@@ -47,20 +47,14 @@ endif()
 # There is currently a bug in CMake that makes it report 32 bit architecture even on 64 bit system. This is why we don't use the
 # CMAKE_SYSTEM_PROCESSOR value. We prefer the native bitsize for the system, however, for MS Visual Studio, we always pick the
 # bitsize specified by the generator (as it won't compile otherwise!)
-message(STATUS ${CMAKE_GENERATOR})
-message(STATUS ${CMAKE_SIZEOF_VOID_P})
 if(CMAKE_GENERATOR MATCHES "Visual Studio .. Win64")
 	set(X86_64 1)
-	message(STATUS "64bit VS")
 elseif(CMAKE_GENERATOR MATCHES "Visual Studio*")
 	set(X86 1)
-	message(STATUS "32bit VS")
 elseif(CMAKE_SIZEOF_VOID_P MATCHES 8)
 	set(X86_64 1)
-	message(STATUS "64bit")
 else()
 	set(X86 1)
-	message(STATUS "32bit")
 endif()
 
 # Use native PLProject? (internal option set by toolchains)
@@ -75,6 +69,9 @@ endif()
 
 # Nightly build
 set(CMAKETOOLS_CONFIG_NIGHTLY "0" CACHE BOOL "Create a nightly build?")
+
+# Build docs
+set(PL_DOCS "0" CACHE BOOL "Build the user documentation")
 
 # Target architecture (x86, arm...)
 if(CMAKETOOLS_TARGET_ARCH)
@@ -145,10 +142,10 @@ else()
 endif()
 
 # Build SDK projects?
-if(CMAKETOOLS_SDK)
-	set(CMAKETOOLS_SDK ${CMAKETOOLS_SDK} CACHE BOOL "Build SDK projects (or all)?")
+if(CMAKETOOLS_BUILD_SDK)
+	set(CMAKETOOLS_BUILD_SDK ${CMAKETOOLS_BUILD_SDK} CACHE BOOL "Build SDK projects (or all)?")
 else()
-	set(CMAKETOOLS_SDK "0" CACHE BOOL "Build SDK projects (or all)?")
+	set(CMAKETOOLS_BUILD_SDK "0" CACHE BOOL "Build SDK projects (or all)?")
 endif()
 
 # Project suffix
@@ -303,7 +300,7 @@ if(CMAKETOOLS_MINIMAL)
 	# Tests and samples
 	set (PL_SAMPLES									"0"					CACHE BOOL "Build the samples?")
 	set (PL_TESTS									"0"					CACHE BOOL "Build the tests?")
-elseif(CMAKETOOLS_SDK)
+elseif(CMAKETOOLS_BUILD_SDK)
 	# SDK build
 	# -> We don't use "${PL_USE_NONPUBLIC}" in here because this would result in required additional configurations
 	set (PL_CORE_ZIP								"1"					CACHE BOOL "Build in ZIP support within 'PLCore'? (it's highly recommended to enable ZIP support, requires 'zlib' external dependency)")
@@ -379,6 +376,9 @@ elseif(CMAKETOOLS_SDK)
 	# Tests and samples
 	set (PL_SAMPLES									"1"					CACHE BOOL "Build the samples?")
 	set (PL_TESTS									"1"					CACHE BOOL "Build the tests?")
+	
+	# We want to include docs in the SDK
+	set	(PL_DOCS									"1"					CACHE BOOL "Build the user documentation")
 else()
 	# Include everything
 	set (PL_CORE_ZIP								"1"					CACHE BOOL "Build in ZIP support within 'PLCore'? (it's highly recommended to enable ZIP support, requires 'zlib' external dependency)")
@@ -454,6 +454,9 @@ else()
 	# Tests and samples
 	set (PL_SAMPLES									"1"					CACHE BOOL "Build the samples?")
 	set (PL_TESTS									"1"					CACHE BOOL "Build the tests?")
+	
+	# Documentation
+	set	(PL_DOCS									"1"					CACHE BOOL "Build the user documentation")
 endif()
 
 
@@ -682,5 +685,3 @@ endif()
 if(NOT CMAKETOOLS_TARGET_BITSIZE STREQUAL "32")
 	set(CMAKETOOLS_CONFIG_NO_INLINE_ASM "1")
 endif()
-
-message(STATUS "PHYSX: ${PL_PLUGIN_PHYSICS_PHYSX}")

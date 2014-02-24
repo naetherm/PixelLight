@@ -70,10 +70,12 @@ copy_file(${CMAKE_SOURCE_DIR}/cc-by-nc-sa-3.txt	${PL_BIN_DIR})
 copy_file(${CMAKE_SOURCE_DIR}/ReleaseNotes.txt	${PL_BIN_DIR})
 
 # Copy Microsoft Visual C++ Redistributables
-if(WIN32)
-	file(MAKE_DIRECTORY ${PL_RUNTIME_BIN_DIR}/VC2010_Redistributable)
-	copy_files("${PL_RUNTIME_BIN_GITDIR}/VC2010_Redistributable/*.*" "${PL_RUNTIME_BIN_DIR}/VC2010_Redistributable")
-endif()
+#TODO: for now this does not work as expected. The redistributable should be included in the installable SDK
+# but nowhere else
+#if(WIN32)
+#	file(MAKE_DIRECTORY ${PL_RUNTIME_BIN_DIR}/VC2010_Redistributable)
+#	copy_files("${PL_RUNTIME_BIN_GITDIR}/VC2010_Redistributable/*.*" "${PL_RUNTIME_BIN_DIR}/VC2010_Redistributable")
+#endif()
 
 ##################################################
 ## Target
@@ -93,7 +95,9 @@ if(PL_TESTS)
 	add_subdirectory(Tests)
 endif()
 add_subdirectory(Tools)
-add_subdirectory(Docs EXCLUDE_FROM_ALL)
+if(PL_DOCS)	
+	add_subdirectory(Docs EXCLUDE_FROM_ALL)
+endif()
 
 ##################################################
 ## Install
@@ -108,16 +112,17 @@ install(FILES	${CMAKE_SOURCE_DIR}/AUTHORS
 )
 
 # Microsoft Visual C++ Redistributables
-if(WIN32)
-	install(DIRECTORY ${PL_RUNTIME_BIN_GITDIR}/VC2010_Redistributable
-		DESTINATION ${PL_INSTALL_RUNTIME_BIN}	COMPONENT SDK
-	)
-endif()
+#TODO: see above
+#if(WIN32)
+#	install(DIRECTORY ${PL_RUNTIME_BIN_GITDIR}/VC2010_Redistributable
+#		DESTINATION ${PL_INSTALL_RUNTIME_BIN}	COMPONENT SDK
+#	)
+#endif()
 
 ##################################################
 ## Packages
 ##################################################
-if(CMAKE_BUILD_TYPE MATCHES Release)
+if(CMAKETOOLS_BUILD_SDK)
 	add_subdirectory(Packages)
 endif()
 
