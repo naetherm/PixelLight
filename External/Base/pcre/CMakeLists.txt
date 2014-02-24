@@ -78,5 +78,4 @@ else()
 	set(PCRE_INCLUDE_DIR ${PCRE_INSTALL}/include CACHE INTERNAL "")
 	
 	#add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
-	#add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
 endif()

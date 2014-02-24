@@ -71,13 +71,12 @@ else()
 	)
 	
 	if(WIN32)
-		set(ZLIB_LIBRARIES ${ZLIB_INSTALL}/lib/zlibstatic.lib CACHE INTERNAL "")
-		#set(ZLIB_LIBRARIES ${ZLIB_INSTALL}/lib/zlib.lib CACHE INTERNAL "")
+		# On Windows, the output .lib file has a different name for debug configuration
+		set(ZLIB_LIBRARIES optimized ${ZLIB_INSTALL}/lib/zlibstatic.lib debug ${ZLIB_INSTALL}/lib/zlibstaticd.lib CACHE INTERNAL "")
 	else()
 		set(ZLIB_LIBRARIES ${ZLIB_INSTALL}/lib/libz.a CACHE INTERNAL "")
 	endif()
 	set(ZLIB_INCLUDE_DIR ${ZLIB_INSTALL}/include CACHE INTERNAL "")
 	
 	#add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
-	#add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
 endif()
