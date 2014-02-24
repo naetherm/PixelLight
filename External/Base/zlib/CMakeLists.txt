@@ -21,25 +21,32 @@
 #*  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #*********************************************************#
 
+include(ExternalProject)
 
 ##################################################
-## Project
+## Configuration
 ##################################################
-define_external_project(zlib)
+set(ZLIB_VERSION "1.2.8")
+set(ZLIB_DOWNLOAD "${CMAKE_CURRENT_BINARY_DIR}/Download")
+set(ZLIB_SOURCE "${CMAKE_CURRENT_BINARY_DIR}/Source")
+set(ZLIB_BUILD "${CMAKE_CURRENT_BINARY_DIR}/Build")
+set(ZLIB_INSTALL "${CMAKE_CURRENT_BINARY_DIR}/Install")
+set(ZLIB_URL "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz")
+set(ZLIB_MD5 "44d667c142d7cda120332623eab69f40")
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Need to download?
 ##################################################
-# Android hasn't that many public shared libraries on it's system, but zlib is there, so do always use the system version to save memory
-# (just in case you may say "Why the heck don't you use "CMAKETOOLS_USE_SYSTEM_LIBS" in the first place?" -> right now, "CMAKETOOLS_USE_SYSTEM_LIBS"
-#  means "use system library or just fail", to fail is no option just because we want to use this single system library in here... maybe when
-#  using "CMAKETOOLS_USE_SYSTEM_LIBS" there should be a fallback in case there's no such system library?)
-if(CMAKETOOLS_USE_SYSTEM_LIBS OR ANDROID)
-	##################################################
-	## Use system libraries
-	##################################################
-	find_package(ZLIB)
+# First look if we have the library installed already. This will be the case for the majority of Linux systems
+#TODO: what about debug configuration?
+message(STATUS "Looking for external dependency 'zlib' with minimum version ${ZLIB_VERSION}...")
+find_package(ZLIB ${ZLIB_VERSION})
 
+# Do we have it?
+if(ZLIB_FOUND)
+	# We will use the library present on the user system
+	message(STATUS "'zlib' was found on this system")
+	
 	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 	# These variables should normaly only be visible within the cmake file in which the find module was called.
 	# Otherwise the variables would be visible for all other projects if wanted or not
@@ -47,48 +54,30 @@ if(CMAKETOOLS_USE_SYSTEM_LIBS OR ANDROID)
 	set(ZLIB_LIBRARIES ${ZLIB_LIBRARIES} CACHE INTERNAL "")
 	set(ZLIB_INCLUDE_DIR ${ZLIB_INCLUDE_DIR} CACHE INTERNAL "")
 else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
-
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(ZLIB_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INCLUDE_DIR}/zlib CACHE INTERNAL "")
+	# We'll need to download and build the library ourselves
+	message(STATUS "'zlib' was not found, will be downloaded and built from [${ZLIB_URL}]")
+	
+	# Define the external project
+	ExternalProject_Add(External-zlib
+		DOWNLOAD_DIR ${ZLIB_DOWNLOAD}
+		SOURCE_DIR ${ZLIB_SOURCE}
+		BINARY_DIR ${ZLIB_BUILD}
+		INSTALL_DIR ${ZLIB_INSTALL}
+		URL ${ZLIB_URL}
+		URL_MD5 ${ZLIB_MD5}
+		PATCH_COMMAND ${CMAKE_COMMAND} -E remove <SOURCE_DIR>/zconf.h
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+	)
+	
 	if(WIN32)
-		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/zlib.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libz.a CACHE INTERNAL "")
+		set(ZLIB_LIBRARIES ${ZLIB_INSTALL}/lib/zlibstatic.lib CACHE INTERNAL "")
+		#set(ZLIB_LIBRARIES ${ZLIB_INSTALL}/lib/zlib.lib CACHE INTERNAL "")
+	else()
+		set(ZLIB_LIBRARIES ${ZLIB_INSTALL}/lib/libz.a CACHE INTERNAL "")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
+	set(ZLIB_INCLUDE_DIR ${ZLIB_INSTALL}/include CACHE INTERNAL "")
+	
+	#add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
+	#add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
 endif()

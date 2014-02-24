@@ -21,66 +21,62 @@
 #*  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #*********************************************************#
 
+include(ExternalProject)
 
 ##################################################
-## Project
+## Configuration
 ##################################################
-define_external_project(libpcre)
+set(PCRE_VERSION "8.34")
+set(PCRE_DOWNLOAD "${CMAKE_CURRENT_BINARY_DIR}/Download")
+set(PCRE_SOURCE "${CMAKE_CURRENT_BINARY_DIR}/Source")
+set(PCRE_BUILD "${CMAKE_CURRENT_BINARY_DIR}/Build")
+set(PCRE_INSTALL "${CMAKE_CURRENT_BINARY_DIR}/Install")
+set(PCRE_URL "http://sourceforge.net/projects/pcre/files/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.gz")
+set(PCRE_MD5 "eb34b2c9c727fd64940d6fd9a00995eb")
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Need to download?
 ##################################################
-if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-	find_package(PCRE)
+# First look if we have the library installed already. This will be the case for the majority of Linux systems
+#TODO: what about debug configuration?
+message(STATUS "Looking for external dependency 'pcre' with minimum version ${PCRE_VERSION}...")
+find_package(PCRE ${PCRE_VERSION})
+
+# Do we have it?
+if(PCRE_FOUND)
+	# We will use the library present on the user system
+	message(STATUS "'pcre' was found on this system")
+	
+	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+	# These variables should normaly only be visible within the cmake file in which the find module was called.
+	# Otherwise the variables would be visible for all other projects if wanted or not
+	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
+	set(PCRE_LIBRARIES ${PCRE_LIBRARIES} CACHE INTERNAL "")
+	set(PCRE_INCLUDE_DIR ${PCRE_INCLUDE_DIR} CACHE INTERNAL "")
 else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
-
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(PCRE_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INCLUDE_DIR}/pcre CACHE INTERNAL "")
+	# We'll need to download and build the library ourselves
+	message(STATUS "'pcre' was not found, will be downloaded and built from [${PCRE_URL}]")
+	
+	# Define the external project
+	ExternalProject_Add(External-libpcre
+		DOWNLOAD_DIR ${PCRE_DOWNLOAD}
+		SOURCE_DIR ${PCRE_SOURCE}
+		BINARY_DIR ${PCRE_BUILD}
+		INSTALL_DIR ${PCRE_INSTALL}
+		URL ${PCRE_URL}
+		URL_MD5 ${PCRE_MD5}
+#		PATCH_COMMAND ${CMAKE_COMMAND} -E remove <SOURCE_DIR>/zconf.h
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+	)
+	
 	if(WIN32)
-		set(PCRE_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/pcre.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(PCRE_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libpcre.a CACHE INTERNAL "")
+		set(PCRE_LIBRARIES ${PCRE_INSTALL}/lib/pcre.lib CACHE INTERNAL "")
+	else()
+		set(PCRE_LIBRARIES ${PCRE_INSTALL}/lib/libpcre.a CACHE INTERNAL "")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	# Check if built file exists
-	if(NOT EXISTS "${CMAKETOOLS_CURRENT_EXT_DIR}/${CMAKETOOLS_CURRENT_NAME}/built")
-		##################################################
-		## Fetch
-		##################################################
-		external_fetch()
-		
-		##################################################
-		## Configure
-		##################################################
-		external_configure()
-		
-		##################################################
-		## Build
-		##################################################
-		external_build()
-		
-		##################################################
-		## Install
-		##################################################
-		external_install()
-	endif()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
+	set(PCRE_INCLUDE_DIR ${PCRE_INSTALL}/include CACHE INTERNAL "")
+	
+	#add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
+	#add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
 endif()
