@@ -44,12 +44,23 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif()
 
 # Check which architecture has the host system
-# X86_64 aka x64
-if(${CMAKE_SYSTEM_PROCESSOR} MATCHES amd64* OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES x86_64* OR CMAKE_GENERATOR MATCHES "Visual Studio 10 Win64")
+# There is currently a bug in CMake that makes it report 32 bit architecture even on 64 bit system. This is why we don't use the
+# CMAKE_SYSTEM_PROCESSOR value. We prefer the native bitsize for the system, however, for MS Visual Studio, we always pick the
+# bitsize specified by the generator (as it won't compile otherwise!)
+message(STATUS ${CMAKE_GENERATOR})
+message(STATUS ${CMAKE_SIZEOF_VOID_P})
+if(CMAKE_GENERATOR MATCHES "Visual Studio .. Win64")
 	set(X86_64 1)
-# X86
-elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES i686* OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES i386* OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES x86*)
+	message(STATUS "64bit VS")
+elseif(CMAKE_GENERATOR MATCHES "Visual Studio*")
 	set(X86 1)
+	message(STATUS "32bit VS")
+elseif(CMAKE_SIZEOF_VOID_P MATCHES 8)
+	set(X86_64 1)
+	message(STATUS "64bit")
+else()
+	set(X86 1)
+	message(STATUS "32bit")
 endif()
 
 # Use native PLProject? (internal option set by toolchains)
