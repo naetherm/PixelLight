@@ -21,16 +21,15 @@
 #*  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #*********************************************************#
 
-include(ExternalProject)
+##################################################
+## Project
+##################################################
+define_external_project(zlib)
 
 ##################################################
 ## Configuration
 ##################################################
 set(ZLIB_VERSION "1.2.8")
-set(ZLIB_DOWNLOAD "${CMAKE_CURRENT_BINARY_DIR}/Download")
-set(ZLIB_SOURCE "${CMAKE_CURRENT_BINARY_DIR}/Source")
-set(ZLIB_BUILD "${CMAKE_CURRENT_BINARY_DIR}/Build")
-set(ZLIB_INSTALL "${CMAKE_CURRENT_BINARY_DIR}/Install")
 set(ZLIB_URL "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz")
 set(ZLIB_MD5 "44d667c142d7cda120332623eab69f40")
 
@@ -58,11 +57,13 @@ else()
 	message(STATUS "'zlib' was not found, will be downloaded and built from [${ZLIB_URL}]")
 	
 	# Define the external project
-	ExternalProject_Add(External-zlib
-		DOWNLOAD_DIR ${ZLIB_DOWNLOAD}
-		SOURCE_DIR ${ZLIB_SOURCE}
-		BINARY_DIR ${ZLIB_BUILD}
-		INSTALL_DIR ${ZLIB_INSTALL}
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${ZLIB_URL}
 		URL_MD5 ${ZLIB_MD5}
 		PATCH_COMMAND ${CMAKE_COMMAND} -E remove <SOURCE_DIR>/zconf.h
@@ -72,11 +73,11 @@ else()
 	
 	if(WIN32)
 		# On Windows, the output .lib file has a different name for debug configuration
-		set(ZLIB_LIBRARIES optimized ${ZLIB_INSTALL}/lib/zlibstatic.lib debug ${ZLIB_INSTALL}/lib/zlibstaticd.lib CACHE INTERNAL "")
+		set(ZLIB_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib CACHE INTERNAL "")
 	else()
-		set(ZLIB_LIBRARIES ${ZLIB_INSTALL}/lib/libz.a CACHE INTERNAL "")
+		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libz.a CACHE INTERNAL "")
 	endif()
-	set(ZLIB_INCLUDE_DIR ${ZLIB_INSTALL}/include CACHE INTERNAL "")
+	set(ZLIB_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
-	#add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
+	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
 endif()

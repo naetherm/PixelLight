@@ -21,16 +21,15 @@
 #*  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #*********************************************************#
 
-include(ExternalProject)
+##################################################
+## Project
+##################################################
+define_external_project(libpcre)
 
 ##################################################
 ## Configuration
 ##################################################
 set(PCRE_VERSION "8.34")
-set(PCRE_DOWNLOAD "${CMAKE_CURRENT_BINARY_DIR}/Download")
-set(PCRE_SOURCE "${CMAKE_CURRENT_BINARY_DIR}/Source")
-set(PCRE_BUILD "${CMAKE_CURRENT_BINARY_DIR}/Build")
-set(PCRE_INSTALL "${CMAKE_CURRENT_BINARY_DIR}/Install")
 set(PCRE_URL "http://sourceforge.net/projects/pcre/files/pcre/${PCRE_VERSION}/pcre-${PCRE_VERSION}.tar.gz")
 set(PCRE_MD5 "eb34b2c9c727fd64940d6fd9a00995eb")
 
@@ -58,11 +57,13 @@ else()
 	message(STATUS "'pcre' was not found, will be downloaded and built from [${PCRE_URL}]")
 	
 	# Define the external project
-	ExternalProject_Add(External-libpcre
-		DOWNLOAD_DIR ${PCRE_DOWNLOAD}
-		SOURCE_DIR ${PCRE_SOURCE}
-		BINARY_DIR ${PCRE_BUILD}
-		INSTALL_DIR ${PCRE_INSTALL}
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${PCRE_URL}
 		URL_MD5 ${PCRE_MD5}
 #		PATCH_COMMAND ${CMAKE_COMMAND} -E remove <SOURCE_DIR>/zconf.h
@@ -70,12 +71,14 @@ else()
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 	)
 	
+	# Setup paths
 	if(WIN32)
-		set(PCRE_LIBRARIES ${PCRE_INSTALL}/lib/pcre.lib CACHE INTERNAL "")
+		set(PCRE_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/pcre.lib CACHE INTERNAL "")
 	else()
-		set(PCRE_LIBRARIES ${PCRE_INSTALL}/lib/libpcre.a CACHE INTERNAL "")
+		set(PCRE_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpcre.a CACHE INTERNAL "")
 	endif()
-	set(PCRE_INCLUDE_DIR ${PCRE_INSTALL}/include CACHE INTERNAL "")
+	set(PCRE_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
-	#add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
+	# Dependencies
+	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
 endif()

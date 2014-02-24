@@ -29,7 +29,6 @@
 ## dependencies automatically for your project
 ##################################################
 
-
 ##################################################
 ## MACRO: define_external_project
 ##
@@ -37,23 +36,37 @@
 ##   name		name of the project (e.g. "TestProject")
 ##################################################
 macro(define_external_project name)
-	# Begin project
-	project(External-${name})
-
+	# We are now using ExternalProject so there is no "real" project defined here.
+	# Instead, we just define a bunch of variables we will be using in our build scripts.
+	
 	# Set project variables
 	set(CMAKETOOLS_CURRENT_NAME ${name})
 	set(CMAKETOOLS_CURRENT_TARGET External-${name})
-	set(CMAKETOOLS_CURRENT_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
-	set(CMAKETOOLS_CURRENT_DOWNLOAD_DIR "${CMAKETOOLS_CURRENT_SOURCE_DIR}/Download")
-	set(CMAKETOOLS_CURRENT_BUILD_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+	
+	# Where is the current CMakeLists.txt located
+	set(CMAKETOOLS_CURRENT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+	
+	# Root for external projects' directories
+	set(CMAKETOOLS_CURRENT_ROOT_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+	# Where to download the library
+	set(CMAKETOOLS_CURRENT_DOWNLOAD_DIR "${CMAKETOOLS_CURRENT_ROOT_DIR}/Download")
+	# Where to extract the library sources
+	set(CMAKETOOLS_CURRENT_SRC_DIR "${CMAKETOOLS_CURRENT_ROOT_DIR}/Source")
+	# Where to build the library
+	set(CMAKETOOLS_CURRENT_BUILD_DIR "${CMAKETOOLS_CURRENT_ROOT_DIR}/Build")
+	# Where to build the library
+	set(CMAKETOOLS_CURRENT_BUILD_DIR "${CMAKETOOLS_CURRENT_ROOT_DIR}/Build")
+	# Where to install the library
+	set(CMAKETOOLS_CURRENT_INSTALL_DIR "${CMAKETOOLS_CURRENT_ROOT_DIR}/Install")
+	# Where to put temporary files
+	set(CMAKETOOLS_CURRENT_TMP_DIR "${CMAKETOOLS_CURRENT_ROOT_DIR}/Temp")
+	# Where to put stamp files
+	set(CMAKETOOLS_CURRENT_STAMP_DIR "${CMAKETOOLS_CURRENT_ROOT_DIR}/Stamp")
+	
 	set(CMAKETOOLS_CURRENT_EXT_DIR "${CMAKE_SOURCE_DIR}/External/_${CMAKETOOLS_CONFIG_NAME}_${CMAKETOOLS_TARGET_ARCH}_${CMAKETOOLS_TARGET_BITSIZE}")
 	set(CMAKETOOLS_CURRENT_DEST_DIR "${CMAKETOOLS_CURRENT_EXT_DIR}/${CMAKETOOLS_CURRENT_NAME}")
 	set(CMAKETOOLS_CURRENT_INCLUDE_DIR "${CMAKETOOLS_CURRENT_DEST_DIR}/include")
 	set(CMAKETOOLS_CURRENT_LIB_DIR "${CMAKETOOLS_CURRENT_DEST_DIR}/lib")
-	set(CMAKETOOLS_CURRENT_BUILT_FILE "${CMAKETOOLS_CURRENT_EXT_DIR}/${CMAKETOOLS_CURRENT_NAME}/built")
-
-	# Create main target
-	add_custom_target(${CMAKETOOLS_CURRENT_TARGET})
 endmacro(define_external_project name)
 
 ##################################################
