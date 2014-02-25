@@ -86,12 +86,8 @@ else()
 	
 	if(WIN32)
 		# On Windows, the output .lib file has a different name for debug configuration, rename it
-		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CrateDummyDebugLib
-			COMMAND ${CMAKE_COMMAND} -E touch ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib
-			DEPENDEES install
-		)
 		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} RenameDebugLib
-			COMMAND ${CMAKE_COMMAND} -E rename ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib
+			COMMAND ${CMAKE_COMMAND} -DCMAKETOOLS_CURRENT_INSTALL_DIR:STRING=${CMAKETOOLS_CURRENT_INSTALL_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/PostInstall.cmake
 			DEPENDEES install
 		)
 		
