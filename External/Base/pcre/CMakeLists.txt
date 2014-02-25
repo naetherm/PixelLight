@@ -73,6 +73,16 @@ else()
 	
 	# Setup paths
 	if(WIN32)
+		# On Windows, the output .lib file has a different name for debug configuration, rename it
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CrateDummyDebugLib
+			COMMAND ${CMAKE_COMMAND} -E touch ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/pcred.lib
+			DEPENDEES install
+		)
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} RenameDebugLib
+			COMMAND ${CMAKE_COMMAND} -E rename ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/pcred.lib ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/pcre.lib
+			DEPENDEES install
+		)
+		
 		set(PCRE_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/pcre.lib CACHE INTERNAL "")
 	else()
 		set(PCRE_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpcre.a CACHE INTERNAL "")

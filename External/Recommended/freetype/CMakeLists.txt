@@ -28,61 +28,64 @@
 define_external_project(freetype)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-	find_package(Freetype)
-	set(FREETYPE_INCLUDE_DIRS ${FREETYPE_INCLUDE_DIR_freetype2} ${FREETYPE_INCLUDE_DIR_ft2build} CACHE INTERNAL "")
+set(FREETYPE_VERSION "2.5.2")
+set(FREETYPE_URL "http://sourceforge.net/projects/freetype/files/freetype2/${FREETYPE_VERSION}/freetype-${FREETYPE_VERSION}.tar.gz")
+set(FREETYPE_MD5 "004320381043d275c4e28bbacf05a1b7")
+
+##################################################
+## Need to download?
+##################################################
+# First look if we have the library installed already. This will be the case for the majority of Linux systems
+#TODO: what about debug configuration?
+message(STATUS "Looking for external dependency 'freetype' with minimum version ${FREETYPE_VERSION}...")
+find_package(FREETYPE ${FREETYPE_VERSION})
+
+# Do we have it?
+if(FREETYPE_FOUND)
+	# We will use the library present on the user system
+	message(STATUS "'freetype' was found on this system")
+	
+	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+	# These variables should normaly only be visible within the cmake file in which the find module was called.
+	# Otherwise the variables would be visible for all other projects if wanted or not
+	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
 	set(FREETYPE_LIBRARIES ${FREETYPE_LIBRARY} CACHE INTERNAL "")
+	set(FREETYPE_INCLUDE_DIRS ${FREETYPE_INCLUDE_DIR_freetype2} ${FREETYPE_INCLUDE_DIR_ft2build} CACHE INTERNAL "")
 else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
-
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(FREETYPE_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} CACHE INTERNAL "")
+	# We'll need to download and build the library ourselves
+	message(STATUS "'freetype' was not found, will be downloaded and built from [${FREETYPE_URL}]")
+	
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${FREETYPE_URL}
+		URL_MD5 ${FREETYPE_MD5}
+#		PATCH_COMMAND ${CMAKE_COMMAND} -E remove <SOURCE_DIR>/zconf.h
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+#			-DZLIB_LIBRARY=${ZLIB_LIBRARY}
+#			-DZLIB_INCLUDE_DIR:STRING=${ZLIB_INCLUDE_DIR}
+	)
+	
 	if(WIN32)
-		set(FREETYPE_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libfreetype.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(FREETYPE_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libfreetype.a CACHE INTERNAL "")
+		# On Windows, the output .lib file has a different name for debug configuration
+		set(FREETYPE_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/freetype.lib CACHE INTERNAL "")
+	else()
+		set(FREETYPE_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libfreetype.a CACHE INTERNAL "")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	# Check if built file exists
-	if(NOT EXISTS "${CMAKETOOLS_CURRENT_EXT_DIR}/${CMAKETOOLS_CURRENT_NAME}/built")
-		##################################################
-		## Fetch
-		##################################################
-		external_fetch()
-		
-		##################################################
-		## Configure
-		##################################################
-		external_configure()
-		
-		##################################################
-		## Build
-		##################################################
-		external_build()
-		
-		##################################################
-		## Install
-		##################################################
-		external_install()
-	endif()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
+	set(FREETYPE_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include/freetype2 CACHE INTERNAL "")
+	
+	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
+	
+	# We depend on zlib, so set dependency if it will be built using ExternalProject
+#	if(ZLIB_HAS_PROJECT)
+#		add_dependencies(${CMAKETOOLS_CURRENT_TARGET} External-zlib)
+#	endif()
 endif()

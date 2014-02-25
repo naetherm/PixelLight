@@ -27,7 +27,7 @@
 //[-------------------------------------------------------]
 #include <ft2build.h>
 #include FT_FREETYPE_H
-#include <freetype/ftglyph.h>
+#include FT_GLYPH_H
 #include <PLMath/Math.h>
 #include "PLRendererOpenGL/FontTexture.h"
 #include "PLRendererOpenGL/FontGlyphTexture.h"

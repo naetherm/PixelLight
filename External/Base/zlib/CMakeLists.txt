@@ -33,6 +33,16 @@ set(ZLIB_VERSION "1.2.8")
 set(ZLIB_URL "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz")
 set(ZLIB_MD5 "44d667c142d7cda120332623eab69f40")
 
+# This is required because these variables are cached. If another library performs the same check (as e.g. libpng
+# does), it will result in the external project not being built after repeated CMake runs. We want to make this
+# the only place where zlib's (non)existence is decided
+set(ZLIB_FOUND "0" CACHE INTERNAL "")
+set(ZLIB_LIBRARY "" CACHE INTERNAL "")
+set(ZLIB_LIBRARIES "" CACHE INTERNAL "")
+set(ZLIB_INCLUDE_DIR "" CACHE INTERNAL "")
+# Also mark if there was a project created for zlib for dependency checking
+set(ZLIB_HAS_PROJECT OFF CACHE INTERNAL "")
+
 ##################################################
 ## Need to download?
 ##################################################
@@ -51,10 +61,13 @@ if(ZLIB_FOUND)
 	# Otherwise the variables would be visible for all other projects if wanted or not
 	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
 	set(ZLIB_LIBRARIES ${ZLIB_LIBRARIES} CACHE INTERNAL "")
+	set(ZLIB_LIBRARY ${ZLIB_LIBRARIES} CACHE INTERNAL "")
 	set(ZLIB_INCLUDE_DIR ${ZLIB_INCLUDE_DIR} CACHE INTERNAL "")
 else()
 	# We'll need to download and build the library ourselves
 	message(STATUS "'zlib' was not found, will be downloaded and built from [${ZLIB_URL}]")
+	
+	set(ZLIB_HAS_PROJECT ON CACHE INTERNAL "")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -72,10 +85,21 @@ else()
 	)
 	
 	if(WIN32)
-		# On Windows, the output .lib file has a different name for debug configuration
-		set(ZLIB_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib CACHE INTERNAL "")
+		# On Windows, the output .lib file has a different name for debug configuration, rename it
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CrateDummyDebugLib
+			COMMAND ${CMAKE_COMMAND} -E touch ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib
+			DEPENDEES install
+		)
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} RenameDebugLib
+			COMMAND ${CMAKE_COMMAND} -E rename ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib
+			DEPENDEES install
+		)
+		
+		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib CACHE INTERNAL "")
+		set(ZLIB_LIBRARY ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib CACHE INTERNAL "")
 	else()
 		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libz.a CACHE INTERNAL "")
+		set(ZLIB_LIBRARY ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libz.a CACHE INTERNAL "")
 	endif()
 	set(ZLIB_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
