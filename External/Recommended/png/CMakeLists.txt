@@ -66,21 +66,20 @@ else()
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${PNG_URL}
 		URL_MD5 ${PNG_MD5}
-#		PATCH_COMMAND ${CMAKE_COMMAND} -E remove <SOURCE_DIR>/zconf.h
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-			-DZLIB_LIBRARY=${ZLIB_LIBRARY}
+			-DZLIB_LIBRARY:STRING=${ZLIB_LIBRARY_LIST}
+			-DZLIB_LIBRARIES:STRING=${ZLIB_LIBRARY_LIST}
 			-DZLIB_INCLUDE_DIR:STRING=${ZLIB_INCLUDE_DIR}
+			-DZLIB_FOUND=ON
+			
+		# See zlib's CMakeLists.txt
+		LIST_SEPARATOR ^^
 	)
 	
 	if(WIN32)
-		# On Windows, the output .lib file has a different name for debug configuration, rename it
-		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} RenameDebugLib
-			COMMAND ${CMAKE_COMMAND} -DCMAKETOOLS_CURRENT_INSTALL_DIR:STRING=${CMAKETOOLS_CURRENT_INSTALL_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/PostInstall.cmake
-			DEPENDEES install
-		)
-		
-		set(PNG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpng16_static.lib CACHE INTERNAL "")
+		# On Windows, the output .lib file has a different name for debug configuration
+		set(PNG_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpng16_static.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpng16_staticd.lib CACHE INTERNAL "")
 	else()
 		set(PNG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpng.a CACHE INTERNAL "")
 	endif()
@@ -89,7 +88,7 @@ else()
 	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 	
 	# We depend on zlib, so set dependency if it will be built using ExternalProject
-	if(ZLIB_HAS_PROJECT)
+	#if(ZLIB_HAS_PROJECT)
 		add_dependencies(${CMAKETOOLS_CURRENT_TARGET} External-zlib)
-	endif()
+	#endif()
 endif()

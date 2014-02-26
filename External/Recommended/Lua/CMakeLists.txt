@@ -25,61 +25,102 @@
 ##################################################
 ## Project
 ##################################################
-define_external_project(Lua)
+define_external_project(LuaJIT)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-# [TODO] System libs possible for Lua?
-#if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-#	find_package(LUA)
+set(LUAJIT_VERSION "2.0.2")
+set(LUAJIT_URL "http://luajit.org/download/LuaJIT-${LUAJIT_VERSION}.tar.gz")
+set(LUAJIT_MD5 "112dfb82548b03377fbefbba2e0e3a5b")
+
+##################################################
+#[TODO] There are CMake-based git repos for Lua and LuaJIT at LuaDist
+# 		We might want to use these for clarity
+##################################################
+
+##################################################
+## Need to download?
+##################################################
+# First look if we have the library installed already. This will be the case for the majority of Linux systems
+#TODO: what about debug configuration?
+message(STATUS "Looking for external dependency 'LuaJIT' with minimum version ${LUAJIT_VERSION}...")
+#find_package(LUAJIT ${LUAJIT_VERSION})
+
+# Do we have it?
+#if(LUAJIT_FOUND)
+#	# We will use the library present on the user system
+#	message(STATUS "'LuaJIT' was found on this system")
+#	
+#	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+#	# These variables should normaly only be visible within the cmake file in which the find module was called.
+#	# Otherwise the variables would be visible for all other projects if wanted or not
+#	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
+#	set(LUAJIT_LIBRARIES ${LUAJIT_LIBRARIES} CACHE INTERNAL "")
+#	set(LUAJIT_LIBRARY ${LUAJIT_LIBRARIES} CACHE INTERNAL "")
+#	set(LUAJIT_INCLUDE_DIR ${LUAJIT_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
-
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(LUA_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} CACHE INTERNAL "")
-	if(WIN32)
-		set(LUA_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/lua51.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(LUA_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/liblua.a CACHE INTERNAL "")
+	# We'll need to download and build the library ourselves
+	message(STATUS "'LuaJIT' was not found, will be downloaded and built from [${LUAJIT_URL}]")
+	
+	# Define the external project
+	if(MSVC)
+		ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+			DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+			SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+			INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+			TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+			STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+			URL ${LUAJIT_URL}
+			URL_MD5 ${LUAJIT_MD5}
+			BUILD_IN_SOURCE 1
+			CONFIGURE_COMMAND ""
+			BUILD_COMMAND ${CMAKE_COMMAND} -E chdir src msvcbuild.bat
+            INSTALL_COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll <INSTALL_DIR>/bin/lua51.dll
+			COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll ${PL_RUNTIME_BIN_GITDIR}/lua51.dll
+            COMMAND ${CMAKE_COMMAND} -E copy src/lua51.lib <INSTALL_DIR>/lib/lua51.lib
+            COMMAND ${CMAKE_COMMAND} -E copy src/lauxlib.h "<INSTALL_DIR>/include/Lua/lauxlib.h"
+            COMMAND ${CMAKE_COMMAND} -E copy src/luaconf.h "<INSTALL_DIR>/include/Lua/luaconf.h"
+            COMMAND ${CMAKE_COMMAND} -E copy src/lua.h "<INSTALL_DIR>/include/Lua/lua.h"
+            COMMAND ${CMAKE_COMMAND} -E copy src/luajit.h "<INSTALL_DIR>/include/Lua/luajit.h"
+            COMMAND ${CMAKE_COMMAND} -E copy src/lualib.h "<INSTALL_DIR>/include/Lua/lualib.h"
+		)
+	elseif(UNIX)
+		ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+			DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+			SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+			INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+			TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+			STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+			URL ${LUAJIT_URL}
+			URL_MD5 ${LUAJIT_MD5}
+			BUILD_IN_SOURCE 1
+			CONFIGURE_COMMAND ""
+			BUILD_COMMAND make
+			#[TODO] What is the .so here?
+            INSTALL_COMMAND ${CMAKE_COMMAND} -E copy src/libluajit.a <INSTALL_DIR>/bin/liblua.a
+			COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll ${PL_RUNTIME_BIN_GITDIR}/lua51.dll
+			
+            COMMAND ${CMAKE_COMMAND} -E copy src/libluajit.a <INSTALL_DIR>/bin/liblua.a
+            COMMAND ${CMAKE_COMMAND} -E copy src/lauxlib.h "<INSTALL_DIR>/include/Lua/lauxlib.h"
+            COMMAND ${CMAKE_COMMAND} -E copy src/luaconf.h "<INSTALL_DIR>/include/Lua/luaconf.h"
+            COMMAND ${CMAKE_COMMAND} -E copy src/lua.h "<INSTALL_DIR>/include/Lua/lua.h"
+            COMMAND ${CMAKE_COMMAND} -E copy src/luajit.h "<INSTALL_DIR>/include/Lua/luajit.h"
+            COMMAND ${CMAKE_COMMAND} -E copy src/lualib.h "<INSTALL_DIR>/include/Lua/lualib.h"
+		)
+	else()
+		#[TODO] Revert to classical Lua
+		message(FATAL_ERROR "Cannot use LuaJIT with CMake generator ${CMAKE_GENERATOR}")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
-# [TODO] System libs possible for Lua?
+	
+	if(WIN32)
+		# On Windows, the output .lib file has a different name for debug configuration
+		#set(LUAJIT_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib CACHE INTERNAL "")
+		set(LUA_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/lua51.lib CACHE INTERNAL "")
+	else()
+		set(LUA_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/liblua.a CACHE INTERNAL "")
+	endif()
+	set(LUA_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include/Lua CACHE INTERNAL "")
+	
+	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 #endif()

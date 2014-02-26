@@ -38,6 +38,7 @@ set(ZLIB_MD5 "44d667c142d7cda120332623eab69f40")
 # the only place where zlib's (non)existence is decided
 set(ZLIB_FOUND "0" CACHE INTERNAL "")
 set(ZLIB_LIBRARY "" CACHE INTERNAL "")
+set(ZLIB_LIBRARY_LIST "" CACHE INTERNAL "")
 set(ZLIB_LIBRARIES "" CACHE INTERNAL "")
 set(ZLIB_INCLUDE_DIR "" CACHE INTERNAL "")
 # Also mark if there was a project created for zlib for dependency checking
@@ -85,17 +86,16 @@ else()
 	)
 	
 	if(WIN32)
-		# On Windows, the output .lib file has a different name for debug configuration, rename it
-		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} RenameDebugLib
-			COMMAND ${CMAKE_COMMAND} -DCMAKETOOLS_CURRENT_INSTALL_DIR:STRING=${CMAKETOOLS_CURRENT_INSTALL_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/cmake/PostInstall.cmake
-			DEPENDEES install
-		)
+		# On Windows, the output .lib file has a different name for debug configuration
+		set(ZLIB_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib CACHE INTERNAL "")
+		set(ZLIB_LIBRARY ${ZLIB_LIBRARIES} CACHE INTERNAL "")
 		
-		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib CACHE INTERNAL "")
-		set(ZLIB_LIBRARY ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib CACHE INTERNAL "")
+		# This is a small hack that allows us to pass this as a -D parameter into other external projects
+		set(ZLIB_LIBRARY_LIST optimized^^${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib^^debug^^${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib CACHE INTERNAL "")
 	else()
 		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libz.a CACHE INTERNAL "")
-		set(ZLIB_LIBRARY ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libz.a CACHE INTERNAL "")
+		set(ZLIB_LIBRARY ${ZLIB_LIBRARIES} CACHE INTERNAL "")
+		set(ZLIB_LIBRARY_LIST ${ZLIB_LIBRARIES} CACHE INTERNAL "")
 	endif()
 	set(ZLIB_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
