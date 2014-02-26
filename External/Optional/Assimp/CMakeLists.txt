@@ -69,6 +69,7 @@ message(STATUS "Looking for external dependency 'Assimp' with minimum version ${
 		URL_MD5 ${ASSIMP_MD5}
 		TIMEOUT 30
 		
+		# Include our custom code patch
 		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/Patch/LWOAnimation.cpp <SOURCE_DIR>/code/LWOAnimation.cpp
 		
 		CMAKE_ARGS
@@ -83,6 +84,7 @@ message(STATUS "Looking for external dependency 'Assimp' with minimum version ${
 			-DBUILD_ASSIMP_TOOLS:BOOL=OFF
 			-DBUILD_ASSIMP_SAMPLES:BOOL=OFF
 			-DBUILD_TESTS:BOOL=OFF
+			-DBUILD_STATIC_LIB:BOOL=ON
 			
 		# See zlib's CMakeLists.txt
 		LIST_SEPARATOR ^^
@@ -90,11 +92,12 @@ message(STATUS "Looking for external dependency 'Assimp' with minimum version ${
 	
 	if(WIN32)
 		# On Windows, the output .lib file has a different name for debug configuration
-		set(ASSIMP_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/assimp.lib CACHE INTERNAL "")
+		set(ASSIMP_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/assimp.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/assimpD.lib CACHE INTERNAL "")
 	else()
 		set(ASSIMP_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libassimp.a CACHE INTERNAL "")
 	endif()
 	set(ASSIMP_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	add_dependencies(${CMAKETOOLS_CURRENT_TARGET} External-zlib)
 	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
 #endif()
