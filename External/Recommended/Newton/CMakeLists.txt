@@ -28,61 +28,72 @@
 define_external_project(Newton)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-# [TODO] System libs possible for Newton?
-#if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-#	find_package(Newton)
-#	set(NEWTON_INCLUDE_DIRS ${NEWTON_INCLUDE_DIR_NEWTON} CACHE INTERNAL "")
-#	set(NEWTON_LIBRARIES ${NEWTON_LIBRARY} CACHE INTERNAL "")
+set(NEWTON_VERSION "2.32")
+set(NEWTON_URL "http://pixellight.org/external/repack/newton-dynamics-${NEWTON_VERSION}.tgz")
+set(NEWTON_MD5 "a922b216785e10a691119f1b5fa299ab")
+
+##################################################
+## Need to download?
+##################################################
+# First look if we have the library installed already. This will be the case for the majority of Linux systems
+#TODO: what about debug configuration?
+message(STATUS "Looking for external dependency 'Newton' with minimum version ${NEWTON_VERSION}...")
+#find_package(NEWTON ${NEWTON_VERSION})
+
+# Do we have it?
+#if(NEWTON_FOUND)
+#	# We will use the library present on the user system
+#	message(STATUS "'NEWTON' was found on this system")
+#	
+#	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+#	# These variables should normaly only be visible within the cmake file in which the find module was called.
+#	# Otherwise the variables would be visible for all other projects if wanted or not
+#	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
+#	set(NEWTON_LIBRARIES ${NEWTON_LIBRARIES} CACHE INTERNAL "")
+#	set(NEWTON_INCLUDE_DIRS ${NEWTON_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
-
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(NEWTON_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} CACHE INTERNAL "")
+	# We'll need to download and build the library ourselves
+	message(STATUS "'Newton' was not found, will be downloaded and built from [${NEWTON_URL}]")
+	
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${NEWTON_URL}
+		URL_MD5 ${NEWTON_MD5}
+		TIMEOUT 30
+		
+		# We have a custom CMake script to build Newton
+		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/CMake/CMakeLists.txt <SOURCE_DIR>
+		
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+	)
+	
 	if(WIN32)
-		set(NEWTON_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/newton.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(NEWTON_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libNewton.so CACHE INTERNAL "")
+		set(NEWTON_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/newton.lib CACHE INTERNAL "")
+		
+		# Copy the DLL to Bin
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/bin/Newton.dll ${PL_RUNTIME_BIN_GITDIR}
+			DEPENDEES install
+		)
+	else()
+		set(NEWTON_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libNewton.so CACHE INTERNAL "")
+		
+		# Copy the SO to Bin
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/bin/libNewton.so ${PL_RUNTIME_BIN_GITDIR}/Newton
+			DEPENDEES install
+		)
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
-
-# [TODO] System libs possible for Newton?
+	set(NEWTON_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
+	
+	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
 #endif()
