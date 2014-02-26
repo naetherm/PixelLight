@@ -67,6 +67,7 @@ else()
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${JPEG_URL}
 #		URL_MD5 ${JPEG_MD5}
+		TIMEOUT 30
 
 		# We have a CMake script for libjpeg, copy it over to the source folder so that
 		# ExternalProject finds it and executes it.

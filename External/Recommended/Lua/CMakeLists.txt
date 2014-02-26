@@ -73,6 +73,7 @@ message(STATUS "Looking for external dependency 'LuaJIT' with minimum version ${
 			STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 			URL ${LUAJIT_URL}
 			URL_MD5 ${LUAJIT_MD5}
+			TIMEOUT 30
 			BUILD_IN_SOURCE 1
 			CONFIGURE_COMMAND ""
 			BUILD_COMMAND ${CMAKE_COMMAND} -E chdir src msvcbuild.bat
@@ -94,6 +95,7 @@ message(STATUS "Looking for external dependency 'LuaJIT' with minimum version ${
 			STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 			URL ${LUAJIT_URL}
 			URL_MD5 ${LUAJIT_MD5}
+			TIMEOUT 30
 			BUILD_IN_SOURCE 1
 			CONFIGURE_COMMAND ""
 			BUILD_COMMAND make

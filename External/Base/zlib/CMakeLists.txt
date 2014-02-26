@@ -30,7 +30,8 @@ define_external_project(zlib)
 ## Configuration
 ##################################################
 set(ZLIB_VERSION "1.2.8")
-set(ZLIB_URL "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz")
+#set(ZLIB_URL "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz")
+set(ZLIB_URL "http://prdownloads.sourceforge.net/libpng/zlib-${ZLIB_VERSION}.tar.gz")
 set(ZLIB_MD5 "44d667c142d7cda120332623eab69f40")
 
 # This is required because these variables are cached. If another library performs the same check (as e.g. libpng
@@ -80,6 +81,7 @@ else()
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${ZLIB_URL}
 		URL_MD5 ${ZLIB_MD5}
+		TIMEOUT 30
 		PATCH_COMMAND ${CMAKE_COMMAND} -E remove <SOURCE_DIR>/zconf.h
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>

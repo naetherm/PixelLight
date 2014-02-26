@@ -1,5 +1,5 @@
 #*********************************************************#
-#*  File: Check.cmake                                    *
+#*  File: CMakeLists.txt                                 *
 #*
 #*  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
 #*
@@ -21,42 +21,47 @@
 #*  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #*********************************************************#
 
+cmake_minimum_required(VERSION 2.8)
 
-##################################################
-## Project
-##################################################
-include(${CMAKETOOLS_DIR}/External/Check.cmake)
+project(libogg C)
 
-##################################################
-## Check
-##################################################
-
-# Check if built file exists
-if(NOT EXISTS ${CMAKETOOLS_CURRENT_BUILT_FILE})
-	# Download prebuilt package from the repository
-	set(md5sum "")
-	if(WIN32)
-		if(CMAKETOOLS_TARGET_BITSIZE MATCHES "64")
-			# md5sum of the 64bit Windows package
-			set(md5sum "9fbb8e163b0e1d8ba7850585c8495347")
-		else()
-			# md5sum of the 32bit Windows package
-			set(md5sum "f5b4f509340adae46dcbe41f83dd0633")
-		endif()
-	elseif(LINUX)
-		if(CMAKETOOLS_TARGET_BITSIZE MATCHES "64")
-			# md5sum of the 64bit Linux package
-			set(md5sum "e5351c6ceea660a4ae5b850efd40d011")
-		else()
-			# md5sum of the 32bit Linux package
-			set(md5sum "8ddc11618b9ee5d96d814d4e57327b1e")
-		endif()
-	endif()
-	external_check_download("" ${md5sum})
-
-	# Unpack the package
-	external_check_unpack()
+if(NOT MSVC AND NOT CMAKE_BUILD_TYPE)
+    #SET(CMAKE_BUILD_TYPE "Debug")
+    set(CMAKE_BUILD_TYPE "Release")
+    message(STATUS "No CMAKE_BUILD_TYPE specified, defaulting to ${CMAKE_BUILD_TYPE}") 
 endif()
 
-# Done
-external_check_done()
+set(libogg_SRCS src/bitwise.c src/framing.c)
+set(libogg_HDRS include/ogg/ogg.h include/ogg/os_types.h)
+
+include_directories(include)
+
+if(MSVC)
+    add_definitions(/D_UNICODE /DUNICODE)
+    list(APPEND libogg_SRCS win32/ogg.def)
+endif()
+
+if(LINUX)
+	# libogg expects configure to be called on linux to
+	# generate config_types.h
+    list(APPEND libogg_HDRS include/ogg/config_types.h)
+
+	add_custom_command(
+		OUTPUT include/ogg/config_types.h
+		COMMAND ./configure
+		DEPENDS include/ogg/ogg.h # Hopefully if the libogg version changes, so does this file
+								  # so configure_types.h will be regenerated.
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+	)
+endif()
+
+add_library(libogg ${libogg_SRCS} ${libogg_HDRS})
+
+install(
+	TARGETS libogg
+    RUNTIME DESTINATION bin
+    ARCHIVE DESTINATION lib
+    LIBRARY DESTINATION lib
+)
+
+install(FILES ${libogg_HDRS} DESTINATION include/ogg)
