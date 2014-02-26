@@ -25,9 +25,9 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <Assimp/aiScene.h>
-#include <Assimp/assimp.hpp>
-#include <Assimp/aiPostProcess.h>
+#include <Assimp/scene.h>
+#include <Assimp/Importer.hpp>
+#include <Assimp/postProcess.h>
 #include <PLCore/Log/Log.h>
 #include <PLCore/File/File.h>
 #include <PLMath/Matrix3x3.h>

@@ -25,8 +25,8 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <Assimp/aiMaterial.h>
-#include <Assimp/aiPostProcess.h>
+#include <Assimp/material.h>
+#include <Assimp/postProcess.h>
 #include <PLRenderer/RendererContext.h>
 #include <PLRenderer/Texture/TextureManager.h>
 #include <PLRenderer/Material/Material.h>

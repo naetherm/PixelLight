@@ -33,13 +33,16 @@
 #include <PLMesh/Geometry.h>
 #include "PLAssimp/AssimpLoader.h"
 
+#include <assimp/vector3.h>
+#include <assimp/matrix4x4.h>
+
 
 //[-------------------------------------------------------]
 //[ Forward declarations                                  ]
 //[-------------------------------------------------------]
 struct aiNode;
 struct aiScene;
-struct aiMatrix4x4;
+//struct aiMatrix4x4;
 namespace PLCore {
 	class File;
 }
