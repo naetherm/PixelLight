@@ -22,7 +22,6 @@
 #*********************************************************#
 
 execute_process(COMMAND @CMAKETOOLS_CURRENT_SRC_DIR@/configure.exe
-  -opensource -debug-and-release -no-accessibility -no-qt3support -no-openvg -no-gif -no-libpng -no-libmng
-  -no-libtiff -no-libjpeg -no-openssl -no-phonon -no-phonon-backend -no-multimedia -no-audio-backend -no-webkit -no-script -no-scripttools -no-declarative -no-declarative-debug -mp -nomake examples -nomake demos -nomake tests -nomake tools -nomake docs -nomake translations -nomake xml -nomake javascript
+  -opensource -debug-and-release -no-accessibility -no-qt3support -no-openvg -no-svg -no-gif -no-libpng -no-libmng -no-libtiff -no-libjpeg -no-openssl -no-phonon -no-phonon-backend -no-multimedia -no-mediaservices -no-audio-backend -no-webkit -no-script -no-scripttools -no-declarative -no-declarative-debug -no-xmlpatterns -no-sql-sqllite -mp -nomake examples -nomake demos -nomake tests -nomake tools -nomake docs -no-javascript-jit
   WORKING_DIRECTORY @CMAKETOOLS_CURRENT_SRC_DIR@
   INPUT_FILE "@CMAKETOOLS_CURRENT_DIR@/CMake/QtWinConfig_input.txt")
