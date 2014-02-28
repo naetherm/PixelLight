@@ -325,7 +325,7 @@ if(WIN32)
 		COMMAND ${CMAKE_COMMAND} -E copy ${QT_EXTERNAL_DIR}/lib/QtCore4.lib ${PL_LIB_DIR}
 		COMMAND ${CMAKE_COMMAND} -E copy ${QT_EXTERNAL_DIR}/lib/QtGui4.lib ${PL_LIB_DIR}
 		COMMAND ${CMAKE_COMMAND} -E copy ${QT_EXTERNAL_DIR}/lib/qtmain.lib ${PL_LIB_DIR}
-		COMMAND ${CMAKE_COMMAND} -E copy ${QT_EXTERNAL_DIR}/lib/qtmaind.lib ${PL_LIB_DIR}
+#		COMMAND ${CMAKE_COMMAND} -E copy ${QT_EXTERNAL_DIR}/lib/qtmaind.lib ${PL_LIB_DIR}
 	)
 endif()
 if(LINUX)

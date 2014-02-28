@@ -501,9 +501,6 @@ unset (PL_PLUGIN_VOLUME_LOADER_DICOM_GDCM CACHE)
 ##################################################
 unset (PL_PLUGIN_DATABASE_MYSQL CACHE)
 
-#unset (PL_PLUGIN_RENDERER_OPENGLCG CACHE)
-unset (PL_PLUGIN_ENGINE_POSTPROCESS CACHE)
-
 unset (PL_TESTS CACHE)
 unset (PL_DOCS CACHE)
 

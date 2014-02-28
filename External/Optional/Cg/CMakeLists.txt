@@ -28,60 +28,43 @@
 define_external_project(Cg)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-	find_package(Cg)
-	set(CG_INCLUDE_DIRS ${CG_INCLUDE_PATH} CACHE INTERNAL "")
-	set(CG_OPENGL_LIBRARIES ${CG_LIBRARY} ${CG_GL_LIBRARY} CACHE INTERNAL "")
-	set(CG_DIRECTX9_LIBRARIES ${CG_LIBRARY} ${CG_D3D9_LIBRARY} CACHE INTERNAL "")
-else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
-
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(CG_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} CACHE INTERNAL "")
-	if(WIN32)
-		set(CG_OPENGL_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/cg.lib ${CMAKETOOLS_CURRENT_LIB_DIR}/cgGL.lib CACHE INTERNAL "")
-		set(CG_DIRECTX9_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/cg.lib ${CMAKETOOLS_CURRENT_LIB_DIR}/cgD3D9.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(CG_OPENGL_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libCg.so ${CMAKETOOLS_CURRENT_LIB_DIR}/libCgGL.so CACHE INTERNAL "")
+if(WIN32)
+	# For Windows, there is no binary distribution save the official installer. We don't go through
+	# the hassle of re-packing the binaries ourselves (who knows what the licensing implication are)
+	# and just softly fail if the package is not installed. Our official SDK installer should offer
+	# the Cg Toolkit for installation anyway.
+	
+	# Set this value first, it will be used by the script (and that one does not do it properly it seems)
+	if(CMAKETOOLS_TARGET_BITSIZE MATCHES "64")
+		set(NV_SYSTEM_PROCESSOR "x86_64" CACHE INTERNAL "")
+	else()
+		set(NV_SYSTEM_PROCESSOR "x86" CACHE INTERNAL "")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
+	
+	find_package(Cg)
+	
+	if(NOT CG_FOUND)	
+		message(STATUS "Cg Toolkit is not installed, download it from http://developer.download.nvidia.com/cg/Cg_3.1/Cg-3.1_April2012_Setup.exe")
+		
+		# We cannot build any of the dependent projects
+		unset(PL_PLUGIN_RENDERER_OPENGLCG CACHE)
+	else()
+		set(CG_INCLUDE_DIRS ${CG_INCLUDE_DIR} CACHE INTERNAL "")
+		set(CG_OPENGL_LIBRARIES ${CG_LIBRARY} ${CG_GL_LIBRARY} CACHE INTERNAL "")
+		
+		# We need to copy over cg.dll and cgGl.dll
+		# For now we do it directly here but in the future it would be better to create a custom target
+		# and do this in its build phase
+		string(REGEX REPLACE "/lib" "/bin" CG_DLL ${CG_LIBRARY})
+		string(REGEX REPLACE ".lib" ".dll" CG_DLL ${CG_DLL})
+		file(COPY ${CG_DLL} DESTINATION ${PL_RUNTIME_BIN_GITDIR})
+		
+		string(REGEX REPLACE "/lib" "/bin" CG_GL_DLL ${CG_GL_LIBRARY})
+		string(REGEX REPLACE ".lib" ".dll" CG_GL_DLL ${CG_GL_DLL})
+		file(COPY ${CG_GL_DLL} DESTINATION ${PL_RUNTIME_BIN_GITDIR})
+	endif()
+else()
+	#[TODO] For Linux, we can download and unpack the binary distribution from NVIDIA's site
 endif()
