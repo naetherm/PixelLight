@@ -498,8 +498,6 @@ unset (PL_PLUGIN_VOLUME_LOADER_DICOM_GDCM CACHE)
 ##################################################
 ## Temporarily disable projects that don't build yet
 ##################################################
-unset (PL_PLUGIN_DATABASE_MYSQL CACHE)
-#unset (PL_PLUGIN_PHYSICS_BULLET CACHE)
 
 unset (PL_TESTS CACHE)
 unset (PL_DOCS CACHE)

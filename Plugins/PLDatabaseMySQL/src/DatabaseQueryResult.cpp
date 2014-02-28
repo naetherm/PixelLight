@@ -26,7 +26,7 @@
 #ifdef WIN32
 	#include <Winsock2.h>
 #endif
-#include <MySQL/mysql.h>
+#include <mysql.h>
 #include "PLDatabaseMySQL/DatabaseQueryResult.h"
 
 

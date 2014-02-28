@@ -28,58 +28,82 @@
 define_external_project(MySQL)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-# [TODO] System libs possible for MySQL?
-#if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-#	find_package(MYSQL)
+set(MYSQL_VERSION "5.6.16")
+set(MYSQL_URL "http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-${MYSQL_VERSION}.tar.gz")
+set(MYSQL_MD5 "1d3d91e8459c719bbef7c97bb499634d")
+
+##################################################
+## Need to download?
+##################################################
+# First look if we have the library installed already. This will be the case for the majority of Linux systems
+#TODO: what about debug configuration?
+message(STATUS "Looking for external dependency 'MYSQL' with minimum version ${MYSQL_VERSION}...")
+#find_package(MYSQL ${MYSQL_VERSION})
+
+# Do we have it?
+#if(MYSQL_FOUND)
+#	# We will use the library present on the user system
+#	message(STATUS "'MYSQL' was found on this system")
+#	
+#	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+#	# These variables should normaly only be visible within the cmake file in which the find module was called.
+#	# Otherwise the variables would be visible for all other projects if wanted or not
+#	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
+#	set(MYSQL_LIBRARIES ${MYSQL_LIBRARIES} CACHE INTERNAL "")
+#	set(MYSQL_INCLUDE_DIRS ${MYSQL_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
+	# We'll need to download and build the library ourselves
+	message(STATUS "'MYSQL' was not found, will be downloaded and built from [${MYSQL_URL}]")
+	
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${MYSQL_URL}
+		URL_MD5 ${MYSQL_MD5}
+#		TIMEOUT 30
 
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(MYSQL_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} CACHE INTERNAL "")
+		# "Patch" the CMake script - see the file being replaced for more info
+		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/Patch/install_macros.cmake <SOURCE_DIR>/cmake
+		
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+			
+		CMAKE_CACHE_ARGS
+			-DBUILD_CONFIG:BOOL=OFF
+			-DWITHOUT_SERVER:BOOL=ON
+			-DWITH_UNIT_TESTS:BOOL=OFF
+	)
+	
 	if(WIN32)
-		set(MYSQL_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libmysql.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(MYSQL_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libmysqlclient.a ${CMAKETOOLS_CURRENT_LIB_DIR}/../../zlib/lib/libz.a CACHE INTERNAL "")
+		set(MYSQL_LIBRARIES
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libmysql.lib
+			CACHE INTERNAL "")
+			
+		# Copy the DLL to Bin
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libmysql.dll ${PL_RUNTIME_BIN_GITDIR}
+			DEPENDEES install
+		)
+	else()
+		set(MYSQL_LIBRARIES
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libmysql.a
+			CACHE INTERNAL "")
+			
+		# Copy the SO to Bin
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libmysql.so ${PL_RUNTIME_BIN_GITDIR}
+			DEPENDEES install
+		)
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
-# [TODO] System libs possible for MySQL?
+	
+	set(MYSQL_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
+	
+	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})
 #endif()
