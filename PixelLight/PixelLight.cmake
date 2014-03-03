@@ -476,8 +476,6 @@ unset (PL_PLUGIN_PHYSICS_PHYSX CACHE)
 ##################################################
 ## Disable plugins that will be enabled in later version
 ##################################################
-unset (PL_PLUGIN_SCRIPT_V8 CACHE)
-unset (PL_PLUGIN_SCRIPT_PYTHON CACHE)
 unset (PL_PLUGIN_SCRIPT_ANGELSCRIPT	CACHE)
 unset (PL_PLUGIN_DATABASE_POSTGRESQL CACHE)
 unset (PL_PLUGIN_DATABASE_SQLITE CACHE)
@@ -499,7 +497,8 @@ unset (PL_PLUGIN_VOLUME_LOADER_DICOM_GDCM CACHE)
 ## Temporarily disable projects that don't build yet
 ##################################################
 
-unset (PL_TESTS CACHE)
+unset (PL_PLUGIN_SCRIPT_V8 CACHE)
+unset (PL_PLUGIN_SCRIPT_PYTHON CACHE)
 unset (PL_DOCS CACHE)
 
 ##################################################
