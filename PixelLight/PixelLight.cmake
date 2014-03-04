@@ -499,7 +499,6 @@ unset (PL_PLUGIN_VOLUME_LOADER_DICOM_GDCM CACHE)
 
 unset (PL_PLUGIN_SCRIPT_V8 CACHE)
 unset (PL_PLUGIN_SCRIPT_PYTHON CACHE)
-unset (PL_DOCS CACHE)
 
 ##################################################
 ## Remove optional projects not available on a certain platform
