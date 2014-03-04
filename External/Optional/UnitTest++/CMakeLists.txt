@@ -28,58 +28,62 @@
 define_external_project(UnitTest++)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-# [TODO] System libs possible for UnitTest++?
-#if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-#	find_package(UNITTESTPP)
+set(UNITTESTPP_VERSION "1.4")
+set(UNITTESTPP_URL "http://sourceforge.net/projects/unittest-cpp/files/UnitTest%2B%2B/${UNITTESTPP_VERSION}/unittest-cpp-${UNITTESTPP_VERSION}.zip/download")
+set(UNITTESTPP_MD5 "bd373a53403ed51ea1bbb60b1952d7e3")
+
+##################################################
+## Need to download?
+##################################################
+# First look if we have the library installed already. This will be the case for the majority of Linux systems
+#TODO: what about debug configuration?
+message(STATUS "Looking for external dependency 'libUNITTESTPP' with minimum version ${UNITTESTPP_VERSION}...")
+#find_package(UNITTESTPP)
+
+# Do we have it?
+#if(UNITTESTPP_FOUND)
+#	# We will use the library present on the user system
+#	message(STATUS "'libUNITTESTPP' was found on this system")
+#	
+#	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+#	# These variables should normaly only be visible within the cmake file in which the find module was called.
+#	# Otherwise the variables would be visible for all other projects if wanted or not
+#	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
+#	set(UNITTESTPP_LIBRARIES ${UNITTESTPP_LIBRARIES} CACHE INTERNAL "")
+#	set(UNITTESTPP_INCLUDE_DIR ${UNITTESTPP_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
+	# We'll need to download and build the library ourselves
+	message(STATUS "'libUNITTESTPP' was not found, will be downloaded and built from [${UNITTESTPP_URL}]")
+	
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${UNITTESTPP_URL}
+		URL_MD5 ${UNITTESTPP_MD5}
+		TIMEOUT 30
 
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(UNITTESTPP_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} CACHE INTERNAL "")
+		# We have a CMake script for libUNITTESTPP, copy it over to the source folder so that
+		# ExternalProject finds it and executes it.
+		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/CMake/CMakeLists.txt ${CMAKETOOLS_CURRENT_SRC_DIR}/CMakeLists.txt
+		
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+	)
+	
 	if(WIN32)
-		set(UNITTESTPP_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/UnitTest++.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(UNITTESTPP_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libUnitTest++.a CACHE INTERNAL "")
+		set(UNITTESTPP_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/UnitTest++.lib CACHE INTERNAL "")
+	else()
+		set(UNITTESTPP_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libUnitTest++.a CACHE INTERNAL "")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
-# [TODO] System libs possible for UnitTest++?
+	set(UNITTESTPP_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
+	
+	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 #endif()
+
