@@ -30,34 +30,29 @@ define_external_project(zlib)
 ## Configuration
 ##################################################
 set(ZLIB_VERSION "1.2.8")
-#set(ZLIB_URL "http://zlib.net/zlib-${ZLIB_VERSION}.tar.gz")
 set(ZLIB_URL "http://prdownloads.sourceforge.net/libpng/zlib-${ZLIB_VERSION}.tar.gz")
 set(ZLIB_MD5 "44d667c142d7cda120332623eab69f40")
 
 # This is required because these variables are cached. If another library performs the same check (as e.g. libpng
 # does), it will result in the external project not being built after repeated CMake runs. We want to make this
 # the only place where zlib's (non)existence is decided
+# [TODO] We should find another solution or do this for all libraries where we are looking for existing packages
 set(ZLIB_FOUND "0" CACHE INTERNAL "")
 set(ZLIB_LIBRARY "" CACHE INTERNAL "")
 set(ZLIB_LIBRARY_LIST "" CACHE INTERNAL "")
 set(ZLIB_LIBRARIES "" CACHE INTERNAL "")
 set(ZLIB_INCLUDE_DIR "" CACHE INTERNAL "")
-# Also mark if there was a project created for zlib for dependency checking
-set(ZLIB_HAS_PROJECT OFF CACHE INTERNAL "")
 
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'zlib' with minimum version ${ZLIB_VERSION}...")
-find_package(ZLIB ${ZLIB_VERSION})
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(ZLIB ${ZLIB_VERSION})
+endif()
 
 # Do we have it?
 if(ZLIB_FOUND)
-	# We will use the library present on the user system
-	message(STATUS "'zlib' was found on this system")
-	
+	# We will use the library present on the user system	
 	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 	# These variables should normaly only be visible within the cmake file in which the find module was called.
 	# Otherwise the variables would be visible for all other projects if wanted or not
@@ -67,9 +62,7 @@ if(ZLIB_FOUND)
 	set(ZLIB_INCLUDE_DIR ${ZLIB_INCLUDE_DIR} CACHE INTERNAL "")
 else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'zlib' was not found, will be downloaded and built from [${ZLIB_URL}]")
-	
-	set(ZLIB_HAS_PROJECT ON CACHE INTERNAL "")
+	message(STATUS "-- Using external build system for dependency 'zlib'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -81,12 +74,14 @@ else()
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${ZLIB_URL}
 		URL_MD5 ${ZLIB_MD5}
-		TIMEOUT 30
+		
 		PATCH_COMMAND ${CMAKE_COMMAND} -E remove <SOURCE_DIR>/zconf.h
+		
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 	)
 	
+	# Setup paths
 	if(WIN32)
 		# On Windows, the output .lib file has a different name for debug configuration
 		set(ZLIB_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib CACHE INTERNAL "")
@@ -101,5 +96,6 @@ else()
 	endif()
 	set(ZLIB_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
 endif()

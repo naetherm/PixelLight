@@ -32,14 +32,12 @@ define_external_project(Bullet)
 ##################################################
 set(BULLET_VERSION "2.82-r2704")
 set(BULLET_URL "https://bullet.googlecode.com/files/bullet-${BULLET_VERSION}.tgz")
-#set(BULLET_MD5 "52aa4cf4e34e6b2a9c5f6c0b3c319af1")
+set(BULLET_MD5 "70b3c8d202dee91a0854b4cbc88173e8")
 
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'BULLET' with minimum version ${BULLET_VERSION}...")
+# [TODO] Find package possible for Bullet?
 #find_package(BULLET ${BULLET_VERSION})
 
 # Do we have it?
@@ -55,7 +53,7 @@ message(STATUS "Looking for external dependency 'BULLET' with minimum version ${
 #	set(BULLET_INCLUDE_DIRS ${BULLET_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'BULLET' was not found, will be downloaded and built from [${BULLET_URL}]")
+	message(STATUS "-- Using external build system for dependency 'Bullet'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -66,8 +64,7 @@ message(STATUS "Looking for external dependency 'BULLET' with minimum version ${
 		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${BULLET_URL}
-#		URL_MD5 ${BULLET_MD5}
-#		TIMEOUT 30
+		URL_MD5 ${BULLET_MD5}
 		
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
@@ -79,6 +76,7 @@ message(STATUS "Looking for external dependency 'BULLET' with minimum version ${
 			-DUSE_MSVC_RUNTIME_LIBRARY_DLL:BOOL=ON
 	)
 	
+	# Setup paths
 	if(WIN32)
 		set(BULLET_LIBRARIES
 			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/BulletCollision.lib
@@ -92,8 +90,8 @@ message(STATUS "Looking for external dependency 'BULLET' with minimum version ${
 			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libLinearMath.a
 			CACHE INTERNAL "")
 	endif()
-	
 	set(BULLET_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})
 #endif()

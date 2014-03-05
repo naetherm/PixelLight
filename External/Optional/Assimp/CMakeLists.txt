@@ -37,9 +37,7 @@ set(ASSIMP_MD5 "52aa4cf4e34e6b2a9c5f6c0b3c319af1")
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'Assimp' with minimum version ${ASSIMP_VERSION}...")
+# [TODO] Find package possible for Assimp?
 #find_package(ASSIMP ${ASSIMP_VERSION})
 
 # Do we have it?
@@ -55,7 +53,7 @@ message(STATUS "Looking for external dependency 'Assimp' with minimum version ${
 #	set(ASSIMP_INCLUDE_DIRS ${ASSIMP_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'Assimp' was not found, will be downloaded and built from [${ASSIMP_URL}]")
+	message(STATUS "-- Using external build system for dependency 'Assimp'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -67,7 +65,6 @@ message(STATUS "Looking for external dependency 'Assimp' with minimum version ${
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${ASSIMP_URL}
 		URL_MD5 ${ASSIMP_MD5}
-		TIMEOUT 30
 		
 		# Include our custom code patch
 		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/Patch/LWOAnimation.cpp <SOURCE_DIR>/code/LWOAnimation.cpp
@@ -90,6 +87,7 @@ message(STATUS "Looking for external dependency 'Assimp' with minimum version ${
 		LIST_SEPARATOR ^^
 	)
 	
+	# Setup paths
 	if(WIN32)
 		# On Windows, the output .lib file has a different name for debug configuration
 		set(ASSIMP_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/assimp.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/assimpD.lib CACHE INTERNAL "")
@@ -98,6 +96,7 @@ message(STATUS "Looking for external dependency 'Assimp' with minimum version ${
 	endif()
 	set(ASSIMP_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(${CMAKETOOLS_CURRENT_TARGET} External-zlib)
 	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
 #endif()

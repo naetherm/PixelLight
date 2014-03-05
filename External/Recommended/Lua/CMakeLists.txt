@@ -42,26 +42,21 @@ set(LUAJIT_MD5 "112dfb82548b03377fbefbba2e0e3a5b")
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'LuaJIT' with minimum version ${LUAJIT_VERSION}...")
+# [TODO] Find package possible for LuaJIT?
 #find_package(LUAJIT ${LUAJIT_VERSION})
 
 # Do we have it?
 #if(LUAJIT_FOUND)
 #	# We will use the library present on the user system
-#	message(STATUS "'LuaJIT' was found on this system")
-#	
 #	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 #	# These variables should normaly only be visible within the cmake file in which the find module was called.
 #	# Otherwise the variables would be visible for all other projects if wanted or not
 #	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
 #	set(LUAJIT_LIBRARIES ${LUAJIT_LIBRARIES} CACHE INTERNAL "")
-#	set(LUAJIT_LIBRARY ${LUAJIT_LIBRARIES} CACHE INTERNAL "")
-#	set(LUAJIT_INCLUDE_DIR ${LUAJIT_INCLUDE_DIR} CACHE INTERNAL "")
+#	set(LUAJIT_INCLUDE_DIRS ${LUAJIT_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'LuaJIT' was not found, will be downloaded and built from [${LUAJIT_URL}]")
+	message(STATUS "-- Using external build system for dependency 'LuaJIT'...")
 	
 	# Define the external project
 	if(MSVC)
@@ -73,11 +68,13 @@ message(STATUS "Looking for external dependency 'LuaJIT' with minimum version ${
 			STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 			URL ${LUAJIT_URL}
 			URL_MD5 ${LUAJIT_MD5}
-			TIMEOUT 30
 			BUILD_IN_SOURCE 1
+			
 			CONFIGURE_COMMAND ""
+			
 			BUILD_COMMAND ${CMAKE_COMMAND} -E chdir src msvcbuild.bat
-            INSTALL_COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll <INSTALL_DIR>/bin/lua51.dll
+            
+			INSTALL_COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll <INSTALL_DIR>/bin/lua51.dll
 			COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll ${PL_RUNTIME_BIN_GITDIR}/lua51.dll
             COMMAND ${CMAKE_COMMAND} -E copy src/lua51.lib <INSTALL_DIR>/lib/lua51.lib
             COMMAND ${CMAKE_COMMAND} -E copy src/lauxlib.h "<INSTALL_DIR>/include/Lua/lauxlib.h"
@@ -95,14 +92,15 @@ message(STATUS "Looking for external dependency 'LuaJIT' with minimum version ${
 			STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 			URL ${LUAJIT_URL}
 			URL_MD5 ${LUAJIT_MD5}
-			TIMEOUT 30
 			BUILD_IN_SOURCE 1
+			
 			CONFIGURE_COMMAND ""
+			
 			BUILD_COMMAND make
+			
 			#[TODO] What is the .so here?
             INSTALL_COMMAND ${CMAKE_COMMAND} -E copy src/libluajit.a <INSTALL_DIR>/bin/liblua.a
 			COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll ${PL_RUNTIME_BIN_GITDIR}/lua51.dll
-			
             COMMAND ${CMAKE_COMMAND} -E copy src/libluajit.a <INSTALL_DIR>/bin/liblua.a
             COMMAND ${CMAKE_COMMAND} -E copy src/lauxlib.h "<INSTALL_DIR>/include/Lua/lauxlib.h"
             COMMAND ${CMAKE_COMMAND} -E copy src/luaconf.h "<INSTALL_DIR>/include/Lua/luaconf.h"
@@ -111,18 +109,18 @@ message(STATUS "Looking for external dependency 'LuaJIT' with minimum version ${
             COMMAND ${CMAKE_COMMAND} -E copy src/lualib.h "<INSTALL_DIR>/include/Lua/lualib.h"
 		)
 	else()
-		#[TODO] Revert to classical Lua
+		# [TODO] Revert to classical Lua
 		message(FATAL_ERROR "Cannot use LuaJIT with CMake generator ${CMAKE_GENERATOR}")
 	endif()
 	
+	# Setup paths
 	if(WIN32)
-		# On Windows, the output .lib file has a different name for debug configuration
-		#set(LUAJIT_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib CACHE INTERNAL "")
 		set(LUA_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/lua51.lib CACHE INTERNAL "")
 	else()
 		set(LUA_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/liblua.a CACHE INTERNAL "")
 	endif()
 	set(LUA_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include/Lua CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 #endif()

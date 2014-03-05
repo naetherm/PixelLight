@@ -37,16 +37,13 @@ set(OGG_MD5 "ba526cd8f4403a5d351a9efaa8608fbc")
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'libogg' with minimum version ${OGG_VERSION}...")
-find_package(Ogg ${OGG_VERSION})
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(Ogg ${OGG_VERSION})
+endif()
 
 # Do we have it?
-if(OGG_FOUND)
+if(Ogg_FOUND)
 	# We will use the library present on the user system
-	message(STATUS "'libogg' was found on this system")
-	
 	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 	# These variables should normaly only be visible within the cmake file in which the find module was called.
 	# Otherwise the variables would be visible for all other projects if wanted or not
@@ -55,7 +52,7 @@ if(OGG_FOUND)
 	set(LIBOGG_INCLUDE_DIRS ${Ogg_INCLUDE_DIR} CACHE INTERNAL "")
 else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'libogg' was not found, will be downloaded and built from [${OGG_URL}]")
+	message(STATUS "-- Using external build system for dependency 'libogg'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -67,7 +64,6 @@ else()
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${OGG_URL}
 		URL_MD5 ${OGG_MD5}
-		TIMEOUT 30
 		
 		# We have a CMake script for libogg
 		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/CMake/CMakeLists.txt ${CMAKETOOLS_CURRENT_SRC_DIR}/CMakeLists.txt
@@ -76,13 +72,14 @@ else()
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 	)
 	
+	# Setup paths
 	if(WIN32)
-		# On Windows, the output .lib file has a different name for debug configuration
 		set(LIBOGG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libogg.lib CACHE INTERNAL "")
 	else()
 		set(LIBOGG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libogg.so CACHE INTERNAL "")
 	endif()
 	set(LIBOGG_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 endif()

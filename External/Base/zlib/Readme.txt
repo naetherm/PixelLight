@@ -1,4 +1,4 @@
-zlib 1.2.5
+zlib 1.2.8
 - License: "zlib", see "license.txt"
 - ZIP library
 - Used by the zip file classes inside "PLCore" (statically linked and therefore without additional external dependencies)

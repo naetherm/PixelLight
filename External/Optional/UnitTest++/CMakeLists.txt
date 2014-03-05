@@ -37,16 +37,12 @@ set(UNITTESTPP_MD5 "bd373a53403ed51ea1bbb60b1952d7e3")
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'libUNITTESTPP' with minimum version ${UNITTESTPP_VERSION}...")
+# [TODO] Find package possible for UnitTest++?
 #find_package(UNITTESTPP)
 
 # Do we have it?
 #if(UNITTESTPP_FOUND)
 #	# We will use the library present on the user system
-#	message(STATUS "'libUNITTESTPP' was found on this system")
-#	
 #	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 #	# These variables should normaly only be visible within the cmake file in which the find module was called.
 #	# Otherwise the variables would be visible for all other projects if wanted or not
@@ -55,7 +51,7 @@ message(STATUS "Looking for external dependency 'libUNITTESTPP' with minimum ver
 #	set(UNITTESTPP_INCLUDE_DIR ${UNITTESTPP_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'libUNITTESTPP' was not found, will be downloaded and built from [${UNITTESTPP_URL}]")
+	message(STATUS "-- Using external build system for dependency 'UnitTest++'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -67,16 +63,15 @@ message(STATUS "Looking for external dependency 'libUNITTESTPP' with minimum ver
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${UNITTESTPP_URL}
 		URL_MD5 ${UNITTESTPP_MD5}
-		TIMEOUT 30
 
-		# We have a CMake script for libUNITTESTPP, copy it over to the source folder so that
-		# ExternalProject finds it and executes it.
+		# We have a CMake script for libUNITTESTPP, copy it over to the source folder
 		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/CMake/CMakeLists.txt ${CMAKETOOLS_CURRENT_SRC_DIR}/CMakeLists.txt
 		
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 	)
 	
+	# Setup paths
 	if(WIN32)
 		set(UNITTESTPP_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/UnitTest++.lib CACHE INTERNAL "")
 	else()
@@ -84,6 +79,7 @@ message(STATUS "Looking for external dependency 'libUNITTESTPP' with minimum ver
 	endif()
 	set(UNITTESTPP_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 #endif()
 

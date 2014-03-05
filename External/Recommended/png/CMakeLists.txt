@@ -36,16 +36,13 @@ set(PNG_MD5 "edd26ef2bf561786b2185f2b8afda78b")
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'libpng' with minimum version ${PNG_VERSION}...")
-find_package(PNG ${PNG_VERSION})
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(PNG ${PNG_VERSION})
+endif()
 
 # Do we have it?
 if(PNG_FOUND)
 	# We will use the library present on the user system
-	message(STATUS "'libpng' was found on this system")
-	
 	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 	# These variables should normaly only be visible within the cmake file in which the find module was called.
 	# Otherwise the variables would be visible for all other projects if wanted or not
@@ -54,7 +51,7 @@ if(PNG_FOUND)
 	set(PNG_INCLUDE_DIR ${PNG_INCLUDE_DIR} CACHE INTERNAL "")
 else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'libpng' was not found, will be downloaded and built from [${PNG_URL}]")
+	message(STATUS "-- Using external build system for dependency 'libpng'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -66,7 +63,7 @@ else()
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${PNG_URL}
 		URL_MD5 ${PNG_MD5}
-		TIMEOUT 30
+		
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 			-DZLIB_LIBRARY:STRING=${ZLIB_LIBRARY_LIST}
@@ -78,6 +75,7 @@ else()
 		LIST_SEPARATOR ^^
 	)
 	
+	# Setup paths
 	if(WIN32)
 		# On Windows, the output .lib file has a different name for debug configuration
 		set(PNG_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpng16_static.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpng16_staticd.lib CACHE INTERNAL "")
@@ -86,10 +84,7 @@ else()
 	endif()
 	set(PNG_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
-	
-	# We depend on zlib, so set dependency if it will be built using ExternalProject
-	#if(ZLIB_HAS_PROJECT)
-		add_dependencies(${CMAKETOOLS_CURRENT_TARGET} External-zlib)
-	#endif()
+	add_dependencies(${CMAKETOOLS_CURRENT_TARGET} External-zlib)
 endif()

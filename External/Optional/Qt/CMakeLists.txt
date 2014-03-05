@@ -37,14 +37,16 @@ set(QT_URL "http://download.qt-project.org/official_releases/qt/4.8/${QT_VERSION
 ##################################################
 ## Need to download?
 ##################################################
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'Qt' with minimum version ${QT_VERSION}...")
-#find_package(Qt4 ${QT_VERSION})
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(Qt4 ${QT_VERSION})
+endif()
 
 if(Qt4_FOUND)
 	#[TODO]
 else()
 	# Download and build Qt from source
+	message(STATUS "-- Using external build system for dependency 'Qt'...")
+	
 	if(WIN32)
 		# Try to use jom if available
 		find_program(JOM jom)
@@ -61,7 +63,6 @@ else()
 		# Set build variables
 		set(QT_CONFIGURE ${CMAKE_COMMAND} -P ${CMAKETOOLS_CURRENT_BUILD_DIR}/QtWinConfig.cmake)
 		set(QT_BUILD ${QT_BUILD_PROGRAM})
-#		set(QT_INSTALL "")
 	else()
 		#[TODO]
 		
@@ -71,13 +72,11 @@ else()
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
 		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
 		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
-#		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
 		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
 		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${QT_URL}
 #		URL_MD5 ${QT_MD5}
-#		TIMEOUT 30
 		BUILD_IN_SOURCE 1
 		
 		# Apply our code patch
@@ -86,7 +85,9 @@ else()
 		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/Patch/MathExtras.h <SOURCE_DIR>/src/3rdparty/javascriptcore/JavaScriptCore/wtf
 		
 		CONFIGURE_COMMAND ${QT_CONFIGURE}
+		
 		BUILD_COMMAND ${QT_BUILD}
+		
 		INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/bin <INSTALL_DIR>/bin
 			COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/lib <INSTALL_DIR>/lib
 			COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/include <INSTALL_DIR>/include
@@ -96,11 +97,13 @@ else()
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 	)
 	
+	# Setup paths
 	set(QT_INCLUDE_DIRS
 		${CMAKETOOLS_CURRENT_INSTALL_DIR}/include
 		${CMAKETOOLS_CURRENT_INSTALL_DIR}/include/Qt
 		${CMAKETOOLS_CURRENT_INSTALL_DIR}/include/QtGui
 		${CMAKETOOLS_CURRENT_INSTALL_DIR}/include/QtCore CACHE INTERNAL "")
+		
 	if(WIN32)
 		set(QT_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/QtCore4.lib ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/QtGui4.lib ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/qtmain.lib CACHE INTERNAL "")
 
@@ -151,5 +154,6 @@ else()
 	# Find Qt4 libraries and set all required variables
 	find_package(Qt4 REQUIRED)
 
+	# Dependencies
 	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})
 endif()

@@ -95,8 +95,8 @@ else()
 	set(CMAKETOOLS_TARGET_ARCHBITSIZE ${CMAKETOOLS_TARGET_ARCH} CACHE STRING "Target architecture & bitsize")
 endif()
 
-# Use system libraries or build externals?
-set(CMAKETOOLS_USE_SYSTEM_LIBS "0" CACHE BOOL "Use system libraries or build own external libraries?")
+# Can we use system libraries or do we want to force the system to build our own?
+set(CMAKETOOLS_DONT_USE_SYSTEM_LIBS "0" CACHE BOOL "Can the build system use libraries already present on this system?")
 
 # The following is Linux only
 if(LINUX)

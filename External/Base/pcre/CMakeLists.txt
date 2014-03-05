@@ -36,16 +36,13 @@ set(PCRE_MD5 "eb34b2c9c727fd64940d6fd9a00995eb")
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'pcre' with minimum version ${PCRE_VERSION}...")
-find_package(PCRE ${PCRE_VERSION})
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(PCRE ${PCRE_VERSION})
+endif()
 
 # Do we have it?
 if(PCRE_FOUND)
-	# We will use the library present on the user system
-	message(STATUS "'pcre' was found on this system")
-	
+	# We will use the library present on the user system	
 	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 	# These variables should normaly only be visible within the cmake file in which the find module was called.
 	# Otherwise the variables would be visible for all other projects if wanted or not
@@ -54,7 +51,7 @@ if(PCRE_FOUND)
 	set(PCRE_INCLUDE_DIR ${PCRE_INCLUDE_DIR} CACHE INTERNAL "")
 else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'pcre' was not found, will be downloaded and built from [${PCRE_URL}]")
+	message(STATUS "-- Using external build system for dependency 'pcre'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -66,7 +63,7 @@ else()
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${PCRE_URL}
 		URL_MD5 ${PCRE_MD5}
-		TIMEOUT 30
+		
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 	)

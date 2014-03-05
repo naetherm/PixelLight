@@ -1,3 +1,5 @@
+## The CMake script used to build UnitTest++ by our externals build pipeline
+
 cmake_minimum_required(VERSION 2.8.3)
 
 

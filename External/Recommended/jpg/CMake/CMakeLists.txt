@@ -1,3 +1,5 @@
+## This is the CMake script that our main build pipeline uses to compile the library
+
 cmake_minimum_required(VERSION 2.8.3)
 
 
@@ -87,7 +89,7 @@ add_library(${CURRENT_TARGET_NAME} STATIC ${CURRENT_SRC})
 target_link_libraries(${CURRENT_TARGET_NAME} ${CURRENT_SHARED_LIBRARIES})
 set_target_properties(${CURRENT_TARGET_NAME} PROPERTIES COMPILE_DEFINITIONS "__STDC_INT64__")
 
-#TODO: other platforms
+# [TODO] other platforms
 if(WIN32)
 	add_custom_command(
 		TARGET ${CURRENT_TARGET_NAME}

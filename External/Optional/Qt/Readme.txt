@@ -1,4 +1,4 @@
-﻿Qt 4.8.0 - but only the parts really required because Qt is huge and we only need a small portion of it
+﻿Qt 4.8.5 - but only the parts really required because Qt is huge and we only need a small portion of it
 -> Shared libraries build for Visual Studio 2010
 
 - License: "GNU Library Public License, version 2", see "LICENSE.LGPL"-file

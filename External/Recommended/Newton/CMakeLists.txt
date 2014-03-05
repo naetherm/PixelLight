@@ -37,9 +37,7 @@ set(NEWTON_MD5 "a922b216785e10a691119f1b5fa299ab")
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'Newton' with minimum version ${NEWTON_VERSION}...")
+# [TODO] Find package possible for Newton?
 #find_package(NEWTON ${NEWTON_VERSION})
 
 # Do we have it?
@@ -55,7 +53,7 @@ message(STATUS "Looking for external dependency 'Newton' with minimum version ${
 #	set(NEWTON_INCLUDE_DIRS ${NEWTON_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'Newton' was not found, will be downloaded and built from [${NEWTON_URL}]")
+	message(STATUS "-- Using external build system for dependency 'Newton'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -76,6 +74,7 @@ message(STATUS "Looking for external dependency 'Newton' with minimum version ${
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 	)
 	
+	# Setup paths
 	if(WIN32)
 		set(NEWTON_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/newton.lib CACHE INTERNAL "")
 		
@@ -95,5 +94,6 @@ message(STATUS "Looking for external dependency 'Newton' with minimum version ${
 	endif()
 	set(NEWTON_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
 #endif()

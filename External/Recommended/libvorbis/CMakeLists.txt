@@ -37,16 +37,13 @@ set(VORBIS_MD5 "8851c593a52d1ef9c526d95174873852")
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'libvorbis' with minimum version ${VORBIS_VERSION}...")
-find_package(Vorbis ${VORBIS_VERSION})
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(Vorbis ${VORBIS_VERSION})
+endif()
 
 # Do we have it?
 if(VORBIS_FOUND)
 	# We will use the library present on the user system
-	message(STATUS "'libvorbis' was found on this system")
-	
 	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 	# These variables should normaly only be visible within the cmake file in which the find module was called.
 	# Otherwise the variables would be visible for all other projects if wanted or not
@@ -55,7 +52,7 @@ if(VORBIS_FOUND)
 	set(LIBVORBIS_INCLUDE_DIRS ${Vorbis_INCLUDE_DIR} CACHE INTERNAL "")
 else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'libvorbis' was not found, will be downloaded and built from [${VORBIS_URL}]")
+	message(STATUS "-- Using external build system for dependency 'libvorbis'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -67,7 +64,6 @@ else()
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${VORBIS_URL}
 		URL_MD5 ${VORBIS_MD5}
-		TIMEOUT 30
 		
 		# We have a CMake script for libvorbis
 		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/CMake/CMakeLists.txt ${CMAKETOOLS_CURRENT_SRC_DIR}/CMakeLists.txt
@@ -77,6 +73,7 @@ else()
 			-DOGG_INCLUDE_DIR:PATH=${LIBOGG_INCLUDE_DIRS}
 	)
 	
+	# Setup paths
 	if(WIN32)
 		set(LIBVORBIS_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbis.lib ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbisfile.lib CACHE INTERNAL "")
 	else()
@@ -84,6 +81,7 @@ else()
 	endif()
 	set(LIBVORBIS_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(${CMAKETOOLS_CURRENT_TARGET} External-libogg)
 	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 endif()

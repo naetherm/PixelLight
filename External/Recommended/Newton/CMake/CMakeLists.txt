@@ -1,3 +1,6 @@
+## This is the CMake script used to build Newton by our externals build pipeline
+
+
 cmake_minimum_required(VERSION 2.8.3)
 
 

@@ -32,21 +32,18 @@ define_external_project(libjpg)
 ##################################################
 set(JPEG_VERSION "v9a")
 set(JPEG_URL "http://www.ijg.org/files/jpegsrc.${JPEG_VERSION}.tar.gz")
-#set(JPEG_MD5 "edd26ef2bf561786b2185f2b8afda78b")
+set(JPEG_MD5 "3353992aecaee1805ef4109aadd433e7")
 
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'libjpeg' with minimum version ${JPEG_VERSION}...")
-find_package(JPEG)
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(JPEG)
+endif()
 
 # Do we have it?
 if(JPEG_FOUND)
 	# We will use the library present on the user system
-	message(STATUS "'libjpeg' was found on this system")
-	
 	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 	# These variables should normaly only be visible within the cmake file in which the find module was called.
 	# Otherwise the variables would be visible for all other projects if wanted or not
@@ -55,7 +52,7 @@ if(JPEG_FOUND)
 	set(JPEG_INCLUDE_DIR ${JPEG_INCLUDE_DIR} CACHE INTERNAL "")
 else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'libjpeg' was not found, will be downloaded and built from [${JPEG_URL}]")
+	message(STATUS "-- Using external build system for dependency 'libjpeg'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -66,17 +63,16 @@ else()
 		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${JPEG_URL}
-#		URL_MD5 ${JPEG_MD5}
-		TIMEOUT 30
+		URL_MD5 ${JPEG_MD5}
 
-		# We have a CMake script for libjpeg, copy it over to the source folder so that
-		# ExternalProject finds it and executes it.
+		# We have a CMake script for libjpeg, copy it over to the source folder
 		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/CMake/CMakeLists.txt ${CMAKETOOLS_CURRENT_SRC_DIR}/CMakeLists.txt
 		
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
 	)
 	
+	# Setup paths
 	if(WIN32)
 		set(JPEG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/jpeg.lib CACHE INTERNAL "")
 	else()
@@ -84,6 +80,7 @@ else()
 	endif()
 	set(JPEG_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 endif()
 

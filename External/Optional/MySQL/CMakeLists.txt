@@ -37,16 +37,12 @@ set(MYSQL_MD5 "1d3d91e8459c719bbef7c97bb499634d")
 ##################################################
 ## Need to download?
 ##################################################
-# First look if we have the library installed already. This will be the case for the majority of Linux systems
-#TODO: what about debug configuration?
-message(STATUS "Looking for external dependency 'MYSQL' with minimum version ${MYSQL_VERSION}...")
+# [TODO] Find package possible for MySQL?
 #find_package(MYSQL ${MYSQL_VERSION})
 
 # Do we have it?
 #if(MYSQL_FOUND)
 #	# We will use the library present on the user system
-#	message(STATUS "'MYSQL' was found on this system")
-#	
 #	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 #	# These variables should normaly only be visible within the cmake file in which the find module was called.
 #	# Otherwise the variables would be visible for all other projects if wanted or not
@@ -55,7 +51,7 @@ message(STATUS "Looking for external dependency 'MYSQL' with minimum version ${M
 #	set(MYSQL_INCLUDE_DIRS ${MYSQL_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
 	# We'll need to download and build the library ourselves
-	message(STATUS "'MYSQL' was not found, will be downloaded and built from [${MYSQL_URL}]")
+	message(STATUS "-- Using external build system for dependency 'MySQL'...")
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -67,7 +63,6 @@ message(STATUS "Looking for external dependency 'MYSQL' with minimum version ${M
 		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
 		URL ${MYSQL_URL}
 		URL_MD5 ${MYSQL_MD5}
-#		TIMEOUT 30
 
 		# "Patch" the CMake script - see the file being replaced for more info
 		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/Patch/install_macros.cmake <SOURCE_DIR>/cmake
@@ -81,6 +76,7 @@ message(STATUS "Looking for external dependency 'MYSQL' with minimum version ${M
 			-DWITH_UNIT_TESTS:BOOL=OFF
 	)
 	
+	# Setup paths
 	if(WIN32)
 		set(MYSQL_LIBRARIES
 			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libmysql.lib
@@ -102,8 +98,8 @@ message(STATUS "Looking for external dependency 'MYSQL' with minimum version ${M
 			DEPENDEES install
 		)
 	endif()
-	
 	set(MYSQL_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	
+	# Dependencies
 	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})
 #endif()
