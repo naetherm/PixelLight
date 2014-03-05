@@ -37,9 +37,9 @@ set(QT_URL "http://download.qt-project.org/official_releases/qt/4.8/${QT_VERSION
 ##################################################
 ## Need to download?
 ##################################################
-if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
-	find_package(Qt4 ${QT_VERSION})
-endif()
+#if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+#	find_package(Qt4 ${QT_VERSION})
+#endif()
 
 if(Qt4_FOUND)
 	#[TODO]
