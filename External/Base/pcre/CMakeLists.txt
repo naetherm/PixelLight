@@ -52,6 +52,11 @@ if(PCRE_FOUND)
 else()
 	# We'll need to download and build the library ourselves
 	message(STATUS "-- Using external build system for dependency 'pcre'...")
+
+	# We are building static library out of PCRE - we need to enable PIC support!
+	if(LINUX)
+		set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
+	endif()
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -66,6 +71,8 @@ else()
 		
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+
+		CMAKE_CACHE_ARGS ${COMPILER_FLAGS}
 	)
 	
 	# Setup paths
