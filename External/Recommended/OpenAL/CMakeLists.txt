@@ -30,7 +30,7 @@ define_external_project(OpenAL)
 ## Configuration
 ##################################################
 set(OPENAL_VERSION "1.15.1")
-set(OPENAL_URL "http://openal-soft.org/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2")
+set(OPENAL_URL "http://kcat.strangesoft.net/openal-releases/openal-soft-${OPENAL_VERSION}.tar.bz2")
 #set(OPENAL_MD5 "edd26ef2bf561786b2185f2b8afda78b")
 
 ##################################################
