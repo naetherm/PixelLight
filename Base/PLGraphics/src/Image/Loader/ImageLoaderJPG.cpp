@@ -95,7 +95,7 @@ boolean fill_input_buffer(j_decompress_ptr cinfo)
 		pJpgReadStruct->sPublic.bytes_in_buffer = nReadBytes;
 		pJpgReadStruct->bStartOfFile			= false;
 
-		return true;
+		return TRUE;
 	} else {
 		if (pJpgReadStruct->bStartOfFile) {
 			// Treat empty input file as fatal error
@@ -106,7 +106,7 @@ boolean fill_input_buffer(j_decompress_ptr cinfo)
 		pJpgReadStruct->pBuffer[0] = static_cast<JOCTET>(0xFF);
 		pJpgReadStruct->pBuffer[1] = static_cast<JOCTET>(JPEG_EOI);
 
-		return false;
+		return FALSE;
 	}
 }
 
@@ -186,7 +186,7 @@ boolean empty_output_buffer(j_compress_ptr cinfo)
 	pJpgWriteStruct->sPublic.next_output_byte = pJpgWriteStruct->pBuffer;
 	pJpgWriteStruct->sPublic.free_in_buffer   = OutputBufferSize;
 
-	return 1;
+	return TRUE;
 }
 
 void term_destination(j_compress_ptr cinfo)
@@ -235,8 +235,8 @@ bool ImageLoaderJPG::LoadParams(Image &cImage, File &cFile, bool bBlockSmoothing
 	jpeg_create_decompress(&sInfo);
 
 	// Set the user given parameters
-	sInfo.do_block_smoothing  = bBlockSmoothing;
-	sInfo.do_fancy_upsampling = bFancyUpsampling;
+	sInfo.do_block_smoothing  = bBlockSmoothing ? TRUE : FALSE;
+	sInfo.do_fancy_upsampling = bFancyUpsampling ? TRUE : FALSE;
 
 	jpeg_read_init(&sInfo, &cFile);
 

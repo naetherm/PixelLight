@@ -54,6 +54,11 @@ set(ASSIMP_MD5 "52aa4cf4e34e6b2a9c5f6c0b3c319af1")
 #else()
 	# We'll need to download and build the library ourselves
 	message(STATUS "-- Using external build system for dependency 'Assimp'...")
+
+	# We are building static library out of Assimp - we need to enable PIC support!
+        if(LINUX)
+                set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
+        endif()
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -82,6 +87,7 @@ set(ASSIMP_MD5 "52aa4cf4e34e6b2a9c5f6c0b3c319af1")
 			-DBUILD_ASSIMP_SAMPLES:BOOL=OFF
 			-DBUILD_TESTS:BOOL=OFF
 			-DBUILD_STATIC_LIB:BOOL=ON
+			${COMPILER_FLAGS}
 			
 		# See zlib's CMakeLists.txt
 		LIST_SEPARATOR ^^

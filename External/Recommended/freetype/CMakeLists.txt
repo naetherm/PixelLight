@@ -37,9 +37,9 @@ set(FREETYPE_MD5 "004320381043d275c4e28bbacf05a1b7")
 ##################################################
 ## Need to download?
 ##################################################
-if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
-	find_package(FREETYPE ${FREETYPE_VERSION})
-endif()
+#if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+#	find_package(FREETYPE ${FREETYPE_VERSION})
+#endif()
 
 # Do we have it?
 if(FREETYPE_FOUND)
@@ -53,6 +53,11 @@ if(FREETYPE_FOUND)
 else()
 	# We'll need to download and build the library ourselves
 	message(STATUS "-- Using external build system for dependency 'freetype2'...")
+
+	# We are building static library out of freetype - we need to enable PIC support!
+        if(LINUX)
+                set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
+        endif()
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -67,6 +72,8 @@ else()
 		
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+
+		CMAKE_CACHE_ARGS ${COMPILER_FLAGS}
 	)
 	
 	# Setup paths

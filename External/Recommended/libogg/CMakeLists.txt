@@ -74,9 +74,15 @@ else()
 	
 	# Setup paths
 	if(WIN32)
-		set(LIBOGG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libogg.lib CACHE INTERNAL "")
+		set(LIBOGG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/ogg.lib CACHE INTERNAL "")
 	else()
 		set(LIBOGG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libogg.so CACHE INTERNAL "")
+
+		# Copy the SO to Bin (we have to use shared library on Linux)
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libogg.so ${PL_RUNTIME_BIN_GITDIR}/libogg.so
+			DEPENDEES install
+		)
 	endif()
 	set(LIBOGG_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	

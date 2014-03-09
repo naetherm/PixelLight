@@ -77,7 +77,14 @@ else()
 	if(WIN32)
 		set(LIBVORBIS_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbis.lib ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbisfile.lib CACHE INTERNAL "")
 	else()
-		set(LIBVORBIS_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbis.a ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbisfile.a CACHE INTERNAL "")
+		set(LIBVORBIS_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbis.so ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbisfile.so CACHE INTERNAL "")
+
+		# Copy the SO to Bin (we have to use shared library on Linux)
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbis.so ${PL_RUNTIME_BIN_GITDIR}/libvorbis.so
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbisfile.so ${PL_RUNTIME_BIN_GITDIR}/libvorbisfile.so
+			DEPENDEES install
+		)
 	endif()
 	set(LIBVORBIS_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
 	

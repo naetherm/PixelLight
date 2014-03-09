@@ -53,6 +53,11 @@ if(JPEG_FOUND)
 else()
 	# We'll need to download and build the library ourselves
 	message(STATUS "-- Using external build system for dependency 'libjpeg'...")
+
+	# We are building static library out of libjpeg - we need to enable PIC support!
+        if(LINUX)
+                set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
+        endif()
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -67,9 +72,14 @@ else()
 
 		# We have a CMake script for libjpeg, copy it over to the source folder
 		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/CMake/CMakeLists.txt ${CMAKETOOLS_CURRENT_SRC_DIR}/CMakeLists.txt
-		
+		# We also rename the jconfig file
+		# [TODO] Select the correct file based on platform
+		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_SRC_DIR}/jconfig.vc ${CMAKETOOLS_CURRENT_SRC_DIR}/jconfig.h
+	
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+
+		CMAKE_CACHE_ARGS ${COMPILER_FLAGS}
 	)
 	
 	# Setup paths

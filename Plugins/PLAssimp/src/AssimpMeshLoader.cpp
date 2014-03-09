@@ -25,9 +25,9 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <Assimp/scene.h>
-#include <Assimp/Importer.hpp>
-#include <Assimp/postProcess.h>
+#include <assimp/scene.h>
+#include <assimp/Importer.hpp>
+#include <assimp/postprocess.h>
 #include <PLCore/Log/Log.h>
 #include <PLCore/File/File.h>
 #include <PLRenderer/RendererContext.h>

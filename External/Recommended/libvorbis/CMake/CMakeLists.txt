@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 2.8)
 
-project(libvorbis C)
+project(vorbis C)
 
 if(NOT MSVC AND NOT CMAKE_BUILD_TYPE)
     #SET(CMAKE_BUILD_TYPE "Debug")
@@ -88,16 +88,16 @@ if(MSVC)
     list(APPEND libvorbis_SRCS win32/vorbis.def)
 endif()
 
-add_library(libvorbis ${libvorbis_SRCS} ${libvorbis_HDRS} ${vorbis_public_HDRS})
-add_library(libvorbisfile lib/vorbisfile.c include/vorbis/vorbisfile.h)
+add_library(vorbis SHARED ${libvorbis_SRCS} ${libvorbis_HDRS} ${vorbis_public_HDRS})
+add_library(vorbisfile SHARED lib/vorbisfile.c include/vorbis/vorbisfile.h)
 
 #target_link_libraries(libvorbisfile_dynamic libvorbis_dynamic ${OGG_LIBRARY})
 
 install(
-	TARGETS libvorbis libvorbisfile
-    RUNTIME DESTINATION bin
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
+	TARGETS vorbis vorbisfile
+    	RUNTIME DESTINATION bin
+    	ARCHIVE DESTINATION lib
+    	LIBRARY DESTINATION lib
 )
 
 install(FILES ${vorbis_public_HDRS} DESTINATION include/vorbis)

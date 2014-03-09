@@ -76,12 +76,12 @@ set(LUAJIT_MD5 "112dfb82548b03377fbefbba2e0e3a5b")
             
 			INSTALL_COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll <INSTALL_DIR>/bin/lua51.dll
 			COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll ${PL_RUNTIME_BIN_GITDIR}/lua51.dll
-            COMMAND ${CMAKE_COMMAND} -E copy src/lua51.lib <INSTALL_DIR>/lib/lua51.lib
-            COMMAND ${CMAKE_COMMAND} -E copy src/lauxlib.h "<INSTALL_DIR>/include/Lua/lauxlib.h"
-            COMMAND ${CMAKE_COMMAND} -E copy src/luaconf.h "<INSTALL_DIR>/include/Lua/luaconf.h"
-            COMMAND ${CMAKE_COMMAND} -E copy src/lua.h "<INSTALL_DIR>/include/Lua/lua.h"
-            COMMAND ${CMAKE_COMMAND} -E copy src/luajit.h "<INSTALL_DIR>/include/Lua/luajit.h"
-            COMMAND ${CMAKE_COMMAND} -E copy src/lualib.h "<INSTALL_DIR>/include/Lua/lualib.h"
+            		COMMAND ${CMAKE_COMMAND} -E copy src/lua51.lib <INSTALL_DIR>/lib/lua51.lib
+            		COMMAND ${CMAKE_COMMAND} -E copy src/lauxlib.h "<INSTALL_DIR>/include/Lua/lauxlib.h"
+			COMMAND ${CMAKE_COMMAND} -E copy src/luaconf.h "<INSTALL_DIR>/include/Lua/luaconf.h"
+            		COMMAND ${CMAKE_COMMAND} -E copy src/lua.h "<INSTALL_DIR>/include/Lua/lua.h"
+            		COMMAND ${CMAKE_COMMAND} -E copy src/luajit.h "<INSTALL_DIR>/include/Lua/luajit.h"
+            		COMMAND ${CMAKE_COMMAND} -E copy src/lualib.h "<INSTALL_DIR>/include/Lua/lualib.h"
 		)
 	elseif(UNIX)
 		ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -96,17 +96,16 @@ set(LUAJIT_MD5 "112dfb82548b03377fbefbba2e0e3a5b")
 			
 			CONFIGURE_COMMAND ""
 			
-			BUILD_COMMAND make
+			BUILD_COMMAND make CFLAGS='-fPIC'
 			
-			#[TODO] What is the .so here?
-            INSTALL_COMMAND ${CMAKE_COMMAND} -E copy src/libluajit.a <INSTALL_DIR>/bin/liblua.a
-			COMMAND ${CMAKE_COMMAND} -E copy src/lua51.dll ${PL_RUNTIME_BIN_GITDIR}/lua51.dll
-            COMMAND ${CMAKE_COMMAND} -E copy src/libluajit.a <INSTALL_DIR>/bin/liblua.a
-            COMMAND ${CMAKE_COMMAND} -E copy src/lauxlib.h "<INSTALL_DIR>/include/Lua/lauxlib.h"
-            COMMAND ${CMAKE_COMMAND} -E copy src/luaconf.h "<INSTALL_DIR>/include/Lua/luaconf.h"
-            COMMAND ${CMAKE_COMMAND} -E copy src/lua.h "<INSTALL_DIR>/include/Lua/lua.h"
-            COMMAND ${CMAKE_COMMAND} -E copy src/luajit.h "<INSTALL_DIR>/include/Lua/luajit.h"
-            COMMAND ${CMAKE_COMMAND} -E copy src/lualib.h "<INSTALL_DIR>/include/Lua/lualib.h"
+            		INSTALL_COMMAND ${CMAKE_COMMAND} -E copy src/libluajit.so <INSTALL_DIR>/bin/liblua.so
+			COMMAND ${CMAKE_COMMAND} -E copy src/libluajit.so ${PL_RUNTIME_BIN_GITDIR}/liblua.so
+            		COMMAND ${CMAKE_COMMAND} -E copy src/libluajit.a <INSTALL_DIR>/lib/liblua.a
+            		COMMAND ${CMAKE_COMMAND} -E copy src/lauxlib.h "<INSTALL_DIR>/include/Lua/lauxlib.h"
+            		COMMAND ${CMAKE_COMMAND} -E copy src/luaconf.h "<INSTALL_DIR>/include/Lua/luaconf.h"
+            		COMMAND ${CMAKE_COMMAND} -E copy src/lua.h "<INSTALL_DIR>/include/Lua/lua.h"
+            		COMMAND ${CMAKE_COMMAND} -E copy src/luajit.h "<INSTALL_DIR>/include/Lua/luajit.h"
+            		COMMAND ${CMAKE_COMMAND} -E copy src/lualib.h "<INSTALL_DIR>/include/Lua/lualib.h"
 		)
 	else()
 		# [TODO] Revert to classical Lua

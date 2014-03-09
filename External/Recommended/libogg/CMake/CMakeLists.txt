@@ -2,7 +2,7 @@
 
 cmake_minimum_required(VERSION 2.8)
 
-project(libogg C)
+project(ogg C)
 
 if(NOT MSVC AND NOT CMAKE_BUILD_TYPE)
     #SET(CMAKE_BUILD_TYPE "Debug")
@@ -20,12 +20,13 @@ if(MSVC)
     list(APPEND libogg_SRCS win32/ogg.def)
 endif()
 
-if(LINUX)
+if(UNIX)
 	# libogg expects configure to be called on linux to
 	# generate config_types.h
-    list(APPEND libogg_HDRS include/ogg/config_types.h)
+    	list(APPEND libogg_HDRS include/ogg/config_types.h)
 
 	add_custom_command(
+		PRE_BUILD
 		OUTPUT include/ogg/config_types.h
 		COMMAND ./configure
 		DEPENDS include/ogg/ogg.h # Hopefully if the libogg version changes, so does this file
@@ -34,13 +35,13 @@ if(LINUX)
 	)
 endif()
 
-add_library(libogg ${libogg_SRCS} ${libogg_HDRS})
+add_library(ogg SHARED ${libogg_SRCS} ${libogg_HDRS})
 
 install(
-	TARGETS libogg
-    RUNTIME DESTINATION bin
-    ARCHIVE DESTINATION lib
-    LIBRARY DESTINATION lib
+	TARGETS ogg
+    	RUNTIME DESTINATION bin
+    	ARCHIVE DESTINATION lib
+    	LIBRARY DESTINATION lib
 )
 
 install(FILES ${libogg_HDRS} DESTINATION include/ogg)

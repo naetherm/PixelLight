@@ -54,6 +54,11 @@ set(BULLET_MD5 "70b3c8d202dee91a0854b4cbc88173e8")
 #else()
 	# We'll need to download and build the library ourselves
 	message(STATUS "-- Using external build system for dependency 'Bullet'...")
+
+	# We are building static library out of Bullet - we need to enable PIC support!
+        if(LINUX)
+                set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
+        endif()
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -74,6 +79,7 @@ set(BULLET_MD5 "70b3c8d202dee91a0854b4cbc88173e8")
 			-DBUILD_EXTRAS:BOOL=OFF
 			-DINSTALL_LIBS:BOOL=ON
 			-DUSE_MSVC_RUNTIME_LIBRARY_DLL:BOOL=ON
+			${COMPILER_FLAGS}
 	)
 	
 	# Setup paths
@@ -85,12 +91,13 @@ set(BULLET_MD5 "70b3c8d202dee91a0854b4cbc88173e8")
 			CACHE INTERNAL "")
 	else()
 		set(BULLET_LIBRARIES
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libBulletSoftBody.a
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libBulletDynamics.a			
 			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libBulletCollision.a
-			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libBulletDynamics.a
-			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libLinearMath.a
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libLinearMath.a	
 			CACHE INTERNAL "")
 	endif()
-	set(BULLET_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
+	set(BULLET_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include/bullet CACHE INTERNAL "")
 	
 	# Dependencies
 	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})

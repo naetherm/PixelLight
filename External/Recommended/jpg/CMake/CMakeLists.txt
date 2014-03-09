@@ -89,15 +89,21 @@ add_library(${CURRENT_TARGET_NAME} STATIC ${CURRENT_SRC})
 target_link_libraries(${CURRENT_TARGET_NAME} ${CURRENT_SHARED_LIBRARIES})
 set_target_properties(${CURRENT_TARGET_NAME} PROPERTIES COMPILE_DEFINITIONS "__STDC_INT64__")
 
-# [TODO] other platforms
-if(WIN32)
-	add_custom_command(
-		TARGET ${CURRENT_TARGET_NAME}
-		PRE_BUILD
-		COMMAND ${CMAKE_COMMAND}
-		ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.vc ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.h
-	)
-endif()
+#if(WIN32)
+#	add_custom_command(
+#		TARGET ${CURRENT_TARGET_NAME}
+#		PRE_BUILD
+#		COMMAND ${CMAKE_COMMAND}
+#		ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.vc ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.h
+#	)
+#else()
+#	add_custom_command(
+#		TARGET ${CURRENT_TARGET_NAME}
+#		PRE_BUILD
+#		COMMAND ${CMAKE_COMMAND}
+#		ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.vc ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.h
+#	)
+#endif()
 
 ##################################################
 ## Install

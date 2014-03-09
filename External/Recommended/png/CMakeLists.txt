@@ -52,6 +52,11 @@ if(PNG_FOUND)
 else()
 	# We'll need to download and build the library ourselves
 	message(STATUS "-- Using external build system for dependency 'libpng'...")
+
+	# We are building static library out of libpng - we need to enable PIC support!
+        if(LINUX)
+                set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
+        endif()
 	
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
@@ -73,6 +78,9 @@ else()
 			
 		# See zlib's CMakeLists.txt
 		LIST_SEPARATOR ^^
+
+		CMAKE_CACHE_ARGS
+			${COMPILER_FLAGS}
 	)
 	
 	# Setup paths

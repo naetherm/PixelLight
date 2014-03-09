@@ -64,7 +64,7 @@ else()
 	# We'll need to download and build the library ourselves
 	message(STATUS "-- Using external build system for dependency 'zlib'...")
 
-	# We are building static library out of PCRE - we need to enable PIC support!
+	# We are building static library out of ZLIB - we need to enable PIC support!
         if(LINUX)
                 set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
         endif()
