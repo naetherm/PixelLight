@@ -63,9 +63,15 @@ else()
 		# Set build variables
 		set(QT_CONFIGURE ${CMAKE_COMMAND} -P ${CMAKETOOLS_CURRENT_BUILD_DIR}/QtWinConfig.cmake)
 		set(QT_BUILD ${QT_BUILD_PROGRAM})
+		set(QT_INSTALL ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/bin <INSTALL_DIR>/bin
+			COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/lib <INSTALL_DIR>/lib
+			COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/include <INSTALL_DIR>/include
+			COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/src <INSTALL_DIR>/src)
 	else()
-		#[TODO]
-		
+		# Set build variables
+		set(QT_CONFIGURE echo yes | sh ./configure --prefix=${CMAKETOOLS_CURRENT_INSTALL_DIR} -opensource -release -no-accessibility -no-qt3support -no-openvg -no-gif -no-libpng -no-libmng -no-libtiff -no-libjpeg -no-openssl -no-phonon -no-phonon-backend -no-multimedia -no-audio-backend -no-webkit -no-script -no-scripttools -no-declarative -no-declarative-debug -no-xmlpatterns -nomake examples -nomake demos -nomake tests -nomake tools -nomake docs)
+		set(QT_BUILD make -j4)
+		set(QT_INSTALL make install)
 	endif()
 	
 	# Add the external project
@@ -88,10 +94,7 @@ else()
 		
 		BUILD_COMMAND ${QT_BUILD}
 		
-		INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/bin <INSTALL_DIR>/bin
-			COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/lib <INSTALL_DIR>/lib
-			COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/include <INSTALL_DIR>/include
-			COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/src <INSTALL_DIR>/src
+		INSTALL_COMMAND ${QT_INSTALL}
 			
 		CMAKE_ARGS
 			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
@@ -121,7 +124,7 @@ else()
 		set(QT_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libQtCore.so ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libQtGui.so CACHE INTERNAL "")
 
 		# Set "FindQt4.cmake"-variables
-		set(QT_TOOLS_DIR ${CMAKETOOLS_CURRENT_DIR}/Tools/Win)
+		set(QT_TOOLS_DIR ${CMAKETOOLS_CURRENT_DIR}/Tools/Linux)
 		set(QT_QMAKE_EXECUTABLE ${QT_TOOLS_DIR}/qmake)	# Tell Qt were to find qmake
 	endif()
 	

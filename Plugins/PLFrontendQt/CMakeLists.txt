@@ -302,11 +302,11 @@ if(NOT CMAKETOOLS_USE_SYSTEM_LIBS)
 		set(COPY_SOURCE ${QT_EXTERNAL_DIR}/lib/libQtCore.so
 						${QT_EXTERNAL_DIR}/lib/libQtCore.so.4
 						${QT_EXTERNAL_DIR}/lib/libQtCore.so.4.8
-						${QT_EXTERNAL_DIR}/lib/libQtCore.so.4.8.2
+						${QT_EXTERNAL_DIR}/lib/libQtCore.so.4.8.5
 						${QT_EXTERNAL_DIR}/lib/libQtGui.so
 						${QT_EXTERNAL_DIR}/lib/libQtGui.so.4
 						${QT_EXTERNAL_DIR}/lib/libQtGui.so.4.8
-						${QT_EXTERNAL_DIR}/lib/libQtGui.so.4.8.2)
+						${QT_EXTERNAL_DIR}/lib/libQtGui.so.4.8.5)
 
 		# Set COPY_DEST to a directory to which the files in COPY_SOURCE should be copied into (this variable is used by the "copy.cmake"-script)
 		set(COPY_DEST ${PL_RUNTIME_BIN_DIR})

@@ -87,7 +87,7 @@ set(NEWTON_MD5 "a922b216785e10a691119f1b5fa299ab")
 		
 		# Copy the SO to Bin
 		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
-			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libNewton.so ${PL_RUNTIME_BIN_GITDIR}/Newton
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libNewton.so ${PL_RUNTIME_BIN_GITDIR}
 			DEPENDEES install
 		)
 	endif()
