@@ -28,58 +28,66 @@
 define_external_project(Python)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-# [TODO] System libs possible for Python?
-#if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-#	find_package(PYTHON)
+set(PYTHON_VERSION "2.7.6")
+set(PYTHON_URL "http://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz")
+set(PYTHON_MD5 "1d8728eb0dfcac72a0fd99c17ec7f386")
+
+##################################################
+## Need to download?
+##################################################
+# First look if we have the library installed already. This will be the case for the majority of Linux systems
+#TODO: what about debug configuration?
+message(STATUS "Looking for external dependency 'libPYTHON' with minimum version ${PYTHON_VERSION}...")
+#find_package(PYTHON)
+
+# Do we have it?
+#if(PYTHON_FOUND)
+#	# We will use the library present on the user system
+#	message(STATUS "'libPYTHON' was found on this system")
+#	
+#	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+#	# These variables should normaly only be visible within the cmake file in which the find module was called.
+#	# Otherwise the variables would be visible for all other projects if wanted or not
+#	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
+#	set(PYTHON_LIBRARIES ${PYTHON_LIBRARIES} CACHE INTERNAL "")
+#	set(PYTHON_INCLUDE_DIR ${PYTHON_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
+	# We'll need to download and build the library ourselves
+	message(STATUS "'libPYTHON' was not found, will be downloaded and built from [${PYTHON_URL}]")
+	
+if(WIN32)
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+#		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${PYTHON_URL}
+		URL_MD5 ${PYTHON_MD5}
+		TIMEOUT 30
+		BUILD_IN_SOURCE 1
 
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(PYTHON_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} CACHE INTERNAL "")
+		CONFIGURE_COMMAND ""
+		BUILD_COMMAND ${CMAKE_COMMAND} -E chdir PCBuild build.bat
+		INSTALL_COMMAND ""
+		
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+	)
+else()
+	# [TODO] Linux & OSX
+endif()
+	
 	if(WIN32)
-		set(PYTHON_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/python27.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(PYTHON_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libpython2.7.a CACHE INTERNAL "")
+		set(PYTHON_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/python27.lib CACHE INTERNAL "")
+	else()
+		set(PYTHON_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpython2.7.a CACHE INTERNAL "")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
-# [TODO] System libs possible for Python?
+	set(PYTHON_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
+	
+	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})
 #endif()

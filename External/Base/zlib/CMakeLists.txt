@@ -21,74 +21,88 @@
 #*  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #*********************************************************#
 
-
 ##################################################
 ## Project
 ##################################################
 define_external_project(zlib)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-# Android hasn't that many public shared libraries on it's system, but zlib is there, so do always use the system version to save memory
-# (just in case you may say "Why the heck don't you use "CMAKETOOLS_USE_SYSTEM_LIBS" in the first place?" -> right now, "CMAKETOOLS_USE_SYSTEM_LIBS"
-#  means "use system library or just fail", to fail is no option just because we want to use this single system library in here... maybe when
-#  using "CMAKETOOLS_USE_SYSTEM_LIBS" there should be a fallback in case there's no such system library?)
-if(CMAKETOOLS_USE_SYSTEM_LIBS OR ANDROID)
-	##################################################
-	## Use system libraries
-	##################################################
-	find_package(ZLIB)
+set(ZLIB_VERSION "1.2.8")
+set(ZLIB_URL "http://prdownloads.sourceforge.net/libpng/zlib-${ZLIB_VERSION}.tar.gz")
+set(ZLIB_MD5 "44d667c142d7cda120332623eab69f40")
 
+# This is required because these variables are cached. If another library performs the same check (as e.g. libpng
+# does), it will result in the external project not being built after repeated CMake runs. We want to make this
+# the only place where zlib's (non)existence is decided
+# [TODO] We should find another solution or do this for all libraries where we are looking for existing packages
+set(ZLIB_FOUND "0" CACHE INTERNAL "")
+set(ZLIB_LIBRARY "" CACHE INTERNAL "")
+set(ZLIB_LIBRARY_LIST "" CACHE INTERNAL "")
+set(ZLIB_LIBRARIES "" CACHE INTERNAL "")
+set(ZLIB_INCLUDE_DIR "" CACHE INTERNAL "")
+
+##################################################
+## Need to download?
+##################################################
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(ZLIB ${ZLIB_VERSION})
+endif()
+
+# Do we have it?
+if(ZLIB_FOUND)
+	# We will use the library present on the user system	
 	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
 	# These variables should normaly only be visible within the cmake file in which the find module was called.
 	# Otherwise the variables would be visible for all other projects if wanted or not
 	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
 	set(ZLIB_LIBRARIES ${ZLIB_LIBRARIES} CACHE INTERNAL "")
+	set(ZLIB_LIBRARY ${ZLIB_LIBRARIES} CACHE INTERNAL "")
 	set(ZLIB_INCLUDE_DIR ${ZLIB_INCLUDE_DIR} CACHE INTERNAL "")
 else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
+	# We'll need to download and build the library ourselves
+	message(STATUS "-- Using external build system for dependency 'zlib'...")
 
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(ZLIB_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INCLUDE_DIR}/zlib CACHE INTERNAL "")
+	# We are building static library out of ZLIB - we need to enable PIC support!
+        if(LINUX)
+                set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
+        endif()
+	
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${ZLIB_URL}
+		URL_MD5 ${ZLIB_MD5}
+		
+		PATCH_COMMAND ${CMAKE_COMMAND} -E remove <SOURCE_DIR>/zconf.h
+		
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+
+		CMAKE_CACHE_ARGS ${COMPILER_FLAGS}
+	)
+	
+	# Setup paths
 	if(WIN32)
-		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/zlib.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libz.a CACHE INTERNAL "")
+		# On Windows, the output .lib file has a different name for debug configuration
+		set(ZLIB_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib CACHE INTERNAL "")
+		set(ZLIB_LIBRARY ${ZLIB_LIBRARIES} CACHE INTERNAL "")
+		
+		# This is a small hack that allows us to pass this as a -D parameter into other external projects
+		set(ZLIB_LIBRARY_LIST optimized^^${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstatic.lib^^debug^^${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/zlibstaticd.lib CACHE INTERNAL "")
+	else()
+		set(ZLIB_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libz.a CACHE INTERNAL "")
+		set(ZLIB_LIBRARY ${ZLIB_LIBRARIES} CACHE INTERNAL "")
+		set(ZLIB_LIBRARY_LIST ${ZLIB_LIBRARIES} CACHE INTERNAL "")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
+	set(ZLIB_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
+	
+	# Dependencies
+	add_dependencies(External-Base ${CMAKETOOLS_CURRENT_TARGET})
 endif()

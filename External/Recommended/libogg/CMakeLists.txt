@@ -28,56 +28,64 @@
 define_external_project(libogg)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-	find_package(Ogg)
+set(OGG_VERSION "1.3.1")
+set(OGG_URL "http://downloads.xiph.org/releases/ogg/libogg-${OGG_VERSION}.tar.gz")
+set(OGG_MD5 "ba526cd8f4403a5d351a9efaa8608fbc")
+
+##################################################
+## Need to download?
+##################################################
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(Ogg ${OGG_VERSION})
+endif()
+
+# Do we have it?
+if(Ogg_FOUND)
+	# We will use the library present on the user system
+	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+	# These variables should normaly only be visible within the cmake file in which the find module was called.
+	# Otherwise the variables would be visible for all other projects if wanted or not
+	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
+	set(LIBOGG_LIBRARIES ${Ogg_LIBRARIES} CACHE INTERNAL "")
+	set(LIBOGG_INCLUDE_DIRS ${Ogg_INCLUDE_DIR} CACHE INTERNAL "")
 else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
-
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(LIBOGG_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} CACHE INTERNAL "")
+	# We'll need to download and build the library ourselves
+	message(STATUS "-- Using external build system for dependency 'libogg'...")
+	
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${OGG_URL}
+		URL_MD5 ${OGG_MD5}
+		
+		# We have a CMake script for libogg
+		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/CMake/CMakeLists.txt ${CMAKETOOLS_CURRENT_SRC_DIR}/CMakeLists.txt
+		
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+	)
+	
+	# Setup paths
 	if(WIN32)
-		set(LIBOGG_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libogg_static.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(LIBOGG_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libogg.so CACHE INTERNAL "")
+		set(LIBOGG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/ogg.lib CACHE INTERNAL "")
+	else()
+		set(LIBOGG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libogg.so CACHE INTERNAL "")
+
+		# Copy the SO to Bin (we have to use shared library on Linux)
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libogg.so ${PL_RUNTIME_BIN_GITDIR}/libogg.so
+			DEPENDEES install
+		)
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
+	set(LIBOGG_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
+	
+	# Dependencies
+	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 endif()

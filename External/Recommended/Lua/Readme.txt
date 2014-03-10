@@ -1,4 +1,4 @@
-﻿Lua 5.1.4
+﻿LuaJIT 2.0.2
 - License: "MIT license", see "COPYRIGHT"-file
-- Used by the script backend "PLScriptLua" (external Windows dependencies: "lua51.dll")
-- Download from: http://www.lua.org/
+- Used by the script backend "PLScriptLua" (external Windows dependencies: "LuaJIT.dll")
+- Download from: http://luajit.org/

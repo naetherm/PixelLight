@@ -30,15 +30,15 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-// Set windows version to Windows XP
+// Set windows version to Windows 7
 #ifdef WINVER
 	#undef WINVER
 #endif
-#define WINVER			0x0501
+#define WINVER			0x0601
 #ifdef _WIN32_WINNT
 	#undef _WIN32_WINNT
 #endif
-#define _WIN32_WINNT	0x0501
+#define _WIN32_WINNT	0x0601
 
 // Exclude some stuff from windows.h to speed up compilation a bit
 //#define WIN32_LEAN_AND_MEAN

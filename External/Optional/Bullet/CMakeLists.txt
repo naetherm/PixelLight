@@ -28,65 +28,77 @@
 define_external_project(Bullet)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-# [TODO] System libs possible for Bullet?
-#if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-#	find_package(BULLET)
-#	set(BULLET_INCLUDE_DIRS ${BULLET_INCLUDE_DIR_BULLET} CACHE INTERNAL "")
-#	set(BULLET_LIBRARIES ${BULLET_LIBRARY} CACHE INTERNAL "")
+set(BULLET_VERSION "2.82-r2704")
+set(BULLET_URL "https://bullet.googlecode.com/files/bullet-${BULLET_VERSION}.tgz")
+set(BULLET_MD5 "70b3c8d202dee91a0854b4cbc88173e8")
+
+##################################################
+## Need to download?
+##################################################
+# [TODO] Find package possible for Bullet?
+#find_package(BULLET ${BULLET_VERSION})
+
+# Do we have it?
+#if(BULLET_FOUND)
+#	# We will use the library present on the user system
+#	message(STATUS "'BULLET' was found on this system")
+#	
+#	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+#	# These variables should normaly only be visible within the cmake file in which the find module was called.
+#	# Otherwise the variables would be visible for all other projects if wanted or not
+#	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
+#	set(BULLET_LIBRARIES ${BULLET_LIBRARIES} CACHE INTERNAL "")
+#	set(BULLET_INCLUDE_DIRS ${BULLET_INCLUDE_DIR} CACHE INTERNAL "")
 #else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
+	# We'll need to download and build the library ourselves
+	message(STATUS "-- Using external build system for dependency 'Bullet'...")
 
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(BULLET_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} ${CMAKETOOLS_CURRENT_INCLUDE_DIR}/Bullet CACHE INTERNAL "")
+	# We are building static library out of Bullet - we need to enable PIC support!
+        if(LINUX)
+                set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
+        endif()
+	
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${BULLET_URL}
+		URL_MD5 ${BULLET_MD5}
+		
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+			
+		CMAKE_CACHE_ARGS
+			-DBUILD_DEMOS:BOOL=OFF
+			-DBUILD_EXTRAS:BOOL=OFF
+			-DINSTALL_LIBS:BOOL=ON
+			-DUSE_MSVC_RUNTIME_LIBRARY_DLL:BOOL=ON
+			${COMPILER_FLAGS}
+	)
+	
+	# Setup paths
 	if(WIN32)
-		set(BULLET_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/BulletDynamics.lib
-							 ${CMAKETOOLS_CURRENT_LIB_DIR}/BulletCollision.lib
-							 ${CMAKETOOLS_CURRENT_LIB_DIR}/LinearMath.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(BULLET_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libBulletDynamics.a
-							 ${CMAKETOOLS_CURRENT_LIB_DIR}/libBulletCollision.a
-							 ${CMAKETOOLS_CURRENT_LIB_DIR}/libLinearMath.a CACHE INTERNAL "")
+		set(BULLET_LIBRARIES
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/BulletCollision.lib
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/BulletDynamics.lib
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/LinearMath.lib
+			CACHE INTERNAL "")
+	else()
+		set(BULLET_LIBRARIES
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libBulletSoftBody.a
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libBulletDynamics.a			
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libBulletCollision.a
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libLinearMath.a	
+			CACHE INTERNAL "")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
-
-# [TODO] System libs possible for Newton?
+	set(BULLET_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include/bullet CACHE INTERNAL "")
+	
+	# Dependencies
+	add_dependencies(External-Optional ${CMAKETOOLS_CURRENT_TARGET})
 #endif()

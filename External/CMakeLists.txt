@@ -21,6 +21,10 @@
 #*  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #*********************************************************#
 
+##################################################
+## Includes
+##################################################
+include(ExternalProject)
 
 ##################################################
 ## Project
@@ -32,8 +36,6 @@ project(External)
 ##################################################
 add_custom_target(External)
 set_target_properties(External PROPERTIES EXCLUDE_FROM_DEFAULT_BUILD 1)
-add_custom_target(External-Clean)
-set_target_properties(External-Clean PROPERTIES EXCLUDE_FROM_DEFAULT_BUILD 1)
 
 ##################################################
 ## Projects

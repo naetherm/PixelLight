@@ -28,7 +28,7 @@
 	#undef Yield		// We undef this to avoid name conflicts with OS macros, why do they need to use macros?!
 	#undef GetClassName // We undef this to avoid name conflicts with OS macros, why do they need to use macros?!
 #endif
-#include <MySQL/mysql.h>
+#include <mysql.h>
 #include <PLCore/Log/Log.h>
 #include "PLDatabaseMySQL/DatabaseQuery.h"
 #include "PLDatabaseMySQL/Database.h"

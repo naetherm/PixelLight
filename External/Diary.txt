@@ -1,3 +1,28 @@
+>> 10.3.2014
+[AD]
+- All libraries that build on Windows x64 now build also on Linux x64
+- Added MySQL build for Linux x64
+
+
+>> 5.3.2014
+[AD]
+- After several weeks of effort, external depedencies are now using CMake's own ExternalProject based pipeline
+  instead of our old macros. This came with several important changes:
+
+  1. The following externals are not supported and are NOT planned to be supported in the future (unless someonw
+     from the community will step forward and add the support): DirectX9, DirectX11, Max exporters and PhysX - these
+	 have been moved to the Deprecated subfolder
+
+  2. The following externals are not supported, but will be put back when the time allows it (along with their
+     respective plugins): AngelScript, FMOD, FMODEx, gdcm, libRocket, ODE, OpenEXR, OpenGLES2, OpenSLES, PostgreSQL,
+	 Python, SQLite, V8, xulrunnersdk
+
+  3. The rest is fully functional at least on Windows in Release build. Linux support will be added before this gets
+     merged back to master
+
+  4. All packages were updated to their most recent versions, please see the "Readme.txt" files for each package to
+     see its current version, I won't list them all here since nearly all of them got upgraded
+
 >> 22.08.2012
 [SW][CO]
 - Updated from "SQLite 3.5.6" to "SQLite 3.7.13"

@@ -44,11 +44,16 @@ if(NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
 endif()
 
 # Check which architecture has the host system
-# X86_64 aka x64
-if(${CMAKE_SYSTEM_PROCESSOR} MATCHES amd64* OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES x86_64* OR CMAKE_GENERATOR MATCHES "Visual Studio 10 Win64")
+# There is currently a bug in CMake that makes it report 32 bit architecture even on 64 bit system. This is why we don't use the
+# CMAKE_SYSTEM_PROCESSOR value. We prefer the native bitsize for the system, however, for MS Visual Studio, we always pick the
+# bitsize specified by the generator (as it won't compile otherwise!)
+if(CMAKE_GENERATOR MATCHES "Visual Studio .. Win64")
 	set(X86_64 1)
-# X86
-elseif(${CMAKE_SYSTEM_PROCESSOR} MATCHES i686* OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES i386* OR ${CMAKE_SYSTEM_PROCESSOR} MATCHES x86*)
+elseif(CMAKE_GENERATOR MATCHES "Visual Studio*")
+	set(X86 1)
+elseif(CMAKE_SIZEOF_VOID_P MATCHES 8)
+	set(X86_64 1)
+else()
 	set(X86 1)
 endif()
 
@@ -64,6 +69,9 @@ endif()
 
 # Nightly build
 set(CMAKETOOLS_CONFIG_NIGHTLY "0" CACHE BOOL "Create a nightly build?")
+
+# Build docs
+set(PL_DOCS "0" CACHE BOOL "Build the user documentation")
 
 # Target architecture (x86, arm...)
 if(CMAKETOOLS_TARGET_ARCH)
@@ -87,8 +95,8 @@ else()
 	set(CMAKETOOLS_TARGET_ARCHBITSIZE ${CMAKETOOLS_TARGET_ARCH} CACHE STRING "Target architecture & bitsize")
 endif()
 
-# Use system libraries or build externals?
-set(CMAKETOOLS_USE_SYSTEM_LIBS "0" CACHE BOOL "Use system libraries or build own external libraries?")
+# Can we use system libraries or do we want to force the system to build our own?
+set(CMAKETOOLS_DONT_USE_SYSTEM_LIBS "0" CACHE BOOL "Can the build system use libraries already present on this system?")
 
 # The following is Linux only
 if(LINUX)
@@ -134,10 +142,10 @@ else()
 endif()
 
 # Build SDK projects?
-if(CMAKETOOLS_SDK)
-	set(CMAKETOOLS_SDK ${CMAKETOOLS_SDK} CACHE BOOL "Build SDK projects (or all)?")
+if(CMAKETOOLS_BUILD_SDK)
+	set(CMAKETOOLS_BUILD_SDK ${CMAKETOOLS_BUILD_SDK} CACHE BOOL "Build SDK projects (or all)?")
 else()
-	set(CMAKETOOLS_SDK "0" CACHE BOOL "Build SDK projects (or all)?")
+	set(CMAKETOOLS_BUILD_SDK "0" CACHE BOOL "Build SDK projects (or all)?")
 endif()
 
 # Project suffix
@@ -218,7 +226,7 @@ if(CMAKETOOLS_MINIMAL)
 	set (PL_PLUGIN_PHYSICS_NULL						"0"					CACHE BOOL "Build plugin 'PLPhysicsNull'?")
 	set (PL_PLUGIN_PHYSICS_NEWTON					"0"					CACHE BOOL "Build plugin 'PLPhysicsNewton'?")
 	set (PL_PLUGIN_PHYSICS_ODE						"0"					CACHE BOOL "Build plugin 'PLPhysicsODE'?")
-	set (PL_PLUGIN_PHYSICS_PHYSX					"0"					CACHE BOOL "Build plugin 'PLPhysicsPhysX'?" (due to legal issues, we can't provide a public downloadable package))
+	set (PL_PLUGIN_PHYSICS_PHYSX					"0"					CACHE BOOL "Build plugin 'PLPhysicsPhysX'? (due to legal issues, we can't provide a public downloadable package)")
 	set (PL_PLUGIN_PHYSICS_BULLET					"0"					CACHE BOOL "Build plugin 'PLPhysicsBullet'? (heavily under construction)")
 	set (PL_PLUGIN_RENDERER_NULL					"0"					CACHE BOOL "Build plugin 'PLRendererNull'?")
 	if(PL_MOBILE)
@@ -292,7 +300,7 @@ if(CMAKETOOLS_MINIMAL)
 	# Tests and samples
 	set (PL_SAMPLES									"0"					CACHE BOOL "Build the samples?")
 	set (PL_TESTS									"0"					CACHE BOOL "Build the tests?")
-elseif(CMAKETOOLS_SDK)
+elseif(CMAKETOOLS_BUILD_SDK)
 	# SDK build
 	# -> We don't use "${PL_USE_NONPUBLIC}" in here because this would result in required additional configurations
 	set (PL_CORE_ZIP								"1"					CACHE BOOL "Build in ZIP support within 'PLCore'? (it's highly recommended to enable ZIP support, requires 'zlib' external dependency)")
@@ -368,6 +376,9 @@ elseif(CMAKETOOLS_SDK)
 	# Tests and samples
 	set (PL_SAMPLES									"1"					CACHE BOOL "Build the samples?")
 	set (PL_TESTS									"1"					CACHE BOOL "Build the tests?")
+	
+	# We want to include docs in the SDK
+	set	(PL_DOCS									"1"					CACHE BOOL "Build the user documentation")
 else()
 	# Include everything
 	set (PL_CORE_ZIP								"1"					CACHE BOOL "Build in ZIP support within 'PLCore'? (it's highly recommended to enable ZIP support, requires 'zlib' external dependency)")
@@ -443,8 +454,51 @@ else()
 	# Tests and samples
 	set (PL_SAMPLES									"1"					CACHE BOOL "Build the samples?")
 	set (PL_TESTS									"1"					CACHE BOOL "Build the tests?")
+	
+	# Documentation
+	set	(PL_DOCS									"1"					CACHE BOOL "Build the user documentation")
 endif()
 
+##################################################
+## Disable unsupported plugins
+##################################################
+unset (PL_EXPORTER_3DSMAX_2008 CACHE)
+unset (PL_EXPORTER_3DSMAX_2009 CACHE)
+unset (PL_EXPORTER_3DSMAX_2010 CACHE)
+unset (PL_EXPORTER_3DSMAX_2011 CACHE)
+unset (PL_EXPORTER_3DSMAX_2012 CACHE)
+unset (PL_EXPORTER_3DSMAX_2013 CACHE)
+unset (PL_PLUGIN_FRONTEND_ACTIVEX CACHE)
+unset (PL_PLUGIN_FRONTEND_MOZILLA CACHE)
+unset (PL_PLUGIN_RENDERER_D3D9 CACHE)
+unset (PL_PLUGIN_RENDERER_D3D11 CACHE)
+unset (PL_PLUGIN_PHYSICS_PHYSX CACHE)
+
+##################################################
+## Disable plugins that will be enabled in later version
+##################################################
+unset (PL_PLUGIN_SCRIPT_ANGELSCRIPT	CACHE)
+unset (PL_PLUGIN_DATABASE_POSTGRESQL CACHE)
+unset (PL_PLUGIN_DATABASE_SQLITE CACHE)
+unset (PL_PLUGIN_PHYSICS_ODE CACHE)
+unset (PL_PLUGIN_ENGINE_IMAGEEXR CACHE)
+unset (PL_PLUGIN_RENDERER_OPENGLES2_EMULATOR CACHE)
+unset (PL_PLUGIN_SOUND_OPENSLES CACHE)
+unset (PL_PLUGIN_NETWORK_IRC CACHE)
+unset (PL_PLUGIN_NETWORK_JABBER CACHE)
+unset (PL_PLUGIN_VOLUME_LOADER_PVM CACHE)
+unset (PL_PLUGIN_VOLUME_LOADER_DICOM_GDCM CACHE)
+unset (PL_PLUGIN_SCRIPT_V8 CACHE)
+
+##################################################
+## Temporarily disable projects that don't build yet
+##################################################
+
+unset (PL_PLUGIN_SCRIPT_PYTHON CACHE)
+unset (PL_PLUGIN_SOUND_FMOD CACHE)
+unset (PL_PLUGIN_SOUND_FMODEX CACHE)
+unset (PL_PLUGIN_ENGINE_SPARK CACHE)
+unset (PL_PLUGIN_ENGINE_LIBROCKET CACHE)
 
 ##################################################
 ## Remove optional projects not available on a certain platform
@@ -467,7 +521,7 @@ if(X86_64)
 		unset (PL_PLUGIN_SCRIPT_V8					CACHE)
 		unset (PL_PLUGIN_SCRIPT_PYTHON				CACHE)
 		unset (PL_PLUGIN_SCRIPT_ANGELSCRIPT			CACHE)
-		unset (PL_PLUGIN_DATABASE_MYSQL				CACHE)
+#		unset (PL_PLUGIN_DATABASE_MYSQL				CACHE)
 		unset (PL_PLUGIN_DATABASE_POSTGRESQL		CACHE)
 		unset (PL_PLUGIN_PHYSICS_ODE				CACHE)
 	endif()
@@ -670,4 +724,44 @@ if(NOT CMAKETOOLS_TARGET_ARCH STREQUAL "x86")
 endif()
 if(NOT CMAKETOOLS_TARGET_BITSIZE STREQUAL "32")
 	set(CMAKETOOLS_CONFIG_NO_INLINE_ASM "1")
+endif()
+
+##################################################
+## MSVC hack - late search for VC tools
+##################################################
+
+#TODO: how to solve this???
+
+# Try to find nmake
+if(NOT NMAKE_FOUND)
+	# Search for nmake
+	find_program(NMAKE_EXECUTABLE NAMES nmake.exe)
+	if(NMAKE_EXECUTABLE)
+		set(NMAKE_FOUND ON)
+		message(STATUS "NMAKE found")
+	else()
+		set(NMAKE_FOUND OFF)
+		message(STATUS "NMAKE NOT found")
+	endif()
+endif()
+
+# Try to find vcbuild
+if(NOT VCBUILD_FOUND)
+	# Get path hint based on location of nmake
+	set(path_hint)
+	if(NMAKE_FOUND)
+		get_filename_component(path1 ${NMAKE_EXECUTABLE} PATH)
+		get_filename_component(path2 ${path1} PATH)
+		set(path_hint "${path2}/vcpackages")
+	endif()
+
+	# Search for vcbuild
+	find_program(VCBUILD_EXECUTABLE NAMES vcbuild.exe PATHS ${path_hint})
+	if(VCBUILD_EXECUTABLE)
+		set(VCBUILD_FOUND ON)
+		message(STATUS "VCBUILD found")
+	else()
+		set(VCBUILD_FOUND OFF)
+		message(STATUS "VCBUILD NOT found")
+	endif()
 endif()

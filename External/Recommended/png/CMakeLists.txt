@@ -21,73 +21,78 @@
 #*  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #*********************************************************#
 
-
 ##################################################
 ## Project
 ##################################################
 define_external_project(libpng)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-	find_package(PNG)
+set(PNG_VERSION "1.6.9")
+set(PNG_URL "http://download.sourceforge.net/libpng/libpng-${PNG_VERSION}.tar.gz")
+set(PNG_MD5 "edd26ef2bf561786b2185f2b8afda78b")
+
+##################################################
+## Need to download?
+##################################################
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(PNG ${PNG_VERSION})
+endif()
+
+# Do we have it?
+if(PNG_FOUND)
+	# We will use the library present on the user system
 	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
-	# These variables should normaly only be visible within the CMake file in which the find module was called.
+	# These variables should normaly only be visible within the cmake file in which the find module was called.
 	# Otherwise the variables would be visible for all other projects if wanted or not
 	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
 	set(PNG_LIBRARIES ${PNG_LIBRARIES} CACHE INTERNAL "")
 	set(PNG_INCLUDE_DIR ${PNG_INCLUDE_DIR} CACHE INTERNAL "")
-else(CMAKETOOLS_USE_SYSTEM_LIBS)
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
+else()
+	# We'll need to download and build the library ourselves
+	message(STATUS "-- Using external build system for dependency 'libpng'...")
 
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(PNG_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INCLUDE_DIR}/png CACHE INTERNAL "")
+	# We are building static library out of libpng - we need to enable PIC support!
+        if(LINUX)
+                set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
+        endif()
+	
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${PNG_URL}
+		URL_MD5 ${PNG_MD5}
+		
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+			-DZLIB_LIBRARY:STRING=${ZLIB_LIBRARY_LIST}
+			-DZLIB_LIBRARIES:STRING=${ZLIB_LIBRARY_LIST}
+			-DZLIB_INCLUDE_DIR:STRING=${ZLIB_INCLUDE_DIR}
+			-DZLIB_FOUND=ON
+			
+		# See zlib's CMakeLists.txt
+		LIST_SEPARATOR ^^
+
+		CMAKE_CACHE_ARGS
+			${COMPILER_FLAGS}
+	)
+	
+	# Setup paths
 	if(WIN32)
-		set(PNG_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libpng.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(PNG_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libpng.a CACHE INTERNAL "")
+		# On Windows, the output .lib file has a different name for debug configuration
+		set(PNG_LIBRARIES optimized ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpng16_static.lib debug ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpng16_staticd.lib CACHE INTERNAL "")
+	else()
+		set(PNG_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libpng.a CACHE INTERNAL "")
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	# Check if built file exists
-	if(NOT EXISTS "${CMAKETOOLS_CURRENT_EXT_DIR}/${CMAKETOOLS_CURRENT_NAME}/built")
-		##################################################
-		## Fetch
-		##################################################
-		external_fetch()
-		add_dependencies(${CMAKETOOLS_CURRENT_TARGET}-Fetch External-zlib)
-		
-		##################################################
-		## Configure
-		##################################################
-		external_configure()
-		
-		##################################################
-		## Build
-		##################################################
-		external_build()
-		
-		##################################################
-		## Install
-		##################################################
-		external_install()
-	endif(NOT EXISTS "${CMAKETOOLS_CURRENT_EXT_DIR}/${CMAKETOOLS_CURRENT_NAME}/built")
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
-endif(CMAKETOOLS_USE_SYSTEM_LIBS)
+	set(PNG_INCLUDE_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
+	
+	# Dependencies
+	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
+	add_dependencies(${CMAKETOOLS_CURRENT_TARGET} External-zlib)
+endif()

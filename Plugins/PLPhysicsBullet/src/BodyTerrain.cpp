@@ -29,7 +29,7 @@
 #include "PLPhysicsBullet/BodyImpl.h"
 #include "PLPhysicsBullet/World.h"
 #include "PLPhysicsBullet/BodyTerrain.h"
-#include <Bullet/BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
+#include <bullet/BulletCollision/CollisionShapes/btHeightfieldTerrainShape.h>
 
 
 //[-------------------------------------------------------]

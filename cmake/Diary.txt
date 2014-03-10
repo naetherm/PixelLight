@@ -1,3 +1,11 @@
+>> 5.3.2014
+[AD]
+- I removed all the scripts below External/ and cleaned the related macros from the CMakeTools_Externals.cmake.
+  PixelLight is now using CMake's own ExternalProject extension for all 3rd party dependencies so these became
+  redundant and not used anymore.
+
+
+
 >> 21.08.2012
 - Another checksum related issue at: http://dev.pixellight.org/forum/viewtopic.php?f=6&t=531
   Some time ago, I changed the log message "File 'libpng.tar.gz' MD5 sum is incorrect!" into

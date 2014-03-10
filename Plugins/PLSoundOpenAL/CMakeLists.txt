@@ -69,9 +69,9 @@ add_libs(
 	PLCore
 	PLMath
 	PLSound
-	${OPENAL_LIBRARIES}
 	${LIBOGG_LIBRARIES}
 	${LIBVORBIS_LIBRARIES}
+	${OPENAL_LIBRARIES}
 )
 
 ##################################################
@@ -175,22 +175,18 @@ if(NOT CMAKETOOLS_USE_SYSTEM_LIBS)
 	if(WIN32)
 		add_custom_command(TARGET ${CMAKETOOLS_CURRENT_TARGET}
 			COMMAND ${CMAKE_COMMAND} -E copy ${PL_RUNTIME_BIN_GITDIR}/OpenAL32.dll ${PL_RUNTIME_BIN_DIR}
-			COMMAND ${CMAKE_COMMAND} -E copy ${PL_RUNTIME_BIN_GITDIR}/wrap_oal.dll ${PL_RUNTIME_BIN_DIR}
+#			COMMAND ${CMAKE_COMMAND} -E copy ${PL_RUNTIME_BIN_GITDIR}/wrap_oal.dll ${PL_RUNTIME_BIN_DIR}
 		)
 	elseif(LINUX)
 		# Set COPY_SOURCE to files which should be copied (this variable is used by the "copy.cmake"-script)
-		set(COPY_SOURCE ${CMAKETOOLS_CURRENT_EXT_DIR}/OpenAL/lib/libopenal.so
-						${CMAKETOOLS_CURRENT_EXT_DIR}/OpenAL/lib/libopenal.so.1
-						${CMAKETOOLS_CURRENT_EXT_DIR}/OpenAL/lib/libopenal.so.1.13.0
-						${CMAKETOOLS_CURRENT_EXT_DIR}/libogg/lib/libogg.so
-						${CMAKETOOLS_CURRENT_EXT_DIR}/libogg/lib/libogg.so.0
-						${CMAKETOOLS_CURRENT_EXT_DIR}/libogg/lib/libogg.so.0.7.1
-						${CMAKETOOLS_CURRENT_EXT_DIR}/libvorbis/lib/libvorbis.so
-						${CMAKETOOLS_CURRENT_EXT_DIR}/libvorbis/lib/libvorbis.so.0
-						${CMAKETOOLS_CURRENT_EXT_DIR}/libvorbis/lib/libvorbis.so.0.4.5
-						${CMAKETOOLS_CURRENT_EXT_DIR}/libvorbis/lib/libvorbisfile.so
-						${CMAKETOOLS_CURRENT_EXT_DIR}/libvorbis/lib/libvorbisfile.so.3
-						${CMAKETOOLS_CURRENT_EXT_DIR}/libvorbis/lib/libvorbisfile.so.3.3.4)
+		set(COPY_SOURCE 
+			${PL_RUNTIME_BIN_GITDIR}/libopenal.so
+			${PL_RUNTIME_BIN_GITDIR}/libopenal.so.1
+			${PL_RUNTIME_BIN_GITDIR}/libopenal.so.1.15.1
+			${PL_RUNTIME_BIN_GITDIR}/libogg.so
+			${PL_RUNTIME_BIN_GITDIR}/libvorbis.so
+			${PL_RUNTIME_BIN_GITDIR}/libvorbisfile.so
+		)
 
 		# Set COPY_DEST to a directory to which the files in COPY_SOURCE should be copied into (this variable is used by the "copy.cmake"-script)
 		set(COPY_DEST ${PL_RUNTIME_BIN_DIR})
@@ -228,7 +224,7 @@ install(FILES ${PL_RUNTIME_BIN_DIR}/${CMAKETOOLS_CURRENT_PLUGIN}
 if(NOT CMAKETOOLS_USE_SYSTEM_LIBS)
 	if(WIN32)
 		install(FILES ${PL_RUNTIME_BIN_DIR}/OpenAL32.dll
-					  ${PL_RUNTIME_BIN_DIR}/wrap_oal.dll
+#					  ${PL_RUNTIME_BIN_DIR}/wrap_oal.dll
 			DESTINATION ${PL_INSTALL_RUNTIME_BIN}	COMPONENT Runtime
 		)
 	elseif(LINUX)

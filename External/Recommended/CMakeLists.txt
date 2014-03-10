@@ -44,13 +44,7 @@ if(PL_PLUGIN_GRAPHICS_JPG)
 endif()
 # Script backends
 if(PL_PLUGIN_SCRIPT_LUA)
-	if(WIN32)
-		# Just-in-time (JIT) compiler for Lua (better performance, but transparent to the programmer, it's still just Lua)
-		add_subdirectory(LuaJIT)
-	else()
-		# Classic Lua
-		add_subdirectory(Lua)
-	endif()
+	add_subdirectory(Lua)
 endif()
 # PLRenderer backends
 if(PL_PLUGIN_RENDERER_OPENGL)

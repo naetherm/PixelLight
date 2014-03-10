@@ -1,3 +1,5 @@
+## This is the CMake script that our main build pipeline uses to compile the library
+
 cmake_minimum_required(VERSION 2.8.3)
 
 
@@ -86,3 +88,35 @@ endif()
 add_library(${CURRENT_TARGET_NAME} STATIC ${CURRENT_SRC})
 target_link_libraries(${CURRENT_TARGET_NAME} ${CURRENT_SHARED_LIBRARIES})
 set_target_properties(${CURRENT_TARGET_NAME} PROPERTIES COMPILE_DEFINITIONS "__STDC_INT64__")
+
+#if(WIN32)
+#	add_custom_command(
+#		TARGET ${CURRENT_TARGET_NAME}
+#		PRE_BUILD
+#		COMMAND ${CMAKE_COMMAND}
+#		ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.vc ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.h
+#	)
+#else()
+#	add_custom_command(
+#		TARGET ${CURRENT_TARGET_NAME}
+#		PRE_BUILD
+#		COMMAND ${CMAKE_COMMAND}
+#		ARGS -E copy ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.vc ${CMAKE_CURRENT_SOURCE_DIR}/jconfig.h
+#	)
+#endif()
+
+##################################################
+## Install
+##################################################
+install(TARGETS ${CURRENT_TARGET_NAME}
+	RUNTIME DESTINATION bin
+	LIBRARY DESTINATION lib
+	ARCHIVE DESTINATION lib
+)
+
+install(FILES
+	${CMAKE_CURRENT_SOURCE_DIR}/jconfig.h
+	${CMAKE_CURRENT_SOURCE_DIR}/jpeglib.h
+	${CMAKE_CURRENT_SOURCE_DIR}/jmorecfg.h
+	DESTINATION include
+)

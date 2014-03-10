@@ -1,3 +1,6 @@
+## This is the CMake script used to build Newton by our externals build pipeline
+
+
 cmake_minimum_required(VERSION 2.8.3)
 
 
@@ -24,6 +27,7 @@ set(CURRENT_SRC
 	core/dg.cpp
 	core/dgRef.cpp
 	core/dgCRC.cpp
+	core/dgDebug.cpp
 	core/dgTree.cpp
 	core/dgNode.cpp
 	core/dgTypes.cpp
@@ -97,15 +101,49 @@ set(CURRENT_SHARED_LIBRARIES
 	# Not required in this project
 )
 
+##################################################
+## Library
+##################################################
+add_library(${CURRENT_TARGET_NAME} SHARED ${CURRENT_SRC})
+target_link_libraries(${CURRENT_TARGET_NAME} ${CURRENT_SHARED_LIBRARIES})
 
 ##################################################
 ## Build
 ##################################################
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -ffor-scope -fno-rtti -fno-exceptions -pipe -ffunction-sections -fdata-sections -ffast-math -Wnon-virtual-dtor -Wreorder -Wsign-promo -Wstrict-null-sentinel -Os -funroll-all-loops -fpeel-loops -ftree-vectorize")
-set(LINKER_FLAGS "${LINKER_FLAGS} -Wl,--as-needed -Wl,--gc-sections -Wl,--no-undefined -Wl,--strip-all")
-if(ANDROID)
-	set(LINKER_FLAGS "${LINKER_FLAGS} -Wl,-rpath-link=${ANDROID_NDK_SYSROOT}/usr/lib/ -L${ANDROID_NDK_SYSROOT}/usr/lib/")
+if(MSVC)
+	if(CMAKE_GENERATOR MATCHES "Visual Studio .. Win64")
+		set_target_properties(${CURRENT_TARGET_NAME} PROPERTIES COMPILE_DEFINITIONS "__STDC_INT64__;_SCALAR_ARITHMETIC_ONLY;_WIN_64_VER;_NEWTON_BUILD_DLL")
+	else()
+		set_target_properties(${CURRENT_TARGET_NAME} PROPERTIES COMPILE_DEFINITIONS "__STDC_INT64__;_SCALAR_ARITHMETIC_ONLY;_WIN_32_VER;_NEWTON_BUILD_DLL")
+	endif()
+	
+	#set(CMAKE_CXX_FLAGS_DEBUG "/D_DEBUG /MTd /Zi /Ob0 /Od /RTC1" CACHE INTERNAL "")
+	#set(CMAKE_CXX_FLAGS_RELEASE "/MT /O2 /Ob2 /D NDEBUG" CACHE INTERNAL "")
+	#set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "/MT /Zi /O2 /Ob1 /D NDEBUG" CACHE INTERNAL "")
+	#set(CMAKE_CXX_FLAGS_MINSIZEREL "/MT /O1 /Ob1 /D NDEBUG" CACHE INTERNAL "")
+else()
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -ffor-scope -fno-rtti -fno-exceptions -pipe -ffunction-sections -fdata-sections -ffast-math -Wnon-virtual-dtor -Wreorder -Wsign-promo -Wstrict-null-sentinel -Os -funroll-all-loops -fpeel-loops -ftree-vectorize -fpermissive")
+	set(LINKER_FLAGS "${LINKER_FLAGS} -Wl,--as-needed -Wl,--gc-sections -Wl,--no-undefined -Wl,--strip-all")
+	
+	if(ANDROID)
+		set(LINKER_FLAGS "${LINKER_FLAGS} -Wl,-rpath-link=${ANDROID_NDK_SYSROOT}/usr/lib/ -L${ANDROID_NDK_SYSROOT}/usr/lib/")
+	endif()
+	
+	set_target_properties(${CURRENT_TARGET_NAME} PROPERTIES COMPILE_DEFINITIONS "__STDC_INT64__;_LINUX_VER;_LINUX_VER_64;_SCALAR_ARITHMETIC_ONLY")
 endif()
-add_library(${CURRENT_TARGET_NAME} SHARED ${CURRENT_SRC})
-target_link_libraries(${CURRENT_TARGET_NAME} ${CURRENT_SHARED_LIBRARIES})
-set_target_properties(${CURRENT_TARGET_NAME} PROPERTIES COMPILE_DEFINITIONS "__STDC_INT64__;_LINUX_VER;_LINUX_VER_64;_SCALAR_ARITHMETIC_ONLY")
+
+##################################################
+## Install
+##################################################
+install(TARGETS ${CURRENT_TARGET_NAME}
+	RUNTIME DESTINATION bin
+	LIBRARY DESTINATION lib
+	ARCHIVE DESTINATION lib
+)
+
+file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/newton/*.h")
+install(FILES ${files} DESTINATION include/Newton)
+file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/physics/*.h")
+install(FILES ${files} DESTINATION include/Pysics)
+file(GLOB files "${CMAKE_CURRENT_SOURCE_DIR}/core/*.h")
+install(FILES ${files} DESTINATION include/Core)

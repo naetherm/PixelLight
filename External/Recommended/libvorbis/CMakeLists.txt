@@ -28,56 +28,67 @@
 define_external_project(libvorbis)
 
 ##################################################
-## INCLUDES AND LIBRARIES
+## Configuration
 ##################################################
-if(CMAKETOOLS_USE_SYSTEM_LIBS)
-	##################################################
-	## Use system libraries
-	##################################################
-	find_package(Vorbis)
+set(VORBIS_VERSION "1.3.4")
+set(VORBIS_URL "http://downloads.xiph.org/releases/vorbis/libvorbis-${VORBIS_VERSION}.tar.gz")
+set(VORBIS_MD5 "8851c593a52d1ef9c526d95174873852")
+
+##################################################
+## Need to download?
+##################################################
+if(NOT CMAKETOOLS_DONT_USE_SYSTEM_LIBS)
+	find_package(Vorbis ${VORBIS_VERSION})
+endif()
+
+# Do we have it?
+if(VORBIS_FOUND)
+	# We will use the library present on the user system
+	# The find module from CMake itself doesn't add the XXX_LIBRARIES variable and XXX_INCLUDE_DIR variable to the cache, which is the correct behaviour.
+	# These variables should normaly only be visible within the cmake file in which the find module was called.
+	# Otherwise the variables would be visible for all other projects if wanted or not
+	# We want this, because this variables are used in other CMake files, which doesn't include this file, so we add the variables to the cache
+	set(LIBVORBIS_LIBRARIES ${Vorbis_LIBRARIES} CACHE INTERNAL "")
+	set(LIBVORBIS_INCLUDE_DIRS ${Vorbis_INCLUDE_DIR} CACHE INTERNAL "")
 else()
-	# Build external
-	message(STATUS "Using build script for external '${CMAKETOOLS_CURRENT_NAME}'")
-
-	##################################################
-	## Build external
-	##################################################
-	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
-	add_dependencies(External-Clean ${CMAKETOOLS_CURRENT_TARGET}-Clean)
-	set(LIBVORBIS_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INCLUDE_DIR} CACHE INTERNAL "")
+	# We'll need to download and build the library ourselves
+	message(STATUS "-- Using external build system for dependency 'libvorbis'...")
+	
+	# Define the external project
+	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
+		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
+		SOURCE_DIR ${CMAKETOOLS_CURRENT_SRC_DIR}
+		BINARY_DIR ${CMAKETOOLS_CURRENT_BUILD_DIR}
+		INSTALL_DIR ${CMAKETOOLS_CURRENT_INSTALL_DIR}
+		TMP_DIR ${CMAKETOOLS_CURRENT_TMP_DIR}
+		STAMP_DIR ${CMAKETOOLS_CURRENT_STAMP_DIR}
+		URL ${VORBIS_URL}
+		URL_MD5 ${VORBIS_MD5}
+		
+		# We have a CMake script for libvorbis
+		PATCH_COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_DIR}/CMake/CMakeLists.txt ${CMAKETOOLS_CURRENT_SRC_DIR}/CMakeLists.txt
+		
+		CMAKE_ARGS
+			-DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+			-DOGG_INCLUDE_DIR:PATH=${LIBOGG_INCLUDE_DIRS}
+	)
+	
+	# Setup paths
 	if(WIN32)
-		set(LIBVORBIS_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libvorbis_static.lib ${CMAKETOOLS_CURRENT_LIB_DIR}/libvorbisfile_static.lib CACHE INTERNAL "")
-	elseif(LINUX)
-		set(LIBVORBIS_LIBRARIES ${CMAKETOOLS_CURRENT_LIB_DIR}/libvorbis.so ${CMAKETOOLS_CURRENT_LIB_DIR}/libvorbisfile.so CACHE INTERNAL "")
+		set(LIBVORBIS_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbis.lib ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbisfile.lib CACHE INTERNAL "")
+	else()
+		set(LIBVORBIS_LIBRARIES ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbis.so ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbisfile.so CACHE INTERNAL "")
+
+		# Copy the SO to Bin (we have to use shared library on Linux)
+		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbis.so ${PL_RUNTIME_BIN_GITDIR}/libvorbis.so
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libvorbisfile.so ${PL_RUNTIME_BIN_GITDIR}/libvorbisfile.so
+			DEPENDEES install
+		)
 	endif()
-
-	##################################################
-	## Check
-	##################################################
-	external_check()
-
-	##################################################
-	## Fetch
-	##################################################
-	external_fetch()
-
-	##################################################
-	## Configure
-	##################################################
-	external_configure()
-
-	##################################################
-	## Build
-	##################################################
-	external_build()
-
-	##################################################
-	## Install
-	##################################################
-	external_install()
-
-	##################################################
-	## Clean
-	##################################################
-	external_clean()
+	set(LIBVORBIS_INCLUDE_DIRS ${CMAKETOOLS_CURRENT_INSTALL_DIR}/include CACHE INTERNAL "")
+	
+	# Dependencies
+	add_dependencies(${CMAKETOOLS_CURRENT_TARGET} External-libogg)
+	add_dependencies(External-Recommended ${CMAKETOOLS_CURRENT_TARGET})
 endif()
