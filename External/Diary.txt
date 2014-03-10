@@ -1,3 +1,9 @@
+>> 10.3.2014
+[AD]
+- All libraries that build on Windows x64 now build also on Linux x64
+- Added MySQL build for Linux x64
+
+
 >> 5.3.2014
 [AD]
 - After several weeks of effort, external depedencies are now using CMake's own ExternalProject based pipeline

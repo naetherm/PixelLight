@@ -52,7 +52,15 @@ set(MYSQL_MD5 "1d3d91e8459c719bbef7c97bb499634d")
 #else()
 	# We'll need to download and build the library ourselves
 	message(STATUS "-- Using external build system for dependency 'MySQL'...")
-	
+
+	# [TODO] On Linux, the MySQL build without server fails, we should add a custom patch for their CMakeLists.txt file
+	# so that it builds. Leads here: http://bugs.mysql.com/bug.php?id=66000
+	if(NOT LINUX)
+		set(BUILD_WITHOUT_SERVER ON)
+	else()
+		set(BUILD_WITHOUT_SERVER OFF)
+	endif()	
+
 	# Define the external project
 	ExternalProject_Add(${CMAKETOOLS_CURRENT_TARGET}
 		DOWNLOAD_DIR ${CMAKETOOLS_CURRENT_DOWNLOAD_DIR}
@@ -72,7 +80,7 @@ set(MYSQL_MD5 "1d3d91e8459c719bbef7c97bb499634d")
 			
 		CMAKE_CACHE_ARGS
 			-DBUILD_CONFIG:BOOL=OFF
-			-DWITHOUT_SERVER:BOOL=ON
+			-DWITHOUT_SERVER:BOOL=${BUILD_WITHOUT_SERVER}
 			-DWITH_UNIT_TESTS:BOOL=OFF
 	)
 	
@@ -89,12 +97,12 @@ set(MYSQL_MD5 "1d3d91e8459c719bbef7c97bb499634d")
 		)
 	else()
 		set(MYSQL_LIBRARIES
-			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libmysql.a
+			${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libmysqlclient.so
 			CACHE INTERNAL "")
 			
 		# Copy the SO to Bin
 		ExternalProject_Add_Step(${CMAKETOOLS_CURRENT_TARGET} CopyDLL
-			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libmysql.so ${PL_RUNTIME_BIN_GITDIR}
+			COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_INSTALL_DIR}/lib/libmysqlclient.so ${PL_RUNTIME_BIN_GITDIR}
 			DEPENDEES install
 		)
 	endif()

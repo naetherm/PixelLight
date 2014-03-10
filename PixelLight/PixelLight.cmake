@@ -484,21 +484,21 @@ unset (PL_PLUGIN_PHYSICS_ODE CACHE)
 unset (PL_PLUGIN_ENGINE_IMAGEEXR CACHE)
 unset (PL_PLUGIN_RENDERER_OPENGLES2_EMULATOR CACHE)
 unset (PL_PLUGIN_SOUND_OPENSLES CACHE)
-unset (PL_PLUGIN_SOUND_FMOD CACHE)
-unset (PL_PLUGIN_SOUND_FMODEX CACHE)
-unset (PL_PLUGIN_ENGINE_SPARK CACHE)
-unset (PL_PLUGIN_ENGINE_LIBROCKET CACHE)
 unset (PL_PLUGIN_NETWORK_IRC CACHE)
 unset (PL_PLUGIN_NETWORK_JABBER CACHE)
 unset (PL_PLUGIN_VOLUME_LOADER_PVM CACHE)
 unset (PL_PLUGIN_VOLUME_LOADER_DICOM_GDCM CACHE)
+unset (PL_PLUGIN_SCRIPT_V8 CACHE)
 
 ##################################################
 ## Temporarily disable projects that don't build yet
 ##################################################
 
-unset (PL_PLUGIN_SCRIPT_V8 CACHE)
 unset (PL_PLUGIN_SCRIPT_PYTHON CACHE)
+unset (PL_PLUGIN_SOUND_FMOD CACHE)
+unset (PL_PLUGIN_SOUND_FMODEX CACHE)
+unset (PL_PLUGIN_ENGINE_SPARK CACHE)
+unset (PL_PLUGIN_ENGINE_LIBROCKET CACHE)
 
 ##################################################
 ## Remove optional projects not available on a certain platform
@@ -521,7 +521,7 @@ if(X86_64)
 		unset (PL_PLUGIN_SCRIPT_V8					CACHE)
 		unset (PL_PLUGIN_SCRIPT_PYTHON				CACHE)
 		unset (PL_PLUGIN_SCRIPT_ANGELSCRIPT			CACHE)
-		unset (PL_PLUGIN_DATABASE_MYSQL				CACHE)
+#		unset (PL_PLUGIN_DATABASE_MYSQL				CACHE)
 		unset (PL_PLUGIN_DATABASE_POSTGRESQL		CACHE)
 		unset (PL_PLUGIN_PHYSICS_ODE				CACHE)
 	endif()
