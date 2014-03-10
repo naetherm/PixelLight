@@ -35,7 +35,11 @@ if(UNIX)
 	)
 endif()
 
-add_library(ogg SHARED ${libogg_SRCS} ${libogg_HDRS})
+if(MSVC)
+	add_library(ogg ${libogg_SRCS} ${libogg_HDRS})
+else()
+	add_library(ogg SHARED ${libogg_SRCS} ${libogg_HDRS})
+endif()
 
 install(
 	TARGETS ogg

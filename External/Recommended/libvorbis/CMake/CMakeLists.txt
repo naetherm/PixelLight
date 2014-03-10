@@ -88,8 +88,13 @@ if(MSVC)
     list(APPEND libvorbis_SRCS win32/vorbis.def)
 endif()
 
-add_library(vorbis SHARED ${libvorbis_SRCS} ${libvorbis_HDRS} ${vorbis_public_HDRS})
-add_library(vorbisfile SHARED lib/vorbisfile.c include/vorbis/vorbisfile.h)
+if(MSVC)
+	add_library(vorbis ${libvorbis_SRCS} ${libvorbis_HDRS} ${vorbis_public_HDRS})
+	add_library(vorbisfile lib/vorbisfile.c include/vorbis/vorbisfile.h)
+else()
+	add_library(vorbis SHARED ${libvorbis_SRCS} ${libvorbis_HDRS} ${vorbis_public_HDRS})
+	add_library(vorbisfile SHARED lib/vorbisfile.c include/vorbis/vorbisfile.h)
+endif()
 
 #target_link_libraries(libvorbisfile_dynamic libvorbis_dynamic ${OGG_LIBRARY})
 
