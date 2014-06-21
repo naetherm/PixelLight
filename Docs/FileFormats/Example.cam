@@ -1,5 +1,0 @@
-<?xml version="1.0" ?>
-<Camcorder Version="1" SceneContainer="Root.RootScene.MyScene" SceneNode="FreeCamera">
-    <PositionKeys CoordinateSystem="Parent" FramesPerSecond="24">Data/Camcorder/Example_Position.chunk</PositionKeys>
-    <RotationKeys FramesPerSecond="24">Data/Camcorder/Example_Rotation.chunk</RotationKeys>
-</Camcorder>

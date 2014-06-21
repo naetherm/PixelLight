@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<Path Version="1" Closed="1">
-    <Node Name="A" Pos="0 0 2" />
-    <Node Name="B" Pos="2 0 0" />
-    <Node Name="C" Pos="16 0 0" />
-    <Node Name="D" Pos="19 0 2" />
-    <Node Name="E" Pos="16 0 4" />
-    <Node Name="F" Pos="2 0 4" />
-</Path>

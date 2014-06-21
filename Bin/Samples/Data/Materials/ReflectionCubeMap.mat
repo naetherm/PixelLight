@@ -1,4 +1,0 @@
-<?xml version="1.0"?>
-<Material Version="1">
-    <Texture Name="ReflectionMap">Data/Textures/CubeMap.dds</Texture>
-</Material>

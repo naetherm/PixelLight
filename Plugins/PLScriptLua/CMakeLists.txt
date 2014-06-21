@@ -25,190 +25,52 @@
 ##################################################
 ## Project
 ##################################################
-define_project(PLScriptLua)
+pl_project(PLScriptLua)
+
 
 ##################################################
 ## Source files
 ##################################################
-add_sources(
-	src/PLScriptLua.cpp
-	src/LuaContext.cpp
-	src/LuaUserData.cpp
-	src/RTTIObjectPointerBase.cpp
-	src/RTTIObjectPointer.cpp
-	src/RTTIObjectMethodPointer.cpp
-	src/RTTIObjectSignalPointerBase.cpp
-	src/RTTIObjectSignalPointer.cpp
-	src/RTTIObjectSignalMethodPointer.cpp
-	src/RTTIObjectSlotPointer.cpp
-	src/Script.cpp
-)
+pl_collect_source_files()
 
-##################################################
-## Include directories
-##################################################
-add_include_directories(
-	include
-	${CMAKE_SOURCE_DIR}/Base/PLCore/include
-	${LUA_INCLUDE_DIRS}
-)
-
-##################################################
-## Library directories
-##################################################
-add_link_directories(
-	${PL_LIB_DIR}
-)
-
-##################################################
-## Additional libraries
-##################################################
-add_libs(
-	PLCore
-	${LUA_LIBRARIES}
-)
-if(LINUX)
-	##################################################
-	## Linux
-	##################################################
-	add_libs(
-		dl
-	)
-endif()
-
-##################################################
-## Preprocessor definitions
-##################################################
-add_compile_defs(
-	PLSCRIPTLUA_EXPORTS
-)
-if(WIN32)
-	##################################################
-	## Win32
-	##################################################
-	add_compile_defs(
-		${WIN32_COMPILE_DEFS}
-	)
-elseif(LINUX)
-	##################################################
-	## Linux
-	##################################################
-	add_compile_defs(
-		${LINUX_COMPILE_DEFS}
-	)
-endif()
-
-##################################################
-## Compiler flags
-##################################################
-if(WIN32)
-	##################################################
-	## MSVC Compiler
-	##################################################
-	add_compile_flags(
-		${WIN32_COMPILE_FLAGS}
-	)
-elseif(LINUX)
-	##################################################
-	## GCC Compiler
-	##################################################
-	add_compile_flags(
-		${LINUX_COMPILE_FLAGS}
-	)
-endif()
-
-##################################################
-## Linker flags
-##################################################
-if(WIN32)
-	##################################################
-	## MSVC Compiler
-	##################################################
-	add_linker_flags(
-		${WIN32_LINKER_FLAGS}
-	)
-elseif(LINUX)
-	##################################################
-	## GCC Compiler
-	##################################################
-	add_linker_flags(
-		${LINUX_LINKER_FLAGS}
-	)
-endif()
-
-##################################################
-## Build
-##################################################
-build_library(${CMAKETOOLS_CURRENT_TARGET} SHARED)
-pl_create_plugin_description(${CMAKE_CURRENT_SOURCE_DIR} ${PL_RUNTIME_BIN_DIR})
 
 ##################################################
 ## Dependencies
 ##################################################
-add_dependencies(${CMAKETOOLS_CURRENT_TARGET}	External-Lua External-LuaJIT PLCore)
-add_dependencies(Plugins                       	${CMAKETOOLS_CURRENT_TARGET})
+pl_add_dependency(PLCore)
+pl_add_dependency(LuaJIT)
+
 
 ##################################################
-## Post-Build
+## Additional libraries
 ##################################################
-
-# Dynamic library
-add_custom_command(TARGET ${CMAKETOOLS_CURRENT_TARGET}
-	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_OUTPUT_DIR}/${CMAKETOOLS_CURRENT_SHARED_LIB} ${PL_RUNTIME_BIN_DIR}
-)
-
-# Create relative symbolic links?
-if(LINUX AND CMAKETOOLS_DETAILED_VERSION_INFORMATION)
-	add_custom_command(TARGET ${CMAKETOOLS_CURRENT_TARGET}
-		COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKETOOLS_CURRENT_SHARED_LIB} ${CMAKETOOLS_CURRENT_SHARED_LIB_VERSION} WORKING_DIRECTORY ${PL_RUNTIME_BIN_DIR}
-		COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKETOOLS_CURRENT_SHARED_LIB} ${CMAKETOOLS_CURRENT_SHARED_LIB_SO_VERSION} WORKING_DIRECTORY ${PL_RUNTIME_BIN_DIR}
-	)
+if(LINUX)
+	pl_add_link_libs(dl)
 endif()
 
-# Import library
-if(WIN32)
-	add_custom_command(TARGET ${CMAKETOOLS_CURRENT_TARGET}
-		COMMAND ${CMAKE_COMMAND} -E copy ${CMAKETOOLS_CURRENT_OUTPUT_DIR}/${CMAKETOOLS_CURRENT_STATIC_LIB} ${PL_LIB_DIR}
-	)
-endif()
+
+##################################################
+## Preprocessor definitions
+##################################################
+pl_add_compile_defs(PLSCRIPTLUA_EXPORTS)
+
+
+##################################################
+## Finalize
+##################################################
+pl_build_library(PLUGIN)
+
+
+##################################################
+## Custom install
+##################################################
 
 # External dependencies, but only when not using system-libs
 # [TODO] Uncomment this as soon as there's support for system-libs
 #if(NOT CMAKETOOLS_USE_SYSTEM_LIBS)
-	if(WIN32)
-		add_custom_command(TARGET ${CMAKETOOLS_CURRENT_TARGET}
-			COMMAND ${CMAKE_COMMAND} -E copy ${PL_RUNTIME_BIN_GITDIR}/lua51.dll   ${PL_RUNTIME_BIN_DIR}
-		)
-	endif()
-#endif()
-
-##################################################
-## Install
-##################################################
-
-# Library
-install(TARGETS ${CMAKETOOLS_CURRENT_TARGET}
-	RUNTIME DESTINATION ${PL_INSTALL_RUNTIME_BIN}	COMPONENT Runtime
-	LIBRARY DESTINATION ${PL_INSTALL_RUNTIME_BIN}	COMPONENT Runtime
-	ARCHIVE DESTINATION ${PL_INSTALL_LIB}			COMPONENT SDK
-)
-
-# Include files
-install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/${CMAKETOOLS_CURRENT_PROJECT}
-	DESTINATION ${PL_INSTALL_INCLUDE} 				COMPONENT SDK		REGEX ${PL_EXCLUDE_FILE_EXTENSIONS} EXCLUDE
-)
-
-# Plugin file
-install(FILES ${PL_RUNTIME_BIN_DIR}/${CMAKETOOLS_CURRENT_PLUGIN}
-	DESTINATION ${PL_INSTALL_RUNTIME_BIN}			COMPONENT Runtime
-)
-
-# External dependencies, but only when not using system-libs
-# [TODO] Uncomment this as soon as there's support for system-libs
-#if(NOT CMAKETOOLS_USE_SYSTEM_LIBS)
-	if(WIN32)
-		install(FILES ${PL_RUNTIME_BIN_DIR}/lua51.dll
-			DESTINATION ${PL_INSTALL_RUNTIME_BIN}	COMPONENT Runtime
-		)
-	endif()
+#	if(WIN32)
+#		install(FILES ${PL_RUNTIME_BIN_DIR}/lua51.dll
+#			DESTINATION ${PL_INSTALL_RUNTIME_BIN}	COMPONENT Runtime
+#		)
+#	endif()
 #endif()

@@ -1,6 +1,0 @@
-Looking for the log? Have a look into your user data directory!
-
-Examples on different systems:
-- Linux:      /home/<username>/pixellight
-- Windows XP: C:\Documents and Settings\<Username>\Application Data\PixelLight
-- Windows 7:  C:\Users\<UserName>\AppData\Roaming\PixelLight

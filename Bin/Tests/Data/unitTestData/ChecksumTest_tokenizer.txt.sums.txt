@@ -1,3 +1,0 @@
-MD5:    3ef605c74b399d7d869afb40de4cede4
-SHA1:   b6f311adc109cfe58ec1156ad926260c725f3945
-CRC32:  843cd3ed

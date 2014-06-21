@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<Terrain Version="1">
-    <HeightMap>Racetrack.png</HeightMap>
-    <PVS>Data/Textures/Terrain/Mountains/HeightMap.pvs</PVS>
-    <Material>Racetrack.mat</Material>
-    <Scale>1.0 0.125 1.0</Scale>
-    <MaxError>0.013</MaxError>
-    <MergePatches>0</MergePatches>
-</Terrain>

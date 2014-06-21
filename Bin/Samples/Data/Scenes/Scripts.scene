@@ -1,9 +1,0 @@
-<?xml version="1.0" ?>
-<Scene Version="1" Name="Scene">
-    <Node Class="PLScene::SNKeyValue" Key="ClearColor" Value="0.5 0.5 0.5" />
-    <Modifier Class="PLScriptBindings::SNMScript" Script="Data/Scripts/ScriptsScene.lua" />
-    <Node Class="PLScene::SNCamera" Name="FixedCamera" Rotation="0.0 180.0 0.0" />
-    <Node Class="PLScene::SNMesh" Position="0 -2.1 -5" Scale="4 0.1 4" Rotation="0 180 0" Name="Floor" Mesh="Default" />
-    <Node Class="PLScene::SNMesh" Position="0 -1.5 -5" Scale="0.5 0.5 0.5" Name="BigBox" Mesh="Default" />
-    <Node Class="PLScene::SNMesh" Position="0 -1 -5" Scale="0.007 0.007 0.007" Name="Soldier" Mesh="Data/Meshes/Soldier.mesh" />
-</Scene>

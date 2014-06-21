@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<Skin Version="1">
-    <Material Name="Wood.dds">Data/Textures/Stone.dds</Material>
-    <Material Name="Leafes.mat">Data/Materials/Farn.mat</Material>
-</Skin>

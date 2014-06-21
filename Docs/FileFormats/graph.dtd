@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE Graph [
-  <!ELEMENT Neighbour EMPTY>
-  <!ATTLIST Neighbour Name     CDATA #REQUIRED
-                      Distance CDATA #IMPLIED>
-  <!ELEMENT Node (Neighbour*)>
-  <!ATTLIST Node Name CDATA #IMPLIED
-                 Pos  CDATA #IMPLIED>
-]>

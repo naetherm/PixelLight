@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<!DOCTYPE Path [
-  <!ATTLIST Path Closed CDATA #IMPLIED>
-  <!ELEMENT Node EMPTY>
-  <!ATTLIST Node Name CDATA #IMPLIED
-                 Pos  CDATA #IMPLIED>
-]>

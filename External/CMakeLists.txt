@@ -21,30 +21,18 @@
 #*  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #*********************************************************#
 
-##################################################
-## Includes
-##################################################
+
+# Set the package name
+pl_set_current_package(External)
+
+# Include the required module
 include(ExternalProject)
 
-##################################################
-## Project
-##################################################
-project(External)
+# Include our location dummy
+pl_add_subdirectory(_dummy)
 
-##################################################
-## Target
-##################################################
-add_custom_target(External)
-set_target_properties(External PROPERTIES EXCLUDE_FROM_DEFAULT_BUILD 1)
+# These need to go first
+pl_add_subdirectory(zlib)
 
-##################################################
-## Projects
-##################################################
-add_subdirectory(Base)
-add_subdirectory(Recommended)
-add_subdirectory(Optional)
-
-##################################################
-## Dependencies
-##################################################
-add_dependencies(PixelLight External)
+# Add the rest automatically
+pl_add_subdir_projects()

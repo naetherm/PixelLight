@@ -33,49 +33,39 @@ cmake_minimum_required(VERSION 2.8.3)
 project(PixelLight)
 
 ##################################################
+## Debug
+##################################################
+set(PL_DEBUG_BUILD_SYSTEM ON)
+
+##################################################
 ## Includes
 ##################################################
-include(cmake/CMakeTools.cmake)
-include(cmake/CMakeTools_Apps.cmake)
-include(cmake/CMakeTools_Docs.cmake)
-include(cmake/CMakeTools_Externals.cmake)
-include(PixelLight/PixelLight.cmake)
+include(CMake/Utils.cmake)
+include(CMake/Platform.cmake)
 
 ##################################################
-## Prerequisites
+## Output directories
 ##################################################
 
-# Create PixelLight header file
-configure_file("PixelLight/PixelLight.h.in" "${CMAKE_BINARY_DIR}/PixelLight.h")
+# Install bin
+set(PL_BIN_DIR "${CMAKE_INSTALL_PREFIX}/Bin/${PL_TARGET_ARCHBITSIZE}")
+# Developer bin
+set(PL_DEV_BIN_DIR "${CMAKE_CURRENT_SOURCE_DIR}/_Bin/${PL_TARGET_ARCHBITSIZE}")
 
-# Create 'Bin'-directory
-set(PL_BIN_DIR "${CMAKE_SOURCE_DIR}/Bin-${CMAKETOOLS_CONFIG_NAME}")
-file(MAKE_DIRECTORY ${PL_BIN_DIR})
+# Install lib
+set(PL_LIB_DIR "${CMAKE_INSTALL_PREFIX}/Lib/${PL_TARGET_ARCHBITSIZE}")
+# Developer lib
+set(PL_DEV_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/_Lib/${PL_TARGET_ARCHBITSIZE}")
 
-# Create 'Runtime'-directory
-file(MAKE_DIRECTORY ${PL_BIN_DIR}/Runtime)
-set(PL_RUNTIME_BIN_DIR "${PL_BIN_DIR}/Runtime/${CMAKETOOLS_TARGET_ARCHBITSIZE}")
-file(MAKE_DIRECTORY ${PL_RUNTIME_BIN_DIR})
-set(PL_RUNTIME_BIN_GITDIR "${CMAKE_SOURCE_DIR}/Bin/Runtime/${CMAKETOOLS_TARGET_ARCHBITSIZE}")	# Points to the directory directly within the Git repository
+# Install include
+set(PL_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/Include")
 
-# Create 'Lib'-directory
-file(MAKE_DIRECTORY ${PL_BIN_DIR}/Lib)
-set(PL_LIB_DIR "${PL_BIN_DIR}/Lib/${CMAKETOOLS_TARGET_ARCHBITSIZE}")
-file(MAKE_DIRECTORY ${PL_LIB_DIR})
-
-# Copy copyright and notes
-copy_file(${CMAKE_SOURCE_DIR}/AUTHORS			${PL_BIN_DIR})
-copy_file(${CMAKE_SOURCE_DIR}/COPYING			${PL_BIN_DIR})
-copy_file(${CMAKE_SOURCE_DIR}/cc-by-nc-sa-3.txt	${PL_BIN_DIR})
-copy_file(${CMAKE_SOURCE_DIR}/ReleaseNotes.txt	${PL_BIN_DIR})
-
-# Copy Microsoft Visual C++ Redistributables
-#TODO: for now this does not work as expected. The redistributable should be included in the installable SDK
-# but nowhere else
-#if(WIN32)
-#	file(MAKE_DIRECTORY ${PL_RUNTIME_BIN_DIR}/VC2010_Redistributable)
-#	copy_files("${PL_RUNTIME_BIN_GITDIR}/VC2010_Redistributable/*.*" "${PL_RUNTIME_BIN_DIR}/VC2010_Redistributable")
-#endif()
+##################################################
+## Includes
+##################################################
+include(CMake/Config.cmake)
+include(CMake/Build.cmake)
+include(CMake/Project.cmake)
 
 ##################################################
 ## Target
@@ -83,20 +73,32 @@ copy_file(${CMAKE_SOURCE_DIR}/ReleaseNotes.txt	${PL_BIN_DIR})
 add_custom_target(PixelLight)
 
 ##################################################
-## Projects
+## Include our projects
 ##################################################
+
+# We don't use our automation macros here to filter out everything more effectively
+# (and to keep the right order)
+
 add_subdirectory(External)
-add_subdirectory(Base)
+add_subdirectory(Engine)
 add_subdirectory(Plugins)
-if(PL_SAMPLES)
-	add_subdirectory(Samples)
+
+if(PL_BUILD_SAMPLES)
+	add_subdirectory(Tutorial)
 endif()
-if(PL_TESTS)
+
+if(PL_BUILD_TESTS)
 	add_subdirectory(Tests)
 endif()
+
 add_subdirectory(Tools)
-if(PL_DOCS)	
+
+if(PL_BUILD_DOCS)
 	add_subdirectory(Docs EXCLUDE_FROM_ALL)
+endif()
+
+if(PL_BUILD_SDK)
+	add_subdirectory(Packages)
 endif()
 
 ##################################################
@@ -108,27 +110,8 @@ install(FILES	${CMAKE_SOURCE_DIR}/AUTHORS
 				${CMAKE_SOURCE_DIR}/COPYING
 				${CMAKE_SOURCE_DIR}/cc-by-nc-sa-3.txt
 				${CMAKE_SOURCE_DIR}/ReleaseNotes.txt
-	DESTINATION ${PL_INSTALL_ROOT}				COMPONENT SDK
+	DESTINATION ${CMAKE_INSTALL_PREFIX}				
+	COMPONENT SDK
 )
 
-# Microsoft Visual C++ Redistributables
-#TODO: see above
-#if(WIN32)
-#	install(DIRECTORY ${PL_RUNTIME_BIN_GITDIR}/VC2010_Redistributable
-#		DESTINATION ${PL_INSTALL_RUNTIME_BIN}	COMPONENT SDK
-#	)
-#endif()
-
-##################################################
-## Packages
-##################################################
-if(CMAKETOOLS_BUILD_SDK)
-	add_subdirectory(Packages)
-endif()
-
-##################################################
-## Testing
-##################################################
-if(CMAKETOOLS_CONFIG_NIGHTLY)
-	include(CTest)
-endif()
+# [TODO] Testing

@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<Terrain Version="1">
-    <HeightMap>Racetrack.png</HeightMap>
-    <Material>Racetrack.plfx</Material>
-    <Scale>1.0 0.125 1.0</Scale>
-</Terrain>

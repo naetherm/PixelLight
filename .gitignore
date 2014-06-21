@@ -1,8 +1,10 @@
 # ignore from kdevelop 4 generated files
 .kdev*
 *.kdev4
+
 # ignore backup files
 *~
+
 #ignore build dir
 build/
 Bin-Windows/

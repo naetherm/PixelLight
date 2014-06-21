@@ -1,4 +1,0 @@
-\chapter{Batching}
-Do not create a scene which is in fact only one big object, but do also not create a object for each single triangle! The realtime performance of your scene depends heavy on the spatial separation. Within each cell, there should be single objects for the room geometry\footnote{One huge object for the room geometry is not recommended!} and the objects within this \emph{room}. If a cell is currently invisible, all objects within this cell are completely ignored. If a cell is visible, each object inside it is checked for visibility.
-
-\textbf{Take care of batches! Group small static objects to one object but do not use one huge object for the \emph{room} geometry.}

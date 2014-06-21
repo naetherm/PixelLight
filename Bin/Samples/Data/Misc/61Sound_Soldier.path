@@ -1,7 +1,0 @@
-<?xml version="1.0" ?>
-<Path Version="1" Closed="1">
-    <Node Name="A" Position="-2.5 -2.0 -2.0" />
-    <Node Name="B" Position="2.5 -2.0 -2.0" />
-    <Node Name="C" Position="2.5 -2.0 -7.0" />
-    <Node Name="D" Position="-2.5 -2.0 -7.0" />
-</Path>

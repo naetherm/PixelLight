@@ -1,8 +1,0 @@
-<RCC>
-  <qresource prefix="icon">
-    <file>../../../PixelLight/PL.png</file>
-  </qresource>
-  <qresource prefix="logo">
-    <file>../../../Docs/Common/pics/PLLogo.png</file>
-  </qresource>
-</RCC>

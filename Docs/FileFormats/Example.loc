@@ -1,5 +1,0 @@
-<?xml version="1.0" ?>
-<Localization Version="1" From="English" To="Deutsch">
-    <Text Name="Hello">Hallo</Text>
-    <Text Name="This is a test">Dies ist ein Test</Text>
-</Localization>
