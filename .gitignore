@@ -15,3 +15,4 @@ Packages/Files/readme.txt
 Packages/Files/welcome.txt
 Bin/Runtime/x64/*.dll
 Bin-Linux/
+_*

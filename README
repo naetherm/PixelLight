@@ -1,0 +1,36 @@
+PIXELLIGHT ENGINE v1.5 "Sunray"
+
+This README file temporarily replaces the virtually non-existant homepage of the project.
+
+This is the official repository of PixelLight - the 3D engine and application framework. This version is based upon the original version "1.0.1-RC" from the engine's original authors. The "reborn" version contained in this repository contains many modifications that mark a slight change in the project's direction. The current vision is for PixelLight to become a fully featured open-source game development kit, instead of being "just" a source code package for developing applications from scratch. To make things more manageable, I decided to split the shifting process into two phases:
+
+* First, the essential systems of the engine will be updated and it will be made stable on all supported platforms (Windows, Linux and possibly MacOSX). This stage is codenamed "v1.5" aka "Sunray" and should be almost fully compatible with the existing codebase.
+
+* After "Sunray" is merged to master, the development of "Glare" or "PixelLight 2.0" will begin according to the priority list found below. This will contain many breaking changes to the core of the engine and will prepare path for the upcoming GDK
+
+
+PixelLight 1.5 "Sunray" roadmap:
+
+- Return configuration options to the build system
+- Fix the build of unit tests and relevant documentation
+- Make the engine to build on Linux (and possibly MacOSX)
+- Develop an initial set of samples in the form of a basic tutorial
+- Create an SDK installer
+
+Once this version is stable, it will be merged to master. Its support will be minimal, but I am planning on doing some basic update work on the 1.5 build. Most notably:
+
+- Return some missing plugins (like libRocket or Python)
+- Update the core documentation to fit some new paradigms
+- Develop new samples that do not touch functionality planned for "Glare"
+- Add support for Qt projects into the build system
+
+Parallel to this maintenance work, the development of "Glare" will begin. This release has the following list of major goals:
+
+- Update of the RTTI system to be more flexible and powerful
+- Automation of the various data pipelines in PL using RTTI
+- Rewrite of the low-level rendering API (based on Christian Ofenberg's UNRIMP)
+- Performance analysis and tuning of the code
+- Parallelization of the engine runtime
+- Support for more recent 3rd party APIs like Qt5 and FMOD Studio
+- Update of the plugin system to allow for more dynamic behavior
+- ...
