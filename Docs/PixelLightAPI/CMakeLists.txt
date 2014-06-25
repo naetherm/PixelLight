@@ -23,43 +23,47 @@
 
 
 ##################################################
-## Prepare documentation build
+## Configure input files
 ##################################################
 
-# Search for LaTeX compiler
-find_package(LATEX)
-
-# Check if LaTeX has been found
-if(LATEX_COMPILER)
-	message(STATUS "Looking for LaTeX... - found ${LATEX_COMPILER}")
-
-	# Check if dvipdf has been found, but only if LaTeX has been found (avoid errors overkill within the log)
-	if(DVIPDF_CONVERTER)
-		message(STATUS "Looking for dvipdf... - found ${DVIPDF_CONVERTER}")
-	else()
-		message(STATUS "Looking for dvipdf... - NOT found")
-	endif()
-else()
-	message(STATUS "Looking for LaTeX... - NOT found")
+# Dot graphing option
+set(PL_DOXYGEN_DOT_SWITCH NO)
+if(DOXYGEN_DOT_FOUND)
+	set(PL_DOXYGEN_DOT_SWITCH YES)
 endif()
 
-# Search for doxygen
-find_package(Doxygen)
+# List of libraries to include in the build
+foreach(lib ${PL_DOXYGEN_PATHS})
+	set(PL_DOXYGEN_INCLUDE_PATHS "${PL_DOXYGEN_INCLUDE_PATHS} ${lib}")
+endforeach()
 
-# Search for Html Help Compiler
-#find_package(HTMLHelp)
+# Configure doxyfile
+set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/doxyfile)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/doxyfile.in ${doxyfile})
 
-# Check if Microsoft Html Help Compiler (http://msdn.microsoft.com/en-us/library/ms669985) has been found
-#message(STATUS "Looking for Microsoft Html Help Compiler...")
-#if(HTML_HELP_COMPILER)
-#	message(STATUS "Looking for Microsoft Html Help Compiler... - found ${HTML_HELP_COMPILER}")
-#else()
-#	message(STATUS "Looking for Microsoft Html Help Compiler (http://msdn.microsoft.com/en-us/library/ms669985)... - NOT found")
-#endif()
+# Configure custom footer
+#configure_file(${CMAKE_CURRENT_SOURCE_DIR}/footer.html.in )
 
 
 ##################################################
-## Include documentation projects
+## Run doxygen
 ##################################################
 
-pl_add_subdir_projects()
+set(PL_CURRENT_TARGET_NAME Doxygen)
+
+project(${PL_CURRENT_TARGET_NAME})
+
+add_custom_target(${PL_CURRENT_TARGET_NAME}
+	COMMAND ${DOXYGEN} \"${doxyfile}\"
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+	SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/doxyfile.in
+)
+
+set_target_properties(${PL_CURRENT_TARGET_NAME}
+	PROPERTIES EXCLUDE_FROM_DEFAULT_BUILD 1)
+
+# Solution folders
+set_property(
+	TARGET ${PL_CURRENT_TARGET_NAME}
+	PROPERTY FOLDER "Docs"
+)

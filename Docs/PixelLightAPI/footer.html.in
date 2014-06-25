@@ -1,0 +1,6 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title></title></head>
+<body> <table width="100%"> <tbody><tr><td align="center"><br><br> <table style="width: 974px; height: 153px;"> <tbody><tr>
+<td style="text-align: right;" width="90"><img src="PLLogo.png" alt="PixelLight" border="0" height="50" width="70"></td> <td width="320">PixelLight ${PL_PROJECT_VERSION_MAJOR}.${PL_PROJECT_VERSION_MINOR}.${PL_PROJECT_VERSION_PATCH}-${PL_PROJECT_VERSION_RELEASE}<br>Copyright (C) 2002-2014 by <a href="http://www.pixellight.org/" target="_top">The PixelLight Team<br> </a>Last modified $datetime </td><td style="text-align: right;"><img style="border: 0px solid ; width: 88px; height: 31px;" src="CreativeCommonsLicense_by-nc-sa.png"></td><td>The content of this PixelLight
+document is published under the<br><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" target="_top">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported</a></td>
+</tr> </tbody></table></td> </tr> </tbody></table></body></html>

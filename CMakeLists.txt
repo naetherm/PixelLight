@@ -60,17 +60,17 @@ set(PL_DEV_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/_Lib/${PL_TARGET_ARCHBITSIZE}")
 # Install include
 set(PL_INCLUDE_DIR "${CMAKE_INSTALL_PREFIX}/Include")
 
+# Install documentation
+set(PL_DOC_DIR "${CMAKE_INSTALL_PREFIX}/Docs")
+# Developer documentation
+set(PL_DEV_DOC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/_Docs")
+
 ##################################################
 ## Includes
 ##################################################
 include(CMake/Config.cmake)
 include(CMake/Build.cmake)
 include(CMake/Project.cmake)
-
-##################################################
-## Target
-##################################################
-add_custom_target(PixelLight)
 
 ##################################################
 ## Include our projects
@@ -94,7 +94,8 @@ endif()
 add_subdirectory(Tools)
 
 if(PL_BUILD_DOCS)
-	add_subdirectory(Docs EXCLUDE_FROM_ALL)
+	file(MAKE_DIRECTORY ${PL_DEV_DOC_DIR})
+	add_subdirectory(Docs)
 endif()
 
 if(PL_BUILD_SDK)

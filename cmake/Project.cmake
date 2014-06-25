@@ -22,6 +22,10 @@
 #*********************************************************#
 
 
+# This variable will collect all the doxygen-enabled projects
+set(PL_DOXYGEN_PATHS CACHE INTERNAL "")
+
+
 ##################################################
 ## Configure time automation
 ##################################################
@@ -401,9 +405,12 @@ macro(pl_build_library type)
 	
 	# Parse options
 	set(no_install OFF)
+	set(no_docs OFF)
 	foreach(option ${ARGN})
-		if("${option}" STREQUAL "NOINSTALL") # Turn off the automated installation
+		if("${option}" STREQUAL "NOINSTALL")	# Turn off the automated installation
 			set(no_install ON)
+		elseif("${option}" STREQUAL "NODOC")	# Turn off documentation build for this project
+			set(no_docs ON)
 		endif()
 	endforeach()
 
@@ -455,6 +462,11 @@ macro(pl_build_library type)
 	# Handle plugin
 	if(${is_plugin})
 		pl_create_plugin()
+	endif()
+
+	# Include documentation?
+	if(NOT ${no_docs})
+		set(PL_DOXYGEN_PATHS "${PL_DOXYGEN_PATHS} ${${PL_CURRENT_TARGET_INCLUDE_DIRS}}" CACHE INTERNAL "")
 	endif()
 
 	# Installation

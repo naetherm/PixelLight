@@ -28,10 +28,10 @@
 
 set(PL_PROJECT_NAME "PixelLight")
 
-set(PL_PROJECT_VERSION_MAJOR    2)
-set(PL_PROJECT_VERSION_MINOR    0)
+set(PL_PROJECT_VERSION_MAJOR    1)
+set(PL_PROJECT_VERSION_MINOR    5)
 set(PL_PROJECT_VERSION_PATCH    0)
-set(PL_PROJECT_VERSION_RELEASE "unstable")
+set(PL_PROJECT_VERSION_RELEASE "Sunray")
 
 # Create PixelLight header file
 configure_file("CMake/Config/PixelLight.h.in" "${CMAKE_BINARY_DIR}/PixelLight.h")

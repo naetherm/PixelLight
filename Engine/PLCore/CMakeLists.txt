@@ -106,7 +106,7 @@ pl_add_compile_defs(PLCORE_STATIC)
 
 # Build it
 pl_project(PLCoreStat NORESET)
-pl_build_library(STATIC)
+pl_build_library(STATIC NODOC)
 
 # Install
 install(
