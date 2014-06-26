@@ -105,6 +105,7 @@ endmacro()
 ##################################################
 macro(pl_set_current_package name)
 	set(PL_CURRENT_PACKAGE ${name})
+	set(PL_CURRENT_PACKAGE_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 endmacro()
 
 ##################################################
@@ -184,6 +185,11 @@ macro(pl_project name)
 	# Define local project variables
 	set(PL_CURRENT_TARGET_NAME ${name})
 	set(PL_CURRENT_OUTPUT_NAME "${PL_CURRENT_PACKAGE}.${name}")
+
+	# The path in IDE
+	string(REPLACE "${PL_CURRENT_PACKAGE_ROOT}" "" PL_CURRENT_IDE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
+	set(PL_CURRENT_IDE_PATH ${PL_CURRENT_PACKAGE}${PL_CURRENT_IDE_PATH}) # There is now a slash at the beginning of PL_CURRENT_IDE_PATH
+	get_filename_component(PL_CURRENT_IDE_PATH ${PL_CURRENT_IDE_PATH} DIRECTORY)
 
 	# Begin project
 	project(${PL_CURRENT_TARGET_NAME} C CXX ${PL_RC_COMPILER})
@@ -449,7 +455,7 @@ macro(pl_build_library type)
 	# Solution folders
 	set_property(
 		TARGET ${PL_CURRENT_TARGET_NAME}
-		PROPERTY FOLDER "${PL_CURRENT_PACKAGE}")
+		PROPERTY FOLDER "${PL_CURRENT_IDE_PATH}")
 
 	# Output file
 	set_property(
@@ -563,7 +569,7 @@ macro(pl_build_executable subsystem)
 	# Solution folders
 	set_property(
 		TARGET ${PL_CURRENT_TARGET_NAME}
-		PROPERTY FOLDER "${PL_CURRENT_PACKAGE}")
+		PROPERTY FOLDER "${PL_CURRENT_IDE_PATH}")
 
 	# Output file
 	set_property(
