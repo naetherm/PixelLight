@@ -22,8 +22,40 @@
 #*********************************************************#
 
 
-# Set the package name
-pl_set_current_package(Test)
+##################################################
+## Project
+##################################################
+pl_project(PLUnitTestsPerformance)
 
-# Add all samples automatically
-pl_add_subdir_projects()
+
+##################################################
+## Source files
+##################################################
+pl_collect_source_files()
+
+# Add common stuff from PLUnitTests
+set(PL_CURRENT_SOURCES
+	${PL_CURRENT_SOURCES} ../PLUnitTests/Private/UnitTest++AddIns/RunAllTests.cpp ../PLUnitTests/Private/UnitTest++AddIns/wchar_template.cpp)
+
+
+##################################################
+## Dependencies
+##################################################
+pl_add_dependency(PLCore)
+pl_add_dependency(PLUnitTests)
+pl_add_dependency(UnitTest++)
+
+
+# [TODO]: Compiler flags
+# Win	: /EHsc
+# Linux	: -fexceptions
+
+
+##################################################
+## Finalize
+##################################################
+if(ANDROID)
+	pl_build_library(SHARED)
+else()
+	pl_build_executable(CONSOLE)
+endif()

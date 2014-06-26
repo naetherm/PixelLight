@@ -22,8 +22,36 @@
 #*********************************************************#
 
 
-# Set the package name
-pl_set_current_package(Test)
+##################################################
+## Project
+##################################################
+pl_project(PLUnitTests)
 
-# Add all samples automatically
-pl_add_subdir_projects()
+
+##################################################
+## Source files
+##################################################
+pl_collect_source_files()
+
+
+##################################################
+## Dependencies
+##################################################
+pl_add_dependency(PLCore)
+pl_add_dependency(PLMath)
+pl_add_dependency(UnitTest++)
+
+
+# [TODO]: Compiler flags
+# Win	: /EHsc
+# Linux	: -fexceptions
+
+
+##################################################
+## Finalize
+##################################################
+if(ANDROID)
+	pl_build_library(SHARED)
+else()
+	pl_build_executable(CONSOLE)
+endif()
