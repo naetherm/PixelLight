@@ -69,24 +69,24 @@ Application::~Application()
 //[-------------------------------------------------------]
 void Application::Main()
 {
-	// Create an instance of our RTTI-enabled class using a regular construction process
+	//// Create an instance of our RTTI-enabled class using a regular construction process
 	MyClass *cInstance1 = new MyClass();
 
-	// We can now access the declared argumets as usual
-	cInstance1->Number = 108;
-	cInstance1->InnerObj = new MyClass();
+	//// We can now access the declared argumets as usual
+	//cInstance1->Number = 108;
+	//cInstance1->InnerObj = new MyClass();
 
-	// We can also create an instance of the class if we know its name
-	const Class *cMyClass = ClassManager::GetInstance()->GetClass("MyClass");
-	MyClass *cInstance2 = (MyClass*)cMyClass->Create();
+	//// We can also create an instance of the class if we know its name
+	//const Class *cMyClass = ClassManager::GetInstance()->GetClass("MyClass");
+	//MyClass *cInstance2 = (MyClass*)cMyClass->Create();
 
-	// Attributes can be also accessed by name
-	cInstance2->GetAttribute("Number")->SetInt(108);
-	cInstance2->GetAttribute("InnerObj")->SetVar(Var<MyClass*>(new MyClass()));
+	//// Attributes can be also accessed by name
+	//cInstance2->GetAttribute("Number")->SetInt(108);
+	//cInstance2->GetAttribute("InnerObj")->SetVar(Var<MyClass*>(new MyClass()));
 
-	// Cleanup
-	delete cInstance1->InnerObj;
+	//// Cleanup
+	//delete cInstance1->InnerObj;
 	delete cInstance1;
-	delete cInstance2->InnerObj;
-	delete cInstance2;
+	//delete cInstance2->InnerObj;
+	//delete cInstance2;
 }

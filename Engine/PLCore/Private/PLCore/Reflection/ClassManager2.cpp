@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Application.h                                  *
+ *  File: Rtti.h                                         *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,59 +22,44 @@
 \*********************************************************/
 
 
-#ifndef __MYCLASS_H__
-#define __MYCLASS_H__
-#pragma once
-
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-//#include <PLCore/Base/Object.h>
-#include <PLCore/Reflection/Rtti.h>
+#include <PLCore/Reflection/ClassManager.h>
+#include <PLCore/Reflection/Class.h>
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+using namespace PLRefl;
 
 
 //[-------------------------------------------------------]
-//[ Classes                                               ]
+//[ Public methods                                        ]
 //[-------------------------------------------------------]
-/**
-*  @brief
-*    Test class using PixelLight's RTTI system
-*/
-class MyClass
+Class &ClassManager::RegisterClass(const PLCore::String &sName, const char *szId)
 {
+	// The class may be already registered
+	ClassInfo &clss = m_mapClassIds.Get(szId);
+	if (clss == ClassIdMap::Null)
+	{
+		// Regiter a new class
+		ClassInfo info;
+		info.pClass = new Class(/*sName*/);
+		info.sName = sName;
+		info.szId = szId;
 
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_rtti()
+		m_mapClassNames.Add(sName, info);
+		m_mapClassIds.Add(szId, info);
 
+		// [TODO] Fire event
 
-	//[-------------------------------------------------------]
-	//[ Public functions                                      ]
-	//[-------------------------------------------------------]
-	public:
-		/**
-		*  @brief
-		*    Constructor
-		*/
-		MyClass();
-
-		/**
-		*  @brief
-		*    Destructor
-		*/
-		virtual ~MyClass();
-
-		/**
-		*  @brief
-		*    Sample function that will be bound to reflection
-		*/
-		int Foo(int i, float f);
-};
-
-// Declare the reflected type
-pl_declare_type(MyClass)
-
-
-#endif // __MYCLASS_H__
+		return *info.pClass;
+	}
+	else
+	{
+		// Return the existing class
+		return *clss.pClass;
+	}
+}

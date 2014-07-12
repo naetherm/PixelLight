@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Application.h                                  *
+ *  File: PLCore.h                                       *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,16 +22,15 @@
 \*********************************************************/
 
 
-#ifndef __MYCLASS_H__
-#define __MYCLASS_H__
+#ifndef __PLCORE_FUNCTIONBASE_H__
+#define __PLCORE_FUNCTIONBASE_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
-//[ Includes                                              ]
+//[ Namespace                                             ]
 //[-------------------------------------------------------]
-//#include <PLCore/Base/Object.h>
-#include <PLCore/Reflection/Rtti.h>
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -39,16 +38,9 @@
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Test class using PixelLight's RTTI system
+*    Base for callable function objects
 */
-class MyClass
-{
-
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_rtti()
-
+class FunctionBase {
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -56,25 +48,16 @@ class MyClass
 	public:
 		/**
 		*  @brief
-		*    Constructor
+		*    Call the function using the specified dynamic arguments
 		*/
-		MyClass();
-
-		/**
-		*  @brief
-		*    Destructor
-		*/
-		virtual ~MyClass();
-
-		/**
-		*  @brief
-		*    Sample function that will be bound to reflection
-		*/
-		int Foo(int i, float f);
+		//virtual bool Call(DynParams &cParams) = 0;
 };
 
-// Declare the reflected type
-pl_declare_type(MyClass)
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore
 
 
-#endif // __MYCLASS_H__
+#endif // __PLCORE_FUNCTIONBASE_H__

@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Application.h                                  *
+ *  File: Rtti.h                                         *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,59 +22,41 @@
 \*********************************************************/
 
 
-#ifndef __MYCLASS_H__
-#define __MYCLASS_H__
-#pragma once
-
-
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-//#include <PLCore/Base/Object.h>
-#include <PLCore/Reflection/Rtti.h>
 
 
 //[-------------------------------------------------------]
-//[ Classes                                               ]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+namespace PLRefl {
+
+//[-------------------------------------------------------]
+//[ Public functions                                      ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Test class using PixelLight's RTTI system
+*    Create builder for the specified class instance
 */
-class MyClass
+template <typename T>
+ClassBuilder<T>::ClassBuilder(Class &cClss)
+	: m_pClass(&cClss)
 {
+}
 
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_rtti()
+/**
+*  @brief
+*    Declare a method inside the class
+*/
+template <typename T>
+template <typename TRet, typename... TArgs>
+ClassBuilder<T> &ClassBuilder<T>::Method(const PLCore::String &sName, PLCore::Function<TRet, TArgs...> &&cFn)
+{
+	return *this;
+}
 
-
-	//[-------------------------------------------------------]
-	//[ Public functions                                      ]
-	//[-------------------------------------------------------]
-	public:
-		/**
-		*  @brief
-		*    Constructor
-		*/
-		MyClass();
-
-		/**
-		*  @brief
-		*    Destructor
-		*/
-		virtual ~MyClass();
-
-		/**
-		*  @brief
-		*    Sample function that will be bound to reflection
-		*/
-		int Foo(int i, float f);
-};
-
-// Declare the reflected type
-pl_declare_type(MyClass)
-
-
-#endif // __MYCLASS_H__
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLRefl

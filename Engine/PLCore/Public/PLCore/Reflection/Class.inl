@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Application.h                                  *
+ *  File: Rtti.h                                         *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,59 +22,42 @@
 \*********************************************************/
 
 
-#ifndef __MYCLASS_H__
-#define __MYCLASS_H__
-#pragma once
-
-
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-//#include <PLCore/Base/Object.h>
-#include <PLCore/Reflection/Rtti.h>
+#include "ClassManager.h"
 
 
 //[-------------------------------------------------------]
-//[ Classes                                               ]
+//[ Namespace                                             ]
 //[-------------------------------------------------------]
+namespace PLRefl {
+
 /**
 *  @brief
-*    Test class using PixelLight's RTTI system
+*    Declare a new reflected class
 */
-class MyClass
+template <typename T>
+ClassBuilder<T> Class::Declare(const PLCore::String &sName)
 {
+	// Destruction helper
+	//struct Destructor
+	//{
+	//	template <typename T>
+	//	static void Destruct(const UserObject &obj)
+	//	{
+	//		delete obj.GetAs<T*>();
+	//	}
+	//};
 
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_rtti()
+	// Register the class
+	Class &clss = ClassManager::GetInstance()->RegisterClass(sName, StaticTypeId<T>::Get());
+	//clss.Destructor = &Destructor::Destruct<T>;
+	
+	return ClassBuilder<T>(clss);
+}
 
-
-	//[-------------------------------------------------------]
-	//[ Public functions                                      ]
-	//[-------------------------------------------------------]
-	public:
-		/**
-		*  @brief
-		*    Constructor
-		*/
-		MyClass();
-
-		/**
-		*  @brief
-		*    Destructor
-		*/
-		virtual ~MyClass();
-
-		/**
-		*  @brief
-		*    Sample function that will be bound to reflection
-		*/
-		int Foo(int i, float f);
-};
-
-// Declare the reflected type
-pl_declare_type(MyClass)
-
-
-#endif // __MYCLASS_H__
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLRefl

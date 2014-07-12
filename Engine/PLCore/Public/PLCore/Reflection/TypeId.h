@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Application.cpp                                *
+ *  File: Rtti.h                                         *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,95 +22,86 @@
 \*********************************************************/
 
 
+#ifndef __PLCORE_REFL_TYPEID_H__
+#define __PLCORE_REFL_TYPEID_H__
+#pragma once
+
+
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "MyClass.h"
-#include <PLCore/Typebase/Tuple.h>
+#include <PLCore/Typebase/RawType.h>
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-using namespace PLRefl;
-
+namespace PLRefl {
 
 //[-------------------------------------------------------]
-//[ RTTI interface                                        ]
+//[ Classes                                               ]
 //[-------------------------------------------------------]
-pl_begin_class(MyClass)
-	pl_class_method(Foo)
-//.Method("Foo", PLCore::Function<decltype(&_Clss::Foo)>(nullptr, &_Clss::Foo))
-pl_end_class()
-
-template <typename Func>
-struct S
+/**
+*  @brief
+*    Specialization of StaticTypeId for classes without defined reflection
+*
+*  @remarks
+*    This will throw a compile time error if you try to retrieve reflection type Id
+*    of a non-registered type
+*/
+template <typename T>
+struct StaticTypeId
 {
-	S(Func _f) : f(_f) {}
-	Func f;
-
-	template <typename... Args>
-	void Exec(Args... args)
+	static const char *Get()
 	{
-		f(args...);
+		// This will create at least somehow verbose compile-time error
+		return T::TYPE_NOT_REGISTERED_IN_REFLECTION();
 	}
+
+	enum { Defined = false, Copyable = true };
 };
 
-class B
+/**
+*  @brief
+*    Check if the given type has been registered with reflection
+*/
+template <typename T>
+struct HasStaticTypeId
 {
-public:
-	virtual void f(int, float)
-	{}
-};
-
-class D : public B
-{
-public:
-	virtual void f(int ii, float ff) override
+	enum Value
 	{
-		ii=ii;
-	}
+		Value = StaticTypeId<PLCore::RawType<T>>::Defined;
+	};
 };
 
 //[-------------------------------------------------------]
-//[ Public functions                                      ]
+//[ Global functions                                      ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Constructor
+*    Retirieve the static type Id of the given type
 */
-MyClass::MyClass()
+template <typename T>
+const char *GetStaticTypeId()
 {
-	D inst;
-	PLCore::Function<decltype(&B::f)> d(&inst, &B::f);
-	d(1, 2.0f);
-
-	//auto l = [this](int i, float f) {};
-	//S<decltype(l)> s(l);
-	//s.Exec(1, 1.0f);
-	//PLCore::Function<decltype(l)> dl;
-
-	PLCore::Tuple<int, float> t;
-	int& i = PLCore::TupleGet<0>(t) = 2;
-	float& f = PLCore::TupleGet<1>(t) = 2.0f;
-	i = 108;
-	f = 1.08f;
-
-	d(t);
+	return StaticTypeId<typename PLCore::RawType<T>::Type>::Get();
 }
 
 /**
 *  @brief
-*    Destructor
+*    Retrieve the static type Id from the specified instance
 */
-MyClass::~MyClass()
+template <typename T>
+const char *GetStaticTypeId(const T&)
 {
+	return StaticTypeId<typename PLCore::RawType<T>::Type>::Get();
 }
 
-/**
-*  @brief
-*    Dummy function
-*/
-int MyClass::Foo(int i, float f)
-{
-	return 0;
-}
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLRefl
+
+
+#endif // __PLCORE_REFL_RTTI_H__

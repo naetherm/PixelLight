@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Application.h                                  *
+ *  File: PLCore.h                                       *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,16 +22,15 @@
 \*********************************************************/
 
 
-#ifndef __MYCLASS_H__
-#define __MYCLASS_H__
+#ifndef __PLCORE_RAWTYPE_H__
+#define __PLCORE_RAWTYPE_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
-//[ Includes                                              ]
+//[ Namespace                                             ]
 //[-------------------------------------------------------]
-//#include <PLCore/Base/Object.h>
-#include <PLCore/Reflection/Rtti.h>
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -39,42 +38,36 @@
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Test class using PixelLight's RTTI system
+*    This template will remove all type qualifiers (const, pointers, references)
 */
-class MyClass
+template <typename T>
+struct RawType
 {
-
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_rtti()
-
-
-	//[-------------------------------------------------------]
-	//[ Public functions                                      ]
-	//[-------------------------------------------------------]
-	public:
-		/**
-		*  @brief
-		*    Constructor
-		*/
-		MyClass();
-
-		/**
-		*  @brief
-		*    Destructor
-		*/
-		virtual ~MyClass();
-
-		/**
-		*  @brief
-		*    Sample function that will be bound to reflection
-		*/
-		int Foo(int i, float f);
+	typedef T Type;
 };
 
-// Declare the reflected type
-pl_declare_type(MyClass)
+template <typename T>
+struct RawType<const T>
+{
+	typedef typename RawType<T>::Type Type;
+};
+
+template <typename T>
+struct RawType<T&>
+{
+	typedef typename RawType<T>::Type Type;
+};
+
+template <typename T>
+struct RawType<T*>
+{
+	typedef typename RawType<T>::Type Type;
+};
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore
 
 
-#endif // __MYCLASS_H__
+#endif // __PLCORE_RAWTYPE_H__

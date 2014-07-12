@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Application.h                                  *
+ *  File: Rtti.h                                         *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,16 +22,29 @@
 \*********************************************************/
 
 
-#ifndef __MYCLASS_H__
-#define __MYCLASS_H__
+#ifndef __PLCORE_REFL_CLASS_H__
+#define __PLCORE_REFL_CLASS_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-//#include <PLCore/Base/Object.h>
-#include <PLCore/Reflection/Rtti.h>
+#include "TypeId.h"
+#include <PLCore/String/String.h>
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+namespace PLRefl {
+
+
+//[-------------------------------------------------------]
+//[ Forward declarations                                  ]
+//[-------------------------------------------------------]
+template <typename T>
+class ClassBuilder;
 
 
 //[-------------------------------------------------------]
@@ -39,16 +52,12 @@
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Test class using PixelLight's RTTI system
+*    The reflection system's representation of a class type
+*
+*  @remarks
+*    TODO: describe this in more detail
 */
-class MyClass
-{
-
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_rtti()
-
+class Class {
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -56,25 +65,28 @@ class MyClass
 	public:
 		/**
 		*  @brief
-		*    Constructor
+		*    Start the construction of a new class definition
+		*
+		*  @param[in] sName
+		*    The name of the new class in the reflection system. This can be different from the real
+		*    C++ class name
 		*/
-		MyClass();
-
-		/**
-		*  @brief
-		*    Destructor
-		*/
-		virtual ~MyClass();
-
-		/**
-		*  @brief
-		*    Sample function that will be bound to reflection
-		*/
-		int Foo(int i, float f);
+		template <typename T>
+		static ClassBuilder<T> Declare(const PLCore::String &sName);
 };
 
-// Declare the reflected type
-pl_declare_type(MyClass)
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLRefl
 
 
-#endif // __MYCLASS_H__
+//[-------------------------------------------------------]
+//[ Implementation                                        ]
+//[-------------------------------------------------------]
+#include "ClassBuilder.h"
+#include "Class.inl"
+
+
+#endif // __PLCORE_REFL_CLASS_H__

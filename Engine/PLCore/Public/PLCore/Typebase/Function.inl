@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Application.h                                  *
+ *  File: PLCore.h                                       *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,59 +22,52 @@
 \*********************************************************/
 
 
-#ifndef __MYCLASS_H__
-#define __MYCLASS_H__
-#pragma once
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
-//[ Includes                                              ]
+//[ Public functions                                      ]
 //[-------------------------------------------------------]
-//#include <PLCore/Base/Object.h>
-#include <PLCore/Reflection/Rtti.h>
-
+	
+/**
+*  @brief
+*    Ctor
+*/
+template <typename TRet, class T, typename... TArgs>
+Function<TRet(T::*)(TArgs...)>::Function(T *pObj, TRet(T::*TMethod)(TArgs...))
+{
+	m_pObject = pObj;
+	m_cFunc = TMethod;
+}
 
 //[-------------------------------------------------------]
-//[ Classes                                               ]
+//[ Public virtual Invokable functions                    ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Test class using PixelLight's RTTI system
+*    Invoke the delegate
 */
-class MyClass
+template <typename TRet, class T, typename... TArgs>
+TRet Function<TRet(T::*)(TArgs...)>::Invoke(TArgs... args)
 {
+	return (m_pObject->*m_cFunc)(args...);
+}
 
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_rtti()
-
-
-	//[-------------------------------------------------------]
-	//[ Public functions                                      ]
-	//[-------------------------------------------------------]
-	public:
-		/**
-		*  @brief
-		*    Constructor
-		*/
-		MyClass();
-
-		/**
-		*  @brief
-		*    Destructor
-		*/
-		virtual ~MyClass();
-
-		/**
-		*  @brief
-		*    Sample function that will be bound to reflection
-		*/
-		int Foo(int i, float f);
-};
-
-// Declare the reflected type
-pl_declare_type(MyClass)
+/**
+*  @brief
+*    Get the invocation target
+*/
+template <typename TRet, class T, typename... TArgs>
+void* Function<TRet(T::*)(TArgs...)>::GetTargetObject()
+{
+	return m_pObject;
+}
 
 
-#endif // __MYCLASS_H__
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore
