@@ -26,12 +26,22 @@
 #define __PLCORE_TUPLE_H__
 #pragma once
 
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+#include <PLCore/Typebase/UntypedVariant.h>
+#include <PLCore/Container/Iterable.h>
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLCore {
 
+//[-------------------------------------------------------]
+//[ Forward declarations                                  ]
+//[-------------------------------------------------------]
+template <int I, typename T>
+struct TupleElement;
 
 //[-------------------------------------------------------]
 //[ Classes                                               ]
@@ -201,9 +211,6 @@ class Tuple {
 *  @brief
 *    Tuple element type helper
 */
-template <int I, typename T>
-struct TupleElement;
-
 template <int I, typename Head, typename... Tail>
 struct TupleElement<I, Tuple<Head, Tail...>> : TupleElement<I-1, Tuple<Tail...>> {
 };
@@ -250,6 +257,39 @@ struct MakeIndexSequence : public MakeIndexSequence<N - 1, N - 1, I...> {
 
 template <int... I>
 struct MakeIndexSequence<0, I...> : public IndexSequence<I...>{
+};
+
+/**
+*  @brief
+*    Construct tuple from untyped variant
+*/
+template <int BUFFER_SIZE, typename... T>
+void TupleFromUntypedVariant(const Iterable<UntypedVariant<BUFFER_SIZE>> *pDyn, Tuple<T...> &cTuple)
+{
+	ConstIterator<UntypedVariant<BUFFER_SIZE>> iter = pDyn->GetConstIterator();
+	TupleFromUntypedVariantImpl<sizeof...(T), BUFFER_SIZE, T...>::Make(iter, cTuple);
+}
+
+template <int N, int BUFFER_SIZE, typename... T>
+struct TupleFromUntypedVariantImpl {
+	
+	static void Make(ConstIterator<UntypedVariant<BUFFER_SIZE>> &cIterator, Tuple<T...> &cTuple)
+	{
+		TupleFromUntypedVariantImpl<N - 1, BUFFER_SIZE, T...>::Make(cIterator, cTuple);
+
+		typedef typename TupleElement<N - 1, Tuple<T...>>::_Type _Type;
+		if (cIterator.HasNext())
+			TupleGet<N - 1>(cTuple) = cIterator.Next().Get<_Type>();
+	}
+};
+
+template <int BUFFER_SIZE, typename... T>
+struct TupleFromUntypedVariantImpl<0, BUFFER_SIZE, T...> {
+	
+	static void Make(ConstIterator<UntypedVariant<BUFFER_SIZE>> &cIterator, Tuple<T...> &cTuple)
+	{
+		// End of line
+	}
 };
 
 

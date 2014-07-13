@@ -105,6 +105,48 @@ class Invokable : public FunctionBase {
 		virtual void *GetTargetObject() = 0;
 
 	//[-------------------------------------------------------]
+	//[ Private helpers                                       ]
+	//[-------------------------------------------------------]
+	private:
+		/**
+		*  @brief
+		*    Helper to invoke function using dynamic arguments and handle return value
+		*/
+		template <class TTuple, typename TRet>
+		struct DynInvokeHelper {
+
+			static void Call(FunctionParam &cRet, Invokable *pToInvoke, const TTuple &tuple)
+			{
+				TRet ret = pToInvoke->TupleInvoke(tuple);
+				cRet.Set<TRet>(ret);
+			}
+		};
+
+		template <class TTuple>
+		struct DynInvokeHelper<TTuple, void> {
+		
+			static void Call(FunctionParam &cRet, Invokable *pToInvoke, const TTuple &tuple)
+			{
+				pToInvoke->TupleInvoke(tuple);
+			}
+		};
+	//[-------------------------------------------------------]
+	//[ Public virtual FunctionBase functions                 ]
+	//[-------------------------------------------------------]
+	public:
+		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParam) override
+		{
+			// Initialize a tuple of the correct type from the dynamic argument list
+			TupleType t;
+			TupleFromUntypedVariant(pParam, t);
+
+			// Invoke the function using the tuple
+			FunctionParam ret;
+			DynInvokeHelper<TupleType, TRet>::Call(ret, this, t);
+			return ret;
+		}
+
+	//[-------------------------------------------------------]
 	//[ Private functions                                     ]
 	//[-------------------------------------------------------]
 	private:

@@ -26,7 +26,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "MyClass.h"
-#include <PLCore/Typebase/Tuple.h>
+#include <PLCore/Container/Array.h>
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -58,16 +58,18 @@ struct S
 class B
 {
 public:
-	virtual void f(int, float)
-	{}
+	virtual int f(int, float)
+	{
+		return 1;
+	}
 };
 
 class D : public B
 {
 public:
-	virtual void f(int ii, float ff) override
+	virtual int f(int ii, float ff) override
 	{
-		ii=ii;
+		return 2;
 	}
 };
 
@@ -94,8 +96,53 @@ MyClass::MyClass()
 	float& f = PLCore::TupleGet<1>(t) = 2.0f;
 	i = 108;
 	f = 1.08f;
-
 	d(t);
+
+	PLCore::Array<PLCore::FunctionParam> params;
+	params.Add(PLCore::FunctionParam(108));
+	params.Add(PLCore::FunctionParam(10.8f));
+	int ret = d.DynInvoke(&params).Get<int>();
+
+	struct SmallStruct {
+	
+		int a;
+
+		SmallStruct()
+		{
+			a=10;
+		}
+		~SmallStruct()
+		{
+			a=a;
+		}
+	};
+
+	struct BigStruct {
+	
+		int a;
+		int b;
+		int c;
+		int d;
+
+		BigStruct()
+		{
+			a=b=c=d=10;
+		}
+		~BigStruct()
+		{
+			a=a;
+		}
+	};
+
+	SmallStruct ss0;
+	PLCore::FunctionParam p1(ss0);
+	SmallStruct &ss = p1.Get<SmallStruct>();
+	p1.Destroy<SmallStruct>();
+
+	BigStruct bs0;
+	PLCore::FunctionParam p2(bs0);
+	BigStruct &bs = p2.Get<BigStruct>();
+	p2.Destroy<BigStruct>();
 }
 
 /**

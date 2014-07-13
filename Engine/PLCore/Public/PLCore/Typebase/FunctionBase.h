@@ -26,11 +26,23 @@
 #define __PLCORE_FUNCTIONBASE_H__
 #pragma once
 
+//[-------------------------------------------------------]
+//[ Includes                                              ]
+//[-------------------------------------------------------]
+#include <PLCore/Typebase/UntypedVariant.h>
+#include <PLCore/Container/Iterable.h>
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLCore {
+
+
+//[-------------------------------------------------------]
+//[ Types                                                 ]
+//[-------------------------------------------------------]
+typedef UntypedVariant<16> FunctionParam;
 
 
 //[-------------------------------------------------------]
@@ -50,7 +62,7 @@ class FunctionBase {
 		*  @brief
 		*    Call the function using the specified dynamic arguments
 		*/
-		//virtual bool Call(DynParams &cParams) = 0;
+		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParams) = 0;
 };
 
 
