@@ -32,40 +32,9 @@ namespace PLRefl {
 *  @brief
 *    Comparison operator
 */
-bool ClassMethod::operator==(const ClassMethod &cOther) const
+bool ClassField::operator==(const ClassField &cOther) const
 {
-	return (m_pFunc == cOther.m_pFunc && m_sName == cOther.m_sName);
-}
-
-/**
-*  @brief
-*    Invoke the method
-*/
-PLCore::FunctionParam ClassMethod::Call(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
-{
-	if (m_pFunc)
-	{
-		return m_pFunc->DynInvoke(pParams);
-	}
-	else
-	{
-		return PLCore::FunctionParam();
-	}
-}
-
-/**
-*  @brief
-*    Directly invoke the method
-*/
-template <typename TRet, class TObject, typename... TArgs>
-TRet ClassMethod::CallDirect(TObject *pObj, TArgs... args) const
-{
-	// This method works with the assumption that every Function is derived from the
-	// appropriate Invokable
-	typedef PLCore::Invokable<TRet, TObject*, TArgs...> _InvType;
-	_InvType* casted = (_InvType*)m_pFunc;
-
-	return casted->Invoke(pObj, args...);
+	return (m_nOffset == cOther.m_nOffset && m_sName == cOther.m_sName);
 }
 
 //[-------------------------------------------------------]

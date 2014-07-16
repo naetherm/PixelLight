@@ -58,6 +58,32 @@ ClassBuilder<T> &ClassBuilder<T>::Method(const PLCore::String &sName, PLCore::Fu
 	return *this;
 }
 
+/**
+*  @brief
+*    Declare a field inside the class
+*/
+template <typename T>
+ClassBuilder<T> &ClassBuilder<T>::Field(const PLCore::String &sName, PLCore::uint32 nOffset)
+{
+	// Add field to class
+	m_pClass->m_mapFields.Add(sName, ClassField(sName, nOffset));
+
+	return *this;
+}
+
+/**
+*  @brief
+*    Declare a property inside the class
+*/
+template <typename T>
+ClassBuilder<T> &ClassBuilder<T>::Property(const PLCore::String &sName, PLCore::FunctionBase *pSetter, PLCore::FunctionBase *pGetter)
+{
+	// Add method to class
+	m_pClass->m_mapProperties.Add(sName, ClassProperty(sName, pSetter, pGetter));
+
+	return *this;
+}
+
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]

@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassMehod.h                                   *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,14 +22,15 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSBUILDER_H__
-#define __PLCORE_REFL_CLASSBUILDER_H__
+#ifndef __PLCORE_REFL_CLASSPROPERTY_H__
+#define __PLCORE_REFL_CLASSPROPERTY_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include <PLCore/String/String.h>
 #include <PLCore/Typebase/FunctionBase.h>
 
 
@@ -38,18 +39,19 @@
 //[-------------------------------------------------------]
 namespace PLRefl {
 
+
 //[-------------------------------------------------------]
 //[ Classes                                               ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Class declaration helper
+*    The reflection system's representation of a class property
 *
 *  @remarks
 *    TODO: describe this in more detail
 */
-template <typename T>
-class ClassBuilder {
+class ClassProperty {
+
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -57,37 +59,36 @@ class ClassBuilder {
 	public:
 		/**
 		*  @brief
-		*    Constructor
+		*    Default ctor
+		*/
+		PLCORE_API ClassProperty();
+
+		/**
+		*  @brief
+		*    Value ctor
 		*
-		*  @param[in] cClss
-		*    Reference to the class type instance we'll be constructing
+		*  @param[in] sName
+		*    The name of this property
+		*  @param[in] pSetter
+		*    The function object representing setter for the property
+		*  @param[in] pGetter
+		*    The function object representing getter for the property
 		*/
-		ClassBuilder(Class &cClss);
+		PLCORE_API ClassProperty(const PLCore::String &sName, PLCore::FunctionBase *pSetter, PLCore::FunctionBase *pGetter);
 
 		/**
 		*  @brief
-		*    Define a method inside the class
+		*    Comparison operator
 		*/
-		ClassBuilder<T> &Method(const PLCore::String &sName, PLCore::FunctionBase *pFn);
-
-		/**
-		*  @brief
-		*    Define a field inside the class
-		*/
-		ClassBuilder<T> &Field(const PLCore::String &sName, PLCore::uint32 nOffset);
-
-		/**
-		*  @brief
-		*    Define a property inside the class
-		*/
-		ClassBuilder<T> &Property(const PLCore::String &sName, PLCore::FunctionBase *pSetter, PLCore::FunctionBase *pGetter);
-		
+		inline PLCORE_API bool operator==(const ClassProperty &cOther) const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		Class *m_pClass;			/**< The class being built */
+		PLCore::String			m_sName;			/**< The name of the property */
+		PLCore::FunctionBase	*m_pSetter;			/**< The setter function */
+		PLCore::FunctionBase	*m_pGetter;			/**< The getter function */
 };
 
 
@@ -100,7 +101,7 @@ class ClassBuilder {
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "ClassBuilder.inl"
+#include "ClassProperty.inl"
 
 
-#endif // __PLCORE_REFL_CLASSBUILDER_H__
+#endif // __PLCORE_REFL_CLASSPROPERTY_H__

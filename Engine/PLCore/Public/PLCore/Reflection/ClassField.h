@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassMehod.h                                   *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,15 +22,15 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSBUILDER_H__
-#define __PLCORE_REFL_CLASSBUILDER_H__
+#ifndef __PLCORE_REFL_CLASSFIELD_H__
+#define __PLCORE_REFL_CLASSFIELD_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Typebase/FunctionBase.h>
+#include <PLCore/String/String.h>
 
 
 //[-------------------------------------------------------]
@@ -38,18 +38,19 @@
 //[-------------------------------------------------------]
 namespace PLRefl {
 
+
 //[-------------------------------------------------------]
 //[ Classes                                               ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Class declaration helper
+*    The reflection system's representation of a class field
 *
 *  @remarks
 *    TODO: describe this in more detail
 */
-template <typename T>
-class ClassBuilder {
+class ClassField {
+
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -57,37 +58,33 @@ class ClassBuilder {
 	public:
 		/**
 		*  @brief
-		*    Constructor
+		*    Default ctor
+		*/
+		PLCORE_API ClassField();
+
+		/**
+		*  @brief
+		*    Value ctor
 		*
-		*  @param[in] cClss
-		*    Reference to the class type instance we'll be constructing
+		*  @param[in] sName
+		*    The name of this field
+		*  @param[in] nOffset
+		*    Memory offset of the field on an instance of the class
 		*/
-		ClassBuilder(Class &cClss);
+		PLCORE_API ClassField(const PLCore::String &sName, PLCore::uint32 nOffset);
 
 		/**
 		*  @brief
-		*    Define a method inside the class
+		*    Comparison operator
 		*/
-		ClassBuilder<T> &Method(const PLCore::String &sName, PLCore::FunctionBase *pFn);
-
-		/**
-		*  @brief
-		*    Define a field inside the class
-		*/
-		ClassBuilder<T> &Field(const PLCore::String &sName, PLCore::uint32 nOffset);
-
-		/**
-		*  @brief
-		*    Define a property inside the class
-		*/
-		ClassBuilder<T> &Property(const PLCore::String &sName, PLCore::FunctionBase *pSetter, PLCore::FunctionBase *pGetter);
-		
+		inline PLCORE_API bool operator==(const ClassField &cOther) const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		Class *m_pClass;			/**< The class being built */
+		PLCore::String			m_sName;			/**< The name of the field */
+		PLCore::uint32			m_nOffset;			/**< The offset of the field on its class type */
 };
 
 
@@ -100,7 +97,7 @@ class ClassBuilder {
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "ClassBuilder.inl"
+#include "ClassField.inl"
 
 
-#endif // __PLCORE_REFL_CLASSBUILDER_H__
+#endif // __PLCORE_REFL_CLASSFIELD_H__

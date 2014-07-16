@@ -32,6 +32,8 @@
 //[-------------------------------------------------------]
 #include "TypeId.h"
 #include "ClassMethod.h"
+#include "ClassField.h"
+#include "ClassProperty.h"
 #include <PLCore/String/String.h>
 #include <PLCore/Container/HashMap.h>
 
@@ -95,6 +97,30 @@ class Class {
 		*/
 		PLCORE_API const ClassMethod *GetMethod(const PLCore::String &sName) const;
 
+		/**
+		*  @brief
+		*    Find a field by name on this class
+		*
+		*  @param[in] sName
+		*    The name of the field to look for
+		*
+		*  @return
+		*    Pointer to ClassField instance representing the field or nullptr if it was not found
+		*/
+		PLCORE_API const ClassField *GetField(const PLCore::String &sName) const;
+
+		/**
+		*  @brief
+		*    Find a property by name on this class
+		*
+		*  @param[in] sName
+		*    The name of the property to look for
+		*
+		*  @return
+		*    Pointer to ClassProperty instance representing the property or nullptr if it was not found
+		*/
+		PLCORE_API const ClassProperty *GetProperty(const PLCore::String &sName) const;
+
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
@@ -102,6 +128,12 @@ class Class {
 	private:
 		typedef PLCore::HashMap<PLCore::String, ClassMethod> _MethodMap;
 		_MethodMap m_mapMethods;		/**< Methods for this class */
+
+		typedef PLCore::HashMap<PLCore::String, ClassField> _FieldMap;
+		_FieldMap m_mapFields;			/**< Fields for this class */
+
+		typedef PLCore::HashMap<PLCore::String, ClassProperty> _PropertyMap;
+		_PropertyMap m_mapProperties;	/**< Properties for this class */
 };
 
 

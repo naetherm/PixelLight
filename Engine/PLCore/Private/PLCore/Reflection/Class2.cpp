@@ -54,3 +54,41 @@ const ClassMethod *Class::GetMethod(const PLCore::String &sName) const
 		return &meth;
 	}
 }
+
+/**
+*  @brief
+*    Find field by name
+*/
+const ClassField *Class::GetField(const PLCore::String &sName) const
+{
+	const ClassField &field = m_mapFields.Get(sName);
+	if (field == _FieldMap::Null)
+	{
+		// Field not found
+		return nullptr;
+	}
+	else
+	{
+		// Field found
+		return &field;
+	}
+}
+
+/**
+*  @brief
+*    Find property by name
+*/
+const ClassProperty *Class::GetProperty(const PLCore::String &sName) const
+{
+	const ClassProperty &prop = m_mapProperties.Get(sName);
+	if (prop == _PropertyMap::Null)
+	{
+		// Property not found
+		return nullptr;
+	}
+	else
+	{
+		// Property found
+		return &prop;
+	}
+}

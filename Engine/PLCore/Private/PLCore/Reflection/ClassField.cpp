@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassMehod.inl                                 *
+ *  File: ClassMethod.cpp                                *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,53 +22,33 @@
 \*********************************************************/
 
 
+//[-------------------------------------------------------]
+//[ Includes                                              ]
+//[-------------------------------------------------------]
+#include <PLCore/Reflection/ClassField.h>
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
-
-/**
-*  @brief
-*    Comparison operator
-*/
-bool ClassMethod::operator==(const ClassMethod &cOther) const
-{
-	return (m_pFunc == cOther.m_pFunc && m_sName == cOther.m_sName);
-}
-
-/**
-*  @brief
-*    Invoke the method
-*/
-PLCore::FunctionParam ClassMethod::Call(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
-{
-	if (m_pFunc)
-	{
-		return m_pFunc->DynInvoke(pParams);
-	}
-	else
-	{
-		return PLCore::FunctionParam();
-	}
-}
-
-/**
-*  @brief
-*    Directly invoke the method
-*/
-template <typename TRet, class TObject, typename... TArgs>
-TRet ClassMethod::CallDirect(TObject *pObj, TArgs... args) const
-{
-	// This method works with the assumption that every Function is derived from the
-	// appropriate Invokable
-	typedef PLCore::Invokable<TRet, TObject*, TArgs...> _InvType;
-	_InvType* casted = (_InvType*)m_pFunc;
-
-	return casted->Invoke(pObj, args...);
-}
+using namespace PLRefl;
 
 //[-------------------------------------------------------]
-//[ Namespace                                             ]
+//[ Public functions                                      ]
 //[-------------------------------------------------------]
-} // PLRefl
+/**
+*  @brief
+*    Default ctor
+*/
+ClassField::ClassField() :
+	m_nOffset(-1)
+{}
+
+/**
+*  @brief
+*    Value ctor
+*/
+ClassField::ClassField(const PLCore::String &sName, PLCore::uint32 nOffset) :
+	m_sName(sName),
+	m_nOffset(nOffset)
+{}
