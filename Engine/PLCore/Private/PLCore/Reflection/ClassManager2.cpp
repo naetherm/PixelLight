@@ -38,6 +38,10 @@ using namespace PLRefl;
 //[-------------------------------------------------------]
 //[ Public methods                                        ]
 //[-------------------------------------------------------]
+/**
+*  @brief
+*    Register a new class into the system
+*/
 Class &ClassManager::RegisterClass(const PLCore::String &sName, const char *szId)
 {
 	// The class may be already registered
@@ -61,5 +65,24 @@ Class &ClassManager::RegisterClass(const PLCore::String &sName, const char *szId
 	{
 		// Return the existing class
 		return *clss.pClass;
+	}
+}
+
+/**
+*  @brief
+*    Find a class by name
+*/
+const Class *ClassManager::GetClass(const PLCore::String &sName) const
+{
+	const ClassInfo &clss = m_mapClassNames.Get(sName);
+	if (clss == ClassNameMap::Null)
+	{
+		// Class not found
+		return nullptr;
+	}
+	else
+	{
+		// Class found
+		return clss.pClass;
 	}
 }

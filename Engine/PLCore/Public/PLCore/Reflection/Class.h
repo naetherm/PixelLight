@@ -31,7 +31,9 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "TypeId.h"
+#include "ClassMethod.h"
 #include <PLCore/String/String.h>
+#include <PLCore/Container/HashMap.h>
 
 
 //[-------------------------------------------------------]
@@ -60,6 +62,13 @@ class ClassBuilder;
 class Class {
 
 	//[-------------------------------------------------------]
+	//[ Friends                                               ]
+	//[-------------------------------------------------------]
+	template <typename T>
+	friend class ClassBuilder;
+
+
+	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
 	public:
@@ -73,6 +82,26 @@ class Class {
 		*/
 		template <typename T>
 		static ClassBuilder<T> Declare(const PLCore::String &sName);
+
+		/**
+		*  @brief
+		*    Find a method by name on this class
+		*
+		*  @param[in] sName
+		*    The name of the method to look for
+		*
+		*  @return
+		*    Pointer to ClassMethod instance representing the method or nullptr if it was not found
+		*/
+		PLCORE_API const ClassMethod *GetMethod(const PLCore::String &sName) const;
+
+
+	//[-------------------------------------------------------]
+	//[ Private data                                          ]
+	//[-------------------------------------------------------]
+	private:
+		typedef PLCore::HashMap<PLCore::String, ClassMethod> _MethodMap;
+		_MethodMap m_mapMethods;		/**< Methods for this class */
 };
 
 

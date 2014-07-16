@@ -167,7 +167,7 @@ namespace PLRefl {
 *    Attach current class' member function to the reflection
 */
 #define pl_class_method(NAME) \
-	.Method(#NAME, PLCore::Function<decltype(&_Clss::NAME)>(nullptr, &_Clss::NAME))
+	.Method(#NAME, new PLCore::Function<decltype(&_Clss::NAME)>(&_Clss::NAME))
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]

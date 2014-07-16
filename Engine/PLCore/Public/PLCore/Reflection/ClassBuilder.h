@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Typebase/Function.h>
+#include <PLCore/Typebase/FunctionBase.h>
 
 
 //[-------------------------------------------------------]
@@ -68,8 +68,7 @@ class ClassBuilder {
 		*  @brief
 		*    Define a method inside the class
 		*/
-		template <typename TRet, typename... TArgs>
-		ClassBuilder<T> &Method(const PLCore::String &sName, PLCore::Function<TRet, TArgs...> &&cFn);
+		ClassBuilder<T> &Method(const PLCore::String &sName, PLCore::FunctionBase *pFn);
 		
 
 	//[-------------------------------------------------------]

@@ -27,8 +27,7 @@
 //[-------------------------------------------------------]
 #include <PLCore/System/System.h>
 #include <PLCore/System/Console.h>
-#include <PLCore/Base/Class.h>
-#include <PLCore/Base/ClassManager.h>
+#include <PLCore/Container/Array.h>
 #include "Application.h"
 #include "MyClass.h"
 
@@ -69,24 +68,26 @@ Application::~Application()
 //[-------------------------------------------------------]
 void Application::Main()
 {
-	//// Create an instance of our RTTI-enabled class using a regular construction process
-	MyClass *cInstance1 = new MyClass();
+	const PLRefl::Class *clss = PLRefl::ClassManager::GetInstance()->GetClass("MyClass");
+	if (clss)
+	{
+		MyClass c;
 
-	//// We can now access the declared argumets as usual
-	//cInstance1->Number = 108;
-	//cInstance1->InnerObj = new MyClass();
+		// Method
+		const PLRefl::ClassMethod *meth = clss->GetMethod("Foo");
+		if (meth)
+		{
+			// Indirect call
+			PLCore::Array<PLCore::FunctionParam> params;
+			params.Add(PLCore::FunctionParam(&c));
+			params.Add(PLCore::FunctionParam(108));
+			params.Add(PLCore::FunctionParam(10.8f));
 
-	//// We can also create an instance of the class if we know its name
-	//const Class *cMyClass = ClassManager::GetInstance()->GetClass("MyClass");
-	//MyClass *cInstance2 = (MyClass*)cMyClass->Create();
-
-	//// Attributes can be also accessed by name
-	//cInstance2->GetAttribute("Number")->SetInt(108);
-	//cInstance2->GetAttribute("InnerObj")->SetVar(Var<MyClass*>(new MyClass()));
-
-	//// Cleanup
-	//delete cInstance1->InnerObj;
-	delete cInstance1;
-	//delete cInstance2->InnerObj;
-	//delete cInstance2;
+			int ret = meth->Call(&params).Get<int>();
+			
+			// Direct call
+			ret = meth->CallDirect<int>(&c, 108, 108.108f);
+			ret=ret;
+		}
+	}
 }

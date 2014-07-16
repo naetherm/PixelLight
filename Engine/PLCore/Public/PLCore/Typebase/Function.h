@@ -54,7 +54,7 @@ namespace PLCore {
 template <typename T, class U = void> class Function;
 
 template <typename TRet, class T, typename... TArgs>
-class Function<TRet (T::*)(TArgs...)> : public Invokable<TRet, TArgs...> {
+class Function<TRet (T::*)(TArgs...)> : public Invokable<TRet, T*, TArgs...> {
 
 	//[-------------------------------------------------------]
 	//[ Public typedefs                                       ]
@@ -70,14 +70,13 @@ class Function<TRet (T::*)(TArgs...)> : public Invokable<TRet, TArgs...> {
 		*  @brief
 		*    Ctor
 		*/
-		Function(T *pObj, TRet(T::*TMethod)(TArgs...));
+		Function(TRet(T::*TMethod)(TArgs...));
 
 	//[-------------------------------------------------------]
 	//[ Public virtual Invokable functions                    ]
 	//[-------------------------------------------------------]
 	public:
-		virtual TRet Invoke(TArgs... args) override;
-		virtual void *GetTargetObject() override;
+		virtual TRet Invoke(T *pInst, TArgs... args) const override;
 
 	//[-------------------------------------------------------]
 	//[ Private typedefs                                      ]
@@ -89,8 +88,7 @@ class Function<TRet (T::*)(TArgs...)> : public Invokable<TRet, TArgs...> {
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		T *m_pObject;		/**< The target of the invocation */
-		FnType m_cFunc;		/**< The function to invoke */
+		FnType m_cFunc;		/**< Stored member function pointer */
 };
 
 

@@ -37,9 +37,8 @@ namespace PLCore {
 *    Ctor
 */
 template <typename TRet, class T, typename... TArgs>
-Function<TRet(T::*)(TArgs...)>::Function(T *pObj, TRet(T::*TMethod)(TArgs...))
+Function<TRet(T::*)(TArgs...)>::Function(TRet(T::*TMethod)(TArgs...))
 {
-	m_pObject = pObj;
 	m_cFunc = TMethod;
 }
 
@@ -51,19 +50,9 @@ Function<TRet(T::*)(TArgs...)>::Function(T *pObj, TRet(T::*TMethod)(TArgs...))
 *    Invoke the delegate
 */
 template <typename TRet, class T, typename... TArgs>
-TRet Function<TRet(T::*)(TArgs...)>::Invoke(TArgs... args)
+TRet Function<TRet(T::*)(TArgs...)>::Invoke(T *pInst, TArgs... args) const
 {
-	return (m_pObject->*m_cFunc)(args...);
-}
-
-/**
-*  @brief
-*    Get the invocation target
-*/
-template <typename TRet, class T, typename... TArgs>
-void* Function<TRet(T::*)(TArgs...)>::GetTargetObject()
-{
-	return m_pObject;
+	return (pInst->*m_cFunc)(args...);
 }
 
 

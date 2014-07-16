@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassMehod.inl                                 *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,40 +22,50 @@
 \*********************************************************/
 
 
-//[-------------------------------------------------------]
-//[ Includes                                              ]
-//[-------------------------------------------------------]
-#include "ClassMethod.h"
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLRefl {
 
-//[-------------------------------------------------------]
-//[ Public functions                                      ]
-//[-------------------------------------------------------]
 /**
 *  @brief
-*    Create builder for the specified class instance
+*    Comparison operator
 */
-template <typename T>
-ClassBuilder<T>::ClassBuilder(Class &cClss)
-	: m_pClass(&cClss)
+bool ClassMethod::operator==(const ClassMethod &cOther) const
 {
+	return (m_sName == cOther.m_sName && m_pFunc == cOther.m_pFunc);
 }
 
 /**
 *  @brief
-*    Declare a method inside the class
+*    Invoke the method
 */
-template <typename T>
-ClassBuilder<T> &ClassBuilder<T>::Method(const PLCore::String &sName, PLCore::FunctionBase *pFn)
+PLCore::FunctionParam ClassMethod::Call(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
 {
-	// Add method to class
-	m_pClass->m_mapMethods.Add(sName, ClassMethod(sName, pFn));
+	if (m_pFunc)
+	{
+		return m_pFunc->DynInvoke(pParams);
+	}
+	else
+	{
+		return PLCore::FunctionParam();
+	}
+}
 
-	return *this;
+/**
+*  @brief
+*    Directly invoke the method
+*/
+template <typename TRet, class TObject, typename... TArgs>
+TRet ClassMethod::CallDirect(TObject *pObj, TArgs... args) const
+{
+	// This method works with the assumption that every Function is derived from the
+	// appropriate Invokable
+	typedef PLCore::Invokable<TRet, TObject*, TArgs...> _InvType;
+	_InvType* casted = (_InvType*)m_pFunc;
+
+	return casted->Invoke(pObj, args...);
 }
 
 //[-------------------------------------------------------]

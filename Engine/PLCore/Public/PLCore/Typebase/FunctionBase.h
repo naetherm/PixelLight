@@ -61,8 +61,11 @@ class FunctionBase {
 		/**
 		*  @brief
 		*    Call the function using the specified dynamic arguments
+		*
+		*  @param[in] pParams
+		*    Dynamic arguments for the function
 		*/
-		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParams) = 0;
+		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParams) const = 0;
 };
 
 

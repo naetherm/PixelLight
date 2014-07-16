@@ -99,19 +99,19 @@ pl_build_library(SHARED)
 ##################################################
 
 # Change the definition setup
-if(NOT LINUX)
-	pl_remove_compile_defs(PLCORE_EXPORTS)
-endif()
-pl_add_compile_defs(PLCORE_STATIC)
+#if(NOT LINUX)
+#	pl_remove_compile_defs(PLCORE_EXPORTS)
+#endif()
+#pl_add_compile_defs(PLCORE_STATIC)
 
 # Build it
-pl_project(PLCoreStat NORESET)
-pl_build_library(STATIC NODOC)
+#pl_project(PLCoreStat NORESET)
+#pl_build_library(STATIC NODOC)
 
 # Install
-install(
-	TARGETS ${PL_CURRENT_TARGET_NAME}
-	RUNTIME DESTINATION ${PL_BIN_DIR} COMPONENT Runtime
-	LIBRARY DESTINATION ${PL_BIN_DIR} COMPONENT Runtime
-	ARCHIVE DESTINATION ${PL_LIB_DIR} COMPONENT SDK
-)
+#install(
+#	TARGETS ${PL_CURRENT_TARGET_NAME}
+#	RUNTIME DESTINATION ${PL_BIN_DIR} COMPONENT Runtime
+#	LIBRARY DESTINATION ${PL_BIN_DIR} COMPONENT Runtime
+#	ARCHIVE DESTINATION ${PL_LIB_DIR} COMPONENT SDK
+#)

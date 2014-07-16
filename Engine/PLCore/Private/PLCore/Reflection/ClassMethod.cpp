@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassMethod.cpp                                *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -25,40 +25,29 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "ClassMethod.h"
+#include <PLCore/Reflection/ClassMethod.h>
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+using namespace PLRefl;
 
 //[-------------------------------------------------------]
 //[ Public functions                                      ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Create builder for the specified class instance
+*    Default ctor
 */
-template <typename T>
-ClassBuilder<T>::ClassBuilder(Class &cClss)
-	: m_pClass(&cClss)
-{
-}
+ClassMethod::ClassMethod() :
+m_pFunc(nullptr)
+{}
 
 /**
 *  @brief
-*    Declare a method inside the class
+*    Value ctor
 */
-template <typename T>
-ClassBuilder<T> &ClassBuilder<T>::Method(const PLCore::String &sName, PLCore::FunctionBase *pFn)
-{
-	// Add method to class
-	m_pClass->m_mapMethods.Add(sName, ClassMethod(sName, pFn));
-
-	return *this;
-}
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-} // PLRefl
+ClassMethod::ClassMethod(const PLCore::String &sName, PLCore::FunctionBase *pFn) :
+m_sName(sName), m_pFunc(pFn)
+{}

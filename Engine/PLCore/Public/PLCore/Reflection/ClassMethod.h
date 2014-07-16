@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassMehod.h                                   *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,17 +22,16 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSMANAGER_H__
-#define __PLCORE_REFL_CLASSMANAGER_H__
+#ifndef __PLCORE_REFL_CLASSMETHOD_H__
+#define __PLCORE_REFL_CLASSMETHOD_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Core/Singleton.h>
-#include <PLCore/Container/HashMap.h>
 #include <PLCore/String/String.h>
+#include <PLCore/Typebase/FunctionBase.h>
 
 
 //[-------------------------------------------------------]
@@ -42,21 +41,17 @@ namespace PLRefl {
 
 
 //[-------------------------------------------------------]
-//[ Forward declarations                                  ]
-//[-------------------------------------------------------]
-class Class;
-
-//[-------------------------------------------------------]
 //[ Classes                                               ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    The central reflected class register
+*    The reflection system's representation of a class method
 *
 *  @remarks
 *    TODO: describe this in more detail
 */
-class ClassManager : public PLCore::Singleton<ClassManager> {
+class ClassMethod {
+
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -64,60 +59,57 @@ class ClassManager : public PLCore::Singleton<ClassManager> {
 	public:
 		/**
 		*  @brief
-		*    Register a new class into the manager
-		*
-		*  @param[in] sName
-		*    Name of the class to register
-		*  @param[in] szId
-		*    Type Id of the class
-		*
-		*  @return
-		*    New class type instance
+		*    Default ctor
 		*/
-		PLCORE_API PLRefl::Class &RegisterClass(const PLCore::String &sName, const char *szId);
+		PLCORE_API ClassMethod();
 
 		/**
 		*  @brief
-		*    Find a class by name
+		*    Value ctor
 		*
 		*  @param[in] sName
-		*    Name of the class to find
-		*
-		*  @return
-		*    Pointer to the class or nullptr of it was not found
+		*    The name of this method
+		*  @param[in] pFunc
+		*    The function object representing this method
 		*/
-		PLCORE_API const PLRefl::Class *GetClass(const PLCore::String &sName) const;
+		PLCORE_API ClassMethod(const PLCore::String &sName, PLCore::FunctionBase *pFunc);
 
-
-	//[-------------------------------------------------------]
-	//[ Private structures                                    ]
-	//[-------------------------------------------------------]
-	private:
 		/**
 		*  @brief
-		*    Class info holder
+		*    Invoke the method using the specified dynamic parameters
+		*
+		*  @param[in] pParams
+		*    Dynamic params for invocation. Note that the first parameter MUST be the instance to
+		*    invoke the method on!
+		*
+		*  @return
+		*    Untyped return value
 		*/
-		struct ClassInfo
-		{
-			PLCore::String	sName;			/**< Name of the class */
-			const char		*szId;			/**< Id of the class type */
-			PLRefl::Class	*pClass;		/**< The actual class instance */
+		PLCORE_API inline PLCore::FunctionParam Call(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
 
-			bool operator==(const ClassInfo &other) const
-			{
-				return pClass == other.pClass;
-			}
-		};
+		/**
+		*  @brief
+		*    Directly invoke the method with real arguments
+		*
+		*  @remarks
+		*    This function does not make a whole lot of sense in the typical setting but is still provided for those
+		*    rare cases where the signature of the method is known but it still needs to be accessed via reflection
+		*/
+		template <typename TRet, class TObject, typename... TArgs>
+		PLCORE_API inline TRet CallDirect(TObject *pObj, TArgs... args) const;
+
+		/**
+		*  @brief
+		*    Comparison operator
+		*/
+		inline PLCORE_API bool operator==(const ClassMethod &cOther) const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		typedef PLCore::HashMap<PLCore::String, ClassInfo> ClassNameMap;
-		ClassNameMap m_mapClassNames;		/**< All known classes by name */
-
-		typedef PLCore::HashMap<const char*, ClassInfo> ClassIdMap;
-		ClassIdMap m_mapClassIds;			/**< All known classes by Id */
+		PLCore::String			m_sName;			/**< The name of the method */
+		PLCore::FunctionBase*	m_pFunc;			/**< The invokable function object */
 };
 
 
@@ -130,7 +122,7 @@ class ClassManager : public PLCore::Singleton<ClassManager> {
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "ClassManager.inl"
+#include "ClassMethod.inl"
 
 
-#endif // __PLCORE_REFL_CLASSMANAGER_H__
+#endif // __PLCORE_REFL_CLASSMETHOD_H__

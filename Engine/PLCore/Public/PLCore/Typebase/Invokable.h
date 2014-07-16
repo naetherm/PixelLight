@@ -64,13 +64,13 @@ class Invokable : public FunctionBase {
 		*  @brief
 		*    Invoke the target function object
 		*/
-		virtual TRet Invoke(TArgs... args) = 0;
+		virtual TRet Invoke(TArgs... args) const = 0;
 
 		/**
 		*  @brief
 		*    Invoke the target function object
 		*/
-		TRet operator()(TArgs... args)
+		TRet operator()(TArgs... args) const
 		{
 			return Invoke(args...);
 		}
@@ -79,7 +79,7 @@ class Invokable : public FunctionBase {
 		*  @brief
 		*    Invoke the target function object using packed arguments
 		*/
-		TRet TupleInvoke(const TupleType &cTuple)
+		TRet TupleInvoke(const TupleType &cTuple) const
 		{
 			return TupleInvokeHelper(cTuple, MakeIndexSequence<sizeof...(TArgs)>());
 		}
@@ -88,21 +88,10 @@ class Invokable : public FunctionBase {
 		*  @brief
 		*    Invoke the target function object using packed arguments
 		*/
-		TRet operator()(const TupleType &cTuple)
+		TRet operator()(const TupleType &cTuple) const
 		{
 			return TupleInvoke(cTuple);
 		}
-
-		/**
-		*  @brief
-		*    Return a pointer to the object associated with the invocation target
-		*
-		*  @remarks
-		*    The pointer returned should point to the object the invocation depends on. This
-		*    might be the instance in case of member functions, for example. This can return null
-		*    if there is no object associated with the invocation.
-		*/
-		virtual void *GetTargetObject() = 0;
 
 	//[-------------------------------------------------------]
 	//[ Private helpers                                       ]
@@ -115,7 +104,7 @@ class Invokable : public FunctionBase {
 		template <class TTuple, typename TRet>
 		struct DynInvokeHelper {
 
-			static void Call(FunctionParam &cRet, Invokable *pToInvoke, const TTuple &tuple)
+			static void Call(FunctionParam &cRet, const Invokable *pToInvoke, const TTuple &tuple)
 			{
 				TRet ret = pToInvoke->TupleInvoke(tuple);
 				cRet.Set<TRet>(ret);
@@ -125,16 +114,17 @@ class Invokable : public FunctionBase {
 		template <class TTuple>
 		struct DynInvokeHelper<TTuple, void> {
 		
-			static void Call(FunctionParam &cRet, Invokable *pToInvoke, const TTuple &tuple)
+			static void Call(FunctionParam &cRet, const Invokable *pToInvoke, const TTuple &tuple)
 			{
 				pToInvoke->TupleInvoke(tuple);
 			}
 		};
+
 	//[-------------------------------------------------------]
 	//[ Public virtual FunctionBase functions                 ]
 	//[-------------------------------------------------------]
 	public:
-		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParam) override
+		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParam) const override
 		{
 			// Initialize a tuple of the correct type from the dynamic argument list
 			TupleType t;
@@ -155,7 +145,7 @@ class Invokable : public FunctionBase {
 		*    Tuple invoke helper
 		*/
 		template <int... I>
-		TRet TupleInvokeHelper(const TupleType &cTuple, IndexSequence<I...>)
+		TRet TupleInvokeHelper(const TupleType &cTuple, IndexSequence<I...>) const
 		{
 			return Invoke(TupleGet<I>(cTuple)...);
 		}

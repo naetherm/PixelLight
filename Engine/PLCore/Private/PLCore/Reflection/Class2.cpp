@@ -32,3 +32,25 @@
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLRefl;
+
+//[-------------------------------------------------------]
+//[ Public functions                                      ]
+//[-------------------------------------------------------]
+/**
+*  @brief
+*    Find method by name
+*/
+const ClassMethod *Class::GetMethod(const PLCore::String &sName) const
+{
+	const ClassMethod &meth = m_mapMethods.Get(sName);
+	if (meth == _MethodMap::Null)
+	{
+		// Method not found
+		return nullptr;
+	}
+	else
+	{
+		// Method found
+		return &meth;
+	}
+}
