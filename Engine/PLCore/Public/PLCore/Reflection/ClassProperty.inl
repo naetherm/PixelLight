@@ -30,6 +30,64 @@ namespace PLRefl {
 
 /**
 *  @brief
+*    Set the property
+*/
+void ClassProperty::Set(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
+{
+	if (m_pSetter)
+	{
+		m_pSetter->DynInvoke(pParams);
+	}
+}
+
+/**
+*  @brief
+*    Get the property
+*/
+PLCore::FunctionParam ClassProperty::Get(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
+{
+	if (m_pGetter)
+	{
+		return m_pGetter->DynInvoke(pParams);
+	}
+	else
+	{
+		return PLCore::FunctionParam();
+	}
+}
+
+/**
+*  @brief
+*    Directly set the property
+*/
+template <typename T, class TObject>
+void ClassProperty::SetDirect(TObject *pObj, T cValue) const
+{
+	// This method works with the assumption that every Function is derived from the
+	// appropriate Invokable
+	typedef PLCore::Invokable<void, TObject*, T> _InvType;
+	_InvType* casted = (_InvType*)m_pSetter;
+
+	casted->Invoke(pObj, cValue);
+}
+
+/**
+*  @brief
+*    Directly get the property
+*/
+template <typename T, class TObject>
+T ClassProperty::GetDirect(TObject *pObj) const
+{
+	// This method works with the assumption that every Function is derived from the
+	// appropriate Invokable
+	typedef PLCore::Invokable<T, TObject*> _InvType;
+	_InvType* casted = (_InvType*)m_pGetter;
+
+	return casted->Invoke(pObj);
+}
+
+/**
+*  @brief
 *    Comparison operator
 */
 bool ClassProperty::operator==(const ClassProperty &cOther) const

@@ -42,6 +42,26 @@ Function<TRet(T::*)(TArgs...)>::Function(TRet(T::*TMethod)(TArgs...))
 	m_cFunc = TMethod;
 }
 
+/**
+*  @brief
+*    Ctor
+*/
+template <typename TRet, class T, typename... TArgs>
+Function<TRet(T::*)(TArgs...) const>::Function(TRet(T::*TMethod)(TArgs...) const)
+{
+	m_cFunc = TMethod;
+}
+
+/**
+*  @brief
+*    Ctor
+*/
+//template <class T, typename TField>
+//Function<TField T::*, Field>::Function(TField (T::*cField))
+//{
+//	m_cField = cField;
+//}
+
 //[-------------------------------------------------------]
 //[ Public virtual Invokable functions                    ]
 //[-------------------------------------------------------]
@@ -54,6 +74,26 @@ TRet Function<TRet(T::*)(TArgs...)>::Invoke(T *pInst, TArgs... args) const
 {
 	return (pInst->*m_cFunc)(args...);
 }
+
+/**
+*  @brief
+*    Invoke the delegate
+*/
+template <typename TRet, class T, typename... TArgs>
+TRet Function<TRet(T::*)(TArgs...) const>::Invoke(const T *pInst, TArgs... args) const
+{
+	return (pInst->*m_cFunc)(args...);
+}
+
+/**
+*  @brief
+*    Access the field
+*/
+//template <class T, typename TField>
+//void Function<TField T::*, Field>::Invoke(T *pInst, TField **pValue) const
+//{
+//	*pValue = &(pInst->*m_cField);
+//}
 
 
 //[-------------------------------------------------------]

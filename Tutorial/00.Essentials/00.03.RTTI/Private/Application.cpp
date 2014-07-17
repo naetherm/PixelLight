@@ -28,6 +28,7 @@
 #include <PLCore/System/System.h>
 #include <PLCore/System/Console.h>
 #include <PLCore/Container/Array.h>
+#include <PLCore/Typebase/Function.h>
 #include "Application.h"
 #include "MyClass.h"
 
@@ -68,11 +69,11 @@ Application::~Application()
 //[-------------------------------------------------------]
 void Application::Main()
 {
+	MyClass c;
+
 	const PLRefl::Class *clss = PLRefl::ClassManager::GetInstance()->GetClass("MyClass");
 	if (clss)
 	{
-		MyClass c;
-
 		// Method
 		const PLRefl::ClassMethod *meth = clss->GetMethod("Foo");
 		if (meth)
@@ -89,5 +90,36 @@ void Application::Main()
 			ret = meth->CallDirect<int>(&c, 108, 108.108f);
 			ret=ret;
 		}
+
+		// Property
+		const PLRefl::ClassProperty *prop = clss->GetProperty("PrivateInt");
+		if (prop)
+		{
+			// Indirect set/get
+			PLCore::Array<PLCore::FunctionParam> params;
+			params.Add(PLCore::FunctionParam(&c));
+			params.Add(PLCore::FunctionParam(108));
+
+			prop->Set(&params);
+			int ret = prop->Get(&params).Get<int>();
+
+			// Direct set/get
+			prop->SetDirect<const int&>(&c, 1008);
+			ret = prop->GetDirect<const int&>(&c);
+			ret=ret;
+		}
 	}
+
+	/*PLCore::Function<decltype(&MyClass::PublicInt), PLCore::Field> f(&MyClass::PublicInt);
+
+	int* v = nullptr;
+	f(&c, &v);
+	*v = 2;
+	
+	PLCore::Array<PLCore::FunctionParam> params;
+	params.Add(PLCore::FunctionParam(&c));
+	params.Add(PLCore::FunctionParam(&v));
+
+	f.DynInvoke(&params);
+	*v = 108;*/
 }

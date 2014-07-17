@@ -169,6 +169,13 @@ namespace PLRefl {
 #define pl_class_method(NAME) \
 	.Method(#NAME, new PLCore::Function<decltype(&_Clss::NAME)>(&_Clss::NAME))
 
+/**
+*  @brief
+*    Attach a property to the current class
+*/
+#define pl_class_property(NAME, GETTER, SETTER) \
+	.Property(#NAME, new PLCore::Function<decltype(&_Clss::SETTER)>(&_Clss::SETTER), new PLCore::Function<decltype(&_Clss::GETTER)>(&_Clss::GETTER))
+
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]

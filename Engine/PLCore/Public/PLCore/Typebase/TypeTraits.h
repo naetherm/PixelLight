@@ -22,8 +22,8 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_TYPETRAITS_H__
-#define __PLCORE_TYPETRAITS_H__
+#ifndef __PLCORE_TYPETRAITS2_H__
+#define __PLCORE_TYPETRAITS2_H__
 #pragma once
 
 
@@ -53,6 +53,43 @@ struct MemberFunctionDecomp<TRet(TClass::*)(TArgs...)> {
 	typedef TRet _ReturnType;
 };
 
+/**
+*  @brief
+*    Remove reference from a type
+*/
+template <typename T>
+struct RemoveReference {
+
+	typedef T Type;
+};
+
+template <typename T>
+struct RemoveReference<T&> {
+
+	typedef T Type;
+};
+
+template <typename T>
+struct RemoveReference<T&&> {
+
+	typedef T Type;
+};
+
+/**
+*  @brief
+*    Remove const from a type
+*/
+template <typename T>
+struct RemoveConst {
+
+	typedef T Type;
+};
+
+template <typename T>
+struct RemoveConst<const T> {
+
+	typedef T Type;
+};
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -60,4 +97,4 @@ struct MemberFunctionDecomp<TRet(TClass::*)(TArgs...)> {
 } // PLCore
 
 
-#endif // __PLCORE_TYPETRAITS_H__
+#endif // __PLCORE_TYPETRAITS2_H__

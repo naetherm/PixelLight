@@ -71,6 +71,34 @@ class MyClass
 		*    Sample function that will be bound to reflection
 		*/
 		int Foo(int i, float f);
+
+		/**
+		*  @brief
+		*    Get private int
+		*/
+		const int &GetPrivateInt() const { return m_nPrivateInt; }
+
+		/**
+		*  @brief
+		*    Set private int
+		*/
+		void SetPrivateInt(const int &i) { m_nPrivateInt = i; }
+
+	//[-------------------------------------------------------]
+	//[ Public data                                           ]
+	//[-------------------------------------------------------]
+	public:
+		/**
+		*  @brief
+		*    Public field
+		*/
+		int PublicInt;
+
+	//[-------------------------------------------------------]
+	//[ Private data                                          ]
+	//[-------------------------------------------------------]
+	private:
+		int m_nPrivateInt;
 };
 
 // Declare the reflected type

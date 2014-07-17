@@ -78,6 +78,32 @@ class ClassProperty {
 
 		/**
 		*  @brief
+		*    Set the property using dynamic value
+		*/
+		PLCORE_API inline void Set(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
+
+		/**
+		*  @brief
+		*    Get the property into a dynamic value
+		*/
+		PLCORE_API inline PLCore::FunctionParam Get(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
+
+		/**
+		*  @brief
+		*    Directly set the property
+		*/
+		template <typename T, class TObject>
+		PLCORE_API inline void SetDirect(TObject *pObj, T cValue) const;
+
+		/**
+		*  @brief
+		*    Directly get the property
+		*/
+		template <typename T, class TObject>
+		PLCORE_API inline T GetDirect(TObject *pObj) const;
+
+		/**
+		*  @brief
 		*    Comparison operator
 		*/
 		inline PLCORE_API bool operator==(const ClassProperty &cOther) const;

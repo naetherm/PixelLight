@@ -51,7 +51,7 @@ namespace PLCore {
 *    on the other hand so it is a perfect match for code that works solely 
 *    with classes
 */
-template <typename T, class U = void> class Function;
+template <typename T> class Function;
 
 template <typename TRet, class T, typename... TArgs>
 class Function<TRet (T::*)(TArgs...)> : public Invokable<TRet, T*, TArgs...> {
@@ -90,6 +90,78 @@ class Function<TRet (T::*)(TArgs...)> : public Invokable<TRet, T*, TArgs...> {
 	private:
 		FnType m_cFunc;		/**< Stored member function pointer */
 };
+
+template <typename TRet, class T, typename... TArgs>
+class Function<TRet(T::*)(TArgs...) const> : public Invokable<TRet, const T*, TArgs...>{
+
+	//[-------------------------------------------------------]
+	//[ Public typedefs                                       ]
+	//[-------------------------------------------------------]
+public:
+	typedef Function<TRet(T::*)(TArgs...) const> MyType;
+
+	//[-------------------------------------------------------]
+	//[ Public functions                                      ]
+	//[-------------------------------------------------------]
+public:
+	/**
+	*  @brief
+	*    Ctor
+	*/
+	Function(TRet(T::*TMethod)(TArgs...) const);
+
+	//[-------------------------------------------------------]
+	//[ Public virtual Invokable functions                    ]
+	//[-------------------------------------------------------]
+public:
+	virtual TRet Invoke(const T *pInst, TArgs... args) const override;
+
+	//[-------------------------------------------------------]
+	//[ Private typedefs                                      ]
+	//[-------------------------------------------------------]
+private:
+	typedef TRet(T::*FnType)(TArgs...) const;
+
+	//[-------------------------------------------------------]
+	//[ Private data                                          ]
+	//[-------------------------------------------------------]
+private:
+	FnType m_cFunc;		/**< Stored member function pointer */
+};
+
+//struct Field;
+//
+//template <class T, typename TField>
+//class Function<TField T::*, Field> : public Invokable<void, T*, TField**> {
+//
+//	//[-------------------------------------------------------]
+//	//[ Public functions                                      ]
+//	//[-------------------------------------------------------]
+//public:
+//	/**
+//	*  @brief
+//	*    Ctor
+//	*/
+//	Function(TField (T::*cField));
+//
+//	//[-------------------------------------------------------]
+//	//[ Public virtual Invokable functions                    ]
+//	//[-------------------------------------------------------]
+//public:
+//	virtual void Invoke(T *pInst, TField **pValue) const override;
+//
+//	//[-------------------------------------------------------]
+//	//[ Private types                                         ]
+//	//[-------------------------------------------------------]
+//private:
+//	typedef TField(T::*_FieldType);
+//
+//	//[-------------------------------------------------------]
+//	//[ Private data                                          ]
+//	//[-------------------------------------------------------]
+//private:
+//	_FieldType m_cField;		/**< Stored member field pointer */
+//};
 
 
 //[-------------------------------------------------------]

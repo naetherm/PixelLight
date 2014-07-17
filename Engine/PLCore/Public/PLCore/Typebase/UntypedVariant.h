@@ -26,6 +26,8 @@
 #define __PLCORE_UNTYPEDVARIANT_H__
 #pragma once
 
+#include "TypeTraits.h"
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -64,7 +66,8 @@ class UntypedVariant {
 		template <typename T>
 		UntypedVariant(const T &cVal)
 		{
-			AccessHelper<T, IsBig<T>::Value>::Set(cVal, m_pData);
+			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
+			AccessHelper<_Type, IsBig<_Type>::Value>::Set(cVal, m_pData);
 		}
 
 		/**
@@ -84,7 +87,8 @@ class UntypedVariant {
 		template <typename T>
 		void Set(const T &cVal)
 		{
-			AccessHelper<T, IsBig<T>::Value>::Set(cVal, m_pData);
+			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
+			AccessHelper<_Type, IsBig<_Type>::Value>::Set(cVal, m_pData);
 		}
 
 		/**
@@ -92,9 +96,10 @@ class UntypedVariant {
 		*    Get the stored value
 		*/
 		template <typename T>
-		const T &Get() const
+		const typename RemoveReference<T>::Type &Get() const
 		{
-			return AccessHelper<T, IsBig<T>::Value>::Get(m_pData);
+			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
+			return AccessHelper<_Type, IsBig<_Type>::Value>::Get(m_pData);
 		}
 
 		/**
@@ -102,9 +107,10 @@ class UntypedVariant {
 		*    Get the stored value
 		*/
 		template <typename T>
-		T &Get()
+		typename RemoveConst<typename RemoveReference<T>::Type>::Type &Get()
 		{
-			return AccessHelper<T, IsBig<T>::Value>::Get(m_pData);
+			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
+			return AccessHelper<_Type, IsBig<_Type>::Value>::Get(m_pData);
 		}
 
 		/**
@@ -114,7 +120,8 @@ class UntypedVariant {
 		template <typename T>
 		void Destroy()
 		{
-			AccessHelper<T, IsBig<T>::Value>::Destroy(m_pData);
+			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
+			AccessHelper<_Type, IsBig<_Type>::Value>::Destroy(m_pData);
 		}
 
 		/**

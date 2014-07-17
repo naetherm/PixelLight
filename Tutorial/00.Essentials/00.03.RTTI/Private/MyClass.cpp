@@ -38,6 +38,7 @@ using namespace PLRefl;
 //[-------------------------------------------------------]
 pl_begin_class(MyClass)
 	pl_class_method(Foo)
+	pl_class_property(PrivateInt, GetPrivateInt, SetPrivateInt)
 pl_end_class()
 
 //[-------------------------------------------------------]
