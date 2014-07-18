@@ -87,7 +87,10 @@ set(MYSQL_MD5 "1d3d91e8459c719bbef7c97bb499634d")
 	# [HACK] We need the output directory, but it is not easily reachable
 	get_property(lib_file TARGET LocationDummy PROPERTY LOCATION)
 	get_filename_component(lib_path ${lib_file} PATH)
-	
+
+	#Workaround for error "Can't create output directory for sql/share/bulgarian"
+	execute_process(COMMAND ${CMAKE_COMMAND} -E make_directory ${PL_CURRENT_BUILD_DIR}/sql/share)
+
 	# Setup paths
 	if(WIN32)
 		set(${PL_CURRENT_TARGET_LIBRARIES} ${PL_CURRENT_INSTALL_DIR}/lib/libmysql.lib CACHE INTERNAL "")
