@@ -227,7 +227,7 @@ macro(pl_project name)
 		# Set default compile defs
 		if(WIN32)
 			pl_add_compile_defs(${WIN32_COMPILE_DEFS})
-		elseif(LINUX)
+		elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
 			pl_add_compile_defs(${LINUX_COMPILE_DEFS})
 		endif()
 
