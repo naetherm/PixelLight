@@ -45,6 +45,74 @@ using namespace PLCore;
 pl_implement_class(Application)
 
 
+
+//TEMP
+class A
+{
+	pl_rtti()
+
+public:
+	int a;
+
+	virtual void f(int i) = 0;
+};
+pl_declare_type(A)
+
+pl_begin_class(A)
+	pl_class_method(f)
+pl_end_class()
+
+class B : public A
+{
+	pl_rtti()
+
+public:
+	int b;
+
+	virtual void f(int i) override
+	{
+		i = 1;
+	}
+};
+pl_declare_type(B)
+
+pl_begin_class(B)
+	pl_class_base(A)
+pl_end_class()
+
+class C
+{
+	pl_rtti()
+
+public:
+	int c;
+};
+pl_declare_type(C)
+
+pl_begin_class(C)
+pl_end_class()
+
+class D : public B, public C
+{
+	pl_rtti()
+
+public:
+	int d;
+
+	virtual void f(int i) override
+	{
+		i = 2;
+	}
+};
+pl_declare_type(D)
+
+pl_begin_class(D)
+	pl_class_base(B)
+	pl_class_base(C)
+pl_end_class()
+
+
+
 //[-------------------------------------------------------]
 //[ Public functions                                      ]
 //[-------------------------------------------------------]
@@ -122,4 +190,19 @@ void Application::Main()
 
 	f.DynInvoke(&params);
 	*v = 108;*/
+
+	D inst;
+	clss = PLRefl::ClassManager::GetInstance()->GetClass("D");
+	const PLRefl::ClassMethod *meth = clss->GetMethod("f");
+	if (meth)
+	{
+		PLCore::Array<PLCore::FunctionParam> params;
+		params.Add(PLCore::FunctionParam(&inst));
+		params.Add(PLCore::FunctionParam(108));
+
+		meth->Call(&params);
+	}
+
+	const char *id = (&inst)->_ClassId();
+	id=id;
 }

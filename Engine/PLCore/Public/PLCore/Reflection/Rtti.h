@@ -164,6 +164,13 @@ namespace PLRefl {
 
 /**
 *  @brief
+*    Connect the current class to its base
+*/
+#define pl_class_base(NAME) \
+	.Base(#NAME)
+
+/**
+*  @brief
 *    Attach current class' member function to the reflection
 */
 #define pl_class_method(NAME) \

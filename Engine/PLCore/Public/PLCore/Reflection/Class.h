@@ -36,6 +36,7 @@
 #include "ClassProperty.h"
 #include <PLCore/String/String.h>
 #include <PLCore/Container/HashMap.h>
+#include <PLCore/Container/Array.h>
 
 
 //[-------------------------------------------------------]
@@ -134,6 +135,9 @@ class Class {
 
 		typedef PLCore::HashMap<PLCore::String, ClassProperty> _PropertyMap;
 		_PropertyMap m_mapProperties;	/**< Properties for this class */
+
+		typedef PLCore::Array<const Class*> _BaseClasses;
+		_BaseClasses m_lstBases;		/**< Base classes */
 };
 
 

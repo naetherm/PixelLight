@@ -45,7 +45,15 @@ const ClassMethod *Class::GetMethod(const PLCore::String &sName) const
 	const ClassMethod &meth = m_mapMethods.Get(sName);
 	if (meth == _MethodMap::Null)
 	{
-		// Method not found
+		// Method not found, try base classes
+		auto it = m_lstBases.GetConstIterator();
+		while (it.HasNext())
+		{
+			const ClassMethod *baseMeth = it.Next()->GetMethod(sName);
+			if (baseMeth)
+				return baseMeth;
+		}
+
 		return nullptr;
 	}
 	else
@@ -64,7 +72,15 @@ const ClassField *Class::GetField(const PLCore::String &sName) const
 	const ClassField &field = m_mapFields.Get(sName);
 	if (field == _FieldMap::Null)
 	{
-		// Field not found
+		// Field not found, try base classes
+		auto it = m_lstBases.GetConstIterator();
+		while (it.HasNext())
+		{
+			const ClassField *baseField = it.Next()->GetField(sName);
+			if (baseField)
+				return baseField;
+		}
+
 		return nullptr;
 	}
 	else
@@ -83,7 +99,15 @@ const ClassProperty *Class::GetProperty(const PLCore::String &sName) const
 	const ClassProperty &prop = m_mapProperties.Get(sName);
 	if (prop == _PropertyMap::Null)
 	{
-		// Property not found
+		// Property not found, try base classes
+		auto it = m_lstBases.GetConstIterator();
+		while (it.HasNext())
+		{
+			const ClassProperty *baseProp = it.Next()->GetProperty(sName);
+			if (baseProp)
+				return baseProp;
+		}
+
 		return nullptr;
 	}
 	else

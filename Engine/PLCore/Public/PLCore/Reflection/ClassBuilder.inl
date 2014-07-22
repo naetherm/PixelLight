@@ -26,6 +26,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "ClassMethod.h"
+#include "ClassManager.h"
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -43,6 +44,31 @@ template <typename T>
 ClassBuilder<T>::ClassBuilder(Class &cClss)
 	: m_pClass(&cClss)
 {
+}
+
+/**
+*  @brief
+*    Define a base class
+*/
+template <typename T>
+ClassBuilder<T> &ClassBuilder<T>::Base(const PLCore::String &sName)
+{
+	// Due to the rather random nature of static initializer order, it may happen that
+	// the base class has not yet been registered. Thus we first try to find it directly
+	// and if not there, we postpone the binding for later
+	const PLRefl::Class *pBase = PLRefl::ClassManager::GetInstance()->GetClass(sName);
+	if (pBase)
+	{
+		// The base class was already registered
+		m_pClass->m_lstBases.Add(pBase);
+	}
+	else
+	{
+		// We will need to register the base class for late binding with the class manager
+		// [TODO]
+	}
+
+	return *this;
 }
 
 /**
