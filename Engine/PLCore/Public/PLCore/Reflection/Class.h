@@ -77,6 +77,12 @@ class Class {
 	public:
 		/**
 		*  @brief
+		*    Constructor
+		*/
+		Class(const PLCore::String &sName);
+
+		/**
+		*  @brief
 		*    Start the construction of a new class definition
 		*
 		*  @param[in] sName
@@ -85,6 +91,18 @@ class Class {
 		*/
 		template <typename T>
 		static ClassBuilder<T> Declare(const PLCore::String &sName);
+
+		/**
+		*  @brief
+		*    Get class name
+		*/
+		inline const PLCore::String &GetName() const;
+
+		/**
+		*  @brief
+		*    Get all base classes
+		*/
+		inline const PLCore::Array<const Class*> &GetBaseClasses() const;
 
 		/**
 		*  @brief
@@ -127,6 +145,8 @@ class Class {
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
+		PLCore::String m_sName;			/**< Name of the class */
+
 		typedef PLCore::HashMap<PLCore::String, ClassMethod> _MethodMap;
 		_MethodMap m_mapMethods;		/**< Methods for this class */
 

@@ -85,7 +85,7 @@ class ClassMethod {
 		*  @return
 		*    Untyped return value
 		*/
-		PLCORE_API inline PLCore::FunctionParam Call(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
+		inline PLCore::FunctionParam Call(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
 
 		/**
 		*  @brief
@@ -96,13 +96,13 @@ class ClassMethod {
 		*    rare cases where the signature of the method is known but it still needs to be accessed via reflection
 		*/
 		template <typename TRet, class TObject, typename... TArgs>
-		PLCORE_API inline TRet CallDirect(TObject *pObj, TArgs... args) const;
+		inline TRet CallDirect(TObject *pObj, TArgs... args) const;
 
 		/**
 		*  @brief
 		*    Comparison operator
 		*/
-		inline PLCORE_API bool operator==(const ClassMethod &cOther) const;
+		inline bool operator==(const ClassMethod &cOther) const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]

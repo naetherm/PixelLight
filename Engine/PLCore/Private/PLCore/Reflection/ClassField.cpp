@@ -41,7 +41,7 @@ using namespace PLRefl;
 *    Default ctor
 */
 ClassField::ClassField() :
-	m_nOffset(-1)
+	m_nOffset(0xffffffff)
 {}
 
 /**

@@ -198,7 +198,7 @@ class Tuple {
 		*  @brief
 		*    Value constructor
 		*/
-		Tuple(Types... values) { /* [TODO] */ }
+//		Tuple(Types... values) { /* [TODO] */ }
 
 	//[-------------------------------------------------------]
 	//[ Private types                                         ]

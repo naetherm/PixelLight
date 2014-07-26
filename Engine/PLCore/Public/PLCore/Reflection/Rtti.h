@@ -33,6 +33,7 @@
 #include "Class.h"
 #include <PLCore/Typebase/TypeTraits.h>
 #include <PLCore/Typebase/Function.h>
+#include <PLCore/Typebase/Constructor.h>
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -168,6 +169,11 @@ namespace PLRefl {
 */
 #define pl_class_base(NAME) \
 	.Base(#NAME)
+
+/**
+*  @brief
+*    Add a default constructor to the class
+*/
 
 /**
 *  @brief

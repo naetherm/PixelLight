@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassMehod.h                                   *
+ *  File: Constructor.inl                                *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,82 +22,27 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSFIELD_H__
-#define __PLCORE_REFL_CLASSFIELD_H__
-#pragma once
-
-
-//[-------------------------------------------------------]
-//[ Includes                                              ]
-//[-------------------------------------------------------]
-#include <PLCore/String/String.h>
-
-
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
-//[ Classes                                               ]
+//[ Public virtual Invokable functions                    ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    The reflection system's representation of a class field
-*
-*  @remarks
-*    TODO: describe this in more detail
+*    Invoke the delegate
 */
-class ClassField {
-
-
-	//[-------------------------------------------------------]
-	//[ Public functions                                      ]
-	//[-------------------------------------------------------]
-	public:
-		/**
-		*  @brief
-		*    Default ctor
-		*/
-		PLCORE_API ClassField();
-
-		/**
-		*  @brief
-		*    Value ctor
-		*
-		*  @param[in] sName
-		*    The name of this field
-		*  @param[in] nOffset
-		*    Memory offset of the field on an instance of the class
-		*/
-		PLCORE_API ClassField(const PLCore::String &sName, PLCore::uint32 nOffset);
-
-		/**
-		*  @brief
-		*    Comparison operator
-		*/
-		inline bool operator==(const ClassField &cOther) const;
-
-	//[-------------------------------------------------------]
-	//[ Private data                                          ]
-	//[-------------------------------------------------------]
-	private:
-		PLCore::String			m_sName;			/**< The name of the field */
-		PLCore::uint32			m_nOffset;			/**< The offset of the field on its class type */
-};
+template <class T, typename... TArgs>
+T* ConstructorFunc<T, TArgs...>::Invoke(TArgs... args) const
+{
+	return new T(args...);
+}
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
-
-
-//[-------------------------------------------------------]
-//[ Implementation                                        ]
-//[-------------------------------------------------------]
-#include "ClassField.inl"
-
-
-#endif // __PLCORE_REFL_CLASSFIELD_H__
+} // PLCore

@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassMehod.h                                   *
+ *  File: ClassConstructor.h                             *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,8 +22,8 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSFIELD_H__
-#define __PLCORE_REFL_CLASSFIELD_H__
+#ifndef __PLCORE_REFL_CLASSCONSTRUCTOR_H__
+#define __PLCORE_REFL_CLASSCONSTRUCTOR_H__
 #pragma once
 
 
@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include <PLCore/String/String.h>
+#include <PLCore/Typebase/FunctionBase.h>
 
 
 //[-------------------------------------------------------]
@@ -44,12 +45,12 @@ namespace PLRefl {
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    The reflection system's representation of a class field
+*    The reflection system's representation of a class constructor
 *
 *  @remarks
 *    TODO: describe this in more detail
 */
-class ClassField {
+class ClassConstructor {
 
 
 	//[-------------------------------------------------------]
@@ -60,31 +61,51 @@ class ClassField {
 		*  @brief
 		*    Default ctor
 		*/
-		PLCORE_API ClassField();
+		PLCORE_API ClassConstructor();
 
 		/**
 		*  @brief
 		*    Value ctor
 		*
-		*  @param[in] sName
-		*    The name of this field
-		*  @param[in] nOffset
-		*    Memory offset of the field on an instance of the class
+		*  @param[in] pFunc
+		*    The function object representing this constructor
 		*/
-		PLCORE_API ClassField(const PLCore::String &sName, PLCore::uint32 nOffset);
+		PLCORE_API ClassConstructor(PLCore::FunctionBase *pFunc);
+
+		/**
+		*  @brief
+		*    Construct a new object using this constructor
+		*
+		*  @param[in] pParams
+		*    Dynamic params for construction
+		*
+		*  @return
+		*    Untyped return value
+		*/
+		inline PLCore::FunctionParam Call(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
+
+		/**
+		*  @brief
+		*    Directly invoke the method with real arguments
+		*
+		*  @remarks
+		*    This function does not make a whole lot of sense in the typical setting but is still provided for those
+		*    rare cases where the signature of the method is known but it still needs to be accessed via reflection
+		*/
+		template <typename TRet, class TObject, typename... TArgs>
+		inline TRet CallDirect(TObject *pObj, TArgs... args) const;
 
 		/**
 		*  @brief
 		*    Comparison operator
 		*/
-		inline bool operator==(const ClassField &cOther) const;
+		inline bool operator==(const ClassMethod &cOther) const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		PLCore::String			m_sName;			/**< The name of the field */
-		PLCore::uint32			m_nOffset;			/**< The offset of the field on its class type */
+		PLCore::FunctionBase*	m_pFunc;			/**< The invokable function object */
 };
 
 
@@ -97,7 +118,7 @@ class ClassField {
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "ClassField.inl"
+#include "ClassConstructor.inl"
 
 
-#endif // __PLCORE_REFL_CLASSFIELD_H__
+#endif // __PLCORE_REFL_CLASSCONSTRUCTOR_H__

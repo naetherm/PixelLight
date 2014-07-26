@@ -38,6 +38,14 @@ using namespace PLRefl;
 //[-------------------------------------------------------]
 /**
 *  @brief
+*    Constructor
+*/
+Class::Class(const PLCore::String &sName) :
+	m_sName(sName)
+{}
+
+/**
+*  @brief
 *    Find method by name
 */
 const ClassMethod *Class::GetMethod(const PLCore::String &sName) const

@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassMehod.inl                                 *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -24,65 +24,51 @@
 
 
 //[-------------------------------------------------------]
-//[ Includes                                              ]
+//[ Namespace                                             ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/ClassManager.h>
-#include <PLCore/Reflection/Class.h>
+namespace PLRefl {
+
+/**
+*  @brief
+*    Comparison operator
+*/
+bool ClassMethod::operator==(const ClassMethod &cOther) const
+{
+	return (m_pFunc == cOther.m_pFunc && m_sName == cOther.m_sName);
+}
+
+/**
+*  @brief
+*    Invoke the method
+*/
+PLCore::FunctionParam ClassMethod::Call(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
+{
+	if (m_pFunc)
+	{
+		return m_pFunc->DynInvoke(pParams);
+	}
+	else
+	{
+		return PLCore::FunctionParam();
+	}
+}
+
+/**
+*  @brief
+*    Directly invoke the method
+*/
+template <typename TRet, class TObject, typename... TArgs>
+TRet ClassMethod::CallDirect(TObject *pObj, TArgs... args) const
+{
+	// This method works with the assumption that every Function is derived from the
+	// appropriate Invokable
+	typedef PLCore::Invokable<TRet, TObject*, TArgs...> _InvType;
+	_InvType* casted = (_InvType*)m_pFunc;
+
+	return casted->Invoke(pObj, args...);
+}
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-using namespace PLRefl;
-
-
-//[-------------------------------------------------------]
-//[ Public methods                                        ]
-//[-------------------------------------------------------]
-/**
-*  @brief
-*    Register a new class into the system
-*/
-Class &ClassManager::RegisterClass(const PLCore::String &sName, const char *szId)
-{
-	// The class may be already registered
-	ClassInfo &clss = m_mapClassIds.Get(szId);
-	if (clss == ClassIdMap::Null)
-	{
-		// Regiter a new class
-		ClassInfo info;
-		info.pClass = new Class(sName);
-		info.sName = sName;
-		info.szId = szId;
-
-		m_mapClassNames.Add(sName, info);
-		m_mapClassIds.Add(szId, info);
-
-		// [TODO] Fire event
-
-		return *info.pClass;
-	}
-	else
-	{
-		// Return the existing class
-		return *clss.pClass;
-	}
-}
-
-/**
-*  @brief
-*    Find a class by name
-*/
-const Class *ClassManager::GetClass(const PLCore::String &sName) const
-{
-	const ClassInfo &clss = m_mapClassNames.Get(sName);
-	if (clss == ClassNameMap::Null)
-	{
-		// Class not found
-		return nullptr;
-	}
-	else
-	{
-		// Class found
-		return clss.pClass;
-	}
-}
+} // PLRefl

@@ -57,6 +57,24 @@ ClassBuilder<T> Class::Declare(const PLCore::String &sName)
 	return ClassBuilder<T>(clss);
 }
 
+/**
+*  @brief
+*    Get the class name
+*/
+const PLCore::String &Class::GetName() const
+{
+	return m_sName;
+}
+
+/**
+*  @brief
+*    Get base classes
+*/
+const PLCore::Array<const Class*> &Class::GetBaseClasses() const
+{
+	return m_lstBases;
+}
+
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]

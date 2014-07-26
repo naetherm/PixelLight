@@ -85,6 +85,8 @@ class C
 	pl_rtti()
 
 public:
+	C() : c(0) {}
+	C(int cc) : c(cc) {}
 	int c;
 };
 pl_declare_type(C)
@@ -97,6 +99,8 @@ class D : public B, public C
 	pl_rtti()
 
 public:
+	D() : d(0) {}
+	D(int cc, int dd) : C(cc), d(dd) {}
 	int d;
 
 	virtual void f(int i) override
@@ -205,4 +209,16 @@ void Application::Main()
 
 	const char *id = (&inst)->_ClassId();
 	id=id;
+
+	PLCore::Array<PLCore::FunctionParam> params;
+	params.Add(PLCore::FunctionParam(1008));
+	params.Add(PLCore::FunctionParam(108));
+
+	PLCore::ConstructorFunc<D> ctor1;
+	PLCore::ConstructorFunc<D, int, int> ctor2;
+
+	D* d1 = ctor1.DynInvoke(&params).Get<D*>();
+	D* d2 = ctor2.DynInvoke(&params).Get<D*>();
+
+	d1=d2;
 }
