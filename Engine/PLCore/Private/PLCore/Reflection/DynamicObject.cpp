@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassMethod.cpp                                *
+ *  File: DynamicObject.cpp                              *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -25,7 +25,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/ClassConstructor.h>
+#include <PLCore/Reflection/DynamicObject.h>
 
 
 //[-------------------------------------------------------]
@@ -38,19 +38,18 @@ using namespace PLRefl;
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Default ctor
+*    Empty object ctor
 */
-ClassConstructor::ClassConstructor() :
-	m_pFunc(nullptr)
+DynamicObject::DynamicObject() :
+	m_pStorage(nullptr),
+	m_pTypeInfo(nullptr)
 {}
 
 /**
 *  @brief
 *    Value ctor
 */
-ClassConstructor::ClassConstructor(PLCore::FunctionBase *pFn) :
-	m_pFunc(pFn)
-{
-	if (m_pFunc)
-		m_cSignature = m_pFunc->GetSignature();
-}
+DynamicObject::DynamicObject(void *pObj, const TypeInfo *pTypeInfo) :
+	m_pStorage(pObj),
+	m_pTypeInfo(pTypeInfo)
+{}

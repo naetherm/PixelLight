@@ -197,24 +197,19 @@ void Application::Main()
 	f.DynInvoke(&params);
 	*v = 108;*/
 
-	/*D inst;
-	clss = PLRefl::ClassManager::GetInstance()->GetClass("D");
-	const PLRefl::ClassMethod *meth = clss->GetMethod("f");
-	if (meth)
-	{
-		PLCore::Array<PLCore::FunctionParam> params;
-		params.Add(PLCore::FunctionParam(&inst));
-		params.Add(PLCore::FunctionParam(108));
+	D inst;
+	clss = PLRefl::TypeRegistry::GetInstance()->GetClassType("D")->GetClass();
 
-		meth->Call(&params);
-	}
-
-	const char *id = (&inst)->_ClassId();
-	id=id;
+	const PLRefl::ClassConstructor *ctor1 = clss->GetDefaultConstructor();
+	const PLRefl::ClassConstructor *ctor2 = clss->GetConstructorMatchingSignature(PLCore::FunctionSignature::FromTemplate<D*, int, int>());
 
 	PLCore::Array<PLCore::FunctionParam> params;
 	params.Add(PLCore::FunctionParam(1008));
-	params.Add(PLCore::FunctionParam(108));*/
+	params.Add(PLCore::FunctionParam(108));
+
+	D* d1 = ctor1->Construct(&params).GetAs<D>();
+	D* d2 = ctor2->Construct(&params).GetAs<D>();
+	d1=d2;
 
 	//auto ctors = clss->GetConstructors().GetConstIterator();
 	//while (ctors.HasNext())

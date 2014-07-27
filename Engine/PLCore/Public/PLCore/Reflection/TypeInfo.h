@@ -66,6 +66,19 @@ class TypeInfo {
 		*/
 		virtual ~TypeInfo() {}
 
+		/**
+		*  @brief
+		*    Get name of the type
+		*/
+		inline const PLCore::String &GetName() const;
+
+		/**
+		*  @brief
+		*    Check equality
+		*/
+		inline virtual bool operator==(const TypeInfo &cOther) const;
+		inline bool operator!=(const TypeInfo &cOther) const { return !operator==(cOther); }
+
 	//[-------------------------------------------------------]
 	//[ Protected data                                        ]
 	//[-------------------------------------------------------]
@@ -85,6 +98,16 @@ class PointerTypeInfo : public TypeInfo {
 			return m_pPointedType;
 		}
 
+		inline virtual bool operator==(const TypeInfo &cOther) const override
+		{
+			if (GetName() == cOther.GetName()) // Both must be pointers
+			{
+				return m_pPointedType->operator==(*((PointerTypeInfo<IS_CONST>*)&cOther)->GetPointedType());
+			}
+
+			return false;
+		}
+
 	private:
 		TypeInfo *m_pPointedType;
 };
@@ -98,6 +121,16 @@ public:
 	TypeInfo *GetPointedType()
 	{
 		return m_pPointedType;
+	}
+
+	inline virtual bool operator==(const TypeInfo &cOther) const override
+	{
+		if (GetName() == cOther.GetName()) // Both must be references
+		{
+			return m_pPointedType->operator==(*((ReferenceTypeInfo<IS_CONST>*)&cOther)->GetPointedType());
+		}
+
+		return false;
 	}
 
 private:
@@ -222,6 +255,12 @@ TypeInfo *GetStaticTypeInfo(const T&)
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLRefl
+
+
+//[-------------------------------------------------------]
+//[ Implementation                                        ]
+//[-------------------------------------------------------]
+#include "TypeInfo.inl"
 
 
 #endif // __PLCORE_REFL_TYPEINFO_H__

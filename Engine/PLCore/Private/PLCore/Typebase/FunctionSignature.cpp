@@ -27,6 +27,9 @@
 //[-------------------------------------------------------]
 #include <PLCore/Typebase/FunctionSignature.h>
 
+// [TODO] This shouldn't be here but we need it for StaticTypeInfo<void>
+#include <PLCore/Reflection/Rtti.h>
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -36,6 +39,14 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ Public functions                                      ]
 //[-------------------------------------------------------]
+/**
+*  @brief
+*    Constructor
+*/
+FunctionSignature::FunctionSignature() :
+	m_pReturnType(PLRefl::StaticTypeInfo<void>::Get())
+{}
+
 /**
 *  @brief
 *    Constructor

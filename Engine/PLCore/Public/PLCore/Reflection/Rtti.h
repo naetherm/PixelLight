@@ -22,11 +22,6 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_RTTI_H__
-#define __PLCORE_REFL_RTTI_H__
-#pragma once
-
-
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
@@ -37,6 +32,12 @@
 #include <PLCore/Typebase/TypeTraits.h>
 #include <PLCore/Typebase/Function.h>
 #include <PLCore/Typebase/Constructor.h>
+
+
+#ifndef __PLCORE_REFL_RTTI_H__
+#define __PLCORE_REFL_RTTI_H__
+#pragma once
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]

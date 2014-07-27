@@ -128,6 +128,12 @@ class Class {
 
 		/**
 		*  @brief
+		*    Get any additional constructor matching the specified function signature
+		*/
+		inline const ClassConstructor *GetConstructorMatchingSignature(const PLCore::FunctionSignature &cSignature) const;
+
+		/**
+		*  @brief
 		*    Find a method by name on this class
 		*
 		*  @param[in] sName

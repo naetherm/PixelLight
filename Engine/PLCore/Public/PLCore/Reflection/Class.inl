@@ -25,7 +25,10 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include <PLCore/Typebase/FunctionSignature.h>
 
+// [TODO] This shouldn't be here but we need it for StaticTypeInfo<void>
+#include <PLCore/Reflection/Rtti.h>
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -80,11 +83,51 @@ const PLCore::Array<const Class*> &Class::GetBaseClasses() const
 
 /**
 *  @brief
+*    Get default ctor
+*/
+const ClassConstructor *Class::GetDefaultConstructor() const
+{
+	return HasDefaultConstructor() ? &m_cDefaultCtor : nullptr;
+}
+
+/**
+*  @brief
+*    Check for default ctor
+*/
+bool Class::HasDefaultConstructor() const
+{
+	// Empty ctor will have a void return type (invalid for a ctor)
+	return *m_cDefaultCtor.GetSignature().GetReturnType() != *StaticTypeInfo<void>::Get();
+}
+
+/**
+*  @brief
 *    Get constructors
 */
 const PLCore::Array<ClassConstructor> &Class::GetAdditionalConstructors() const
 {
 	return m_lstConstructors;
+}
+
+/**
+*  @brief
+*    Get constructor matching the specified signature
+*/
+const ClassConstructor *Class::GetConstructorMatchingSignature(const PLCore::FunctionSignature &cSignature) const
+{
+	if (cSignature.GetArgumentTypes().GetSize() == 0) // No parameters for the ctor
+		return HasDefaultConstructor() ? &m_cDefaultCtor : nullptr;
+
+	auto ctor = m_lstConstructors.GetConstIterator();
+	while (ctor.HasNext())
+	{
+		const ClassConstructor &c = ctor.Next();
+		if (c.GetSignature() == cSignature)
+			return &c;
+	}
+
+	// None found
+	return nullptr;
 }
 
 //[-------------------------------------------------------]

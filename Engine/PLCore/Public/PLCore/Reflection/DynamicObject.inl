@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassMethod.cpp                                *
+ *  File: DynamicObject.inl                              *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -25,32 +25,91 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/ClassConstructor.h>
+#include "TypeInfo.h"
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-using namespace PLRefl;
+namespace PLRefl {
+
 
 //[-------------------------------------------------------]
 //[ Public functions                                      ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Default ctor
+*    Dynamic object from an existing instance
 */
-ClassConstructor::ClassConstructor() :
-	m_pFunc(nullptr)
-{}
+template <typename T>
+DynamicObject::DynamicObject(T *pInst)
+{
+	m_pStorage = static_cast<void*>(pInst);
+	m_pTypeInfo = GetStaticTypeInfo(&pInst);
+}
 
 /**
 *  @brief
-*    Value ctor
+*    Dynamic object from an existing instance
 */
-ClassConstructor::ClassConstructor(PLCore::FunctionBase *pFn) :
-	m_pFunc(pFn)
+template <typename T>
+DynamicObject::DynamicObject(const T *pInst)
 {
-	if (m_pFunc)
-		m_cSignature = m_pFunc->GetSignature();
+	m_pStorage = static_cast<void*>(pInst);
+	m_pTypeInfo = GetStaticTypeInfo(&pInst);
 }
+
+/**
+*  @brief
+*    Get the internal object
+*/
+void *DynamicObject::GetUntyped()
+{
+	return m_pStorage;
+}
+
+/**
+*  @brief
+*    Get the internal object
+*/
+const void *DynamicObject::GetUntyped() const
+{
+	return m_pStorage;
+}
+
+/**
+*  @brief
+*    Get type info of the stored object
+*/
+const TypeInfo *DynamicObject::GetTypeInfo() const
+{
+	return m_pTypeInfo;
+}
+
+/**
+*  @brief
+*    Get object as an instance of the specified type
+*/
+template <typename T>
+T *DynamicObject::GetAs()
+{
+	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
+	return reinterpret_cast<T*>(m_pStorage);
+}
+
+/**
+*  @brief
+*    Get object as an instance of the specified type
+*/
+template <typename T>
+const T *DynamicObject::GetAs() const
+{
+	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
+	return reinterpret_cast<const T*>(m_pStorage);
+}
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLRefl

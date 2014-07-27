@@ -41,16 +41,25 @@ bool ClassConstructor::operator==(const ClassConstructor &cOther) const
 *  @brief
 *    Invoke the method
 */
-void *ClassConstructor::Construct(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
+DynamicObject ClassConstructor::Construct(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
 {
 	if (m_pFunc)
 	{
-		return m_pFunc->DynInvoke(pParams).Get<void*>();
+		return DynamicObject(m_pFunc->DynInvoke(pParams).Get<void*>(), m_cSignature.GetReturnType());
 	}
 	else
 	{
-		return nullptr;
+		return DynamicObject();
 	}
+}
+
+/**
+*  @brief
+*    Get this ctor's signature
+*/
+const PLCore::FunctionSignature &ClassConstructor::GetSignature() const
+{
+	return m_cSignature;
 }
 
 //[-------------------------------------------------------]

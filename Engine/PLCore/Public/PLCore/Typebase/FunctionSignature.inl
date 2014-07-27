@@ -79,6 +79,46 @@ FunctionSignature FunctionSignature::FromTemplate()
 	return FunctionSignature(ret, args);
 }
 
+/**
+*  @brief
+*    Get the return type
+*/
+const PLRefl::TypeInfo *FunctionSignature::GetReturnType() const
+{
+	return m_pReturnType;
+}
+
+/**
+*  @brief
+*    Get argument types
+*/
+const Array<const PLRefl::TypeInfo*> &FunctionSignature::GetArgumentTypes() const
+{
+	return m_lstArgTypes;
+}
+
+/**
+*  @brief
+*    Check equality
+*/
+bool FunctionSignature::operator==(const FunctionSignature &cOther) const
+{
+	if (*m_pReturnType == *cOther.m_pReturnType && m_lstArgTypes.GetSize() == cOther.m_lstArgTypes.GetSize())
+	{
+		auto type1 = m_lstArgTypes.GetConstIterator();
+		auto type2 = cOther.m_lstArgTypes.GetConstIterator();
+		while (type1.HasNext())
+		{
+			if (*type1.Next() != *type2.Next())
+				return false;
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]

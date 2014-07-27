@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassConstructor.h                             *
+ *  File: DynamicObject.h                                *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,17 +22,15 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSCONSTRUCTOR_H__
-#define __PLCORE_REFL_CLASSCONSTRUCTOR_H__
+#ifndef __PLCORE_DYNAMICOBJECT_H__
+#define __PLCORE_DYNAMICOBJECT_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
-//[ Includes                                              ]
+//[ Namespace                                             ]
 //[-------------------------------------------------------]
-#include "DynamicObject.h"
-#include <PLCore/String/String.h>
-#include <PLCore/Typebase/FunctionBase.h>
+#include <PLCore/PLCore.h>
 
 
 //[-------------------------------------------------------]
@@ -40,18 +38,20 @@
 //[-------------------------------------------------------]
 namespace PLRefl {
 
+//[-------------------------------------------------------]
+//[ Forward declarations                                  ]
+//[-------------------------------------------------------]
+class TypeInfo;
+
 
 //[-------------------------------------------------------]
 //[ Classes                                               ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    The reflection system's representation of a class constructor
-*
-*  @remarks
-*    TODO: describe this in more detail
+*    Holder for object that uses a generic void pointer for storage and a TypeInfo to describe the stored object
 */
-class ClassConstructor {
+class DynamicObject {
 
 
 	//[-------------------------------------------------------]
@@ -60,49 +60,68 @@ class ClassConstructor {
 	public:
 		/**
 		*  @brief
-		*    Default ctor
+		*    Construct an empty object
 		*/
-		PLCORE_API ClassConstructor();
+		PLCORE_API DynamicObject();
 
 		/**
 		*  @brief
-		*    Value ctor
-		*
-		*  @param[in] pFunc
-		*    The function object representing this constructor
+		*    Construct a dynamic object from an existing instance
 		*/
-		PLCORE_API ClassConstructor(PLCore::FunctionBase *pFunc);
+		template <typename T>
+		DynamicObject(T *pInst);
 
 		/**
 		*  @brief
-		*    Construct a new object using this constructor
-		*
-		*  @param[in] pParams
-		*    Dynamic params for construction
-		*
-		*  @return
-		*    Dynamic return value
+		*    Construct a dynamic object from an existing instance
 		*/
-		inline DynamicObject Construct(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
-
-		/**
-		*  @brief 
-		*    Get the construstor's signature
-		*/
-		inline const PLCore::FunctionSignature &GetSignature() const;
+		template <typename T>
+		DynamicObject(const T *pInst);
 
 		/**
 		*  @brief
-		*    Comparison operator
+		*    Construct a dynamic object from unknown object and its type info
 		*/
-		inline bool operator==(const ClassConstructor &cOther) const;
+		PLCORE_API DynamicObject(void *pObj, const TypeInfo *pType);
+
+		/**
+		*  @brief
+		*    Get the stored untyped object
+		*/
+		inline void *GetUntyped();
+
+		/**
+		*  @brief
+		*    Get the stored untyped object
+		*/
+		inline const void *GetUntyped() const;
+
+		/**
+		*  @brief
+		*    Get the type info of the stored object
+		*/
+		inline const TypeInfo *GetTypeInfo() const;
+
+		/**
+		*  @brief
+		*    Get the stored object as a particular type
+		*/
+		template <typename T>
+		inline T* GetAs();
+
+		/**
+		*  @brief
+		*    Get the stored object as a particular type
+		*/
+		template <typename T>
+		inline const T* GetAs() const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		PLCore::FunctionBase*		m_pFunc;			/**< The invokable function object */
-		PLCore::FunctionSignature	m_cSignature;       /**< Cached m_pFunc's signature */
+		void			*m_pStorage;		/**< The untyped object */
+		const TypeInfo	*m_pTypeInfo;		/**< Type of the stored object */
 };
 
 
@@ -115,7 +134,7 @@ class ClassConstructor {
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "ClassConstructor.inl"
+#include "DynamicObject.inl"
 
 
-#endif // __PLCORE_REFL_CLASSCONSTRUCTOR_H__
+#endif // __PLCORE_DYNAMICOBJECT_H__

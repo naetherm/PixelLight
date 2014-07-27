@@ -21,15 +21,14 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 \*********************************************************/
 
-
-#ifndef __PLCORE_FUNCTIONSIGNATURE_H__
-#define __PLCORE_FUNCTIONSIGNATURE_H__
-#pragma once
-
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include <PLCore/Container/Array.h>
+
+#ifndef __PLCORE_FUNCTIONSIGNATURE_H__
+#define __PLCORE_FUNCTIONSIGNATURE_H__
+#pragma once
 
 
 //[-------------------------------------------------------]
@@ -61,7 +60,12 @@ class FunctionSignature {
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
 	public:
-		PLCORE_API FunctionSignature() {}
+		/**
+		*  @brief
+		*    Default ctor will create a signature of function void(*)()
+		*/
+		PLCORE_API FunctionSignature();
+
 		/**
 		*  @brief
 		*    Value constructor
@@ -79,6 +83,24 @@ class FunctionSignature {
 		*/
 		template <typename TRet = void, typename... TArgs>
 		static FunctionSignature FromTemplate();
+
+		/**
+		*  @brief
+		*    Get return type of the function
+		*/
+		inline const PLRefl::TypeInfo *GetReturnType() const;
+
+		/**
+		*  @brief
+		*    Get argument types of the function
+		*/
+		inline const Array<const PLRefl::TypeInfo*> &GetArgumentTypes() const;
+
+		/**
+		*  @brief
+		*    Check if two signatures describe the same function
+		*/
+		inline bool operator==(const FunctionSignature &cOther) const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]

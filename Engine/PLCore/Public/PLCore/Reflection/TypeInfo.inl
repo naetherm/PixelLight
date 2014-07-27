@@ -22,86 +22,35 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_TYPEID_H__
-#define __PLCORE_REFL_TYPEID_H__
-#pragma once
-
-
-//[-------------------------------------------------------]
-//[ Includes                                              ]
-//[-------------------------------------------------------]
-#include <PLCore/Typebase/RawType.h>
-
-
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLRefl {
 
 //[-------------------------------------------------------]
-//[ Classes                                               ]
+//[ Public functions                                      ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Specialization of StaticTypeId for classes without defined reflection
-*
-*  @remarks
-*    This will throw a compile time error if you try to retrieve reflection type Id
-*    of a non-registered type
+*    Check equality
 */
-template <typename T>
-struct StaticTypeId
+bool TypeInfo::operator==(const TypeInfo &cOther) const
 {
-	static const char *Get()
-	{
-		// This will create at least somehow verbose compile-time error
-		return T::TYPE_NOT_REGISTERED_IN_REFLECTION();
-	}
-
-	enum { Defined = false, Copyable = true };
-};
-
-/**
-*  @brief
-*    Check if the given type has been registered with reflection
-*/
-template <typename T>
-struct HasStaticTypeId
-{
-	enum Value
-	{
-		Value = StaticTypeId<PLCore::RawType<T>>::Defined;
-	};
-};
-
-//[-------------------------------------------------------]
-//[ Global functions                                      ]
-//[-------------------------------------------------------]
-/**
-*  @brief
-*    Retirieve the static type Id of the given type
-*/
-template <typename T>
-const char *GetStaticTypeId()
-{
-	return StaticTypeId<typename PLCore::RawType<T>::Type>::Get();
+	return m_sName == cOther.m_sName;
 }
 
 /**
 *  @brief
-*    Retrieve the static type Id from the specified instance
+*    Get name
 */
-template <typename T>
-const char *GetStaticTypeId(const T&)
+const PLCore::String &TypeInfo::GetName() const
 {
-	return StaticTypeId<typename PLCore::RawType<T>::Type>::Get();
+	return m_sName;
 }
+
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLRefl
-
-
-#endif // __PLCORE_REFL_RTTI_H__

@@ -83,7 +83,12 @@ template <typename T>
 ClassBuilder<T> &ClassBuilder<T>::Constructor(PLCore::FunctionBase *pFn)
 {
 	// Add the constructor to the class
-	m_pClass->m_lstConstructors.Add(ClassConstructor(pFn));
+	if (pFn->GetSignature().GetArgumentTypes().GetSize() == 0)
+		// Default ctor
+		m_pClass->m_cDefaultCtor = ClassConstructor(pFn);
+	else
+		// Parameter ctor
+		m_pClass->m_lstConstructors.Add(ClassConstructor(pFn));
 
 	return *this;
 }
