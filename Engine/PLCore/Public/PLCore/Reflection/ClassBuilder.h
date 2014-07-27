@@ -72,6 +72,12 @@ class ClassBuilder {
 
 		/**
 		*  @brief
+		*    Add a constructor
+		*/
+		ClassBuilder<T> &Constructor(PLCore::FunctionBase *pFn);
+
+		/**
+		*  @brief
 		*    Define a method inside the class
 		*/
 		ClassBuilder<T> &Method(const PLCore::String &sName, PLCore::FunctionBase *pFn);

@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassTypeInfo.inl                              *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -24,65 +24,25 @@
 
 
 //[-------------------------------------------------------]
-//[ Includes                                              ]
+//[ Namespace                                             ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/ClassManager.h>
-#include <PLCore/Reflection/Class.h>
+namespace PLRefl {
+
+
+//[-------------------------------------------------------]
+//[ Public functions                                      ]
+//[-------------------------------------------------------]
+/**
+*  @brief
+*    Get the class representation
+*/
+const Class *ClassTypeInfo::GetClass() const
+{
+	return m_pClass;
+}
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-using namespace PLRefl;
-
-
-//[-------------------------------------------------------]
-//[ Public methods                                        ]
-//[-------------------------------------------------------]
-/**
-*  @brief
-*    Register a new class into the system
-*/
-Class &ClassManager::RegisterClass(const PLCore::String &sName, const char *szId)
-{
-	// The class may be already registered
-	ClassInfo &clss = m_mapClassIds.Get(szId);
-	if (clss == ClassIdMap::Null)
-	{
-		// Regiter a new class
-		ClassInfo info;
-		info.pClass = new Class(sName);
-		info.sName = sName;
-		info.szId = szId;
-
-		m_mapClassNames.Add(sName, info);
-		m_mapClassIds.Add(szId, info);
-
-		// [TODO] Fire event
-
-		return *info.pClass;
-	}
-	else
-	{
-		// Return the existing class
-		return *clss.pClass;
-	}
-}
-
-/**
-*  @brief
-*    Find a class by name
-*/
-const Class *ClassManager::GetClass(const PLCore::String &sName) const
-{
-	const ClassInfo &clss = m_mapClassNames.Get(sName);
-	if (clss == ClassNameMap::Null)
-	{
-		// Class not found
-		return nullptr;
-	}
-	else
-	{
-		// Class found
-		return clss.pClass;
-	}
-}
+} // PLRefl

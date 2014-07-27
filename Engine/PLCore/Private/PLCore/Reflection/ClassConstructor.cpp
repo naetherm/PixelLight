@@ -25,7 +25,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/ClassMethod.h>
+#include <PLCore/Reflection/ClassConstructor.h>
 
 
 //[-------------------------------------------------------]
@@ -40,14 +40,14 @@ using namespace PLRefl;
 *  @brief
 *    Default ctor
 */
-ClassMethod::ClassMethod() :
-m_pFunc(nullptr)
+ClassConstructor::ClassConstructor() :
+	m_pFunc(nullptr)
 {}
 
 /**
 *  @brief
 *    Value ctor
 */
-ClassMethod::ClassMethod(const PLCore::String &sName, PLCore::FunctionBase *pFn) :
-m_sName(sName), m_pFunc(pFn)
+ClassConstructor::ClassConstructor(PLCore::FunctionBase *pFn) :
+	m_pFunc(pFn)
 {}

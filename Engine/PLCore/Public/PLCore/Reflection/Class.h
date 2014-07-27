@@ -30,10 +30,11 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "TypeId.h"
+#include "ClassTypeInfo.h"
 #include "ClassMethod.h"
 #include "ClassField.h"
 #include "ClassProperty.h"
+#include "ClassConstructor.h"
 #include <PLCore/String/String.h>
 #include <PLCore/Container/HashMap.h>
 #include <PLCore/Container/Array.h>
@@ -79,7 +80,7 @@ class Class {
 		*  @brief
 		*    Constructor
 		*/
-		Class(const PLCore::String &sName);
+		PLCORE_API Class(const PLCore::String &sName);
 
 		/**
 		*  @brief
@@ -103,6 +104,27 @@ class Class {
 		*    Get all base classes
 		*/
 		inline const PLCore::Array<const Class*> &GetBaseClasses() const;
+
+		/**
+		*  @brief
+		*    Get the default constructor
+		*
+		*  @return
+		*    'nullptr' if there is no default constructor defined for this class
+		*/
+		inline const ClassConstructor *GetDefaultConstructor() const;
+
+		/**
+		*  @brief
+		*    Check if the class has a default constructor
+		*/
+		inline bool HasDefaultConstructor() const;
+
+		/**
+		*  @brief
+		*    Get parameter constructors
+		*/
+		inline const PLCore::Array<ClassConstructor> &GetAdditionalConstructors() const;
 
 		/**
 		*  @brief
@@ -145,19 +167,26 @@ class Class {
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		PLCore::String m_sName;			/**< Name of the class */
+		PLCore::String m_sName;				/**< Name of the class */
 
 		typedef PLCore::HashMap<PLCore::String, ClassMethod> _MethodMap;
-		_MethodMap m_mapMethods;		/**< Methods for this class */
+		_MethodMap m_mapMethods;			/**< Methods for this class */
 
 		typedef PLCore::HashMap<PLCore::String, ClassField> _FieldMap;
-		_FieldMap m_mapFields;			/**< Fields for this class */
+		_FieldMap m_mapFields;				/**< Fields for this class */
 
 		typedef PLCore::HashMap<PLCore::String, ClassProperty> _PropertyMap;
-		_PropertyMap m_mapProperties;	/**< Properties for this class */
+		_PropertyMap m_mapProperties;		/**< Properties for this class */
 
 		typedef PLCore::Array<const Class*> _BaseClasses;
-		_BaseClasses m_lstBases;		/**< Base classes */
+		_BaseClasses m_lstBases;			/**< Base classes */
+
+		/// The default constructor
+		/// Note that the class may not have a default constructor
+		ClassConstructor m_cDefaultCtor;
+
+		typedef PLCore::Array<ClassConstructor> _Constructors;
+		_Constructors m_lstConstructors;	/**< Additional (parameter) constructors */
 };
 
 

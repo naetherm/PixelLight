@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassConstructor.h                             *
+ *  File: PrimitiveTypeInfo.h                            *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,16 +22,15 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSCONSTRUCTOR_H__
-#define __PLCORE_REFL_CLASSCONSTRUCTOR_H__
+#ifndef __PLCORE_PRIMITIVETYPEINFO_H__
+#define __PLCORE_PRIMITIVETYPEINFO_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/String/String.h>
-#include <PLCore/Typebase/FunctionBase.h>
+#include "TypeInfo.h"
 
 
 //[-------------------------------------------------------]
@@ -45,12 +44,9 @@ namespace PLRefl {
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    The reflection system's representation of a class constructor
-*
-*  @remarks
-*    TODO: describe this in more detail
+*    Primitive type in reflection
 */
-class ClassConstructor {
+class PrimitiveTypeInfo : public TypeInfo {
 
 
 	//[-------------------------------------------------------]
@@ -59,42 +55,10 @@ class ClassConstructor {
 	public:
 		/**
 		*  @brief
-		*    Default ctor
+		*    Constructor
 		*/
-		PLCORE_API ClassConstructor();
+		PLCORE_API PrimitiveTypeInfo(const PLCore::String &sName);
 
-		/**
-		*  @brief
-		*    Value ctor
-		*
-		*  @param[in] pFunc
-		*    The function object representing this constructor
-		*/
-		PLCORE_API ClassConstructor(PLCore::FunctionBase *pFunc);
-
-		/**
-		*  @brief
-		*    Construct a new object using this constructor
-		*
-		*  @param[in] pParams
-		*    Dynamic params for construction
-		*
-		*  @return
-		*    Untyped return value
-		*/
-		inline void *Construct(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
-
-		/**
-		*  @brief
-		*    Comparison operator
-		*/
-		inline bool operator==(const ClassConstructor &cOther) const;
-
-	//[-------------------------------------------------------]
-	//[ Private data                                          ]
-	//[-------------------------------------------------------]
-	private:
-		PLCore::FunctionBase*	m_pFunc;			/**< The invokable function object */
 };
 
 
@@ -104,10 +68,4 @@ class ClassConstructor {
 } // PLRefl
 
 
-//[-------------------------------------------------------]
-//[ Implementation                                        ]
-//[-------------------------------------------------------]
-#include "ClassConstructor.inl"
-
-
-#endif // __PLCORE_REFL_CLASSCONSTRUCTOR_H__
+#endif // __PLCORE_PRIMITIVETYPEINFO_H__

@@ -31,6 +31,9 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "Class.h"
+#include "ClassTypeInfo.h"
+#include "PrimitiveTypeInfo.h"
+#include "TypeRegistry.h"
 #include <PLCore/Typebase/TypeTraits.h>
 #include <PLCore/Typebase/Function.h>
 #include <PLCore/Typebase/Constructor.h>
@@ -53,11 +56,18 @@ namespace PLRefl {
 *  @param[in] COPYABLE
 *    Whether the class has defined copy and assignment
 */
-#define __pl_declare_type(CLSS, COPYABLE) \
-	template<> struct PLRefl::StaticTypeId<CLSS> { \
-		static const char *Get() \
+#define __pl_declare_class(CLSS, COPYABLE) \
+	template<> struct PLRefl::StaticTypeInfo<CLSS> { \
+		static PLRefl::TypeInfo *Get() \
 		{ \
-			return #CLSS; \
+			static PLRefl::ClassTypeInfo info(#CLSS); \
+			static bool registered = false; \
+			if (!registered) \
+			{ \
+				registered = true; \
+				PLRefl::TypeRegistry::GetInstance()->RegisterClassType(#CLSS, &info); \
+			} \
+			return &info; \
 		} \
 		enum { Defined = true, Copyable = COPYABLE }; \
 	};
@@ -92,8 +102,8 @@ namespace PLRefl {
 *  @param[in] CLSS
 *    The class type to declare
 */
-#define pl_declare_type(CLSS) \
-	__pl_declare_type(CLSS, true)
+#define pl_declare_class(CLSS) \
+	__pl_declare_class(CLSS, true)
 
 /**
 *  @brief
@@ -102,8 +112,25 @@ namespace PLRefl {
 *  @param[in] CLSS
 *    The class type to declare
 */
-#define pl_declare_type_no_copy(CLSS) \
-	__pl_declare_type(CLSS, false)
+#define pl_declare_class_no_copy(CLSS) \
+	__pl_declare_class(CLSS, false)
+
+/**
+*  @brief
+*    Declare a reflected primitive type
+*
+*  @param[in] TYPE
+*    Name of the type (will be used as ID as well)
+*/
+#define pl_declare_basic_type(TYPE) \
+	template<> struct PLRefl::StaticTypeInfo<TYPE> { \
+		static PLRefl::TypeInfo *Get() \
+		{ \
+			static PLRefl::PrimitiveTypeInfo info(#TYPE); \
+			return &info; \
+		} \
+		enum { Defined = true, Copyable = true }; \
+	};
 
 /**
 *  @brief
@@ -115,7 +142,7 @@ namespace PLRefl {
 #define pl_rtti() \
 	public: \
 		static void _RegisterReflection(); \
-		virtual const char *_ClassId() const { return PLRefl::GetStaticTypeId(this); } \
+		virtual PLRefl::TypeInfo *_ClassId() const { return PLRefl::GetStaticTypeInfo(this); } \
 	private:
 
 /**
@@ -172,8 +199,10 @@ namespace PLRefl {
 
 /**
 *  @brief
-*    Add a default constructor to the class
+*    Add a constructor with the given signature to the class
 */
+#define pl_class_ctor(...) \
+	.Constructor(new PLCore::ConstructorFunc<_Clss, __VA_ARGS__>())
 
 /**
 *  @brief
@@ -193,6 +222,12 @@ namespace PLRefl {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLRefl
+
+
+//[-------------------------------------------------------]
+//[ Core types                                            ]
+//[-------------------------------------------------------]
+#include "PrimitiveTypes.inl"
 
 
 #endif // __PLCORE_REFL_RTTI_H__

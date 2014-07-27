@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: PLCore.h                                       *
+ *  File: TypeRegistry.inl                               *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,108 +22,19 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_TYPETRAITS2_H__
-#define __PLCORE_TYPETRAITS2_H__
-#pragma once
+//[-------------------------------------------------------]
+//[ Includes                                              ]
+//[-------------------------------------------------------]
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLCore {
+namespace PLRefl {
 
 
-//[-------------------------------------------------------]
-//[ Classes                                               ]
-//[-------------------------------------------------------]
-/**
-*  @brief
-*    Member function type decomposer
-*/
-template <typename T>
-struct MemberFunctionDecomp;
-
-template <class TClass, typename TRet, typename... TArgs>
-struct MemberFunctionDecomp<TRet(TClass::*)(TArgs...)> {
-
-	//[-------------------------------------------------------]
-	//[ Public types                                          ]
-	//[-------------------------------------------------------]
-	typedef TClass _Class;
-	typedef TRet _ReturnType;
-};
-
-/**
-*  @brief
-*    Remove reference from a type
-*/
-template <typename T>
-struct RemoveReference {
-
-	typedef T Type;
-};
-
-template <typename T>
-struct RemoveReference<T&> {
-
-	typedef T Type;
-};
-
-template <typename T>
-struct RemoveReference<T&&> {
-
-	typedef T Type;
-};
-
-/**
-*  @brief
-*    Remove const from a type
-*/
-template <typename T>
-struct RemoveConst {
-
-	typedef T Type;
-};
-
-template <typename T>
-struct RemoveConst<const T> {
-
-	typedef T Type;
-};
-
-/**
-*  @brief
-*    This template will remove all type qualifiers (const, pointers, references)
-*/
-template <typename T>
-struct RawType
-{
-	// [TODO] use the above Remove* instead of specialization
-	typedef T Type;
-};
-
-template <typename T>
-struct RawType<const T>
-{
-	typedef typename RawType<T>::Type Type;
-};
-
-template <typename T>
-struct RawType<T&>
-{
-	typedef typename RawType<T>::Type Type;
-};
-
-template <typename T>
-struct RawType<T*>
-{
-	typedef typename RawType<T>::Type Type;
-};
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLCore
-
-
-#endif // __PLCORE_TYPETRAITS2_H__
+} // PLRefl

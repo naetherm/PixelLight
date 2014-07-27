@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassConstructor.h                             *
+ *  File: Rtti.h                                         *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,8 +22,8 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSCONSTRUCTOR_H__
-#define __PLCORE_REFL_CLASSCONSTRUCTOR_H__
+#ifndef __PLCORE_REFL_TYPEINFO_H__
+#define __PLCORE_REFL_TYPEINFO_H__
 #pragma once
 
 
@@ -31,7 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include <PLCore/String/String.h>
-#include <PLCore/Typebase/FunctionBase.h>
+#include <PLCore/Typebase/TypeTraits.h>
 
 
 //[-------------------------------------------------------]
@@ -45,12 +45,9 @@ namespace PLRefl {
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    The reflection system's representation of a class constructor
-*
-*  @remarks
-*    TODO: describe this in more detail
+*    Reflection type representation
 */
-class ClassConstructor {
+class TypeInfo {
 
 
 	//[-------------------------------------------------------]
@@ -59,43 +56,86 @@ class ClassConstructor {
 	public:
 		/**
 		*  @brief
-		*    Default ctor
+		*    Constructor
 		*/
-		PLCORE_API ClassConstructor();
+		TypeInfo(const PLCore::String &sName);
 
 		/**
 		*  @brief
-		*    Value ctor
-		*
-		*  @param[in] pFunc
-		*    The function object representing this constructor
+		*    Virtual destructor
 		*/
-		PLCORE_API ClassConstructor(PLCore::FunctionBase *pFunc);
-
-		/**
-		*  @brief
-		*    Construct a new object using this constructor
-		*
-		*  @param[in] pParams
-		*    Dynamic params for construction
-		*
-		*  @return
-		*    Untyped return value
-		*/
-		inline void *Construct(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
-
-		/**
-		*  @brief
-		*    Comparison operator
-		*/
-		inline bool operator==(const ClassConstructor &cOther) const;
+		virtual ~TypeInfo() {}
 
 	//[-------------------------------------------------------]
-	//[ Private data                                          ]
+	//[ Protected data                                        ]
 	//[-------------------------------------------------------]
-	private:
-		PLCore::FunctionBase*	m_pFunc;			/**< The invokable function object */
+	protected:
+		PLCore::String	m_sName;			/**< Name of the type */
 };
+
+/**
+*  @brief
+*    Helper to retrieve a TypeInfo from object type
+*/
+template <typename T>
+struct StaticTypeInfo;
+
+/**
+*  @brief
+*    Specialization of StaticTypeInfo for classes without defined reflection
+*
+*  @remarks
+*    This will throw a compile time error if you try to retrieve reflection type Id
+*    of a non-registered type
+*/
+template <typename T>
+struct StaticTypeInfo
+{
+	static TypeInfo *Get()
+	{
+		// This will create at least somehow verbose compile-time error
+		return T::TYPE_NOT_REGISTERED_IN_REFLECTION();
+	}
+
+	enum { Defined = false, Copyable = true };
+};
+
+/**
+*  @brief
+*    Check if the given type has been registered with reflection
+*/
+template <typename T>
+struct HasStaticTypeInfo
+{
+	enum Value
+	{
+		Value = StaticTypeInfo<PLCore::RawType<T>>::Defined;
+	};
+};
+
+//[-------------------------------------------------------]
+//[ Global functions                                      ]
+//[-------------------------------------------------------]
+/**
+*  @brief
+*    Retirieve the static type Id of the given type
+*/
+template <typename T>
+TypeInfo *GetStaticTypeInfo()
+{
+	return StaticTypeInfo<typename PLCore::RawType<T>::Type>::Get();
+}
+
+/**
+*  @brief
+*    Retrieve the static type Id from the specified instance
+*/
+template <typename T>
+TypeInfo *GetStaticTypeInfo(const T&)
+{
+	// [TODO] This won't work if for example a base class pointer is passed here but the object is of derived class type
+	return StaticTypeInfo<typename PLCore::RawType<T>::Type>::Get();
+}
 
 
 //[-------------------------------------------------------]
@@ -104,10 +144,4 @@ class ClassConstructor {
 } // PLRefl
 
 
-//[-------------------------------------------------------]
-//[ Implementation                                        ]
-//[-------------------------------------------------------]
-#include "ClassConstructor.inl"
-
-
-#endif // __PLCORE_REFL_CLASSCONSTRUCTOR_H__
+#endif // __PLCORE_REFL_TYPEINFO_H__

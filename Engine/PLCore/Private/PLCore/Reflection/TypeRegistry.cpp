@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: TypeRegistry.cpp                               *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,72 +22,54 @@
 \*********************************************************/
 
 
+
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-namespace PLRefl {
-
-/**
-*  @brief
-*    Declare a new reflected class
-*/
-template <typename T>
-ClassBuilder<T> Class::Declare(const PLCore::String &sName)
-{
-	// Destruction helper
-	//struct Destructor
-	//{
-	//	template <typename T>
-	//	static void Destruct(const UserObject &obj)
-	//	{
-	//		delete obj.GetAs<T*>();
-	//	}
-	//};
-
-	// Create the new class
-	Class *clss = new Class(sName);
-	//clss->Destructor = &Destructor::Destruct<T>;
-
-	// Assign the class instance to its static type info!
-	TypeInfo *myType = StaticTypeInfo<T>::Get();
-	((ClassTypeInfo*)myType)->m_pClass = clss;
-	
-	return ClassBuilder<T>(*clss);
-}
-
-/**
-*  @brief
-*    Get the class name
-*/
-const PLCore::String &Class::GetName() const
-{
-	return m_sName;
-}
-
-/**
-*  @brief
-*    Get base classes
-*/
-const PLCore::Array<const Class*> &Class::GetBaseClasses() const
-{
-	return m_lstBases;
-}
-
-/**
-*  @brief
-*    Get constructors
-*/
-const PLCore::Array<ClassConstructor> &Class::GetAdditionalConstructors() const
-{
-	return m_lstConstructors;
-}
+#include <PLCore/Reflection/TypeRegistry.h>
+#include <PLCore/Reflection/ClassTypeInfo.h>
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+using namespace PLRefl;
+
+
+//[-------------------------------------------------------]
+//[ Public methods                                        ]
+//[-------------------------------------------------------]
+/**
+*  @brief
+*    Register a new class into the system
+*/
+void TypeRegistry::RegisterClassType(const PLCore::String &sName, ClassTypeInfo *pTypeInfo)
+{
+	// The type may be already registered
+	ClassTypeInfo *ti = m_mapClassTypes.Get(sName);
+	if (ti == _ClassTypeMap::Null)
+	{
+		// Regiter a new type
+		m_mapClassTypes.Add(sName, pTypeInfo);
+
+		// [TODO] Fire event
+	}
+}
+
+/**
+*  @brief
+*    Find a class by name
+*/
+const ClassTypeInfo *TypeRegistry::GetClassType(const PLCore::String &sName) const
+{
+	const ClassTypeInfo *ti = m_mapClassTypes.Get(sName);
+	if (ti == _ClassTypeMap::Null)
+	{
+		// Class not found
+		return nullptr;
+	}
+	else
+	{
+		// Class found
+		return ti;
+	}
+}

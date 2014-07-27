@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassTypeInfo.cpp                              *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -25,69 +25,22 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include <PLCore/Reflection/ClassTypeInfo.h>
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
-
-/**
-*  @brief
-*    Declare a new reflected class
-*/
-template <typename T>
-ClassBuilder<T> Class::Declare(const PLCore::String &sName)
-{
-	// Destruction helper
-	//struct Destructor
-	//{
-	//	template <typename T>
-	//	static void Destruct(const UserObject &obj)
-	//	{
-	//		delete obj.GetAs<T*>();
-	//	}
-	//};
-
-	// Create the new class
-	Class *clss = new Class(sName);
-	//clss->Destructor = &Destructor::Destruct<T>;
-
-	// Assign the class instance to its static type info!
-	TypeInfo *myType = StaticTypeInfo<T>::Get();
-	((ClassTypeInfo*)myType)->m_pClass = clss;
-	
-	return ClassBuilder<T>(*clss);
-}
-
-/**
-*  @brief
-*    Get the class name
-*/
-const PLCore::String &Class::GetName() const
-{
-	return m_sName;
-}
-
-/**
-*  @brief
-*    Get base classes
-*/
-const PLCore::Array<const Class*> &Class::GetBaseClasses() const
-{
-	return m_lstBases;
-}
-
-/**
-*  @brief
-*    Get constructors
-*/
-const PLCore::Array<ClassConstructor> &Class::GetAdditionalConstructors() const
-{
-	return m_lstConstructors;
-}
+using namespace PLRefl;
 
 //[-------------------------------------------------------]
-//[ Namespace                                             ]
+//[ Public functions                                      ]
 //[-------------------------------------------------------]
-} // PLRefl
+/**
+*  @brief
+*    Value ctor
+*/
+ClassTypeInfo::ClassTypeInfo(const PLCore::String &sName) :
+	TypeInfo(sName),
+	m_pClass(nullptr)
+{}

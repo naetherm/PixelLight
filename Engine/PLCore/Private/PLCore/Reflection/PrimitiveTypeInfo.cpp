@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassMethod.cpp                                *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -25,17 +25,21 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/String/String.h>
+#include <PLCore/Reflection/PrimitiveTypeInfo.h>
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
-
-
+using namespace PLRefl;
 
 //[-------------------------------------------------------]
-//[ Namespace                                             ]
+//[ Public functions                                      ]
 //[-------------------------------------------------------]
-} // PLRefl
+/**
+*  @brief
+*    Value ctor
+*/
+PrimitiveTypeInfo::PrimitiveTypeInfo(const PLCore::String &sName) :
+	TypeInfo(sName)
+{}

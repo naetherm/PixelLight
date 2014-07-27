@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Rtti.h                                         *
+ *  File: ClassTypeInfo.h                                *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,17 +22,15 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSMANAGER_H__
-#define __PLCORE_REFL_CLASSMANAGER_H__
+#ifndef __PLCORE_CLASSTYPEINFO_H__
+#define __PLCORE_CLASSTYPEINFO_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Core/Singleton.h>
-#include <PLCore/Container/HashMap.h>
-#include <PLCore/String/String.h>
+#include "TypeInfo.h"
 
 
 //[-------------------------------------------------------]
@@ -51,12 +49,15 @@ class Class;
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    The central reflected class register
-*
-*  @remarks
-*    TODO: describe this in more detail
+*    Specialized type info for class types
 */
-class ClassManager : public PLCore::Singleton<ClassManager> {
+class ClassTypeInfo : public TypeInfo {
+
+
+	//[-------------------------------------------------------]
+	//[ Friends                                               ]
+	//[-------------------------------------------------------]
+	friend class Class;
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -64,60 +65,24 @@ class ClassManager : public PLCore::Singleton<ClassManager> {
 	public:
 		/**
 		*  @brief
-		*    Register a new class into the manager
-		*
-		*  @param[in] sName
-		*    Name of the class to register
-		*  @param[in] szId
-		*    Type Id of the class
-		*
-		*  @return
-		*    New class type instance
+		*    Constructor
 		*/
-		PLCORE_API PLRefl::Class &RegisterClass(const PLCore::String &sName, const char *szId);
+		PLCORE_API ClassTypeInfo(const PLCore::String &sName);
 
 		/**
 		*  @brief
-		*    Find a class by name
-		*
-		*  @param[in] sName
-		*    Name of the class to find
+		*    Retirieve the associated class definition
 		*
 		*  @return
-		*    Pointer to the class or nullptr of it was not found
+		*    The associated class or 'nullptr' if the class has not yet been registered
 		*/
-		PLCORE_API const PLRefl::Class *GetClass(const PLCore::String &sName) const;
-
-
-	//[-------------------------------------------------------]
-	//[ Private structures                                    ]
-	//[-------------------------------------------------------]
-	private:
-		/**
-		*  @brief
-		*    Class info holder
-		*/
-		struct ClassInfo
-		{
-			PLCore::String	sName;			/**< Name of the class */
-			const char		*szId;			/**< Id of the class type */
-			PLRefl::Class	*pClass;		/**< The actual class instance */
-
-			bool operator==(const ClassInfo &other) const
-			{
-				return pClass == other.pClass;
-			}
-		};
+		inline const Class *GetClass() const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		typedef PLCore::HashMap<PLCore::String, ClassInfo> ClassNameMap;
-		ClassNameMap m_mapClassNames;		/**< All known classes by name */
-
-		typedef PLCore::HashMap<const char*, ClassInfo> ClassIdMap;
-		ClassIdMap m_mapClassIds;			/**< All known classes by Id */
+		const Class *m_pClass;		/**< The class this info represents */
 };
 
 
@@ -126,11 +91,9 @@ class ClassManager : public PLCore::Singleton<ClassManager> {
 //[-------------------------------------------------------]
 } // PLRefl
 
-
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "ClassManager.inl"
+#include "ClassTypeInfo.inl"
 
-
-#endif // __PLCORE_REFL_CLASSMANAGER_H__
+#endif // __PLCORE_CLASSTYPEINFO_H__

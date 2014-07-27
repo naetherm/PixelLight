@@ -26,7 +26,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "ClassMethod.h"
-#include "ClassManager.h"
+#include "TypeRegistry.h"
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -56,17 +56,34 @@ ClassBuilder<T> &ClassBuilder<T>::Base(const PLCore::String &sName)
 	// Due to the rather random nature of static initializer order, it may happen that
 	// the base class has not yet been registered. Thus we first try to find it directly
 	// and if not there, we postpone the binding for later
-	const PLRefl::Class *pBase = PLRefl::ClassManager::GetInstance()->GetClass(sName);
-	if (pBase)
+	const ClassTypeInfo *pBaseType = TypeRegistry::GetInstance()->GetClassType(sName);
+	if (pBaseType)
 	{
-		// The base class was already registered
-		m_pClass->m_lstBases.Add(pBase);
+		const Class *pBase = pBaseType->GetClass();
+		if (pBase)
+		{
+			// The base class was already registered
+			m_pClass->m_lstBases.Add(pBase);
+		}
+		else
+		{
+			// We will need to register the base class for late binding with the type registry (?)
+			// [TODO]
+		}
 	}
-	else
-	{
-		// We will need to register the base class for late binding with the class manager
-		// [TODO]
-	}
+
+	return *this;
+}
+
+/**
+*  @brief
+*    Declare a constructor inside the class
+*/
+template <typename T>
+ClassBuilder<T> &ClassBuilder<T>::Constructor(PLCore::FunctionBase *pFn)
+{
+	// Add the constructor to the class
+	m_pClass->m_lstConstructors.Add(ClassConstructor(pFn));
 
 	return *this;
 }

@@ -102,7 +102,7 @@ class MyClass
 };
 
 // Declare the reflected type
-pl_declare_type(MyClass)
+pl_declare_class(MyClass)
 
 
 #endif // __MYCLASS_H__

@@ -56,7 +56,7 @@ public:
 
 	virtual void f(int i) = 0;
 };
-pl_declare_type(A)
+pl_declare_class(A)
 
 pl_begin_class(A)
 	pl_class_method(f)
@@ -74,7 +74,7 @@ public:
 		i = 1;
 	}
 };
-pl_declare_type(B)
+pl_declare_class(B)
 
 pl_begin_class(B)
 	pl_class_base(A)
@@ -89,7 +89,7 @@ public:
 	C(int cc) : c(cc) {}
 	int c;
 };
-pl_declare_type(C)
+pl_declare_class(C)
 
 pl_begin_class(C)
 pl_end_class()
@@ -108,11 +108,13 @@ public:
 		i = 2;
 	}
 };
-pl_declare_type(D)
+pl_declare_class(D)
 
 pl_begin_class(D)
 	pl_class_base(B)
 	pl_class_base(C)
+	pl_class_ctor()
+	pl_class_ctor(int, int)
 pl_end_class()
 
 
@@ -143,7 +145,7 @@ void Application::Main()
 {
 	MyClass c;
 
-	const PLRefl::Class *clss = PLRefl::ClassManager::GetInstance()->GetClass("MyClass");
+	const PLRefl::Class *clss = PLRefl::TypeRegistry::GetInstance()->GetClassType("MyClass")->GetClass();
 	if (clss)
 	{
 		// Method
@@ -195,7 +197,7 @@ void Application::Main()
 	f.DynInvoke(&params);
 	*v = 108;*/
 
-	D inst;
+	/*D inst;
 	clss = PLRefl::ClassManager::GetInstance()->GetClass("D");
 	const PLRefl::ClassMethod *meth = clss->GetMethod("f");
 	if (meth)
@@ -212,13 +214,14 @@ void Application::Main()
 
 	PLCore::Array<PLCore::FunctionParam> params;
 	params.Add(PLCore::FunctionParam(1008));
-	params.Add(PLCore::FunctionParam(108));
+	params.Add(PLCore::FunctionParam(108));*/
 
-	PLCore::ConstructorFunc<D> ctor1;
-	PLCore::ConstructorFunc<D, int, int> ctor2;
+	//auto ctors = clss->GetConstructors().GetConstIterator();
+	//while (ctors.HasNext())
+	//{
+	//	const PLRefl::ClassConstructor &ctor = ctors.Next();
+	//	D* d = (D*)ctor.Construct(&params);
+	//	d=d;
+	//}
 
-	D* d1 = ctor1.DynInvoke(&params).Get<D*>();
-	D* d2 = ctor2.DynInvoke(&params).Get<D*>();
-
-	d1=d2;
 }

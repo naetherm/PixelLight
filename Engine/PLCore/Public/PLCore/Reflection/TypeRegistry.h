@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassConstructor.h                             *
+ *  File: TypeRegistry.h                                 *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,17 +22,17 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSCONSTRUCTOR_H__
-#define __PLCORE_REFL_CLASSCONSTRUCTOR_H__
+#ifndef __PLCORE_REFL_TYPEREGISTRY_H__
+#define __PLCORE_REFL_TYPEREGISTRY_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include <PLCore/Core/Singleton.h>
+#include <PLCore/Container/HashMap.h>
 #include <PLCore/String/String.h>
-#include <PLCore/Typebase/FunctionBase.h>
-
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -41,17 +41,22 @@ namespace PLRefl {
 
 
 //[-------------------------------------------------------]
+//[ Forward declarations                                  ]
+//[-------------------------------------------------------]
+class ClassTypeInfo;
+class PrimitiveTypeInfo;
+
+//[-------------------------------------------------------]
 //[ Classes                                               ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    The reflection system's representation of a class constructor
+*    The central reflected type registry
 *
 *  @remarks
 *    TODO: describe this in more detail
 */
-class ClassConstructor {
-
+class TypeRegistry : public PLCore::Singleton<TypeRegistry> {
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -59,42 +64,34 @@ class ClassConstructor {
 	public:
 		/**
 		*  @brief
-		*    Default ctor
+		*    Register a new class into the registry
+		*
+		*  @param[in] sName
+		*    Name of the type to register
+		*  @param[in] pTypeInfo
+		*    The type info for the class
 		*/
-		PLCORE_API ClassConstructor();
+		PLCORE_API void RegisterClassType(const PLCore::String &sName, ClassTypeInfo *pTypeInfo);
 
 		/**
 		*  @brief
-		*    Value ctor
+		*    Find a class type by name
 		*
-		*  @param[in] pFunc
-		*    The function object representing this constructor
-		*/
-		PLCORE_API ClassConstructor(PLCore::FunctionBase *pFunc);
-
-		/**
-		*  @brief
-		*    Construct a new object using this constructor
-		*
-		*  @param[in] pParams
-		*    Dynamic params for construction
+		*  @param[in] sName
+		*    Name of the class type to find
 		*
 		*  @return
-		*    Untyped return value
+		*    Pointer to the type info or nullptr of it was not found
 		*/
-		inline void *Construct(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const;
+		PLCORE_API const ClassTypeInfo *GetClassType(const PLCore::String &sName) const;
 
-		/**
-		*  @brief
-		*    Comparison operator
-		*/
-		inline bool operator==(const ClassConstructor &cOther) const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		PLCore::FunctionBase*	m_pFunc;			/**< The invokable function object */
+		typedef PLCore::HashMap<PLCore::String, ClassTypeInfo*> _ClassTypeMap;
+		_ClassTypeMap m_mapClassTypes;		/**< All known class types by name */
 };
 
 
@@ -107,7 +104,7 @@ class ClassConstructor {
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "ClassConstructor.inl"
+#include "TypeRegistry.inl"
 
 
-#endif // __PLCORE_REFL_CLASSCONSTRUCTOR_H__
+#endif // __PLCORE_REFL_TYPEREGISTRY_H__

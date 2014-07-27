@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: PLCore.h                                       *
+ *  File: TypeInfo.cpp                                   *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,52 +22,24 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_RAWTYPE_H__
-#define __PLCORE_RAWTYPE_H__
-#pragma once
+//[-------------------------------------------------------]
+//[ Includes                                              ]
+//[-------------------------------------------------------]
+#include <PLCore/Reflection/TypeInfo.h>
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLCore {
-
+using namespace PLRefl;
 
 //[-------------------------------------------------------]
-//[ Classes                                               ]
+//[ Public functions                                      ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    This template will remove all type qualifiers (const, pointers, references)
+*    Value ctor
 */
-template <typename T>
-struct RawType
-{
-	typedef T Type;
-};
-
-template <typename T>
-struct RawType<const T>
-{
-	typedef typename RawType<T>::Type Type;
-};
-
-template <typename T>
-struct RawType<T&>
-{
-	typedef typename RawType<T>::Type Type;
-};
-
-template <typename T>
-struct RawType<T*>
-{
-	typedef typename RawType<T>::Type Type;
-};
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-} // PLCore
-
-
-#endif // __PLCORE_RAWTYPE_H__
+TypeInfo::TypeInfo(const PLCore::String &sName) :
+	m_sName(sName)
+{}
