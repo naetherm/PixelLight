@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: TypeRegistry.cpp                               *
+ *  File: FunctionSignature.cpp                          *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,90 +22,25 @@
 \*********************************************************/
 
 
-
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/TypeRegistry.h>
-#include <PLCore/Reflection/ClassTypeInfo.h>
+#include <PLCore/Typebase/FunctionSignature.h>
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-using namespace PLRefl;
-
+using namespace PLCore;
 
 //[-------------------------------------------------------]
-//[ Public methods                                        ]
+//[ Public functions                                      ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Register a new class into the system
+*    Constructor
 */
-void TypeRegistry::RegisterClassType(const PLCore::String &sName, ClassTypeInfo *pTypeInfo)
-{
-	// The type may be already registered
-	ClassTypeInfo *ti = m_mapClassTypes.Get(sName);
-	if (ti == _ClassTypeMap::Null)
-	{
-		// Regiter a new type
-		m_mapClassTypes.Add(sName, pTypeInfo);
-
-		// [TODO] Fire event
-	}
-}
-
-/**
-*  @brief
-*    Register a new primitive into the system
-*/
-void TypeRegistry::RegisterPrimitiveType(const PLCore::String &sName, PrimitiveTypeInfo *pTypeInfo)
-{
-	// The type may be already registered
-	PrimitiveTypeInfo *ti = m_mapPrimitiveTypes.Get(sName);
-	if (ti == _PrimitiveTypeMap::Null)
-	{
-		// Regiter a new type
-		m_mapPrimitiveTypes.Add(sName, pTypeInfo);
-
-		// [TODO] Fire event
-	}
-}
-
-/**
-*  @brief
-*    Find a class by name
-*/
-const ClassTypeInfo *TypeRegistry::GetClassType(const PLCore::String &sName) const
-{
-	const ClassTypeInfo *ti = m_mapClassTypes.Get(sName);
-	if (ti == _ClassTypeMap::Null)
-	{
-		// Class not found
-		return nullptr;
-	}
-	else
-	{
-		// Class found
-		return ti;
-	}
-}
-
-/**
-*  @brief
-*    Find a primitive type by name
-*/
-const PrimitiveTypeInfo *TypeRegistry::GetPrimitiveType(const PLCore::String &sName) const
-{
-	const PrimitiveTypeInfo *ti = m_mapPrimitiveTypes.Get(sName);
-	if (ti == _PrimitiveTypeMap::Null)
-	{
-		// Class not found
-		return nullptr;
-	}
-	else
-	{
-		// Class found
-		return ti;
-	}
-}
+FunctionSignature::FunctionSignature(const PLRefl::TypeInfo *pReturnType, const Array<const PLRefl::TypeInfo*> &lstArgTypes) :
+	m_pReturnType(pReturnType),
+	m_lstArgTypes(lstArgTypes)
+{}

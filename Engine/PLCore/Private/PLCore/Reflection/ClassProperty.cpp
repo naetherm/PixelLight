@@ -53,4 +53,10 @@ ClassProperty::ClassProperty(const PLCore::String &sName, PLCore::FunctionBase *
 	m_sName(sName),
 	m_pSetter(pSetter),
 	m_pGetter(pGetter)
-{}
+{
+	PLCore::FunctionSignature sig;
+	sig = pSetter->GetSignature();
+	sig = pGetter->GetSignature();
+	int i = 0;
+	i = i;
+}

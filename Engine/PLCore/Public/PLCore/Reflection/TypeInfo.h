@@ -58,7 +58,7 @@ class TypeInfo {
 		*  @brief
 		*    Constructor
 		*/
-		TypeInfo(const PLCore::String &sName);
+		PLCORE_API TypeInfo(const PLCore::String &sName);
 
 		/**
 		*  @brief
@@ -71,6 +71,37 @@ class TypeInfo {
 	//[-------------------------------------------------------]
 	protected:
 		PLCore::String	m_sName;			/**< Name of the type */
+};
+
+//TEST
+template <bool IS_CONST>
+class PointerTypeInfo : public TypeInfo {
+
+	public:
+		PointerTypeInfo(TypeInfo *pPointedType) : TypeInfo(IS_CONST ? "const*" : "*"), m_pPointedType(pPointedType) {}
+
+		TypeInfo *GetPointedType()
+		{
+			return m_pPointedType;
+		}
+
+	private:
+		TypeInfo *m_pPointedType;
+};
+
+template <bool IS_CONST>
+class ReferenceTypeInfo : public TypeInfo {
+
+public:
+	ReferenceTypeInfo(TypeInfo *pPointedType) : TypeInfo(IS_CONST ? "const&" : "&"), m_pPointedType(pPointedType) {}
+
+	TypeInfo *GetPointedType()
+	{
+		return m_pPointedType;
+	}
+
+private:
+	TypeInfo *m_pPointedType;
 };
 
 /**
@@ -89,8 +120,8 @@ struct StaticTypeInfo;
 *    of a non-registered type
 */
 template <typename T>
-struct StaticTypeInfo
-{
+struct StaticTypeInfo {
+
 	static TypeInfo *Get()
 	{
 		// This will create at least somehow verbose compile-time error
@@ -100,13 +131,62 @@ struct StaticTypeInfo
 	enum { Defined = false, Copyable = true };
 };
 
+//TEST
+template <typename T>
+struct StaticTypeInfo<T*> {
+
+	static TypeInfo *Get()
+	{
+		static PointerTypeInfo<false> info(StaticTypeInfo<T>::Get());
+		return &info;
+	}
+
+	enum { Defined = true, Copyable = true };
+};
+
+template <typename T>
+struct StaticTypeInfo<const T*> {
+
+	static TypeInfo *Get()
+	{
+		static PointerTypeInfo<true> info(StaticTypeInfo<T>::Get());
+		return &info;
+	}
+
+	enum { Defined = true, Copyable = true };
+};
+
+template <typename T>
+struct StaticTypeInfo<T&> {
+
+	static TypeInfo *Get()
+	{
+		static ReferenceTypeInfo<false> info(StaticTypeInfo<T>::Get());
+		return &info;
+	}
+
+	enum { Defined = true, Copyable = false };
+};
+
+template <typename T>
+struct StaticTypeInfo<const T&> {
+
+	static TypeInfo *Get()
+	{
+		static ReferenceTypeInfo<true> info(StaticTypeInfo<T>::Get());
+		return &info;
+	}
+
+	enum { Defined = true, Copyable = false };
+};
+
 /**
 *  @brief
 *    Check if the given type has been registered with reflection
 */
 template <typename T>
-struct HasStaticTypeInfo
-{
+struct HasStaticTypeInfo {
+
 	enum Value
 	{
 		Value = StaticTypeInfo<PLCore::RawType<T>>::Defined;

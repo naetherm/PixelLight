@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: TypeRegistry.cpp                               *
+ *  File: FunctionSignature.inl                          *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -21,91 +21,66 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 \*********************************************************/
 
-
-
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/TypeRegistry.h>
-#include <PLCore/Reflection/ClassTypeInfo.h>
+#include "Tuple.h"
+#include <PLCore/Reflection/TypeInfo.h>
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-using namespace PLRefl;
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
-//[ Public methods                                        ]
+//[ Classes                                               ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Register a new class into the system
+*    Helper to fill an array of TypeInfo's from a variadic template argument list
 */
-void TypeRegistry::RegisterClassType(const PLCore::String &sName, ClassTypeInfo *pTypeInfo)
-{
-	// The type may be already registered
-	ClassTypeInfo *ti = m_mapClassTypes.Get(sName);
-	if (ti == _ClassTypeMap::Null)
-	{
-		// Regiter a new type
-		m_mapClassTypes.Add(sName, pTypeInfo);
+template <int N, typename... T>
+struct TemplateToTypeInfoArray {
 
-		// [TODO] Fire event
+	static void Make(Array<const PLRefl::TypeInfo*> &lstTypes)
+	{
+		TemplateToTypeInfoArray<N - 1, T...>::Make(lstTypes);
+
+		typedef typename TupleElement<N - 1, Tuple<T...>>::_Type _Type;
+		lstTypes[N - 1] = PLRefl::StaticTypeInfo<_Type>::Get();
 	}
-}
+};
+
+template <typename... T>
+struct TemplateToTypeInfoArray<0, T...> {
+
+	static void Make(Array<const PLRefl::TypeInfo*> &lstTypes)
+	{
+		// End of line
+	}
+};
 
 /**
 *  @brief
-*    Register a new primitive into the system
+*    Typed construction of function signature
 */
-void TypeRegistry::RegisterPrimitiveType(const PLCore::String &sName, PrimitiveTypeInfo *pTypeInfo)
+template <typename TRet, typename... TArgs>
+FunctionSignature FunctionSignature::FromTemplate()
 {
-	// The type may be already registered
-	PrimitiveTypeInfo *ti = m_mapPrimitiveTypes.Get(sName);
-	if (ti == _PrimitiveTypeMap::Null)
-	{
-		// Regiter a new type
-		m_mapPrimitiveTypes.Add(sName, pTypeInfo);
+	// Return type
+	PLRefl::TypeInfo* ret = PLRefl::StaticTypeInfo<TRet>::Get();
 
-		// [TODO] Fire event
-	}
+	// Arguments
+	Array<const PLRefl::TypeInfo*> args;
+	args.Resize(sizeof...(TArgs));
+	TemplateToTypeInfoArray<sizeof...(TArgs), TArgs...>::Make(args);
+
+	return FunctionSignature(ret, args);
 }
 
-/**
-*  @brief
-*    Find a class by name
-*/
-const ClassTypeInfo *TypeRegistry::GetClassType(const PLCore::String &sName) const
-{
-	const ClassTypeInfo *ti = m_mapClassTypes.Get(sName);
-	if (ti == _ClassTypeMap::Null)
-	{
-		// Class not found
-		return nullptr;
-	}
-	else
-	{
-		// Class found
-		return ti;
-	}
-}
 
-/**
-*  @brief
-*    Find a primitive type by name
-*/
-const PrimitiveTypeInfo *TypeRegistry::GetPrimitiveType(const PLCore::String &sName) const
-{
-	const PrimitiveTypeInfo *ti = m_mapPrimitiveTypes.Get(sName);
-	if (ti == _PrimitiveTypeMap::Null)
-	{
-		// Class not found
-		return nullptr;
-	}
-	else
-	{
-		// Class found
-		return ti;
-	}
-}
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore

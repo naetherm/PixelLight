@@ -127,6 +127,12 @@ namespace PLRefl {
 		static PLRefl::TypeInfo *Get() \
 		{ \
 			static PLRefl::PrimitiveTypeInfo info(#TYPE); \
+			static bool registered = false; \
+			if (!registered) \
+			{ \
+				registered = true; \
+				PLRefl::TypeRegistry::GetInstance()->RegisterPrimitiveType(#TYPE, &info); \
+			} \
 			return &info; \
 		} \
 		enum { Defined = true, Copyable = true }; \

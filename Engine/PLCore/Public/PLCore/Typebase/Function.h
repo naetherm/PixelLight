@@ -77,6 +77,7 @@ class Function<TRet (T::*)(TArgs...)> : public Invokable<TRet, T*, TArgs...> {
 	//[-------------------------------------------------------]
 	public:
 		virtual TRet Invoke(T *pInst, TArgs... args) const override;
+		virtual FunctionSignature GetSignature() const override;
 
 	//[-------------------------------------------------------]
 	//[ Private typedefs                                      ]
@@ -115,6 +116,7 @@ public:
 	//[-------------------------------------------------------]
 public:
 	virtual TRet Invoke(const T *pInst, TArgs... args) const override;
+	virtual FunctionSignature GetSignature() const override;
 
 	//[-------------------------------------------------------]
 	//[ Private typedefs                                      ]

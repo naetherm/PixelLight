@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: PLCore.h                                       *
+ *  File: FunctionSignature.h                            *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,16 +22,23 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_FUNCTIONBASE_H__
-#define __PLCORE_FUNCTIONBASE_H__
+#ifndef __PLCORE_FUNCTIONSIGNATURE_H__
+#define __PLCORE_FUNCTIONSIGNATURE_H__
 #pragma once
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "FunctionSignature.h"
-#include <PLCore/Typebase/UntypedVariant.h>
-#include <PLCore/Container/Iterable.h>
+#include <PLCore/Container/Array.h>
+
+
+//[-------------------------------------------------------]
+//[ Forward declarations                                  ]
+//[-------------------------------------------------------]
+namespace PLRefl
+{
+	class TypeInfo;
+}
 
 
 //[-------------------------------------------------------]
@@ -41,38 +48,44 @@ namespace PLCore {
 
 
 //[-------------------------------------------------------]
-//[ Types                                                 ]
-//[-------------------------------------------------------]
-typedef UntypedVariant<16> FunctionParam;
-
-
-//[-------------------------------------------------------]
 //[ Classes                                               ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Base for callable function objects
+*    Signature of a function
 */
-class FunctionBase {
+class FunctionSignature {
+
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
 	public:
+		PLCORE_API FunctionSignature() {}
 		/**
 		*  @brief
-		*    Call the function using the specified dynamic arguments
+		*    Value constructor
 		*
-		*  @param[in] pParams
-		*    Dynamic arguments for the function
+		*  @param[in] pReturnType
+		*    TypeInfo of the function return type
+		*  @param[in] lstArgTypes
+		*    Array containing TypeInfo structures for function arguments
 		*/
-		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParams) const = 0;
+		PLCORE_API FunctionSignature(const PLRefl::TypeInfo *pReturnType, const Array<const PLRefl::TypeInfo*> &lstArgTypes);
 
 		/**
 		*  @brief
-		*    Retrieve function signature
+		*    Typed constructor
 		*/
-		virtual FunctionSignature GetSignature() const = 0;
+		template <typename TRet = void, typename... TArgs>
+		static FunctionSignature FromTemplate();
+
+	//[-------------------------------------------------------]
+	//[ Private data                                          ]
+	//[-------------------------------------------------------]
+	private:
+		const PLRefl::TypeInfo			*m_pReturnType;		/**< Function return type */
+		Array<const PLRefl::TypeInfo*>	m_lstArgTypes;		/**< Argument types */
 };
 
 
@@ -82,4 +95,10 @@ class FunctionBase {
 } // PLCore
 
 
-#endif // __PLCORE_FUNCTIONBASE_H__
+//[-------------------------------------------------------]
+//[ Implementation                                        ]
+//[-------------------------------------------------------]
+#include "FunctionSignature.inl"
+
+
+#endif // __PLCORE_FUNCTIONSIGNATURE_H__

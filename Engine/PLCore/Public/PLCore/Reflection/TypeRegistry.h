@@ -75,6 +75,17 @@ class TypeRegistry : public PLCore::Singleton<TypeRegistry> {
 
 		/**
 		*  @brief
+		*    Register a new primitive into the registry
+		*
+		*  @param[in] sName
+		*    Name of the type to register
+		*  @param[in] pTypeInfo
+		*    The type info for the type
+		*/
+		PLCORE_API void RegisterPrimitiveType(const PLCore::String &sName, PrimitiveTypeInfo *pTypeInfo);
+
+		/**
+		*  @brief
 		*    Find a class type by name
 		*
 		*  @param[in] sName
@@ -85,13 +96,28 @@ class TypeRegistry : public PLCore::Singleton<TypeRegistry> {
 		*/
 		PLCORE_API const ClassTypeInfo *GetClassType(const PLCore::String &sName) const;
 
+		/**
+		*  @brief
+		*    Find a primitive type by name
+		*
+		*  @param[in] sName
+		*    Name of the primitive type to find
+		*
+		*  @return
+		*    Pointer to the type info or nullptr of it was not found
+		*/
+		PLCORE_API const PrimitiveTypeInfo *GetPrimitiveType(const PLCore::String &sName) const;
+
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
 		typedef PLCore::HashMap<PLCore::String, ClassTypeInfo*> _ClassTypeMap;
-		_ClassTypeMap m_mapClassTypes;		/**< All known class types by name */
+		_ClassTypeMap m_mapClassTypes;				/**< All known class types by name */
+
+		typedef PLCore::HashMap<PLCore::String, PrimitiveTypeInfo*> _PrimitiveTypeMap;
+		_PrimitiveTypeMap m_mapPrimitiveTypes;		/**< All known class types by name */
 };
 
 

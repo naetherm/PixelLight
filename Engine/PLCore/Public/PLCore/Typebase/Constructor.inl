@@ -41,6 +41,16 @@ T* ConstructorFunc<T, TArgs...>::Invoke(TArgs... args) const
 	return new T(args...);
 }
 
+/**
+*  @brief
+*    Retrieve the signature
+*/
+template <class T, typename... TArgs>
+FunctionSignature ConstructorFunc<T, TArgs...>::GetSignature() const
+{
+	return FunctionSignature::FromTemplate<T*, TArgs...>();
+}
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]

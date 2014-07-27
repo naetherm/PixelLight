@@ -77,12 +77,32 @@ TRet Function<TRet(T::*)(TArgs...)>::Invoke(T *pInst, TArgs... args) const
 
 /**
 *  @brief
+*    Retrieve the signature
+*/
+template <typename TRet, class T, typename... TArgs>
+FunctionSignature Function<TRet(T::*)(TArgs...)>::GetSignature() const
+{
+	return FunctionSignature::FromTemplate<TRet, T*, TArgs...>();
+}
+
+/**
+*  @brief
 *    Invoke the delegate
 */
 template <typename TRet, class T, typename... TArgs>
 TRet Function<TRet(T::*)(TArgs...) const>::Invoke(const T *pInst, TArgs... args) const
 {
 	return (pInst->*m_cFunc)(args...);
+}
+
+/**
+*  @brief
+*    Retrieve the signature
+*/
+template <typename TRet, class T, typename... TArgs>
+FunctionSignature Function<TRet(T::*)(TArgs...) const>::GetSignature() const
+{
+	return FunctionSignature::FromTemplate<TRet, const T*, TArgs...>();
 }
 
 /**

@@ -55,6 +55,7 @@ class ConstructorFunc : public Invokable<T*, TArgs...> {
 	//[-------------------------------------------------------]
 	public:
 		virtual T* Invoke(TArgs... args) const override;
+		virtual FunctionSignature GetSignature() const override;
 };
 
 
