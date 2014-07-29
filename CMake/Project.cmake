@@ -465,9 +465,11 @@ macro(pl_build_library type)
 	# Input libraries for other projects
 	set(${PL_CURRENT_TARGET_NAME}_LIBRARIES ${PL_CURRENT_TARGET_NAME} CACHE INTERNAL "")
 
-	# Handle plugin
-	if(${is_plugin})
-		pl_create_plugin()
+	if(WIN32)
+		# Handle plugin
+		if(${is_plugin})
+			pl_create_plugin()
+		endif()
 	endif()
 
 	# Include documentation?
