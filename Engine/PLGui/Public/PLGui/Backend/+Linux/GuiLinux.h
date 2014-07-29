@@ -32,7 +32,7 @@
 //[-------------------------------------------------------]
 #include <PLCore/Container/Array.h>
 #include "PLGui/Backend/GuiImpl.h"
-#include "PLGui/PLGuiLinuxIncludes.h"
+#include "PLGui/+Linux/PLGuiLinuxIncludes.h"
 
 
 //[-------------------------------------------------------]

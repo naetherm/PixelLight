@@ -32,7 +32,7 @@
 //[-------------------------------------------------------]
 #include <PLCore/String/String.h>
 #include "PLGui/Backend/WidgetImpl.h"
-#include "PLGui/PLGuiLinuxIncludes.h"
+#include "PLGui/+Linux/PLGuiLinuxIncludes.h"
 
 
 //[-------------------------------------------------------]

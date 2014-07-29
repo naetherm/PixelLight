@@ -32,7 +32,7 @@
 //[-------------------------------------------------------]
 #include <PLGraphics/Color/Color4.h>
 #include "PLGui/PLGui.h"
-#include "PLGui/PLGuiLinuxIncludes.h"
+#include "PLGui/+Linux/PLGuiLinuxIncludes.h"
 
 
 //[-------------------------------------------------------]

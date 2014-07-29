@@ -28,7 +28,7 @@
 #include "PLInput/Backend/Bluetooth/Bluetooth.h"
 #include "PLInput/Backend/Bluetooth/BTImpl.h"
 #if defined(LINUX) && !defined(ANDROID) && !defined(APPLE)
-	#include "PLInput/Backend/Bluetooth/BTLinux.h"
+	#include "PLInput/Backend/Bluetooth/+Linux/BTLinux.h"
 #endif
 
 

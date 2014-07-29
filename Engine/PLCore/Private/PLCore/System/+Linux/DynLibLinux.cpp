@@ -31,7 +31,7 @@
 #include <dlfcn.h>
 #include <stdio.h>
 #include "PLCore/File/Url.h"
-#include "PLCore/System/DynLibLinux.h"
+#include "PLCore/System/+Linux/DynLibLinux.h"
 
 
 //[-------------------------------------------------------]

@@ -32,7 +32,7 @@
 #include <string.h>
 #ifdef LINUX
 	#include <wchar.h>
-	#include "PLCore/PLCoreLinuxWrapper.h"
+	#include "PLCore/+Linux/PLCoreLinuxWrapper.h"
 #endif
 #include "PLCore/String/String.h"
 #include "PLCore/String/UTF8Tools.h"

@@ -32,8 +32,8 @@
 #include <PLCore/Frontend/Frontend.h>
 #include <PLCore/Frontend/FrontendContext.h>
 #include "PLFrontendOS/Frontend.h"
-#include "PLFrontendOS/Linux_XDnDFileDropHelper.h"
-#include "PLFrontendOS/OSWindowLinux.h"
+#include "PLFrontendOS/+Linux/Linux_XDnDFileDropHelper.h"
+#include "PLFrontendOS/+Linux/OSWindowLinux.h"
 
 
 //[-------------------------------------------------------]

@@ -28,7 +28,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #ifdef LINUX
-	#include "PLCore/PLCoreLinuxWrapper.h"
+	#include "PLCore/+Linux/PLCoreLinuxWrapper.h"
 #endif
 #include "PLCore/Core/MemoryManager.h"
 #include "PLCore/String/UTF8Tools.h"

@@ -31,7 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLGui/Backend/ImageImpl.h"
-#include "PLGui/PLGuiLinuxIncludes.h"
+#include "PLGui/+Linux/PLGuiLinuxIncludes.h"
 
 
 //[-------------------------------------------------------]
