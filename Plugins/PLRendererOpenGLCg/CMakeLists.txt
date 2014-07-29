@@ -48,7 +48,7 @@ pl_add_dependency(Cg)
 ##################################################
 ## Additional libraries
 ##################################################
-if(LINUX)
+if(CMAKE_SYSTEM_NAME STREQUAL Linux)
 	pl_add_link_libs(GL)
 endif()
 

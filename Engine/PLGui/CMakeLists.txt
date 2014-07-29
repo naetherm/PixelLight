@@ -48,7 +48,7 @@ if(WIN32)
 	pl_add_link_libs(${WIN32_STANDARD_LIBS}	${WIN32_GDI_LIBS})
 elseif(ANDROID)
 	pl_add_link_libs(android)
-elseif(LINUX)
+elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
 	pl_add_link_libs(${LINUX_X11_LIBS})
 endif()
 

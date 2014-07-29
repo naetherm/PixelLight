@@ -55,10 +55,10 @@ else()
 	message(STATUS "-- Using external build system for dependency 'jpg'...")
 
 	# We are building static library out of libjpeg - we need to enable PIC support!
-        if(LINUX)
+        if(CMAKE_SYSTEM_NAME STREQUAL Linux)
                 set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
         endif()
-	
+
 	# Define the external project
 	ExternalProject_Add(${PL_CURRENT_TARGET_NAME}
 		DOWNLOAD_DIR ${PL_CURRENT_DOWNLOAD_DIR}

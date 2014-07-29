@@ -50,13 +50,13 @@ if(ANDROID)
 	pl_add_include_paths(${ANDROID_NDK}/sources/android/native_app_glue)
 elseif(APPLE)
 	# [TODO] Apple input implementation
-elseif(LINUX)
+elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
 	pl_add_include_paths(
 		/usr/include/dbus-1.0
 		/usr/lib/dbus-1.0/include
 		# [TODO] check the dbus include dirs. This are the dirs 'pkg-config --cflags --libs dbus-1' returns on Ubuntu 11.10
 		# Added this for Ubuntu includes and hopefully it will be the right location for most of ubuntu installations.
-		/usr/include/dbus-1.0 
+		/usr/include/dbus-1.0
 		/usr/lib/i386-linux-gnu/dbus-1.0/include
 		# Ubuntu 11.10 64bit dbus include
 		/usr/lib/x86_64-linux-gnu/dbus-1.0/include
@@ -77,7 +77,7 @@ elseif(ANDROID)
 	pl_add_link_libs(android)
 elseif(APPLE)
 	# [TODO] Apple input implementation
-elseif(LINUX)
+elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
 	pl_add_link_libs(
 		${LINUX_X11_LIBS}
 		dbus-1

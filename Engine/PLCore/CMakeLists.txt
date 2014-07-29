@@ -58,7 +58,7 @@ endif()
 
 if(WIN32)
 	pl_add_link_libs(${WIN32_STANDARD_LIBS} ${WIN32_WSOCK32_LIB} ${WIN32_USER32_LIB})
-elseif(LINUX)
+elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
 	pl_add_link_libs(dl)
 
 	# There's no native curses library on Android, and compiling one
@@ -99,7 +99,7 @@ pl_build_library(SHARED)
 ##################################################
 
 # Change the definition setup
-if(NOT LINUX)
+if(NOT CMAKE_SYSTEM_NAME STREQUAL Linux)
 	pl_remove_compile_defs(PLCORE_EXPORTS)
 endif()
 pl_add_compile_defs(PLCORE_STATIC)

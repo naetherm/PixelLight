@@ -44,7 +44,7 @@ pl_add_dependency(LuaJIT)
 ##################################################
 ## Additional libraries
 ##################################################
-if(LINUX)
+if(CMAKE_SYSTEM_NAME STREQUAL Linux)
 	pl_add_link_libs(dl)
 endif()
 
