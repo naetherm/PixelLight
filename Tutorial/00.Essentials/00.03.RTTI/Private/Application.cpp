@@ -207,8 +207,8 @@ void Application::Main()
 	params.Add(PLCore::FunctionParam(1008));
 	params.Add(PLCore::FunctionParam(108));
 
-	D* d1 = ctor1->Construct(&params).GetAs<D>();
-	D* d2 = ctor2->Construct(&params).GetAs<D>();
+	D* d1 = ctor1->Construct(&params).GetAs<D*>();
+	D* d2 = ctor2->Construct(&params).GetAs<D*>();
 	d1=d2;
 
 	//auto ctors = clss->GetConstructors().GetConstIterator();
@@ -219,4 +219,24 @@ void Application::Main()
 	//	d=d;
 	//}
 
+	struct TEST {
+	
+		int cnt;
+
+		TEST()
+		{
+			static int i = 0;
+			cnt = i = i++;
+		}
+
+		~TEST()
+		{
+			static int i = 0;
+			i=i;
+		}
+	};
+
+	PLCore::UntypedVariant<> v;
+	v.Set(TEST(), false);
+	v.Destroy();
 }

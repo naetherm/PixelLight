@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: DynamicObject.inl                              *
+ *  File: TagHolder.h                                    *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,10 +22,17 @@
 \*********************************************************/
 
 
+#ifndef __PLCORE_REFL_TAGHOLDER_H__
+#define __PLCORE_REFL_TAGHOLDER_H__
+#pragma once
+
+
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "TypeInfo.h"
+#include <PLCore/String/String.h>
+#include <PLCore/Container/HashMap.h>
+#include "DynamicObject.h"
 
 
 //[-------------------------------------------------------]
@@ -35,61 +42,58 @@ namespace PLRefl {
 
 
 //[-------------------------------------------------------]
-//[ Public functions                                      ]
+//[ Classes                                               ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Dynamic object from an existing instance
+*    Base for reflection elements supporting tags
+*
+*  @remarks
+*    TODO: describe this in more detail
 */
-template <typename T>
-DynamicObject::DynamicObject(const T &cInst)
-{
-	m_pStorage.Set(cInst);
-	m_pTypeInfo = GetStaticTypeInfo(pInst);
-}
+class TagHolder {
 
-/**
-*  @brief
-*    Get the internal object
-*/
-const PLCore::UntypedVariant<> &DynamicObject::GetUntyped() const
-{
-	return m_pStorage;
-}
 
-/**
-*  @brief
-*    Get type info of the stored object
-*/
-const TypeInfo *DynamicObject::GetTypeInfo() const
-{
-	return m_pTypeInfo;
-}
+	//[-------------------------------------------------------]
+	//[ Public functions                                      ]
+	//[-------------------------------------------------------]
+	public:
+		/**
+		*  @brief
+		*    Default ctor
+		*/
+		TagHolder() {}
 
-/**
-*  @brief
-*    Get object as an instance of the specified type
-*/
-template <typename T>
-T &DynamicObject::GetAs()
-{
-	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
-	return m_pStorage.Get<T>();
-}
+	//[-------------------------------------------------------]
+	//[ Protected functions                                   ]
+	//[-------------------------------------------------------]
+	protected:
+		/**
+		*  @brief
+		*    Add a new tag
+		*/
+		inline void AddTag(const PLCore::String &sName, const DynamicObject &cValue);
 
-/**
-*  @brief
-*    Get object as an instance of the specified type
-*/
-template <typename T>
-const T &DynamicObject::GetAs() const
-{
-	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
-	return m_pStorage.Get<T>();
-}
+	//[-------------------------------------------------------]
+	//[ Protected data                                        ]
+	//[-------------------------------------------------------]
+	protected:
+		typedef PLCore::HashMap<PLCore::String, DynamicObject> _TagMap;
+		_TagMap m_mapTags;		/**< Map storing tag values by their name */
+
+};
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLRefl
+
+
+//[-------------------------------------------------------]
+//[ Implementation                                        ]
+//[-------------------------------------------------------]
+#include "TagHolder.inl"
+
+
+#endif // __PLCORE_REFL_TAGHOLDER_H__

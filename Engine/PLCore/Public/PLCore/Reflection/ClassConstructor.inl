@@ -45,7 +45,7 @@ DynamicObject ClassConstructor::Construct(const PLCore::Iterable<PLCore::Functio
 {
 	if (m_pFunc)
 	{
-		return DynamicObject(m_pFunc->DynInvoke(pParams).Get<void*>(), m_cSignature.GetReturnType());
+		return DynamicObject(m_pFunc->DynInvoke(pParams), m_cSignature.GetReturnType());
 	}
 	else
 	{

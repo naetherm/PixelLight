@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: DynamicObject.inl                              *
+ *  File: Destructor.inl                                 *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -23,15 +23,9 @@
 
 
 //[-------------------------------------------------------]
-//[ Includes                                              ]
-//[-------------------------------------------------------]
-#include "TypeInfo.h"
-
-
-//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -39,57 +33,64 @@ namespace PLRefl {
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Dynamic object from an existing instance
+*    Create new destructor
 */
+template <typename T, bool IS_POINTER_TO_POINTER>
+Destructor Destructor::Create()
+{
+	Destructor d;
+	d.m_cDestroyFunc = &Destructor::DestructStub<T, IS_POINTER_TO_POINTER>;
+
+	return d;
+}
+
+/**
+*  @brief
+*    Destroy the given object
+*/
+void Destructor::Destroy(void *pObject) const
+{
+	if (m_cDestroyFunc)
+		(*m_cDestroyFunc)(pObject);
+}
+
+//[-------------------------------------------------------]
+//[ Private functions                                     ]
+//[-------------------------------------------------------]
+/**
+*  @brief
+*    Simple helper for Destructor::DestructStub
+*/
+template <typename T, bool PTP>
+struct PointerHelper {
+
+	static T *Get(void *pUntyped)
+	{
+		return reinterpret_cast<T*>(pUntyped);
+	}
+};
+
 template <typename T>
-DynamicObject::DynamicObject(const T &cInst)
-{
-	m_pStorage.Set(cInst);
-	m_pTypeInfo = GetStaticTypeInfo(pInst);
-}
+struct PointerHelper<T, true> {
+
+	static T *Get(void *pUntyped)
+	{
+		return *reinterpret_cast<T**>(pUntyped);
+	}
+};
 
 /**
 *  @brief
-*    Get the internal object
+*    The typed destruction method stub
 */
-const PLCore::UntypedVariant<> &DynamicObject::GetUntyped() const
+template <typename T, bool IS_POINTER_TO_POINTER>
+void Destructor::DestructStub(void *pObject)
 {
-	return m_pStorage;
+	T* ptr = PointerHelper<T, IS_POINTER_TO_POINTER>::Get(pObject);
+	ptr->~T();
 }
-
-/**
-*  @brief
-*    Get type info of the stored object
-*/
-const TypeInfo *DynamicObject::GetTypeInfo() const
-{
-	return m_pTypeInfo;
-}
-
-/**
-*  @brief
-*    Get object as an instance of the specified type
-*/
-template <typename T>
-T &DynamicObject::GetAs()
-{
-	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
-	return m_pStorage.Get<T>();
-}
-
-/**
-*  @brief
-*    Get object as an instance of the specified type
-*/
-template <typename T>
-const T &DynamicObject::GetAs() const
-{
-	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
-	return m_pStorage.Get<T>();
-}
-
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+} // PLCore

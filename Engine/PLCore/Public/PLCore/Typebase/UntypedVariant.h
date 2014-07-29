@@ -27,6 +27,7 @@
 #pragma once
 
 #include "TypeTraits.h"
+#include "Destructor.h"
 
 
 //[-------------------------------------------------------]
@@ -64,10 +65,24 @@ class UntypedVariant {
 		*    Typed constructor
 		*/
 		template <typename T>
-		UntypedVariant(const T &cVal)
+		UntypedVariant(const T &cVal, bool bAutoDestroy = false)
 		{
 			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
 			AccessHelper<_Type, IsBig<_Type>::Value>::Set(cVal, m_pData);
+
+			if (bAutoDestroy)
+			{
+				m_cDestructor = Destructor::Create<_Type, IsBig<_Type>::Value>();
+			}
+		}
+
+		/**
+		*  @brief
+		*    Destructor
+		*/
+		~UntypedVariant()
+		{
+			Destroy();
 		}
 
 		/**
@@ -85,10 +100,19 @@ class UntypedVariant {
 		*    Set the variant value
 		*/
 		template <typename T>
-		void Set(const T &cVal)
+		void Set(const T &cVal, bool bAutoDestroy = false)
 		{
+			// We are possibly overriding the stored value, thus we should destroy the old one if
+			// it was set.
+			Destroy();
+
 			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
 			AccessHelper<_Type, IsBig<_Type>::Value>::Set(cVal, m_pData);
+
+			if (bAutoDestroy)
+			{
+				m_cDestructor = Destructor::Create<_Type, IsBig<_Type>::Value>();
+			}
 		}
 
 		/**
@@ -117,11 +141,12 @@ class UntypedVariant {
 		*  @brief
 		*    Destroy the object stored in the variant
 		*/
-		template <typename T>
 		void Destroy()
 		{
-			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
-			AccessHelper<_Type, IsBig<_Type>::Value>::Destroy(m_pData);
+			m_cDestructor.Destroy(m_pData);
+
+			// Reset the destructor!
+			m_cDestructor = Destructor();
 		}
 
 		/**
@@ -220,7 +245,8 @@ class UntypedVariant {
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		unsigned char m_pData[STORAGE_SIZE];
+		unsigned char	m_pData[STORAGE_SIZE];		/**< Untyped data buffer */
+		Destructor		m_cDestructor;				/**< Untyped destructor*/
 };
 
 //[-------------------------------------------------------]

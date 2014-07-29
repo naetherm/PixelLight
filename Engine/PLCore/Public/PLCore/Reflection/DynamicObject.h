@@ -31,6 +31,7 @@
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 #include <PLCore/PLCore.h>
+#include <PLCore/Typebase/UntypedVariant.h>
 
 
 //[-------------------------------------------------------]
@@ -49,7 +50,7 @@ class TypeInfo;
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Holder for object that uses a generic void pointer for storage and a TypeInfo to describe the stored object
+*    Holder for object that uses an untyped variant for storage and a TypeInfo to describe the stored object
 */
 class DynamicObject {
 
@@ -69,32 +70,19 @@ class DynamicObject {
 		*    Construct a dynamic object from an existing instance
 		*/
 		template <typename T>
-		DynamicObject(T *pInst);
-
-		/**
-		*  @brief
-		*    Construct a dynamic object from an existing instance
-		*/
-		template <typename T>
-		DynamicObject(const T *pInst);
+		DynamicObject(const T &cInst);
 
 		/**
 		*  @brief
 		*    Construct a dynamic object from unknown object and its type info
 		*/
-		PLCORE_API DynamicObject(void *pObj, const TypeInfo *pType);
+		PLCORE_API DynamicObject(const PLCore::UntypedVariant<> &cVariant, const TypeInfo *pType);
 
 		/**
 		*  @brief
 		*    Get the stored untyped object
 		*/
-		inline void *GetUntyped();
-
-		/**
-		*  @brief
-		*    Get the stored untyped object
-		*/
-		inline const void *GetUntyped() const;
+		inline const PLCore::UntypedVariant<> &GetUntyped() const;
 
 		/**
 		*  @brief
@@ -107,21 +95,21 @@ class DynamicObject {
 		*    Get the stored object as a particular type
 		*/
 		template <typename T>
-		inline T* GetAs();
+		inline T& GetAs();
 
 		/**
 		*  @brief
 		*    Get the stored object as a particular type
 		*/
 		template <typename T>
-		inline const T* GetAs() const;
+		inline const T& GetAs() const;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		void			*m_pStorage;		/**< The untyped object */
-		const TypeInfo	*m_pTypeInfo;		/**< Type of the stored object */
+		PLCore::UntypedVariant<>	m_pStorage;		/**< The untyped object */
+		const TypeInfo				*m_pTypeInfo;	/**< Type of the stored object */
 };
 
 

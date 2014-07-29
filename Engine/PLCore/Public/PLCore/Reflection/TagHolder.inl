@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: DynamicObject.inl                              *
+ *  File: TagHolder.inl                                  *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,72 +22,23 @@
 \*********************************************************/
 
 
-//[-------------------------------------------------------]
-//[ Includes                                              ]
-//[-------------------------------------------------------]
-#include "TypeInfo.h"
-
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLRefl {
 
-
 //[-------------------------------------------------------]
 //[ Public functions                                      ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Dynamic object from an existing instance
+*    Add new tag
 */
-template <typename T>
-DynamicObject::DynamicObject(const T &cInst)
+void TagHolder::AddTag(const PLCore::String &sName, const DynamicObject &cValue)
 {
-	m_pStorage.Set(cInst);
-	m_pTypeInfo = GetStaticTypeInfo(pInst);
+	m_mapTags.Add(sName, cValue);
 }
-
-/**
-*  @brief
-*    Get the internal object
-*/
-const PLCore::UntypedVariant<> &DynamicObject::GetUntyped() const
-{
-	return m_pStorage;
-}
-
-/**
-*  @brief
-*    Get type info of the stored object
-*/
-const TypeInfo *DynamicObject::GetTypeInfo() const
-{
-	return m_pTypeInfo;
-}
-
-/**
-*  @brief
-*    Get object as an instance of the specified type
-*/
-template <typename T>
-T &DynamicObject::GetAs()
-{
-	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
-	return m_pStorage.Get<T>();
-}
-
-/**
-*  @brief
-*    Get object as an instance of the specified type
-*/
-template <typename T>
-const T &DynamicObject::GetAs() const
-{
-	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
-	return m_pStorage.Get<T>();
-}
-
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]

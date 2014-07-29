@@ -41,7 +41,6 @@ using namespace PLRefl;
 *    Empty object ctor
 */
 DynamicObject::DynamicObject() :
-	m_pStorage(nullptr),
 	m_pTypeInfo(nullptr)
 {}
 
@@ -49,7 +48,7 @@ DynamicObject::DynamicObject() :
 *  @brief
 *    Value ctor
 */
-DynamicObject::DynamicObject(void *pObj, const TypeInfo *pTypeInfo) :
-	m_pStorage(pObj),
+DynamicObject::DynamicObject(const PLCore::UntypedVariant<> &cVariant, const TypeInfo *pTypeInfo) :
+	m_pStorage(cVariant),
 	m_pTypeInfo(pTypeInfo)
 {}

@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: PLCore.h                                       *
+ *  File: Destructor.h                                   *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,16 +22,13 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_FUNCTIONBASE_H__
-#define __PLCORE_FUNCTIONBASE_H__
+#ifndef __PLCORE_DESTRUCTOR2_H__
+#define __PLCORE_DESTRUCTOR2_H__
 #pragma once
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "FunctionSignature.h"
-#include <PLCore/Typebase/UntypedVariant.h>
-#include <PLCore/Container/Iterable.h>
 
 
 //[-------------------------------------------------------]
@@ -41,19 +38,14 @@ namespace PLCore {
 
 
 //[-------------------------------------------------------]
-//[ Types                                                 ]
-//[-------------------------------------------------------]
-typedef UntypedVariant<> FunctionParam;
-
-
-//[-------------------------------------------------------]
 //[ Classes                                               ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Base for callable function objects
+*    Generic destructor wrapper
 */
-class FunctionBase {
+class Destructor {
+
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -61,18 +53,45 @@ class FunctionBase {
 	public:
 		/**
 		*  @brief
-		*    Call the function using the specified dynamic arguments
-		*
-		*  @param[in] pParams
-		*    Dynamic arguments for the function
+		*    Construct an "empty" destructor
 		*/
-		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParams) const = 0;
+		Destructor() : m_cDestroyFunc(nullptr) {}
 
 		/**
 		*  @brief
-		*    Retrieve function signature
+		*    Create new destructor for the specified type
 		*/
-		virtual FunctionSignature GetSignature() const = 0;
+		template <typename T, bool IS_POINTER_TO_POINTER = false>
+		static Destructor Create();
+
+		/**
+		*  @brief
+		*    Destruct the given untyped object using the internal typed destructor
+		*/
+		inline void Destroy(void *pObject) const;
+
+	//[-------------------------------------------------------]
+	//[ Private functions                                     ]
+	//[-------------------------------------------------------]
+	private:
+		/**
+		*  @brief
+		*    The static templated function using for the actual destruction
+		*/
+		template <typename T, bool IS_POINTER_TO_POINTER>
+		static void DestructStub(void *pObject);
+
+	//[-------------------------------------------------------]
+	//[ Private types                                         ]
+	//[-------------------------------------------------------]
+	private:
+		typedef void (*DestructorStub)(void*);
+
+	//[-------------------------------------------------------]
+	//[ Private data                                          ]
+	//[-------------------------------------------------------]
+	private:
+		DestructorStub m_cDestroyFunc;	/**< Pointer to the typed destructor function */
 };
 
 
@@ -82,4 +101,10 @@ class FunctionBase {
 } // PLCore
 
 
-#endif // __PLCORE_FUNCTIONBASE_H__
+//[-------------------------------------------------------]
+//[ Implementation                                        ]
+//[-------------------------------------------------------]
+#include "Destructor.inl"
+
+
+#endif // __PLCORE_DESTRUCTOR2_H__
