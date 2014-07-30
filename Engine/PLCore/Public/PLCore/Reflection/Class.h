@@ -35,6 +35,7 @@
 #include "ClassField.h"
 #include "ClassProperty.h"
 #include "ClassConstructor.h"
+#include "TagHolder.h"
 #include <PLCore/String/String.h>
 #include <PLCore/Container/HashMap.h>
 #include <PLCore/Container/Array.h>
@@ -63,7 +64,7 @@ class ClassBuilder;
 *  @remarks
 *    TODO: describe this in more detail
 */
-class Class {
+class Class : public TagHolder {
 
 	//[-------------------------------------------------------]
 	//[ Friends                                               ]

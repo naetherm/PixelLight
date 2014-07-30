@@ -53,6 +53,11 @@ namespace PLRefl {
 */
 class TagHolder {
 
+	//[-------------------------------------------------------]
+	//[ Public functions                                      ]
+	//[-------------------------------------------------------]
+	template <typename T>
+	friend class ClassBuilder;
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -63,6 +68,18 @@ class TagHolder {
 		*    Default ctor
 		*/
 		TagHolder() {}
+
+		/**
+		*  @brief
+		*    Check for a tag
+		*/
+		inline bool HasTag(const PLCore::String &sName) const;
+
+		/**
+		*  @brief
+		*    Get tag value
+		*/
+		inline const DynamicObject &GetTag(const PLCore::String &sName) const;
 
 	//[-------------------------------------------------------]
 	//[ Protected functions                                   ]

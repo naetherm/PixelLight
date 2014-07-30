@@ -45,7 +45,7 @@ template <typename T>
 DynamicObject::DynamicObject(const T &cInst)
 {
 	m_pStorage.Set(cInst);
-	m_pTypeInfo = GetStaticTypeInfo(pInst);
+	m_pTypeInfo = GetStaticTypeInfo(cInst);
 }
 
 /**
@@ -86,6 +86,16 @@ const T &DynamicObject::GetAs() const
 {
 	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
 	return m_pStorage.Get<T>();
+}
+
+/**
+*  @brief
+*    Comparison operator
+*/
+bool DynamicObject::operator==(const DynamicObject &cOther) const
+{
+	// [TODO] Untyped objects cannot be compared as of now so this always return false!!!
+	return (m_pTypeInfo == cOther.m_pTypeInfo && m_pStorage == cOther.m_pStorage);
 }
 
 

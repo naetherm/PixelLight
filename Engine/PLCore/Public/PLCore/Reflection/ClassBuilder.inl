@@ -44,6 +44,8 @@ template <typename T>
 ClassBuilder<T>::ClassBuilder(Class &cClss)
 	: m_pClass(&cClss)
 {
+	// By default, the tags go to the class itself
+	m_pLastTagHolder = m_pClass;
 }
 
 /**
@@ -84,11 +86,16 @@ ClassBuilder<T> &ClassBuilder<T>::Constructor(PLCore::FunctionBase *pFn)
 {
 	// Add the constructor to the class
 	if (pFn->GetSignature().GetArgumentTypes().GetSize() == 0)
+	{
 		// Default ctor
 		m_pClass->m_cDefaultCtor = ClassConstructor(pFn);
+		m_pLastTagHolder = &m_pClass->m_cDefaultCtor;
+	}
 	else
+	{
 		// Parameter ctor
-		m_pClass->m_lstConstructors.Add(ClassConstructor(pFn));
+		m_pLastTagHolder = &m_pClass->m_lstConstructors.Add(ClassConstructor(pFn));
+	}
 
 	return *this;
 }
@@ -102,6 +109,7 @@ ClassBuilder<T> &ClassBuilder<T>::Method(const PLCore::String &sName, PLCore::Fu
 {
 	// Add method to class
 	m_pClass->m_mapMethods.Add(sName, ClassMethod(sName, pFn));
+	m_pLastTagHolder = &m_pClass->m_mapMethods.Get(sName);
 
 	return *this;
 }
@@ -115,6 +123,7 @@ ClassBuilder<T> &ClassBuilder<T>::Field(const PLCore::String &sName, PLCore::uin
 {
 	// Add field to class
 	m_pClass->m_mapFields.Add(sName, ClassField(sName, nOffset));
+	m_pLastTagHolder = &m_pClass->m_mapFields.Get(sName);
 
 	return *this;
 }
@@ -128,6 +137,19 @@ ClassBuilder<T> &ClassBuilder<T>::Property(const PLCore::String &sName, PLCore::
 {
 	// Add method to class
 	m_pClass->m_mapProperties.Add(sName, ClassProperty(sName, pSetter, pGetter));
+	m_pLastTagHolder = &m_pClass->m_mapProperties.Get(sName);
+
+	return *this;
+}
+
+/**
+*  @brief
+*    Add a tag
+*/
+template <typename T>
+ClassBuilder<T> &ClassBuilder<T>::Tag(const PLCore::String &sName, const DynamicObject &cValue)
+{
+	m_pLastTagHolder->AddTag(sName, cValue);
 
 	return *this;
 }

@@ -225,6 +225,13 @@ namespace PLRefl {
 #define pl_class_property(NAME, GETTER, SETTER) \
 	.Property(#NAME, new PLCore::Function<decltype(&_Clss::SETTER)>(&_Clss::SETTER), new PLCore::Function<decltype(&_Clss::GETTER)>(&_Clss::GETTER))
 
+/**
+*  @brief
+*    Add a tag to the last defined tag holder
+*/
+#define pl_tag(NAME, VALUE) \
+	.Tag(NAME, VALUE)
+
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]

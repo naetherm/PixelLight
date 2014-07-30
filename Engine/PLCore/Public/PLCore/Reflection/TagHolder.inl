@@ -22,7 +22,6 @@
 \*********************************************************/
 
 
-
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
@@ -38,6 +37,28 @@ namespace PLRefl {
 void TagHolder::AddTag(const PLCore::String &sName, const DynamicObject &cValue)
 {
 	m_mapTags.Add(sName, cValue);
+}
+
+
+/**
+*  @brief
+*    Check for a tag
+*/
+bool TagHolder::HasTag(const PLCore::String &sName) const
+{
+	const DynamicObject &tag = m_mapTags.Get(sName);
+	
+	// The default "null object" will have no type info set
+	return (tag.GetTypeInfo() != nullptr);
+}
+
+/**
+*  @brief
+*    Get a tag's value
+*/
+const DynamicObject &TagHolder::GetTag(const PLCore::String &sName) const
+{
+	return m_mapTags.Get(sName);
 }
 
 //[-------------------------------------------------------]

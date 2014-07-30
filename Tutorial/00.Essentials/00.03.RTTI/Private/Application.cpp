@@ -59,7 +59,10 @@ public:
 pl_declare_class(A)
 
 pl_begin_class(A)
+	pl_tag("Access", PLCore::String("Private"))
+	pl_tag("Virtual", true)
 	pl_class_method(f)
+		pl_tag("Access", PLCore::String("Public"))
 pl_end_class()
 
 class B : public A
@@ -211,32 +214,24 @@ void Application::Main()
 	D* d2 = ctor2->Construct(&params).GetAs<D*>();
 	d1=d2;
 
-	//auto ctors = clss->GetConstructors().GetConstIterator();
-	//while (ctors.HasNext())
-	//{
-	//	const PLRefl::ClassConstructor &ctor = ctors.Next();
-	//	D* d = (D*)ctor.Construct(&params);
-	//	d=d;
-	//}
-
-	struct TEST {
 	
-		int cnt;
+	clss = PLRefl::TypeRegistry::GetInstance()->GetClassType("A")->GetClass();
+	if (clss->HasTag("Access"))
+	{
+		PLCore::String val = clss->GetTag("Access").GetAs<PLCore::String>();
+		val=val;
+	}
 
-		TEST()
-		{
-			static int i = 0;
-			cnt = i = i++;
-		}
+	if (clss->HasTag("Virtual"))
+	{
+		bool val = clss->GetTag("Virtual").GetAs<bool>();
+		val=val;
+	}
 
-		~TEST()
-		{
-			static int i = 0;
-			i=i;
-		}
-	};
-
-	PLCore::UntypedVariant<> v;
-	v.Set(TEST(), false);
-	v.Destroy();
+	const PLRefl::ClassMethod *meth = clss->GetMethod("f");
+	if (meth && meth->HasTag("Access"))
+	{
+		PLCore::String val = meth->GetTag("Access").GetAs<PLCore::String>();
+		val=val;
+	}
 }

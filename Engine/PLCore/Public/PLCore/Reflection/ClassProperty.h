@@ -30,6 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include "TagHolder.h"
 #include <PLCore/String/String.h>
 #include <PLCore/Typebase/FunctionBase.h>
 
@@ -50,7 +51,7 @@ namespace PLRefl {
 *  @remarks
 *    TODO: describe this in more detail
 */
-class ClassProperty {
+class ClassProperty : public TagHolder {
 
 
 	//[-------------------------------------------------------]

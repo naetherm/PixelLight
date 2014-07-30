@@ -104,6 +104,12 @@ class DynamicObject {
 		template <typename T>
 		inline const T& GetAs() const;
 
+		/**
+		*  @brief
+		*    Comparison
+		*/
+		inline bool operator==(const DynamicObject &cOther) const;
+
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]

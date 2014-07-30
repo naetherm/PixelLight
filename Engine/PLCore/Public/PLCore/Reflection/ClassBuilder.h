@@ -30,6 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include "DynamicObject.h"
 #include <PLCore/Typebase/FunctionBase.h>
 
 
@@ -93,13 +94,20 @@ class ClassBuilder {
 		*    Define a property inside the class
 		*/
 		ClassBuilder<T> &Property(const PLCore::String &sName, PLCore::FunctionBase *pSetter, PLCore::FunctionBase *pGetter);
+
+		/**
+		*  @brief
+		*    Add a tag to the last defined element
+		*/
+		ClassBuilder<T> &Tag(const PLCore::String &sName, const DynamicObject &cValue);
 		
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		Class *m_pClass;			/**< The class being built */
+		Class		*m_pClass;			/**< The class being built */
+		TagHolder	*m_pLastTagHolder;	/**< The last tag holder in the chain */
 };
 
 

@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "DynamicObject.h"
+#include "TagHolder.h"
 #include <PLCore/String/String.h>
 #include <PLCore/Typebase/FunctionBase.h>
 
@@ -51,7 +52,7 @@ namespace PLRefl {
 *  @remarks
 *    TODO: describe this in more detail
 */
-class ClassConstructor {
+class ClassConstructor : public TagHolder {
 
 
 	//[-------------------------------------------------------]

@@ -30,6 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include "TagHolder.h"
 #include <PLCore/String/String.h>
 
 
@@ -49,7 +50,7 @@ namespace PLRefl {
 *  @remarks
 *    TODO: describe this in more detail
 */
-class ClassField {
+class ClassField : public TagHolder {
 
 
 	//[-------------------------------------------------------]
