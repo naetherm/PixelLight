@@ -48,6 +48,13 @@ inline void *operator new(size_t nNumOfBytes)
 	}
 }
 
+inline void *operator new(size_t nNumOfBytes, void *pPlacementAddress)
+{
+	// Placement new syntax
+	(void)nNumOfBytes;
+	return pPlacementAddress;
+}
+
 inline void *operator new[](size_t nNumOfBytes)
 {
 	// The ANSI standard says that allocation requests of 0 bytes will still return a valid value

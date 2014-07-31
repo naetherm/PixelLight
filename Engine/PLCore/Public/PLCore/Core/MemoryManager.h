@@ -251,15 +251,16 @@ class MemoryManager {
 //[-------------------------------------------------------]
 //[ Variations of global 'new' and 'delete' operators     ]
 //[-------------------------------------------------------]
-void *operator new(size_t nNumOfBytes);
-void *operator new[](size_t nNumOfBytes);
-void  operator delete(void *pAddress);
-void  operator delete[](void *pAddress);
+extern void *operator new(size_t nNumOfBytes);
+extern void *operator new[](size_t nNumOfBytes);
+extern void *operator new(size_t nNumOfBytes, void *pPlacementAddress);
+extern void  operator delete(void *pAddress);
+extern void  operator delete[](void *pAddress);
 // This two special new-operators are also used by 'Microsoft's memory tracker', so there's no undesired interfering
-void *operator new(size_t nNumOfBytes, const char *pszSourceFile, int nSourceLine);
-void *operator new[](size_t nNumOfBytes, const char *pszSourceFile, int nSourceLine);
-void  operator delete(void *pAddress, const char *pszSourceFile, int nSourceLine);
-void  operator delete[](void *pAddress, const char *pszSourceFile, int nSourceLine);
+extern void *operator new(size_t nNumOfBytes, const char *pszSourceFile, int nSourceLine);
+extern void *operator new[](size_t nNumOfBytes, const char *pszSourceFile, int nSourceLine);
+extern void  operator delete(void *pAddress, const char *pszSourceFile, int nSourceLine);
+extern void  operator delete[](void *pAddress, const char *pszSourceFile, int nSourceLine);
 
 
 #endif // __PLCORE_MEMORYMANAGER_H__

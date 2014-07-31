@@ -184,14 +184,14 @@ class UntypedVariant {
 
 			static void Set(const T &cVal, unsigned char *pBuffer)
 			{
-				// [TODO] Here should be placement new
-				*((T*)pBuffer) = cVal;
+				// [TODO] Arrays are not supported
+				new (pBuffer) T(cVal);
 			}
 
 			static void Set(const T &&cVal, unsigned char *pBuffer)
 			{
-				// [TODO] Here should be placement new
-				*((T*)pBuffer) = cVal;
+				// [TODO] Arrays are not supported
+				new (pBuffer)T(cVal);
 			}
 
 			static T &Get(unsigned char *pBuffer)
@@ -215,11 +215,13 @@ class UntypedVariant {
 
 			static void Set(const T &cVal, unsigned char *pBuffer)
 			{
+				// [TODO] Arrays are not supported
 				*((T**)pBuffer) = new T(cVal);
 			}
 
 			static void Set(const T &&cVal, unsigned char *pBuffer)
 			{
+				// [TODO] Arrays are not supported
 				*((T**)pBuffer) = new T(cVal);
 			}
 
