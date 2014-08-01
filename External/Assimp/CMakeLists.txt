@@ -56,10 +56,10 @@ set(ASSIMP_MD5 "52aa4cf4e34e6b2a9c5f6c0b3c319af1")
 	message(STATUS "-- Using external build system for dependency 'Assimp'...")
 
 	# We are building static library out of Assimp - we need to enable PIC support!
-    if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+    if(LINUX)
             set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
     endif()
-
+	
 	# Define the external project
 	ExternalProject_Add(${PL_CURRENT_TARGET_NAME}
 		DOWNLOAD_DIR ${PL_CURRENT_DOWNLOAD_DIR}

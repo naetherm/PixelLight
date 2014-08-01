@@ -53,7 +53,7 @@ pl_add_compile_defs(PLASSIMP_EXPORTS)
 
 if(WIN32)
 	pl_add_compile_defs(PLATFORM_WINDOWS)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+elseif(LINUX)
 	if(ANDROID)
 		pl_add_compile_defs(__GNUC_	__x86_32__)
 	endif()

@@ -49,7 +49,7 @@ pl_add_dependency(PLCore)
 ##################################################
 if(ANDROID)
 	pl_add_link_libs(log android)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+elseif(LINUX)
 	pl_add_link_libs(${LINUX_X11_LIBS})
 endif()
 

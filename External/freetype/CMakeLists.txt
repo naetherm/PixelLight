@@ -55,10 +55,10 @@ else()
 	message(STATUS "-- Using external build system for dependency 'freetype2'...")
 
 	# We are building static library out of freetype - we need to enable PIC support!
-    if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+    if(LINUX)
             set(COMPILER_FLAGS -DCMAKE_C_FLAGS:STRING=-fPIC -DCMAKE_CXX_FLAGS:STRING=-fPIC)
     endif()
-
+	
 	# Define the external project
 	ExternalProject_Add(${PL_CURRENT_TARGET_NAME}
 		DOWNLOAD_DIR ${PL_CURRENT_DOWNLOAD_DIR}

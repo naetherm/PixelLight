@@ -57,7 +57,7 @@ if(WIN32)
 		${WIN32_OPENGL32_LIB}
 		${WIN32_GLU32_LIB}
 	)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+elseif(LINUX)
 	pl_add_link_libs(
 		${LINUX_X11_LIBS}
 		GL
@@ -77,7 +77,7 @@ pl_add_compile_defs(PLRENDEREROPENGL_EXPORTS)
 #	pl_add_compile_defs(DISABLE_FONT_SUPPORT)
 #endif()
 
-if(CMAKE_SYSTEM_NAME STREQUAL Linux)
+if(LINUX)
 	pl_add_compile_defs(GLX_GLXEXT_PROTOTYPES)
 endif()
 
