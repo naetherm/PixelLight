@@ -110,7 +110,7 @@ if(GCC44 AND GCC_VERSION VERSION_LESS "4.4.6")
 endif()
 
 # Check GCC compiler
-include(CMake/Modules/CheckLinuxCompiler.cmake)	# Adds e.g. visibility attribute (http://gcc.gnu.org/wiki/Visibility) and checks for c++0x support
+include(${CMAKETOOLS_DIR}/Modules/CheckLinuxCompiler.cmake)	# Adds e.g. visibility attribute (http://gcc.gnu.org/wiki/Visibility) and checks for c++0x support
 
 
 ##################################################

@@ -77,9 +77,10 @@ set(PL_SUPPORTED_PLATFORMS "")
 ##################################################
 ## Platform-specific includes
 ##################################################
+
 if(WIN32)
 	include(CMake/Platforms/WinMSVC.cmake)
-elseif(CMAKE_SYSTEM_NAME STREQUAL Linux)
+elseif(LINUX)
 
 	# Common settings
 	include(CMake/Platforms/LinuxCommon.cmake)
