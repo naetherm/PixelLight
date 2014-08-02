@@ -47,7 +47,7 @@ const Class *ClassTypeInfo::GetClass() const
 */
 TypeInfo::Type ClassTypeInfo::GetTypeInfoType() const
 {
-	return Class;
+	return ClassType;
 }
 
 

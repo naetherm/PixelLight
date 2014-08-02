@@ -29,15 +29,19 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(LocalizationLoader, PLCore)
+	pl_base_class(PLCore::LoaderImpl)
+	pl_desc("Abstract localization loader base class")
+	pl_str_tag("Type", "Localization")
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLCore {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(LocalizationLoader)
 
 
 //[-------------------------------------------------------]

@@ -71,10 +71,6 @@ namespace PLCore {
 *    Constructor
 */
 FrontendPixelLight::FrontendPixelLight(const FrontendContext &cFrontendContext, FrontendImpl &cFrontendImpl) : Frontend(cFrontendContext, cFrontendImpl),
-	ApplicationClass(this),
-	ApplicationConstructor(this),
-	ApplicationConstructorParameters(this),
-	ApplicationParameters(this),
 	m_pFrontendApplication(nullptr),
 	m_bFrontendApplicationInitialized(false)
 {

@@ -50,14 +50,9 @@ class ChunkLoader : public LoaderImpl {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, ChunkLoader, "PLCore", PLCore::LoaderImpl, "Abstract chunk loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Chunk")
-		pl_properties_end
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -84,6 +79,12 @@ class ChunkLoader : public LoaderImpl {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::ChunkLoader)
 
 
 #endif // __PLCORE_CHUNKLOADER_H__

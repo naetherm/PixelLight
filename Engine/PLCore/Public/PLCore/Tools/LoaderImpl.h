@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Base/Object.h"
+#include "PLCore/Reflection/Rtti.h"
 
 
 //[-------------------------------------------------------]
@@ -68,13 +68,19 @@ namespace PLCore {
 *    even expect that it's data is within a provided directory (example: DICOM). As "Format", write
 *    ",", ",dcm,DCM,dicom,DICOM" and so on.
 */
-class LoaderImpl : public Object {
+class LoaderImpl {
 
 
 	//[-------------------------------------------------------]
 	//[ Friends                                               ]
 	//[-------------------------------------------------------]
 	friend class Loader;
+
+	
+	//[-------------------------------------------------------]
+	//[ Reflected class                                       ]
+	//[-------------------------------------------------------]
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -85,20 +91,6 @@ class LoaderImpl : public Object {
 		static PLCORE_API const String DeprecatedFormatVersion;			/**< 'Deprecated format version' string */
 		static PLCORE_API const String NoLongerSupportedFormatVersion;	/**< 'No longer supported format version' string */
 		static PLCORE_API const String InvalidFormatVersion;			/**< 'Invalid format version' string */
-
-
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, LoaderImpl, "PLCore", PLCore::Object, "Abstract loader implementation base class, derive your concrete loader implementations from this class")
-		// Properties
-		pl_properties
-			pl_property("Type",		"Unknown")
-			pl_property("Formats",	"")
-			pl_property("Load",		"0")
-			pl_property("Save",		"0")
-		pl_properties_end
-	pl_class_end
 
 
 	//[-------------------------------------------------------]
@@ -125,6 +117,12 @@ class LoaderImpl : public Object {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::LoaderImpl)
 
 
 #endif // __PLCORE_LOADER_IMPL_H__

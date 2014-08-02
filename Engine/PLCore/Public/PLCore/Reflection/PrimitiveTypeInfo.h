@@ -63,7 +63,7 @@ class PrimitiveTypeInfo : public TypeInfo {
 		*  @brief
 		*    Trivial RTTI for type infos
 		*/
-		virtual Type GetTypeInfoType() const override { return Primitive; }
+		virtual Type GetTypeInfoType() const override { return PrimitiveType; }
 };
 
 

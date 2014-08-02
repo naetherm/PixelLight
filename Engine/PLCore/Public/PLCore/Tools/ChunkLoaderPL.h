@@ -75,21 +75,9 @@ class ChunkLoaderPL : public ChunkLoader {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, ChunkLoaderPL, "PLCore", PLCore::ChunkLoader, "Chunk loader implementation for the PixelLight binary (Little-Endian) chunk file format")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"chunk,CHUNK")
-			pl_property("Load",		"1")
-			pl_property("Save",		"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_2(Load,	pl_ret_type(bool),	Chunk&,			File&,	"Load method",	"")
-		pl_method_2(Save,	pl_ret_type(bool),	const Chunk&,	File&,	"Save method",	"")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -143,6 +131,12 @@ class ChunkLoaderPL : public ChunkLoader {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::ChunkLoaderPL)
 
 
 #endif // __PLCORE_CHUNKLOADER_PL_H__

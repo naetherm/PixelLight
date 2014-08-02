@@ -67,7 +67,7 @@ class ClassTypeInfo : public TypeInfo {
 		*  @brief
 		*    Constructor
 		*/
-		PLCORE_API ClassTypeInfo(const PLCore::String &sName);
+		PLCORE_API ClassTypeInfo(const String &sName);
 
 		/**
 		*  @brief

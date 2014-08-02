@@ -29,15 +29,21 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(LoaderImpl, PLCore)
+	pl_desc("Abstract loader implementation base class, derive your concrete loader implementations from this class")
+	pl_str_tag("Type", "Unknown")
+	pl_str_tag("Formats", "")
+	pl_tag("Load", false)
+	pl_tag("Save", false)
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLCore {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(LoaderImpl)
 
 
 //[-------------------------------------------------------]

@@ -30,8 +30,8 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/String/String.h>
-#include <PLCore/Typebase/TypeTraits.h>
+#include "PLCore/String/String.h"
+#include "PLCore/Typebase/TypeTraits.h"
 
 
 //[-------------------------------------------------------]
@@ -64,10 +64,10 @@ class TypeInfo {
 		*    don't want it to become a performace bottleneck.
 		*/
 		enum Type {
-			Class,		/**< ClassTypeInfo */
-			Primitive,	/**< PrimitiveTypeInfo */
-			Pointer,	/**< PointerTypeInfo */
-			Reference	/**< ReferenceTypeInfo */
+			ClassType,		/**< ClassTypeInfo */
+			PrimitiveType,	/**< PrimitiveTypeInfo */
+			Pointer,		/**< PointerTypeInfo */
+			Reference		/**< ReferenceTypeInfo */
 		};
 
 	//[-------------------------------------------------------]

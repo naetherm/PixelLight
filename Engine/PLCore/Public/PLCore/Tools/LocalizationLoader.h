@@ -50,14 +50,9 @@ class LocalizationLoader : public LoaderImpl {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, LocalizationLoader, "PLCore", PLCore::LoaderImpl, "Abstract localization loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Localization")
-		pl_properties_end
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -84,6 +79,12 @@ class LocalizationLoader : public LoaderImpl {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::LocalizationLoader)
 
 
 #endif // __PLCORE_LOCALIZATIONLOADER_H__
