@@ -128,7 +128,8 @@ class Invokable : public FunctionBase {
 		{
 			// Initialize a tuple of the correct type from the dynamic argument list
 			TupleType t;
-			TupleFromUntypedVariant(pParam, t);
+			if (pParam)
+				TupleFromUntypedVariant(pParam, t);
 
 			// Invoke the function using the tuple
 			FunctionParam ret;

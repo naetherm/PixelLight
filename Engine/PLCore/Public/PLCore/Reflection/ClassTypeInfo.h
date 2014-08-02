@@ -36,7 +36,7 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -71,6 +71,12 @@ class ClassTypeInfo : public TypeInfo {
 
 		/**
 		*  @brief
+		*    Trivial RTTI for type infos
+		*/
+		virtual Type GetTypeInfoType() const override;
+
+		/**
+		*  @brief
 		*    Retirieve the associated class definition
 		*
 		*  @return
@@ -89,7 +95,7 @@ class ClassTypeInfo : public TypeInfo {
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+} // PLCore
 
 //[-------------------------------------------------------]
 //[ Implementation                                        ]

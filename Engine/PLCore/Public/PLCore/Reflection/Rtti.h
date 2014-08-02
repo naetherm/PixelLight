@@ -42,7 +42,7 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -58,15 +58,15 @@ namespace PLRefl {
 *    Whether the class has defined copy and assignment
 */
 #define __pl_declare_class(CLSS, COPYABLE) \
-	template<> struct PLRefl::StaticTypeInfo<CLSS> { \
-		static PLRefl::TypeInfo *Get() \
+	template<> struct PLCore::StaticTypeInfo<CLSS> { \
+		static PLCore::TypeInfo *Get() \
 		{ \
-			static PLRefl::ClassTypeInfo info(#CLSS); \
+			static PLCore::ClassTypeInfo info(#CLSS); \
 			static bool registered = false; \
 			if (!registered) \
 			{ \
 				registered = true; \
-				PLRefl::TypeRegistry::GetInstance()->RegisterClassType(#CLSS, &info); \
+				PLCore::TypeRegistry::GetInstance()->RegisterClassType(#CLSS, &info); \
 			} \
 			return &info; \
 		} \
@@ -124,15 +124,15 @@ namespace PLRefl {
 *    Name of the type (will be used as ID as well)
 */
 #define pl_declare_basic_type(TYPE) \
-	template<> struct PLRefl::StaticTypeInfo<TYPE> { \
-		static PLRefl::TypeInfo *Get() \
+	template<> struct PLCore::StaticTypeInfo<TYPE> { \
+		static PLCore::TypeInfo *Get() \
 		{ \
-			static PLRefl::PrimitiveTypeInfo info(#TYPE); \
+			static PLCore::PrimitiveTypeInfo info(#TYPE); \
 			static bool registered = false; \
 			if (!registered) \
 			{ \
 				registered = true; \
-				PLRefl::TypeRegistry::GetInstance()->RegisterPrimitiveType(#TYPE, &info); \
+				PLCore::TypeRegistry::GetInstance()->RegisterPrimitiveType(#TYPE, &info); \
 			} \
 			return &info; \
 		} \
@@ -149,7 +149,7 @@ namespace PLRefl {
 #define pl_rtti() \
 	public: \
 		static void _RegisterReflection(); \
-		virtual PLRefl::TypeInfo *_ClassId() const { return PLRefl::GetStaticTypeInfo(this); } \
+		virtual PLCore::ClassTypeInfo *GetClassTypeInfo() const { return (PLCore::ClassTypeInfo*)PLCore::GetStaticTypeInfo(this); } \
 	private:
 
 /**
@@ -174,21 +174,23 @@ namespace PLRefl {
 *    declared using the other macros provided (pl_rtti or pl_sti & pl_declare_type)
 *
 *  @param[in] CLSS
-*    The type to define reflection for
+*    The type to define reflection for (without namespace!)
+*  @param[in] NAMESPACe
+*    The namespace the type resides in
 */
-#define pl_begin_class(CLSS) \
+#define pl_begin_class(CLSS, NAMESPACE) \
 	struct CLSS##_Register { \
 		CLSS##_Register() \
 		{ \
-			CLSS::_RegisterReflection(); \
+			NAMESPACE::CLSS::_RegisterReflection(); \
 		} \
 	}; \
 	static CLSS##_Register __##CLSS##_Register; \
 	\
-	void CLSS::_RegisterReflection() \
+	void NAMESPACE::CLSS::_RegisterReflection() \
 	{ \
-		typedef CLSS _Clss; \
-		PLRefl::Class::Declare<CLSS>(#CLSS) \
+		typedef NAMESPACE::CLSS _Clss; \
+		PLCore::Class::Declare<CLSS>(#CLSS) \
 
 /**
 *  @brief
@@ -201,28 +203,28 @@ namespace PLRefl {
 *  @brief
 *    Connect the current class to its base
 */
-#define pl_class_base(NAME) \
+#define pl_base_class(NAME) \
 	.Base(#NAME)
 
 /**
 *  @brief
 *    Add a constructor with the given signature to the class
 */
-#define pl_class_ctor(...) \
+#define pl_ctor(...) \
 	.Constructor(new PLCore::ConstructorFunc<_Clss, __VA_ARGS__>())
 
 /**
 *  @brief
 *    Attach current class' member function to the reflection
 */
-#define pl_class_method(NAME) \
+#define pl_method(NAME) \
 	.Method(#NAME, new PLCore::Function<decltype(&_Clss::NAME)>(&_Clss::NAME))
 
 /**
 *  @brief
 *    Attach a property to the current class
 */
-#define pl_class_property(NAME, GETTER, SETTER) \
+#define pl_property(NAME, GETTER, SETTER) \
 	.Property(#NAME, new PLCore::Function<decltype(&_Clss::SETTER)>(&_Clss::SETTER), new PLCore::Function<decltype(&_Clss::GETTER)>(&_Clss::GETTER))
 
 /**
@@ -232,10 +234,24 @@ namespace PLRefl {
 #define pl_tag(NAME, VALUE) \
 	.Tag(NAME, VALUE)
 
+/**
+*  @brief
+*    Helper for string tags (as you cannot store const char[N] in a tag)
+*/
+#define pl_str_tag(NAME, VALUE) \
+	pl_tag(NAME, PLCore::String(VALUE))
+
+/**
+*  @brief
+*    Unified tag to provide descriptions of object
+*/
+#define pl_desc(DESC) \
+	pl_str_tag("Description", DESC)
+
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+} // PLCore
 
 
 //[-------------------------------------------------------]

@@ -26,7 +26,7 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 /**
 *  @brief
@@ -63,12 +63,14 @@ PLCore::FunctionParam ClassProperty::Get(const PLCore::Iterable<PLCore::Function
 template <typename T, class TObject>
 void ClassProperty::SetDirect(TObject *pObj, T cValue) const
 {
-	// This method works with the assumption that every Function is derived from the
-	// appropriate Invokable
-	typedef PLCore::Invokable<void, TObject*, T> _InvType;
-	_InvType* casted = (_InvType*)m_pSetter;
+	// This method simplifies the process by caching the required parameter array internally
+	static Array<FunctionParam> params;
+	params.Resize(2);
 
-	casted->Invoke(pObj, cValue);
+	params[0] = pObj;
+	params[1] = cValue;
+
+	Set(&params);
 }
 
 /**
@@ -78,12 +80,13 @@ void ClassProperty::SetDirect(TObject *pObj, T cValue) const
 template <typename T, class TObject>
 T ClassProperty::GetDirect(TObject *pObj) const
 {
-	// This method works with the assumption that every Function is derived from the
-	// appropriate Invokable
-	typedef PLCore::Invokable<T, TObject*> _InvType;
-	_InvType* casted = (_InvType*)m_pGetter;
+	// This method simplifies the process by caching the required parameter array internally
+	static Array<FunctionParam> params;
+	params.Resize(1);
 
-	return casted->Invoke(pObj);
+	params[0] = pObj;
+
+	return Get(&params).Get<T>();
 }
 
 /**
@@ -98,4 +101,4 @@ bool ClassProperty::operator==(const ClassProperty &cOther) const
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+} // PLCore

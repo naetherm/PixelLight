@@ -34,7 +34,7 @@
 //[-------------------------------------------------------]
 //[ Forward declarations                                  ]
 //[-------------------------------------------------------]
-namespace PLRefl
+namespace PLCore
 {
 	class TypeInfo;
 }
@@ -75,7 +75,7 @@ class FunctionSignature {
 		*  @param[in] lstArgTypes
 		*    Array containing TypeInfo structures for function arguments
 		*/
-		PLCORE_API FunctionSignature(const PLRefl::TypeInfo *pReturnType, const Array<const PLRefl::TypeInfo*> &lstArgTypes);
+		PLCORE_API FunctionSignature(const PLCore::TypeInfo *pReturnType, const Array<const PLCore::TypeInfo*> &lstArgTypes);
 
 		/**
 		*  @brief
@@ -88,13 +88,13 @@ class FunctionSignature {
 		*  @brief
 		*    Get return type of the function
 		*/
-		inline const PLRefl::TypeInfo *GetReturnType() const;
+		inline const PLCore::TypeInfo *GetReturnType() const;
 
 		/**
 		*  @brief
 		*    Get argument types of the function
 		*/
-		inline const Array<const PLRefl::TypeInfo*> &GetArgumentTypes() const;
+		inline const Array<const PLCore::TypeInfo*> &GetArgumentTypes() const;
 
 		/**
 		*  @brief
@@ -106,8 +106,8 @@ class FunctionSignature {
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		const PLRefl::TypeInfo			*m_pReturnType;		/**< Function return type */
-		Array<const PLRefl::TypeInfo*>	m_lstArgTypes;		/**< Argument types */
+		const PLCore::TypeInfo			*m_pReturnType;		/**< Function return type */
+		Array<const PLCore::TypeInfo*>	m_lstArgTypes;		/**< Argument types */
 };
 
 

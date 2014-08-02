@@ -59,10 +59,10 @@ public:
 pl_declare_class(A)
 
 pl_begin_class(A)
-	pl_tag("Access", PLCore::String("Private"))
+	pl_tag("Access", String("Private"))
 	pl_tag("Virtual", true)
 	pl_class_method(f)
-		pl_tag("Access", PLCore::String("Public"))
+		pl_tag("Access", String("Public"))
 pl_end_class()
 
 class B : public A
@@ -148,18 +148,18 @@ void Application::Main()
 {
 	MyClass c;
 
-	const PLRefl::Class *clss = PLRefl::TypeRegistry::GetInstance()->GetClassType("MyClass")->GetClass();
+	const PLCore::Class *clss = PLCore::TypeRegistry::GetInstance()->GetClassType("MyClass")->GetClass();
 	if (clss)
 	{
 		// Method
-		const PLRefl::ClassMethod *meth = clss->GetMethod("Foo");
+		const PLCore::ClassMethod *meth = clss->GetMethod("Foo");
 		if (meth)
 		{
 			// Indirect call
 			PLCore::Array<PLCore::FunctionParam> params;
-			params.Add(PLCore::FunctionParam(&c));
-			params.Add(PLCore::FunctionParam(108));
-			params.Add(PLCore::FunctionParam(10.8f));
+			params.Add(&c);
+			params.Add(108);
+			params.Add(10.8f);
 
 			int ret = meth->Call(&params).Get<int>();
 			
@@ -169,7 +169,7 @@ void Application::Main()
 		}
 
 		// Property
-		const PLRefl::ClassProperty *prop = clss->GetProperty("PrivateInt");
+		const PLCore::ClassProperty *prop = clss->GetProperty("PrivateInt");
 		if (prop)
 		{
 			// Indirect set/get
@@ -201,21 +201,21 @@ void Application::Main()
 	*v = 108;*/
 
 	D inst;
-	clss = PLRefl::TypeRegistry::GetInstance()->GetClassType("D")->GetClass();
+	clss = PLCore::TypeRegistry::GetInstance()->GetClassType("D")->GetClass();
 
-	const PLRefl::ClassConstructor *ctor1 = clss->GetDefaultConstructor();
-	const PLRefl::ClassConstructor *ctor2 = clss->GetConstructorMatchingSignature(PLCore::FunctionSignature::FromTemplate<D*, int, int>());
+	const PLCore::ClassConstructor *ctor1 = clss->GetDefaultConstructor();
+	const PLCore::ClassConstructor *ctor2 = clss->GetConstructorMatchingSignature(PLCore::FunctionSignature::FromTemplate<D*, int, int>());
 
 	PLCore::Array<PLCore::FunctionParam> params;
-	params.Add(PLCore::FunctionParam(1008));
-	params.Add(PLCore::FunctionParam(108));
+	params.Add(1008);
+	params.Add(108);
 
 	D* d1 = ctor1->Construct(&params).GetAs<D*>();
 	D* d2 = ctor2->Construct(&params).GetAs<D*>();
 	d1=d2;
 
 	
-	clss = PLRefl::TypeRegistry::GetInstance()->GetClassType("A")->GetClass();
+	clss = PLCore::TypeRegistry::GetInstance()->GetClassType("A")->GetClass();
 	if (clss->HasTag("Access"))
 	{
 		PLCore::String val = clss->GetTag("Access").GetAs<PLCore::String>();
@@ -228,7 +228,7 @@ void Application::Main()
 		val=val;
 	}
 
-	const PLRefl::ClassMethod *meth = clss->GetMethod("f");
+	const PLCore::ClassMethod *meth = clss->GetMethod("f");
 	if (meth && meth->HasTag("Access"))
 	{
 		PLCore::String val = meth->GetTag("Access").GetAs<PLCore::String>();

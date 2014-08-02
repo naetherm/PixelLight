@@ -25,22 +25,24 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Base/Class.h"
-#include "PLCore/String/ParseTools.h"
-#include "PLCore/Config/ConfigLoader.h"
-#include "PLCore/Config/Config.h"
+#include <PLCore/Reflection/Class.h>
+#include <PLCore/String/ParseTools.h>
+#include <PLCore/Config/ConfigLoader.h>
+#include <PLCore/Config/Config.h>
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLCore {
-
+using namespace PLCore;
 
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ConfigGroup)
+pl_begin_class(ConfigGroup, PLCore)
+	pl_desc("Configuration group")
+
+pl_end_class()
 
 
 //[-------------------------------------------------------]
@@ -99,11 +101,12 @@ String Config::GetVar(const String &sClass, const String &sVariable)
 {
 	// Get configuration class
 	ConfigGroup *pClass = GetClass(sClass);
-	if (pClass) {
+	if (pClass)	{
 		// Get attribute
-		const DynVar *pDynVar = pClass->GetAttribute(sVariable);
-		if (pDynVar)
-			return pDynVar->GetString();
+		const ClassProperty *pProp = pClass->GetClassTypeInfo()->GetClass()->GetProperty(sVariable);
+		if (pProp)
+			// [TODO] Do we care about the type of the property?
+			return pProp->GetDirect<String>(pClass);
 	}
 
 	// Error!
@@ -120,9 +123,10 @@ int Config::GetVarInt(const String &sClass, const String &sVariable)
 	ConfigGroup *pClass = GetClass(sClass);
 	if (pClass) {
 		// Get attribute
-		const DynVar *pDynVar = pClass->GetAttribute(sVariable);
-		if (pDynVar)
-			return pDynVar->GetInt();
+		const ClassProperty *pProp = pClass->GetClassTypeInfo()->GetClass()->GetProperty(sVariable);
+		if (pProp)
+			// [TODO] Do we care about the type of the property?
+			return pProp->GetDirect<int>(pClass);
 	}
 
 	// Error!
@@ -139,9 +143,9 @@ bool Config::SetVar(const String &sClass, const String &sVariable, const String 
 	ConfigGroup *pClass = GetClass(sClass);
 	if (pClass) {
 		// Get attribute
-		DynVar *pDynVar = pClass->GetAttribute(sVariable);
-		if (pDynVar) {
-			pDynVar->SetString(sValue);
+		const ClassProperty *pProp = pClass->GetClassTypeInfo()->GetClass()->GetProperty(sVariable);
+		if (pProp) {
+			pProp->SetDirect(pClass, sValue);
 
 			// Done
 			return true;
@@ -167,7 +171,7 @@ bool Config::SetDefault(const String &sClass, const String &sVariable)
 		Iterator<ConfigGroup*> cIterator = m_lstConfig.GetIterator();
 		while (cIterator.HasNext()) {
 			ConfigGroup *pClass = cIterator.Next();
-			if (!SetClassDefault(pClass->GetClass()->GetClassName(), sVariable))
+			if (!SetClassDefault(pClass->GetClassTypeInfo()->GetClass()->GetName(), sVariable))
 				bResult = false; // Something went wrong
 		}
 
@@ -188,14 +192,16 @@ ConfigGroup *Config::GetClass(const String &sName)
 		return pConfig;
 
 	// No, check if it is a valid class
-	const Class *pClass = ClassManager::GetInstance()->GetClass(sName);
-	if (pClass && pClass->IsDerivedFrom("PLCore::ConfigGroup")) {
+	const ClassTypeInfo *pClass = TypeRegistry::GetInstance()->GetClassType(sName);
+	if (pClass && pClass->IsDerivedFrom("PLCore::ConfigGroup"))
+	{
 		// Create configuration object
-		pConfig = static_cast<ConfigGroup*>(pClass->Create());
-		if (pConfig) {
+		pConfig = pClass->GetClass()->Create<ConfigGroup>();
+		if (pConfig)
+		{
 			// Add configuration object
 			m_lstConfig.Add(pConfig);
-			m_mapConfig.Add(pClass->GetClassName(), pConfig);
+			m_mapConfig.Add(pClass->GetName(), pConfig);
 			return pConfig;
 		}
 	}
@@ -235,7 +241,7 @@ bool Config::SetClassDefault(const String &sClass, const String &sVariable)
 {
 	// Get class
 	ConfigGroup *pClass = GetClass(sClass);
-	if (!pClass || !pClass->GetClass())
+	if (!pClass)
 		return false; // Error!
 
 	// Set all variables to default?
@@ -261,9 +267,3 @@ String Config::GetLoadableTypeName() const
 	static const String sString = "Config";
 	return sString;
 }
-
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-} // PLCore

@@ -44,14 +44,14 @@ using namespace PLCore;
 *    Constructor
 */
 FunctionSignature::FunctionSignature() :
-	m_pReturnType(PLRefl::StaticTypeInfo<void>::Get())
+	m_pReturnType(PLCore::StaticTypeInfo<void>::Get())
 {}
 
 /**
 *  @brief
 *    Constructor
 */
-FunctionSignature::FunctionSignature(const PLRefl::TypeInfo *pReturnType, const Array<const PLRefl::TypeInfo*> &lstArgTypes) :
+FunctionSignature::FunctionSignature(const PLCore::TypeInfo *pReturnType, const Array<const PLCore::TypeInfo*> &lstArgTypes) :
 	m_pReturnType(pReturnType),
 	m_lstArgTypes(lstArgTypes)
 {}

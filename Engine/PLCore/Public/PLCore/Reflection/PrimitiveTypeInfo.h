@@ -36,7 +36,7 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -59,13 +59,18 @@ class PrimitiveTypeInfo : public TypeInfo {
 		*/
 		PLCORE_API PrimitiveTypeInfo(const PLCore::String &sName);
 
+		/**
+		*  @brief
+		*    Trivial RTTI for type infos
+		*/
+		virtual Type GetTypeInfoType() const override { return Primitive; }
 };
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+} // PLCore
 
 
 #endif // __PLCORE_PRIMITIVETYPEINFO_H__

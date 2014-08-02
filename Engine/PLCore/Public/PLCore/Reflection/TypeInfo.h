@@ -37,7 +37,7 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -49,6 +49,26 @@ namespace PLRefl {
 */
 class TypeInfo {
 
+
+	//[-------------------------------------------------------]
+	//[ Public types                                          ]
+	//[-------------------------------------------------------]
+	public:
+		/**
+		*  @brief
+		*    The type of the type info
+		*
+		*  @note
+		*    In theory, we could use the "proper" RTTI provided by our system to detect ClassTypeInfo and the like,
+		*    but we are using this old-school shortcut simply because we expect this check to be called a lot and we
+		*    don't want it to become a performace bottleneck.
+		*/
+		enum Type {
+			Class,		/**< ClassTypeInfo */
+			Primitive,	/**< PrimitiveTypeInfo */
+			Pointer,	/**< PointerTypeInfo */
+			Reference	/**< ReferenceTypeInfo */
+		};
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -65,6 +85,12 @@ class TypeInfo {
 		*    Virtual destructor
 		*/
 		virtual ~TypeInfo() {}
+
+		/**
+		*  @brief
+		*    Trivial RTTI for type infos
+		*/
+		virtual Type GetTypeInfoType() const = 0;
 
 		/**
 		*  @brief
@@ -98,6 +124,12 @@ class PointerTypeInfo : public TypeInfo {
 			return m_pPointedType;
 		}
 
+		/**
+		*  @brief
+		*    Trivial RTTI for type infos
+		*/
+		virtual Type GetTypeInfoType() const override { return Pointer; }
+
 		inline virtual bool operator==(const TypeInfo &cOther) const override
 		{
 			if (GetName() == cOther.GetName()) // Both must be pointers
@@ -122,6 +154,12 @@ public:
 	{
 		return m_pPointedType;
 	}
+
+	/**
+	*  @brief
+	*    Trivial RTTI for type infos
+	*/
+	virtual Type GetTypeInfoType() const override { return Reference; }
 
 	inline virtual bool operator==(const TypeInfo &cOther) const override
 	{
@@ -254,7 +292,7 @@ TypeInfo *GetStaticTypeInfo(const T&)
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+} // PLCore
 
 
 //[-------------------------------------------------------]

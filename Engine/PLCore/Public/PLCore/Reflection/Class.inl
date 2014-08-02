@@ -33,7 +33,7 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 /**
 *  @brief
@@ -130,7 +130,20 @@ const ClassConstructor *Class::GetConstructorMatchingSignature(const PLCore::Fun
 	return nullptr;
 }
 
+/**
+*  @brief
+*    Instantiate the class
+*/
+template <typename T>
+T *Class::Create()
+{
+	if (!HasDefaultConstructor())
+		return nullptr;
+
+	return m_cDefaultCtor.Construct().GetAs<T*>();
+}
+
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+} // PLCore

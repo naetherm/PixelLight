@@ -30,8 +30,9 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Base/Object.h"
-#include "PLCore/Core/AbstractContext.h"
+#include <PLCore/Core/AbstractContext.h>
+#include <PLCore/Reflection/Rtti.h>
+#include <PLCore/Container/Array.h>
 
 
 //[-------------------------------------------------------]
@@ -52,23 +53,12 @@ namespace PLCore {
 *    such as startup information (what was the current directory when the
 *    application started) or paths to needed resources.
 */
-class ApplicationContext : public Object, public AbstractContext {
-
+class ApplicationContext : public AbstractContext {
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, ApplicationContext, "PLCore", PLCore::Object, "Application context")
-		#ifdef PLCORE_EXPORTS	// The following is only required when compiling PLCore
-			// Methods
-			pl_method_0(GetExecutableFilename,	pl_ret_type(String),	"Get absolute path of application executable (native path style, e.g. on Windows: 'C:\MyApplication\x86\Test.exe').",				"")
-			pl_method_0(GetExecutableDirectory,	pl_ret_type(String),	"Get directory of executable (native path style, e.g. on Windows: 'C:\MyApplication\x86').",										"")
-			pl_method_0(GetAppDirectory,		pl_ret_type(String),	"Get directory of application (native path style, e.g. on Windows: 'C:\MyApplication').",											"")
-			pl_method_0(GetStartupDirectory,	pl_ret_type(String),	"Get current directory when the application constructor was called (native path style, e.g. on Windows: 'C:\MyApplication\x86').",	"")
-			pl_method_0(GetLogFilename,			pl_ret_type(String),	"Get absolute path to log file, empty if log has not been opened (native path style).",												"")
-			pl_method_0(GetConfigFilename,		pl_ret_type(String),	"Get absolute path to config file, empty if no config is used (native path style).",												"")
-		#endif
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -243,6 +233,11 @@ class ApplicationContext : public Object, public AbstractContext {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::ApplicationContext)
 
 
 //[-------------------------------------------------------]

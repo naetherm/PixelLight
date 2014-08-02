@@ -43,19 +43,19 @@ namespace PLCore {
 template <int N, typename... T>
 struct TemplateToTypeInfoArray {
 
-	static void Make(Array<const PLRefl::TypeInfo*> &lstTypes)
+	static void Make(Array<const PLCore::TypeInfo*> &lstTypes)
 	{
 		TemplateToTypeInfoArray<N - 1, T...>::Make(lstTypes);
 
 		typedef typename TupleElement<N - 1, Tuple<T...>>::_Type _Type;
-		lstTypes[N - 1] = PLRefl::StaticTypeInfo<_Type>::Get();
+		lstTypes[N - 1] = PLCore::StaticTypeInfo<_Type>::Get();
 	}
 };
 
 template <typename... T>
 struct TemplateToTypeInfoArray<0, T...> {
 
-	static void Make(Array<const PLRefl::TypeInfo*> &lstTypes)
+	static void Make(Array<const PLCore::TypeInfo*> &lstTypes)
 	{
 		// End of line
 	}
@@ -69,10 +69,10 @@ template <typename TRet, typename... TArgs>
 FunctionSignature FunctionSignature::FromTemplate()
 {
 	// Return type
-	PLRefl::TypeInfo* ret = PLRefl::StaticTypeInfo<TRet>::Get();
+	PLCore::TypeInfo* ret = PLCore::StaticTypeInfo<TRet>::Get();
 
 	// Arguments
-	Array<const PLRefl::TypeInfo*> args;
+	Array<const PLCore::TypeInfo*> args;
 	args.Resize(sizeof...(TArgs));
 	TemplateToTypeInfoArray<sizeof...(TArgs), TArgs...>::Make(args);
 
@@ -83,7 +83,7 @@ FunctionSignature FunctionSignature::FromTemplate()
 *  @brief
 *    Get the return type
 */
-const PLRefl::TypeInfo *FunctionSignature::GetReturnType() const
+const PLCore::TypeInfo *FunctionSignature::GetReturnType() const
 {
 	return m_pReturnType;
 }
@@ -92,7 +92,7 @@ const PLRefl::TypeInfo *FunctionSignature::GetReturnType() const
 *  @brief
 *    Get argument types
 */
-const Array<const PLRefl::TypeInfo*> &FunctionSignature::GetArgumentTypes() const
+const Array<const PLCore::TypeInfo*> &FunctionSignature::GetArgumentTypes() const
 {
 	return m_lstArgTypes;
 }

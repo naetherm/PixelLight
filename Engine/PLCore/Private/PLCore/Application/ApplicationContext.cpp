@@ -25,21 +25,42 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/File/Url.h"
-#include "PLCore/System/System.h"
-#include "PLCore/Application/ApplicationContext.h"
+#include <PLCore/File/Url.h>
+#include <PLCore/System/System.h>
+#include <PLCore/Application/ApplicationContext.h>
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLCore {
+using namespace PLCore;
 
 
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ApplicationContext)
+pl_begin_class(ApplicationContext, PLCore)
+	pl_desc("Application context.")
+
+	pl_method(GetExecutableFilename)
+		pl_desc("Get absolute path of application executable (native path style, e.g. on Windows: 'C:\MyApplication\x86\Test.exe').")
+
+	pl_method(GetExecutableDirectory)
+		pl_desc("Get directory of executable (native path style, e.g. on Windows: 'C:\MyApplication\x86').")
+
+	pl_method(GetAppDirectory)
+		pl_desc("Get directory of application (native path style, e.g. on Windows: 'C:\MyApplication').")
+
+	pl_method(GetStartupDirectory)
+		pl_desc("Get current directory when the application constructor was called (native path style, e.g. on Windows: 'C:\MyApplication\x86').")
+
+	pl_method(GetLogFilename)
+		pl_desc("Get absolute path to log file, empty if log has not been opened (native path style).")
+
+	pl_method(GetConfigFilename)
+		pl_desc("Get absolute path to config file, empty if no config is used (native path style).")
+
+pl_end_class()
 
 
 //[-------------------------------------------------------]
@@ -133,9 +154,3 @@ void ApplicationContext::ChangeIntoAppDirectory() const
 	// Use the executable directory as the current directory
 	System::GetInstance()->SetCurrentDir(Url(m_sExecutableFilename).CutFilename());
 }
-
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-} // PLCore

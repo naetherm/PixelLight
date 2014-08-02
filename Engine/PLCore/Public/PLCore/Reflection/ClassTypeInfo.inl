@@ -26,7 +26,7 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -41,8 +41,17 @@ const Class *ClassTypeInfo::GetClass() const
 	return m_pClass;
 }
 
+/**
+*  @brief
+*    Get the type info type
+*/
+TypeInfo::Type ClassTypeInfo::GetTypeInfoType() const
+{
+	return Class;
+}
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+} // PLCore

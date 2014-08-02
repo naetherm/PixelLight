@@ -30,8 +30,8 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Base/Object.h"
-#include "PLCore/Tools/Loadable.h"
+#include <PLCore/Reflection/Rtti.h>
+#include <PLCore/Tools/Loadable.h>
 
 
 //[-------------------------------------------------------]
@@ -72,20 +72,19 @@ namespace PLCore {
 *   };
 *  @endverbatim
 */
-class ConfigGroup : public Object {
+class ConfigGroup {
+
+
+	//[-------------------------------------------------------]
+	//[ Reflected class                                       ]
+	//[-------------------------------------------------------]
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
 	//[ Friends                                               ]
 	//[-------------------------------------------------------]
 	friend class Config;
-
-
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, ConfigGroup, "PLCore", PLCore::Object, "Configuration group")
-	pl_class_end
 
 
 	//[-------------------------------------------------------]
@@ -103,7 +102,6 @@ class ConfigGroup : public Object {
 		*    Destructor
 		*/
 		PLCORE_API virtual ~ConfigGroup();
-
 
 };
 
@@ -319,6 +317,12 @@ class Config : public Loadable {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::ConfigGroup)
 
 
 //[-------------------------------------------------------]

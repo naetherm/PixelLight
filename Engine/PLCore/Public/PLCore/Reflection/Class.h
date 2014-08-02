@@ -44,7 +44,7 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLRefl {
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -93,6 +93,16 @@ class Class : public TagHolder {
 		*/
 		template <typename T>
 		static ClassBuilder<T> Declare(const PLCore::String &sName);
+
+		/**
+		*  @brief
+		*    Instantiate new instance of the type represented by this class
+		*
+		*  @note
+		*    This will only work if the class has a default constructor defined!
+		*/
+		template <typename T>
+		T *Create() const;
 
 		/**
 		*  @brief
@@ -200,7 +210,7 @@ class Class : public TagHolder {
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-} // PLRefl
+} // PLCore
 
 
 //[-------------------------------------------------------]
