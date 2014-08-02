@@ -30,9 +30,9 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Core/AbstractContext.h>
-#include <PLCore/Reflection/Rtti.h>
-#include <PLCore/Container/Array.h>
+#include "PLCore/Core/AbstractContext.h"
+#include "PLCore/Reflection/Rtti.h"
+#include "PLCore/Container/Array.h"
 
 
 //[-------------------------------------------------------]
@@ -233,6 +233,7 @@ class ApplicationContext : public AbstractContext {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
 
 //[-------------------------------------------------------]
 //[ Reflected class                                       ]

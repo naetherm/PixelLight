@@ -25,15 +25,9 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/File/Url.h>
-#include <PLCore/System/System.h>
-#include <PLCore/Application/ApplicationContext.h>
-
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-using namespace PLCore;
+#include "PLCore/File/Url.h"
+#include "PLCore/System/System.h"
+#include "PLCore/Application/ApplicationContext.h"
 
 
 //[-------------------------------------------------------]
@@ -61,6 +55,12 @@ pl_begin_class(ApplicationContext, PLCore)
 		pl_desc("Get absolute path to config file, empty if no config is used (native path style).")
 
 pl_end_class()
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -154,3 +154,9 @@ void ApplicationContext::ChangeIntoAppDirectory() const
 	// Use the executable directory as the current directory
 	System::GetInstance()->SetCurrentDir(Url(m_sExecutableFilename).CutFilename());
 }
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore

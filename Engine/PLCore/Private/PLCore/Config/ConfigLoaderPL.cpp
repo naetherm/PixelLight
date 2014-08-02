@@ -25,17 +25,11 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Xml/Xml.h>
-#include <PLCore/Log/Log.h>
-#include <PLCore/Reflection/Class.h>
-#include <PLCore/Config/Config.h>
-#include <PLCore/Config/ConfigLoaderPL.h>
-
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-using namespace PLCore;
+#include "PLCore/Xml/Xml.h"
+#include "PLCore/Log/Log.h"
+#include "PLCore/Reflection/Class.h"
+#include "PLCore/Config/Config.h"
+#include "PLCore/Config/ConfigLoaderPL.h"
 
 
 //[-------------------------------------------------------]
@@ -59,6 +53,12 @@ pl_begin_class(ConfigLoaderPL, PLCore)
 		pl_desc("Save method. Parameters: Configuration group to save as 'String', no default values as 'bool'.")
 
 pl_end_class()
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -237,3 +237,9 @@ bool ConfigLoaderPL::SaveGroup(XmlElement &cConfigElement, const ConfigGroup &cG
 	// Done
 	return true;
 }
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore

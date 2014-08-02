@@ -29,12 +29,6 @@
 
 
 //[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-using namespace PLCore;
-
-
-//[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
 pl_begin_class(CoreConfigGroup, PLCore)
@@ -76,7 +70,14 @@ pl_begin_class(FrontendConfig, PLCore)
 	pl_property(Height)
 		pl_desc("Height of the frontend")
 		pl_default(600)
+
 pl_end_class()
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+namespace PLCore {
 
 
 // CoreConfigGroup
@@ -144,3 +145,9 @@ FrontendConfig::FrontendConfig()
 FrontendConfig::~FrontendConfig()
 {
 }
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore

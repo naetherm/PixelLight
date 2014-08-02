@@ -167,4 +167,5 @@ pl_declare_class(PLCore::CoreConfigGroup)
 pl_declare_class(PLCore::CoreConfig)
 pl_declare_class(PLCore::FrontendConfig)
 
+
 #endif // __PLCORE_CONFIGGROUP_H__

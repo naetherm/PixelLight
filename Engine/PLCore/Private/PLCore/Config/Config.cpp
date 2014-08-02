@@ -25,16 +25,11 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/Class.h>
-#include <PLCore/String/ParseTools.h>
-#include <PLCore/Config/ConfigLoader.h>
-#include <PLCore/Config/Config.h>
+#include "PLCore/Reflection/Class.h"
+#include "PLCore/String/ParseTools.h"
+#include "PLCore/Config/ConfigLoader.h"
+#include "PLCore/Config/Config.h"
 
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-using namespace PLCore;
 
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
@@ -43,6 +38,12 @@ pl_begin_class(ConfigGroup, PLCore)
 	pl_desc("Configuration group")
 
 pl_end_class()
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -268,3 +269,9 @@ String Config::GetLoadableTypeName() const
 	static const String sString = "Config";
 	return sString;
 }
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore

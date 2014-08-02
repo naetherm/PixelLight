@@ -41,12 +41,6 @@
 
 
 //[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-using namespace PLCore;
-
-
-//[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
 pl_begin_class(CoreApplication, PLCore)
@@ -60,6 +54,12 @@ pl_begin_class(CoreApplication, PLCore)
 		pl_desc("Exit application. Return code for application as first parameter (usually 0 means no error).")
 
 pl_end_class()
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
@@ -657,3 +657,9 @@ void CoreApplication::SignalHandler(int nSignal)
 		}
 	#endif
 }
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore
