@@ -26,22 +26,24 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Log/Log.h"
-#include "PLCore/Base/Class.h"
+#include "PLCore/Reflection/Class.h"
 #include "PLCore/Frontend/Frontend.h"
 #include "PLCore/Frontend/FrontendContext.h"
 #include "PLCore/Frontend/FrontendImpl.h"
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(FrontendImpl, PLCore)
+	pl_desc("Abstract frontend implementation base class")
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLCore {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(FrontendImpl)
 
 
 //[-------------------------------------------------------]

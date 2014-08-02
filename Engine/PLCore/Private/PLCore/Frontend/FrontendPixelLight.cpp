@@ -25,7 +25,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Base/Class.h"
+#include "PLCore/Reflection/Class.h"
 #include "PLCore/System/System.h"
 #include "PLCore/Frontend/FrontendImpl.h"
 #include "PLCore/Frontend/FrontendApplication.h"
@@ -33,15 +33,34 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(FrontendPixelLight, PLCore)
+	pl_base_class(PLCore::Frontend)
+	pl_desc("PixelLight frontend")
+	pl_ctor(const PLCore::FrontendContext&, PLCore::FrontendImpl&)
+		pl_desc("Parameter constructor. Frontend context this frontend is using as first parameter, frontend implementation this frontend is using as second parameter.")
+
+	pl_property(ApplicationClass)
+		pl_desc("Name of the frontend application RTTI class to use")
+		pl_default(PLCore::String("Application"))
+
+	pl_property(ApplicationConstructor)
+		pl_desc("Name of the frontend application RTTI class constructor to use")
+
+	pl_property(ApplicationConstructorParameters)
+		pl_desc("Parameters for the frontend application RTTI class constructor")
+
+	pl_property(ApplicationParameters)
+		pl_desc("Parameters for the frontend application RTTI class instance")
+	
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLCore {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(FrontendPixelLight)
 
 
 //[-------------------------------------------------------]

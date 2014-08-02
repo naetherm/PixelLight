@@ -73,14 +73,9 @@ class FrontendApplication : public CoreApplication, protected AbstractFrontend {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, FrontendApplication, "PLCore", PLCore::CoreApplication, "Frontend application class")
-		#ifdef PLCORE_EXPORTS	// The following is only required when compiling PLCore
-			// Methods
-			pl_method_0(GetFrontend,	pl_ret_type(Frontend&),	"Returns the frontend this application is running in.",	"")
-		#endif
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -267,6 +262,12 @@ class FrontendApplication : public CoreApplication, protected AbstractFrontend {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::FrontendApplication)
 
 
 //[-------------------------------------------------------]

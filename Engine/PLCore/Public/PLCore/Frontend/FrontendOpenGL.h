@@ -59,6 +59,7 @@ namespace PLCore {
 class FrontendOpenGL : public Frontend {
 
 
+#if 0
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
@@ -68,6 +69,7 @@ class FrontendOpenGL : public Frontend {
 			pl_constructor_2(ParameterConstructor,	const FrontendContext&, FrontendImpl&,	"Parameter constructor. Frontend context this frontend is using as first parameter, frontend implementation this frontend is using as second parameter.",	"")
 		#endif
 	pl_class_end
+#endif
 
 
 	//[-------------------------------------------------------]

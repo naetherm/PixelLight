@@ -62,19 +62,9 @@ class FrontendPixelLight : public Frontend {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, FrontendPixelLight, "PLCore", PLCore::Frontend, "PixelLight frontend")
-		// Attributes
-		pl_attribute(ApplicationClass,					String,	"Application",	ReadWrite,	DirectValue,	"Name of the frontend application RTTI class to use",				"")
-		pl_attribute(ApplicationConstructor,			String,	"",				ReadWrite,	DirectValue,	"Name of the frontend application RTTI class constructor to use",	"")
-		pl_attribute(ApplicationConstructorParameters,	String,	"",				ReadWrite,	DirectValue,	"Parameters for the frontend application RTTI class constructor",	"")
-		pl_attribute(ApplicationParameters,				String,	"",				ReadWrite,	DirectValue,	"Parameters for the frontend application RTTI class instance",		"")
-		#ifdef PLCORE_EXPORTS	// The following is only required when compiling PLCore
-			// Constructors
-			pl_constructor_2(ParameterConstructor,	const FrontendContext&, FrontendImpl&,	"Parameter constructor. Frontend context this frontend is using as first parameter, frontend implementation this frontend is using as second parameter.",	"")
-		#endif
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -97,6 +87,16 @@ class FrontendPixelLight : public Frontend {
 		*    Destructor
 		*/
 		PLCORE_API virtual ~FrontendPixelLight();
+
+
+	//[-------------------------------------------------------]
+	//[ Public properties                                     ]
+	//[-------------------------------------------------------]
+	public:
+		pl_declare_property(ApplicationClass, String)
+		pl_declare_property(ApplicationConstructor, String)
+		pl_declare_property(ApplicationConstructorParameters, String)
+		pl_declare_property(ApplicationParameters, String)
 
 
 	//[-------------------------------------------------------]
@@ -152,6 +152,12 @@ class FrontendPixelLight : public Frontend {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::FrontendPixelLight)
 
 
 #endif // __PLCORE_FRONTEND_PIXELLIGHT_H__

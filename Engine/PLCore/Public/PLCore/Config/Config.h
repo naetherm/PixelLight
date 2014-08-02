@@ -30,8 +30,8 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/Rtti.h>
-#include <PLCore/Tools/Loadable.h>
+#include "PLCore/Reflection/Rtti.h"
+#include "PLCore/Tools/Loadable.h"
 
 
 //[-------------------------------------------------------]

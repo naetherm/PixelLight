@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Base/Object.h"
+#include "PLCore/Reflection/Rtti.h"
 #include "PLCore/Frontend/AbstractFrontend.h"
 #include "PLCore/Core/AbstractLifecycle.h"
 
@@ -83,7 +83,7 @@ template <class ValueType> class Array;
 *      methods like "GetNativeWindowHandle()" or "GetWidth()" return only information relevant for e.g.
 *      rendering into the frontend
 */
-class Frontend : public Object, protected AbstractLifecycle, protected AbstractFrontend {
+class Frontend : protected AbstractLifecycle, protected AbstractFrontend {
 
 
 	//[-------------------------------------------------------]
@@ -93,37 +93,9 @@ class Frontend : public Object, protected AbstractLifecycle, protected AbstractF
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, Frontend, "PLCore", PLCore::Object, "Abstract frontend base class")
-		#ifdef PLCORE_EXPORTS	// The following is only required when compiling PLCore
-			// Methods
-			pl_method_0(Redraw,						pl_ret_type(void),						"Redraw frontend.",																																				"")
-			pl_method_0(Ping,						pl_ret_type(void),						"Give the frontend a chance to process OS messages.",																											"")
-			pl_method_0(RedrawAndPing,				pl_ret_type(void),						"Redraw frontend and give the frontend a chance to process OS messages.",																						"")
-			pl_method_0(GetTitle,					pl_ret_type(String),					"Returns the frontend title.",																																	"")
-			pl_method_1(SetTitle,					pl_ret_type(void),		const String&,	"Sets the frontend title.",																																		"")
-			// Position and size methods
-			pl_method_0(GetX,						pl_ret_type(int),						"Returns the x position of the frontend (in screen coordinates).",																								"")
-			pl_method_0(GetY,						pl_ret_type(int),						"Returns the y position of the frontend (in screen coordinates).",																								"")
-			pl_method_0(GetWidth,					pl_ret_type(uint32),					"Returns the frontend width.",																																	"")
-			pl_method_0(GetHeight,					pl_ret_type(uint32),					"Returns the frontend height.",																																	"")
-			// Fullscreen methods
-			pl_method_0(GetToggleFullscreenMode,	pl_ret_type(bool),						"Returns whether it's allowed to toggle the fullscreen mode using hotkeys. 'true' if it's possible to toggle the fullscreen mode using hotkeys, else 'false'.",	"")
-			pl_method_1(SetToggleFullscreenMode,	pl_ret_type(void),		bool,			"Sets whether it's allowed to toggle the fullscreen mode using hotkeys. 'true' as first parameter to allow it, else 'false'.",									"")
-			pl_method_0(GetFullscreenAltTab,		pl_ret_type(bool),						"Returns whether it's allowed to use Alt-Tab if fullscreen mode is used. 'true' if it's possible to use Alt-Tab if fullscreen mode is used, else 'false'.",		"")
-			pl_method_1(SetFullscreenAltTab,		pl_ret_type(void),		bool,			"Sets whether it's allowed to use Alt-Tab if fullscreen mode is used. 'true' as first parameter to allow it, else 'false'.",									"")
-			pl_method_0(IsFullscreen,				pl_ret_type(bool),						"Returns whether or not the frontend is currently fullscreen or not. Returns 'true' if the frontend is currently fullscreen, else 'false'.",					"")
-			pl_method_1(SetFullscreen,				pl_ret_type(void),		bool,			"Sets whether or not the frontend is currently fullscreen or not. 'true' as first parameter if the frontend is currently fullscreen, else 'false'.",			"")
-			// Mouse methods
-			pl_method_0(IsMouseOver,				pl_ret_type(bool),						"Returns whether or not the mouse cursor is currently over the frontend. Returns 'true' if the mouse cursor is currently over the frontend, else 'false'.",		"")
-			pl_method_0(GetMousePositionX,			pl_ret_type(int),						"Returns the current mouse cursor X position inside the frontend, negative value if the mouse cursor isn't currently over the frontend",						"")
-			pl_method_0(GetMousePositionY,			pl_ret_type(int),						"Returns the current mouse cursor Y position inside the frontend, negative value if the mouse cursor isn't currently over the frontend",						"")
-			pl_method_0(IsMouseVisible,				pl_ret_type(bool),						"Returns whether or not the mouse cursor is currently visible. Returns 'true' if the mouse cursor is currently visible, else 'false'.",							"")
-			pl_method_1(SetMouseVisible,			pl_ret_type(void),		bool,			"Set the mouse cursor visibility. 'true' as first parameter if the mouse cursor shall be visible.",																"")
-			pl_method_1(SetTrapMouse,				pl_ret_type(void),		bool,			"Trap the mouse inside the frontend. 'true' as first parameter if the mouse should be trapped inside the frontend, else 'false'.",								"")
-		#endif
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -565,6 +537,12 @@ class Frontend : public Object, protected AbstractLifecycle, protected AbstractF
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::Frontend)
 
 
 //[-------------------------------------------------------]

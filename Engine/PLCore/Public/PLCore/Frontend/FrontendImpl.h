@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Base/Object.h"
+#include "PLCore/Reflection/Rtti.h"
 #include "PLCore/Frontend/AbstractFrontend.h"
 #include "PLCore/Core/AbstractLifecycle.h"
 
@@ -61,7 +61,7 @@ class FrontendContext;
 *    is the "Frontend"-class. The frontend implementation is e.g. a simple native OS
 *    window or a browser such as MS Internet Explorer or Mozilla Firefox.
 */
-class FrontendImpl : public Object, protected AbstractLifecycle, protected AbstractFrontend {
+class FrontendImpl : protected AbstractLifecycle, protected AbstractFrontend {
 
 
 	//[-------------------------------------------------------]
@@ -71,10 +71,9 @@ class FrontendImpl : public Object, protected AbstractLifecycle, protected Abstr
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, FrontendImpl, "PLCore", PLCore::Object, "Abstract frontend implementation base class")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -525,6 +524,12 @@ class FrontendImpl : public Object, protected AbstractLifecycle, protected Abstr
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::FrontendImpl)
 
 
 //[-------------------------------------------------------]
