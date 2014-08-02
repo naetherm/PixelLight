@@ -50,10 +50,9 @@ class CoreConfigGroup : public ConfigGroup {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, CoreConfigGroup, "PLCore", PLCore::ConfigGroup, "PLCore general configuration 'collection' class")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -83,15 +82,9 @@ class CoreConfig : public CoreConfigGroup {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, CoreConfig, "PLCore", PLCore::CoreConfigGroup, "PLCore configuration classes")
-		// Attributes
-		pl_attribute(FirstRun,	bool,	true,	ReadWrite,	DirectValue,	"Is this the first application start?",																	"")
-		pl_attribute(Language,	String,	"",		ReadWrite,	DirectValue,	"Current used language, if empty the current set OS locale language is used (for instance 'German'",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -111,6 +104,13 @@ class CoreConfig : public CoreConfigGroup {
 		PLCORE_API virtual ~CoreConfig();
 
 
+	//[-------------------------------------------------------]
+	//[ Public properties                                     ]
+	//[-------------------------------------------------------]
+	public:
+		pl_declare_property(FirstRun, bool);
+		pl_declare_property(Language, String);
+
 };
 
 /**
@@ -121,17 +121,9 @@ class FrontendConfig : public CoreConfigGroup {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, FrontendConfig, "PLCore", PLCore::CoreConfigGroup, "PLCore frontend configuration classes")
-		// Attributes
-		pl_attribute(X,			int,	0,		ReadWrite,	DirectValue,	"X position of the frontend (in screen coordinates)",	"")
-		pl_attribute(Y,			int,	0,		ReadWrite,	DirectValue,	"Y position of the frontend (in screen coordinates)",	"")
-		pl_attribute(Width,		uint32,	800,	ReadWrite,	DirectValue,	"Width of the frontend",								"")
-		pl_attribute(Height,	uint32,	600,	ReadWrite,	DirectValue,	"Height of the frontend",								"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -150,6 +142,14 @@ class FrontendConfig : public CoreConfigGroup {
 		*/
 		PLCORE_API virtual ~FrontendConfig();
 
+	//[-------------------------------------------------------]
+	//[ Public properties                                     ]
+	//[-------------------------------------------------------]
+	public:
+		pl_declare_property(X, int);
+		pl_declare_property(Y, int);
+		pl_declare_property(Width, uint32);
+		pl_declare_property(Height, uint32);
 
 };
 
@@ -159,5 +159,12 @@ class FrontendConfig : public CoreConfigGroup {
 //[-------------------------------------------------------]
 } // PLCore
 
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::CoreConfigGroup)
+pl_declare_class(PLCore::CoreConfig)
+pl_declare_class(PLCore::FrontendConfig)
 
 #endif // __PLCORE_CONFIGGROUP_H__

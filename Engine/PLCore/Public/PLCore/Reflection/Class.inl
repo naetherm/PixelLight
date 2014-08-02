@@ -143,6 +143,26 @@ T *Class::Create()
 	return m_cDefaultCtor.Construct().GetAs<T*>();
 }
 
+/**
+*  @brief
+*    Check inheritance
+*/
+bool Class::IsDerivedFrom(const Class *pOtherClass) const
+{
+	auto bases = m_lstBases.GetConstIterator();
+	while (bases.HasNext()) {
+
+		const Class *pClss = bases.Next();
+		if (pClss == pOtherClass)
+			return true;
+
+		if (pClss->IsDerivedFrom(pOtherClass))
+			return true;
+	}
+
+	return false;
+}
+
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]

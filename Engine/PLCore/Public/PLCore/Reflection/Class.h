@@ -117,6 +117,12 @@ class Class : public TagHolder {
 		inline const PLCore::Array<const Class*> &GetBaseClasses() const;
 
 		/**
+		*  @ brief
+		*    Check if this class is a child of the given class
+		*/
+		inline bool IsDerivedFrom(const Class *pOtherClass) const;
+
+		/**
 		*  @brief
 		*    Get the default constructor
 		*

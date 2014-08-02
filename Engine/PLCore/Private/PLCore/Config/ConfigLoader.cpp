@@ -31,13 +31,17 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLCore {
+using namespace PLCore;
 
 
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ConfigLoader)
+pl_begin_class(ConfigLoader, PLCore)
+	pl_base_class(PLCore::LoaderImpl)
+	pl_desc("Abstract config loader base class")
+	pl_str_tag("Type", "Config")
+pl_end_class()
 
 
 //[-------------------------------------------------------]
@@ -58,9 +62,3 @@ ConfigLoader::ConfigLoader()
 ConfigLoader::~ConfigLoader()
 {
 }
-
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-} // PLCore

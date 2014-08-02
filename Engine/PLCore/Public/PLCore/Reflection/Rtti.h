@@ -224,8 +224,32 @@ namespace PLCore {
 *  @brief
 *    Attach a property to the current class
 */
-#define pl_property(NAME, GETTER, SETTER) \
+#define pl_property(NAME) \
+	.Property(#NAME, new PLCore::Function<decltype(&_Clss::Set##NAME)>(&_Clss::Set##NAME), new PLCore::Function<decltype(&_Clss::Get##NAME)>(&_Clss::Get##NAME))
+
+/**
+*  @brief
+*    Attach a property to the current class
+*/
+#define pl_property_getset(NAME, GETTER, SETTER) \
 	.Property(#NAME, new PLCore::Function<decltype(&_Clss::SETTER)>(&_Clss::SETTER), new PLCore::Function<decltype(&_Clss::GETTER)>(&_Clss::GETTER))
+
+/**
+*  @brief
+*    Helper to automatically declare class properties for use with the pl_property macro
+*/
+#define pl_declare_property(NAME, TYPE) \
+	protected: \
+		TYPE NAME; \
+	public: \
+		void Set##NAME(const TYPE &cValue) { NAME = cValue; } \
+		const TYPE &Get##NAME() const { return NAME; }
+
+/**
+*  @brief
+*    Set default value for property or field
+*/
+#define pl_default(VALUE) // [TODO]
 
 /**
 *  @brief

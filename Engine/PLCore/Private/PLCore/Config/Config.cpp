@@ -193,7 +193,8 @@ ConfigGroup *Config::GetClass(const String &sName)
 
 	// No, check if it is a valid class
 	const ClassTypeInfo *pClass = TypeRegistry::GetInstance()->GetClassType(sName);
-	if (pClass && pClass->IsDerivedFrom("PLCore::ConfigGroup"))
+	if (pClass &&
+		pClass->GetClass()->IsDerivedFrom(pConfig->GetClassTypeInfo()->GetClass()))
 	{
 		// Create configuration object
 		pConfig = pClass->GetClass()->Create<ConfigGroup>();

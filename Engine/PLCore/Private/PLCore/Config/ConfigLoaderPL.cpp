@@ -25,23 +25,40 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Xml/Xml.h"
-#include "PLCore/Log/Log.h"
-#include "PLCore/Base/Class.h"
-#include "PLCore/Config/Config.h"
-#include "PLCore/Config/ConfigLoaderPL.h"
+#include <PLCore/Xml/Xml.h>
+#include <PLCore/Log/Log.h>
+#include <PLCore/Reflection/Class.h>
+#include <PLCore/Config/Config.h>
+#include <PLCore/Config/ConfigLoaderPL.h>
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-namespace PLCore {
+using namespace PLCore;
 
 
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ConfigLoaderPL)
+pl_begin_class(ConfigLoaderPL, PLCore)
+	pl_base_class(PLCore::ConfigLoader)
+	pl_desc("Config loader implementation for the PixelLight config XML file format")
+	pl_ctor()
+	pl_str_tag("Formats", "cfg,CFG")
+	pl_tag("Load", true)
+	pl_tag("Save", true)
+
+	pl_method(Load)
+		pl_desc("Load method")
+
+	pl_method(Save)
+		pl_desc("Save method. Saves all configuration groups and includes default values, too.")
+
+	pl_method(SaveParams)
+		pl_desc("Save method. Parameters: Configuration group to save as 'String', no default values as 'bool'.")
+
+pl_end_class()
 
 
 //[-------------------------------------------------------]
@@ -220,9 +237,3 @@ bool ConfigLoaderPL::SaveGroup(XmlElement &cConfigElement, const ConfigGroup &cG
 	// Done
 	return true;
 }
-
-
-//[-------------------------------------------------------]
-//[ Namespace                                             ]
-//[-------------------------------------------------------]
-} // PLCore

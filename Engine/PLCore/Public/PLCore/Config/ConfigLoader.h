@@ -30,7 +30,8 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Tools/LoaderImpl.h"
+#include <PLCore/Reflection/Rtti.h>
+#include <PLCore/Tools/LoaderImpl.h>
 
 
 //[-------------------------------------------------------]
@@ -57,20 +58,14 @@ class ConfigLoader : public LoaderImpl {
 
 
 	//[-------------------------------------------------------]
+	//[ Reflected class                                       ]
+	//[-------------------------------------------------------]
+	pl_rtti()
+
+	//[-------------------------------------------------------]
 	//[ Friends                                               ]
 	//[-------------------------------------------------------]
 	friend class Config;
-
-
-	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
-	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, ConfigLoader, "PLCore", PLCore::LoaderImpl, "Abstract config loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Config")
-		pl_properties_end
-	pl_class_end
 
 
 	//[-------------------------------------------------------]
@@ -97,6 +92,12 @@ class ConfigLoader : public LoaderImpl {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::ConfigLoader)
 
 
 #endif // __PLCORE_CONFIGLOADER_H__
