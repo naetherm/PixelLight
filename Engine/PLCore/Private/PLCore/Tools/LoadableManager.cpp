@@ -30,8 +30,8 @@
 #include "PLCore/File/Directory.h"
 #include "PLCore/File/FileSearch.h"
 #include "PLCore/System/System.h"
-#include "PLCore/Base/Class.h"
-#include "PLCore/Base/ClassManager.h"
+#include "PLCore/Reflection/Class.h"
+#include "PLCore/Reflection/TypeRegistry.h"
 #include "PLCore/Tools/Loader.h"
 #include "PLCore/Tools/LoadableType.h"
 #include "PLCore/Tools/LoadableManager.h"
@@ -480,19 +480,21 @@ String LoadableManager::LoadStringFromFile(const String &sFilename, String::EFor
 *    Constructor
 */
 LoadableManager::LoadableManager() :
-	SlotClassLoaded(&LoadableManager::OnClassLoaded, this),
-	SlotClassUnloaded(&LoadableManager::OnClassUnloaded, this)
+	SlotClassLoaded(this, new Function<decltype(&LoadableManager::OnClassLoaded)>(&LoadableManager::OnClassLoaded)),
+	SlotClassUnloaded(this, new Function<decltype(&LoadableManager::OnClassUnloaded)>(&LoadableManager::OnClassUnloaded))
 {
-	// The loadable manager MUST be informed if new classes are registered in order to register new loadable types!
-	ClassManager::GetInstance()->EventClassLoaded.Connect(SlotClassLoaded);
-	ClassManager::GetInstance()->EventClassUnloaded.Connect(SlotClassUnloaded);
+	PL_TODO(ananta, "If we'll be using the LoadableManager in the future, we should make this code working once again")
 
-	// Register all loaders
-	List<const Class*> lstClasses;
-	ClassManager::GetInstance()->GetClasses(lstClasses, "PLCore::LoaderImpl", Recursive, NoBase, NoAbstract);
-	Iterator<const Class*> cIterator = lstClasses.GetIterator();
-	while (cIterator.HasNext())
-		m_lstNewClasses.Add(cIterator.Next());
+	// The loadable manager MUST be informed if new classes are registered in order to register new loadable types!
+	//ClassManager::GetInstance()->EventClassLoaded.Connect(SlotClassLoaded);
+	//ClassManager::GetInstance()->EventClassUnloaded.Connect(SlotClassUnloaded);
+
+	//// Register all loaders
+	//List<const Class*> lstClasses;
+	//ClassManager::GetInstance()->GetClasses(lstClasses, "PLCore::LoaderImpl", Recursive, NoBase, NoAbstract);
+	//Iterator<const Class*> cIterator = lstClasses.GetIterator();
+	//while (cIterator.HasNext())
+	//	m_lstNewClasses.Add(cIterator.Next());
 }
 
 /**
@@ -580,6 +582,9 @@ void LoadableManager::OnClassUnloaded(const Class *pClass)
 */
 void LoadableManager::RegisterClasses()
 {
+	PL_TODO(ananta, "If we'll be using the LoadableManager in the future, we should make this code working once again")
+
+	/*
 	// Is there anything on the register queue?
 	if (m_lstNewClasses.GetNumOfElements()) {
 		Iterator<const Class*> cIterator = m_lstNewClasses.GetIterator();
@@ -646,6 +651,7 @@ void LoadableManager::RegisterClasses()
 		}
 		m_lstNewClasses.Clear();
 	}
+	*/
 }
 
 

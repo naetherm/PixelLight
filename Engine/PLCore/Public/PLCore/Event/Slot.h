@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Constructor.h                                  *
+ *  File: Slot.h                                         *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,14 +22,14 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_CONSTRUCTOR2_H__
-#define __PLCORE_CONSTRUCTOR2_H__
+#ifndef __PLCORE_SLOT_H__
+#define __PLCORE_SLOT_H__
 #pragma once
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "Invokable.h"
+#include "PLCore/Typebase/Invokable.h"
 
 
 //[-------------------------------------------------------]
@@ -43,18 +43,78 @@ namespace PLCore {
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Constructor function for a specific argument list
+*    Event handler (slot) class
 */
-template <class T, typename... TArgs>
-class Constructor : public Invokable<T*, TArgs...> {
+template <typename... TArgs>
+class Slot : public Invokable<void, void*, TArgs...> {
+
+
+	//[-------------------------------------------------------]
+	//[ Public functions                                      ]
+	//[-------------------------------------------------------]
+	public:
+		/**
+		*  @brief
+		*    Default constructor, for use just in containters and such
+		*/
+		Slot() {}
+
+		/**
+		*  @brief
+		*    Slot must be constructed from object pointer and function
+		*/
+		template <class T>
+		Slot(T *pObj, Invokable<void, T*, TArgs...> *pFunc);
+
+		/**
+		*  @brief
+		*    Call the slot function on the stored object
+		*/
+		void Signal(TArgs... args) const;
+
+		/**
+		*  @brief
+		*    Check equality
+		*/
+		bool operator==(const Slot &cOther) const;
 
 
 	//[-------------------------------------------------------]
 	//[ Public virtual Invokable functions                    ]
 	//[-------------------------------------------------------]
 	public:
-		virtual T* Invoke(TArgs... args) const override;
+		virtual void Invoke(void *pObj, TArgs... args) const override;
 		virtual FunctionSignature GetSignature() const override;
+
+
+	//[-------------------------------------------------------]
+	//[ Private functions                                     ]
+	//[-------------------------------------------------------]
+	private:
+		/**
+		*  @brief
+		*    Dummy typed invoker
+		*/
+		template <class T>
+		static void Invoker(void *pObj, FunctionBase *pFunc, TArgs... args);
+
+
+	//[-------------------------------------------------------]
+	//[ Private types                                         ]
+	//[-------------------------------------------------------]
+	private:
+		typedef void(*InvokerStub)(void*, FunctionBase*, TArgs...);
+
+
+	//[-------------------------------------------------------]
+	//[ Private data                                          ]
+	//[-------------------------------------------------------]
+	private:
+		void			*m_pObject;			/**< Untyped owner of this slot */
+		FunctionBase	*m_pFunction;		/**< Untyped slot function */
+		InvokerStub		m_pInvoker;			/**< Helper for typed invocation */
+
+
 };
 
 
@@ -67,7 +127,7 @@ class Constructor : public Invokable<T*, TArgs...> {
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "Constructor.inl"
+#include "Slot.inl"
 
 
-#endif // __PLCORE_CONSTRUCTOR2_H__
+#endif // __PLCORE_SLOT_H__

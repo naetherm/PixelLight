@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Constructor.inl                                *
+ *  File: Signal.inl                                     *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -29,26 +29,97 @@ namespace PLCore {
 
 
 //[-------------------------------------------------------]
+//[ Public functions                                      ]
+//[-------------------------------------------------------]
+/**
+*  @brief
+*    Emit the signal
+*/
+template <typename... TArgs>
+void Signal<TArgs...>::Emit(TArgs... args) const
+{
+	Invoke(args...);
+}
+
+/**
+*  @brief
+*    Connect a slot to the signal
+*/
+template <typename... TArgs>
+void Signal<TArgs...>::Connect(const SlotType &cSlot)
+{
+	// [TODO] Check for duplicity?
+	m_lstSlots.Add(cSlot);
+}
+
+/**
+*  @brief
+*    Connect a slot to the signal
+*/
+template <typename... TArgs>
+void Signal<TArgs...>::operator+=(const SlotType &cSlot)
+{
+	Connect(cSlot);
+}
+
+/**
+*  @brief
+*    Disconnect a slot from the signal
+*/
+template <typename... TArgs>
+void Signal<TArgs...>::Disconnect(const SlotType &cSlot)
+{
+	// [TODO] Check for multiple instances?
+	m_lstSlots.Remove(cSlot);
+}
+
+/**
+*  @brief
+*    Disconnect a slot from the signal
+*/
+template <typename... TArgs>
+void Signal<TArgs...>::operator-=(const SlotType &cSlot)
+{
+	Disconnect(cSlot);
+}
+
+/**
+*  @brief
+*    Disconnect all slots from the signal
+*/
+template <typename... TArgs>
+void Signal<TArgs...>::DisconnectAll()
+{
+	m_lstSlots.Clear();
+}
+
+
+//[-------------------------------------------------------]
 //[ Public virtual Invokable functions                    ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Invoke the delegate
+*    Emit the signal
 */
-template <class T, typename... TArgs>
-T* Constructor<T, TArgs...>::Invoke(TArgs... args) const
+template <typename... TArgs>
+void Signal<TArgs...>::Invoke(TArgs... args) const
 {
-	return new T(args...);
+	auto slots = m_lstSlots.GetConstIterator();
+	while (slots.HasNext()) {
+		// Signal the slot
+		const SlotType &slot = slots.Next();
+		slot.Signal(args...);
+	}
 }
 
 /**
 *  @brief
 *    Retrieve the signature
 */
-template <class T, typename... TArgs>
-FunctionSignature Constructor<T, TArgs...>::GetSignature() const
+template <typename... TArgs>
+FunctionSignature Signal<TArgs...>::GetSignature() const
 {
-	return FunctionSignature::FromTemplate<T*, TArgs...>();
+	return FunctionSignature::FromTemplate<void, TArgs...>();
 }
 
 

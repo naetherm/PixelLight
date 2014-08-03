@@ -52,7 +52,6 @@
 #include "PLCore/System/System.h"
 #include "PLCore/File/Url.h"
 #include "PLCore/File/Directory.h"
-#include "PLCore/Base/ClassManager.h"
 #include "PLCore/Registry/Registry.h"
 #include "PLCore/Tools/LoadableManager.h"
 #include "PLCore/Runtime.h"
@@ -477,14 +476,16 @@ bool Runtime::SetDirectory(const String &sDirectory, String *pszErrorMessage)
 */
 void Runtime::ScanDirectoryPlugins(const String &sDirectory, bool bDelayedPluginLoading)
 {
+	PL_TODO(ananta, "Return the plugin system")
+
 	// Get PixelLight runtime directory
-	const String sPLDirectory = (sDirectory.GetLength()) ? sDirectory : GetDirectory();
-	if (sPLDirectory.GetLength()) {
-		// Scan for plugins in the PixelLight runtime directory, but not recursively, please. This is quite useful
-		// for projects which can be used completely dynamically, but can also be used in other C++ projects
-		// to access certain features.
-		ClassManager::GetInstance()->ScanPlugins(sPLDirectory, NonRecursive, bDelayedPluginLoading);
-	}
+	//const String sPLDirectory = (sDirectory.GetLength()) ? sDirectory : GetDirectory();
+	//if (sPLDirectory.GetLength()) {
+	//	// Scan for plugins in the PixelLight runtime directory, but not recursively, please. This is quite useful
+	//	// for projects which can be used completely dynamically, but can also be used in other C++ projects
+	//	// to access certain features.
+	//	ClassManager::GetInstance()->ScanPlugins(sPLDirectory, NonRecursive, bDelayedPluginLoading);
+	//}
 }
 
 /**

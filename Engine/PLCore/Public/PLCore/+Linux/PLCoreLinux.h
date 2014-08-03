@@ -51,6 +51,18 @@
 */
 #define PL_WARNING_DISABLE(WarningID)
 
+/**
+*  @brief
+*    Prints generic message to the output
+*/
+#define PL_MESSAGE(x)
+
+/**
+*  @brief
+*    Specialized todo message
+*/
+#define PL_TODO(author, msg)
+
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]

@@ -44,6 +44,11 @@ class Application : public PLCore::CoreApplication {
 
 
 	//[-------------------------------------------------------]
+	//[ Reflected class                                       ]
+	//[-------------------------------------------------------]
+	pl_rtti()
+
+	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
 	pl_class(pl_rtti_export, Application, "", PLCore::CoreApplication, "Application class")
@@ -77,6 +82,12 @@ class Application : public PLCore::CoreApplication {
 
 
 };
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(Application)
 
 
 #endif // __PLSAMPLE_01_H__

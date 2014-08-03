@@ -34,7 +34,7 @@
 #include "PLCore/Core/Singleton.h"
 #include "PLCore/Container/Array.h"
 #include "PLCore/Container/HashMap.h"
-#include "PLCore/Base/Event/EventHandler.h"
+#include "PLCore/Event/Slot.h"
 
 
 //[-------------------------------------------------------]
@@ -520,8 +520,8 @@ class LoadableManager : public Singleton<LoadableManager> {
 	//[ Private slots                                         ]
 	//[-------------------------------------------------------]
 	private:
-		EventHandler<const Class*> SlotClassLoaded;
-		EventHandler<const Class*> SlotClassUnloaded;
+		Slot<const Class*> SlotClassLoaded;
+		Slot<const Class*> SlotClassUnloaded;
 
 
 	//[-------------------------------------------------------]

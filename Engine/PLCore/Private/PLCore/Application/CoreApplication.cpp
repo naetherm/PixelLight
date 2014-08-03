@@ -474,7 +474,7 @@ void CoreApplication::OnInitPlugins()
 	// Scan PL-runtime directory for compatible plugins and load them in
 	Runtime::ScanDirectoryPlugins();
 
-	// [TODO] This functionality is temporarily disabled
+	PL_TODO(ananta, "Return the plugin system")
 
 	// Scan for plugins in the application executable directory, but not recursively, please. This is
 	// quite useful for shipping applications and putting all plugins inside the application root directory

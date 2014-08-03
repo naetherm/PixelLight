@@ -28,6 +28,7 @@
 #include "PLCore/Reflection/Class.h"
 #include "PLCore/System/System.h"
 #include "PLCore/Frontend/FrontendImpl.h"
+#include "PLCore/Frontend/FrontendContext.h"
 #include "PLCore/Frontend/FrontendApplication.h"
 #include "PLCore/Frontend/FrontendPixelLight.h"
 
@@ -114,23 +115,25 @@ void FrontendPixelLight::OnRun(const String &sExecutableFilename, const Array<St
 //[-------------------------------------------------------]
 void FrontendPixelLight::OnCreate()
 {
-	// Get the frontend application RTTI class
-	const Class *pClass = ClassManager::GetInstance()->GetClass(ApplicationClass.GetString());
-	if (pClass && pClass->IsDerivedFrom("PLCore::FrontendApplication")) {
-		// Create the frontend application RTTI class instance
-		if (ApplicationConstructor.GetString().GetLength())
-			m_pFrontendApplication = static_cast<FrontendApplication*>(pClass->Create(ApplicationConstructor.GetString(), "Frontend=\"" + Type<Frontend&>::ConvertToString(*this) + "\" " + ApplicationConstructorParameters.GetString()));
-		else
-			m_pFrontendApplication = static_cast<FrontendApplication*>(pClass->Create(Params<Object*, Frontend&>(*this)));
-		if (m_pFrontendApplication) {
-			// Set parameters for the instanced frontend application RTTI class
-			if (ApplicationParameters.GetString().GetLength())
-				m_pFrontendApplication->SetValues(ApplicationParameters.GetString());
+	PL_TODO(ananta, "Construction now works in a different way, adapt this code!")
 
-			// Do the frontend life cycle thing - let the world know that we have been created
-			m_pFrontendApplication->OnCreate();
-		}
-	}
+	// Get the frontend application RTTI class
+	//const Class *pClass = ClassManager::GetInstance()->GetClass(ApplicationClass.GetString());
+	//if (pClass && pClass->IsDerivedFrom("PLCore::FrontendApplication")) {
+	//	// Create the frontend application RTTI class instance
+	//	if (ApplicationConstructor.GetString().GetLength())
+	//		m_pFrontendApplication = static_cast<FrontendApplication*>(pClass->Create(ApplicationConstructor.GetString(), "Frontend=\"" + Type<Frontend&>::ConvertToString(*this) + "\" " + ApplicationConstructorParameters.GetString()));
+	//	else
+	//		m_pFrontendApplication = static_cast<FrontendApplication*>(pClass->Create(Params<Object*, Frontend&>(*this)));
+	//	if (m_pFrontendApplication) {
+	//		// Set parameters for the instanced frontend application RTTI class
+	//		if (ApplicationParameters.GetString().GetLength())
+	//			m_pFrontendApplication->SetValues(ApplicationParameters.GetString());
+
+	//		// Do the frontend life cycle thing - let the world know that we have been created
+	//		m_pFrontendApplication->OnCreate();
+	//	}
+	//}
 }
 
 void FrontendPixelLight::OnRestart()

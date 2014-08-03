@@ -135,7 +135,7 @@ const ClassConstructor *Class::GetConstructorMatchingSignature(const PLCore::Fun
 *    Instantiate the class
 */
 template <typename T>
-T *Class::Create()
+T *Class::Create() const
 {
 	if (!HasDefaultConstructor())
 		return nullptr;

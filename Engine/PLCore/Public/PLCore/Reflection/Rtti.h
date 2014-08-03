@@ -149,7 +149,8 @@ namespace PLCore {
 #define pl_rtti() \
 	public: \
 		static void _RegisterReflection(); \
-		virtual PLCore::ClassTypeInfo *GetClassTypeInfo() const { return (PLCore::ClassTypeInfo*)PLCore::GetStaticTypeInfo(this); } \
+		static const PLCore::ClassTypeInfo *GetStaticClassTypeInfo(); \
+		virtual const PLCore::ClassTypeInfo *GetClassTypeInfo() const { return (PLCore::ClassTypeInfo*)PLCore::GetStaticTypeInfo(this); } \
 	private:
 
 /**
@@ -163,6 +164,7 @@ namespace PLCore {
 #define pl_sti() \
 	public: \
 		static void _RegisterReflection(); \
+		static const PLCore::ClassTypeInfo *GetStaticClassTypeInfo(); \
 	private:
 
 /**
@@ -179,6 +181,7 @@ namespace PLCore {
 *    The namespace the type resides in
 */
 #define pl_begin_class(CLSS, NAMESPACE) \
+	const PLCore::ClassTypeInfo *NAMESPACE::CLSS::GetStaticClassTypeInfo() { return (const PLCore::ClassTypeInfo*)PLCore::StaticTypeInfo<NAMESPACE::CLSS>::Get(); } \
 	struct CLSS##_Register { \
 		CLSS##_Register() \
 		{ \
@@ -211,7 +214,7 @@ namespace PLCore {
 *    Add a constructor with the given signature to the class
 */
 #define pl_ctor(...) \
-	.Constructor(new PLCore::ConstructorFunc<_Clss, __VA_ARGS__>())
+	.Constructor(new PLCore::Constructor<_Clss, __VA_ARGS__>())
 
 /**
 *  @brief

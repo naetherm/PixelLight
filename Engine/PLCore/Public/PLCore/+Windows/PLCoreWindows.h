@@ -63,6 +63,25 @@
 	#define PL_WARNING_DISABLE(WarningID) __pragma(warning(disable: WarningID))
 #endif
 
+/**
+*  @brief
+*    Compile-time messaging helpers
+*/
+#define STRING2(x) #x
+#define STRING(x) STRING2(x)
+
+/**
+*  @brief
+*    Prints generic message to the output
+*/
+#define PL_MESSAGE(x) __pragma(message("\n"__FILE__"("STRING(__LINE__)")\n^ "#x))
+
+/**
+*  @brief
+*    Specialized todo message
+*/
+#define PL_TODO(author, msg) PL_MESSAGE([TODO] (author) msg)
+
 
 //[-------------------------------------------------------]
 //[ Definitions                                           ]

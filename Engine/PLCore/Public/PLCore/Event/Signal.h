@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Constructor.h                                  *
+ *  File: Signal.h                                       *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,14 +22,16 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_CONSTRUCTOR2_H__
-#define __PLCORE_CONSTRUCTOR2_H__
+#ifndef __PLCORE_SIGNAL_H__
+#define __PLCORE_SIGNAL_H__
 #pragma once
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "Invokable.h"
+#include "PLCore/Typebase/Invokable.h"
+#include "PLCore/Container/List.h"
+#include "Slot.h"
 
 
 //[-------------------------------------------------------]
@@ -43,18 +45,76 @@ namespace PLCore {
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Constructor function for a specific argument list
+*    Event source (signal) class
+*
+*  @remarks
+*    This implements a multi-cast delegate pattern
 */
-template <class T, typename... TArgs>
-class Constructor : public Invokable<T*, TArgs...> {
+template <typename... TArgs>
+class Signal : public Invokable<void, TArgs...> {
+
+
+	//[-------------------------------------------------------]
+	//[ Public types                                          ]
+	//[-------------------------------------------------------]
+	public:
+		typedef Slot<TArgs...> SlotType;
+
+
+	//[-------------------------------------------------------]
+	//[ Public functions                                      ]
+	//[-------------------------------------------------------]
+	public:
+		/**
+		*  @brief
+		*    Emit the signal with the specified arguments
+		*/
+		void Emit(TArgs... args) const;
+
+		/**
+		*  @brief
+		*    Connect this signal (event) to the specified slot (event handler)
+		*/
+		void Connect(const SlotType &cSlot);
+
+		/**
+		*  @brief
+		*    Alternative way to connect a slot to this signal
+		*/
+		void operator+=(const SlotType &cSlot);
+
+		/**
+		*  @brief
+		*    Disconnect the given slot from this signal
+		*/
+		void Disconnect(const SlotType &cSlot);
+
+		/**
+		*  @brief
+		*    Alternative way to disconnect a slot from this signal
+		*/
+		void operator-=(const SlotType &cSlot);
+
+		/**
+		*  @brief
+		*    Disconnect all slots from this signal
+		*/
+		void DisconnectAll();
 
 
 	//[-------------------------------------------------------]
 	//[ Public virtual Invokable functions                    ]
 	//[-------------------------------------------------------]
 	public:
-		virtual T* Invoke(TArgs... args) const override;
+		virtual void Invoke(TArgs... args) const override;
 		virtual FunctionSignature GetSignature() const override;
+
+
+	//[-------------------------------------------------------]
+	//[ Private data                                          ]
+	//[-------------------------------------------------------]
+	private:
+		List<SlotType>	m_lstSlots;		/**< List of all slots currently connected to this signal */
 };
 
 
@@ -67,7 +127,7 @@ class Constructor : public Invokable<T*, TArgs...> {
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "Constructor.inl"
+#include "Signal.inl"
 
 
-#endif // __PLCORE_CONSTRUCTOR2_H__
+#endif // __PLCORE_SIGNAL_H__

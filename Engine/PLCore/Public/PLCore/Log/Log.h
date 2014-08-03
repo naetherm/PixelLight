@@ -32,7 +32,7 @@
 //[-------------------------------------------------------]
 #include "PLCore/Core/Singleton.h"
 #include "PLCore/Container/Queue.h"
-#include "PLCore/Base/Event/Event.h"
+#include "PLCore/Event/Signal.h"
 
 
 //[-------------------------------------------------------]
@@ -123,7 +123,7 @@ class Log : public Singleton<Log> {
 	//[ Public events                                         ]
 	//[-------------------------------------------------------]
 	public:
-		Event<> EventNewEntry;	/**< A new log entry had been added, use e.g. "GetLastMessages()" to access the latest messages */
+		Signal<> EventNewEntry;	/**< A new log entry had been added, use e.g. "GetLastMessages()" to access the latest messages */
 
 
 	//[-------------------------------------------------------]
