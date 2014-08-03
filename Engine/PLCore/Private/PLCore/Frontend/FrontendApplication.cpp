@@ -44,6 +44,8 @@ pl_begin_class(FrontendApplication, PLCore)
 	//	pl_desc("Returns the frontend this application is running in.")
 pl_end_class();
 
+PL_TODO(ananta, "GetFrontend")
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]

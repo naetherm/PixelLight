@@ -40,89 +40,6 @@ using namespace PLCore;
 
 
 //[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(Application)
-
-
-
-//TEMP
-class A
-{
-	pl_rtti()
-
-public:
-	int a;
-
-	virtual void f(int i) = 0;
-};
-pl_declare_class(A)
-
-pl_begin_class(A)
-	pl_tag("Access", String("Private"))
-	pl_tag("Virtual", true)
-	pl_class_method(f)
-		pl_tag("Access", String("Public"))
-pl_end_class()
-
-class B : public A
-{
-	pl_rtti()
-
-public:
-	int b;
-
-	virtual void f(int i) override
-	{
-		i = 1;
-	}
-};
-pl_declare_class(B)
-
-pl_begin_class(B)
-	pl_class_base(A)
-pl_end_class()
-
-class C
-{
-	pl_rtti()
-
-public:
-	C() : c(0) {}
-	C(int cc) : c(cc) {}
-	int c;
-};
-pl_declare_class(C)
-
-pl_begin_class(C)
-pl_end_class()
-
-class D : public B, public C
-{
-	pl_rtti()
-
-public:
-	D() : d(0) {}
-	D(int cc, int dd) : C(cc), d(dd) {}
-	int d;
-
-	virtual void f(int i) override
-	{
-		i = 2;
-	}
-};
-pl_declare_class(D)
-
-pl_begin_class(D)
-	pl_class_base(B)
-	pl_class_base(C)
-	pl_class_ctor()
-	pl_class_ctor(int, int)
-pl_end_class()
-
-
-
-//[-------------------------------------------------------]
 //[ Public functions                                      ]
 //[-------------------------------------------------------]
 /**
@@ -147,6 +64,8 @@ Application::~Application()
 void Application::Main()
 {
 	MyClass c;
+
+	c.OnInit.Emit(108);
 
 	const PLCore::Class *clss = PLCore::TypeRegistry::GetInstance()->GetClassType("MyClass")->GetClass();
 	if (clss)
@@ -185,53 +104,5 @@ void Application::Main()
 			ret = prop->GetDirect<const int&>(&c);
 			ret=ret;
 		}
-	}
-
-	/*PLCore::Function<decltype(&MyClass::PublicInt), PLCore::Field> f(&MyClass::PublicInt);
-
-	int* v = nullptr;
-	f(&c, &v);
-	*v = 2;
-	
-	PLCore::Array<PLCore::FunctionParam> params;
-	params.Add(PLCore::FunctionParam(&c));
-	params.Add(PLCore::FunctionParam(&v));
-
-	f.DynInvoke(&params);
-	*v = 108;*/
-
-	D inst;
-	clss = PLCore::TypeRegistry::GetInstance()->GetClassType("D")->GetClass();
-
-	const PLCore::ClassConstructor *ctor1 = clss->GetDefaultConstructor();
-	const PLCore::ClassConstructor *ctor2 = clss->GetConstructorMatchingSignature(PLCore::FunctionSignature::FromTemplate<D*, int, int>());
-
-	PLCore::Array<PLCore::FunctionParam> params;
-	params.Add(1008);
-	params.Add(108);
-
-	D* d1 = ctor1->Construct(&params).GetAs<D*>();
-	D* d2 = ctor2->Construct(&params).GetAs<D*>();
-	d1=d2;
-
-	
-	clss = PLCore::TypeRegistry::GetInstance()->GetClassType("A")->GetClass();
-	if (clss->HasTag("Access"))
-	{
-		PLCore::String val = clss->GetTag("Access").GetAs<PLCore::String>();
-		val=val;
-	}
-
-	if (clss->HasTag("Virtual"))
-	{
-		bool val = clss->GetTag("Virtual").GetAs<bool>();
-		val=val;
-	}
-
-	const PLCore::ClassMethod *meth = clss->GetMethod("f");
-	if (meth && meth->HasTag("Access"))
-	{
-		PLCore::String val = meth->GetTag("Access").GetAs<PLCore::String>();
-		val=val;
 	}
 }

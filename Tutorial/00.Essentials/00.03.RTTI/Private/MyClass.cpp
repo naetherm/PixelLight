@@ -36,9 +36,9 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_begin_class(MyClass)
-	pl_class_method(Foo)
-	pl_class_property(PrivateInt, GetPrivateInt, SetPrivateInt)
+pl_begin_class(MyClass,)
+	pl_method(Foo)
+	pl_property_getset(PrivateInt, GetPrivateInt, SetPrivateInt)
 pl_end_class()
 
 //[-------------------------------------------------------]
@@ -48,8 +48,10 @@ pl_end_class()
 *  @brief
 *    Constructor
 */
-MyClass::MyClass()
+MyClass::MyClass() :
+	InitializeSlot(this, new Function<decltype(&MyClass::Initialize)>(&MyClass::Initialize))
 {
+	OnInit += InitializeSlot;
 }
 
 /**

@@ -55,6 +55,8 @@ pl_begin_class(CoreApplication, PLCore)
 
 pl_end_class()
 
+PL_TODO(ananta, "GetApplicationContext")
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]

@@ -30,8 +30,9 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-//#include <PLCore/Base/Object.h>
-#include <PLCore/Reflection/Rtti.h>
+#include "PLCore/Reflection/Rtti.h"
+#include "PLCore/Event/Signal.h"
+#include "PLCore/Event/Slot.h"
 
 
 //[-------------------------------------------------------]
@@ -93,6 +94,15 @@ class MyClass
 		*    Public field
 		*/
 		int PublicInt;
+
+		PLCore::Signal<int> OnInit;
+		PLCore::Slot<int> InitializeSlot;
+
+		void Initialize(int i)
+		{
+			int j = i;
+			j=j;
+ 		}
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]

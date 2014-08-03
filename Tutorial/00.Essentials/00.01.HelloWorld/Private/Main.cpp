@@ -77,11 +77,11 @@ using namespace PLCore;
 // The following is a very basic definition of PixelLight's engine module. This is a more advanced topic
 // that will be explained later ([TODO] reference). For now, just note that it is a good practice to use
 // this kind of definition in every PixelLight application which becomes a must in some use cases.
-pl_module("00.01.HelloWorld")
-	pl_module_vendor("Copyright (C) 2002-2014 by The PixelLight Team")
-	pl_module_license("\"MIT License\" which is also known as \"X11 License\" or \"MIT X License\" (mit-license.org)")
-	pl_module_description("PixelLight Tutorial 00.01 - Hello World")
-pl_module_end
+//pl_module("00.01.HelloWorld")
+//	pl_module_vendor("Copyright (C) 2002-2014 by The PixelLight Team")
+//	pl_module_license("\"MIT License\" which is also known as \"X11 License\" or \"MIT X License\" (mit-license.org)")
+//	pl_module_description("PixelLight Tutorial 00.01 - Hello World")
+//pl_module_end
 
 
 //[-------------------------------------------------------]

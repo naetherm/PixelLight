@@ -21,6 +21,9 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 \*********************************************************/
 
+#include "PLCore/PLCore.h"
+PL_TODO(ananta, "Script!")
+
 #if 0
 
 //[-------------------------------------------------------]

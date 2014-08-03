@@ -41,12 +41,12 @@ pl_begin_class(CoreConfig, PLCore)
 	pl_desc("PLCore configuration classes")
 	pl_ctor()
 
-	/*pl_property(FirstRun)
+	pl_property(FirstRun)
 		pl_desc("Is this the first application start?")
 		pl_default(true)
 
 	pl_property(Language)
-		pl_desc("Current used language, if empty the current set OS locale language is used (for instance 'German')")*/
+		pl_desc("Current used language, if empty the current set OS locale language is used (for instance 'German')")
 
 pl_end_class()
 
@@ -55,7 +55,7 @@ pl_begin_class(FrontendConfig, PLCore)
 	pl_desc("PLCore frontend configuration classes")
 	pl_ctor()
 
-	/*pl_property(X)
+	pl_property(X)
 		pl_desc("X position of the frontend (in screen coordinates)")
 		pl_default(0)
 
@@ -69,7 +69,7 @@ pl_begin_class(FrontendConfig, PLCore)
 
 	pl_property(Height)
 		pl_desc("Height of the frontend")
-		pl_default(600)*/
+		pl_default(600)
 
 pl_end_class()
 

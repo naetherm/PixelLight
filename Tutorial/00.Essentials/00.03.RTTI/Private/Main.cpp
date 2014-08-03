@@ -41,11 +41,11 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ Module definition                                     ]
 //[-------------------------------------------------------]
-pl_module("01Application")
-	pl_module_vendor("Copyright (C) 2002-2013 by The PixelLight Team")
-	pl_module_license("\"MIT License\" which is also known as \"X11 License\" or \"MIT X License\" (mit-license.org)")
-	pl_module_description("PixelLight Sample 01 - Application")
-pl_module_end
+//pl_module("01Application")
+//	pl_module_vendor("Copyright (C) 2002-2013 by The PixelLight Team")
+//	pl_module_license("\"MIT License\" which is also known as \"X11 License\" or \"MIT X License\" (mit-license.org)")
+//	pl_module_description("PixelLight Sample 01 - Application")
+//pl_module_end
 
 
 //[-------------------------------------------------------]
