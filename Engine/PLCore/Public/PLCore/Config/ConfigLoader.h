@@ -30,8 +30,8 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/Rtti.h>
-#include <PLCore/Tools/LoaderImpl.h>
+#include "PLCore/Reflection/Rtti.h"
+#include "PLCore/Tools/LoaderImpl.h"
 
 
 //[-------------------------------------------------------]

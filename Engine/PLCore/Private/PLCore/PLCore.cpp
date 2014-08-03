@@ -31,8 +31,9 @@
 //[-------------------------------------------------------]
 //[ Module definition                                     ]
 //[-------------------------------------------------------]
-pl_module_plugin("PLCore")
-	pl_module_vendor("Copyright (C) 2002-2013 by The PixelLight Team")
-	pl_module_license("\"MIT License\" which is also known as \"X11 License\" or \"MIT X License\" (mit-license.org)")
-	pl_module_description("PLCore library")
-pl_module_end
+PL_TODO(ananta, "Re-implement modules!")
+//pl_module_plugin("PLCore")
+//	pl_module_vendor("Copyright (C) 2002-2013 by The PixelLight Team")
+//	pl_module_license("\"MIT License\" which is also known as \"X11 License\" or \"MIT X License\" (mit-license.org)")
+//	pl_module_description("PLCore library")
+//pl_module_end

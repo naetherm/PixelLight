@@ -30,6 +30,7 @@
 #include "PLCore/Reflection/Class.h"
 #include "PLCore/Config/Config.h"
 #include "PLCore/Config/ConfigLoaderPL.h"
+#include "PLCore/File/File.h"
 
 
 //[-------------------------------------------------------]
@@ -126,32 +127,34 @@ bool ConfigLoaderPL::SaveParams(const Config &cConfig, File &cFile, String sGrou
 	XmlElement *pConfigElement = new XmlElement("Config");
 	pConfigElement->SetAttribute("Version", "1");
 
+	PL_TODO(ananta, "If we'll be using the loader, make it work!")
+
 	// Save ONLY configuration class instances which are in a certain configuration class group?
 	bool bResult = true; // No error by default
-	if (sGroup.GetLength()) {
-		// Loop through all config class instances and save them
-		for (uint32 nConfig=0; nConfig<cConfig.GetNumOfClasses(); nConfig++) {
-			// Get config class instance
-			const ConfigGroup *pConfigGroup = cConfig.GetClassByIndex(nConfig);
+	//if (sGroup.GetLength()) {
+	//	// Loop through all config class instances and save them
+	//	for (uint32 nConfig=0; nConfig<cConfig.GetNumOfClasses(); nConfig++) {
+	//		// Get config class instance
+	//		const ConfigGroup *pConfigGroup = cConfig.GetClassByIndex(nConfig);
 
-			// Check whether the class is within the given configuration group
-			if (pConfigGroup && pConfigGroup->IsInstanceOf(sGroup)) {
-				// Save this configuration group
-				if (!SaveGroup(*pConfigElement, *pConfigGroup, bNoDefault))
-					bResult = false; // Error!
-			}
-		}
-	} else { // Save ALL configuration class instances
-		// Loop through all config class instances and save them
-		for (uint32 nConfig=0; nConfig<cConfig.GetNumOfClasses(); nConfig++) {
-			// Get config class instance
-			const ConfigGroup *pConfigGroup = cConfig.GetClassByIndex(nConfig);
+	//		// Check whether the class is within the given configuration group
+	//		if (pConfigGroup && pConfigGroup->IsInstanceOf(sGroup)) {
+	//			// Save this configuration group
+	//			if (!SaveGroup(*pConfigElement, *pConfigGroup, bNoDefault))
+	//				bResult = false; // Error!
+	//		}
+	//	}
+	//} else { // Save ALL configuration class instances
+	//	// Loop through all config class instances and save them
+	//	for (uint32 nConfig=0; nConfig<cConfig.GetNumOfClasses(); nConfig++) {
+	//		// Get config class instance
+	//		const ConfigGroup *pConfigGroup = cConfig.GetClassByIndex(nConfig);
 
-			// Save this configuration group
-			if (pConfigGroup && !SaveGroup(*pConfigElement, *pConfigGroup, bNoDefault))
-				bResult = false; // Error!
-		}
-	}
+	//		// Save this configuration group
+	//		if (pConfigGroup && !SaveGroup(*pConfigElement, *pConfigGroup, bNoDefault))
+	//			bResult = false; // Error!
+	//	}
+	//}
 
 	// Link config element to parent
 	cDocument.LinkEndChild(*pConfigElement);
@@ -194,22 +197,22 @@ ConfigLoaderPL::~ConfigLoaderPL()
 bool ConfigLoaderPL::LoadV1(Config &cConfig, const XmlElement &cConfigElement) const
 {
 	// Iterate through all groups
-	const XmlElement *pGroupElement = cConfigElement.GetFirstChildElement("Group");
-	while (pGroupElement) {
-		// Get group class name
-		String sClass = pGroupElement->GetAttribute("Class");
-		if (sClass.GetLength()) {
-			// Get config class instance
-			ConfigGroup *pClass = cConfig.GetClass(sClass);
-			if (pClass) {
-				// Set variables
-				pClass->SetValuesXml(*pGroupElement);
-			}
-		}
+	//const XmlElement *pGroupElement = cConfigElement.GetFirstChildElement("Group");
+	//while (pGroupElement) {
+	//	// Get group class name
+	//	String sClass = pGroupElement->GetAttribute("Class");
+	//	if (sClass.GetLength()) {
+	//		// Get config class instance
+	//		ConfigGroup *pClass = cConfig.GetClass(sClass);
+	//		if (pClass) {
+	//			// Set variables
+	//			pClass->SetValuesXml(*pGroupElement);
+	//		}
+	//	}
 
-		// Next element, please
-		pGroupElement = pGroupElement->GetNextSiblingElement("Group");
-	}
+	//	// Next element, please
+	//	pGroupElement = pGroupElement->GetNextSiblingElement("Group");
+	//}
 
 	// Done
 	return true;
@@ -222,17 +225,17 @@ bool ConfigLoaderPL::LoadV1(Config &cConfig, const XmlElement &cConfigElement) c
 bool ConfigLoaderPL::SaveGroup(XmlElement &cConfigElement, const ConfigGroup &cGroup, bool bNoDefault) const
 {
 	// Create config group
-	XmlElement *pGroupElement = new XmlElement("Group");
-	pGroupElement->SetAttribute("Class", cGroup.GetClass()->GetClassName());
+	//XmlElement *pGroupElement = new XmlElement("Group");
+	//pGroupElement->SetAttribute("Class", cGroup.GetClass()->GetClassName());
 
-	// Add variables as elements
-	cGroup.GetValuesXml(*pGroupElement, bNoDefault ? NoDefault : WithDefault);
+	//// Add variables as elements
+	//cGroup.GetValuesXml(*pGroupElement, bNoDefault ? NoDefault : WithDefault);
 
-	// Link group to config if it isn't empty
-	if (pGroupElement->GetFirstAttribute())
-		cConfigElement.LinkEndChild(*pGroupElement);
-	else
-		delete pGroupElement; // Ok, the group is empty - say goodbye useless group :)
+	//// Link group to config if it isn't empty
+	//if (pGroupElement->GetFirstAttribute())
+	//	cConfigElement.LinkEndChild(*pGroupElement);
+	//else
+	//	delete pGroupElement; // Ok, the group is empty - say goodbye useless group :)
 
 	// Done
 	return true;

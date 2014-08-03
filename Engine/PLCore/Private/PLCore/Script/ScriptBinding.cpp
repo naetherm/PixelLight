@@ -21,6 +21,7 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 \*********************************************************/
 
+#if 0
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
@@ -87,3 +88,5 @@ ScriptBinding &ScriptBinding::operator =(const ScriptBinding &cSource)
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+#endif

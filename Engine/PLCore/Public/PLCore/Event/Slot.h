@@ -30,6 +30,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Typebase/Invokable.h"
+#include "PLCore/Reflection/Rtti.h"
 
 
 //[-------------------------------------------------------]

@@ -214,29 +214,31 @@ void Frontend::OnRun(const String &sExecutableFilename, const Array<String> &lst
 */
 FrontendImpl *Frontend::CreateFrontendImplementation(const FrontendContext &cFrontendContext)
 {
+	PL_TODO(ananta, "Construction of reflected objects is now working in a different way")
+
 	// Get the frontend implementation RTTI class
-	const Class *pClass = ClassManager::GetInstance()->GetClass(cFrontendContext.GetFrontendImplementation());
-	if (pClass && pClass->IsDerivedFrom("PLCore::FrontendImpl")) {
-		// Create the frontend RTTI class instance
-		Object *pObject = cFrontendContext.GetFrontendImplementationConstructor().GetLength() ? pClass->Create(cFrontendContext.GetFrontendImplementationConstructor(), cFrontendContext.GetFrontendImplementationConstructorParameters()) : pClass->Create();
-		if (pObject) {
-			// Write down a log message
-			PL_LOG(Info, "Using frontend implementation '" + pClass->GetClassName() + "': " + pClass->GetDescription())
+	//const Class *pClass = ClassManager::GetInstance()->GetClass(cFrontendContext.GetFrontendImplementation());
+	//if (pClass && pClass->IsDerivedFrom("PLCore::FrontendImpl")) {
+	//	// Create the frontend RTTI class instance
+	//	Object *pObject = cFrontendContext.GetFrontendImplementationConstructor().GetLength() ? pClass->Create(cFrontendContext.GetFrontendImplementationConstructor(), cFrontendContext.GetFrontendImplementationConstructorParameters()) : pClass->Create();
+	//	if (pObject) {
+	//		// Write down a log message
+	//		PL_LOG(Info, "Using frontend implementation '" + pClass->GetClassName() + "': " + pClass->GetDescription())
 
-			// Set parameters for the instanced frontend implementation RTTI class
-			if (cFrontendContext.GetFrontendImplementationParameters().GetLength())
-				pObject->SetValues(cFrontendContext.GetFrontendImplementationParameters());
+	//		// Set parameters for the instanced frontend implementation RTTI class
+	//		if (cFrontendContext.GetFrontendImplementationParameters().GetLength())
+	//			pObject->SetValues(cFrontendContext.GetFrontendImplementationParameters());
 
-			// Done
-			return static_cast<FrontendImpl*>(pObject);
-		} else {
-			// Error!
-			PL_LOG(Error, "Failed instancing frontend implementation '" + pClass->GetClassName() + "': " + pClass->GetDescription())
-		}
-	} else {
-		// Error!
-		PL_LOG(Error, "Frontend '" + cFrontendContext.GetFrontendImplementation() + "' is no valid frontend implementation RTTI class")
-	}
+	//		// Done
+	//		return static_cast<FrontendImpl*>(pObject);
+	//	} else {
+	//		// Error!
+	//		PL_LOG(Error, "Failed instancing frontend implementation '" + pClass->GetClassName() + "': " + pClass->GetDescription())
+	//	}
+	//} else {
+	//	// Error!
+	//	PL_LOG(Error, "Frontend '" + cFrontendContext.GetFrontendImplementation() + "' is no valid frontend implementation RTTI class")
+	//}
 
 	// Error!
 	return nullptr;

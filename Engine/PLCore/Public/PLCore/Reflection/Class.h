@@ -36,9 +36,10 @@
 #include "ClassProperty.h"
 #include "ClassConstructor.h"
 #include "TagHolder.h"
-#include <PLCore/String/String.h>
-#include <PLCore/Container/HashMap.h>
-#include <PLCore/Container/Array.h>
+#include "Rtti.h"
+#include "PLCore/String/String.h"
+#include "PLCore/Container/HashMap.h"
+#include "PLCore/Container/Array.h"
 
 
 //[-------------------------------------------------------]
@@ -65,6 +66,13 @@ class ClassBuilder;
 *    TODO: describe this in more detail
 */
 class Class : public TagHolder {
+
+
+	//[-------------------------------------------------------]
+	//[ Reflected class                                       ]
+	//[-------------------------------------------------------]
+	pl_rtti()
+
 
 	//[-------------------------------------------------------]
 	//[ Friends                                               ]
@@ -217,6 +225,12 @@ class Class : public TagHolder {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::Class)
 
 
 //[-------------------------------------------------------]

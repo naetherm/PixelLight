@@ -21,12 +21,13 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 \*********************************************************/
 
+#if 0
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Log/Log.h"
-#include "PLCore/Base/Class.h"
+#include "PLCore/Reflection/Class.h"
 #include "PLCore/Script/ScriptManager.h"
 #include "PLCore/Script/Script.h"
 
@@ -172,3 +173,5 @@ Script &Script::operator =(const Script &cSource)
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+#endif

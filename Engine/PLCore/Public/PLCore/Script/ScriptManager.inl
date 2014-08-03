@@ -21,6 +21,7 @@
  *  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 \*********************************************************/
 
+#if 0
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -90,3 +91,5 @@ inline void ScriptManager::OnClassLoaded(const Class *pClass)
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+#endif

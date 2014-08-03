@@ -28,7 +28,7 @@
 #include "PLCore/Log/Log.h"
 #include "PLCore/File/File.h"
 #include "PLCore/System/System.h"
-#include "PLCore/Base/Class.h"
+#include "PLCore/Reflection/Class.h"
 #include "PLCore/Tools/Loader.h"
 #include "PLCore/Tools/LoadableManager.h"
 #include "PLCore/Tools/LoadableType.h"
@@ -242,14 +242,14 @@ void LoadableType::AddLoader(Loader &cLoader)
 			if (pLoader) {
 				// Two loaders for the same format extension of the same loadable type? That's not ok! Sadly, in fact this can happen
 				// due to the tons of available file formats and there's no chance to avoid such naming conflicts...
-				PL_LOG(Info, "Loader '" + cLoader.m_pClass->GetClassName() + "': Format '" + sFormat + "' is already used by loader '" + pLoader->m_pClass->GetClassName() + '\'')
+				PL_LOG(Info, "Loader '" + cLoader.m_pClass->GetName() + "': Format '" + sFormat + "' is already used by loader '" + pLoader->m_pClass->GetName() + '\'')
 			} else {
 				// Is there already such a format within the loadable manager?
 				pLoader = pLoadableManager->m_mapLoaders.Get(sFormat);
 				if (pLoader) {
 					// Write a note into the log - but no error because that's a situation that CAN occur, this just means that we can't figure
 					// out the loader type by just looking at a given filename extension (but that's usually not required anyway)
-					PL_LOG(Debug, "Loader '" + cLoader.m_pClass->GetClassName() + "': Format '" + sFormat + "' is already used by loader '" + pLoader->m_pClass->GetClassName() + "' (uncritical due to different loader types)")
+					PL_LOG(Debug, "Loader '" + cLoader.m_pClass->GetName() + "': Format '" + sFormat + "' is already used by loader '" + pLoader->m_pClass->GetName() + "' (uncritical due to different loader types)")
 
 				// Add format to the loadable manager
 				} else {

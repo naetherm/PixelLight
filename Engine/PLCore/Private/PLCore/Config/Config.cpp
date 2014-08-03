@@ -241,20 +241,22 @@ Config &Config::operator =(const Config &cSource)
 */
 bool Config::SetClassDefault(const String &sClass, const String &sVariable)
 {
-	// Get class
-	ConfigGroup *pClass = GetClass(sClass);
-	if (!pClass)
-		return false; // Error!
+	PL_TODO(ananta, "Property default values")
 
-	// Set all variables to default?
-	if (sVariable.GetLength()) {
-		// Get attribute
-		DynVar *pDynVar = pClass->GetAttribute(sVariable);
-		if (pDynVar)
-			pDynVar->SetDefault();
-	} else {
-		pClass->SetDefaultValues();
-	}
+	// Get class
+	//ConfigGroup *pClass = GetClass(sClass);
+	//if (!pClass)
+	//	return false; // Error!
+
+	//// Set all variables to default?
+	//if (sVariable.GetLength()) {
+	//	// Get attribute
+	//	DynVar *pDynVar = pClass->GetAttribute(sVariable);
+	//	if (pDynVar)
+	//		pDynVar->SetDefault();
+	//} else {
+	//	pClass->SetDefaultValues();
+	//}
 
 	// Done
 	return true;

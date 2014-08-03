@@ -25,7 +25,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Base/Class.h"
+#include "PLCore/Reflection/Class.h"
 #include "PLCore/String/Tokenizer.h"
 #include "PLCore/Tools/LoaderImpl.h"
 #include "PLCore/Tools/Loader.h"
@@ -48,7 +48,7 @@ LoaderImpl *Loader::GetImpl()
 {
 	// Create the loader implementation class instance if required right now
 	if (!m_pLoaderImpl)
-		m_pLoaderImpl = reinterpret_cast<LoaderImpl*>(m_pClass->Create());
+		m_pLoaderImpl = m_pClass->Create<LoaderImpl>();
 
 	// Return the loader implementation class instance
 	return m_pLoaderImpl;
@@ -61,7 +61,7 @@ LoaderImpl *Loader::GetImpl()
 String Loader::GetTypeName() const
 {
 	const Class *pClass = m_pClass;
-	return pClass ? pClass->GetProperties().Get("Type") : "";
+	return pClass ? pClass->GetTag("Type").GetAs<String>() : "";
 }
 
 /**
@@ -88,7 +88,7 @@ bool Loader::IsFormatSupported(const String &sExtension)
 String Loader::GetFormats() const
 {
 	const Class *pClass = m_pClass;
-	return pClass ? pClass->GetProperties().Get("Formats") : "";
+	return pClass ? pClass->GetTag("Formats").GetAs<String>() : "";
 }
 
 /**
@@ -98,7 +98,7 @@ String Loader::GetFormats() const
 String Loader::GetDescription() const
 {
 	const Class *pClass = m_pClass;
-	return pClass ? pClass->GetDescription() : "";
+	return pClass ? pClass->GetTag("Description").GetAs<String>() : "";
 }
 
 /**
@@ -108,7 +108,7 @@ String Loader::GetDescription() const
 bool Loader::CanLoad() const
 {
 	const Class *pClass = m_pClass;
-	return pClass ? pClass->GetProperties().Get("Load").GetBool() : false;
+	return pClass ? pClass->GetTag("Load").GetAs<bool>() : false;
 }
 
 /**
@@ -118,7 +118,7 @@ bool Loader::CanLoad() const
 bool Loader::CanSave() const
 {
 	const Class *pClass = m_pClass;
-	return pClass ? pClass->GetProperties().Get("Save").GetBool() : false;
+	return pClass ? pClass->GetTag("Save").GetAs<bool>() : false;
 }
 
 

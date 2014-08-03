@@ -72,5 +72,10 @@ class PrimitiveTypeInfo : public TypeInfo {
 //[-------------------------------------------------------]
 } // PLCore
 
+//[-------------------------------------------------------]
+//[ Core types                                            ]
+//[-------------------------------------------------------]
+#include "PrimitiveTypes.inl"
+
 
 #endif // __PLCORE_PRIMITIVETYPEINFO_H__

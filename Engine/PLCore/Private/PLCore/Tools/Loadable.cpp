@@ -28,7 +28,7 @@
 #include "PLCore/Log/Log.h"
 #include "PLCore/File/File.h"
 #include "PLCore/File/Directory.h"
-#include "PLCore/Base/Class.h"
+#include "PLCore/Reflection/Class.h"
 #include "PLCore/Tools/Loader.h"
 #include "PLCore/Tools/LoaderImpl.h"
 #include "PLCore/Tools/LoadableType.h"
@@ -453,19 +453,21 @@ Loadable::~Loadable()
 //[-------------------------------------------------------]
 bool Loadable::CallLoadable(File &cFile, Loader &cLoader, const String &sMethod, const String &sParams)
 {
+	PL_TODO(ananta, "If we need this, fix it")
+
 	// Get the loader implementation
-	LoaderImpl *pLoaderImpl = cLoader.GetImpl();
-	if (pLoaderImpl) {
-		// Load
-		if (sParams.GetLength()) {
-			pLoaderImpl->CallMethod(sMethod, "Param0=\"" + Type<Loadable&>::ConvertToString(*this) + "\" Param1=\"" + Type<File&>::ConvertToString(cFile) + "\" " + sParams);
-			return true;
-		} else {
-			Params<bool, Loadable&, File&> cParams(*this, cFile);
-			pLoaderImpl->CallMethod(sMethod, cParams);
-			return cParams.Return;
-		}
-	}
+	//LoaderImpl *pLoaderImpl = cLoader.GetImpl();
+	//if (pLoaderImpl) {
+	//	// Load
+	//	if (sParams.GetLength()) {
+	//		pLoaderImpl->CallMethod(sMethod, "Param0=\"" + Type<Loadable&>::ConvertToString(*this) + "\" Param1=\"" + Type<File&>::ConvertToString(cFile) + "\" " + sParams);
+	//		return true;
+	//	} else {
+	//		Params<bool, Loadable&, File&> cParams(*this, cFile);
+	//		pLoaderImpl->CallMethod(sMethod, cParams);
+	//		return cParams.Return;
+	//	}
+	//}
 
 	// Error!
 	return false;
@@ -474,18 +476,18 @@ bool Loadable::CallLoadable(File &cFile, Loader &cLoader, const String &sMethod,
 bool Loadable::CallLoadable(Directory &cDirectory, Loader &cLoader, const String &sMethod, const String &sParams)
 {
 	// Get the loader implementation
-	LoaderImpl *pLoaderImpl = cLoader.GetImpl();
-	if (pLoaderImpl) {
-		// Load
-		if (sParams.GetLength()) {
-			pLoaderImpl->CallMethod(sMethod, "Param0=\"" + Type<Loadable&>::ConvertToString(*this) + "\" Param1=\"" + Type<Directory&>::ConvertToString(cDirectory) + "\" " + sParams);
-			return true;
-		} else {
-			Params<bool, Loadable&, Directory&> cParams(*this, cDirectory);
-			pLoaderImpl->CallMethod(sMethod, cParams);
-			return cParams.Return;
-		}
-	}
+	//LoaderImpl *pLoaderImpl = cLoader.GetImpl();
+	//if (pLoaderImpl) {
+	//	// Load
+	//	if (sParams.GetLength()) {
+	//		pLoaderImpl->CallMethod(sMethod, "Param0=\"" + Type<Loadable&>::ConvertToString(*this) + "\" Param1=\"" + Type<Directory&>::ConvertToString(cDirectory) + "\" " + sParams);
+	//		return true;
+	//	} else {
+	//		Params<bool, Loadable&, Directory&> cParams(*this, cDirectory);
+	//		pLoaderImpl->CallMethod(sMethod, cParams);
+	//		return cParams.Return;
+	//	}
+	//}
 
 	// Error!
 	return false;

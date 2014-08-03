@@ -33,15 +33,29 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(LocalizationLoaderPL, PLCore)
+	pl_base_class(PLCore::LocalizationLoader)
+	pl_desc("Localization loader implementation for the PixelLight localization XML file format")
+	pl_ctor()
+	pl_str_tag("Formats", "loc,LOC")
+	pl_tag("Load", true)
+	pl_tag("Save", true)
+
+	pl_method(Load)
+		pl_desc("Load method")
+
+	pl_method(Save)
+		pl_desc("Save method")
+
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLCore {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(LocalizationLoaderPL)
 
 
 //[-------------------------------------------------------]

@@ -31,6 +31,7 @@
 //[-------------------------------------------------------]
 #include "PLCore/Typebase/Invokable.h"
 #include "PLCore/Container/List.h"
+#include "PLCore/Reflection/Rtti.h"
 #include "Slot.h"
 
 

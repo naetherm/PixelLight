@@ -26,6 +26,7 @@
 #define __PLCORE_SCRIPTBINDING_H__
 #pragma once
 
+#if 0
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
@@ -123,5 +124,6 @@ class ScriptBinding : public Object {
 //[-------------------------------------------------------]
 } // PLCore
 
+#endif
 
 #endif // __PLCORE_SCRIPTBINDING_H__

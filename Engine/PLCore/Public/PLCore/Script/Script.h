@@ -26,6 +26,7 @@
 #define __PLCORE_SCRIPT_H__
 #pragma once
 
+#if 0
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
@@ -483,5 +484,6 @@ class Script : public Object {
 //[-------------------------------------------------------]
 } // PLCore
 
+#endif
 
 #endif // __PLCORE_SCRIPT_H__

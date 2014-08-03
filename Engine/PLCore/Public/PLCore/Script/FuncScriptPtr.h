@@ -26,6 +26,7 @@
 #define __PLCORE_FUNCSCRIPTPTR_H__
 #pragma once
 
+#if 0
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
@@ -1938,5 +1939,6 @@ class FuncScriptPtr<void> : public Func<void> {
 //[-------------------------------------------------------]
 } // PLCore
 
+#endif
 
 #endif // __PLCORE_FUNCSCRIPTPTR_H__

@@ -192,38 +192,40 @@ int FrontendImpl::Run(const String &sExecutableFilename, const Array<String> &ls
 */
 Frontend *FrontendImpl::CreateFrontend(const FrontendContext &cFrontendContext, FrontendImpl &cFrontendImpl)
 {
+	PL_TODO(ananta, "Fic frontend creation")
+
 	// Get the frontend RTTI class
-	const Class *pClass = ClassManager::GetInstance()->GetClass(cFrontendContext.GetFrontend());
-	if (pClass && pClass->IsDerivedFrom("PLCore::Frontend")) {
-		// Create the frontend RTTI class instance
-		Object *pObject = nullptr;
-		if (cFrontendContext.GetFrontendConstructor().GetLength())
-			pObject = pClass->Create(cFrontendContext.GetFrontendConstructor(), "FrontendContext=\"" + Type<const FrontendContext&>::ConvertToString(cFrontendContext) + "\" FrontendImpl=\"" + Type<FrontendImpl&>::ConvertToString(cFrontendImpl) + "\" " + cFrontendContext.GetFrontendConstructorParameters());
-		else
-			pObject = pClass->Create(Params<Object*, const FrontendContext&, FrontendImpl&>(cFrontendContext, cFrontendImpl));
+	//const Class *pClass = ClassManager::GetInstance()->GetClass(cFrontendContext.GetFrontend());
+	//if (pClass && pClass->IsDerivedFrom("PLCore::Frontend")) {
+	//	// Create the frontend RTTI class instance
+	//	Object *pObject = nullptr;
+	//	if (cFrontendContext.GetFrontendConstructor().GetLength())
+	//		pObject = pClass->Create(cFrontendContext.GetFrontendConstructor(), "FrontendContext=\"" + Type<const FrontendContext&>::ConvertToString(cFrontendContext) + "\" FrontendImpl=\"" + Type<FrontendImpl&>::ConvertToString(cFrontendImpl) + "\" " + cFrontendContext.GetFrontendConstructorParameters());
+	//	else
+	//		pObject = pClass->Create(Params<Object*, const FrontendContext&, FrontendImpl&>(cFrontendContext, cFrontendImpl));
 
-		// Do we now have an instance?
-		if (pObject) {
-			// Cast the pointer to a frontend pointer
-			Frontend *pFrontend = static_cast<Frontend*>(pObject);
+	//	// Do we now have an instance?
+	//	if (pObject) {
+	//		// Cast the pointer to a frontend pointer
+	//		Frontend *pFrontend = static_cast<Frontend*>(pObject);
 
-			// Write down a log message
-			PL_LOG(Info, "Using frontend '" + pClass->GetClassName() + "': " + pClass->GetDescription())
+	//		// Write down a log message
+	//		PL_LOG(Info, "Using frontend '" + pClass->GetClassName() + "': " + pClass->GetDescription())
 
-			// Set parameters for the instanced frontend RTTI class
-			if (cFrontendContext.GetFrontendParameters().GetLength())
-				pObject->SetValues(cFrontendContext.GetFrontendParameters());
+	//		// Set parameters for the instanced frontend RTTI class
+	//		if (cFrontendContext.GetFrontendParameters().GetLength())
+	//			pObject->SetValues(cFrontendContext.GetFrontendParameters());
 
-			// Done
-			return pFrontend;
-		} else {
-			// Error!
-			PL_LOG(Error, "Failed instancing frontend '" + pClass->GetClassName() + "': " + pClass->GetDescription())
-		}
-	} else {
-		// Error!
-		PL_LOG(Error, "Frontend '" + cFrontendContext.GetFrontend() + "' is no valid frontend RTTI class")
-	}
+	//		// Done
+	//		return pFrontend;
+	//	} else {
+	//		// Error!
+	//		PL_LOG(Error, "Failed instancing frontend '" + pClass->GetClassName() + "': " + pClass->GetDescription())
+	//	}
+	//} else {
+	//	// Error!
+	//	PL_LOG(Error, "Frontend '" + cFrontendContext.GetFrontend() + "' is no valid frontend RTTI class")
+	//}
 
 	// Error!
 	return nullptr;

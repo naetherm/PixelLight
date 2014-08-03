@@ -26,6 +26,7 @@
 #define __PLCORE_SCRIPTMANAGER_H__
 #pragma once
 
+#if 0
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
@@ -270,5 +271,6 @@ class ScriptManager : public Singleton<ScriptManager> {
 //[-------------------------------------------------------]
 #include "PLCore/Script/ScriptManager.inl"
 
+#endif
 
 #endif // __PLCORE_SCRIPTMANAGER_H__
