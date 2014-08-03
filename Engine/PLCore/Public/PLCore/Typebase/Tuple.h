@@ -57,7 +57,7 @@ class TupleLeaf {
 	//[ Public types                                          ]
 	//[-------------------------------------------------------]
 	public:
-		typedef typename RemoveConst<typename RemoveReference<TValue>::Type>::Type _StorageType;
+		typedef /*typename RemoveConst<typename RemoveReference<TValue>::Type>::Type*/ TValue _StorageType;
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -126,6 +126,85 @@ class TupleLeaf {
 	//[-------------------------------------------------------]
 	private:
 		_StorageType m_cValue;		/**< The value held by this leaf */
+};
+
+template <int I, typename TValue>
+class TupleLeaf<I, TValue&> {
+
+	//[-------------------------------------------------------]
+	//[ Public types                                          ]
+	//[-------------------------------------------------------]
+	public:
+		typedef typename RemoveConst<TValue>::Type _StorageType;
+		static typename RemoveConst<typename RemoveReference<TValue>::Type>::Type m_cDefaultInst;
+
+	//[-------------------------------------------------------]
+	//[ Public functions                                      ]
+	//[-------------------------------------------------------]
+	public:
+		/**
+		*  @brief
+		*    Default constructor
+		*/
+		TupleLeaf() : m_cValue(m_cDefaultInst) {}
+
+		/**
+		*  @brief
+		*    Copy constructor
+		*/
+		TupleLeaf(const TupleLeaf &cLeaf) : m_cValue(cLeaf.Get()) {}
+
+		/**
+		*  @brief
+		*    Value constructor
+		*
+		*  @param[in] cVal
+		*    The value to initialize the leaf with
+		*/
+		template <typename T>
+		explicit TupleLeaf(T &&cVal) : m_cValue(static_cast<T&&>(cVal)) {}
+
+		/**
+		*  @brief
+		*    Create the leaf from another one on the same position
+		*/
+		template <typename T>
+		explicit TupleLeaf(const TupleLeaf<I, T> &cLeaf) : m_cValue(cLeaf.Get()) {}
+
+		/**
+		*  @brief
+		*    The assignment operator
+		*/
+		template <typename T>
+		TupleLeaf &operator=(T &&cVal)
+		{
+			m_cValue = static_cast<T&&>(cVal);
+			return *this;
+		}
+
+		/**
+		*  @brief
+		*    Get this leaf's data
+		*/
+		_StorageType &Get()
+		{
+			return m_cValue;
+		}
+
+		/**
+		*  @brief
+		*    Get this leaf's data
+		*/
+		const _StorageType &Get() const
+		{
+			return m_cValue;
+		}
+
+	//[-------------------------------------------------------]
+	//[ Private data                                          ]
+	//[-------------------------------------------------------]
+	private:
+		_StorageType& m_cValue;		/**< The value held by this leaf */
 };
 
 /**
@@ -225,7 +304,7 @@ template <typename Head, typename... Tail>
 struct TupleElement<0, Tuple<Head, Tail...>> {
 
 	typedef Head _Type;
-	typedef typename RemoveConst<typename RemoveReference<Head>::Type>::Type _RawType;
+	typedef typename RemoveConst<Head>::Type _RawType;
 };
 
 /**
@@ -284,7 +363,7 @@ struct TupleFromUntypedVariantImpl {
 	{
 		TupleFromUntypedVariantImpl<N - 1, BUFFER_SIZE, T...>::Make(cIterator, cTuple);
 
-		typedef typename RemoveConst<typename RemoveReference<typename TupleElement<N - 1, Tuple<T...>>::_Type>::Type>::Type _Type;
+		typedef typename RemoveConst<typename TupleElement<N - 1, Tuple<T...>>::_Type>::Type _Type;
 		if (cIterator.HasNext())
 			TupleGet<N - 1>(cTuple) = cIterator.Next().Get<_Type>();
 	}

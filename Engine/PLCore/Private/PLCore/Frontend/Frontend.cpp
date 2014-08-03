@@ -40,71 +40,71 @@ pl_begin_class(Frontend, PLCore)
 	pl_desc("Abstract frontend base class")
 
 	// Methods
-	pl_method(Redraw)
-		pl_desc("Redraw frontend.")
+	//pl_method(Redraw)
+	//	pl_desc("Redraw frontend.")
 
-	pl_method(Ping)
-		pl_desc("Give the frontend a chance to process OS messages.")
+	//pl_method(Ping)
+	//	pl_desc("Give the frontend a chance to process OS messages.")
 
-	pl_method(RedrawAndPing)
-		pl_desc("Redraw frontend and give the frontend a chance to process OS messages.")
+	//pl_method(RedrawAndPing)
+	//	pl_desc("Redraw frontend and give the frontend a chance to process OS messages.")
 
-	pl_method(GetTitle)
-		pl_desc("Returns the frontend title.")
+	//pl_method(GetTitle)
+	//	pl_desc("Returns the frontend title.")
 
-	pl_method(SetTitle)
-		pl_desc("Sets the frontend title.")
+	//pl_method(SetTitle)
+	//	pl_desc("Sets the frontend title.")
 
-	// Position and size methods
-	pl_method(GetX)
-		pl_desc("Returns the x position of the frontend (in screen coordinates).")
+	//// Position and size methods
+	//pl_method(GetX)
+	//	pl_desc("Returns the x position of the frontend (in screen coordinates).")
 
-	pl_method(GetY)
-		pl_desc("Returns the y position of the frontend (in screen coordinates).")
+	//pl_method(GetY)
+	//	pl_desc("Returns the y position of the frontend (in screen coordinates).")
 
-	pl_method(GetWidth)
-		pl_desc("Returns the frontend width.")
+	//pl_method(GetWidth)
+	//	pl_desc("Returns the frontend width.")
 
-	pl_method(GetHeight)
-		pl_desc("Returns the frontend height.")
+	//pl_method(GetHeight)
+	//	pl_desc("Returns the frontend height.")
 
-	// Fullscreen methods
-	pl_method(GetToggleFullscreenMode)
-		pl_desc("Returns whether it's allowed to toggle the fullscreen mode using hotkeys. 'true' if it's possible to toggle the fullscreen mode using hotkeys, else 'false'.")
+	//// Fullscreen methods
+	//pl_method(GetToggleFullscreenMode)
+	//	pl_desc("Returns whether it's allowed to toggle the fullscreen mode using hotkeys. 'true' if it's possible to toggle the fullscreen mode using hotkeys, else 'false'.")
 
-	pl_method(SetToggleFullscreenMode)
-		pl_desc("Sets whether it's allowed to toggle the fullscreen mode using hotkeys. 'true' as first parameter to allow it, else 'false'.")
+	//pl_method(SetToggleFullscreenMode)
+	//	pl_desc("Sets whether it's allowed to toggle the fullscreen mode using hotkeys. 'true' as first parameter to allow it, else 'false'.")
 
-	pl_method(GetFullscreenAltTab)
-		pl_desc("Returns whether it's allowed to use Alt-Tab if fullscreen mode is used. 'true' if it's possible to use Alt-Tab if fullscreen mode is used, else 'false'.")
+	//pl_method(GetFullscreenAltTab)
+	//	pl_desc("Returns whether it's allowed to use Alt-Tab if fullscreen mode is used. 'true' if it's possible to use Alt-Tab if fullscreen mode is used, else 'false'.")
 
-	pl_method(SetFullscreenAltTab)
-		pl_desc("Sets whether it's allowed to use Alt-Tab if fullscreen mode is used. 'true' as first parameter to allow it, else 'false'.")
+	//pl_method(SetFullscreenAltTab)
+	//	pl_desc("Sets whether it's allowed to use Alt-Tab if fullscreen mode is used. 'true' as first parameter to allow it, else 'false'.")
 
-	pl_method(IsFullscreen)
-		pl_desc("Returns whether or not the frontend is currently fullscreen or not. Returns 'true' if the frontend is currently fullscreen, else 'false'.")
+	//pl_method(IsFullscreen)
+	//	pl_desc("Returns whether or not the frontend is currently fullscreen or not. Returns 'true' if the frontend is currently fullscreen, else 'false'.")
 
-	pl_method(SetFullscreen)
-		pl_desc("Sets whether or not the frontend is currently fullscreen or not. 'true' as first parameter if the frontend is currently fullscreen, else 'false'.")
+	//pl_method(SetFullscreen)
+	//	pl_desc("Sets whether or not the frontend is currently fullscreen or not. 'true' as first parameter if the frontend is currently fullscreen, else 'false'.")
 
-	// Mouse methods
-	pl_method(IsMouseOver)
-		pl_desc("Returns whether or not the mouse cursor is currently over the frontend. Returns 'true' if the mouse cursor is currently over the frontend, else 'false'.")
+	//// Mouse methods
+	//pl_method(IsMouseOver)
+	//	pl_desc("Returns whether or not the mouse cursor is currently over the frontend. Returns 'true' if the mouse cursor is currently over the frontend, else 'false'.")
 
-	pl_method(GetMousePositionX)
-		pl_desc("Returns the current mouse cursor X position inside the frontend, negative value if the mouse cursor isn't currently over the frontend")
+	//pl_method(GetMousePositionX)
+	//	pl_desc("Returns the current mouse cursor X position inside the frontend, negative value if the mouse cursor isn't currently over the frontend")
 
-	pl_method(GetMousePositionY)
-		pl_desc("Returns the current mouse cursor Y position inside the frontend, negative value if the mouse cursor isn't currently over the frontend")
+	//pl_method(GetMousePositionY)
+	//	pl_desc("Returns the current mouse cursor Y position inside the frontend, negative value if the mouse cursor isn't currently over the frontend")
 
-	pl_method(IsMouseVisible)
-		pl_desc("Returns whether or not the mouse cursor is currently visible. Returns 'true' if the mouse cursor is currently visible, else 'false'.")
+	//pl_method(IsMouseVisible)
+	//	pl_desc("Returns whether or not the mouse cursor is currently visible. Returns 'true' if the mouse cursor is currently visible, else 'false'.")
 
-	pl_method(SetMouseVisible)
-		pl_desc("Set the mouse cursor visibility. 'true' as first parameter if the mouse cursor shall be visible.")
+	//pl_method(SetMouseVisible)
+	//	pl_desc("Set the mouse cursor visibility. 'true' as first parameter if the mouse cursor shall be visible.")
 
-	pl_method(SetTrapMouse)
-		pl_desc("Trap the mouse inside the frontend. 'true' as first parameter if the mouse should be trapped inside the frontend, else 'false'.")
+	//pl_method(SetTrapMouse)
+	//	pl_desc("Trap the mouse inside the frontend. 'true' as first parameter if the mouse should be trapped inside the frontend, else 'false'.")
 
 pl_end_class()
 

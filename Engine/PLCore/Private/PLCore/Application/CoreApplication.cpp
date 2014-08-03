@@ -47,8 +47,8 @@ pl_begin_class(CoreApplication, PLCore)
 	pl_desc("Base application class")
 	pl_ctor()
 
-	pl_method(GetApplicationContext)
-		pl_desc("Get application context.")
+	//pl_method(GetApplicationContext)
+	//	pl_desc("Get application context.")
 
 	pl_method(Exit)
 		pl_desc("Exit application. Return code for application as first parameter (usually 0 means no error).")

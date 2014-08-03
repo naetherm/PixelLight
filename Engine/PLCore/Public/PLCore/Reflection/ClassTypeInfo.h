@@ -73,7 +73,7 @@ class ClassTypeInfo : public TypeInfo {
 		*  @brief
 		*    Trivial RTTI for type infos
 		*/
-		virtual Type GetTypeInfoType() const override;
+		virtual Type GetTypeInfoType() const override { return ClassType; }
 
 		/**
 		*  @brief

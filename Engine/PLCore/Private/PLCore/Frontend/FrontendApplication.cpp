@@ -40,8 +40,8 @@ pl_begin_class(FrontendApplication, PLCore)
 	pl_base_class(PLCore::CoreApplication)
 	pl_desc("Frontend application class")
 
-	pl_method(GetFrontend)
-		pl_desc("Returns the frontend this application is running in.")
+	//pl_method(GetFrontend)
+	//	pl_desc("Returns the frontend this application is running in.")
 pl_end_class();
 
 

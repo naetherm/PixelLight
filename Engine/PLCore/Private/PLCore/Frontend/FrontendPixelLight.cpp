@@ -39,10 +39,10 @@
 pl_begin_class(FrontendPixelLight, PLCore)
 	pl_base_class(PLCore::Frontend)
 	pl_desc("PixelLight frontend")
-	pl_ctor(const PLCore::FrontendContext&, PLCore::FrontendImpl*)
-		pl_desc("Parameter constructor. Frontend context this frontend is using as first parameter, frontend implementation this frontend is using as second parameter.")
+	//pl_ctor(const PLCore::FrontendContext&, PLCore::FrontendImpl*)
+	//	pl_desc("Parameter constructor. Frontend context this frontend is using as first parameter, frontend implementation this frontend is using as second parameter.")
 
-	pl_property(ApplicationClass)
+	/*pl_property(ApplicationClass)
 		pl_desc("Name of the frontend application RTTI class to use")
 		pl_default(PLCore::String("Application"))
 
@@ -53,7 +53,7 @@ pl_begin_class(FrontendPixelLight, PLCore)
 		pl_desc("Parameters for the frontend application RTTI class constructor")
 
 	pl_property(ApplicationParameters)
-		pl_desc("Parameters for the frontend application RTTI class instance")
+		pl_desc("Parameters for the frontend application RTTI class instance")*/
 	
 pl_end_class()
 

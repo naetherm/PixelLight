@@ -45,10 +45,10 @@ const Class *ClassTypeInfo::GetClass() const
 *  @brief
 *    Get the type info type
 */
-TypeInfo::Type ClassTypeInfo::GetTypeInfoType() const
-{
-	return ClassType;
-}
+//TypeInfo::Type ClassTypeInfo::GetTypeInfoType() const
+//{
+//	return ClassType;
+//}
 
 
 //[-------------------------------------------------------]
