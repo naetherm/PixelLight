@@ -71,7 +71,7 @@ const TypeInfo *DynamicObject::GetTypeInfo() const
 *    Get object as an instance of the specified type
 */
 template <typename T>
-T &DynamicObject::GetAs()
+T DynamicObject::GetAs()
 {
 	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
 	return m_pStorage.Get<T>();
@@ -82,7 +82,7 @@ T &DynamicObject::GetAs()
 *    Get object as an instance of the specified type
 */
 template <typename T>
-const T &DynamicObject::GetAs() const
+const T DynamicObject::GetAs() const
 {
 	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
 	return m_pStorage.Get<T>();

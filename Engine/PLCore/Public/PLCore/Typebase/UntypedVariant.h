@@ -65,14 +65,14 @@ class UntypedVariant {
 		*    Typed constructor
 		*/
 		template <typename T>
-		UntypedVariant(const T &cVal, bool bAutoDestroy = false)
+		UntypedVariant(T cVal, bool bAutoDestroy = false)
 		{
-			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
-			AccessHelper<_Type, IsBig<_Type>::Value>::Set(cVal, m_pData);
+			typedef typename TypeStorage<T>::StorageType Type;
+			AccessHelper<T, IsBig<Type>::Value>::Set(cVal, m_pData);
 
 			if (bAutoDestroy)
 			{
-				m_cDestructor = Destructor::Create<_Type, IsBig<_Type>::Value>();
+				m_cDestructor = Destructor::Create<Type, IsBig<Type>::Value>();
 			}
 		}
 
@@ -100,18 +100,18 @@ class UntypedVariant {
 		*    Set the variant value
 		*/
 		template <typename T>
-		void Set(const T &cVal, bool bAutoDestroy = false)
+		void Set(T cVal, bool bAutoDestroy = false)
 		{
 			// We are possibly overriding the stored value, thus we should destroy the old one if
 			// it was set.
 			Destroy();
 
-			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
-			AccessHelper<_Type, IsBig<_Type>::Value>::Set(cVal, m_pData);
+			typedef typename TypeStorage<T>::StorageType Type;
+			AccessHelper<T, IsBig<Type>::Value>::Set(cVal, m_pData);
 
 			if (bAutoDestroy)
 			{
-				m_cDestructor = Destructor::Create<_Type, IsBig<_Type>::Value>();
+				m_cDestructor = Destructor::Create<Type, IsBig<Type>::Value>();
 			}
 		}
 
@@ -120,10 +120,10 @@ class UntypedVariant {
 		*    Get the stored value
 		*/
 		template <typename T>
-		const typename RemoveReference<T>::Type &Get() const
+		const T Get() const
 		{
-			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
-			return AccessHelper<_Type, IsBig<_Type>::Value>::Get(m_pData);
+			typedef typename TypeStorage<T>::StorageType Type;
+			return AccessHelper<T, IsBig<Type>::Value>::Get(m_pData);
 		}
 
 		/**
@@ -131,10 +131,10 @@ class UntypedVariant {
 		*    Get the stored value
 		*/
 		template <typename T>
-		typename RemoveConst<typename RemoveReference<T>::Type>::Type &Get()
+		T Get()
 		{
-			typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type _Type;
-			return AccessHelper<_Type, IsBig<_Type>::Value>::Get(m_pData);
+			typedef typename TypeStorage<T>::StorageType Type;
+			return AccessHelper<T, IsBig<Type>::Value>::Get(m_pData);
 		}
 
 		/**
@@ -182,57 +182,50 @@ class UntypedVariant {
 		template <typename T>
 		struct AccessHelper<T, false> {
 
-			static void Set(const T &cVal, unsigned char *pBuffer)
+			typedef TypeStorage<T> Storage;
+
+			static void Set(T cVal, unsigned char *pBuffer)
 			{
 				// [TODO] Arrays are not supported
-				new (pBuffer) T(cVal);
+				typedef typename Storage::StorageType Type;
+				new (pBuffer) Type(Storage::Store(cVal));
 			}
 
-			static void Set(const T &&cVal, unsigned char *pBuffer)
+			static T Get(unsigned char *pBuffer)
 			{
-				// [TODO] Arrays are not supported
-				new (pBuffer)T(cVal);
+				typedef typename Storage::StorageType Type;
+				return Storage::Restore(*((Type*)pBuffer));
 			}
 
-			static T &Get(unsigned char *pBuffer)
+			static const T Get(const unsigned char *pBuffer)
 			{
-				return *((T*)pBuffer);
-			}
-
-			static const T &Get(const unsigned char *pBuffer)
-			{
-				return *((const T*)pBuffer);
-			}
-
-			static void Destroy(unsigned char *pBuffer)
-			{
-				(&Get(pBuffer))->~T();
+				typedef typename Storage::StorageType Type;
+				return Storage::Restore(*((const Type*)pBuffer));
 			}
 		};
 
 		template <typename T>
 		struct AccessHelper<T, true> {
 
+			typedef TypeStorage<T> Storage;
+
 			static void Set(const T &cVal, unsigned char *pBuffer)
 			{
 				// [TODO] Arrays are not supported
-				*((T**)pBuffer) = new T(cVal);
+				typedef typename Storage::StorageType Type;
+				*((Type**)pBuffer) = new Type(Storage::Store(cVal));
 			}
 
-			static void Set(const T &&cVal, unsigned char *pBuffer)
+			static T Get(unsigned char *pBuffer)
 			{
-				// [TODO] Arrays are not supported
-				*((T**)pBuffer) = new T(cVal);
+				typedef typename Storage::StorageType Type;
+				return Storage::Restore(**((Type**)pBuffer));
 			}
 
-			static T &Get(unsigned char *pBuffer)
+			static const T Get(const unsigned char *pBuffer)
 			{
-				return **((T**)pBuffer);
-			}
-
-			static void Destroy(unsigned char *pBuffer)
-			{
-				delete *((T**)pBuffer)
+				typedef typename Storage::StorageType Type;
+				return Storage::Restore(**((const Type**)pBuffer));
 			}
 		};
 

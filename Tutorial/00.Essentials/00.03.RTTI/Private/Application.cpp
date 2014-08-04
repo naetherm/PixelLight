@@ -65,17 +65,24 @@ void Application::Main()
 {
 	MyClass c;
 
-	c.OnInit.Emit(108);
+	const ClassTypeInfo *ti = GetClassTypeInfo();
+	const ClassTypeInfo *tii = StaticClassTypeInfo<CoreApplication>::Get();
+	const Class *myClass = GetClassTypeInfo()->GetClass();
+	const ClassMethod *getAppContext = myClass->GetMethod("GetApplicationContext");
+	Array<FunctionParam> p;
+	p.Add(this);
 
-	const PLCore::Class *clss = PLCore::TypeRegistry::GetInstance()->GetClassType("MyClass")->GetClass();
+	const ApplicationContext &ctx = getAppContext->Call(&p).Get<const ApplicationContext&>();
+
+	const Class *clss = TypeRegistry::GetInstance()->GetClassType("MyClass")->GetClass();
 	if (clss)
 	{
 		// Method
-		const PLCore::ClassMethod *meth = clss->GetMethod("Foo");
+		const ClassMethod *meth = clss->GetMethod("Foo");
 		if (meth)
 		{
 			// Indirect call
-			PLCore::Array<PLCore::FunctionParam> params;
+			Array<FunctionParam> params;
 			params.Add(&c);
 			params.Add(108);
 			params.Add(10.8f);
@@ -88,21 +95,28 @@ void Application::Main()
 		}
 
 		// Property
-		const PLCore::ClassProperty *prop = clss->GetProperty("PrivateInt");
+		const ClassProperty *prop = clss->GetProperty("PrivateInt");
 		if (prop)
 		{
 			// Indirect set/get
-			PLCore::Array<PLCore::FunctionParam> params;
-			params.Add(PLCore::FunctionParam(&c));
-			params.Add(PLCore::FunctionParam(108));
+			Array<FunctionParam> params;
+			params.Add(&c);
+			//params.Add(108);
+
+			int i = 108;
+			const int &ii = i;
+			UntypedVariant<> uv;
+			uv.Set<const int&>(ii);
+			const int &r = uv.Get<const int&>();
+			params.Add(uv);
 
 			prop->Set(&params);
-			int ret = prop->Get(&params).Get<int>();
+			int ret = prop->Get(&params).Get<const int&>();
 
 			// Direct set/get
-			prop->SetDirect<const int&>(&c, 1008);
-			ret = prop->GetDirect<const int&>(&c);
-			ret=ret;
+			//prop->SetDirect<const int&>(&c, 1008);
+			//ret = prop->GetDirect<const int&>(&c);
+			//ret=ret;
 		}
 	}
 }

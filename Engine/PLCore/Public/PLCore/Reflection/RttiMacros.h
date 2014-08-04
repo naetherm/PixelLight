@@ -50,13 +50,17 @@ namespace PLCore {
 		static PLCore::TypeInfo *Get() \
 		{ \
 			static PLCore::ClassTypeInfo info(#CLSS); \
-			static bool registered = false; \
-			if (!registered) \
-			{ \
-				registered = true; \
-				PLCore::TypeRegistry::GetInstance()->RegisterClassType(#CLSS, &info); \
+			static PLCore::ClassTypeInfo *infoPtr = nullptr; \
+			if (!infoPtr) { \
+				PLCore::ClassTypeInfo *regInfo = PLCore::TypeRegistry::GetInstance()->GetClassType(#CLSS); \
+				if (regInfo) { \
+					infoPtr = regInfo; \
+				} else { \
+					PLCore::TypeRegistry::GetInstance()->RegisterClassType(#CLSS, &info); \
+					infoPtr = &info; \
+				} \
 			} \
-			return &info; \
+			return infoPtr; \
 		} \
 		enum { Defined = true, Copyable = COPYABLE }; \
 	};
@@ -116,13 +120,17 @@ namespace PLCore {
 		static PLCore::TypeInfo *Get() \
 		{ \
 			static PLCore::PrimitiveTypeInfo info(#TYPE); \
-			static bool registered = false; \
-			if (!registered) \
-			{ \
-				registered = true; \
-				PLCore::TypeRegistry::GetInstance()->RegisterPrimitiveType(#TYPE, &info); \
+			static PLCore::PrimitiveTypeInfo *infoPtr = nullptr; \
+			if (!infoPtr) { \
+				PLCore::PrimitiveTypeInfo *regInfo = PLCore::TypeRegistry::GetInstance()->GetPrimitiveType(#TYPE); \
+				if (regInfo) { \
+					infoPtr = regInfo; \
+				} else { \
+					PLCore::TypeRegistry::GetInstance()->RegisterPrimitiveType(#TYPE, &info); \
+					infoPtr = &info; \
+				} \
 			} \
-			return &info; \
+			return infoPtr; \
 		} \
 		enum { Defined = true, Copyable = true }; \
 	};
@@ -137,7 +145,6 @@ namespace PLCore {
 #define pl_rtti() \
 	public: \
 		static void _RegisterReflection(); \
-		static const PLCore::ClassTypeInfo *GetStaticClassTypeInfo(); \
 		virtual const PLCore::ClassTypeInfo *GetClassTypeInfo() const { return (PLCore::ClassTypeInfo*)PLCore::GetStaticTypeInfo(this); } \
 	private:
 
@@ -152,7 +159,6 @@ namespace PLCore {
 #define pl_sti() \
 	public: \
 		static void _RegisterReflection(); \
-		static const PLCore::ClassTypeInfo *GetStaticClassTypeInfo(); \
 	private:
 
 /**
@@ -169,7 +175,6 @@ namespace PLCore {
 *    The namespace the type resides in
 */
 #define pl_begin_class(CLSS, NAMESPACE) \
-	const PLCore::ClassTypeInfo *NAMESPACE::CLSS::GetStaticClassTypeInfo() { return (const PLCore::ClassTypeInfo*)PLCore::StaticTypeInfo<NAMESPACE::CLSS>::Get(); } \
 	struct CLSS##_Register { \
 		CLSS##_Register() \
 		{ \

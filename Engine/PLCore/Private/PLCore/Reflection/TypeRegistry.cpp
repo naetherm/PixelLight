@@ -29,10 +29,33 @@
 #include <PLCore/Reflection/TypeRegistry.h>
 #include <PLCore/Reflection/ClassTypeInfo.h>
 
+
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLCore;
+
+
+//[-------------------------------------------------------]
+//[ Template instance                                     ]
+//[-------------------------------------------------------]
+template class Singleton<TypeRegistry>;
+
+
+//[-------------------------------------------------------]
+//[ Public static PLCore::Singleton functions             ]
+//[-------------------------------------------------------]
+TypeRegistry *TypeRegistry::GetInstance()
+{
+	// The compiler should be able to optimize this extra call, at least inside this project (inlining)
+	return Singleton<TypeRegistry>::GetInstance();
+}
+
+bool TypeRegistry::HasInstance()
+{
+	// The compiler should be able to optimize this extra call, at least inside this project (inlining)
+	return Singleton<TypeRegistry>::HasInstance();
+}
 
 
 //[-------------------------------------------------------]
@@ -93,11 +116,49 @@ const ClassTypeInfo *TypeRegistry::GetClassType(const PLCore::String &sName) con
 
 /**
 *  @brief
+*    Find a class by name
+*/
+ClassTypeInfo *TypeRegistry::GetClassType(const PLCore::String &sName)
+{
+	ClassTypeInfo *ti = m_mapClassTypes.Get(sName);
+	if (ti == _ClassTypeMap::Null)
+	{
+		// Class not found
+		return nullptr;
+	}
+	else
+	{
+		// Class found
+		return ti;
+	}
+}
+
+/**
+*  @brief
 *    Find a primitive type by name
 */
 const PrimitiveTypeInfo *TypeRegistry::GetPrimitiveType(const PLCore::String &sName) const
 {
 	const PrimitiveTypeInfo *ti = m_mapPrimitiveTypes.Get(sName);
+	if (ti == _PrimitiveTypeMap::Null)
+	{
+		// Class not found
+		return nullptr;
+	}
+	else
+	{
+		// Class found
+		return ti;
+	}
+}
+
+/**
+*  @brief
+*    Find a primitive type by name
+*/
+PrimitiveTypeInfo *TypeRegistry::GetPrimitiveType(const PLCore::String &sName)
+{
+	PrimitiveTypeInfo *ti = m_mapPrimitiveTypes.Get(sName);
 	if (ti == _PrimitiveTypeMap::Null)
 	{
 		// Class not found

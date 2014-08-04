@@ -58,6 +58,19 @@ class PrimitiveTypeInfo;
 */
 class TypeRegistry : public PLCore::Singleton<TypeRegistry> {
 
+
+	//[-------------------------------------------------------]
+	//[ Public static PLCore::Singleton functions             ]
+	//[-------------------------------------------------------]
+	// This solution enhances the compatibility with legacy compilers like GCC 4.2.1 used on Mac OS X 10.6
+	// -> The C++11 feature "extern template" (C++11, see e.g. http://www2.research.att.com/~bs/C++0xFAQ.html#extern-templates) can only be used on modern compilers like GCC 4.6
+	// -> We can't break legacy compiler support, especially when only the singletons are responsible for the break
+	// -> See PLCore::Singleton for more details about singletons
+	public:
+	static PLCORE_API TypeRegistry *GetInstance();
+	static PLCORE_API bool HasInstance();
+
+
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
@@ -98,6 +111,18 @@ class TypeRegistry : public PLCore::Singleton<TypeRegistry> {
 
 		/**
 		*  @brief
+		*    Find a class type by name
+		*
+		*  @param[in] sName
+		*    Name of the class type to find
+		*
+		*  @return
+		*    Pointer to the type info or nullptr of it was not found
+		*/
+		PLCORE_API ClassTypeInfo *GetClassType(const PLCore::String &sName);
+
+		/**
+		*  @brief
 		*    Find a primitive type by name
 		*
 		*  @param[in] sName
@@ -107,6 +132,18 @@ class TypeRegistry : public PLCore::Singleton<TypeRegistry> {
 		*    Pointer to the type info or nullptr of it was not found
 		*/
 		PLCORE_API const PrimitiveTypeInfo *GetPrimitiveType(const PLCore::String &sName) const;
+
+		/**
+		*  @brief
+		*    Find a primitive type by name
+		*
+		*  @param[in] sName
+		*    Name of the primitive type to find
+		*
+		*  @return
+		*    Pointer to the type info or nullptr of it was not found
+		*/
+		PLCORE_API PrimitiveTypeInfo *GetPrimitiveType(const PLCore::String &sName);
 
 
 	//[-------------------------------------------------------]

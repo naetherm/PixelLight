@@ -39,8 +39,8 @@
 pl_begin_class(FrontendPixelLight, PLCore)
 	pl_base_class(PLCore::Frontend)
 	pl_desc("PixelLight frontend")
-	//pl_ctor(const PLCore::FrontendContext&, PLCore::FrontendImpl*)
-	//	pl_desc("Parameter constructor. Frontend context this frontend is using as first parameter, frontend implementation this frontend is using as second parameter.")
+	pl_ctor(const PLCore::FrontendContext&, PLCore::FrontendImpl&)
+		pl_desc("Parameter constructor. Frontend context this frontend is using as first parameter, frontend implementation this frontend is using as second parameter.")
 
 	pl_property(ApplicationClass)
 		pl_desc("Name of the frontend application RTTI class to use")
@@ -57,8 +57,6 @@ pl_begin_class(FrontendPixelLight, PLCore)
 	
 pl_end_class()
 
-PL_TODO(ananta, "Constructor")
-
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -73,7 +71,7 @@ namespace PLCore {
 *  @brief
 *    Constructor
 */
-FrontendPixelLight::FrontendPixelLight(const FrontendContext &cFrontendContext, FrontendImpl *pFrontendImpl) : Frontend(cFrontendContext, *pFrontendImpl),
+FrontendPixelLight::FrontendPixelLight(const FrontendContext &cFrontendContext, FrontendImpl &pFrontendImpl) : Frontend(cFrontendContext, pFrontendImpl),
 	m_pFrontendApplication(nullptr),
 	m_bFrontendApplicationInitialized(false)
 {

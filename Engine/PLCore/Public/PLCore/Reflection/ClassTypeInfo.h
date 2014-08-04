@@ -92,6 +92,24 @@ class ClassTypeInfo : public TypeInfo {
 };
 
 
+/**
+*  @brief
+*    Helper to directly retrieve class type info from a type
+*/
+template <typename T>
+struct StaticClassTypeInfo {
+
+	static ClassTypeInfo *Get()
+	{
+		TypeInfo *ti = StaticTypeInfo<T>::Get();
+		if (ti->GetTypeInfoType() == TypeInfo::ClassType)
+			return static_cast<ClassTypeInfo*>(ti);
+		else
+			return nullptr;
+	}
+};
+
+
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]

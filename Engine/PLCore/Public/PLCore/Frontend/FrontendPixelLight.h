@@ -80,7 +80,7 @@ class FrontendPixelLight : public Frontend {
 		*  @param[in] cFrontendImpl
 		*    Frontend implementation instance
 		*/
-		PLCORE_API FrontendPixelLight(const FrontendContext &cFrontendContext, FrontendImpl *pFrontendImpl);
+		PLCORE_API FrontendPixelLight(const FrontendContext &cFrontendContext, FrontendImpl &cFrontendImpl);
 
 		/**
 		*  @brief

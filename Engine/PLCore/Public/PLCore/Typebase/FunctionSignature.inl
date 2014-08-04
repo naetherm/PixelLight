@@ -47,8 +47,8 @@ struct TemplateToTypeInfoArray {
 	{
 		TemplateToTypeInfoArray<N - 1, T...>::Make(lstTypes);
 
-		typedef typename TupleElement<N - 1, Tuple<T...>>::_Type _Type;
-		lstTypes[N - 1] = PLCore::StaticTypeInfo<_Type>::Get();
+		typedef typename TupleElement<N - 1, Tuple<T...>>::Type Type;
+		lstTypes[N - 1] = PLCore::StaticTypeInfo<Type>::Get();
 	}
 };
 

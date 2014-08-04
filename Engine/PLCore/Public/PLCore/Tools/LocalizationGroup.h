@@ -33,6 +33,7 @@
 #include "PLCore/Container/Array.h"
 #include "PLCore/Container/HashMap.h"
 #include "PLCore/Tools/Loadable.h"
+#include "PLCore/Reflection/Rtti.h"
 
 
 //[-------------------------------------------------------]
@@ -55,6 +56,12 @@ class LocalizationText;
 *    Localization group
 */
 class LocalizationGroup : public Loadable {
+
+
+	//[-------------------------------------------------------]
+	//[ Reflected class                                       ]
+	//[-------------------------------------------------------]
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -264,6 +271,12 @@ class LocalizationGroup : public Loadable {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLCore
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLCore::LocalizationGroup)
 
 
 //[-------------------------------------------------------]

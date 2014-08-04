@@ -77,13 +77,19 @@ class MyClass
 		*  @brief
 		*    Get private int
 		*/
-		const int &GetPrivateInt() const { return m_nPrivateInt; }
+		const int &GetPrivateInt() const
+		{
+			return m_nPrivateInt;
+		}
 
 		/**
 		*  @brief
 		*    Set private int
 		*/
-		void SetPrivateInt(const int &i) { m_nPrivateInt = i; }
+		void SetPrivateInt(const int &i)
+		{
+			m_nPrivateInt = i;
+		}
 
 	//[-------------------------------------------------------]
 	//[ Public data                                           ]

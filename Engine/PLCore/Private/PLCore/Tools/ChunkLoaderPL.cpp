@@ -42,15 +42,13 @@ pl_begin_class(ChunkLoaderPL, PLCore)
 	pl_tag("Load", true)
 	pl_tag("Save", true)
 
-	//pl_method(Load)
-	//	pl_desc("Load method")
+	pl_method(Load)
+		pl_desc("Load method")
 
-	//pl_method(Save)
-	//	pl_desc("Save method")
+	pl_method(Save)
+		pl_desc("Save method")
 
 pl_end_class()
-
-PL_TODO(ananta, "Save/Load methods")
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]

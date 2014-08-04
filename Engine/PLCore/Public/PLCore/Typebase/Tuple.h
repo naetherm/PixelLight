@@ -57,7 +57,8 @@ class TupleLeaf {
 	//[ Public types                                          ]
 	//[-------------------------------------------------------]
 	public:
-		typedef typename RemoveConst<typename RemoveReference<TValue>::Type>::Type _StorageType;
+		typedef TypeStorage<TValue> Storage;
+		typedef typename Storage::StorageType StorageType;
 
 	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
@@ -107,7 +108,7 @@ class TupleLeaf {
 		*  @brief
 		*    Get this leaf's data
 		*/
-		_StorageType &Get()
+		StorageType &Get()
 		{
 			return m_cValue;
 		}
@@ -116,7 +117,7 @@ class TupleLeaf {
 		*  @brief
 		*    Get this leaf's data
 		*/
-		const _StorageType &Get() const
+		const StorageType &Get() const
 		{
 			return m_cValue;
 		}
@@ -125,7 +126,7 @@ class TupleLeaf {
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		_StorageType m_cValue;		/**< The value held by this leaf */
+		StorageType m_cValue;		/**< The value held by this leaf */
 };
 
 /**
@@ -224,8 +225,8 @@ struct TupleElement<I, Tuple<Head, Tail...>> : TupleElement<I-1, Tuple<Tail...>>
 template <typename Head, typename... Tail>
 struct TupleElement<0, Tuple<Head, Tail...>> {
 
-	typedef Head _Type;
-	typedef typename RemoveConst<typename RemoveReference<Head>::Type>::Type _RawType;
+	typedef Head Type;
+	typedef typename TypeStorage<Type>::StorageType StorageType;
 };
 
 /**
@@ -233,10 +234,10 @@ struct TupleElement<0, Tuple<Head, Tail...>> {
 *    Get the value on the specified index from the tuple
 */
 template <int I, typename... T>
-const typename TupleElement<I, Tuple<T...>>::_RawType &TupleGet(const Tuple<T...> &cTuple)
+const typename TupleElement<I, Tuple<T...>>::Type TupleGet(const Tuple<T...> &cTuple)
 {
-	typedef typename TupleElement<I, Tuple<T...>>::_Type _Type;
-	return static_cast<const TupleLeaf<I, _Type>&>(cTuple.m_cImpl).Get();
+	typedef typename TupleElement<I, Tuple<T...>>::Type Type;
+	return TypeStorage<Type>::Restore(static_cast<const TupleLeaf<I, Type>&>(cTuple.m_cImpl).Get());
 }
 
 /**
@@ -244,10 +245,21 @@ const typename TupleElement<I, Tuple<T...>>::_RawType &TupleGet(const Tuple<T...
 *    Get the value on the specified index from the tuple
 */
 template <int I, typename... T>
-typename TupleElement<I, Tuple<T...>>::_RawType &TupleGet(Tuple<T...> &cTuple)
+typename TupleElement<I, Tuple<T...>>::Type TupleGet(Tuple<T...> &cTuple)
 {
-	typedef typename TupleElement<I, Tuple<T...>>::_Type _Type;
-	return static_cast<TupleLeaf<I, _Type>&>(cTuple.m_cImpl).Get();
+	typedef typename TupleElement<I, Tuple<T...>>::Type Type;
+	return TypeStorage<Type>::Restore(static_cast<TupleLeaf<I, Type>&>(cTuple.m_cImpl).Get());
+}
+
+/**
+*  @brief
+*    Store the value on the specified index from the tuple
+*/
+template <int I, typename... T>
+typename TupleElement<I, Tuple<T...>>::StorageType &TupleStore(Tuple<T...> &cTuple)
+{
+	typedef typename TupleElement<I, Tuple<T...>>::Type Type;
+	return static_cast<TupleLeaf<I, Type>&>(cTuple.m_cImpl).Get();
 }
 
 /**
@@ -284,9 +296,15 @@ struct TupleFromUntypedVariantImpl {
 	{
 		TupleFromUntypedVariantImpl<N - 1, BUFFER_SIZE, T...>::Make(cIterator, cTuple);
 
-		typedef typename RemoveConst<typename RemoveReference<typename TupleElement<N - 1, Tuple<T...>>::_Type>::Type>::Type _Type;
+		typedef typename TupleElement<N - 1, Tuple<T...>>::Type OriginalType;
+		typedef typename TupleElement<N - 1, Tuple<T...>>::StorageType StorageType;
+
 		if (cIterator.HasNext())
-			TupleGet<N - 1>(cTuple) = cIterator.Next().Get<_Type>();
+		{
+			OriginalType v = cIterator.Next().Get<OriginalType>();
+			StorageType s = TypeStorage<OriginalType>::Store(v);
+			TupleStore<N - 1>(cTuple) = s;
+		}
 	}
 };
 

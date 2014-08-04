@@ -475,29 +475,89 @@ struct RemoveConst<const T> {
 *    This template will remove all type qualifiers (const, pointers, references)
 */
 template <typename T>
-struct RawType
-{
+struct RawType {
+
 	// [TODO] use the above Remove* instead of specialization
 	typedef T Type;
 };
 
 template <typename T>
-struct RawType<const T>
-{
+struct RawType<const T> {
+
 	typedef typename RawType<T>::Type Type;
 };
 
 template <typename T>
-struct RawType<T&>
-{
+struct RawType<T&> {
+
 	typedef typename RawType<T>::Type Type;
 };
 
 template <typename T>
-struct RawType<T*>
-{
+struct RawType<T*> {
+
 	typedef typename RawType<T>::Type Type;
 };
+
+/**
+*  @brief
+*    Storage type helper
+*
+*  @remarks
+*    Some types (such as const types or references) cannot be stored directly. This helper
+*    can provide an alternative type that can be used to store values of those types
+*/
+template <typename T>
+struct TypeStorage {
+
+	typedef T OriginalType;
+	typedef T StorageType;
+
+	static StorageType Store(OriginalType cValue)
+	{
+		return cValue;
+	}
+
+	static OriginalType Restore(StorageType cValue)
+	{
+		return cValue;
+	}
+};
+
+template <typename T>
+struct TypeStorage<T&> {
+
+	typedef T& OriginalType;
+	typedef typename TypeStorage<T*>::StorageType StorageType;
+
+	static StorageType Store(OriginalType cValue)
+	{
+		return TypeStorage<T*>::Store(&cValue);
+	}
+
+	static OriginalType Restore(StorageType cValue)
+	{
+		return *TypeStorage<T*>::Restore(cValue);
+	}
+};
+
+template <typename T>
+struct TypeStorage<const T> {
+
+	typedef const T OriginalType;
+	typedef typename RemoveConst<T>::Type StorageType;
+
+	static StorageType Store(OriginalType cValue)
+	{
+		return static_cast<StorageType>(cValue);
+	}
+
+	static OriginalType Restore(StorageType cValue)
+	{
+		return cValue;
+	}
+};
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]

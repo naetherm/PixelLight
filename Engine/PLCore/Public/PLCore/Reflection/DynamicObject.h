@@ -95,14 +95,14 @@ class DynamicObject {
 		*    Get the stored object as a particular type
 		*/
 		template <typename T>
-		inline T& GetAs();
+		inline T GetAs();
 
 		/**
 		*  @brief
 		*    Get the stored object as a particular type
 		*/
 		template <typename T>
-		inline const T& GetAs() const;
+		inline const T GetAs() const;
 
 		/**
 		*  @brief

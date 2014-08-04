@@ -39,6 +39,10 @@ pl_begin_class(ConfigGroup, PLCore)
 
 pl_end_class()
 
+pl_begin_class(Config, PLCore)
+
+pl_end_class()
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -104,10 +108,11 @@ String Config::GetVar(const String &sClass, const String &sVariable)
 	ConfigGroup *pClass = GetClass(sClass);
 	if (pClass)	{
 		// Get attribute
-		const ClassProperty *pProp = pClass->GetClassTypeInfo()->GetClass()->GetProperty(sVariable);
-		if (pProp)
-			// [TODO] Do we care about the type of the property?
-			return pProp->GetDirect<String>(pClass);
+		//const ClassProperty *pProp = pClass->GetClassTypeInfo()->GetClass()->GetProperty(sVariable);
+		//if (pProp)
+		//	return pProp->GetDirect<String>(pClass);
+
+		PL_TODO(ananta, "We need to convert value to string automatically!")
 	}
 
 	// Error!
@@ -124,10 +129,11 @@ int Config::GetVarInt(const String &sClass, const String &sVariable)
 	ConfigGroup *pClass = GetClass(sClass);
 	if (pClass) {
 		// Get attribute
-		const ClassProperty *pProp = pClass->GetClassTypeInfo()->GetClass()->GetProperty(sVariable);
-		if (pProp)
-			// [TODO] Do we care about the type of the property?
-			return pProp->GetDirect<int>(pClass);
+		//const ClassProperty *pProp = pClass->GetClassTypeInfo()->GetClass()->GetProperty(sVariable);
+		//if (pProp)
+		//	return pProp->GetDirect<int>(pClass);
+
+		PL_TODO(ananta, "We need to validate this is convertible to int!")
 	}
 
 	// Error!
@@ -195,7 +201,7 @@ ConfigGroup *Config::GetClass(const String &sName)
 	// No, check if it is a valid class
 	const ClassTypeInfo *pClass = TypeRegistry::GetInstance()->GetClassType(sName);
 	if (pClass &&
-		pClass->GetClass()->IsDerivedFrom(ConfigGroup::GetStaticClassTypeInfo()->GetClass()))
+		pClass->GetClass()->IsDerivedFrom(StaticClassTypeInfo<ConfigGroup>::Get()->GetClass()))
 	{
 		// Create configuration object
 		pConfig = pClass->GetClass()->Create<ConfigGroup>();
