@@ -30,20 +30,14 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "FunctionSignature.h"
-#include <PLCore/Typebase/UntypedVariant.h>
-#include <PLCore/Container/Iterable.h>
+#include "PLCore/Reflection/DynamicObject.h"
+#include "PLCore/Container/Iterable.h"
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLCore {
-
-
-//[-------------------------------------------------------]
-//[ Types                                                 ]
-//[-------------------------------------------------------]
-typedef UntypedVariant<> FunctionParam;
 
 
 //[-------------------------------------------------------]
@@ -66,7 +60,7 @@ class FunctionBase {
 		*  @param[in] pParams
 		*    Dynamic arguments for the function
 		*/
-		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParams) const = 0;
+		virtual DynamicObject DynInvoke(const Iterable<DynamicObject> *pParams) const = 0;
 
 		/**
 		*  @brief

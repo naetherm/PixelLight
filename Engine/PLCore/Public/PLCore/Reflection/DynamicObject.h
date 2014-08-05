@@ -70,13 +70,20 @@ class DynamicObject {
 		*    Construct a dynamic object from an existing instance
 		*/
 		template <typename T>
-		DynamicObject(const T &cInst);
+		DynamicObject(T cInst);
 
 		/**
 		*  @brief
 		*    Construct a dynamic object from unknown object and its type info
 		*/
 		PLCORE_API DynamicObject(const PLCore::UntypedVariant<> &cVariant, const TypeInfo *pType);
+
+		/**
+		*  @brief
+		*    Set the dynamic object to a new value
+		*/
+		template <typename T>
+		void Set(T cInst);
 
 		/**
 		*  @brief

@@ -42,9 +42,20 @@ namespace PLCore {
 *    Dynamic object from an existing instance
 */
 template <typename T>
-DynamicObject::DynamicObject(const T &cInst)
+DynamicObject::DynamicObject(T cInst)
 {
 	m_pStorage.Set(cInst);
+	m_pTypeInfo = GetStaticTypeInfo(cInst);
+}
+
+/**
+*  @brief
+*    Set the dynamic object to a new value
+*/
+template <typename T>
+void DynamicObject::Set(T cInst)
+{
+	m_pStorage.Set<T>(cInst);
 	m_pTypeInfo = GetStaticTypeInfo(cInst);
 }
 

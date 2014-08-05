@@ -29,8 +29,8 @@
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-#include <PLCore/Typebase/UntypedVariant.h>
-#include <PLCore/Container/Iterable.h>
+#include "PLCore/Reflection/DynamicObject.h"
+#include "PLCore/Container/Iterable.h"
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -256,10 +256,10 @@ typename TupleElement<I, Tuple<T...>>::Type TupleGet(Tuple<T...> &cTuple)
 *    Store the value on the specified index from the tuple
 */
 template <int I, typename... T>
-typename TupleElement<I, Tuple<T...>>::StorageType &TupleStore(Tuple<T...> &cTuple)
+void TupleStore(Tuple<T...> &cTuple, typename const TupleElement<I, Tuple<T...>>::Type &cValue)
 {
 	typedef typename TupleElement<I, Tuple<T...>>::Type Type;
-	return static_cast<TupleLeaf<I, Type>&>(cTuple.m_cImpl).Get();
+	static_cast<TupleLeaf<I, Type>&>(cTuple.m_cImpl).Get() = TypeStorage<Type>::Store(cValue);;
 }
 
 /**
@@ -282,36 +282,34 @@ struct MakeIndexSequence<0, I...> : public IndexSequence<I...>{
 *  @brief
 *    Construct tuple from untyped variant
 */
-template <int BUFFER_SIZE, typename... T>
-void TupleFromUntypedVariant(const Iterable<UntypedVariant<BUFFER_SIZE>> *pDyn, Tuple<T...> &cTuple)
+template <typename... T>
+void TupleFromDynamicObject(const Iterable<DynamicObject> *pDyn, Tuple<T...> &cTuple)
 {
-	ConstIterator<UntypedVariant<BUFFER_SIZE>> iter = pDyn->GetConstIterator();
-	TupleFromUntypedVariantImpl<sizeof...(T), BUFFER_SIZE, T...>::Make(iter, cTuple);
+	ConstIterator<DynamicObject> iter = pDyn->GetConstIterator();
+	TupleFromDynamicObjectImpl<sizeof...(T), T...>::Make(iter, cTuple);
 }
 
-template <int N, int BUFFER_SIZE, typename... T>
-struct TupleFromUntypedVariantImpl {
+template <int N, typename... T>
+struct TupleFromDynamicObjectImpl {
 	
-	static void Make(ConstIterator<UntypedVariant<BUFFER_SIZE>> &cIterator, Tuple<T...> &cTuple)
+	static void Make(ConstIterator<DynamicObject> &cIterator, Tuple<T...> &cTuple)
 	{
-		TupleFromUntypedVariantImpl<N - 1, BUFFER_SIZE, T...>::Make(cIterator, cTuple);
+		TupleFromDynamicObjectImpl<N - 1, T...>::Make(cIterator, cTuple);
 
 		typedef typename TupleElement<N - 1, Tuple<T...>>::Type OriginalType;
 		typedef typename TupleElement<N - 1, Tuple<T...>>::StorageType StorageType;
 
 		if (cIterator.HasNext())
 		{
-			OriginalType v = cIterator.Next().Get<OriginalType>();
-			StorageType s = TypeStorage<OriginalType>::Store(v);
-			TupleStore<N - 1>(cTuple) = s;
+			TupleStore<N - 1>(cTuple, cIterator.Next().GetAs<OriginalType>());
 		}
 	}
 };
 
-template <int BUFFER_SIZE, typename... T>
-struct TupleFromUntypedVariantImpl<0, BUFFER_SIZE, T...> {
+template <typename... T>
+struct TupleFromDynamicObjectImpl<0, T...> {
 	
-	static void Make(ConstIterator<UntypedVariant<BUFFER_SIZE>> &cIterator, Tuple<T...> &cTuple)
+	static void Make(ConstIterator<DynamicObject> &cIterator, Tuple<T...> &cTuple)
 	{
 		// End of line
 	}

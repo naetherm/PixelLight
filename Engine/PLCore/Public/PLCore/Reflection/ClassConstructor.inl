@@ -41,7 +41,7 @@ bool ClassConstructor::operator==(const ClassConstructor &cOther) const
 *  @brief
 *    Invoke the method
 */
-DynamicObject ClassConstructor::Construct(const PLCore::Iterable<PLCore::FunctionParam> *pParams = nullptr) const
+DynamicObject ClassConstructor::Construct(const PLCore::Iterable<DynamicObject> *pParams = nullptr) const
 {
 	if (m_pFunc)
 	{

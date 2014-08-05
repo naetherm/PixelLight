@@ -104,17 +104,16 @@ class Invokable : public FunctionBase {
 		template <class TTuple, typename TRet>
 		struct DynInvokeHelper {
 
-			static void Call(FunctionParam &cRet, const Invokable *pToInvoke, const TTuple &tuple)
+			static void Call(DynamicObject &cRet, const Invokable *pToInvoke, const TTuple &tuple)
 			{
-				TRet ret = pToInvoke->TupleInvoke(tuple);
-				cRet.Set<TRet>(ret);
+				cRet.Set<TRet>(pToInvoke->TupleInvoke(tuple));
 			}
 		};
 
 		template <class TTuple>
 		struct DynInvokeHelper<TTuple, void> {
 		
-			static void Call(FunctionParam &cRet, const Invokable *pToInvoke, const TTuple &tuple)
+			static void Call(DynamicObject &cRet, const Invokable *pToInvoke, const TTuple &tuple)
 			{
 				pToInvoke->TupleInvoke(tuple);
 			}
@@ -124,15 +123,15 @@ class Invokable : public FunctionBase {
 	//[ Public virtual FunctionBase functions                 ]
 	//[-------------------------------------------------------]
 	public:
-		virtual FunctionParam DynInvoke(const Iterable<FunctionParam> *pParam) const override
+		virtual DynamicObject DynInvoke(const Iterable<DynamicObject> *pParam) const override
 		{
 			// Initialize a tuple of the correct type from the dynamic argument list
 			TupleType t;
 			if (pParam)
-				TupleFromUntypedVariant(pParam, t);
+				TupleFromDynamicObject(pParam, t);
 
 			// Invoke the function using the tuple
-			FunctionParam ret;
+			DynamicObject ret;
 			DynInvokeHelper<TupleType, TRet>::Call(ret, this, t);
 			return ret;
 		}

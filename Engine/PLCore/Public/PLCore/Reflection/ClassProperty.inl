@@ -32,7 +32,7 @@ namespace PLCore {
 *  @brief
 *    Set the property
 */
-void ClassProperty::Set(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
+void ClassProperty::Set(const PLCore::Iterable<DynamicObject> *pParams) const
 {
 	if (m_pSetter)
 	{
@@ -44,7 +44,7 @@ void ClassProperty::Set(const PLCore::Iterable<PLCore::FunctionParam> *pParams) 
 *  @brief
 *    Get the property
 */
-PLCore::FunctionParam ClassProperty::Get(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
+DynamicObject ClassProperty::Get(const PLCore::Iterable<DynamicObject> *pParams) const
 {
 	if (m_pGetter)
 	{
@@ -52,7 +52,7 @@ PLCore::FunctionParam ClassProperty::Get(const PLCore::Iterable<PLCore::Function
 	}
 	else
 	{
-		return PLCore::FunctionParam();
+		return DynamicObject();
 	}
 }
 
@@ -64,7 +64,7 @@ template <typename T, class TObject>
 void ClassProperty::SetDirect(TObject *pObj, T cValue) const
 {
 	// This method simplifies the process by caching the required parameter array internally
-	static Array<FunctionParam> params;
+	static Array<DynamicObject> params;
 	params.Resize(2);
 
 	params[0] = pObj;
@@ -81,7 +81,7 @@ template <typename T, class TObject>
 T ClassProperty::GetDirect(TObject *pObj) const
 {
 	// This method simplifies the process by caching the required parameter array internally
-	static Array<FunctionParam> params;
+	static Array<DynamicObject> params;
 	params.Resize(1);
 
 	params[0] = pObj;

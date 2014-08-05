@@ -65,15 +65,6 @@ void Application::Main()
 {
 	MyClass c;
 
-	const ClassTypeInfo *ti = GetClassTypeInfo();
-	const ClassTypeInfo *tii = StaticClassTypeInfo<CoreApplication>::Get();
-	const Class *myClass = GetClassTypeInfo()->GetClass();
-	const ClassMethod *getAppContext = myClass->GetMethod("GetApplicationContext");
-	Array<FunctionParam> p;
-	p.Add(this);
-
-	const ApplicationContext &ctx = getAppContext->Call(&p).Get<const ApplicationContext&>();
-
 	const Class *clss = TypeRegistry::GetInstance()->GetClassType("MyClass")->GetClass();
 	if (clss)
 	{
@@ -82,12 +73,12 @@ void Application::Main()
 		if (meth)
 		{
 			// Indirect call
-			Array<FunctionParam> params;
+			Array<DynamicObject> params;
 			params.Add(&c);
 			params.Add(108);
 			params.Add(10.8f);
 
-			int ret = meth->Call(&params).Get<int>();
+			int ret = meth->Call(&params).GetAs<int>();
 			
 			// Direct call
 			ret = meth->CallDirect<int>(&c, 108, 108.108f);
@@ -99,19 +90,14 @@ void Application::Main()
 		if (prop)
 		{
 			// Indirect set/get
-			Array<FunctionParam> params;
+			Array<DynamicObject> params;
 			params.Add(&c);
-			//params.Add(108);
-
-			int i = 108;
-			const int &ii = i;
-			UntypedVariant<> uv;
-			uv.Set<const int&>(ii);
-			const int &r = uv.Get<const int&>();
-			params.Add(uv);
+			params.Add(108);
 
 			prop->Set(&params);
-			int ret = prop->Get(&params).Get<const int&>();
+			int ret = prop->Get(&params).GetAs<const int&>();
+
+			PL_TODO(ananta, "This needs to be solved somehow!!!")
 
 			// Direct set/get
 			//prop->SetDirect<const int&>(&c, 1008);

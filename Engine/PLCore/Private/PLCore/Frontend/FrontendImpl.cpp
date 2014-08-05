@@ -192,7 +192,7 @@ int FrontendImpl::Run(const String &sExecutableFilename, const Array<String> &ls
 */
 Frontend *FrontendImpl::CreateFrontend(const FrontendContext &cFrontendContext, FrontendImpl &cFrontendImpl)
 {
-	PL_TODO(ananta, "Fic frontend creation")
+	PL_TODO(ananta, "Fix frontend creation")
 
 	// Get the frontend RTTI class
 	//const Class *pClass = ClassManager::GetInstance()->GetClass(cFrontendContext.GetFrontend());

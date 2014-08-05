@@ -41,7 +41,7 @@ bool ClassMethod::operator==(const ClassMethod &cOther) const
 *  @brief
 *    Invoke the method
 */
-PLCore::FunctionParam ClassMethod::Call(const PLCore::Iterable<PLCore::FunctionParam> *pParams) const
+DynamicObject ClassMethod::Call(const PLCore::Iterable<DynamicObject> *pParams) const
 {
 	if (m_pFunc)
 	{
@@ -49,7 +49,7 @@ PLCore::FunctionParam ClassMethod::Call(const PLCore::Iterable<PLCore::FunctionP
 	}
 	else
 	{
-		return PLCore::FunctionParam();
+		return DynamicObject();
 	}
 }
 
@@ -60,6 +60,8 @@ PLCore::FunctionParam ClassMethod::Call(const PLCore::Iterable<PLCore::FunctionP
 template <typename TRet, class TObject, typename... TArgs>
 TRet ClassMethod::CallDirect(TObject *pObj, TArgs... args) const
 {
+	PL_TODO(ananta, "Upgrade this as with properties")
+
 	// This method works with the assumption that every Function is derived from the
 	// appropriate Invokable
 	typedef PLCore::Invokable<TRet, TObject*, TArgs...> _InvType;
