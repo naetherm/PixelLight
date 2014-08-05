@@ -81,13 +81,13 @@ class ClassProperty : public TagHolder {
 		*  @brief
 		*    Set the property using dynamic value
 		*/
-		inline void Set(const PLCore::Iterable<DynamicObject> *pParams) const;
+		inline void Set(PLCore::Iterable<DynamicObject> *pParams) const;
 
 		/**
 		*  @brief
 		*    Get the property into a dynamic value
 		*/
-		inline DynamicObject Get(const PLCore::Iterable<DynamicObject> *pParams) const;
+		inline DynamicObject Get(PLCore::Iterable<DynamicObject> *pParams) const;
 
 		/**
 		*  @brief

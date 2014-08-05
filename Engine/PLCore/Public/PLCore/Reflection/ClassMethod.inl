@@ -41,7 +41,7 @@ bool ClassMethod::operator==(const ClassMethod &cOther) const
 *  @brief
 *    Invoke the method
 */
-DynamicObject ClassMethod::Call(const PLCore::Iterable<DynamicObject> *pParams) const
+DynamicObject ClassMethod::Call(PLCore::Iterable<DynamicObject> *pParams) const
 {
 	if (m_pFunc)
 	{

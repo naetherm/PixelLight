@@ -283,16 +283,16 @@ struct MakeIndexSequence<0, I...> : public IndexSequence<I...>{
 *    Construct tuple from untyped variant
 */
 template <typename... T>
-void TupleFromDynamicObject(const Iterable<DynamicObject> *pDyn, Tuple<T...> &cTuple)
+void TupleFromDynamicObject(Iterable<DynamicObject> *pDyn, Tuple<T...> &cTuple)
 {
-	ConstIterator<DynamicObject> iter = pDyn->GetConstIterator();
+	Iterator<DynamicObject> iter = pDyn->GetIterator();
 	TupleFromDynamicObjectImpl<sizeof...(T), T...>::Make(iter, cTuple);
 }
 
 template <int N, typename... T>
 struct TupleFromDynamicObjectImpl {
 	
-	static void Make(ConstIterator<DynamicObject> &cIterator, Tuple<T...> &cTuple)
+	static void Make(Iterator<DynamicObject> &cIterator, Tuple<T...> &cTuple)
 	{
 		TupleFromDynamicObjectImpl<N - 1, T...>::Make(cIterator, cTuple);
 
@@ -301,7 +301,7 @@ struct TupleFromDynamicObjectImpl {
 
 		if (cIterator.HasNext())
 		{
-			TupleStore<N - 1>(cTuple, cIterator.Next().GetAs<OriginalType>());
+			TupleStore<N - 1>(cTuple, cIterator.Next().GetAs<typename TupleElement<N - 1, Tuple<T...>>::Type>());
 		}
 	}
 };
@@ -309,7 +309,7 @@ struct TupleFromDynamicObjectImpl {
 template <typename... T>
 struct TupleFromDynamicObjectImpl<0, T...> {
 	
-	static void Make(ConstIterator<DynamicObject> &cIterator, Tuple<T...> &cTuple)
+	static void Make(Iterator<DynamicObject> &cIterator, Tuple<T...> &cTuple)
 	{
 		// End of line
 	}

@@ -32,7 +32,7 @@ namespace PLCore {
 *  @brief
 *    Set the property
 */
-void ClassProperty::Set(const PLCore::Iterable<DynamicObject> *pParams) const
+void ClassProperty::Set(PLCore::Iterable<DynamicObject> *pParams) const
 {
 	if (m_pSetter)
 	{
@@ -44,7 +44,7 @@ void ClassProperty::Set(const PLCore::Iterable<DynamicObject> *pParams) const
 *  @brief
 *    Get the property
 */
-DynamicObject ClassProperty::Get(const PLCore::Iterable<DynamicObject> *pParams) const
+DynamicObject ClassProperty::Get(PLCore::Iterable<DynamicObject> *pParams) const
 {
 	if (m_pGetter)
 	{

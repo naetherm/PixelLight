@@ -123,7 +123,7 @@ class Invokable : public FunctionBase {
 	//[ Public virtual FunctionBase functions                 ]
 	//[-------------------------------------------------------]
 	public:
-		virtual DynamicObject DynInvoke(const Iterable<DynamicObject> *pParam) const override
+		virtual DynamicObject DynInvoke(Iterable<DynamicObject> *pParam) const override
 		{
 			// Initialize a tuple of the correct type from the dynamic argument list
 			TupleType t;

@@ -44,8 +44,7 @@ namespace PLCore {
 template <typename T>
 DynamicObject::DynamicObject(T cInst)
 {
-	m_pStorage.Set(cInst);
-	m_pTypeInfo = GetStaticTypeInfo(cInst);
+	Set<T>(cInst);
 }
 
 /**

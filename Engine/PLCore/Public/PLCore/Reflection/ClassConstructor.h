@@ -84,7 +84,7 @@ class ClassConstructor : public TagHolder {
 		*  @return
 		*    Dynamic return value
 		*/
-		inline DynamicObject Construct(const PLCore::Iterable<DynamicObject> *pParams) const;
+		inline DynamicObject Construct(PLCore::Iterable<DynamicObject> *pParams) const;
 
 		/**
 		*  @brief 

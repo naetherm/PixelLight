@@ -86,7 +86,7 @@ class ClassMethod : public TagHolder {
 		*  @return
 		*    Untyped return value
 		*/
-		inline DynamicObject Call(const PLCore::Iterable<DynamicObject> *pParams) const;
+		inline DynamicObject Call(PLCore::Iterable<DynamicObject> *pParams) const;
 
 		/**
 		*  @brief

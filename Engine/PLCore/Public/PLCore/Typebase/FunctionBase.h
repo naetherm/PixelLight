@@ -60,7 +60,7 @@ class FunctionBase {
 		*  @param[in] pParams
 		*    Dynamic arguments for the function
 		*/
-		virtual DynamicObject DynInvoke(const Iterable<DynamicObject> *pParams) const = 0;
+		virtual DynamicObject DynInvoke(Iterable<DynamicObject> *pParams) const = 0;
 
 		/**
 		*  @brief
