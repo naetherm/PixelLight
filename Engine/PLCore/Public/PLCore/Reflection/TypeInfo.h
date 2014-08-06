@@ -113,11 +113,13 @@ class TypeInfo {
 };
 
 //TEST
-template <bool IS_CONST>
 class PointerTypeInfo : public TypeInfo {
 
 	public:
-		PointerTypeInfo(TypeInfo *pPointedType) : TypeInfo(IS_CONST ? "const*" : "*"), m_pPointedType(pPointedType) {}
+		PointerTypeInfo(TypeInfo *pPointedType, bool bConst) : TypeInfo(bConst ? "const*" : "*"),
+			m_pPointedType(pPointedType),
+			m_bIsConst(bConst)
+		{}
 
 		TypeInfo *GetPointedType()
 		{
@@ -134,21 +136,26 @@ class PointerTypeInfo : public TypeInfo {
 		{
 			if (GetName() == cOther.GetName()) // Both must be pointers
 			{
-				return m_pPointedType->operator==(*((PointerTypeInfo<IS_CONST>*)&cOther)->GetPointedType());
+				return m_pPointedType->operator==(*((PointerTypeInfo*)&cOther)->GetPointedType());
 			}
 
 			return false;
 		}
 
+		bool IsConst() const { return m_bIsConst; }
+
 	private:
-		TypeInfo *m_pPointedType;
+		TypeInfo	*m_pPointedType;
+		bool		m_bIsConst;
 };
 
-template <bool IS_CONST>
 class ReferenceTypeInfo : public TypeInfo {
 
 public:
-	ReferenceTypeInfo(TypeInfo *pPointedType) : TypeInfo(IS_CONST ? "const&" : "&"), m_pPointedType(pPointedType) {}
+	ReferenceTypeInfo(TypeInfo *pPointedType, bool bConst) : TypeInfo(bConst ? "const&" : "&"),
+		m_pPointedType(pPointedType),
+		m_bIsConst(bConst)
+	{}
 
 	TypeInfo *GetPointedType()
 	{
@@ -165,14 +172,17 @@ public:
 	{
 		if (GetName() == cOther.GetName()) // Both must be references
 		{
-			return m_pPointedType->operator==(*((ReferenceTypeInfo<IS_CONST>*)&cOther)->GetPointedType());
+			return m_pPointedType->operator==(*((ReferenceTypeInfo*)&cOther)->GetPointedType());
 		}
 
 		return false;
 	}
 
+	bool IsConst() const { return m_bIsConst; }
+
 private:
-	TypeInfo *m_pPointedType;
+	TypeInfo	*m_pPointedType;
+	bool		m_bIsConst;
 };
 
 /**
@@ -208,7 +218,7 @@ struct StaticTypeInfo<T*> {
 
 	static TypeInfo *Get()
 	{
-		static PointerTypeInfo<false> info(StaticTypeInfo<T>::Get());
+		static PointerTypeInfo info(StaticTypeInfo<T>::Get(), false);
 		return &info;
 	}
 
@@ -220,7 +230,7 @@ struct StaticTypeInfo<const T*> {
 
 	static TypeInfo *Get()
 	{
-		static PointerTypeInfo<true> info(StaticTypeInfo<T>::Get());
+		static PointerTypeInfo info(StaticTypeInfo<T>::Get(), true);
 		return &info;
 	}
 
@@ -232,7 +242,7 @@ struct StaticTypeInfo<T&> {
 
 	static TypeInfo *Get()
 	{
-		static ReferenceTypeInfo<false> info(StaticTypeInfo<T>::Get());
+		static ReferenceTypeInfo info(StaticTypeInfo<T>::Get(), false);
 		return &info;
 	}
 
@@ -244,7 +254,7 @@ struct StaticTypeInfo<const T&> {
 
 	static TypeInfo *Get()
 	{
-		static ReferenceTypeInfo<true> info(StaticTypeInfo<T>::Get());
+		static ReferenceTypeInfo info(StaticTypeInfo<T>::Get(), true);
 		return &info;
 	}
 
@@ -275,7 +285,7 @@ struct HasStaticTypeInfo {
 template <typename T>
 TypeInfo *GetStaticTypeInfo()
 {
-	return StaticTypeInfo<typename PLCore::RawType<T>::Type>::Get();
+	return StaticTypeInfo<T>::Get();
 }
 
 /**
@@ -283,10 +293,12 @@ TypeInfo *GetStaticTypeInfo()
 *    Retrieve the static type Id from the specified instance
 */
 template <typename T>
-TypeInfo *GetStaticTypeInfo(const T&)
+TypeInfo *GetStaticTypeInfo(T o)
 {
+	(void)o;
+
 	// [TODO] This won't work if for example a base class pointer is passed here but the object is of derived class type
-	return StaticTypeInfo<typename PLCore::RawType<T>::Type>::Get();
+	return StaticTypeInfo<T>::Get();
 }
 
 

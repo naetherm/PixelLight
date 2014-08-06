@@ -329,7 +329,7 @@ class Config : public Loadable {
 //[ Reflected class                                       ]
 //[-------------------------------------------------------]
 pl_declare_class(PLCore::ConfigGroup)
-pl_declare_class(PLCore::Config)
+pl_declare_class_no_copy(PLCore::Config)
 
 
 //[-------------------------------------------------------]

@@ -276,7 +276,7 @@ class LocalizationGroup : public Loadable {
 //[-------------------------------------------------------]
 //[ Reflected class                                       ]
 //[-------------------------------------------------------]
-pl_declare_class(PLCore::LocalizationGroup)
+pl_declare_class_no_copy(PLCore::LocalizationGroup)
 
 
 //[-------------------------------------------------------]

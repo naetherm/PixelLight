@@ -590,7 +590,7 @@ class File : public FileObject {
 //[-------------------------------------------------------]
 //[ Reflected class                                       ]
 //[-------------------------------------------------------]
-pl_declare_class(PLCore::File)
+pl_declare_class_no_copy(PLCore::File)
 
 
 //[-------------------------------------------------------]

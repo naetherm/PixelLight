@@ -26,6 +26,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "TypeInfo.h"
+#include "ClassTypeInfo.h"
 
 
 //[-------------------------------------------------------]
@@ -55,7 +56,7 @@ template <typename T>
 void DynamicObject::Set(T cInst)
 {
 	m_pStorage.Set<T>(cInst);
-	m_pTypeInfo = GetStaticTypeInfo(cInst);
+	m_pTypeInfo = GetStaticTypeInfo<T>();
 }
 
 /**
@@ -76,6 +77,77 @@ const TypeInfo *DynamicObject::GetTypeInfo() const
 	return m_pTypeInfo;
 }
 
+template <typename T, bool Copyable>
+struct Access;
+
+template <typename T>
+struct Access<T, true> {
+
+	typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type NakedType;
+
+	static T Get(UntypedVariant<> &cValue, TypeInfo *pMyTypeInfo)
+	{
+		// If the requested type is a const reference of the actually stored type, we can convert it
+		TypeInfo *pRequestedTypeInfo = StaticTypeInfo<T>::Get();
+		if (pRequestedTypeInfo->GetTypeInfoType() == TypeInfo::Reference &&
+			((ReferenceTypeInfo*)pRequestedTypeInfo)->IsConst() &&
+			*((ReferenceTypeInfo*)pRequestedTypeInfo)->GetPointedType() == *pMyTypeInfo)
+		{
+			return cValue.GetRef<NakedType>();
+		}
+
+		// If the stored type is a const reference to the requested type, we can convert it as well
+		if (pMyTypeInfo->GetTypeInfoType() == TypeInfo::Reference &&
+			((ReferenceTypeInfo*)pMyTypeInfo)->IsConst() &&
+			*((ReferenceTypeInfo*)pMyTypeInfo)->GetPointedType() == *pRequestedTypeInfo)
+		{
+			const T &ref = cValue.Get<const T&>();
+			return ref;
+		}
+		
+		return cValue.Get<T>();
+	}
+
+	static const T Get(const UntypedVariant<> &cValue, const TypeInfo *pMyTypeInfo)
+	{
+		// If the requested type is a const reference of the actually stored type, we can convert it
+		TypeInfo *pRequestedTypeInfo = StaticTypeInfo<T>::Get();
+		if (pRequestedTypeInfo->GetTypeInfoType() == TypeInfo::Reference &&
+			((ReferenceTypeInfo*)pRequestedTypeInfo)->IsConst() &&
+			*((ReferenceTypeInfo*)pRequestedTypeInfo)->GetPointedType() == *pMyTypeInfo)
+		{
+			return cValue.GetRef<NakedType>();
+		}
+
+		// If the stored type is a const reference to the requested type, we can convert it as well
+		if (pMyTypeInfo->GetTypeInfoType() == TypeInfo::Reference &&
+			((ReferenceTypeInfo*)pMyTypeInfo)->IsConst() &&
+			*((ReferenceTypeInfo*)pMyTypeInfo)->GetPointedType() == *pRequestedTypeInfo)
+		{
+			const T &ref = cValue.Get<const T&>();
+			return ref;
+		}
+
+		return cValue.Get<T>();
+	}
+};
+
+template <typename T>
+struct Access<T, false> {
+
+	typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type NakedType;
+
+	static T Get(UntypedVariant<> &cValue, TypeInfo *pMyTypeInfo)
+	{
+		return cValue.Get<T>();
+	}
+
+	static const T Get(const UntypedVariant<> &cValue, const TypeInfo *pMyTypeInfo)
+	{
+		return cValue.Get<T>();
+	}
+};
+
 /**
 *  @brief
 *    Get object as an instance of the specified type
@@ -84,7 +156,10 @@ template <typename T>
 T DynamicObject::GetAs()
 {
 	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
-	return m_pStorage.Get<T>();
+	//return m_pStorage.Get<T>();
+
+	typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type NakedType;
+	return Access<T, StaticTypeInfo<NakedType>::Copyable>::Get(m_pStorage, m_pTypeInfo);
 }
 
 /**
@@ -95,7 +170,10 @@ template <typename T>
 const T DynamicObject::GetAs() const
 {
 	// [TODO] Retrieve the TypeInfo of T and check if it is compatible with the stored TypeInfo
-	return m_pStorage.Get<T>();
+	//return m_pStorage.Get<T>();
+
+	typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type NakedType;
+	return Access<T, StaticTypeInfo<NakedType>::Copyable>::Get(m_pStorage, m_pTypeInfo);
 }
 
 /**

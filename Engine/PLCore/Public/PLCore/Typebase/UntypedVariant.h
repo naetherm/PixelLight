@@ -139,6 +139,28 @@ class UntypedVariant {
 
 		/**
 		*  @brief
+		*    Get the stored value as pointer
+		*/
+		template <typename T>
+		const T &GetRef() const
+		{
+			typedef typename TypeStorage<T>::StorageType Type;
+			return AccessHelper<T, IsBig<Type>::Value>::GetRef(m_pData);
+		}
+
+		/**
+		*  @brief
+		*    Get the stored value as pointer
+		*/
+		template <typename T>
+		T &GetRef()
+		{
+			typedef typename TypeStorage<T>::StorageType Type;
+			return AccessHelper<T, IsBig<Type>::Value>::GetRef(m_pData);
+		}
+
+		/**
+		*  @brief
 		*    Destroy the object stored in the variant
 		*/
 		void Destroy()
@@ -202,6 +224,18 @@ class UntypedVariant {
 				typedef typename Storage::StorageType Type;
 				return Storage::Restore(*((const Type*)pBuffer));
 			}
+
+			static T &GetRef(unsigned char *pBuffer)
+			{
+				typedef typename Storage::StorageType Type;
+				return Storage::RestoreRef(*((Type*)pBuffer));
+			}
+
+			static const T &GetRef(const unsigned char *pBuffer)
+			{
+				typedef typename Storage::StorageType Type;
+				return Storage::RestoreRef(*((const Type*)pBuffer));
+			}
 		};
 
 		template <typename T>
@@ -226,6 +260,18 @@ class UntypedVariant {
 			{
 				typedef typename Storage::StorageType Type;
 				return Storage::Restore(**((const Type**)pBuffer));
+			}
+
+			static T &GetRef(unsigned char *pBuffer)
+			{
+				typedef typename Storage::StorageType Type;
+				return Storage::RestoreRef(**((Type**)pBuffer));
+			}
+
+			static const T &GetRef(const unsigned char *pBuffer)
+			{
+				typedef typename Storage::StorageType Type;
+				return Storage::RestoreRef(**((const Type**)pBuffer));
 			}
 		};
 

@@ -95,7 +95,7 @@ void Application::Main()
 			params.Add(108);
 
 			prop->Set(&params);
-			int ret = prop->Get(&params).GetAs<const int&>();
+			const int& ret = prop->Get(&params).GetAs<const int&>();
 
 			PL_TODO(ananta, "This needs to be solved somehow!!!")
 

@@ -316,7 +316,7 @@ class Chunk : public Loadable {
 //[-------------------------------------------------------]
 //[ Reflected class                                       ]
 //[-------------------------------------------------------]
-pl_declare_class(PLCore::Chunk)
+pl_declare_class_no_copy(PLCore::Chunk)
 
 
 //[-------------------------------------------------------]

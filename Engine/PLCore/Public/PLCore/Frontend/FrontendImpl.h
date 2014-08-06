@@ -529,7 +529,7 @@ class FrontendImpl : protected AbstractLifecycle, protected AbstractFrontend {
 //[-------------------------------------------------------]
 //[ Reflected class                                       ]
 //[-------------------------------------------------------]
-pl_declare_class(PLCore::FrontendImpl)
+pl_declare_class_no_copy(PLCore::FrontendImpl)
 
 
 //[-------------------------------------------------------]

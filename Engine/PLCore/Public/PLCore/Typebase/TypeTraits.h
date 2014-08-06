@@ -522,6 +522,16 @@ struct TypeStorage {
 	{
 		return cValue;
 	}
+
+	static OriginalType &RestoreRef(StorageType &cValue)
+	{
+		return cValue;
+	}
+
+	static const OriginalType &RestoreRef(const StorageType &cValue)
+	{
+		return cValue;
+	}
 };
 
 template <typename T>
@@ -539,6 +549,16 @@ struct TypeStorage<T&> {
 	{
 		return *TypeStorage<T*>::Restore(cValue);
 	}
+
+	static OriginalType &RestoreRef(StorageType &cValue)
+	{
+		return *TypeStorage<T*>::Restore(cValue);
+	}
+
+	static const OriginalType &RestoreRef(const StorageType &cValue)
+	{
+		return *TypeStorage<T*>::Restore(cValue);
+	}
 };
 
 template <typename T>
@@ -553,6 +573,16 @@ struct TypeStorage<const T> {
 	}
 
 	static OriginalType Restore(StorageType cValue)
+	{
+		return cValue;
+	}
+
+	static OriginalType &RestoreRef(StorageType &cValue)
+	{
+		return cValue;
+	}
+
+	static const OriginalType &RestoreRef(const StorageType &cValue)
 	{
 		return cValue;
 	}

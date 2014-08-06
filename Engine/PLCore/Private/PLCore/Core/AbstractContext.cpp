@@ -53,6 +53,7 @@ AbstractContext::~AbstractContext()
 {
 }
 
+PL_TODO(ananta, "The copy ctor was private but we need it protected!")
 
 //[-------------------------------------------------------]
 //[ Private functions                                     ]

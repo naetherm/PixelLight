@@ -74,7 +74,7 @@
 *  @brief
 *    Prints generic message to the output
 */
-#define PL_MESSAGE(x) __pragma(message("\n"__FILE__"("STRING(__LINE__)")\n^ "#x))
+#define PL_MESSAGE(x) __pragma(message("\n"__FILE__"("STRING(__LINE__)")\n^ "#x"\n^"))
 
 /**
 *  @brief

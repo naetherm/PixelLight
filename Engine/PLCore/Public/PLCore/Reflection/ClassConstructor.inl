@@ -45,7 +45,7 @@ DynamicObject ClassConstructor::Construct(PLCore::Iterable<DynamicObject> *pPara
 {
 	if (m_pFunc)
 	{
-		return DynamicObject(m_pFunc->DynInvoke(pParams), m_cSignature.GetReturnType());
+		return m_pFunc->DynInvoke(pParams);
 	}
 	else
 	{

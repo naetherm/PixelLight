@@ -238,7 +238,7 @@ class ApplicationContext : public AbstractContext {
 //[-------------------------------------------------------]
 //[ Reflected class                                       ]
 //[-------------------------------------------------------]
-pl_declare_class(PLCore::ApplicationContext)
+pl_declare_class_no_copy(PLCore::ApplicationContext)
 
 
 //[-------------------------------------------------------]
