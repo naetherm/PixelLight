@@ -31,7 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "DynamicObject.h"
-#include <PLCore/Typebase/FunctionBase.h>
+#include "PLCore/Typebase/FunctionBase.h"
 
 
 //[-------------------------------------------------------]
@@ -100,14 +100,21 @@ class ClassBuilder {
 		*    Add a tag to the last defined element
 		*/
 		ClassBuilder<T> &Tag(const PLCore::String &sName, const DynamicObject &cValue);
+
+		/**
+		*  @brief
+		*    Set the default value of the last defined element
+		*/
+		ClassBuilder<T> &Default(const DynamicObject &cValue);
 		
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		Class		*m_pClass;			/**< The class being built */
-		TagHolder	*m_pLastTagHolder;	/**< The last tag holder in the chain */
+		Class			*m_pClass;			/**< The class being built */
+		TagHolder		*m_pLastTagHolder;	/**< The last tag holder in the chain */
+		DefaultValue	*m_pLastDefaultVal;	/**< The last element supporting default values in the chain */
 };
 
 

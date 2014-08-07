@@ -39,6 +39,7 @@ using namespace PLCore;
 pl_begin_class(MyClass,)
 	pl_method(Foo)
 	pl_property_getset(PrivateInt, GetPrivateInt, SetPrivateInt)
+		pl_default(1)
 pl_end_class()
 
 //[-------------------------------------------------------]

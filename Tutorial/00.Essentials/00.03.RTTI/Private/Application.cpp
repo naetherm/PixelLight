@@ -68,6 +68,8 @@ void Application::Main()
 	const Class *clss = TypeRegistry::GetInstance()->GetClassType("MyClass")->GetClass();
 	if (clss)
 	{
+		clss->ResetToDefault(&c);
+
 		// Method
 		const ClassMethod *meth = clss->GetMethod("Foo");
 		if (meth)

@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: AbstractLifecycle.cpp                          *
+ *  File: DefaultValue.inl                               *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,11 +22,6 @@
 \*********************************************************/
 
 
-//[-------------------------------------------------------]
-//[ Includes                                              ]
-//[-------------------------------------------------------]
-#include "PLCore/Core/AbstractLifecycle.h"
-
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -35,45 +30,24 @@ namespace PLCore {
 
 
 //[-------------------------------------------------------]
-//[ Protected functions                                   ]
+//[ Public functions                                      ]
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    Default constructor
+*    Get default value
 */
-AbstractLifecycle::AbstractLifecycle()
+const DynamicObject &DefaultValue::GetDefaultValue() const
 {
+	return m_cValue;
 }
 
 /**
 *  @brief
-*    Destructor
+*    Set default value
 */
-AbstractLifecycle::~AbstractLifecycle()
+void DefaultValue::SetDefaultValue(const DynamicObject &cValue)
 {
-}
-
-
-//[-------------------------------------------------------]
-//[ Private functions                                     ]
-//[-------------------------------------------------------]
-/**
-*  @brief
-*    Copy constructor
-*/
-AbstractLifecycle::AbstractLifecycle(const AbstractLifecycle &/*cSource*/)
-{
-	// No implementation because the copy constructor is never used
-}
-
-/**
-*  @brief
-*    Copy operator
-*/
-AbstractLifecycle &AbstractLifecycle::operator =(const AbstractLifecycle &/*cSource*/)
-{
-	// No implementation because the copy operator is never used
-	return *this;
+	m_cValue = cValue;
 }
 
 

@@ -245,7 +245,8 @@ namespace PLCore {
 *  @brief
 *    Set default value for property or field
 */
-#define pl_default(VALUE) // [TODO]
+#define pl_default(VALUE) \
+	.Default(VALUE)
 
 /**
 *  @brief

@@ -41,8 +41,8 @@ namespace PLCore {
 *    Create builder for the specified class instance
 */
 template <typename T>
-ClassBuilder<T>::ClassBuilder(Class &cClss)
-	: m_pClass(&cClss)
+ClassBuilder<T>::ClassBuilder(Class &cClss)	:
+	m_pClass(&cClss), m_pLastDefaultVal(nullptr)
 {
 	// By default, the tags go to the class itself
 	m_pLastTagHolder = m_pClass;
@@ -137,7 +137,10 @@ ClassBuilder<T> &ClassBuilder<T>::Property(const PLCore::String &sName, PLCore::
 {
 	// Add method to class
 	m_pClass->m_mapProperties.Add(sName, ClassProperty(sName, pSetter, pGetter));
-	m_pLastTagHolder = &m_pClass->m_mapProperties.Get(sName);
+
+	ClassProperty *pProp = &m_pClass->m_mapProperties.Get(sName);
+	m_pLastTagHolder = pProp;
+	m_pLastDefaultVal = pProp;
 
 	return *this;
 }
@@ -150,6 +153,21 @@ template <typename T>
 ClassBuilder<T> &ClassBuilder<T>::Tag(const PLCore::String &sName, const DynamicObject &cValue)
 {
 	m_pLastTagHolder->AddTag(sName, cValue);
+
+	return *this;
+}
+
+/**
+*  @brief
+*    Set default value
+*/
+template <typename T>
+ClassBuilder<T> &ClassBuilder<T>::Default(const DynamicObject &cValue)
+{
+	if (m_pLastDefaultVal)
+	{
+		m_pLastDefaultVal->SetDefaultValue(cValue);
+	}
 
 	return *this;
 }

@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: ClassMehod.h                                   *
+ *  File: DefaultValue.h                                 *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -22,18 +22,15 @@
 \*********************************************************/
 
 
-#ifndef __PLCORE_REFL_CLASSPROPERTY_H__
-#define __PLCORE_REFL_CLASSPROPERTY_H__
+#ifndef __PLCORE_DEFAULT_VALUE_H__
+#define __PLCORE_DEFAULT_VALUE_H__
 #pragma once
 
 
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "TagHolder.h"
-#include "DefaultValue.h"
-#include "PLCore/String/String.h"
-#include "PLCore/Typebase/FunctionBase.h"
+#include "DynamicObject.h"
 
 
 //[-------------------------------------------------------]
@@ -47,12 +44,9 @@ namespace PLCore {
 //[-------------------------------------------------------]
 /**
 *  @brief
-*    The reflection system's representation of a class property
-*
-*  @remarks
-*    TODO: describe this in more detail
+*    Base for reflected items able to hold some kind of "default value"
 */
-class ClassProperty : public TagHolder, public DefaultValue {
+class DefaultValue {
 
 
 	//[-------------------------------------------------------]
@@ -63,68 +57,45 @@ class ClassProperty : public TagHolder, public DefaultValue {
 		*  @brief
 		*    Default ctor
 		*/
-		PLCORE_API ClassProperty();
+		DefaultValue();
 
 		/**
 		*  @brief
 		*    Value ctor
-		*
-		*  @param[in] sName
-		*    The name of this property
-		*  @param[in] pSetter
-		*    The function object representing setter for the property
-		*  @param[in] pGetter
-		*    The function object representing getter for the property
 		*/
-		PLCORE_API ClassProperty(const PLCore::String &sName, PLCore::FunctionBase *pSetter, PLCore::FunctionBase *pGetter);
+		DefaultValue(const DynamicObject &cValue);
 
 		/**
 		*  @brief
-		*    Set the property using dynamic value
+		*    Retrieve the default value
 		*/
-		inline void Set(PLCore::Iterable<DynamicObject> *pParams) const;
+		inline const DynamicObject &GetDefaultValue() const;
 
 		/**
 		*  @brief
-		*    Get the property into a dynamic value
+		*    Set the default value
 		*/
-		inline DynamicObject Get(PLCore::Iterable<DynamicObject> *pParams) const;
+		inline void SetDefaultValue(const DynamicObject &cValue);
 
-		/**
-		*  @brief
-		*    Directly set the property
-		*/
-		template <typename T, class TObject>
-		inline void SetDirect(TObject *pObj, T cValue) const;
-
-		/**
-		*  @brief
-		*    Directly get the property
-		*/
-		template <typename T, class TObject>
-		inline T GetDirect(TObject *pObj) const;
-
-		/**
-		*  @brief
-		*    Comparison operator
-		*/
-		inline bool operator==(const ClassProperty &cOther) const;
 
 	//[-------------------------------------------------------]
 	//[ Public virtual DefaultValue functions                 ]
 	//[-------------------------------------------------------]
 	public:
-		virtual void RestoreDefaultValue(const DynamicObject &cObject) const override;
-
+		/**
+		*  @brief
+		*    Restore the default value on the object
+		*
+		*  @param cObject[in]
+		*    The object to set the value on
+		*/
+		virtual void RestoreDefaultValue(const DynamicObject &cObject) const = 0;
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		PLCore::String			m_sName;			/**< The name of the property */
-		PLCore::FunctionBase	*m_pSetter;			/**< The setter function */
-		PLCore::FunctionBase	*m_pGetter;			/**< The getter function */
-
+		DynamicObject m_cValue;		/**< The default value holder */
 };
 
 
@@ -137,7 +108,7 @@ class ClassProperty : public TagHolder, public DefaultValue {
 //[-------------------------------------------------------]
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
-#include "ClassProperty.inl"
+#include "DefaultValue.inl"
 
 
-#endif // __PLCORE_REFL_CLASSPROPERTY_H__
+#endif // __PLCORE_DEFAULT_VALUE_H__

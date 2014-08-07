@@ -73,11 +73,6 @@ class AbstractContext {
 		*/
 		PLCORE_API ~AbstractContext();
 
-
-	//[-------------------------------------------------------]
-	//[ Private functions                                     ]
-	//[-------------------------------------------------------]
-	protected:
 		/**
 		*  @brief
 		*    Copy constructor

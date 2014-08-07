@@ -193,6 +193,12 @@ class Class : public TagHolder {
 		*/
 		PLCORE_API const ClassProperty *GetProperty(const PLCore::String &sName) const;
 
+		/**
+		*  @brief
+		*    Restore all properties this class defines to their default values on the specified object
+		*/
+		inline void ResetToDefault(const DynamicObject &cObject) const;
+
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]

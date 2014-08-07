@@ -140,7 +140,12 @@ T *Class::Create() const
 	if (!HasDefaultConstructor())
 		return nullptr;
 
-	return m_cDefaultCtor.Construct().GetAs<T*>();
+	DynamicObject obj = m_cDefaultCtor.Construct();
+
+	// [TODO] Do we want this?
+	//ResetToDefault(obj);
+		
+	return obj.GetAs<T*>();
 }
 
 /**
@@ -161,6 +166,27 @@ bool Class::IsDerivedFrom(const Class *pOtherClass) const
 	}
 
 	return false;
+}
+
+/**
+*  @brief
+*    Reset all properties to default values
+*/
+void Class::ResetToDefault(const DynamicObject &cObject) const
+{
+	// All properties
+	auto prop = m_mapProperties.GetConstIterator();
+	while (prop.HasNext()) {
+	
+		prop.Next().RestoreDefaultValue(cObject);
+	}
+
+	// Do the same for all base classes as well
+	auto bases = m_lstBases.GetConstIterator();
+	while (bases.HasNext()) {
+
+		bases.Next()->ResetToDefault(cObject);
+	}
 }
 
 //[-------------------------------------------------------]

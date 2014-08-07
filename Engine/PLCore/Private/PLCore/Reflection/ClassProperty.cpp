@@ -25,13 +25,15 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Reflection/ClassProperty.h>
+#include "PLCore/Reflection/ClassProperty.h"
+#include "PLCore/Container/Array.h"
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-using namespace PLCore;
+namespace PLCore {
+
 
 //[-------------------------------------------------------]
 //[ Public functions                                      ]
@@ -60,3 +62,31 @@ ClassProperty::ClassProperty(const PLCore::String &sName, PLCore::FunctionBase *
 	int i = 0;
 	i = i;
 }
+
+
+//[-------------------------------------------------------]
+//[ Public virtual DefaultValue functions                 ]
+//[-------------------------------------------------------]
+/**
+*  @brief
+*    Reset the property to default value
+*/
+void ClassProperty::RestoreDefaultValue(const DynamicObject &cObject) const
+{
+	if (m_pSetter && GetDefaultValue().GetTypeInfo())
+	{
+		static Array<DynamicObject> val;
+		val.Resize(2);
+
+		val[0] = cObject;
+		val[1] = GetDefaultValue();
+
+		Set(&val);
+	}
+}
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore
