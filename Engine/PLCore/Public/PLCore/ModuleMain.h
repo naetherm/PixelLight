@@ -32,6 +32,21 @@
 //[-------------------------------------------------------]
 #include "PLCore/Core/MemoryManagerOnlyOncePerProject.inl"	// By adding this in here, usually every PixelLight basing project will add automatically the correct memory manager features
 #include "PLCore/Reflection/Rtti.h"
+#include "PLCore/Module/Module.h"
+
+
+//[-------------------------------------------------------]
+//[ Definitions                                           ]
+//[-------------------------------------------------------]
+/**
+*  @brief
+*    Debug mode
+*/
+#ifdef _DEBUG
+	#define PLCORE_IS_DEBUGMODE true
+#else
+	#define PLCORE_IS_DEBUGMODE false
+#endif
 
 
 //[-------------------------------------------------------]

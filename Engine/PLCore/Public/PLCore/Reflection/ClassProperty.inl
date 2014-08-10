@@ -86,7 +86,7 @@ T ClassProperty::GetDirect(TObject *pObj) const
 
 	params[0] = pObj;
 
-	return Get(&params).Get<T>();
+	return Get(&params).GetAs<T>();
 }
 
 /**

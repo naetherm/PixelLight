@@ -99,25 +99,6 @@ void TypeRegistry::RegisterPrimitiveType(const PLCore::String &sName, PrimitiveT
 *  @brief
 *    Find a class by name
 */
-const ClassTypeInfo *TypeRegistry::GetClassType(const PLCore::String &sName) const
-{
-	const ClassTypeInfo *ti = m_mapClassTypes.Get(sName);
-	if (ti == _ClassTypeMap::Null)
-	{
-		// Class not found
-		return nullptr;
-	}
-	else
-	{
-		// Class found
-		return ti;
-	}
-}
-
-/**
-*  @brief
-*    Find a class by name
-*/
 ClassTypeInfo *TypeRegistry::GetClassType(const PLCore::String &sName)
 {
 	ClassTypeInfo *ti = m_mapClassTypes.Get(sName);
@@ -129,25 +110,9 @@ ClassTypeInfo *TypeRegistry::GetClassType(const PLCore::String &sName)
 	else
 	{
 		// Class found
-		return ti;
-	}
-}
 
-/**
-*  @brief
-*    Find a primitive type by name
-*/
-const PrimitiveTypeInfo *TypeRegistry::GetPrimitiveType(const PLCore::String &sName) const
-{
-	const PrimitiveTypeInfo *ti = m_mapPrimitiveTypes.Get(sName);
-	if (ti == _PrimitiveTypeMap::Null)
-	{
-		// Class not found
-		return nullptr;
-	}
-	else
-	{
-		// Class found
+		PL_TODO(ananta, "Here the system should load a plugin for the type if 'ti' is PluginClassTypeInfo")
+
 		return ti;
 	}
 }

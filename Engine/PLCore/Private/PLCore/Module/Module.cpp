@@ -1,5 +1,5 @@
 /*********************************************************\
- *  File: Application.cpp                                *
+ *  File: Module.cpp                                     *
  *
  *  Copyright (C) 2002-2013 The PixelLight Team (http://www.pixellight.org/)
  *
@@ -25,28 +25,31 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/System/System.h>
-#include <PLCore/System/Console.h>
-#include <PLCore/Container/Array.h>
-#include <PLCore/Typebase/Function.h>
-#include "Application.h"
-#include "MyClass.h"
+#include "PLCore/System/DynLib.h"
+#include "PLCore/Base/Module.h"
 
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
-using namespace PLCore;
+namespace PLCore {
 
 
 //[-------------------------------------------------------]
-//[ Public functions                                      ]
+//[ Private functions                                     ]
 //[-------------------------------------------------------]
 /**
 *  @brief
 *    Constructor
 */
-Application::Application() : CoreApplication()
+Module::Module(uint32 nModuleID) :
+	m_nModuleID(nModuleID),
+	m_bPlugin(false),
+	m_pDynLib(nullptr),
+	m_sName("Unknown"),
+	m_sVendor("Unknown"),
+	m_sLicense("Unknown"),
+	m_sDescription("Unknown module")
 {
 }
 
@@ -54,55 +57,28 @@ Application::Application() : CoreApplication()
 *  @brief
 *    Destructor
 */
-Application::~Application()
+Module::~Module()
 {
+	// If there's a dynamic library instance, destroy it right now
+	if (m_pDynLib)
+		delete m_pDynLib;
 }
 
-//[-------------------------------------------------------]
-//[ Private virtual PLCore::CoreApplication functions     ]
-//[-------------------------------------------------------]
-void Application::Main()
+/**
+*  @brief
+*    Set module information
+*/
+void Module::SetModuleInfo(const String &sName, const String &sVendor, const String &sLicense, const String &sDescription)
 {
-	MyClass c;
-
-	const Class *clss = TypeRegistry::GetInstance()->GetClassType("MyClass")->GetClass();
-	if (clss)
-	{
-		clss->ResetToDefault(&c);
-
-		// Method
-		const ClassMethod *meth = clss->GetMethod("Foo");
-		if (meth)
-		{
-			// Indirect call
-			Array<DynamicObject> params;
-			params.Add(&c);
-			params.Add(108);
-			params.Add(10.8f);
-
-			int ret = meth->Call(&params).GetAs<int>();
-			
-			// Direct call
-			ret = meth->CallDirect<int>(&c, 108, 108.108f);
-			ret=ret;
-		}
-
-		// Property
-		const ClassProperty *prop = clss->GetProperty("PrivateInt");
-		if (prop)
-		{
-			// Indirect set/get
-			Array<DynamicObject> params;
-			params.Add(&c);
-			params.Add(108);
-
-			prop->Set(&params);
-			int ret = prop->Get(&params).GetAs<int>();
-
-			// Direct set/get
-			prop->SetDirect(&c, 1008);
-			ret = prop->GetDirect<int>(&c);
-			ret=ret;
-		}
-	}
+	// Save data
+	m_sName			= sName;
+	m_sVendor		= sVendor;
+	m_sLicense		= sLicense;
+	m_sDescription	= sDescription;
 }
+
+
+//[-------------------------------------------------------]
+//[ Namespace                                             ]
+//[-------------------------------------------------------]
+} // PLCore

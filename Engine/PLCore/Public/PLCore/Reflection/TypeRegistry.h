@@ -107,31 +107,7 @@ class TypeRegistry : public PLCore::Singleton<TypeRegistry> {
 		*  @return
 		*    Pointer to the type info or nullptr of it was not found
 		*/
-		PLCORE_API const ClassTypeInfo *GetClassType(const PLCore::String &sName) const;
-
-		/**
-		*  @brief
-		*    Find a class type by name
-		*
-		*  @param[in] sName
-		*    Name of the class type to find
-		*
-		*  @return
-		*    Pointer to the type info or nullptr of it was not found
-		*/
 		PLCORE_API ClassTypeInfo *GetClassType(const PLCore::String &sName);
-
-		/**
-		*  @brief
-		*    Find a primitive type by name
-		*
-		*  @param[in] sName
-		*    Name of the primitive type to find
-		*
-		*  @return
-		*    Pointer to the type info or nullptr of it was not found
-		*/
-		PLCORE_API const PrimitiveTypeInfo *GetPrimitiveType(const PLCore::String &sName) const;
 
 		/**
 		*  @brief
