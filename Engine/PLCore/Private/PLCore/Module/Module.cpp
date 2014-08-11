@@ -26,7 +26,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/System/DynLib.h"
-#include "PLCore/Base/Module.h"
+#include "PLCore/Module/Module.h"
 
 
 //[-------------------------------------------------------]
