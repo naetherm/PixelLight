@@ -25,8 +25,15 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Base/Class.h>
 #include "PLDatabase/Database.h"
+
+
+//[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(Database, PLDatabase)
+	pl_desc("Abstract SQL (Structured Query Language) database base class")
+pl_end_class()
 
 
 //[-------------------------------------------------------]
@@ -34,12 +41,6 @@
 //[-------------------------------------------------------]
 using namespace PLCore;
 namespace PLDatabase {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(Database)
 
 
 //[-------------------------------------------------------]
@@ -52,12 +53,12 @@ pl_implement_class(Database)
 Database *Database::Create(const String &sClass)
 {
 	// Get the database RTTI class
-	const Class *pClass = ClassManager::GetInstance()->GetClass(sClass);
-	if (!pClass || !pClass->IsDerivedFrom("PLDatabase::Database"))
+	const ClassTypeInfo *pClass = TypeRegistry::GetInstance()->GetClassType(sClass);
+	if (!pClass || !pClass->GetClass()->IsDerivedFrom(StaticClassTypeInfo<Database>::Get()->GetClass()))
 		return nullptr; // Error!
 
 	// Create an instance of the database class and return it
-	return static_cast<Database*>(pClass->Create());
+	return pClass->GetClass()->Create<Database>();
 }
 
 

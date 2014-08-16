@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Base/Object.h>
+#include <PLCore/Reflection/Rtti.h>
 #include "PLDatabase/PLDatabase.h"
 
 
@@ -53,14 +53,13 @@ class DatabaseQuery;
 *  @brief
 *    Abstract SQL (Structured Query Language) database base class
 */
-class Database : public PLCore::Object {
+class Database {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLDATABASE_RTTI_EXPORT, Database, "PLDatabase", PLCore::Object, "Abstract SQL (Structured Query Language) database base class")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -203,6 +202,12 @@ class Database : public PLCore::Object {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLDatabase
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLDatabase::Database)
 
 
 #endif // __PLDATABASE_DATABASE_H__
