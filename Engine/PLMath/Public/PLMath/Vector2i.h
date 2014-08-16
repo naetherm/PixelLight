@@ -393,7 +393,6 @@ class Vector2i {
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
 #include "PLMath/Vector2i.inl"
-#include "PLMath/TypeVector2i.inl"
 
 
 #endif // __PLMATH_VECTOR2I_H__

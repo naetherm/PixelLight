@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include <PLCore/Container/Element.h>
+#include <PLCore/Container/List.h>
 #include "PLMath/Vector3.h"
 
 

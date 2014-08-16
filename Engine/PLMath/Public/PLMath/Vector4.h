@@ -726,7 +726,6 @@ class Vector4 {
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
 #include "PLMath/Vector4.inl"
-#include "PLMath/TypeVector4.inl"
 
 
 #endif // __PLMATH_VECTOR4_H__

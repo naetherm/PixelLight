@@ -29,15 +29,19 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(GraphPathLoader, PLMath)
+	pl_base_class(PLCore::LoaderImpl)
+	pl_desc("Abstract graph path loader base class")
+	pl_str_tag("Type", "GraphPath")
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 namespace PLMath {
-
-
-//[-------------------------------------------------------]
-//[ Class implementation                                  ]
-//[-------------------------------------------------------]
-pl_implement_class(GraphPathLoader)
 
 
 //[-------------------------------------------------------]

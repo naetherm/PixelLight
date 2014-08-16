@@ -60,6 +60,12 @@ class Graph : public PLCore::Resource<Graph>, public PLCore::ElementManager<Grap
 
 
 	//[-------------------------------------------------------]
+	//[ Reflected class                                       ]
+	//[-------------------------------------------------------]
+	pl_rtti()
+
+
+	//[-------------------------------------------------------]
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
 	public:
@@ -141,6 +147,12 @@ class Graph : public PLCore::Resource<Graph>, public PLCore::ElementManager<Grap
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLMath
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLMath::Graph)
 
 
 #endif // __PLMATH_GRAPH_GRAPH_H__

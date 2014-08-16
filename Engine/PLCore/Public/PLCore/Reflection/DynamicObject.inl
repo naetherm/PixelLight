@@ -85,7 +85,7 @@ struct Access<T, true> {
 
 	typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type NakedType;
 
-	static T Get(UntypedVariant<> &cValue, TypeInfo *pMyTypeInfo)
+	static T Get(UntypedVariant<> &cValue, const TypeInfo *pMyTypeInfo)
 	{
 		// If the requested type is a const reference of the actually stored type, we can convert it
 		TypeInfo *pRequestedTypeInfo = StaticTypeInfo<T>::Get();
@@ -137,7 +137,7 @@ struct Access<T, false> {
 
 	typedef typename RemoveConst<typename RemoveReference<T>::Type>::Type NakedType;
 
-	static T Get(UntypedVariant<> &cValue, TypeInfo *pMyTypeInfo)
+	static T Get(UntypedVariant<> &cValue, const TypeInfo *pMyTypeInfo)
 	{
 		return cValue.Get<T>();
 	}

@@ -715,7 +715,6 @@ class Vector2 {
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
 #include "PLMath/Vector2.inl"
-#include "PLMath/TypeVector2.inl"
 
 
 #endif // __PLMATH_VECTOR2_H__

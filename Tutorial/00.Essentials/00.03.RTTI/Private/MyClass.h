@@ -91,6 +91,11 @@ class MyClass
 			m_nPrivateInt = i;
 		}
 
+		MyClass &GetMyClass(MyClass &c)
+		{
+			return c;
+		}
+
 	//[-------------------------------------------------------]
 	//[ Public data                                           ]
 	//[-------------------------------------------------------]

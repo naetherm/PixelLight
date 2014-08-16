@@ -33,7 +33,7 @@
 #include "PLCore/String/String.h"
 #include "PLCore/Container/Array.h"
 #include "PLCore/Container/HashMap.h"
-#include "PLCore/Base/Event/Event.h"
+#include "PLCore/Event/Signal.h"
 
 
 //[-------------------------------------------------------]
@@ -68,7 +68,7 @@ template <class AType> class ResourceManager {
 	//[ Events                                                ]
 	//[-------------------------------------------------------]
 	public:
-		PLCore::Event<AType&> EventResourceRemoved;	/**< Resource removed event, removed resource as parameter */
+		PLCore::Signal<AType&> EventResourceRemoved;	/**< Resource removed event, removed resource as parameter */
 
 
 	//[-------------------------------------------------------]

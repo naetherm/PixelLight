@@ -1062,7 +1062,6 @@ class Vector3 {
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
 #include "PLMath/Vector3.inl"
-#include "PLMath/TypeVector3.inl"
 
 
 #endif // __PLMATH_VECTOR3_H__

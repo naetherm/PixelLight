@@ -40,6 +40,9 @@ pl_begin_class(MyClass,)
 	pl_method(Foo)
 	pl_property_getset(PrivateInt, GetPrivateInt, SetPrivateInt)
 		pl_default(1)
+
+	pl_method(GetMyClass)
+
 pl_end_class()
 
 //[-------------------------------------------------------]

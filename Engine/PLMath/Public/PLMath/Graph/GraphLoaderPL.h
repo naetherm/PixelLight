@@ -56,21 +56,9 @@ class GraphLoaderPL : public GraphLoader {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLMATH_RTTI_EXPORT, GraphLoaderPL, "PLMath", PLMath::GraphLoader, "Graph loader implementation for the PixelLight graph XML file format")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"graph,GRAPH")
-			pl_property("Load",		"1")
-			pl_property("Save",		"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_2(Load,	pl_ret_type(bool),	Graph&,			PLCore::File&,	"Load method",	"")
-		pl_method_2(Save,	pl_ret_type(bool),	const Graph&,	PLCore::File&,	"Save method",	"")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -124,6 +112,12 @@ class GraphLoaderPL : public GraphLoader {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLMath
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLMath::GraphLoaderPL)
 
 
 #endif // __PLMATH_GRAPH_GRAPHLOADER_PL_H__

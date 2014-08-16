@@ -30,6 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include <PLCore/Container/Array.h>
 #include "PLMath/Vector2.h"
 #include "PLMath/Vector4.h"
 

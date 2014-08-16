@@ -28,9 +28,30 @@
 #include <PLCore/Xml/Xml.h>
 #include <PLCore/Log/Log.h>
 #include <PLCore/String/ParseTools.h>
+#include <PLCore/File/File.h>
 #include "PLMath/Graph/GraphPath.h"
 #include "PLMath/Graph/GraphNode.h"
 #include "PLMath/Graph/GraphPathLoaderPL.h"
+
+
+//[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(GraphPathLoaderPL, PLMath)
+	pl_base_class(PLMath::GraphPathLoader)
+	pl_desc("Graph path loader implementation for the PixelLight graph path XML file format")
+	pl_ctor()
+	pl_str_tag("Formats", "path,PATH")
+	pl_tag("Load", true)
+	pl_tag("Save", true)
+
+	pl_method(Load)
+		pl_desc("Load method")
+
+	pl_method(Save)
+		pl_desc("Save method")
+
+pl_end_class()
 
 
 //[-------------------------------------------------------]
@@ -38,12 +59,6 @@
 //[-------------------------------------------------------]
 using namespace PLCore;
 namespace PLMath {
-
-
-//[-------------------------------------------------------]
-//[ Class implementation                                  ]
-//[-------------------------------------------------------]
-pl_implement_class(GraphPathLoaderPL)
 
 
 //[-------------------------------------------------------]

@@ -436,7 +436,6 @@ class Vector3i {
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
 #include "PLMath/Vector3i.inl"
-#include "PLMath/TypeVector3i.inl"
 
 
 #endif // __PLMATH_VECTOR3I_H__

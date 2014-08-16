@@ -51,14 +51,9 @@ class GraphLoader : public PLCore::LoaderImpl {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLMATH_RTTI_EXPORT, GraphLoader, "PLMath", PLCore::LoaderImpl, "Abstract graph loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Graph")
-		pl_properties_end
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -85,6 +80,12 @@ class GraphLoader : public PLCore::LoaderImpl {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLMath
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLMath::GraphLoader)
 
 
 #endif // __PLMATH_GRAPH_GRAPHLOADER_H__

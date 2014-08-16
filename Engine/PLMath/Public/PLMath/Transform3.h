@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Base/Event/Event.h>
+#include <PLCore/Event/Signal.h>
 #include <PLMath/Matrix3x4.h>
 #include <PLMath/Quaternion.h>
 
@@ -63,9 +63,9 @@ class Transform3 {
 	//[ Events                                                ]
 	//[-------------------------------------------------------]
 	public:
-		PLCore::Event<>	EventPosition;	/**< Position change event */
-		PLCore::Event<>	EventRotation;	/**< Rotation change event */
-		PLCore::Event<>	EventScale;		/**< Scale change event */
+		PLCore::Signal<>	EventPosition;	/**< Position change event */
+		PLCore::Signal<>	EventRotation;	/**< Rotation change event */
+		PLCore::Signal<>	EventScale;		/**< Scale change event */
 
 
 	//[-------------------------------------------------------]
