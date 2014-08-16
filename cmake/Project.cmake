@@ -409,6 +409,9 @@ macro(pl_build_library type)
 		set(lib_type "SHARED")
 	endif()
 	
+	# [TODO] Re-enable PLPlugin once it can cope with the new reflection system
+	set(is_plugin OFF)
+	
 	# Parse options
 	set(no_install OFF)
 	set(no_docs OFF)
