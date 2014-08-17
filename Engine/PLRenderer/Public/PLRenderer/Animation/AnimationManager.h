@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Base/Event/Event.h>
+#include <PLCore/Event/Signal.h>
 #include <PLCore/Container/ElementManager.h>
 #include "PLRenderer/PLRenderer.h"
 
@@ -63,7 +63,7 @@ class AnimationManager : public PLCore::ElementManager<PLRenderer::Animation> {
 	//[ Events                                                ]
 	//[-------------------------------------------------------]
 	public:
-		PLCore::Event<>	EventAnimationFrameChange;	/**< Current animation frame change event */
+		PLCore::Signal<>	EventAnimationFrameChange;	/**< Current animation frame change event */
 
 
 	//[-------------------------------------------------------]

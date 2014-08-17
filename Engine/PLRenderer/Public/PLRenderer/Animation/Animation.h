@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Base/Event/Event.h>
+#include <PLCore/Event/Signal.h>
 #include <PLCore/Container/Element.h>
 #include "PLRenderer/PLRenderer.h"
 
@@ -76,10 +76,10 @@ class Animation : public PLCore::Element<Animation> {
 	//[ Events                                                ]
 	//[-------------------------------------------------------]
 	public:
-		PLCore::Event<>		EventStart;			/**< Animation has been started */
-		PLCore::Event<>		EventStop;			/**< Animation has been stopped */
-		PLCore::Event<>		EventFrameChange;	/**< Current frame change event */
-		PLCore::Event<int>	EventSpecialFrame;	/**< Special marked frame reached event, event ID as parameter (see 'AnimationEvent') */
+		PLCore::Signal<>		EventStart;			/**< Animation has been started */
+		PLCore::Signal<>		EventStop;			/**< Animation has been stopped */
+		PLCore::Signal<>		EventFrameChange;	/**< Current frame change event */
+		PLCore::Signal<int>	EventSpecialFrame;	/**< Special marked frame reached event, event ID as parameter (see 'AnimationEvent') */
 
 
 	//[-------------------------------------------------------]
