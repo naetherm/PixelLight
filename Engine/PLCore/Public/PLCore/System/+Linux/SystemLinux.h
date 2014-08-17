@@ -31,7 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include <sys/utsname.h>
-#include "PLCore/System/ConsoleLinux.h"
+#include "PLCore/System/+Linux/ConsoleLinux.h"
 #include "PLCore/System/SystemImpl.h"
 
 

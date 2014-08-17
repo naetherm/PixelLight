@@ -29,7 +29,7 @@
 	#include <io.h>
 	#include <Fcntl.h>
 #elif defined(LINUX)
-	#include "PLCore/PLCoreLinuxWrapper.h"
+	#include "PLCore/+Linux/PLCoreLinuxWrapper.h"
 #endif
 #include <stdio.h>
 #include <string.h>

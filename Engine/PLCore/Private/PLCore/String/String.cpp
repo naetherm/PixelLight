@@ -40,7 +40,7 @@
 #ifdef LINUX
 	#include <inttypes.h>
 	#include <wchar.h>
-	#include "PLCore/PLCoreLinuxWrapper.h"
+	#include "PLCore/+Linux/PLCoreLinuxWrapper.h"
 #endif
 #include "PLCore/Core/MemoryManager.h"
 #include "PLCore/String/UTF8Tools.h"

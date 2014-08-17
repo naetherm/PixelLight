@@ -31,6 +31,9 @@
 ## and provides variables for important libraries a.s.o.
 ##################################################
 
+# Support Linux
+list(REMOVE_ITEM PL_UNSUPPORTED_PLATFORMS Linux)
+set(PL_SUPPORTED_PLATFORMS Linux)
 
 ##################################################
 ## Preprocessor definitions

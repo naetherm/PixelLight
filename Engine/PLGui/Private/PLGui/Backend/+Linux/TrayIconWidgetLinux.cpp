@@ -28,9 +28,9 @@
 #include "PLGui/Gui/Gui.h"
 #include "PLGui/Gui/Resources/Graphics.h"
 #include "PLGui/Gui/TrayIcon.h"
-#include "PLGui/Backend/Linux/GuiLinux.h"
-#include "PLGui/Backend/Linux/WidgetLinux.h"
-#include "PLGui/Backend/Linux/TrayIconWidgetLinux.h"
+#include "PLGui/Backend/+Linux/GuiLinux.h"
+#include "PLGui/Backend/+Linux/WidgetLinux.h"
+#include "PLGui/Backend/+Linux/TrayIconWidgetLinux.h"
 
 
 //[-------------------------------------------------------]

@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/PLCoreLinuxIncludes.h>
+#include <PLCore/+Linux/PLCoreLinuxIncludes.h>
 #include "PLGui/Backend/CursorImpl.h"
 
 

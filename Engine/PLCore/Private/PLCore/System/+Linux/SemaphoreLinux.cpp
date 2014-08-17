@@ -29,7 +29,7 @@
 	#include <sys/types.h>	// For "time_t" used within "linux/time.h" required for "timespec" (yyyeeeehhhaaa! *g*)
 	#include <linux/time.h>	// For "timespec", else we get the error "error: aggregate 'timespec timeout' has incomplete type and cannot be defined"
 #endif
-#include "PLCore/System/SemaphoreLinux.h"
+#include "PLCore/System/+Linux/SemaphoreLinux.h"
 
 
 //[-------------------------------------------------------]

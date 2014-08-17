@@ -33,7 +33,7 @@
 #include <termios.h>
 #include <sys/ioctl.h>
 #include "PLCore/File/File.h"
-#include "PLCore/System/ConsoleLinux.h"
+#include "PLCore/System/+Linux/ConsoleLinux.h"
 
 
 //[-------------------------------------------------------]

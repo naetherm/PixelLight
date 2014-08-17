@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLGui/PLGuiLinuxIncludes.h"
+#include "PLGui/+Linux/PLGuiLinuxIncludes.h"
 #include "PLGui/Widgets/Widget.h"
 
 

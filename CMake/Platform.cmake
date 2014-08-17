@@ -78,6 +78,10 @@ set(PL_SUPPORTED_PLATFORMS "")
 ## Platform-specific includes
 ##################################################
 
+if(UNIX)
+  set(LINUX TRUE)
+endif()
+
 if(WIN32)
 	include(CMake/Platforms/WinMSVC.cmake)
 elseif(LINUX)

@@ -25,20 +25,19 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLGui/PLGuiLinuxIncludes.h"
 #include "PLGui/Gui/Base/Keys.h"
 #include "PLGui/Gui/Base/GuiMessage.h"
 #include "PLGui/Gui/Resources/Graphics.h"
 #include "PLGui/Gui/Resources/Cursor.h"
 #include "PLGui/Gui/Gui.h"
 #include "PLGui/Widgets/Widget.h"
-#include "PLGui/Backend/Linux/GuiLinux.h"
-#include "PLGui/Backend/Linux/WidgetLinux.h"
-#include "PLGui/Backend/Linux/GraphicsLinux.h"
-#include "PLGui/Backend/Linux/ImageLinux.h"
-#include "PLGui/Backend/Linux/CursorLinux.h"
-#include "PLGui/Backend/Linux/ToolsLinux.h"
-#include "PLGui/PLGuiLinuxIncludes.h"
+#include "PLGui/Backend/+Linux/GuiLinux.h"
+#include "PLGui/Backend/+Linux/WidgetLinux.h"
+#include "PLGui/Backend/+Linux/GraphicsLinux.h"
+#include "PLGui/Backend/+Linux/ImageLinux.h"
+#include "PLGui/Backend/+Linux/CursorLinux.h"
+#include "PLGui/Backend/+Linux/ToolsLinux.h"
+#include "PLGui/+Linux/PLGuiLinuxIncludes.h"
 
 
 //[-------------------------------------------------------]

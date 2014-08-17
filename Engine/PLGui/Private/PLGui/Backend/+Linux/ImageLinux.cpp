@@ -32,9 +32,9 @@
 #include <PLGraphics/Image/ImageBuffer.h>
 #include "PLGui/Gui/Gui.h"
 #include "PLGui/Gui/Resources/Image.h"
-#include "PLGui/Backend/Linux/ToolsLinux.h"
-#include "PLGui/Backend/Linux/GuiLinux.h"
-#include "PLGui/Backend/Linux/ImageLinux.h"
+#include "PLGui/Backend/+Linux/ToolsLinux.h"
+#include "PLGui/Backend/+Linux/GuiLinux.h"
+#include "PLGui/Backend/+Linux/ImageLinux.h"
 
 
 //[-------------------------------------------------------]

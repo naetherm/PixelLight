@@ -28,7 +28,7 @@
 #include <signal.h>
 #include "PLCore/System/Mutex.h"
 #include "PLCore/System/Thread.h"
-#include "PLCore/System/ThreadLinux.h"
+#include "PLCore/System/+Linux/ThreadLinux.h"
 
 // [DEBUG]
 #ifdef DEBUG

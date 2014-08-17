@@ -28,9 +28,9 @@
 #include <PLGraphics/Image/Image.h>
 #include "PLGui/Gui/Gui.h"
 #include "PLGui/Gui/Resources/Cursor.h"
-#include "PLGui/Backend/Linux/GuiLinux.h"
-#include "PLGui/Backend/Linux/ToolsLinux.h"
-#include "PLGui/Backend/Linux/CursorLinux.h"
+#include "PLGui/Backend/+Linux/GuiLinux.h"
+#include "PLGui/Backend/+Linux/ToolsLinux.h"
+#include "PLGui/Backend/+Linux/CursorLinux.h"
 #include <X11/cursorfont.h>
 
 
