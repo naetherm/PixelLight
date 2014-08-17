@@ -31,7 +31,7 @@
 #include <sys/socket.h>
 #include <PLCore/Core/MemoryManager.h>
 #include "PLInput/Backend/Bluetooth/BTDevice.h"
-#include "PLInput/Backend/Bluetooth/BTDeviceLinux.h"
+#include "PLInput/Backend/Bluetooth/+Linux/BTDeviceLinux.h"
 
 
 //[-------------------------------------------------------]

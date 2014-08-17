@@ -31,10 +31,10 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/stat.h>
-#include "PLCore/PLCoreLinuxIncludes.h"
+#include "PLCore/+Linux/PLCoreLinuxIncludes.h"
 #include "PLCore/File/File.h"
-#include "PLCore/File/FileSearchLinux.h"
-#include "PLCore/File/FileLinux.h"
+#include "PLCore/File/+Linux/FileSearchLinux.h"
+#include "PLCore/File/+Linux/FileLinux.h"
 
 
 //[-------------------------------------------------------]

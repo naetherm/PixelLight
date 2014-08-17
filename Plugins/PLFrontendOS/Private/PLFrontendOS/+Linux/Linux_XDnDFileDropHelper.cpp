@@ -27,8 +27,8 @@
 //[-------------------------------------------------------]
 #include <string.h>
 #include <PLCore/String/Tokenizer.h>
-#include "PLFrontendOS/OSWindowLinux.h"
-#include "PLFrontendOS/Linux_XDnDFileDropHelper.h"
+#include "PLFrontendOS/+Linux/OSWindowLinux.h"
+#include "PLFrontendOS/+Linux/Linux_XDnDFileDropHelper.h"
 
 
 //[-------------------------------------------------------]

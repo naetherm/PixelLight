@@ -36,7 +36,7 @@
 #include <dlfcn.h>
 #include "PLCore/String/RegEx.h"
 #include "PLCore/File/File.h"
-#include "PLCore/System/SystemLinux.h"
+#include "PLCore/System/+Linux/SystemLinux.h"
 
 
 //[-------------------------------------------------------]

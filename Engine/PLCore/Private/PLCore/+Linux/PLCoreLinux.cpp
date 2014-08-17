@@ -31,14 +31,13 @@
 #include <wctype.h>
 #include <string.h>
 #include <stdarg.h>
-#include "PLCore/PLCoreLinux.h"
-#include "PLCore/PLCoreLinuxWrapper.h"
-
+#include "PLCore/+Linux/PLCoreLinux.h"
+#include "PLCore/+Linux/PLCoreLinuxWrapper.h"
 
 char *_strupr(char *s)
 {
     char *p = s;
-    
+
     if (p) {
 		while (*p) {
 			*p = toupper(*p);

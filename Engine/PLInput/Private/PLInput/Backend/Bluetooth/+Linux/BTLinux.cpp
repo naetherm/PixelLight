@@ -29,8 +29,8 @@
 #include <dbus/dbus.h>
 #include <PLCore/String/ParseTools.h>
 #include <PLCore/Log/Log.h>
-#include "PLInput/Backend/Bluetooth/BTLinux.h"
-#include "PLInput/Backend/Bluetooth/BTDeviceLinux.h"
+#include "PLInput/Backend/Bluetooth/+Linux/BTLinux.h"
+#include "PLInput/Backend/Bluetooth/+Linux/BTDeviceLinux.h"
 
 
 //[-------------------------------------------------------]

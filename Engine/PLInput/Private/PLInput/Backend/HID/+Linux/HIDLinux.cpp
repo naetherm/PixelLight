@@ -25,8 +25,8 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLInput/Backend/HID/HIDLinux.h"
-#include "PLInput/Backend/HID/HIDDeviceLinux.h"
+#include "PLInput/Backend/HID/+Linux/HIDLinux.h"
+#include "PLInput/Backend/HID/+Linux/HIDDeviceLinux.h"
 
 
 //[-------------------------------------------------------]
