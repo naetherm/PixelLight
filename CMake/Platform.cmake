@@ -30,10 +30,12 @@
 # There is currently a bug in CMake that makes it report 32 bit architecture even on 64 bit system. This is why we don't use the
 # CMAKE_SYSTEM_PROCESSOR value. We prefer the native bitsize for the system, however, for MS Visual Studio, we always pick the
 # bitsize specified by the generator (as it won't compile otherwise!)
-if(CMAKE_GENERATOR MATCHES "Visual Studio .. Win64")
-	set(X86_64 1)
-elseif(CMAKE_GENERATOR MATCHES "Visual Studio*")
-	set(X86 1)
+if(CMAKE_GENERATOR MATCHES "Visual Studio*")
+	if (CMAKE_GENERATOR MATCHES "Win64")
+		set(X86_64 1)
+	else()
+		set(X86 1)
+	endif()
 elseif(CMAKE_SIZEOF_VOID_P MATCHES 8)
 	set(X86_64 1)
 else()

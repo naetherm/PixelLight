@@ -27,6 +27,9 @@
 ##################################################
 cmake_minimum_required(VERSION 2.8.3)
 
+# Suppress warning about the deprecated target property LOCATION
+cmake_policy(SET CMP0026 OLD)
+
 ##################################################
 ## Project
 ##################################################
@@ -81,7 +84,10 @@ include(CMake/Project.cmake)
 
 add_subdirectory(External)
 add_subdirectory(Engine)
-add_subdirectory(Plugins)
+
+if(PL_BUILD_PLUGINS)
+	add_subdirectory(Plugins)
+endif()
 
 if(PL_BUILD_SAMPLES)
 	add_subdirectory(Tutorial)
