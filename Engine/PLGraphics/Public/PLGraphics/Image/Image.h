@@ -33,6 +33,7 @@
 #include <PLCore/Tools/Loadable.h>
 #include <PLCore/Container/Array.h>
 #include <PLCore/Container/HashMap.h>
+#include <PLCore/Reflection/Rtti.h>
 #include "PLGraphics/PLGraphics.h"
 
 
@@ -82,6 +83,12 @@ namespace PLGraphics {
 *  @endverbatim
 */
 class Image : public PLCore::Loadable {
+
+
+	//[-------------------------------------------------------]
+	//[ Reflected class                                       ]
+	//[-------------------------------------------------------]
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -425,6 +432,12 @@ class Image : public PLCore::Loadable {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLGraphics
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLGraphics::Image)
 
 
 //[-------------------------------------------------------]

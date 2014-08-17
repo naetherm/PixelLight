@@ -55,10 +55,9 @@ class IEConvert : public ImageEffect {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, IEConvert, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Convert data and color type of an image")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -105,6 +104,12 @@ class IEConvert : public ImageEffect {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLGraphics
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLGraphics::IEConvert)
 
 
 #endif // __PLGRAPHICS_IMAGEEFFECT_CONVERT_H__

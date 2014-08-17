@@ -37,17 +37,37 @@ extern "C" {
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(ImageLoaderJPG, PLGraphics)
+	pl_base_class(PLGraphics::ImageLoader)
+	pl_desc("Image loader implementation for JPEG (\"Joint Photographic Experts Group\") file formats")
+	pl_ctor()
+	pl_str_tag("Formats", "jpg,jpeg,jpe,jif,jfif,jfi,JPG,JPEG,JPE,JIF,JFIF,JFI")
+	pl_tag("Load", true)
+	pl_tag("Save", true)
+
+	pl_method(Load)
+		pl_desc("Load method, no fancy upsampling and no interblock smoothing is applied")
+
+	pl_method(LoadParams)
+		pl_desc("Load method. Parameters: First 'bool' parameter determines whether or not fancy upsampling is applied, second 'bool' parameter whether or not interblock smoothing is applied.")
+
+	pl_method(Save)
+		pl_desc("Save method, using 100% quality setting")
+
+	pl_method(SaveParams)
+		pl_desc("Save method, quality (0...100) as first parameter")
+
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLCore;
 using namespace PLMath;
 namespace PLGraphics {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(ImageLoaderJPG)
 
 
 //[-------------------------------------------------------]

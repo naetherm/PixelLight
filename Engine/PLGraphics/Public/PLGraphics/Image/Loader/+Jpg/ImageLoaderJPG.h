@@ -59,23 +59,9 @@ class ImageLoaderJPG : public ImageLoader {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, ImageLoaderJPG, "PLGraphics", PLGraphics::ImageLoader, "Image loader implementation for JPEG (\"Joint Photographic Experts Group\") file formats")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"jpg,jpeg,jpe,jif,jfif,jfi,JPG,JPEG,JPE,JIF,JFIF,JFI")
-			pl_property("Load",		"1")
-			pl_property("Save",		"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_2(Load,		pl_ret_type(bool),	Image&,			PLCore::File&,					"Load method, no fancy upsampling and no interblock smoothing is applied",																											"")
-		pl_method_4(LoadParams,	pl_ret_type(bool),	Image&,			PLCore::File&,	bool,	bool,	"Load method. Parameters: First 'bool' parameter determines whether or not fancy upsampling is applied, second 'bool' parameter whether or not interblock smoothing is applied.",	"")
-		pl_method_2(Save,		pl_ret_type(bool),	const Image&,	PLCore::File&,					"Save method, using 100% quality setting",																																			"")
-		pl_method_3(SaveParams,	pl_ret_type(bool),	const Image&,	PLCore::File&,	PLCore::uint32,	"Save method, quality (0...100) as first parameter",																																"")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -112,6 +98,12 @@ class ImageLoaderJPG : public ImageLoader {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLGraphics
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLGraphics::ImageLoaderJPG)
 
 
 #endif // __PLGRAPHICS_IMAGELOADER_JPG_H__

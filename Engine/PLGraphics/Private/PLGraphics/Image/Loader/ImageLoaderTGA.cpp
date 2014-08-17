@@ -36,6 +36,26 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(ImageLoaderTGA, PLGraphics)
+	pl_base_class(PLGraphics::ImageLoader)
+	pl_desc("Image loader implementation for TGA (\"Targa Image File\"... \"Targa\"=\"Truevision Advanced Raster Graphics Array\") file formats")
+	pl_ctor()
+	pl_str_tag("Formats", "tga,TGA")
+	pl_tag("Load", true)
+	pl_tag("Save", true)
+
+	pl_method(Load)
+		pl_desc("Load method")
+
+	pl_method(Save)
+		pl_desc("Save method")
+
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLCore;
@@ -64,12 +84,6 @@ struct TGAHeader {
 	uint8  nImageDescriptor;	/**< Image descriptor */
 };
 #pragma pack(pop)	// Restore original alignment from stack
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(ImageLoaderTGA)
 
 
 //[-------------------------------------------------------]

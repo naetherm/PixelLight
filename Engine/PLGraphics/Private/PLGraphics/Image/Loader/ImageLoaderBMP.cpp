@@ -35,17 +35,31 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(ImageLoaderBMP, PLGraphics)
+	pl_base_class(PLGraphics::ImageLoader)
+	pl_desc("Image loader implementation for BMP file formats")
+	pl_ctor()
+	pl_str_tag("Formats", "bmp,BMP")
+	pl_tag("Load", true)
+	pl_tag("Save", true)
+
+	pl_method(Load)
+		pl_desc("Load method")
+
+	pl_method(Save)
+		pl_desc("Save method")
+
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLCore;
 using namespace PLMath;
 namespace PLGraphics {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(ImageLoaderBMP)
 
 
 //[-------------------------------------------------------]

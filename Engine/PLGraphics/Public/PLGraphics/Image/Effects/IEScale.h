@@ -54,10 +54,9 @@ class IEScale : public ImageEffect {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, IEScale, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Apply scale")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -126,6 +125,12 @@ class IEScale : public ImageEffect {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLGraphics
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLGraphics::IEScale)
 
 
 #endif // __PLGRAPHICS_IMAGEEFFECT_SCALE_H__

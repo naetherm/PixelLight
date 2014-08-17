@@ -713,7 +713,6 @@ class Color4 {
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
 #include "PLGraphics/Color/Color4.inl"
-#include "PLGraphics/Color/TypeColor4.inl"
 
 
 #endif // __PLGRAPHICS_COLOR4_H__

@@ -25,7 +25,6 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Base/Class.h>
 #include "PLGraphics/Image/Image.h"
 #include "PLGraphics/Image/ImagePart.h"
 #include "PLGraphics/Image/ImageBuffer.h"
@@ -33,16 +32,18 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(ImageEffect, PLGraphics)
+	pl_desc("Abstract image effect base class")
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLCore;
 namespace PLGraphics {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(ImageEffect)
 
 
 //[-------------------------------------------------------]
@@ -71,8 +72,8 @@ ImageEffect::~ImageEffect()
 String ImageEffect::GetDescription() const
 {
 	// [TODO] New RTTI usage: Remove this method?
-	const PLCore::Class *pClass = GetClass();
-	return (pClass != nullptr) ? pClass->GetDescription() : "";
+	const PLCore::ClassTypeInfo *pClass = GetClassTypeInfo();
+	return pClass->GetClass()->GetTag("Description").GetAs<PLCore::String>();
 }
 
 

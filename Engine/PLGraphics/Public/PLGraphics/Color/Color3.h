@@ -631,7 +631,6 @@ class Color3 {
 //[ Implementation                                        ]
 //[-------------------------------------------------------]
 #include "PLGraphics/Color/Color3.inl"
-#include "PLGraphics/Color/TypeColor3.inl"
 
 
 #endif // __PLGRAPHICS_COLOR3_H__

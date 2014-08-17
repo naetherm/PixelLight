@@ -33,6 +33,25 @@
 #include "PLGraphics/Image/ImageBuffer.h"
 #include "PLGraphics/Image/Loader/ImageLoaderDDS.h"
 
+//[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(ImageLoaderDDS, PLGraphics)
+	pl_base_class(PLGraphics::ImageLoader)
+	pl_desc("Image loader implementation for DDS file formats")
+	pl_ctor()
+	pl_str_tag("Formats", "dds,DDS")
+	pl_tag("Load", true)
+	pl_tag("Save", true)
+
+	pl_method(Load)
+		pl_desc("Load method")
+
+	pl_method(Save)
+		pl_desc("Save method")
+
+pl_end_class()
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -112,12 +131,6 @@ struct DDSHeaderDX10 {
 	uint32 nArraySize;
 	uint32 nReserved;
 };
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(ImageLoaderDDS)
 
 
 //[-------------------------------------------------------]

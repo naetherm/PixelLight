@@ -50,10 +50,9 @@ class IERemovePalette : public ImageEffect {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, IERemovePalette, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Removes the palette")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -87,6 +86,12 @@ class IERemovePalette : public ImageEffect {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLGraphics
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLGraphics::IERemovePalette)
 
 
 #endif // __PLGRAPHICS_IMAGEEFFECT_REMOVEPALETTE_H__

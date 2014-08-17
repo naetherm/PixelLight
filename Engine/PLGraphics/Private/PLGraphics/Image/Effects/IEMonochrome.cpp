@@ -28,6 +28,14 @@
 #include "PLGraphics/Image/ImageBuffer.h"
 #include "PLGraphics/Image/Effects/IEMonochrome.h"
 
+//[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(IEMonochrome, PLGraphics)
+	pl_base_class(PLGraphics::ImageEffect)
+	pl_desc("Image effect: Convert color to gray scale using \"human eye formula\" (red*0.299 + green*0.587 + blue*0.114)")
+pl_end_class()
+
 
 //[-------------------------------------------------------]
 //[ Namespace                                             ]
@@ -110,12 +118,6 @@ class ProcessData {
 
 
 };
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(IEMonochrome)
 
 
 //[-------------------------------------------------------]

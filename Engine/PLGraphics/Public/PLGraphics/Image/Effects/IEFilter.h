@@ -50,10 +50,9 @@ class IEFilter : public ImageEffect {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, IEFilter, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Generic image filter")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -87,6 +86,12 @@ class IEFilter : public ImageEffect {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLGraphics
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLGraphics::IEFilter)
 
 
 #endif // __PLGRAPHICS_IMAGEEFFECT_FILTER_H__

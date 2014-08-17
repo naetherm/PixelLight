@@ -31,16 +31,19 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(IEFlipXAxis, PLGraphics)
+	pl_base_class(PLGraphics::ImageEffect)
+	pl_desc("Image effect: Flip the image around the x axis")
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLCore;
 namespace PLGraphics {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(IEFlipXAxis)
 
 
 //[-------------------------------------------------------]

@@ -31,6 +31,15 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(IEConvert, PLGraphics)
+	pl_base_class(PLGraphics::ImageEffect)
+	pl_desc("Image effect: Convert data and color type of an image")
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLCore;
@@ -580,12 +589,6 @@ class ConvertData {
 
 
 };
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(IEConvert)
 
 
 //[-------------------------------------------------------]

@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include <PLCore/Base/Object.h>
+#include <PLCore/Reflection/Rtti.h>
 #include "PLGraphics/PLGraphics.h"
 
 
@@ -57,14 +57,13 @@ class ImageBuffer;
 *  @brief
 *    Abstract image effect base class
 */
-class ImageEffect : public PLCore::Object {
+class ImageEffect {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, ImageEffect, "PLGraphics", PLCore::Object, "Abstract image effect base class")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -141,6 +140,12 @@ class ImageEffect : public PLCore::Object {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLGraphics
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLGraphics::ImageEffect)
 
 
 #endif // __PLGRAPHICS_IMAGEEFFECT_H__

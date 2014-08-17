@@ -34,17 +34,31 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(ImageLoaderPPM, PLGraphics)
+	pl_base_class(PLGraphics::ImageLoader)
+	pl_desc("Image loader implementation for PPM file formats")
+	pl_ctor()
+	pl_str_tag("Formats", "ppm,PPM")
+	pl_tag("Load", true)
+	pl_tag("Save", true)
+
+	pl_method(Load)
+		pl_desc("Load method")
+
+	pl_method(Save)
+		pl_desc("Save method")
+
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLCore;
 using namespace PLMath;
 namespace PLGraphics {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(ImageLoaderPPM)
 
 
 //[-------------------------------------------------------]

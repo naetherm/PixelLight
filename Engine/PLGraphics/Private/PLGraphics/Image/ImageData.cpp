@@ -25,6 +25,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include <PLCore/Core/MemoryManager.h>
 #include <PLMath/Math.h>
 #include "PLGraphics/Image/ImagePalette.h"
 #include "PLGraphics/Image/ImageBuffer.h"

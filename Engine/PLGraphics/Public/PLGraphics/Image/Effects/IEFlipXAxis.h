@@ -50,10 +50,9 @@ class IEFlipXAxis : public ImageEffect {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, IEFlipXAxis, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Flip the image around the x axis")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -87,6 +86,12 @@ class IEFlipXAxis : public ImageEffect {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLGraphics
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLGraphics::IEFlipXAxis)
 
 
 #endif // __PLGRAPHICS_IMAGEEFFECT_FLIPXAXIS_H__

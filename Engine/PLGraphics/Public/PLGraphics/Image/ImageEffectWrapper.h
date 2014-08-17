@@ -50,10 +50,9 @@ class ImageEffectWrapper: public ImageEffect {
 
 
 	//[-------------------------------------------------------]
-	//[ RTTI interface                                        ]
+	//[ Reflected class                                       ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, ImageEffectWrapper, "PLGraphics", PLGraphics::ImageEffect, "Image effect wrapper")
-	pl_class_end
+	pl_rtti()
 
 
 	//[-------------------------------------------------------]
@@ -110,6 +109,12 @@ class ImageEffectWrapper: public ImageEffect {
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 } // PLGraphics
+
+
+//[-------------------------------------------------------]
+//[ Reflected class                                       ]
+//[-------------------------------------------------------]
+pl_declare_class(PLGraphics::ImageEffectWrapper)
 
 
 //[-------------------------------------------------------]

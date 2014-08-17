@@ -33,17 +33,20 @@
 
 
 //[-------------------------------------------------------]
+//[ RTTI interface                                        ]
+//[-------------------------------------------------------]
+pl_begin_class(IEScale, PLGraphics)
+	pl_base_class(PLGraphics::ImageEffect)
+	pl_desc("Image effect: Apply scale")
+pl_end_class()
+
+
+//[-------------------------------------------------------]
 //[ Namespace                                             ]
 //[-------------------------------------------------------]
 using namespace PLCore;
 using namespace PLMath;
 namespace PLGraphics {
-
-
-//[-------------------------------------------------------]
-//[ RTTI interface                                        ]
-//[-------------------------------------------------------]
-pl_implement_class(IEScale)
 
 
 //[-------------------------------------------------------]
