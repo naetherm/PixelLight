@@ -133,3 +133,5 @@ else()
 		file(COPY ${CG_GL_LIBRARY} DESTINATION ${lib_path})
 	endif()
 endif()
+
+mark_as_advanced(FORCE CG_COMPILER CG_GL_LIBRARY CG_INCLUDE_DIR CG_LIBRARY)

@@ -76,7 +76,8 @@ set(PL_CONFIG_FILE_LOCATION "${CMAKE_BINARY_DIR}" CACHE INTERNAL "Location of th
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(PL_BUILD_SAMPLES ON CACHE BOOL "Build sample projects?")
-set(PL_BUILD_DOCS ON CACHE BOOL "Build development documentation?")
+set(PL_BUILD_PLUGINS OFF CACHE BOOL "Build PixelLight plugins")
+set(PL_BUILD_DOCS OFF CACHE BOOL "Build development documentation?")
 set(PL_BUILD_SDK OFF CACHE BOOL "Build SDK installer?")
 set(PL_BUILD_TESTS OFF CACHE BOOL "Build automated unit tests?")
 

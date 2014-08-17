@@ -95,3 +95,5 @@ else()
 	# Finalize
 	pl_build_external()
 endif()
+
+mark_as_advanced(FORCE LIBVORBISFILE_LIBRARY LIBVORBIS_LIBRARY)
