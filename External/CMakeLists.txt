@@ -34,5 +34,9 @@ pl_add_subdirectory(_dummy)
 # These need to go first
 pl_add_subdirectory(zlib)
 
+# Vorbis requires Ogg to be included first
+pl_add_subdirectory(libogg)
+pl_add_subdirectory(libvorbis)
+
 # Add the rest automatically
 pl_add_subdir_projects()

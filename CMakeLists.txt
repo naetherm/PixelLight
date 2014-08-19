@@ -27,8 +27,10 @@
 ##################################################
 cmake_minimum_required(VERSION 2.8.3)
 
-# Suppress warning about the deprecated target property LOCATION
-cmake_policy(SET CMP0026 OLD)
+# Suppress warning about the deprecated target property LOCATION in CMake 3
+if(CMAKE_MAJOR_VERSION EQUAL 3)
+	cmake_policy(SET CMP0026 OLD)
+endif()
 
 ##################################################
 ## Project
