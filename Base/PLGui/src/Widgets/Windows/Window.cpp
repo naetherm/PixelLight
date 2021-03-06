@@ -51,7 +51,17 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Window)
+pl_class_metadata(Window, "PLGui", PLGui::Widget, "Base class for windows (widgets with a border and a title bar)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(SystemButtons,	pl_flag_type(ESystemButton),	7,							ReadWrite,	"System Buttons",				"")
+	pl_attribute_metadata(ShowTitleBar,	bool,							true,						ReadWrite,	"Show title bar?",				"")
+	pl_attribute_metadata(ShowBorder,		bool,							true,						ReadWrite,	"Show border?",					"")
+	pl_attribute_metadata(Resizable,		bool,							true,						ReadWrite,	"Is window resizable?",			"")
+	pl_attribute_metadata(MinSize,		PLMath::Vector2i,				PLMath::Vector2i(-1, -1),	ReadWrite,	"Minimum size for resizing",	"")
+	pl_attribute_metadata(MaxSize,		PLMath::Vector2i,				PLMath::Vector2i(-1, -1),	ReadWrite,	"Maximum size for resizing",	"")
+pl_class_metadata_end(Window)
 
 
 //[-------------------------------------------------------]

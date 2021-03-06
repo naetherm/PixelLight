@@ -95,13 +95,11 @@ class SRPDeferredGBufferDebug : public SRPDeferred {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferredGBufferDebug, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering GBuffer debug")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,	PLCore::String,			"",			ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
-		pl_attribute(Mode,				pl_enum_type(EMode),	ShowAlbedo,	ReadWrite,	DirectValue,	"Debug mode",																															"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(ShaderLanguage,	PLCore::String,	"",			ReadWrite)
+		pl_attribute_directvalue(Mode,				EMode,			ShowAlbedo,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

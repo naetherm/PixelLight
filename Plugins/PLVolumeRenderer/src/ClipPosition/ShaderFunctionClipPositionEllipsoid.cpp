@@ -45,7 +45,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionClipPositionEllipsoid)
+pl_class_metadata(ShaderFunctionClipPositionEllipsoid, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClipPosition, "Ellipsoid shader function implementation class for clip position")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionClipPositionEllipsoid)
 
 
 //[-------------------------------------------------------]

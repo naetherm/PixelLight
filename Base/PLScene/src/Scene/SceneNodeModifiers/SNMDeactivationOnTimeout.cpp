@@ -40,7 +40,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMDeactivationOnTimeout)
+pl_class_metadata(SNMDeactivationOnTimeout, "PLScene", PLScene::SceneNodeModifier, "Deactivation on timeout scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Timeout,	float,	5.0f,	ReadWrite,	"Timeout in seconds (if value set=restart)",	"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
+pl_class_metadata_end(SNMDeactivationOnTimeout)
 
 
 //[-------------------------------------------------------]

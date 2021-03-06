@@ -47,7 +47,14 @@ const String ShaderLanguageGLSL::GLSL = "GLSL";
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderLanguageGLSL)
+pl_class_metadata(ShaderLanguageGLSL, "PLRendererOpenGLES2", PLRenderer::ShaderLanguage, "OpenGL ES GLSL shader language class")
+	// Properties
+	pl_properties
+		pl_property("ShaderLanguage",	"GLSL")
+	pl_properties_end
+	// Constructors
+	pl_constructor_1_metadata(DefaultConstructor,	PLRenderer::Renderer&,	"Constructor with used renderer as parameter",	"")
+pl_class_metadata_end(ShaderLanguageGLSL)
 
 
 //[-------------------------------------------------------]

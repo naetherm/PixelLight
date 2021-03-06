@@ -43,7 +43,15 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneCreatorLoadableTypeMesh)
+pl_class_metadata(SceneCreatorLoadableTypeMesh, "PLEngine", PLEngine::SceneCreatorLoadableType, "Mesh loadable type scene creator")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Mesh")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneCreatorLoadableTypeMesh)
+
 
 
 //[-------------------------------------------------------]

@@ -52,14 +52,8 @@ class MeshLoaderStereolithography : public MeshLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, MeshLoaderStereolithography, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for stl (Stereolithography) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"stl,STL")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

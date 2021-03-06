@@ -41,7 +41,14 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessCombineMultiplicate)
+pl_class_metadata(SNMPostProcessCombineMultiplicate, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Scale,	PLMath::Vector2,	PLMath::Vector2::One,							ReadWrite,	"Scale",								"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,	PLCore::String,		"Data/PostProcesses/CombineMultiplicate.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessCombineMultiplicate)
 
 
 //[-------------------------------------------------------]

@@ -58,8 +58,26 @@ namespace PLNature {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SkyLayer)
-pl_implement_class(SNSky)
+pl_class_metadata(SkyLayer, "PLNature", PLCore::Object, "Sky layer")
+	// Attributes
+	pl_attribute_metadata(Type,		pl_enum_type_def3(SkyLayer, EType),	SkyLayer::Unknown,		ReadWrite,	"Sky layer type",															"")
+	pl_attribute_metadata(Position,	PLMath::Vector3,					PLMath::Vector3::Zero,	ReadWrite,	"Sky layer position",														"")
+	pl_attribute_metadata(Rotation,	PLMath::Vector3,					PLMath::Vector3::Zero,	ReadWrite,	"Sky layer rotation",														"")
+	pl_attribute_metadata(Scale,	PLMath::Vector3,					PLMath::Vector3::One,	ReadWrite,	"Sky layer scale",															"")
+	pl_attribute_metadata(Name,		PLCore::String,						"",						ReadWrite,	"Optional sky layer name. If not defined, a name is chosen automatically.",	"")
+pl_class_metadata_end(SkyLayer)
+
+pl_class_metadata(SNSky, "PLNature", PLScene::SceneNode, "Sky scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNSky, EFlags),	SNSky::NoCulling,									ReadWrite,	"Flags",																															"")
+	pl_attribute_metadata(MaxDrawDistance,	float,								-10000.0f,											ReadWrite,	"Maximum draw distance of the scene node to the camera, if 0 do always draw, if negative, do always draw this node before other",	"")
+	pl_attribute_metadata(AABBMin,			PLMath::Vector3,					PLMath::Vector3(-10000.0f, -10000.0f, -10000.0f),	ReadWrite,	"Minimum position of the 'scene node space' axis aligned bounding box",																"")
+	pl_attribute_metadata(AABBMax,			PLMath::Vector3,					PLMath::Vector3( 10000.0f,  10000.0f,  10000.0f),	ReadWrite,	"Maximum position of the 'scene node space' axis aligned bounding box",																"")
+		// Overwritten PLCore::Loadable attributes
+	pl_attribute_metadata(Filename,			PLCore::String,						"",													ReadWrite,	"Sky filename",																														"Type='Sky'")
+pl_class_metadata_end(SNSky)
 
 
 //[-------------------------------------------------------]

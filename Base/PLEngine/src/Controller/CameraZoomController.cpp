@@ -38,7 +38,8 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(CameraZoomController)
+pl_class_metadata(CameraZoomController, "PLEngine", PLInput::Controller, "Camera zoom input controller")
+pl_class_metadata_end(CameraZoomController)
 
 
 //[-------------------------------------------------------]

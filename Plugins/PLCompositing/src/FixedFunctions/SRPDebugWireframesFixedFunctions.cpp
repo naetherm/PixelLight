@@ -52,7 +52,10 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDebugWireframesFixedFunctions)
+pl_class_metadata(SRPDebugWireframesFixedFunctions, "PLCompositing", PLCompositing::SRPDebugWireframes, "Fixed functions based scene renderer pass drawing just simple wireframes")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SRPDebugWireframesFixedFunctions)
 
 
 //[-------------------------------------------------------]

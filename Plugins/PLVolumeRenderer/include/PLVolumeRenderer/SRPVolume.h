@@ -133,7 +133,7 @@ class SRPVolume : public PLVolume::SRPVolume {
 			NoGradientInput               = 1<<19,	/**< Suppress shader function: 2.5 - Gradient Input */
 			NoIllumination                = 1<<20	/**< Suppress shader function: 2.6 - Illumination */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(PLVolume::SRPVolume::EFlags)
 			pl_enum_value(NoBlend,							"Do not perform blend")
 			pl_enum_value(NoNearCap,						"Do not use near-cap (required for camera within volume)")
@@ -161,25 +161,23 @@ class SRPVolume : public PLVolume::SRPVolume {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, SRPVolume, "PLVolumeRenderer", PLVolume::SRPVolume, "Scene renderer pass for volume scene nodes targeting PC")
+	pl_class_def(PLVOLUMERENDERER_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,				PLCore::String,						"",										ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",																"")
-		// 1.0 - Ray Setup
-		pl_attribute(RaySetup,						pl_enum_type(ERaySetup),			RaySetupHybrid,							ReadWrite,	DirectValue,	"Technique to use for the ray setup (1.0 - Ray Setup)",																																				"")
-		pl_attribute(GlobalSampleRateFactor,		float,								1.0f,									ReadWrite,	DirectValue,	"Global sample rate factor to use (1.0 = 100% for correct result, 0.0 = 50% = take only half of the samples) (1.0 - Ray Setup), simply multiplied with the per scene node sampling rate factor",	"Max='10'")
-		// 1.2 - Jitter Position
-		pl_attribute(JitterPosition,				pl_enum_type(EJitterPosition),		JitterPositionTrigonometric,			ReadWrite,	DirectValue,	"Technique to use for jitter ray start position (1.2 - Jitter Position, jitter the start position of the ray in order to reduce wooden grain effect)",												"")
-		pl_attribute(DitherRay,						float,								1.0f,									ReadWrite,	DirectValue,	"Scale factor for dithering the ray's start position in order to avoid wooden grain effects (usually value between 0...1) (1.2 - Jitter Position)",													"")
-		// 2.2 - Fetch Scalar
-		pl_attribute(GlobalVolumeTextureLOD,		float,								0.0,									ReadWrite,	DirectValue,	"Global volume texture level of detail (0...<number of mipmaps>-1), usually the value 3 shows a well notable effect (2.2 - Fetch Scalar), simply added to the per scene node volume texture LOD",	"Min='0'")
-		// 2.3 - Shading
-		pl_attribute(AmbientColor,					PLGraphics::Color3,					PLGraphics::Color3(0.2f, 0.2f, 0.2f),	ReadWrite,	DirectValue,	"Ambient color (2.3 - Shading)",																																									"")
-		pl_attribute(IlluminationThreshold,			float,								0.01f,									ReadWrite,	DirectValue,	"Performance: Illumination opacity threshold, usually within the interval [0 .. 1] (2.3 - Shading), illumination only if opacity >= this value",													"")
+		pl_attribute_directvalue(			ShaderLanguage,			PLCore::String,		"",										ReadWrite)
+			// 1.0 - Ray Setup
+		pl_attribute_directvalue(			RaySetup,				ERaySetup,			RaySetupHybrid,							ReadWrite)
+		pl_attribute_directvalue(			GlobalSampleRateFactor,	float,				1.0f,									ReadWrite)
+			// 1.2 - Jitter Position
+		pl_attribute_directvalue(			JitterPosition,			EJitterPosition,	JitterPositionTrigonometric,			ReadWrite)
+		pl_attribute_directvalue(			DitherRay,				float,				1.0f,									ReadWrite)
+			// 2.2 - Fetch Scalar
+		pl_attribute_directvalue(			GlobalVolumeTextureLOD,	float,				0.0,									ReadWrite)
+			// 2.3 - Shading
+		pl_attribute_directvalue(			AmbientColor,			PLGraphics::Color3,	PLGraphics::Color3(0.2f, 0.2f, 0.2f),	ReadWrite)
+		pl_attribute_directvalue(			IlluminationThreshold,	float,				0.01f,									ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,							pl_flag_type(EFlags),				0,										ReadWrite,	GetSet,			"Flags",																																															"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPVolume,	Flags,					PLCore::uint32,		0,										ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

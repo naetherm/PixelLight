@@ -41,7 +41,11 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(BitmapButton)
+pl_class_metadata(BitmapButton, "PLGui", PLGui::AbstractButton, "A button that displays images for each state")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// [TODO] Images...
+pl_class_metadata_end(BitmapButton)
 
 
 //[-------------------------------------------------------]

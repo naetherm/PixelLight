@@ -52,10 +52,8 @@ class ShaderFunctionShadingDebugGradient : public ShaderFunctionShadingDebug {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionShadingDebugGradient, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionShadingDebug, "Debug gradient shader function implementation class for shading")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

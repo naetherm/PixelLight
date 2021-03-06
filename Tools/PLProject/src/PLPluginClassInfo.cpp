@@ -173,6 +173,73 @@ void PLPluginClassInfo::ParsePLClassBlock(const String &sPLClassBlock)
 	}
 }
 
+/**
+*  @brief
+*    Parse the given pl_class_metadata pl_class_metadata_end block
+*/
+void PLPluginClassInfo::ParsePLClassMetadataBlock(const PLCore::String &sPLClassMetadataBlock)
+{
+	// Reset information
+	m_sClassName			 = "";
+	m_sNamespace			 = "";
+	m_sBaseClass			 = "";
+	m_sDescription			 = "";
+	m_bHasConstructor		 = false;
+	m_bHasDefaultConstructor = false;
+	m_mapProperties.Clear();
+
+	{ // Parse pl_class
+		RegEx cPLClassBlock("^\\s*pl_class_metadata\\s*\\(\\s*(?<name>\\w*)\\s*,\\s*\\\"(?<namespace>\\w*)\\\"\\s*,\\s*(?<baseclass>\\w*\\:\\:\\w*)\\s*,\\s*\\\"(?<description>.*)\\\"\\)");
+		if (cPLClassBlock.Match(sPLClassMetadataBlock)) {
+			m_sClassName   = cPLClassBlock.GetNameResult("name");
+			m_sNamespace   = cPLClassBlock.GetNameResult("namespace");
+			m_sBaseClass   = cPLClassBlock.GetNameResult("baseclass");
+			m_sDescription = cPLClassBlock.GetNameResult("description");
+		}
+	}
+
+	{ // Parse constructor information
+		// Is there any constructor?
+		RegEx cPLConstructorBlock("^\\s*(pl_constructor_\\d\\d?_metadata)", RegEx::Multiline);
+		m_bHasConstructor = cPLConstructorBlock.Match(sPLClassMetadataBlock);
+		if (m_bHasConstructor) {
+			// Is there a default constructor?
+			RegEx cPLDefaultConstructorBlock("^\\s*(pl_constructor_0_metadata)", RegEx::Multiline);
+			m_bHasDefaultConstructor = cPLDefaultConstructorBlock.Match(sPLClassMetadataBlock);
+		}
+	}
+
+	{ // Parse property information
+		RegEx cPLPropertiesBlock("^\\s*(pl_properties.*pl_properties_end)", RegEx::Multiline | RegEx::DotAll);
+		if (cPLPropertiesBlock.Match(sPLClassMetadataBlock)) {
+			// Setup the tokenizer
+			Tokenizer cTokenizer;
+			cTokenizer.SetDelimiters("\r\n");
+			cTokenizer.SetSingleChars("");
+			cTokenizer.SetQuotes("");
+			cTokenizer.Start(cPLPropertiesBlock.GetResult(0));
+
+			// Parse all individual properties
+			RegEx cPLPropertyBlock("^\\s*(pl_property\\(\\\"(?<name>\\w*)\\\"\\s*,\\s*\\\"(?<value>.*)\\\"\\s*\\))", RegEx::Multiline);
+			String sToken = cTokenizer.GetNextToken();
+			while (sToken.GetLength()) {
+				// Is this a property block?
+				if (cPLPropertyBlock.Match(sToken)) {
+					// Get the name and the value of the found property
+					const String sPropertyName  = cPLPropertyBlock.GetNameResult("name");
+					const String sPropertyValue = cPLPropertyBlock.GetNameResult("value");
+
+					// Add the found property to the properties list
+					m_mapProperties.Add(sPropertyName, sPropertyValue);
+				}
+
+				// Next, please!
+				sToken = cTokenizer.GetNextToken();
+			}
+		}
+	}
+}
+
 
 //[-------------------------------------------------------]
 //[ Private functions                                     ]

@@ -36,7 +36,7 @@ namespace PLFrontendQt {
 namespace DataModels {
 
 
-PLDynVarVector3TreeItem::PLDynVarVector3TreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent) : PLDynVarStringTreeItem(dynVar, PLDynVarTreeItemTypes::Vector3, parent)
+PLDynVarVector3TreeItem::PLDynVarVector3TreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent) : PLDynVarStringTreeItem(dynVar, PLDynVarTreeItemTypes::Vector3, parent)
 {
 	RemoveFlags(1,  Qt::ItemIsEditable);
 	if (m_dynVar && m_dynVar->GetTypeID() == PLCore::Type<PLMath::Vector3>::TypeID) {

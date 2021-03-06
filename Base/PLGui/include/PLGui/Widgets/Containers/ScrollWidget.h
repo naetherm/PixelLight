@@ -58,17 +58,15 @@ class ScrollWidget : public ContainerWidget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, ScrollWidget, "PLGui", PLGui::ContainerWidget, "Container that allows it's content to be scrolled")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(ScrollBarStyleX,	pl_enum_type(EScrollBarStyle),	ScrollBarStyleDynamic,	ReadWrite,	GetSet,	"Style of horizontal scrollbar",	"")
-		pl_attribute(ScrollBarStyleY,	pl_enum_type(EScrollBarStyle),	ScrollBarStyleDynamic,	ReadWrite,	GetSet,	"Style of horizontal scrollbar",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
+		pl_attribute_getset(ScrollWidget,	ScrollBarStyleX,	EScrollBarStyle,	ScrollBarStyleDynamic,	ReadWrite)
+		pl_attribute_getset(ScrollWidget,	ScrollBarStyleY,	EScrollBarStyle,	ScrollBarStyleDynamic,	ReadWrite)
 		// Slots
-		pl_slot_1(OnInnerWidgetSize,	const PLMath::Vector2i&,	"Size callback",		"")
-		pl_slot_1(OnScrollBarXChanged,	int,						"Scrollbar callback",	"")
-		pl_slot_1(OnScrollBarYChanged,	int,						"Scrollbar callback",	"")
-	pl_class_end
+		pl_slot_1_def(ScrollWidget,	OnInnerWidgetSize,		const PLMath::Vector2i&)
+		pl_slot_1_def(ScrollWidget,	OnScrollBarXChanged,	int)
+		pl_slot_1_def(ScrollWidget,	OnScrollBarYChanged,	int)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

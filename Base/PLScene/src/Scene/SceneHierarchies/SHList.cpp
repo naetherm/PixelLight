@@ -38,9 +38,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SHList)
-
-
+pl_class_metadata(SHList, "PLScene", PLScene::SceneHierarchy, "Scene hierarchy which is in fact a simple list (a special case of a tree :)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SHList)
 
 
 //[-------------------------------------------------------]

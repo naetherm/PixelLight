@@ -87,14 +87,14 @@ class MeshCreator : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLMESH_RTTI_EXPORT, MeshCreator, "PLMesh", PLCore::Object, "Abstract mesh creator base class")
+	pl_class_def(PLMESH_API)
 		// Attributes
-		pl_attribute(DrawStyle,	pl_enum_type(EDrawStyle),	Fill,							ReadWrite,	DirectValue,	"Draw style",										"")
-		pl_attribute(Order,		bool,						0,								ReadWrite,	DirectValue,	"Geometry order (0=clockwise  1=counterclockwise)",	"")
-		pl_attribute(TexCoords,	bool,						true,							ReadWrite,	DirectValue,	"Generate texture coordinates?",					"")
-		pl_attribute(Normals,	bool,						true,							ReadWrite,	DirectValue,	"Generate normals coordinates?",					"")
-		pl_attribute(Material,	PLCore::String,				"Data/Textures/Default.dds",	ReadWrite,	DirectValue,	"Material to use",									"")
-	pl_class_end
+		pl_attribute_directvalue(DrawStyle,	EDrawStyle,		Fill,							ReadWrite)
+		pl_attribute_directvalue(Order,		bool,			0,								ReadWrite)
+		pl_attribute_directvalue(TexCoords,	bool,			true,							ReadWrite)
+		pl_attribute_directvalue(Normals,	bool,			true,							ReadWrite)
+		pl_attribute_directvalue(Material,	PLCore::String,	"Data/Textures/Default.dds",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

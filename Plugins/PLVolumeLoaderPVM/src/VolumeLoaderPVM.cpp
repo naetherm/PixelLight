@@ -49,7 +49,20 @@ namespace PLVolumeLoaderPVM {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(VolumeLoaderPVM)
+pl_class_metadata(VolumeLoaderPVM, "PLVolumeLoaderPVM", PLVolume::VolumeLoader, "Volume loader implementation for the \"PVM\"-format. The file format is part of the V^3 volume rendering package available at http://www.stereofx.org/volume.html .")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"pvm,PVM")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,			pl_ret_type(bool),	PLVolume::Volume&,			PLCore::File&,			"Load method, by default 8 bit is enforced",																							"")
+	pl_method_3_metadata(LoadParams,	pl_ret_type(bool),	PLVolume::Volume&,			PLCore::File&,	bool,	"Load method. Parameters: First 'bool' parameter determines whether or not to enforce 8 bit (may result in a visible quality loss).",	"")
+	pl_method_2_metadata(Save,			pl_ret_type(bool),	const PLVolume::Volume&,	PLCore::File&,			"Save method",																															"")
+pl_class_metadata_end(VolumeLoaderPVM)
 
 
 //[-------------------------------------------------------]

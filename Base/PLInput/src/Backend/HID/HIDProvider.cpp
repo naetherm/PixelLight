@@ -44,7 +44,10 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(HIDProvider)
+pl_class_metadata(HIDProvider, "PLInput", PLInput::Provider, "Input provider for HID devices")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(HIDProvider)
 
 
 //[-------------------------------------------------------]

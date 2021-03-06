@@ -45,7 +45,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionReconstructionTriCubic)
+pl_class_metadata(ShaderFunctionReconstructionTriCubic, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionReconstruction, "Tri-cubic B-spline filtering (8 volume texture fetches for the reconstruction, higher-order texture filtering) shader function implementation class for reconstruction")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionReconstructionTriCubic)
 
 
 //[-------------------------------------------------------]

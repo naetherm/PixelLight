@@ -52,10 +52,8 @@ class ShaderFunctionClipPositionVolumeTexture : public ShaderFunctionClipPositio
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionClipPositionVolumeTexture, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClipPosition, "Volume texture shader function implementation class for clip position")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

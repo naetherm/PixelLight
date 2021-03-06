@@ -56,18 +56,16 @@ class SNMPostProcessDiagonalBlur : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessDiagonalBlur, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(ColorScale,	float,				4.0f,									ReadWrite,	DirectValue,	"Color scale",							"")
-		pl_attribute(PixelKernel0,	PLMath::Vector2,	PLMath::Vector2( 2.0f, 2.0f),			ReadWrite,	DirectValue,	"Pixel kernel 0",						"")
-		pl_attribute(PixelKernel1,	PLMath::Vector2,	PLMath::Vector2( 4.0f, 4.0f),			ReadWrite,	DirectValue,	"Pixel kernel 1",						"")
-		pl_attribute(PixelKernel2,	PLMath::Vector2,	PLMath::Vector2(-6.0f, 6.0f),			ReadWrite,	DirectValue,	"Pixel kernel 2",						"")
-		pl_attribute(PixelKernel3,	PLMath::Vector2,	PLMath::Vector2( 8.0f, 8.0f),			ReadWrite,	DirectValue,	"Pixel kernel 3",						"")
+		pl_attribute_directvalue(								ColorScale,		float,				4.0f,									ReadWrite)
+		pl_attribute_directvalue(								PixelKernel0,	PLMath::Vector2,	PLMath::Vector2( 2.0f, 2.0f),			ReadWrite)
+		pl_attribute_directvalue(								PixelKernel1,	PLMath::Vector2,	PLMath::Vector2( 4.0f, 4.0f),			ReadWrite)
+		pl_attribute_directvalue(								PixelKernel2,	PLMath::Vector2,	PLMath::Vector2(-6.0f, 6.0f),			ReadWrite)
+		pl_attribute_directvalue(								PixelKernel3,	PLMath::Vector2,	PLMath::Vector2( 8.0f, 8.0f),			ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,		PLCore::String,		"Data/PostProcesses/DiagonalBlur.pp",	ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,		PLCore::String,		"Data/PostProcesses/DiagonalBlur.pp",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

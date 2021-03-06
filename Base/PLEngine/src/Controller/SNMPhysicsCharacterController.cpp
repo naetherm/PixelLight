@@ -54,7 +54,21 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsCharacterController)
+pl_class_metadata(SNMPhysicsCharacterController, "PLEngine", PLEngine::SNMPhysicsCharacter, "Basic PL physics character controller scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InputSemantic,		PLCore::String,												"",		ReadWrite,	"Semantic of this input controller (e.g. \"Camera\")",												"")
+	pl_attribute_metadata(YRotVelocity,			float,														0.0f,	ReadWrite,	"Y rotation velocity, if 0, there's no rotation control",											"")
+	pl_attribute_metadata(IdleAnimation,		PLCore::String,												"",		ReadWrite,	"Idle animation",																					"")
+	pl_attribute_metadata(IdleAnimationSpeed,	float,														24.0f,	ReadWrite,	"Idle animation playback speed",																	"Min='0.0001'")
+	pl_attribute_metadata(WalkAnimation,		PLCore::String,												"",		ReadWrite,	"Walk animation",																					"")
+	pl_attribute_metadata(WalkAnimationSpeed,	float,														24.0f,	ReadWrite,	"Walk animation playback speed",																	"Min='0.0001'")
+	pl_attribute_metadata(RunAnimationSpeed,	float,														35.0f,	ReadWrite,	"Run animation playback speed (walk animation, just faster)",										"Min='0.0001'")
+	pl_attribute_metadata(RotationNode,			PLCore::String,												"",		ReadWrite,	"If empty, take the rotation of the owner node for movement, else the rotation of the given node",	"")
+		// Overwritten PLScene::SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SNMPhysicsCharacterController, EFlags),	0,		ReadWrite,	"Flags",																							"")
+pl_class_metadata_end(SNMPhysicsCharacterController)
 
 
 //[-------------------------------------------------------]
@@ -282,7 +296,7 @@ void SNMPhysicsCharacterController::OnUpdate()
 					if (bRevert)
 						pAni->SetSpeed(IsRunning() ? -RunAnimationSpeed : -WalkAnimationSpeed);
 					else
-						pAni->SetSpeed(IsRunning() ?  RunAnimationSpeed.GetFloat() :  WalkAnimationSpeed);
+						pAni->SetSpeed(IsRunning() ?  RunAnimationSpeed.Get() :  WalkAnimationSpeed);
 					pAni->SetWeight(IsRunning() ? 1.5f : 1.0f);
 
 					// Is the animation currently running?

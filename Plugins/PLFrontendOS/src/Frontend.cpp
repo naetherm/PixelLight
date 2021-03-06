@@ -47,7 +47,10 @@ namespace PLFrontendOS {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Frontend)
+pl_class_metadata(Frontend, "PLFrontendOS", PLCore::FrontendImpl, "OS frontend implementation class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Frontend)
 
 
 //[-------------------------------------------------------]

@@ -41,7 +41,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Joystick)
+pl_class_metadata(Joystick, "PLInput", PLInput::Device, "Joystick input controller")
+pl_class_metadata_end(Joystick)
 
 
 //[-------------------------------------------------------]

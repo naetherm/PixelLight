@@ -67,12 +67,10 @@ class SNMBillboardSpherical : public SNMBillboard {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMBillboardSpherical, "PLScene", PLScene::SNMBillboard, "Spherical (point rotated) billboard scene node modifier class")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	pl_class_def(PLS_API)
 		// Slots
-		pl_slot_1(OnAddedToVisibilityTree,	VisNode&,	"Called when the owner scene node was added to a visibility tree, visibility node which is representing the owner scene node within the visibility tree as first parameter",	"")
-	pl_class_end
+		pl_slot_1_def(SNMBillboardSpherical,	OnAddedToVisibilityTree,	VisNode&)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

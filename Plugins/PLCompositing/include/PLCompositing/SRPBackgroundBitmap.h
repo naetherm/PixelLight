@@ -63,7 +63,7 @@ class SRPBackgroundBitmap : public SRPBackground {
 		enum EFlags {
 			IgnoreColor = 1<<1	/**< Ignore the color variable of the bitmap */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPBackground::EFlags)
 			pl_enum_value(IgnoreColor, "Ignore the color variable of the bitmap")
 		pl_enum_end
@@ -72,19 +72,17 @@ class SRPBackgroundBitmap : public SRPBackground {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPBackgroundBitmap, "PLCompositing", PLCompositing::SRPBackground, "Abstract bitmap background scene renderer pass")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(Material,		PLCore::String,			"",							ReadWrite,	GetSet,			"Material to use",											"Type='Material Effect Image TextureAni'")
-		pl_attribute(Color,			PLGraphics::Color4,		PLGraphics::Color4::White,	ReadWrite,	DirectValue,	"Bitmap color",												"")
-		pl_attribute(Position,		PLMath::Vector2,		PLMath::Vector2::Zero,		ReadWrite,	DirectValue,	"Bitmap position (0..1), (0, 0)=left top",					"")
-		pl_attribute(Size,			PLMath::Vector2,		PLMath::Vector2::One,		ReadWrite,	DirectValue,	"Bitmap size (0..1)",										"")
-		pl_attribute(TexelStart,	PLMath::Vector2,		PLMath::Vector2::Zero,		ReadWrite,	DirectValue,	"Bitmap texture source rectangle (0..1) start coordinate",	"")
-		pl_attribute(TexelEnd,		PLMath::Vector2,		PLMath::Vector2::One,		ReadWrite,	DirectValue,	"Bitmap texture source rectangle (0..1) end coordinate",	"")
+		pl_attribute_getset		(SRPBackgroundBitmap,	Material,	PLCore::String,		"",							ReadWrite)
+		pl_attribute_directvalue(						Color,		PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite)
+		pl_attribute_directvalue(						Position,	PLMath::Vector2,	PLMath::Vector2::Zero,		ReadWrite)
+		pl_attribute_directvalue(						Size,		PLMath::Vector2,	PLMath::Vector2::One,		ReadWrite)
+		pl_attribute_directvalue(						TexelStart,	PLMath::Vector2,	PLMath::Vector2::Zero,		ReadWrite)
+		pl_attribute_directvalue(						TexelEnd,	PLMath::Vector2,	PLMath::Vector2::One,		ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),	0,							ReadWrite,	GetSet,			"Flags",													"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPBackgroundBitmap,	Flags,		PLCore::uint32,		0,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

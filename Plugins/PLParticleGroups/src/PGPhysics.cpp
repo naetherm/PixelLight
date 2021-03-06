@@ -42,7 +42,8 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGPhysics)
+pl_class_metadata(PGPhysics, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Abstract physics particle group base class")
+pl_class_metadata_end(PGPhysics)
 
 
 //[-------------------------------------------------------]

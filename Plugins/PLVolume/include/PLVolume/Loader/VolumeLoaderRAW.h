@@ -62,19 +62,8 @@ class VolumeLoaderRAW : public VolumeLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, VolumeLoaderRAW, "PLVolume", PLVolume::VolumeLoader, "Volume loader implementation for the \"RAW\" volume data file format (Lookout! You have to provide correct data type, width, height and depth loader parameters!)")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"raw,RAW")
-			pl_property("Load",		"1")
-			pl_property("Save",		"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_6(LoadParams,	pl_ret_type(bool),	Volume&,		PLCore::File&,	PLCore::uint8, PLCore::uint16, PLCore::uint16, PLCore::uint16,	"Load method. Parameters: First 'integer' parameter determines the data type (0=byte, 1=word, 2=half, 3=float, 4=double), the other parameters are the width, height and depth.",	"")
-		pl_method_2(Save,		pl_ret_type(bool),	const Volume&,	PLCore::File&,																	"Save method",																																										"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

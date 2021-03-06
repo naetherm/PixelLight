@@ -100,14 +100,14 @@ class SkyLayer : public PLCore::Object, public PLCore::Element<SkyLayer> {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLNATURE_RTTI_EXPORT, SkyLayer, "PLNature", PLCore::Object, "Sky layer")
+	pl_class_def(PLNATURE_API)
 		// Attributes
-		pl_attribute(Type,		pl_enum_type(EType),	Unknown,				ReadWrite,	GetSet,	"Sky layer type",															"")
-		pl_attribute(Position,	PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	GetSet,	"Sky layer position",														"")
-		pl_attribute(Rotation,	PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	GetSet,	"Sky layer rotation",														"")
-		pl_attribute(Scale,		PLMath::Vector3,		PLMath::Vector3::One,	ReadWrite,	GetSet,	"Sky layer scale",															"")
-		pl_attribute(Name,		PLCore::String,			"",						ReadWrite,	GetSet,	"Optional sky layer name. If not defined, a name is chosen automatically.",	"")
-	pl_class_end
+		pl_attribute_getset(SkyLayer,	Type,		EType,				Unknown,				ReadWrite)
+		pl_attribute_getset(SkyLayer,	Position,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_getset(SkyLayer,	Rotation,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_getset(SkyLayer,	Scale,		PLMath::Vector3,	PLMath::Vector3::One,	ReadWrite)
+		pl_attribute_getset(SkyLayer,	Name,		PLCore::String,		"",						ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -221,18 +221,16 @@ class SNSky : public PLScene::SceneNode, public PLCore::ElementManager<SkyLayer>
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLNATURE_RTTI_EXPORT, SNSky, "PLNature", PLScene::SceneNode, "Sky scene node")
+	pl_class_def(PLNATURE_API)
 		// Attributes
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	NoCulling,											ReadWrite,	GetSet,		"Flags",																															"")
-		pl_attribute(MaxDrawDistance,	float,					-10000.0f,											ReadWrite,	ModifyAttr,	"Maximum draw distance of the scene node to the camera, if 0 do always draw, if negative, do always draw this node before other",	"")
-		pl_attribute(AABBMin,			PLMath::Vector3,		PLMath::Vector3(-10000.0f, -10000.0f, -10000.0f),	ReadWrite,	GetSet,		"Minimum position of the 'scene node space' axis aligned bounding box",																"")
-		pl_attribute(AABBMax,			PLMath::Vector3,		PLMath::Vector3( 10000.0f,  10000.0f,  10000.0f),	ReadWrite,	GetSet,		"Maximum position of the 'scene node space' axis aligned bounding box",																"")
+		pl_attribute_getset(	SNSky,				Flags,				PLCore::uint32,		NoCulling,											ReadWrite)
+		pl_attribute_modifyattr(PLScene::SceneNode,	MaxDrawDistance,	float,				-10000.0f,											ReadWrite)
+		pl_attribute_getset(	SNSky,				AABBMin,			PLMath::Vector3,	PLMath::Vector3(-10000.0f, -10000.0f, -10000.0f),	ReadWrite)
+		pl_attribute_getset(	SNSky,				AABBMax,			PLMath::Vector3,	PLMath::Vector3( 10000.0f,  10000.0f,  10000.0f),	ReadWrite)
 			// Overwritten PLCore::Loadable attributes
-		pl_attribute(Filename,			PLCore::String,			"",													ReadWrite,	GetSet,		"Sky filename",																														"Type='Sky'")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(	SNSky,				Filename,			PLCore::String,		"",													ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

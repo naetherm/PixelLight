@@ -62,12 +62,8 @@ class ApplicationQt : public Application {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, ApplicationQt, "", Application, "PLViewer application class with an added lightweight Qt GUI-layer")
-		// Methods
-		pl_method_0(GetDockWidgetManager,	pl_ret_type(PLFrontendQt::DockWidgetManager*),	"Returns the dock widget manager instance the application is using, can be a null pointer.",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

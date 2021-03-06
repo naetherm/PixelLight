@@ -54,7 +54,7 @@ class PLFRONTENDQT_API PLDynVarFlagsTreeItem : public PLDynVarStringTreeItem {
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
 	public:
-		explicit PLDynVarFlagsTreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent = nullptr);
+		explicit PLDynVarFlagsTreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent = nullptr);
 		virtual QVariant data(const int column, const int role) override;
 
 

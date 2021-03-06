@@ -52,13 +52,11 @@ class ModClose : public Modifier {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, ModClose, "PLGui", PLGui::Modifier, "Modifier that adds actions to the close button (close window or exit application)")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(CloseWindow,		bool,	false,	ReadWrite,	DirectValue,	"Destroy window on 'close'-button?",	"")
-		pl_attribute(ExitApplication,	bool,	false,	ReadWrite,	DirectValue,	"Exit application on 'close'-button?",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(CloseWindow,		bool,	false,	ReadWrite)
+		pl_attribute_directvalue(ExitApplication,	bool,	false,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -41,7 +41,14 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessColorFilter)
+pl_class_metadata(SNMPostProcessColorFilter, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Filter,	PLGraphics::Color4,	PLGraphics::Color4(1.0f, 0.4f, 0.4f, 1.0f),	ReadWrite,	"Color filter",							"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,	PLCore::String,		"Data/PostProcesses/ColorFilter.pp",		ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessColorFilter)
 
 
 //[-------------------------------------------------------]

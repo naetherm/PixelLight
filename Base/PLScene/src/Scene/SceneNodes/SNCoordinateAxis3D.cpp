@@ -46,7 +46,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNCoordinateAxis3D)
+pl_class_metadata(SNCoordinateAxis3D, "PLScene", PLScene::SNCoordinateAxis, "Scene node for 3D coordinate axis visualization")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(AABBMax,	PLMath::Vector3,	PLMath::Vector3::One,	ReadWrite,	"Maximum position of the 'scene node space' axis aligned bounding box",	"")
+pl_class_metadata_end(SNCoordinateAxis3D)
 
 
 //[-------------------------------------------------------]

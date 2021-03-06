@@ -59,12 +59,8 @@ class SkeletonAniLoader : public PLCore::LoaderImpl {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLMESH_RTTI_EXPORT, SkeletonAniLoader, "PLMesh", PLCore::LoaderImpl, "Abstract skeleton animation loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Skeleton")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLMESH_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

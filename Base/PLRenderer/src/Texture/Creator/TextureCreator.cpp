@@ -39,7 +39,8 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureCreator)
+pl_class_metadata(TextureCreator, "PLRenderer", PLCore::Object, "Abstract texture creator base class")
+pl_class_metadata_end(TextureCreator)
 
 
 //[-------------------------------------------------------]

@@ -37,7 +37,8 @@ namespace PLGraphics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ImageEffectWrapper)
+pl_class_metadata(ImageEffectWrapper, "PLGraphics", PLGraphics::ImageEffect, "Image effect wrapper")
+pl_class_metadata_end(ImageEffectWrapper)
 
 
 //[-------------------------------------------------------]

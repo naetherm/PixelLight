@@ -66,7 +66,14 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPShadowMapping)
+pl_class_metadata(SRPShadowMapping, "PLCompositing", PLScene::SceneRendererPass, "Shadow map manager scene renderer pass implementation")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,		PLCore::String,	"",		ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+	pl_attribute_metadata(SlopeScaleDepthBias,	float,			2.0f,	ReadWrite,	"Slope scale depth bias (polygon offset to avoid nasty shadow artifacts)",																"")
+	pl_attribute_metadata(DepthBias,			float,			10.0f,	ReadWrite,	"Depth bias (polygon offset to avoid nasty shadow artifacts)",																			"")
+pl_class_metadata_end(SRPShadowMapping)
 
 
 //[-------------------------------------------------------]

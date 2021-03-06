@@ -86,6 +86,15 @@ class PLPluginClassInfo {
 		*/
 		void ParsePLClassBlock(const PLCore::String &sPLClassBlock);
 
+		/**
+		*  @brief
+		*    Parse the given pl_class_metadata pl_class_metadata_end block
+		*
+		*  @param[in] sPLClassMetadataBlock
+		*    Block to parse
+		*/
+		void ParsePLClassMetadataBlock(const PLCore::String &sPLClassMetadataBlock);
+
 
 	//[-------------------------------------------------------]
 	//[ Private functions                                     ]

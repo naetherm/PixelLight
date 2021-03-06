@@ -38,7 +38,13 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PLViewerQtConfig)
+pl_class_metadata(PLViewerQtConfig, "", PLCore::ConfigGroup, "PLViewerQt general configuration classes")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShowColorGradientBackground,	bool,	true,	ReadWrite,	"Show color gradient background? (whether or not this has an effect depends on the used scene renderer)",	"")
+	pl_attribute_metadata(ShowBackfacesAndSilhouettes,	bool,	true,	ReadWrite,	"Show backfaces and silhouettes? (whether or not this has an effect depends on the used scene renderer)",	"")
+pl_class_metadata_end(PLViewerQtConfig)
 
 
 //[-------------------------------------------------------]

@@ -30,7 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
-#include "PLCore/Base/Func/Functor.h"
+#include "PLCore/Base/Func/FunctorDynFunc.h"
 #include "PLCore/Base/Func/FuncDesc.h"
 
 
@@ -51,7 +51,7 @@ namespace PLCore {
 *    This class template represents methods (functions that belong to objects).
 */
 template <typename DESC>
-class Method : public DESC::FuncType {
+class Method : public DESC::FuncWrapperType {
 
 
 	//[-------------------------------------------------------]
@@ -75,7 +75,7 @@ class Method : public DESC::FuncType {
 		*    Pointer to object to which the method belongs
 		*/
 		Method(const typename DESC::MethType::MemFuncType &pMemFunc, typename DESC::ClassType *pObject) :
-			DESC::FuncType(pMemFunc, pObject)
+			DESC::FuncWrapperType(&m_func), m_func(pMemFunc, pObject)
 		{
 			// Ensure that the compiler will actually create static instances
 			Desc.Dummy();
@@ -107,6 +107,8 @@ class Method : public DESC::FuncType {
 			return &Desc;
 		}
 
+	private:
+		typename DESC::FuncWrapperType::FunctorType	m_func;
 
 };
 

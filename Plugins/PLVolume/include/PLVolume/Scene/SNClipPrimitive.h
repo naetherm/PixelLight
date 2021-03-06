@@ -52,8 +52,8 @@ class SNClipPrimitive : public SNClip {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, SNClipPrimitive, "PLVolume", PLVolume::SNClip, "Abstract clip primitive scene node base class")
-	pl_class_end
+	pl_class_def(PLVOLUME_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -52,14 +52,8 @@ class MeshLoaderQuakeIMesh : public MeshLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, MeshLoaderQuakeIMesh, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for mdl (Quake I mesh) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"mdl,MDL")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

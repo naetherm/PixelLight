@@ -55,13 +55,8 @@ class Effect : public Control {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, Effect, "PLInput", PLInput::Control, "Effect control")
-		#ifdef PLINPUT_EXPORTS	// The following is only required when compiling PLInput
-			// Methods
-			pl_method_0(GetValue,	pl_ret_type(float),			"Returns the current value.",							"")
-			pl_method_1(SetValue,	pl_ret_type(void),	float,	"Set effect value. Current value as first parameter.",	"")
-		#endif
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

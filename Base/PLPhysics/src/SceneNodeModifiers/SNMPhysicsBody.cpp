@@ -45,7 +45,20 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsBody)
+pl_class_metadata(SNMPhysicsBody, "PLPhysics", PLPhysics::SNMPhysics, "Abstract physics body scene node modifier")
+	// Attributes
+	pl_attribute_metadata(Mass,				float,										0.0f,					ReadWrite,	"Mass of the physics body, 0=static body",				"Min='0.0'")
+	pl_attribute_metadata(CenterOfMass,		PLMath::Vector3,							PLMath::Vector3::Zero,	ReadWrite,	"Relative center of mass",								"")
+	pl_attribute_metadata(PositionOffset,	PLMath::Vector3,							PLMath::Vector3::Zero,	ReadWrite,	"Position offset relative to the scene node (=origin)",	"")
+	pl_attribute_metadata(CollisionGroup,	PLCore::uint8,								0,						ReadWrite,	"The collision group the body is in (0-31)",			"Min='0' Max='31'")
+		// Overwritten PLScene::SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNMPhysicsBody, EFlags),	0,						ReadWrite,	"Flags",												"")
+	// Slots
+	pl_slot_0_metadata(OnActive,	"Called when the scene node active state changed",		"")
+	pl_slot_0_metadata(OnPosition,	"Called when the scene node position changed",			"")
+	pl_slot_0_metadata(OnRotation,	"Called when the scene node rotation changed",			"")
+	pl_slot_0_metadata(OnTransform,	"Called when the transform was changed by the physics",	"")
+pl_class_metadata_end(SNMPhysicsBody)
 
 
 //[-------------------------------------------------------]

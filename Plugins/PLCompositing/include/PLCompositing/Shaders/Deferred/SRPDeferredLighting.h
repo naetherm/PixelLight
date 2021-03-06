@@ -110,7 +110,7 @@ class SRPDeferredLighting : public SRPDeferred {
 			NoDiscard               = 1<<11,	/**< Disable discard (may result in better or worse performance) */
 			NoGammaCorrection       = 1<<12		/**< Do not perform gamma correction (for projective lights) - if gamma correction is enabled, there should be a gamma correction at the end of the render pipeline */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPDeferred::EFlags)
 			pl_enum_value(NoShadow,					"Do not render shadows")
 			pl_enum_value(NoSoftShadow,				"No soft shadows")
@@ -130,15 +130,13 @@ class SRPDeferredLighting : public SRPDeferred {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferredLighting, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering lighting")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,	PLCore::String,						"",								ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
-		pl_attribute(TextureFiltering,	pl_enum_type(ETextureFiltering),	Anisotropic8,					ReadWrite,	DirectValue,	"Texture filtering, used for projective lights",																						"")
+		pl_attribute_directvalue(						ShaderLanguage,		PLCore::String,		"",								ReadWrite)
+		pl_attribute_directvalue(						TextureFiltering,	ETextureFiltering,	Anisotropic8,					ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),				NoShadowLOD|NoAmbientOcclusion,	ReadWrite,	GetSet,			"Flags",																																"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPDeferredLighting,	Flags,				PLCore::uint32,		NoShadowLOD|NoAmbientOcclusion,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

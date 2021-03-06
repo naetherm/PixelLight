@@ -306,7 +306,7 @@ enum ESystemButton {
 };
 
 // RTTI definition
-pl_enum(ESystemButton)
+pl_flag(ESystemButton)
 	pl_enum_value(SystemButtonMinimize,	"Minimize button")
 	pl_enum_value(SystemButtonMaximize,	"Maximize button")
 	pl_enum_value(SystemButtonClose,	"Close button")
@@ -464,7 +464,7 @@ enum ETextStyle {
 };
 
 // RTTI definition
-pl_enum(ETextStyle)
+pl_flag(ETextStyle)
 	pl_enum_value(UnderlineText, "Underline the text")
 	pl_enum_value(CrossoutText,	 "Cross out the text")
 pl_enum_end

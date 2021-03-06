@@ -52,10 +52,8 @@ class ShaderFunctionShadingLighting : public ShaderFunctionShading {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionShadingLighting, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionShading, "Lighting shader function implementation class for shading (gradient-based shading)")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

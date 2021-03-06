@@ -56,16 +56,14 @@ class SNMPostProcessBrightPass : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessBrightPass, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(Luminance,		float,			0.08f,								ReadWrite,	DirectValue,	"Luminance",							"")
-		pl_attribute(MiddleGray,	float,			0.18f,								ReadWrite,	DirectValue,	"Middle gray value",					"")
-		pl_attribute(WhiteCutoff,	float,			0.8f,								ReadWrite,	DirectValue,	"White cutoff",							"")
+		pl_attribute_directvalue(								Luminance,		float,			0.08f,								ReadWrite)
+		pl_attribute_directvalue(								MiddleGray,		float,			0.18f,								ReadWrite)
+		pl_attribute_directvalue(								WhiteCutoff,	float,			0.8f,								ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,		PLCore::String,	"Data/PostProcesses/BrightPass.pp",	ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,		PLCore::String,	"Data/PostProcesses/BrightPass.pp",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

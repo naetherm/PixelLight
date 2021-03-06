@@ -41,7 +41,14 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreator)
+pl_class_metadata(MeshCreator, "PLMesh", PLCore::Object, "Abstract mesh creator base class")
+	// Attributes
+	pl_attribute_metadata(DrawStyle,	pl_enum_type_def3(MeshCreator, EDrawStyle),	MeshCreator::Fill,				ReadWrite,	"Draw style",										"")
+	pl_attribute_metadata(Order,		bool,										0,								ReadWrite,	"Geometry order (0=clockwise  1=counterclockwise)",	"")
+	pl_attribute_metadata(TexCoords,	bool,										true,							ReadWrite,	"Generate texture coordinates?",					"")
+	pl_attribute_metadata(Normals,		bool,										true,							ReadWrite,	"Generate normals coordinates?",					"")
+	pl_attribute_metadata(Material,		PLCore::String,								"Data/Textures/Default.dds",	ReadWrite,	"Material to use",									"")
+pl_class_metadata_end(MeshCreator)
 
 
 //[-------------------------------------------------------]

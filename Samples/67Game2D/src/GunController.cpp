@@ -38,7 +38,8 @@ using namespace PLInput;
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(GunController)
+pl_class_metadata(GunController, "", PLInput::Controller, "Demo2DGame gun input controller")
+pl_class_metadata_end(GunController)
 
 
 //[-------------------------------------------------------]

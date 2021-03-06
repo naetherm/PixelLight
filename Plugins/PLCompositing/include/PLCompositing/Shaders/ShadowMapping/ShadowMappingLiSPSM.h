@@ -56,10 +56,8 @@ class ShadowMappingLiSPSM : public ShadowMapping {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, ShadowMappingLiSPSM, "PLCompositing", PLCompositing::ShadowMapping, "Light Space Perspective Shadow Mapping (LiSPSM) class")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLCOM_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -95,7 +95,7 @@ class SceneRendererPass : public PLCore::Object, public PLCore::Element<SceneRen
 		enum EFlags {
 			Inactive = 1<<0	/**< This scene renderer pass is currently NOT active */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_value(Inactive,	"This scene renderer pass is currently NOT active")
 		pl_enum_end
 
@@ -103,11 +103,11 @@ class SceneRendererPass : public PLCore::Object, public PLCore::Element<SceneRen
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SceneRendererPass, "PLScene", PLCore::Object, "Abstract scene renderer pass class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	0,	ReadWrite,	GetSet,	"Flags",																				"")
-		pl_attribute(Name,	PLCore::String,			"",	ReadWrite,	GetSet,	"Optional scene renderer pass name. If not defined, a name is chosen automatically",	"")
-	pl_class_end
+		pl_attribute_getset(SceneRendererPass,	Flags,	PLCore::uint32,	0,	ReadWrite)
+		pl_attribute_getset(SceneRendererPass,	Name,	PLCore::String,	"",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

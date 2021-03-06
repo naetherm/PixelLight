@@ -78,7 +78,7 @@ class SNConsoleBase : public PLScene::SceneNode {
 		enum EFlags {
 			NoDebugCommands = 1<<10	/**< Do not allow debug commands */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(NoDebugCommands, "Do not allow debug commands")
 		pl_enum_end
@@ -87,11 +87,11 @@ class SNConsoleBase : public PLScene::SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNConsoleBase, "PLEngine", PLScene::SceneNode, "Abstract console base class")
+	pl_class_def(PL_API)
 		// Attributes
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	NoCulling,	ReadWrite,	GetSet,	"Flags",	"")
-	pl_class_end
+		pl_attribute_getset(SNConsoleBase,	Flags,	PLCore::uint32,	NoCulling,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

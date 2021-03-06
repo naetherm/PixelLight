@@ -44,7 +44,8 @@ namespace PLFrontendPLGui {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PreviewWidget)
+pl_class_metadata(PreviewWidget, "PLFrontendPLGui", PLFrontendPLGui::RenderWidget, "GUI renderer preview widget")
+pl_class_metadata_end(PreviewWidget)
 
 
 //[-------------------------------------------------------]

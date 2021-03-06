@@ -68,13 +68,11 @@ class SNMPhysicsBodyMesh : public SNMPhysicsBody {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsBodyMesh, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics mesh body scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(Mesh,		PLCore::String,	"",		ReadWrite,	GetSet,	"Collision mesh, if empty, the variable 'Mesh' (if available) of the scene node is used instead",								"Type='Mesh'")
-		pl_attribute(Optimize,	bool,			false,	ReadWrite,	GetSet,	"Flag that indicates whether it should optimize this mesh. Set to 1 to optimize (may take some time!) the mesh, otherwise 0.",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMPhysicsBodyMesh,	Mesh,		PLCore::String,	"",		ReadWrite)
+		pl_attribute_getset(SNMPhysicsBodyMesh,	Optimize,	bool,			false,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -63,7 +63,7 @@ RTTIObjectSlotPointer::~RTTIObjectSlotPointer()
 *  @brief
 *    Returns the pointer to the RTTI object slot to wrap
 */
-DynEventHandler *RTTIObjectSlotPointer::GetDynEventHandler() const
+DynEventHandlerPtr RTTIObjectSlotPointer::GetDynEventHandler() const
 {
 	return m_pDynEventHandler;
 }
@@ -114,7 +114,7 @@ void RTTIObjectSlotPointer::CallMetamethod(lua_State *pLuaState)
 *  @brief
 *    Initializes this instance
 */
-void RTTIObjectSlotPointer::InitializeInstance(Script &cScript, Object *pRTTIObject, PLCore::DynEventHandler *pDynEventHandler)
+void RTTIObjectSlotPointer::InitializeInstance(Script &cScript, Object *pRTTIObject, PLCore::DynEventHandlerPtr pDynEventHandler)
 {
 	// Call base implementation
 	RTTIObjectPointerBase::InitializeInstance(cScript, pRTTIObject);

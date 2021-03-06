@@ -37,7 +37,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNEventArea)
+pl_class_metadata(SNEventArea, "PLScene", PLScene::SNArea, "An event area is a region in the scene where an event can be caused")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(EventID,	int,	0,	ReadWrite,	"Event ID",	"")
+pl_class_metadata_end(SNEventArea)
 
 
 //[-------------------------------------------------------]

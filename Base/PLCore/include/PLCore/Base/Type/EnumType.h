@@ -120,7 +120,7 @@ class FlagType {
 	//[ Public data types                                     ]
 	//[-------------------------------------------------------]
 	public:
-		typedef typename PLCore::uint32 	_BaseType;
+		typedef typename ENUM::_BaseType 	_BaseType;
 		typedef typename ENUM::_Type       _Type;			/**< Real type */
 		typedef typename ENUM::_Type       _StorageType;	/**< Storage type, for this type identical to the real type */
 

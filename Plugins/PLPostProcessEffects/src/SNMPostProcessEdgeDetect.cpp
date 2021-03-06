@@ -41,7 +41,18 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessEdgeDetect)
+pl_class_metadata(SNMPostProcessEdgeDetect, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(LuminanceConvert,	PLMath::Vector3,	PLMath::Vector3(0.2125f, 0.7154f, 0.0721f),	ReadWrite,	"Color scale (for pixel kernel 0 and 1)",	"")
+	pl_attribute_metadata(PixelKernel0,		PLMath::Vector2,	PLMath::Vector2( 0.0f,  1.0f),				ReadWrite,	"Pixel kernel 0",							"")
+	pl_attribute_metadata(PixelKernel1,		PLMath::Vector2,	PLMath::Vector2( 1.0f,  0.0f),				ReadWrite,	"Pixel kernel 1",							"")
+	pl_attribute_metadata(PixelKernel2,		PLMath::Vector2,	PLMath::Vector2( 0.0f, -1.0f),				ReadWrite,	"Pixel kernel 2",							"")
+	pl_attribute_metadata(PixelKernel3,		PLMath::Vector2,	PLMath::Vector2(-1.0f,  0.0f),				ReadWrite,	"Pixel kernel 3",							"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,			PLCore::String,		"Data/PostProcesses/EdgeDetect.pp",			ReadWrite,	"Filename of the post process to use",		"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessEdgeDetect)
 
 
 //[-------------------------------------------------------]

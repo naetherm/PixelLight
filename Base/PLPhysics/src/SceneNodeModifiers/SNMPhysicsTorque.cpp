@@ -42,7 +42,12 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsTorque)
+pl_class_metadata(SNMPhysicsTorque, "PLPhysics", PLPhysics::SNMPhysics, "Physics scene node modifier adding a torque to the first found physics body of the owner scene node")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Torque,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Torque to add",	"")
+pl_class_metadata_end(SNMPhysicsTorque)
 
 
 //[-------------------------------------------------------]

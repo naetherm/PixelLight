@@ -38,7 +38,14 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Button)
+pl_class_metadata(Button, "PLInput", PLInput::Control, "Button control")
+	// Methods
+	pl_method_0_metadata(GetCharacter,	pl_ret_type(char),			"Returns the character associated with the button, '\0' if none.",																				"")
+	pl_method_0_metadata(IsPressed,		pl_ret_type(bool),			"Returns 'true', if the button is currently pressed, else 'false'.",																			"")
+	pl_method_1_metadata(SetPressed,		pl_ret_type(void),	bool,	"Set button status. 'true' as first parameter, if the button is pressed, else 'false'.",														"")
+	pl_method_0_metadata(IsHit,			pl_ret_type(bool),			"Returns 'true', if the button has been hit since the last call of this function, else 'false'.",												"")
+	pl_method_0_metadata(CheckHit,		pl_ret_type(bool),			"Check if the button has been hit. 'true' as first parameter, if the button has been hit since the last call of this function, else 'false'.",	"")
+pl_class_metadata_end(Button)
 
 
 //[-------------------------------------------------------]

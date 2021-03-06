@@ -45,7 +45,8 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ThemeIngame)
+pl_class_metadata(ThemeIngame, "PLGui", PLGui::Theme, "PixelLight ingame theme")
+pl_class_metadata_end(ThemeIngame)
 
 
 //[-------------------------------------------------------]

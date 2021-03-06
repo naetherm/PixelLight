@@ -46,15 +46,13 @@ class SNProjectile : public PLScene::SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNProjectile, "", PLScene::SceneNode, "Projectile scene node")
+	pl_class_def()
 		// Attributes
-		pl_attribute(Direction,	PLMath::Vector2,	PLMath::Vector2::Zero,	ReadWrite,	DirectValue,	"Projectile direction",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
+		pl_attribute_directvalue(Direction,	PLMath::Vector2,	PLMath::Vector2::Zero,	ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,														"Called when the scene node needs to be updated",																			"")
-		pl_slot_2(OnSceneNode,	PLScene::SceneQuery&,	PLScene::SceneNode&,	"Called when a scene node was found, query found the scene node as first parameter, found scene node as second parameter",	"")
-	pl_class_end
+		pl_slot_0_def(SNProjectile,	OnUpdate)
+		pl_slot_2_def(SNProjectile,	OnSceneNode,	PLScene::SceneQuery&,	PLScene::SceneNode&)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

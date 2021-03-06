@@ -38,7 +38,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionShadingDebugNormal)
+pl_class_metadata(ShaderFunctionShadingDebugNormal, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionShadingDebug, "Debug normal shader function implementation class for shading")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionShadingDebugNormal)
 
 
 //[-------------------------------------------------------]

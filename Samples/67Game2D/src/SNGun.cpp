@@ -48,7 +48,19 @@ using namespace PLScene;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNGun)
+pl_class_metadata(SNGun, "", PLSound::SNSound, "Gun scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InputSemantic,	PLCore::String,						"Gun",									ReadWrite,	"Semantic of this input controller (e.g. \"Camera\")",													"")
+		// Overwritten PLSound::SNSound attributes
+	pl_attribute_metadata(Sound,			PLCore::String,						"Data/Sounds/Shot.ogg",					ReadWrite,	"Filename of the sound which should be played (full path, supported file formats are API dependent)",	"Ext='mp3 ogg wav mid midi it mod s3m xm'")
+		// Overwritten PLScene::SceneNode attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNGun, EFlags),	SNGun::NoLoop|SNGun::NoStartPlayback,	ReadWrite,	"Flags",																								"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,														"Called when the scene node needs to be updated",																			"")
+	pl_slot_2_metadata(OnSceneNode,	PLScene::SceneQuery&,	PLScene::SceneNode&,	"Called when a scene node was found, query found the scene node as first parameter, found scene node as second parameter",	"")
+pl_class_metadata_end(SNGun)
 
 
 //[-------------------------------------------------------]

@@ -50,7 +50,13 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredGBufferDebug)
+pl_class_metadata(SRPDeferredGBufferDebug, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering GBuffer debug")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,										"",										ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+	pl_attribute_metadata(Mode,				pl_enum_type_def3(SRPDeferredGBufferDebug, EMode),	SRPDeferredGBufferDebug::ShowAlbedo,	ReadWrite,	"Debug mode",																															"")
+pl_class_metadata_end(SRPDeferredGBufferDebug)
 
 
 //[-------------------------------------------------------]

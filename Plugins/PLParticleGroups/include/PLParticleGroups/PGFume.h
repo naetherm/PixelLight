@@ -67,21 +67,19 @@ class PGFume : public SNParticleGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGFume, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Fume particle group")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(Size,						float,				2.0f,						ReadWrite,	DirectValue,	"Size",												"Min='0.0001'")
-		pl_attribute(SizeTimeScale,				float,				1.0f,						ReadWrite,	DirectValue,	"Size time scale",									"")
-		pl_attribute(Energie,					float,				1.0f,						ReadWrite,	DirectValue,	"Color",											"")
-		pl_attribute(Color,						PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite,	DirectValue,	"Energy",											"")
-		pl_attribute(PositionScale,				float,				1.0f,						ReadWrite,	DirectValue,	"Position scale",									"")
+		pl_attribute_directvalue(			Size,						float,				2.0f,						ReadWrite)
+		pl_attribute_directvalue(			SizeTimeScale,				float,				1.0f,						ReadWrite)
+		pl_attribute_directvalue(			Energie,					float,				1.0f,						ReadWrite)
+		pl_attribute_directvalue(			Color,						PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite)
+		pl_attribute_directvalue(			PositionScale,				float,				1.0f,						ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,					PLCore::String,		"Data/Effects/PGFume.plfx",	ReadWrite,	GetSet,			"Particle group material",							"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,					PLCore::uint32,		20,							ReadWrite,	GetSet,			"Number of particles",								"Min=1")
-		pl_attribute(TextureAnimationColumns,	PLCore::uint32,		4,							ReadWrite,	GetSet,			"Number of animation frame columns in the texture",	"")
-		pl_attribute(TextureAnimationRows,		PLCore::uint32,		4,							ReadWrite,	GetSet,			"Number of animation frame rows in the texture",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGFume,	Material,					PLCore::String,		"Data/Effects/PGFume.plfx",	ReadWrite)
+		pl_attribute_getset		(PGFume,	Particles,					PLCore::uint32,		20,							ReadWrite)
+		pl_attribute_getset		(PGFume,	TextureAnimationColumns,	PLCore::uint32,		4,							ReadWrite)
+		pl_attribute_getset		(PGFume,	TextureAnimationRows,		PLCore::uint32,		4,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

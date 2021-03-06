@@ -58,8 +58,8 @@ class ConfigGroup : public PLCore::ConfigGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, ConfigGroup, "PLRenderer", PLCore::ConfigGroup, "Renderer configuration 'collection' class")
-	pl_class_end
+	pl_class_def(PLRENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -117,34 +117,32 @@ class Config : public ConfigGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, Config, "PLRenderer", PLRenderer::ConfigGroup, "Renderer configuration class")
+	pl_class_def(PLRENDERER_API)
 		// Attributes
 			// General
 	#ifdef ANDROID
-		pl_attribute(RendererAPI,						PLCore::String,					"PLRendererOpenGLES2::Renderer",	ReadWrite,	DirectValue,	"The used renderer API",																																													"")
+		pl_attribute_directvalue(RendererAPI,						PLCore::String,		"PLRendererOpenGLES2::Renderer",	ReadWrite)
 	#else
-		pl_attribute(RendererAPI,						PLCore::String,					"PLRendererOpenGL::Renderer",		ReadWrite,	DirectValue,	"The used renderer API",																																													"")
+		pl_attribute_directvalue(RendererAPI,						PLCore::String,		"PLRendererOpenGL::Renderer",		ReadWrite)
 	#endif	
-		pl_attribute(RendererMode,						pl_enum_type(Renderer::EMode),	Renderer::ModeBoth,					ReadWrite,	DirectValue,	"The mode the renderer should run in (fixed functions, shaders or both)",																																	"")
-		pl_attribute(Fullscreen,						bool,							false,								ReadWrite,	DirectValue,	"Fullscreen mode?",																																															"")
-		pl_attribute(ZBufferBits,						PLCore::uint32,					24,									ReadWrite,	DirectValue,	"Z buffer bits (just a hint)",																																												"")
-		pl_attribute(StencilBits,						PLCore::uint32,					8,									ReadWrite,	DirectValue,	"Stencil buffer bits (just a hint)",																																										"")
-		pl_attribute(MultisampleAntialiasingSamples,	PLCore::uint32,					4,									ReadWrite,	DirectValue,	"Number of multisample antialiasing samples per pixel (just a hint)",																																		"")
-		pl_attribute(DefaultShaderLanguage,				PLCore::String,					"",									ReadWrite,	DirectValue,	"The name of the default shader language of the renderer (for example \"GLSL\" or \"Cg\"), if the string is empty, the default is chosen by the renderer implementation, this information is just a hint",	"")
+		pl_attribute_directvalue(RendererMode,						Renderer::EMode,	Renderer::ModeBoth,					ReadWrite)
+		pl_attribute_directvalue(Fullscreen,						bool,				false,								ReadWrite)
+		pl_attribute_directvalue(ZBufferBits,						PLCore::uint32,		24,									ReadWrite)
+		pl_attribute_directvalue(StencilBits,						PLCore::uint32,		8,									ReadWrite)
+		pl_attribute_directvalue(MultisampleAntialiasingSamples,	PLCore::uint32,		4,									ReadWrite)
+		pl_attribute_directvalue(DefaultShaderLanguage,				PLCore::String,		"",									ReadWrite)
 			// Display mode
-		pl_attribute(DisplayWidth,						PLCore::uint32,					800,								ReadWrite,	DirectValue,	"Display width",																																															"")
-		pl_attribute(DisplayHeight,						PLCore::uint32,					600,								ReadWrite,	DirectValue,	"Display height",																																															"")
-		pl_attribute(DisplayColorBits,					PLCore::uint32,					32,									ReadWrite,	DirectValue,	"Color bits",																																																"")
-		pl_attribute(DisplayFrequency,					PLCore::uint32,					0,									ReadWrite,	DirectValue,	"Display frequency",																																														"")
+		pl_attribute_directvalue(DisplayWidth,						PLCore::uint32,		800,								ReadWrite)
+		pl_attribute_directvalue(DisplayHeight,						PLCore::uint32,		600,								ReadWrite)
+		pl_attribute_directvalue(DisplayColorBits,					PLCore::uint32,		32,									ReadWrite)
+		pl_attribute_directvalue(DisplayFrequency,					PLCore::uint32,		0,									ReadWrite)
 			// Misc
-		pl_attribute(SwapInterval,						PLCore::uint32,					1,									ReadWrite,	DirectValue,	"The swap interval (vertical synchronization)",																																								"")
-		pl_attribute(UseExtensions,						bool,							true,								ReadWrite,	DirectValue,	"Use extensions?",																																															"")
-		pl_attribute(TextureQuality,					float,							1.0f,								ReadWrite,	DirectValue,	"Texture quality",																																															"Min='0.0' Max='1.0'")
-		pl_attribute(TextureMipmaps,					bool,							true,								ReadWrite,	DirectValue,	"Use texture mipmaps by default?",																																											"")
-		pl_attribute(TextureCompression,				bool,							true,								ReadWrite,	DirectValue,	"Use texture compression by default?",																																										"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(SwapInterval,						PLCore::uint32,		1,									ReadWrite)
+		pl_attribute_directvalue(UseExtensions,						bool,				true,								ReadWrite)
+		pl_attribute_directvalue(TextureQuality,					float,				1.0f,								ReadWrite)
+		pl_attribute_directvalue(TextureMipmaps,					bool,				true,								ReadWrite)
+		pl_attribute_directvalue(TextureCompression,				bool,				true,								ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

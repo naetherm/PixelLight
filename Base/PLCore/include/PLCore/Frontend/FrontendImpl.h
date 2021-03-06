@@ -73,8 +73,8 @@ class FrontendImpl : public Object, protected AbstractLifecycle, protected Abstr
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, FrontendImpl, "PLCore", PLCore::Object, "Abstract frontend implementation base class")
-	pl_class_end
+	pl_class_def(PLCORE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -41,7 +41,16 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessChalk)
+pl_class_metadata(SNMPostProcessChalk, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ColorScale,	PLMath::Vector2,	PLMath::Vector2(10.0f, 10.0f),	ReadWrite,	"Color scale (for pixel kernel 0 and 1)",	"")
+	pl_attribute_metadata(PixelKernel0,	PLMath::Vector2,	PLMath::Vector2( 1.0f,  1.0f),	ReadWrite,	"Pixel kernel 0",							"")
+	pl_attribute_metadata(PixelKernel1,	PLMath::Vector2,	PLMath::Vector2(-1.0f, -1.0f),	ReadWrite,	"Pixel kernel 1",							"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,		"Data/PostProcesses/Chalk.pp",	ReadWrite,	"Filename of the post process to use",		"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessChalk)
 
 
 //[-------------------------------------------------------]

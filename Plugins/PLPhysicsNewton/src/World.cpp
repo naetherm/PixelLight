@@ -68,7 +68,12 @@ namespace PLPhysicsNewton {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(World)
+pl_class_metadata(World, "PLPhysicsNewton", PLPhysics::World, "Newton physics world base class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(CacheDirectory,	PLCore::String,	"",	ReadWrite,	"Newton physics cache directory, if empty, no caching is used (best to avoid cache problems during development)",	"")
+pl_class_metadata_end(World)
 
 
 //[-------------------------------------------------------]

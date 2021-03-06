@@ -71,19 +71,8 @@ class SceneRendererTool : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SceneRendererTool, "PLEngine", PLCore::Object, "Class offering scene renderer tool functionality")
-		#ifdef PLENGINE_EXPORTS	// The following is only required when compiling PLEngine
-			// Methods
-			pl_method_3(SetSceneRenderer,	pl_ret_type(bool),							PLScene::SceneContainer*,	const PLCore::String&,	const PLCore::String&,	"Sets the used scene renderer, scene container to render as first parameter, filename of the scene renderer to use as second parameter, optional filename of a fallback scene renderer to use in case the desired scene renderer can't be used as third parameter. Returns 'true' if all went fine, else 'false'.",									"")
-			pl_method_0(GetNumOfPasses,		pl_ret_type(PLCore::uint32),																							"Returns the number of scene renderer passes",																																																																										"")
-			pl_method_1(GetPassByIndex,		pl_ret_type(PLScene::SceneRendererPass*),	PLCore::uint32,																"Gets a scene renderer pass by index. Index of the scene renderer pass to return as first parameter. The requested scene renderer pass as result, a null pointer on error.",																																										"")
-			pl_method_1(GetPassByName,		pl_ret_type(PLScene::SceneRendererPass*),	const PLCore::String&,														"Gets a scene renderer pass by name. Name of the scene renderer pass to return as first parameter. The requested scene renderer pass as result, a null pointer on error.",																																											"")
-			pl_method_3(SetPassAttribute,	pl_ret_type(bool),							const PLCore::String&,	const PLCore::String&,	const PLCore::String&,		"Sets a scene renderer pass attribute value using a string, name of the scene renderer pass as first parameter, name of the scene renderer pass attribute as second parameter and value to set as third parameter",																																	"")
-			pl_method_2(SetAttribute,		pl_ret_type(PLCore::uint32),				const PLCore::String&,	const PLCore::String&,								"Sets scene renderer pass attribute values using a string. Name of the scene renderer pass attribute (e.g. \"AmbientColor\") as first parameter, value to set (e.g. \"0.2 0.2 0.2\") as second parameter. Unlike \"SetPassAttribute()\", \"SetAttribute()\" sets the <AttributeName>-attribute from all scene renderer passes to the given value.",	"")
-			pl_method_1(SetValues,			pl_ret_type(void),							const PLCore::String&,														"Values to set (e.g.: \"ColorClear=\"0 0 0 0\" AmbientColor=\"0.2 0.2 0.2\"\") as first parameter. Unlike \"SetPassAttribute()\" and \"SetAttribute()\", \"SetValues()\" sets multiple attributes from all scene renderer passes to the given value at once.",																						"")
-			pl_method_0(SetDefaultValues,	pl_ret_type(void),																										"Sets all scene renderer pass attribute values to their default value",																																																																				"")
-		#endif
-	pl_class_end
+	pl_class_def(PL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -196,7 +185,7 @@ class SceneRendererTool : public PLCore::Object {
 		*  @return
 		*    The requested scene renderer pass attribute, a null pointer on error
 		*/
-		PL_API PLCore::DynVar *GetPassAttribute(const PLCore::String &sSceneRendererPassName, const PLCore::String &sAttributeName) const;
+		PL_API PLCore::DynVarPtr GetPassAttribute(const PLCore::String &sSceneRendererPassName, const PLCore::String &sAttributeName) const;
 
 		/**
 		*  @brief

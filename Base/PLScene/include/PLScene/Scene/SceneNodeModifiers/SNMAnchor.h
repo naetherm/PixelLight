@@ -67,7 +67,7 @@ class SNMAnchor : public SceneNodeModifier {
 			NoRotation        = 1<<3,	/**< Do NOT manipulate the rotation */
 			NoContainerUpdate = 1<<4	/**< Do NOT change the container the attached node is in */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNodeModifier::EFlags)
 			pl_enum_value(NoPosition,			"Do NOT manipulate the position")
 			pl_enum_value(NoRotation,			"Do NOT manipulate the rotation")
@@ -78,22 +78,20 @@ class SNMAnchor : public SceneNodeModifier {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMAnchor, "PLScene", PLScene::SceneNodeModifier, "Scene node anchor modifier class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(AttachedNode,			PLCore::String,			"",						ReadWrite,	GetSet,			"Name of the attached scene node",																				"")
-		pl_attribute(PositionOffset,		PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Position offset (node space)",																					"")
-		pl_attribute(RotationOffset,		PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Rotation offset in degree (node space)",																		"")
-		pl_attribute(SkeletonJoint,			PLCore::String,			"",						ReadWrite,	DirectValue,	"If not empty, the attached node is relative to this skeleton joint (there must be a mesh handler + skeleton)",	"")
-		pl_attribute(JointPositionOffset,	PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Joint position offset (joint space)",																			"")
-		pl_attribute(JointRotationOffset,	PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Joint rotation offset in degree (joint space)",																"")
+		pl_attribute_getset		(SNMAnchor,	AttachedNode,			PLCore::String,		"",						ReadWrite)
+		pl_attribute_directvalue(			PositionOffset,			PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_directvalue(			RotationOffset,			PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_directvalue(			SkeletonJoint,			PLCore::String,		"",						ReadWrite)
+		pl_attribute_directvalue(			JointPositionOffset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_directvalue(			JointRotationOffset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
 			// Overwritten SceneNodeModifier attributes
-		pl_attribute(Flags,					pl_flag_type(EFlags),	0,						ReadWrite,	GetSet,			"Flags",																										"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_getset		(SNMAnchor,	Flags,					PLCore::uint32,		0,						ReadWrite)
 		// Slots
-		pl_slot_0(OnContainer,				"Called when the scene node container changed",									"")
-		pl_slot_0(OnPositionRotationUpdate,	"Called when the scene node position or rotation changed or on update request",	"")
-	pl_class_end
+		pl_slot_0_def(SNMAnchor,	OnContainer)
+		pl_slot_0_def(SNMAnchor,	OnPositionRotationUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

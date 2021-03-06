@@ -40,7 +40,16 @@ namespace PLScriptBindings {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ScriptBinding_PL_System_Console)
+pl_class_metadata(ScriptBinding_PL_System_Console, "PLScriptBindings", PLCore::ScriptBinding, "System console script binding class")
+	// Properties
+	pl_properties
+		pl_property("Namespace",	"PL.System.Console")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_1_metadata(Print,	pl_ret_type(void),	PLCore::String,	"Prints the given string into the system console",	"")
+pl_class_metadata_end(ScriptBinding_PL_System_Console)
 
 
 //[-------------------------------------------------------]

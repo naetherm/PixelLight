@@ -52,16 +52,8 @@ class Button : public Control {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, Button, "PLInput", PLInput::Control, "Button control")
-		#ifdef PLINPUT_EXPORTS	// The following is only required when compiling PLInput
-			// Methods
-			pl_method_0(GetCharacter,	pl_ret_type(char),			"Returns the character associated with the button, '\0' if none.",																				"")
-			pl_method_0(IsPressed,		pl_ret_type(bool),			"Returns 'true', if the button is currently pressed, else 'false'.",																			"")
-			pl_method_1(SetPressed,		pl_ret_type(void),	bool,	"Set button status. 'true' as first parameter, if the button is pressed, else 'false'.",														"")
-			pl_method_0(IsHit,			pl_ret_type(bool),			"Returns 'true', if the button has been hit since the last call of this function, else 'false'.",												"")
-			pl_method_0(CheckHit,		pl_ret_type(bool),			"Check if the button has been hit. 'true' as first parameter, if the button has been hit since the last call of this function, else 'false'.",	"")
-		#endif
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

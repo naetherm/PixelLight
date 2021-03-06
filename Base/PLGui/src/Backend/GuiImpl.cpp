@@ -40,7 +40,8 @@ namespace PLGui
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(GuiImpl)
+pl_class_metadata(GuiImpl, "PLGui", PLCore::Object, "Gui implementation backend")
+pl_class_metadata_end(GuiImpl)
 
 
 //[-------------------------------------------------------]

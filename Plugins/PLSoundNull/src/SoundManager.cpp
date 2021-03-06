@@ -42,7 +42,10 @@ namespace PLSoundNull {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SoundManager)
+pl_class_metadata(SoundManager, "PLSoundNull", PLSound::SoundManager, "Null sound backend")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SoundManager)
 
 
 //[-------------------------------------------------------]

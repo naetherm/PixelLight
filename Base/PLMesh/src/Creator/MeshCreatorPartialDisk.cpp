@@ -49,7 +49,18 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorPartialDisk)
+pl_class_metadata(MeshCreatorPartialDisk, "PLMesh", PLMesh::MeshCreator, "Partial disk mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InnerRadius,	float,				0.0f,					ReadWrite,	"Inner radius of the partial disk (can be zero)",											"")
+	pl_attribute_metadata(OuterRadius,	float,				0.5f,					ReadWrite,	"Outer radius of the partial disk",															"")
+	pl_attribute_metadata(Slices,		PLCore::uint32,		20,						ReadWrite,	"Number of subdivisions around the z-axis",													"")
+	pl_attribute_metadata(Loops,		PLCore::uint32,		1,						ReadWrite,	"Number of concentric rings about the origin into which the partial disk is subdivided",	"")
+	pl_attribute_metadata(StartAngle,	float,				0.0f,					ReadWrite,	"Starting angle, in degrees, of the disk portion",											"")
+	pl_attribute_metadata(SweepAngle,	float,				280.0f,					ReadWrite,	"Sweep angle, in degrees, of the disk portion",												"")
+	pl_attribute_metadata(Offset,		PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Offset to center",																			"")
+pl_class_metadata_end(MeshCreatorPartialDisk)
 
 
 //[-------------------------------------------------------]

@@ -52,15 +52,13 @@ class PGFire : public PGPhysics {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGFire, "PLParticleGroups", PLParticleGroups::PGPhysics, "Fire particle group")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(Size,		float,			1.0f,						ReadWrite,	DirectValue,	"Size",						"")
+		pl_attribute_directvalue(			Size,		float,			1.0f,						ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,	PLCore::String,	"Data/Textures/PGFire.dds",	ReadWrite,	GetSet,			"Particle group material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,	PLCore::uint32,	50,							ReadWrite,	GetSet,			"Number of particles",		"Min=1")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGFire,	Material,	PLCore::String,	"Data/Textures/PGFire.dds",	ReadWrite)
+		pl_attribute_getset		(PGFire,	Particles,	PLCore::uint32,	50,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

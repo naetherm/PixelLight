@@ -52,10 +52,8 @@ class ShaderFunctionRaySetupBoundingBoxIntersection : public ShaderFunctionRaySe
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionRaySetupBoundingBoxIntersection, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRaySetup, "Bounding box intersection shader function implementation class for ray setup")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

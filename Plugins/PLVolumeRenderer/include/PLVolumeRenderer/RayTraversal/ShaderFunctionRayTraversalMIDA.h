@@ -60,10 +60,8 @@ class ShaderFunctionRayTraversalMIDA : public ShaderFunctionRayTraversal {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionRayTraversalMIDA, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRayTraversal, "\"Maximum intensity differences accumulation\" (MIDA, hybrid combining the advantages of MIP and DVR) shader function implementation class for ray traversal (early ray termination)")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

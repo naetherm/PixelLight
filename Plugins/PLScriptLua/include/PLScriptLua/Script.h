@@ -37,10 +37,6 @@
 //[-------------------------------------------------------]
 //[ Forward declarations                                  ]
 //[-------------------------------------------------------]
-namespace PLCore {
-	class DynEvent;
-	class DynEventHandler;
-}
 typedef struct lua_State lua_State;
 
 
@@ -69,15 +65,8 @@ class Script : public PLCore::Script {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLSCRIPTLUA_RTTI_EXPORT, Script, "PLScriptLua", PLCore::Script, "Lua (http://www.lua.org/) script implementation")
-		// Properties
-		pl_properties
-			pl_property("Language",	"Lua")
-			pl_property("Formats",	"lua,LUA")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLSCRIPTLUA_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -215,9 +204,9 @@ class Script : public PLCore::Script {
 		*    The structure is used to connect script functions with RTTI signals
 		*/
 		struct EventUserData {
-			PLCore::DynEventHandler *pDynEventHandler;		/**< The generic event handler, always valid! (delete the instance when no longer required) */
-			Script					*pScript;				/**< The owner script instance, always valid! */
-			int						 nLuaFunctionReference;	/**< The Lua-function or C-function to be called, never LUA_NOREF (use luaL_unref(<LuaState>, LUA_REGISTRYINDEX, <Reference>) when no longer required) */
+			PLCore::DynEventHandlerPtr 	pDynEventHandler;		/**< The generic event handler, always valid! (delete the instance when no longer required) */
+			Script						*pScript;				/**< The owner script instance, always valid! */
+			int						 	nLuaFunctionReference;	/**< The Lua-function or C-function to be called, never LUA_NOREF (use luaL_unref(<LuaState>, LUA_REGISTRYINDEX, <Reference>) when no longer required) */
 		};
 
 
@@ -310,7 +299,7 @@ class Script : public PLCore::Script {
 		*  @return
 		*    Event user data key
 		*/
-		PLCore::String GetEventUserDataKey(PLCore::DynEvent *pDynEvent, const void *pLuaPointer) const;
+		PLCore::String GetEventUserDataKey(PLCore::DynEventPtr pDynEvent, const void *pLuaPointer) const;
 
 		/**
 		*  @brief
@@ -324,7 +313,7 @@ class Script : public PLCore::Script {
 		*  @return
 		*    Event user data, can be a null pointer
 		*/
-		EventUserData *GetEventUserData(PLCore::DynEvent *pDynEvent, const void *pLuaPointer) const;
+		EventUserData *GetEventUserData(PLCore::DynEventPtr pDynEvent, const void *pLuaPointer) const;
 
 		/**
 		*  @brief
@@ -340,7 +329,7 @@ class Script : public PLCore::Script {
 		*  @note
 		*    - Do only call this method if the event user data is not yet added
 		*/
-		void AddEventUserData(PLCore::DynEvent *pDynEvent, const void *pLuaPointer, EventUserData *pEventUserData);
+		void AddEventUserData(PLCore::DynEventPtr pDynEvent, const void *pLuaPointer, EventUserData *pEventUserData);
 
 		/**
 		*  @brief

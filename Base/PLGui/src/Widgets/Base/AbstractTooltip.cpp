@@ -47,7 +47,15 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(AbstractTooltip)
+pl_class_metadata(AbstractTooltip, "PLGui", PLGui::Widget, "Base class for tooltip windows")
+	// Attributes
+	pl_attribute_metadata(Text,		PLCore::String,	"",		ReadWrite,	"Tooltip text",											"")
+	pl_attribute_metadata(Timeout,	PLCore::uint64,	5000,	ReadWrite,	"Time (in ms) after which the tooltip is blended out",	"")
+	// Signals
+	pl_signal_0_metadata(SignalTimeout,	"Timeout has been reached",	"")
+	// Slots
+	pl_slot_0_metadata(OnTimer,	"Timer callback",	"")
+pl_class_metadata_end(AbstractTooltip)
 
 
 //[-------------------------------------------------------]

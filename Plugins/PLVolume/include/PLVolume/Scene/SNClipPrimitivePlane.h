@@ -52,14 +52,12 @@ class SNClipPrimitivePlane : public SNClipPrimitive {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, SNClipPrimitivePlane, "PLVolume", PLVolume::SNClipPrimitive, "Clip primitive plane scene node (plane in scene node space, xy-plane clipping everything <0 on the z-axis)")
+	pl_class_def(PLVOLUME_API)
 		// Attributes
 			// Overwritten PLScene::SceneNode attributes
-		pl_attribute(AABBMin,		PLMath::Vector3,			PLMath::Vector3(-10.0f, -10.0f, -10.0f),	ReadWrite,	GetSet,	"Minimum position of the 'scene node space' axis aligned bounding box",	"")
-		pl_attribute(AABBMax,		PLMath::Vector3,			PLMath::Vector3( 10.0f,  10.0f,  10.0f),	ReadWrite,	GetSet,	"Maximum position of the 'scene node space' axis aligned bounding box",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNClipPrimitivePlane,	AABBMin,	PLMath::Vector3,	PLMath::Vector3(-10.0f, -10.0f, -10.0f),	ReadWrite)
+		pl_attribute_getset(SNClipPrimitivePlane,	AABBMax,	PLMath::Vector3,	PLMath::Vector3( 10.0f,  10.0f,  10.0f),	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

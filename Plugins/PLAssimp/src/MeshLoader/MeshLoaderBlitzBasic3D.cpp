@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderBlitzBasic3D)
+pl_class_metadata(MeshLoaderBlitzBasic3D, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for b3d (BlitzBasic 3D) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"b3d,B3D")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderBlitzBasic3D)
 
 
 //[-------------------------------------------------------]

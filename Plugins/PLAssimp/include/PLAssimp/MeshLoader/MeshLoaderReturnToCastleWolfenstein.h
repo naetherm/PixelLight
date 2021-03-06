@@ -52,14 +52,8 @@ class MeshLoaderReturnToCastleWolfenstein : public MeshLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, MeshLoaderReturnToCastleWolfenstein, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for mdc (Return to Castle Wolfenstein (RtCW)) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"mdc,MDC")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

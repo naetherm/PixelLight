@@ -40,7 +40,10 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShadowMappingUSM)
+pl_class_metadata(ShadowMappingUSM, "PLCompositing", PLCompositing::ShadowMapping, "Traditional Uniform Shadow Mapping (USM) class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShadowMappingUSM)
 
 
 //[-------------------------------------------------------]

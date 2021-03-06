@@ -39,7 +39,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Device)
+pl_class_metadata(Device, "PLInput", PLInput::Controller, "Real input device")
+pl_class_metadata_end(Device)
 
 
 //[-------------------------------------------------------]

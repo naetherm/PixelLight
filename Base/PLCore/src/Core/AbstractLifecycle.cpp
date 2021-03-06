@@ -61,7 +61,7 @@ AbstractLifecycle::~AbstractLifecycle()
 *  @brief
 *    Copy constructor
 */
-AbstractLifecycle::AbstractLifecycle(const AbstractLifecycle &cSource)
+AbstractLifecycle::AbstractLifecycle(const AbstractLifecycle &)
 {
 	// No implementation because the copy constructor is never used
 }
@@ -70,7 +70,7 @@ AbstractLifecycle::AbstractLifecycle(const AbstractLifecycle &cSource)
 *  @brief
 *    Copy operator
 */
-AbstractLifecycle &AbstractLifecycle::operator =(const AbstractLifecycle &cSource)
+AbstractLifecycle &AbstractLifecycle::operator =(const AbstractLifecycle &)
 {
 	// No implementation because the copy operator is never used
 	return *this;

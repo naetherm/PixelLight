@@ -51,7 +51,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPScene)
+pl_class_metadata(SPScene, "PLScene", PLRenderer::SurfacePainter, "Scene graph surface painter class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLRenderer::Renderer&,	"Parameter constructor",	"")
+pl_class_metadata_end(SPScene)
 
 
 //[-------------------------------------------------------]

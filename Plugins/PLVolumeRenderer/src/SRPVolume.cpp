@@ -50,7 +50,25 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPVolume)
+pl_class_metadata(SRPVolume, "PLVolumeRenderer", PLVolume::SRPVolume, "Scene renderer pass for volume scene nodes targeting PC")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,			PLCore::String,									"",										ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",																"")
+	// 1.0 - Ray Setup
+	pl_attribute_metadata(RaySetup,					pl_enum_type_def3(SRPVolume, ERaySetup),		SRPVolume::RaySetupHybrid,				ReadWrite,	"Technique to use for the ray setup (1.0 - Ray Setup)",																																				"")
+	pl_attribute_metadata(GlobalSampleRateFactor,	float,											1.0f,									ReadWrite,	"Global sample rate factor to use (1.0 = 100% for correct result, 0.0 = 50% = take only half of the samples) (1.0 - Ray Setup), simply multiplied with the per scene node sampling rate factor",	"Max='10'")
+	// 1.2 - Jitter Position
+	pl_attribute_metadata(JitterPosition,			pl_enum_type_def3(SRPVolume, EJitterPosition),	SRPVolume::JitterPositionTrigonometric,	ReadWrite,	"Technique to use for jitter ray start position (1.2 - Jitter Position, jitter the start position of the ray in order to reduce wooden grain effect)",												"")
+	pl_attribute_metadata(DitherRay,				float,											1.0f,									ReadWrite,	"Scale factor for dithering the ray's start position in order to avoid wooden grain effects (usually value between 0...1) (1.2 - Jitter Position)",													"")
+	// 2.2 - Fetch Scalar
+	pl_attribute_metadata(GlobalVolumeTextureLOD,	float,											0.0,									ReadWrite,	"Global volume texture level of detail (0...<number of mipmaps>-1), usually the value 3 shows a well notable effect (2.2 - Fetch Scalar), simply added to the per scene node volume texture LOD",	"Min='0'")
+	// 2.3 - Shading
+	pl_attribute_metadata(AmbientColor,				PLGraphics::Color3,								PLGraphics::Color3(0.2f, 0.2f, 0.2f),	ReadWrite,	"Ambient color (2.3 - Shading)",																																									"")
+	pl_attribute_metadata(IlluminationThreshold,	float,											0.01f,									ReadWrite,	"Performance: Illumination opacity threshold, usually within the interval [0 .. 1] (2.3 - Shading), illumination only if opacity >= this value",													"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,					pl_flag_type_def3(SRPVolume, EFlags),			0,										ReadWrite,	"Flags",																																															"")
+pl_class_metadata_end(SRPVolume)
 
 
 //[-------------------------------------------------------]

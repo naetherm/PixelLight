@@ -47,7 +47,9 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(TabContainer)
+pl_class_metadata(TabContainer, "PLGui", PLGui::WindowContainer, "Tab container")
+	pl_constructor_0_metadata(DefaultConstructor, "Default constructor", "")
+pl_class_metadata_end(TabContainer)
 
 
 //[-------------------------------------------------------]

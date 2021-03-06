@@ -40,7 +40,14 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Control)
+pl_class_metadata(Control, "PLInput", PLCore::Object, "Input control base class")
+	// Methods
+	pl_method_0_metadata(GetController,	pl_ret_type(Controller*),					"Returns the controller that owns the control, can be a null pointer.",											"")
+	pl_method_0_metadata(GetType,		pl_ret_type(pl_enum_type(EControlType)),	"Returns the type of control.",																					"")
+	pl_method_0_metadata(IsInputControl,	pl_ret_type(bool),							"Check if control is input or output control. Returns 'true' if control is input control, 'false' if output.",	"")
+	pl_method_0_metadata(GetName,		pl_ret_type(PLCore::String),				"Returns the control name.",																					"")
+	pl_method_0_metadata(GetDescription,	pl_ret_type(PLCore::String),				"Returns the control description.",																				"")
+pl_class_metadata_end(Control)
 
 
 //[-------------------------------------------------------]

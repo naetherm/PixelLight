@@ -43,7 +43,12 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsBodyConvexHull)
+pl_class_metadata(SNMPhysicsBodyConvexHull, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics convex hull body scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Mesh,	PLCore::String,	"",	ReadWrite,	"Collision mesh, if empty, the variable 'Mesh' (if available) of the scene node is used instead",	"Type='Mesh'")
+pl_class_metadata_end(SNMPhysicsBodyConvexHull)
 
 
 //[-------------------------------------------------------]
@@ -93,7 +98,7 @@ void SNMPhysicsBodyConvexHull::CreatePhysicsBody()
 		// Create the PL physics body
 		String sMesh = m_sMesh;
 		if (!m_sMesh.GetLength()) {
-			DynVar *pDynVar = GetSceneNode().GetAttribute("Mesh");
+			DynVarPtr pDynVar = GetSceneNode().GetAttribute("Mesh");
 			if (pDynVar)
 				sMesh = pDynVar->GetString();
 		}

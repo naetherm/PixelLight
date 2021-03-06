@@ -52,14 +52,8 @@ class SceneLoaderBlitzBasic3D : public SceneLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SceneLoaderBlitzBasic3D, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for b3d (BlitzBasic 3D) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"b3d,B3D")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

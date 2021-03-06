@@ -45,7 +45,22 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGImage)
+pl_class_metadata(PGImage, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Image particle group")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ImageFilename,		PLCore::String,						"Data/Textures/PGImage_Test.dds",	ReadWrite,	"Image to create the particles from",	"Type='Image'")
+	pl_attribute_metadata(RedColorKey,			PLCore::uint8,						0,									ReadWrite,	"Color key red component",				"")
+	pl_attribute_metadata(GreenColorKey,		PLCore::uint8,						0,									ReadWrite,	"Color key green component",			"")
+	pl_attribute_metadata(BlueColorKey,			PLCore::uint8,						0,									ReadWrite,	"Color key blue component",				"")
+	pl_attribute_metadata(ColorKeyTolerance,	char,								0,									ReadWrite,	"Color key tolerance",					"")
+	pl_attribute_metadata(ImageScale,			float,								0.1f,								ReadWrite,	"Image scale",							"")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,				PLCore::String,						"Data/Effects/PGImage.plfx",		ReadWrite,	"Particle group material",				"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,			PLCore::uint32,						1,									ReadWrite,	"Number of particles",					"Min=1")
+		// Overwritten PLScene::SceneNode attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(PGImage, EFlags),	PGImage::PointSprites,				ReadWrite,	"Flags",								"")
+pl_class_metadata_end(PGImage)
 
 
 //[-------------------------------------------------------]

@@ -70,10 +70,8 @@ class World : public PLPhysics::World {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICSBULLET_RTTI_EXPORT, World, "PLPhysicsBullet", PLPhysics::World, "Bullet physics world base class")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLPHYSICSBULLET_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

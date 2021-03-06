@@ -44,7 +44,7 @@ namespace PLFrontendQt {
 namespace DataModels {
 
 
-PLDynVarColorTreeItem::PLDynVarColorTreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent) : PLDynVarStringTreeItem(dynVar, PLDynVarTreeItemTypes::Color, parent)
+PLDynVarColorTreeItem::PLDynVarColorTreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent) : PLDynVarStringTreeItem(dynVar, PLDynVarTreeItemTypes::Color, parent)
  , m_bHasAlpha(dynVar ? dynVar->GetTypeID() == PLCore::Type<PLGraphics::Color4>::TypeID : false)
 {
 	

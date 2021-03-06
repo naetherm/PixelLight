@@ -72,12 +72,10 @@ class SNTerrain : public PLScene::SceneNode, public PLCore::Loadable {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLNATURE_RTTI_EXPORT, SNTerrain, "PLNature", PLScene::SceneNode, "Terrain scene node")
+	pl_class_def(PLNATURE_API)
 		// Attributes
-		pl_attribute(Filename,	PLCore::String, "",	ReadWrite,	GetSet,	"Terrain filename",	"Type='Terrain'")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNTerrain,	Filename,	PLCore::String, "",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

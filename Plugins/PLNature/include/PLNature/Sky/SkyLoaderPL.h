@@ -58,19 +58,8 @@ class SkyLoaderPL : public SkyLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLNATURE_RTTI_EXPORT, SkyLoaderPL, "PLNature", PLNature::SkyLoader, "Sky loader implementation for the PixelLight sky XML file format")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"sky,SKY")
-			pl_property("Load",		"1")
-			pl_property("Save",		"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_2(Load,	pl_ret_type(bool),	SNSky&,		PLCore::File&,	"Load method",	"")
-		pl_method_2(Save,	pl_ret_type(bool),	SNSky&,		PLCore::File&,	"Save method",	"")
-	pl_class_end
+	pl_class_def(PLNATURE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

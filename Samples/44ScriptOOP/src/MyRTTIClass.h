@@ -46,26 +46,15 @@ class MyRTTIClass : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, MyRTTIClass, "", PLCore::Object, "Sample RTTI class, don't take it to serious")
-		// Properties
-		pl_properties
-			pl_property("MyProperty",	"This is a property value")
-		pl_properties_end
+	pl_class_def()
 		// Attributes
-		pl_attribute(Name,	PLCore::String,		"Bob",	ReadWrite,	GetSet,			"A name, emits MySignal after the name was changed",			"")
-		pl_attribute(Level,	int,				1,		ReadWrite,	DirectValue,	"Level, automatically increased on get/set name and OnMyEvent",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_0(Return42,			pl_ret_type(int),					"Returns 42",							"")
-		pl_method_1(IgnoreTheParameter,	pl_ret_type(void),			float,	"Ignores the provided parameter",		"")
-		pl_method_0(SaySomethingWise,	pl_ret_type(void),					"Says something wise",					"")
-		pl_method_0(GetSelf,			pl_ret_type(MyRTTIClass*),			"Returns a pointer to this instance",	"")
+		pl_attribute_getset		(MyRTTIClass,	Name,	PLCore::String,		"Bob",	ReadWrite)
+		pl_attribute_directvalue(				Level,	int,				1,		ReadWrite)
 		// Signals
-		pl_signal_1(MySignal,	PLCore::String,	"My signal, automatically emitted after the name was changed, message as first parameter",	"")
+		pl_signal_1_def(MySignal,	PLCore::String)
 		// Slots
-		pl_slot_1(OnMyEvent,	PLCore::String,	"My slot, message as first parameter",	"")
-	pl_class_end
+		pl_slot_1_def(MyRTTIClass,	OnMyEvent,	PLCore::String)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

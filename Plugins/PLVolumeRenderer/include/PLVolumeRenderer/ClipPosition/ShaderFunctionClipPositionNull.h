@@ -52,10 +52,8 @@ class ShaderFunctionClipPositionNull : public ShaderFunctionClipPosition {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionClipPositionNull, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClipPosition, "Null shader function implementation class for clip position")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

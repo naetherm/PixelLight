@@ -59,13 +59,11 @@ class SNSphereFog : public SNFog {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNSphereFog, "PLScene", PLScene::SNFog, "Spherical volumetric fog scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Range,			float,	1.0f,	ReadWrite,	GetSet,			"Fog range",	"Min='0.0001'")
-		pl_attribute(Volumetricy,	float,	1.0f,	ReadWrite,	DirectValue,	"Fog volume",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNSphereFog,	Range,			float,	1.0f,	ReadWrite)
+		pl_attribute_directvalue(				Volumetricy,	float,	1.0f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

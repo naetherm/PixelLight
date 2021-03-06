@@ -65,8 +65,8 @@ class RendererBackend : public Renderer {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, RendererBackend, "PLRenderer", PLRenderer::Renderer, "Renderer backend with general stuff which all backends will need")
-	pl_class_end
+	pl_class_def(PLRENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

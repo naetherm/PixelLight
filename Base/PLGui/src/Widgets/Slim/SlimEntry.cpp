@@ -49,7 +49,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(SlimEntry)
+pl_class_metadata(SlimEntry, "PLGui", PLGui::Widget, "Slim widgets: Entry widget that can contain an image and a text")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SlimEntry)
 
 
 //[-------------------------------------------------------]

@@ -68,14 +68,8 @@ class SceneApplication : public PLRenderer::RendererApplication {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SceneApplication, "PLScene", PLRenderer::RendererApplication, "Scene application class")
-		#ifdef PLSCENE_EXPORTS	// The following is only required when compiling PLScene
-			// Constructors
-			pl_constructor_1(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
-			// Methods
-			pl_method_0(GetRootScene,	pl_ret_type(PLScene::SceneContainer*),	"Returns the root scene container, can be a null pointer.",	"")
-		#endif
-	pl_class_end
+	pl_class_def(PLS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

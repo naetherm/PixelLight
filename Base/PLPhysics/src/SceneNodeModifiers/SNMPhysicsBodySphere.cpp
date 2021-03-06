@@ -53,7 +53,15 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsBodySphere)
+pl_class_metadata(SNMPhysicsBodySphere, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics sphere body scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Slots
+	// Attributes
+	pl_attribute_metadata(Radius,	float,	0.0f,	ReadWrite,	"Sphere radius, if null, a sphere 'inside' the axis align bounding box in 'scene node space' is used as default",	"Min='0.0'")
+	// Slots
+	pl_slot_2_metadata(OnDrawDebug,	PLRenderer::Renderer&,	const PLScene::VisNode*,	"Called on scene node debug draw, the used renderer as first parameter, the current visibility node of this scene node as second parameter (can be a null pointer)",	"")
+pl_class_metadata_end(SNMPhysicsBodySphere)
 
 
 //[-------------------------------------------------------]

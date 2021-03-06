@@ -73,7 +73,7 @@ class SRPLightEffects : public PLScene::SceneRendererPass {
 			NoBlend     = 1<<3,	/**< Disable blend rendering */
 			PrepareStep = 1<<4	/**< Is this a prepare step? */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneRendererPass::EFlags)
 			pl_enum_value(NoCorona,		"Disable corona rendering")
 			pl_enum_value(NoFlares,		"Disable flares rendering")
@@ -85,14 +85,14 @@ class SRPLightEffects : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPLightEffects, "PLCompositing", PLScene::SceneRendererPass, "Abstract scene renderer pass drawing light effects like lens flares")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(CoronaMaterial,	PLCore::String,			"Data/Effects/DefaultCorona.plfx",	ReadWrite,	GetSet,	"Corona material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(FlareMaterial,		PLCore::String,			"Data/Effects/DefaultFlare.plfx",	ReadWrite,	GetSet,	"Flare material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(BlendMaterial,		PLCore::String,			"Data/Effects/DefaultBlend.plfx",	ReadWrite,	GetSet,	"Blend material",	"Type='Material Effect Image TextureAni'")
+		pl_attribute_getset(SRPLightEffects,	CoronaMaterial,	PLCore::String,	"Data/Effects/DefaultCorona.plfx",	ReadWrite)
+		pl_attribute_getset(SRPLightEffects,	FlareMaterial,	PLCore::String,	"Data/Effects/DefaultFlare.plfx",	ReadWrite)
+		pl_attribute_getset(SRPLightEffects,	BlendMaterial,	PLCore::String,	"Data/Effects/DefaultBlend.plfx",	ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,									ReadWrite,	GetSet,	"Flags",			"")
-	pl_class_end
+		pl_attribute_getset(SRPLightEffects,	Flags,			PLCore::uint32,	0,									ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

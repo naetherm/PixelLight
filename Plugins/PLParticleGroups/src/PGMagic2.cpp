@@ -42,7 +42,19 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGMagic2)
+pl_class_metadata(PGMagic2, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Magic particle group 2")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(SmallParticles,			bool,			true,							ReadWrite,	"Small particles?",									"")
+	pl_attribute_metadata(TexAni,					bool,			false,							ReadWrite,	"Texture animation?",								"")
+	pl_attribute_metadata(Size,						float,			1.0f,							ReadWrite,	"Size",												"Min='0.0001'")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,					PLCore::String,	"Data/Textures/PGMagic2.dds",	ReadWrite,	"Particle group material",							"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,				PLCore::uint32,	100,							ReadWrite,	"Number of particles",								"Min=1")
+	pl_attribute_metadata(TextureAnimationColumns,	PLCore::uint32,	2,								ReadWrite,	"Number of animation frame columns in the texture",	"")
+	pl_attribute_metadata(TextureAnimationRows,		PLCore::uint32,	1,								ReadWrite,	"Number of animation frame rows in the texture",	"")
+pl_class_metadata_end(PGMagic2)
 
 
 //[-------------------------------------------------------]

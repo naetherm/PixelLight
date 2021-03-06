@@ -46,7 +46,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionClassificationTransferFunctionPreMultiplied)
+pl_class_metadata(ShaderFunctionClassificationTransferFunctionPreMultiplied, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClassification, "Pre-multiplied (no color bleeding) post-interpolative function shader function implementation class for classification")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionClassificationTransferFunctionPreMultiplied)
 
 
 //[-------------------------------------------------------]

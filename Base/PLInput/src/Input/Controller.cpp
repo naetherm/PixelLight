@@ -40,7 +40,17 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Controller)
+pl_class_metadata(Controller, "PLInput", PLCore::Object, "Input controller base class")
+	// Attributes
+	pl_attribute_metadata(Type,			pl_enum_type(EControllerType),	ControllerVirtual,	ReadOnly,	"Controller type",			"")
+	pl_attribute_metadata(Name,			PLCore::String,					"",					ReadOnly,	"Controller name",			"")
+	pl_attribute_metadata(Description,	PLCore::String,					"",					ReadOnly,	"Controller description",	"")
+	pl_attribute_metadata(Active,		bool,							true,				ReadWrite,	"State of controller",		"")
+	// Signals
+	pl_signal_1_metadata(SignalOnActivate,	bool,		"Controller has been activated or deactivated. 'true' as parameter if the controller has been activated, else 'false'.",	"")
+	pl_signal_1_metadata(SignalOnControl,	Control&,	"Control event has occurred, control as parameter",																			"")
+	pl_signal_0_metadata(SignalOnChanged,				"Controller state has changed",																								"")
+pl_class_metadata_end(Controller)
 
 
 //[-------------------------------------------------------]

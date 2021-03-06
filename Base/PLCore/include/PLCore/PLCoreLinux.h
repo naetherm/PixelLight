@@ -104,24 +104,12 @@
 	#define PL_GENERIC_API_EXPORT
 #endif
 
-// To export RTTI elements
-#define PL_GENERIC_RTTI_EXPORT 1
-
 
 //[-------------------------------------------------------]
 //[ Project independent generic import                    ]
 //[-------------------------------------------------------]
 // To import classes, methods and variables
 #define PL_GENERIC_API_IMPORT
-
-// To import RTTI elements
-#if defined(HAVE_VISIBILITY_ATTR) && !defined(ALWAYS_RTTI_EXPORT)
-	// To import RTTI elements
-	#define PL_GENERIC_RTTI_IMPORT 0
-#else
-	// When the visibility feature is not used/supported then always "export" RTTI elements
-	#define PL_GENERIC_RTTI_IMPORT 1
-#endif
 
 
 //[-------------------------------------------------------]

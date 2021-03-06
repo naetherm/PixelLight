@@ -48,7 +48,26 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNLoadScreen)
+pl_class_metadata(SNLoadScreen, "PLEngine", PLEngine::SNLoadScreenBase, "Load screen scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ClearFlags,	pl_flag_type_def3(SNLoadScreen, EClearFlags),	SNLoadScreen::Color|SNLoadScreen::Depth,		ReadWrite,	"Clear flags",											"")
+	pl_attribute_metadata(ClearColor,	PLGraphics::Color4,								PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),		ReadWrite,	"Clear color (r/g/b/a)",								"")
+	pl_attribute_metadata(Images,		PLCore::uint8,									4,												ReadWrite,	"Number of images (1-4)",								"Min='1' Max='4'")
+	pl_attribute_metadata(ImageX,		float,											0.175f,											ReadWrite,	"Image x position 'screen space' between 0.0 and 1.0",	"")
+	pl_attribute_metadata(ImageY,		float,											0.133f,											ReadWrite,	"Image y position 'screen space' between 0.0 and 1.0",	"")
+	pl_attribute_metadata(ImageWidth,	float,											0.64f,											ReadWrite,	"Image width 'screen space' between 0.0 and 1.0",		"")
+	pl_attribute_metadata(ImageHeight,	float,											0.853f,											ReadWrite,	"Image height 'screen space' between 0.0 and 1.0",		"")
+	pl_attribute_metadata(ImageColor,	PLGraphics::Color4,								PLGraphics::Color4::White,						ReadWrite,	"Image color",											"")
+	pl_attribute_metadata(BarX,			float,											0.025f,											ReadWrite,	"Bar x position 'screen space' between 0.0 and 1.0",	"")
+	pl_attribute_metadata(BarY,			float,											0.083f,											ReadWrite,	"Bar y position 'screen space' between 0.0 and 1.0",	"")
+	pl_attribute_metadata(BarWidth,		float,											0.95f,											ReadWrite,	"Bar width 'screen space' between 0.0 and 1.0",			"")
+	pl_attribute_metadata(BarHeight,	float,											0.066f,											ReadWrite,	"Bar height 'screen space' between 0.0 and 1.0",		"")
+	pl_attribute_metadata(BarColor,		PLGraphics::Color4,								PLGraphics::Color4::White,						ReadWrite,	"Bar color",											"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,		pl_flag_type_def3(SNLoadScreen, EFlags),		SNLoadScreen::NoCulling,						ReadWrite,	"Flags",												"")
+pl_class_metadata_end(SNLoadScreen)
 
 
 //[-------------------------------------------------------]

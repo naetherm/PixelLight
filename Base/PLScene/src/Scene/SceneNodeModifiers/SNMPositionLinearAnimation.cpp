@@ -41,7 +41,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPositionLinearAnimation)
+pl_class_metadata(SNMPositionLinearAnimation, "PLScene", PLScene::SNMTransform, "Linear position animation scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(AutoVector,	pl_enum_type_def3(SNMPositionLinearAnimation, EAutoVector),	SNMPositionLinearAnimation::None,	ReadWrite,	"Automatic vector type",	"")
+	pl_attribute_metadata(Vector,		PLMath::Vector3,											PLMath::Vector3::One,				ReadWrite,	"Movement vector",			"")
+	pl_attribute_metadata(Speed,		float,														1.0f,								ReadWrite,	"Movement speed",			"")
+pl_class_metadata_end(SNMPositionLinearAnimation)
 
 
 //[-------------------------------------------------------]

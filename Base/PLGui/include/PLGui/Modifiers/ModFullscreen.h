@@ -52,10 +52,8 @@ class ModFullscreen : public Modifier {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, ModFullscreen, "PLGui", PLGui::Modifier, "Modifier that toggles a widgets fullscreen mode on 'ALT+ENTER'")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

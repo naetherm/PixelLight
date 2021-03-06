@@ -57,12 +57,10 @@ class SNBitmap3D : public SNBitmap {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNBitmap3D, "PLScene", PLScene::SNBitmap, "3D bitmap scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(PositionOffset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	GetSet,	"Position offset (scene node space)",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNBitmap3D,	PositionOffset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

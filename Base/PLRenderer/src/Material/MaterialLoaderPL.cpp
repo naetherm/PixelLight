@@ -44,7 +44,19 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MaterialLoaderPL)
+pl_class_metadata(MaterialLoaderPL, "PLRenderer", PLRenderer::MaterialLoader, "Material loader implementation for the PixelLight material XML file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"mat,MAT")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	Material&,			PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const Material&,	PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(MaterialLoaderPL)
 
 
 //[-------------------------------------------------------]

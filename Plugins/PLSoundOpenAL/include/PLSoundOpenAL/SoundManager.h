@@ -57,12 +57,10 @@ class SoundManager : public PLSound::SoundManager {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SoundManager, "PLSoundOpenAL", PLSound::SoundManager, "OpenAL sound backend")
+	pl_class_def()
 		// Attributes
-		pl_attribute(DeviceName,	PLCore::String,	"",	ReadWrite,	DirectValue,	"Device name. If not defined the 'preferred device' is selected.",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(DeviceName,	PLCore::String,	"",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

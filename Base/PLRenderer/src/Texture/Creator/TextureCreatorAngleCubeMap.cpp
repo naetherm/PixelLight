@@ -45,7 +45,12 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureCreatorAngleCubeMap)
+pl_class_metadata(TextureCreatorAngleCubeMap, "PLRenderer", PLRenderer::TextureCreator, "Angle cube map (TextureBuffer::R8G8B8) texture creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Size,	PLCore::uint32,	256,	ReadWrite,	"Texture size (must be a power of 2)",	"Min='8'")
+pl_class_metadata_end(TextureCreatorAngleCubeMap)
 
 
 //[-------------------------------------------------------]

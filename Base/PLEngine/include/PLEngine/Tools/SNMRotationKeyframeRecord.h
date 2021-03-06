@@ -65,15 +65,13 @@ class SNMRotationKeyframeRecord : public PLScene::SNMTransform {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNMRotationKeyframeRecord, "PLEngine", PLScene::SNMTransform, "Keyframe rotation animation scene node modifier class")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(FramesPerSecond,	PLCore::uint32,	24,	ReadWrite,	DirectValue,	"Frames per second",													"")
-		pl_attribute(Keys,				PLCore::String,	"",	ReadWrite,	DirectValue,	"Rotation keys (w, x, y and z quaternion components) chunk filename",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_directvalue(FramesPerSecond,	PLCore::uint32,	24,	ReadWrite)
+		pl_attribute_directvalue(Keys,				PLCore::String,	"",	ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,	"Called when the scene node needs to be updated",	"")
-	pl_class_end
+		pl_slot_0_def(SNMRotationKeyframeRecord,	OnUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

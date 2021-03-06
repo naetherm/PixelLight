@@ -40,7 +40,19 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ChunkLoaderPL)
+pl_class_metadata(ChunkLoaderPL, "PLCore", PLCore::ChunkLoader, "Chunk loader implementation for the PixelLight binary (Little-Endian) chunk file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"chunk,CHUNK")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	Chunk&,			File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const Chunk&,	File&,	"Save method",	"")
+pl_class_metadata_end(ChunkLoaderPL)
 
 
 //[-------------------------------------------------------]

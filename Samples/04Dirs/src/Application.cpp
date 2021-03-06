@@ -40,7 +40,10 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Application)
+pl_class_metadata(Application, "", PLCore::CoreApplication, "Application class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor, "Default constructor", "")
+pl_class_metadata_end(Application)
 
 
 //[-------------------------------------------------------]

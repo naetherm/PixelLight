@@ -77,7 +77,7 @@ class SRPDeferredGodRays : public SRPDeferred {
 			NoDiscard  = 1<<1,	/**< Disable discard (may result in better or worse performance) */
 			NoBlending = 1<<2	/**< Disable blending (for debugging) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPDeferred::EFlags)
 			pl_enum_value(NoDiscard,	"Disable discard (may result in better or worse performance)")
 			pl_enum_value(NoBlending,	"Disable blending (for debugging)")
@@ -87,20 +87,18 @@ class SRPDeferredGodRays : public SRPDeferred {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferredGodRays, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering god rays effect (volumetric light scattering as a post-process)")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,	PLCore::String,			"",											ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
-		pl_attribute(NumberOfSamples,	PLCore::uint32,			20,											ReadWrite,	DirectValue,	"Number of samples, higher is better but costs more performance",																		"")
-		pl_attribute(Density,			float,					0.3f,										ReadWrite,	DirectValue,	"Density",																																"")
-		pl_attribute(Weight,			float,					0.2f,										ReadWrite,	DirectValue,	"The weight constant to influences the brightness",																						"")
-		pl_attribute(Decay,				float,					0.9f,										ReadWrite,	DirectValue,	"Exponential decay attenuation coefficient",																							"")
-		pl_attribute(LightPosition,		PLMath::Vector2,		PLMath::Vector2(0.5f, 0.5f),				ReadWrite,	DirectValue,	"Light position on screen, lower/left is (0,0) and upper/right is (1,1)",																"")
-		pl_attribute(Color,				PLGraphics::Color3,		PLGraphics::Color3(0.15f, 0.15f, 0.15f),	ReadWrite,	DirectValue,	"God rays color",																														"")
+		pl_attribute_directvalue(						ShaderLanguage,		PLCore::String,		"",											ReadWrite)
+		pl_attribute_directvalue(						NumberOfSamples,	PLCore::uint32,		20,											ReadWrite)
+		pl_attribute_directvalue(						Density,			float,				0.3f,										ReadWrite)
+		pl_attribute_directvalue(						Weight,				float,				0.2f,										ReadWrite)
+		pl_attribute_directvalue(						Decay,				float,				0.9f,										ReadWrite)
+		pl_attribute_directvalue(						LightPosition,		PLMath::Vector2,	PLMath::Vector2(0.5f, 0.5f),				ReadWrite)
+		pl_attribute_directvalue(						Color,				PLGraphics::Color3,	PLGraphics::Color3(0.15f, 0.15f, 0.15f),	ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,											ReadWrite,	GetSet,			"Flags",																																"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPDeferredGodRays,	Flags,				PLCore::uint32,		0,											ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -42,7 +42,10 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MacOSXProvider)
+pl_class_metadata(MacOSXProvider, "PLInput", PLInput::Provider, "Standard input provider for Mac OS X")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MacOSXProvider)
 
 
 //[-------------------------------------------------------]

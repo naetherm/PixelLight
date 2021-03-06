@@ -44,7 +44,13 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsJointCorkscrew)
+pl_class_metadata(SNMPhysicsJointCorkscrew, "PLPhysics", PLPhysics::SNMPhysicsJoint, "Physics corkscrew joint scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Origin of the corkscrew in local space",																									"")
+	pl_attribute_metadata(PinDir,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	"The line of action of the corkscrew in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",	"")
+pl_class_metadata_end(SNMPhysicsJointCorkscrew)
 
 
 //[-------------------------------------------------------]

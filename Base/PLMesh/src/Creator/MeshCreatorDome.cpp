@@ -49,7 +49,17 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorDome)
+pl_class_metadata(MeshCreatorDome, "PLMesh", PLMesh::MeshCreator, "Dome mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Radius,	float,				0.5f,					ReadWrite,	"Dome radius",		"")
+	pl_attribute_metadata(DTheta,	float,				10.0f,					ReadWrite,	"Number of slices",	"")
+	pl_attribute_metadata(DPhi,		float,				10.0f,					ReadWrite,	"Number of rings",	"")
+	pl_attribute_metadata(HTile,	float,				1.0f,					ReadWrite,	"Size of a slice",	"")
+	pl_attribute_metadata(VTile,	float,				1.0f,					ReadWrite,	"Size of a ring",	"")
+	pl_attribute_metadata(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Offset to center",	"")
+pl_class_metadata_end(MeshCreatorDome)
 
 
 //[-------------------------------------------------------]

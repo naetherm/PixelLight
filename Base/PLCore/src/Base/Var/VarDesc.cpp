@@ -85,10 +85,10 @@ String VarDesc::GetDefault() const
 *  @brief
 *    Get attribute
 */
-DynVar *VarDesc::GetAttribute(const Object &cObject) const
+DynVarPtr VarDesc::GetAttribute(const Object &cObject) const
 {
 	// To be implemented in derived classes
-	return nullptr;
+	return DynVarPtr(nullptr);
 }
 
 

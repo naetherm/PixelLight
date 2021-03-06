@@ -55,7 +55,7 @@ class PLFRONTENDQT_API PLDynVarVector2iTreeItem : public PLDynVarStringTreeItem 
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
 	public:
-		explicit PLDynVarVector2iTreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent = nullptr);
+		explicit PLDynVarVector2iTreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent = nullptr);
 		virtual QVariant data(const int column, const int role) override;
 
 

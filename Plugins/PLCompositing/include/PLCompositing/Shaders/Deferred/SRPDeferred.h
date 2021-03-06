@@ -67,8 +67,8 @@ class SRPDeferred : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferred, "PLCompositing", PLScene::SceneRendererPass, "Abstract scene renderer pass for deferred rendering")
-	pl_class_end
+	pl_class_def(PLCOM_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

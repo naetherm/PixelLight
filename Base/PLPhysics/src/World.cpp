@@ -39,7 +39,10 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(World)
+pl_class_metadata(World, "PLPhysics", PLCore::Object, "Abstract PL physics world (also called 'simulator') base class")
+	// Signals
+	pl_signal_1_metadata(SignalContact,	ContactInformation&,	"A contact between two bodies was detected by the physics. Contact information as parameter.",	"")
+pl_class_metadata_end(World)
 
 
 //[-------------------------------------------------------]

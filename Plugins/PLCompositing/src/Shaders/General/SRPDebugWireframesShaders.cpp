@@ -57,7 +57,12 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDebugWireframesShaders)
+pl_class_metadata(SRPDebugWireframesShaders, "PLCompositing", PLCompositing::SRPDebugWireframes, "Shaders based scene renderer pass drawing just simple wireframes")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,	"",	ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+pl_class_metadata_end(SRPDebugWireframesShaders)
 
 
 //[-------------------------------------------------------]

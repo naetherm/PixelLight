@@ -44,7 +44,10 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsUpdateVelocity)
+pl_class_metadata(SNMPhysicsUpdateVelocity, "PLPhysics", PLPhysics::SNMPhysics, "Updates the linear and angular velocity of physics bodies according to the scene node movement")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+pl_class_metadata_end(SNMPhysicsUpdateVelocity)
 
 
 //[-------------------------------------------------------]

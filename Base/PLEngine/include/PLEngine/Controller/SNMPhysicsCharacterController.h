@@ -83,7 +83,7 @@ class SNMPhysicsCharacterController : public SNMPhysicsCharacter {
 			NoRun   = 1<<4,	/**< Do not allow running */
 			NoCreep = 1<<5	/**< Do not allow creeping */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNMPhysicsCharacter::EFlags)
 			pl_enum_value(NoJump,	"Do not allow jumping")
 			pl_enum_value(NoRun,	"Do not allow running")
@@ -94,21 +94,19 @@ class SNMPhysicsCharacterController : public SNMPhysicsCharacter {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNMPhysicsCharacterController, "PLEngine", PLEngine::SNMPhysicsCharacter, "Basic PL physics character controller scene node modifier class")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(InputSemantic,			PLCore::String,			"",		ReadWrite,	DirectValue,	"Semantic of this input controller (e.g. \"Camera\")",												"")
-		pl_attribute(YRotVelocity,			float,					0.0f,	ReadWrite,	DirectValue,	"Y rotation velocity, if 0, there's no rotation control",											"")
-		pl_attribute(IdleAnimation,			PLCore::String,			"",		ReadWrite,	DirectValue,	"Idle animation",																					"")
-		pl_attribute(IdleAnimationSpeed,	float,					24.0f,	ReadWrite,	DirectValue,	"Idle animation playback speed",																	"Min='0.0001'")
-		pl_attribute(WalkAnimation,			PLCore::String,			"",		ReadWrite,	DirectValue,	"Walk animation",																					"")
-		pl_attribute(WalkAnimationSpeed,	float,					24.0f,	ReadWrite,	DirectValue,	"Walk animation playback speed",																	"Min='0.0001'")
-		pl_attribute(RunAnimationSpeed,		float,					35.0f,	ReadWrite,	DirectValue,	"Run animation playback speed (walk animation, just faster)",										"Min='0.0001'")
-		pl_attribute(RotationNode,			PLCore::String,			"",		ReadWrite,	DirectValue,	"If empty, take the rotation of the owner node for movement, else the rotation of the given node",	"")
+		pl_attribute_directvalue(								InputSemantic,		PLCore::String,	"",		ReadWrite)
+		pl_attribute_directvalue(								YRotVelocity,		float,			0.0f,	ReadWrite)
+		pl_attribute_directvalue(								IdleAnimation,		PLCore::String,	"",		ReadWrite)
+		pl_attribute_directvalue(								IdleAnimationSpeed,	float,			24.0f,	ReadWrite)
+		pl_attribute_directvalue(								WalkAnimation,		PLCore::String,	"",		ReadWrite)
+		pl_attribute_directvalue(								WalkAnimationSpeed,	float,			24.0f,	ReadWrite)
+		pl_attribute_directvalue(								RunAnimationSpeed,	float,			35.0f,	ReadWrite)
+		pl_attribute_directvalue(								RotationNode,		PLCore::String,	"",		ReadWrite)
 			// Overwritten PLScene::SceneNodeModifier attributes
-		pl_attribute(Flags,					pl_flag_type(EFlags),	0,		ReadWrite,	GetSet,			"Flags",																							"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNMPhysicsCharacterController,	Flags,				PLCore::uint32,	0,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

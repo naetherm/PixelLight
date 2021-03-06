@@ -67,21 +67,19 @@ class PGSmoke : public SNParticleGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGSmoke, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Smoke particle group")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(Size,						float,				2.0f,							ReadWrite,	DirectValue,	"Size",												"Min='0.0001'")
-		pl_attribute(SizeTimeScale,				float,				1.0f,							ReadWrite,	DirectValue,	"Size time scale",									"")
-		pl_attribute(Energie,					float,				1.0f,							ReadWrite,	DirectValue,	"Energy",											"")
-		pl_attribute(Color,						PLGraphics::Color4,	PLGraphics::Color4::White,		ReadWrite,	DirectValue,	"Color",											"")
-		pl_attribute(PositionScale,				float,				1.0f,							ReadWrite,	DirectValue,	"Position scale",									"")
+		pl_attribute_directvalue(			Size,						float,				2.0f,							ReadWrite)
+		pl_attribute_directvalue(			SizeTimeScale,				float,				1.0f,							ReadWrite)
+		pl_attribute_directvalue(			Energie,					float,				1.0f,							ReadWrite)
+		pl_attribute_directvalue(			Color,						PLGraphics::Color4,	PLGraphics::Color4::White,		ReadWrite)
+		pl_attribute_directvalue(			PositionScale,				float,				1.0f,							ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,					PLCore::String,		"Data/Textures/PGSmoke.dds",	ReadWrite,	GetSet,			"Particle group material",							"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,					PLCore::uint32,		20,								ReadWrite,	GetSet,			"Number of particles",								"Min=1")
-		pl_attribute(TextureAnimationColumns,	PLCore::uint32,		4,								ReadWrite,	GetSet,			"Number of animation frame columns in the texture",	"")
-		pl_attribute(TextureAnimationRows,		PLCore::uint32,		4,								ReadWrite,	GetSet,			"Number of animation frame rows in the texture",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGSmoke,	Material,					PLCore::String,		"Data/Textures/PGSmoke.dds",	ReadWrite)
+		pl_attribute_getset		(PGSmoke,	Particles,					PLCore::uint32,		20,								ReadWrite)
+		pl_attribute_getset		(PGSmoke,	TextureAnimationColumns,	PLCore::uint32,		4,								ReadWrite)
+		pl_attribute_getset		(PGSmoke,	TextureAnimationRows,		PLCore::uint32,		4,								ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

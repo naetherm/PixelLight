@@ -37,7 +37,12 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ConfigLoader)
+pl_class_metadata(ConfigLoader, "PLCore", PLCore::LoaderImpl, "Abstract config loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Config")
+	pl_properties_end
+pl_class_metadata_end(ConfigLoader)
 
 
 //[-------------------------------------------------------]

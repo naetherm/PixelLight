@@ -38,7 +38,8 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PhysicsCharacterController)
+pl_class_metadata(PhysicsCharacterController, "PLEngine", PLInput::Controller, "Physics character input controller")
+pl_class_metadata_end(PhysicsCharacterController)
 
 
 //[-------------------------------------------------------]

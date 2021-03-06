@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderValveModel)
+pl_class_metadata(MeshLoaderValveModel, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for smd/vta (Valve Model) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"smd,vta,SMD,VTA")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderValveModel)
 
 
 //[-------------------------------------------------------]

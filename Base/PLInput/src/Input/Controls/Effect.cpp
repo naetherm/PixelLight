@@ -38,7 +38,11 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Effect)
+pl_class_metadata(Effect, "PLInput", PLInput::Control, "Effect control")
+	// Methods
+	pl_method_0_metadata(GetValue,	pl_ret_type(float),			"Returns the current value.",							"")
+	pl_method_1_metadata(SetValue,	pl_ret_type(void),	float,	"Set effect value. Current value as first parameter.",	"")
+pl_class_metadata_end(Effect)
 
 
 //[-------------------------------------------------------]

@@ -45,7 +45,12 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureCreatorNormalizationCubeMap)
+pl_class_metadata(TextureCreatorNormalizationCubeMap, "PLRenderer", PLRenderer::TextureCreator, "Normalization cube map (TextureBuffer::R8G8B8) texture creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Size,	PLCore::uint32,	64,	ReadWrite,	"Texture size (must be a power of 2)",	"Min='8'")
+pl_class_metadata_end(TextureCreatorNormalizationCubeMap)
 
 
 //[-------------------------------------------------------]

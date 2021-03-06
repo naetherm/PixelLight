@@ -53,12 +53,8 @@ class TransferFunctionLoader : public PLCore::LoaderImpl {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, TransferFunctionLoader, "PLVolume", PLCore::LoaderImpl, "Abstract transfer function loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"TransferFunction")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLVOLUME_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

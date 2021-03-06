@@ -46,7 +46,10 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNConsoleBase)
+pl_class_metadata(SNConsoleBase, "PLEngine", PLScene::SceneNode, "Abstract console base class")
+	//Attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNConsoleBase, EFlags),	SNConsoleBase::NoCulling,	ReadWrite,	"Flags",	"")
+pl_class_metadata_end(SNConsoleBase)
 
 
 //[-------------------------------------------------------]

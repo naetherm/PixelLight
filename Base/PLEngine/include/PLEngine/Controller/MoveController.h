@@ -58,8 +58,8 @@ class MoveController : public PLInput::Controller {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, MoveController, "PLEngine", PLInput::Controller, "Move input controller")
-	pl_class_end
+	pl_class_def(PL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

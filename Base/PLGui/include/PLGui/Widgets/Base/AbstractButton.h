@@ -55,21 +55,21 @@ class AbstractButton : public Widget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, AbstractButton, "PLGui", PLGui::Widget, "Abstract base class for all kind of buttons")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(Text,				PLCore::String,		"",							ReadWrite,	GetSet,	"Text that is displayed on the button",					"")
-		pl_attribute(ImageName,			PLCore::String,		"",							ReadWrite,	GetSet,	"Image filename",										"")
-		pl_attribute(ImageSize,			PLMath::Vector2i,	PLMath::Vector2i(16, 16),	ReadWrite,	GetSet,	"Image size",											"")
-		pl_attribute(Repeat,			bool,				false,						ReadWrite,	GetSet,	"If the button is hold down, emit clicks repeatedly",	"")
-		pl_attribute(RepeatDelay,		PLCore::uint64,		500,						ReadWrite,	GetSet,	"Initial delay (in ms) for repeated clicks",			"")
-		pl_attribute(RepeatInterval,	PLCore::uint64,		500,						ReadWrite,	GetSet,	"Interval (in ms) between repeated clicks",				"")
+		pl_attribute_getset(AbstractButton,	Text,			PLCore::String,		"",							ReadWrite)
+		pl_attribute_getset(AbstractButton,	ImageName,		PLCore::String,		"",							ReadWrite)
+		pl_attribute_getset(AbstractButton,	ImageSize,		PLMath::Vector2i,	PLMath::Vector2i(16, 16),	ReadWrite)
+		pl_attribute_getset(AbstractButton,	Repeat,			bool,				false,						ReadWrite)
+		pl_attribute_getset(AbstractButton,	RepeatDelay,	PLCore::uint64,		500,						ReadWrite)
+		pl_attribute_getset(AbstractButton,	RepeatInterval,	PLCore::uint64,		500,						ReadWrite)
 		// Signals
-		pl_signal_0(SignalPressed,	"The button has been pressed down",						"")
-		pl_signal_0(SignalReleased,	"The button has been released",							"")
-		pl_signal_0(SignalClicked,	"The button has been clicked (pressed and released)",	"")
+		pl_signal_0_def(SignalPressed)
+		pl_signal_0_def(SignalReleased)
+		pl_signal_0_def(SignalClicked)
 		// Slots
-		pl_slot_0(OnTimer,	"Timer callback",	"")
-	pl_class_end
+		pl_slot_0_def(AbstractButton,	OnTimer)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

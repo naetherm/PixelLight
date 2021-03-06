@@ -33,13 +33,11 @@ SUITE(Config) {
 		//[-------------------------------------------------------]
 		//[ RTTI interface                                        ]
 		//[-------------------------------------------------------]
-		pl_class(pl_rtti_export, TestConfigTest, "", PLCore::ConfigGroup, "Configuration test class")
+		pl_class_def()
 			// Attributes
-			pl_attribute(Detail,	float,	1.0f,	ReadWrite,	DirectValue,	"Detail",					"")
-			pl_attribute(ShowFPS,	bool,	false,	ReadWrite,	DirectValue,	"Show Frames Per Second?",	"")
-			// Constructors
-			pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-			pl_class_end
+			pl_attribute_directvalue(Detail,	float,	1.0f,	ReadWrite)
+			pl_attribute_directvalue(ShowFPS,	bool,	false,	ReadWrite)
+		pl_class_def_end
 
 
 			//[-------------------------------------------------------]
@@ -69,12 +67,10 @@ SUITE(Config) {
 		//[-------------------------------------------------------]
 		//[ RTTI interface                                        ]
 		//[-------------------------------------------------------]
-		pl_class(pl_rtti_export, TestConfigUser, "", PLCore::ConfigGroup, "Configuration user class")
+		pl_class_def()
 			// Attributes
-			pl_attribute(Players,	int,	1,	ReadWrite,	DirectValue,	"Number of players",	"")
-			// Constructors
-			pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-			pl_class_end
+			pl_attribute_directvalue(Players,	int,	1,	ReadWrite)
+		pl_class_def_end
 
 
 			//[-------------------------------------------------------]
@@ -97,8 +93,21 @@ SUITE(Config) {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_implement_class(TestConfigTest)
-	pl_implement_class(TestConfigUser)
+	pl_class_metadata(TestConfigTest, "", PLCore::ConfigGroup, "Configuration test class")
+		// Constructors
+		pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+		// Attributes
+		pl_attribute_metadata(Detail,	float,	1.0f,	ReadWrite,	"Detail",					"")
+		pl_attribute_metadata(ShowFPS,	bool,	false,	ReadWrite,	"Show Frames Per Second?",	"")
+	pl_class_metadata_end(TestConfigTest)
+		
+	
+	pl_class_metadata(TestConfigUser, "", PLCore::ConfigGroup, "Configuration user class")
+		// Constructors
+		pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+		// Attributes
+		pl_attribute_metadata(Players,	int,	1,	ReadWrite,	"Number of players",	"")
+	pl_class_metadata_end(TestConfigUser)
 
 
 	/*

@@ -37,7 +37,8 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShadowMapping)
+pl_class_metadata(ShadowMapping, "PLCompositing", PLCore::Object, "Abstract shadow mapping algorithm base class")
+pl_class_metadata_end(ShadowMapping)
 
 
 //[-------------------------------------------------------]

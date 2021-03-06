@@ -27,6 +27,7 @@
 //[-------------------------------------------------------]
 #include <QtGui/qtreeview.h>
 #include <QtGui/qdockwidget.h>
+#include <QtGui/QMainWindow>
 #include <PLCore/Base/Class.h>
 #include "PLFrontendQt/QtStringAdapter.h"
 #include "PLFrontendQt/DataModels/PLIntrospectionModel.h"
@@ -44,7 +45,19 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetObject)
+pl_class_metadata(DockWidgetObject, "PLFrontendQt", PLFrontendQt::DockWidget, "\"PLCore::Object\" Qt dock widget class")
+	// Properties
+	pl_properties
+		pl_property("Title", "Object")
+	pl_properties_end
+	// Methods
+	pl_method_0_metadata(GetSelectedObject,	pl_ret_type(PLCore::Object*),						"Returns the currently selected object, can be a null pointer.",	"")
+	pl_method_1_metadata(SelectObject,		pl_ret_type(void),				PLCore::Object*,	"Selects the given object. Object to select as first parameter.",	"")
+	// Constructors
+	pl_constructor_2_metadata(DefaultConstructor,	QMainWindow*,	DockWidgetManager*,	"Constructor with a pointer to the Qt main window as first parameter, pointer to the dock widget manager this dock widget should be registered to as second parameter",	"")
+	// Slots
+	pl_slot_0_metadata(OnDestroyed,	"Called when the object assigned with this dock widget was destroyed",	"")
+pl_class_metadata_end(DockWidgetObject)
 
 
 //[-------------------------------------------------------]
@@ -54,7 +67,7 @@ pl_implement_class(DockWidgetObject)
 *  @brief
 *    Constructor
 */
-DockWidgetObject::DockWidgetObject(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidget(reinterpret_cast<QWidget*>(pQMainWindow), pDockWidgetManager),
+DockWidgetObject::DockWidgetObject(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidget(pQMainWindow, pDockWidgetManager),
 	SlotOnDestroyed(this),
 	m_pQTreeView(nullptr),
 	m_pPLIntrospectionModel(nullptr),
@@ -180,13 +193,13 @@ void DockWidgetObject::SelectObject(Object *pObject)
 					// Do we already have a name?
 					if (!sName.GetLength()) {
 						// Check whether there's an name attribute
-						DynVar *pDynVar = m_pObject->GetAttribute("Name");
+						DynVarPtr pDynVar = m_pObject->GetAttribute("Name");
 						if (pDynVar)
 							sName = "Name = \"" + pDynVar->GetString() + '\"';	// Put it into quotes to make it possible to see e.g. trailing spaces
 
 						// In case there's still no name, check whether or not there's an filename attribute
 						if (!sName.GetLength()) {
-							DynVar *pDynVar = m_pObject->GetAttribute("Filename");
+							DynVarPtr pDynVar = m_pObject->GetAttribute("Filename");
 							if (pDynVar)
 								sName = "Filename = \"" + pDynVar->GetString() + '\"';	// Put it into quotes to make it possible to see e.g. trailing spaces
 						}

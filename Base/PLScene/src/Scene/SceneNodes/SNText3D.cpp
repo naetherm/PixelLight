@@ -53,7 +53,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNText3D)
+pl_class_metadata(SNText3D, "PLScene", PLScene::SNText, "3D (\"flat\") text scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(BackgroundMaterial,	PLCore::String,							"",	ReadWrite,	"Background material to use",	"Type='Material Effect Image TextureAni'")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SNText3D, EFlags),	0,	ReadWrite,	"Flags",						"")
+pl_class_metadata_end(SNText3D)
 
 
 //[-------------------------------------------------------]

@@ -52,7 +52,10 @@ using namespace PLScene;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRP2DGame)
+pl_class_metadata(SRP2DGame, "", PLScene::SceneRendererPass, "Scene renderer pass 2D game")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SRP2DGame)
 
 
 //[-------------------------------------------------------]

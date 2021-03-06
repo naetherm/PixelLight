@@ -38,7 +38,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionIlluminationLambertianReflection)
+pl_class_metadata(ShaderFunctionIlluminationLambertianReflection, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionIllumination, "Lambertian reflection shader function implementation class for local illumination")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionIlluminationLambertianReflection)
 
 
 //[-------------------------------------------------------]

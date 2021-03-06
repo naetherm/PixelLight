@@ -41,7 +41,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNEffectLight)
+pl_class_metadata(SNEffectLight, "PLScene", PLScene::SNLight, "Effect light scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(CoronaMaterial,	PLCore::String,	"Data/Effects/DefaultCorona.plfx",	ReadWrite,	"Corona material",	"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(FlareMaterial,	PLCore::String,	"Data/Effects/DefaultFlare.plfx",	ReadWrite,	"Flare material",	"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(BlendMaterial,	PLCore::String,	"Data/Effects/DefaultBlend.plfx",	ReadWrite,	"Blend material",	"Type='Material Effect Image TextureAni'")
+pl_class_metadata_end(SNEffectLight)
 
 
 //[-------------------------------------------------------]

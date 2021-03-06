@@ -48,7 +48,24 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Camcorder)
+pl_class_metadata(Camcorder, "PLEngine", PLCore::Object, "Camcorder interaction component")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	EngineApplication&,	"Parameter constructor. Owner application as first parameter.",	"")
+	// Methods
+	pl_method_1_metadata(StartRecord,	pl_ret_type(void),	const PLCore::String&,	"Starts the record, record name as first parameter (if empty string, no recording can be started). The currently used application camera will be recorded. If playback is currently enabled, the playback will be stopped at once.",	"")
+	pl_method_0_metadata(IsRecording,	pl_ret_type(bool),							"Returns whether or not recording is currently active. Returns 'true' if recording is currently active, else 'false'.",																													"")
+	pl_method_0_metadata(StopRecord,	pl_ret_type(void),							"Stops the record",																																																						"")
+	pl_method_1_metadata(StartPlayback,	pl_ret_type(void),	const PLCore::String&,	"Starts the playback, record name as first parameter (must be valid). The currently used application camera will be feed with the recorded data. If recording is currently enabled, the recording will be stopped at once.",			"")
+	pl_method_0_metadata(IsPlaying,		pl_ret_type(bool),							"Returns whether or not playback is currently active. Returns 'true' if playback is currently active, else 'false'.",																													"")
+	pl_method_0_metadata(StopPlayback,	pl_ret_type(void),							"Stops the playback",																																																					"")
+	pl_method_0_metadata(Update,		pl_ret_type(void),							"Updates the camcorder component",																																																		"")
+	// Attributes
+	pl_attribute_metadata(CamcorderDirectory,	PLCore::String,	"Data/Camcorder/",	ReadWrite,	"Default directory for the camcorder files",	"")
+	// Signals
+	pl_signal_0_metadata(SignalPlaybackFinished,	"Playback has been finished",	"")
+	// Slots
+	pl_slot_0_metadata(OnAnimationStop,	"Called when one of the keyframe animations has been stopped",	"")
+pl_class_metadata_end(Camcorder)
 
 
 //[-------------------------------------------------------]

@@ -41,7 +41,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNProjectiveSpotLight)
+pl_class_metadata(SNProjectiveSpotLight, "PLScene", PLScene::SNSpotLight, "Projective spot light scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ProjectedMaterial,	PLCore::String,										"Data/Textures/PLLogo.dds",		ReadWrite,	"Projected material",	"Type='Material Effect Image TextureAni'")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SNProjectiveSpotLight, EFlags),	SNProjectiveSpotLight::NoCone,	ReadWrite,	"Flags",				"")
+pl_class_metadata_end(SNProjectiveSpotLight)
 
 
 //[-------------------------------------------------------]

@@ -51,7 +51,37 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNVolume)
+pl_class_metadata(SNVolume, "PLVolume", PLScene::SceneNode, "Scene node representing a volume")
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(VolumeFilenameSave,				PLCore::String,									"",											ReadWrite,	"In case this filename is not empty, the loaded volume will be saved directly after loading by using this filename (can e.g. be used for data conversion)",				"Type='Volume'")
+	pl_attribute_metadata(LoaderParameters,					PLCore::String,									"",											ReadWrite,	"Optional parameters for the used file loader",																															"")
+	pl_attribute_metadata(VolumeFilename,					PLCore::String,									"",											ReadWrite,	"Filename of the volume data to use",																																	"Type='Volume'")
+	// 1.0 - Ray Setup
+	pl_attribute_metadata(SampleRateFactor,					float,											1.0f,										ReadWrite,	"Sample rate factor to use (1.0 = 100% for correct result, 0.0 = 50% = take only half of the samples) (1.0 - Ray Setup)",												"Max='10'")
+	// 2.0 - Ray Traversal
+	pl_attribute_metadata(RayTraversal,						pl_enum_type_def3(SNVolume, ERayTraversal),		SNVolume::RayTraversalDVRFrontToBack,		ReadWrite,	"Technique to use for the ray traversal (2.0 - Ray Traversal)",																											"")
+	pl_attribute_metadata(Opacity,							float,											1.0f,										ReadWrite,	"Opacity, usually within the interval [~0 .. 1] = [transparent .. solid] (2.0 - Ray Traversal)",																		"")
+	pl_attribute_metadata(IsosurfaceValue,					float,											0.2f,										ReadWrite,	"Isosurface value, usually within the interval [0 .. 1] (2.0 - Ray Traversal)",																							"")
+	// 2.2 - Reconstruction
+	// 2.2 - Fetch Scalar
+	pl_attribute_metadata(Reconstruction,					pl_enum_type_def3(SNVolume, EReconstruction),	SNVolume::TrilinearFiltering,				ReadWrite,	"Continues volume reconstruction (2.2 - Fetch Scalar)",																													"")
+	pl_attribute_metadata(VolumeTextureLOD,					float,											0.0,										ReadWrite,	"Volume texture level of detail (0...<number of mipmaps>-1), usually the value 3 shows a well notable effect (2.2 - Reconstruction)(2.2 - Fetch Scalar)",				"Min='0'")
+	// 2.3 - Shading
+	pl_attribute_metadata(Shading,							pl_enum_type_def3(SNVolume, EShading),			SNVolume::ShadingLighting,					ReadWrite,	"Technique to use for the shading (2.3 - Shading)",																														"")
+	// 2.4 - Classification
+	pl_attribute_metadata(Classification,					pl_enum_type_def3(SNVolume, EClassification),	SNVolume::ClassificationTransferFunction,	ReadWrite,	"Technique to use for the classification (2.4 - Classification)",																										"")
+	pl_attribute_metadata(ScalarClassificationThreshold,	float,											0.06f,										ReadWrite,	"Scalar classification threshold (2.4 - Classification)",																												"")
+	// 2.5 - Gradient
+	pl_attribute_metadata(Gradient,							pl_enum_type_def3(SNVolume, EGradient),			SNVolume::GradientCentralDifferences,		ReadWrite,	"Technique to use for the gradient (2.5 - Gradient)",																													"")
+	pl_attribute_metadata(PostClassificationGradient,		bool,											false,										ReadWrite,	"If 'true', the gradient is calculated using the alpha channel of the classified scalar, else the unclassified scalar is used (better performance)(2.5 - Gradient)",	"")
+	// 2.6 - Illumination
+	pl_attribute_metadata(Illumination,						pl_enum_type_def3(SNVolume, EIllumination),		SNVolume::IlluminationBlinnPhong,			ReadWrite,	"Technique to use for the illumination (2.6 - Illumination)",																											"")
+		// Overwritten PLScene::SceneNode attributes
+	pl_attribute_metadata(Flags,							pl_flag_type_def3(SNVolume, EFlags),			0,											ReadWrite,	"Flags",																																								"")
+	pl_attribute_metadata(AABBMin,							PLMath::Vector3,								PLMath::Vector3(0.0f, 0.0f, 0.0f),			ReadWrite,	"Minimum position of the 'scene node space' axis aligned bounding box",																									"")
+	pl_attribute_metadata(AABBMax,							PLMath::Vector3,								PLMath::Vector3(1.0f, 1.0f, 1.0f),			ReadWrite,	"Maximum position of the 'scene node space' axis aligned bounding box",																									"")
+pl_class_metadata_end(SNVolume)
 
 
 //[-------------------------------------------------------]

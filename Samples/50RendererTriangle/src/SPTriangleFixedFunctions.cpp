@@ -45,7 +45,10 @@ using namespace PLRenderer;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPTriangleFixedFunctions)
+pl_class_metadata(SPTriangleFixedFunctions, "", SPTriangle, "Fixed functions triangle surface painter")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLRenderer::Renderer&,	"Parameter constructor",	"")
+pl_class_metadata_end(SPTriangleFixedFunctions)
 
 
 //[-------------------------------------------------------]

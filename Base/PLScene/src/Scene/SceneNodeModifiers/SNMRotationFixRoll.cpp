@@ -42,7 +42,13 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMRotationFixRoll)
+pl_class_metadata(SNMRotationFixRoll, "PLScene", PLScene::SNMTransform, "Scene node modifier class 'correcting' the rotation of a scene node")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(UpVector,	PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	"Up vector",															"")
+	pl_attribute_metadata(Speed,	float,				5.0f,					ReadWrite,	"Fix roll speed, if <=0 rotation is fixed at once and not 'smoothly'",	"Min='0.0'")
+pl_class_metadata_end(SNMRotationFixRoll)
 
 
 //[-------------------------------------------------------]

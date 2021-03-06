@@ -41,7 +41,14 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessMonochrome)
+pl_class_metadata(SNMPostProcessMonochrome, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(LuminanceConvert,	PLGraphics::Color3,	PLGraphics::Color3(0.2125f, 0.7154f, 0.0721f),	ReadWrite,	"Luminance convert",					"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,			PLCore::String,		"Data/PostProcesses/Monochrome.pp",				ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessMonochrome)
 
 
 //[-------------------------------------------------------]

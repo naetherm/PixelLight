@@ -45,7 +45,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionClipPositionBox)
+pl_class_metadata(ShaderFunctionClipPositionBox, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClipPosition, "Box shader function implementation class for clip position")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionClipPositionBox)
 
 
 //[-------------------------------------------------------]

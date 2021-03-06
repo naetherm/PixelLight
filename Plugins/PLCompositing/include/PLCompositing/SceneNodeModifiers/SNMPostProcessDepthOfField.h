@@ -62,19 +62,17 @@ class SNMPostProcessDepthOfField : public SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SNMPostProcessDepthOfField, "PLCompositing", PLCompositing::SNMPostProcess, "Depth of field camera scene node post process modifier class")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(NearBlurDepth,		float,				0.15f,									ReadWrite,	DirectValue,	"Near blur depth",													"")
-		pl_attribute(FocalPlaneDepth,	float,				0.25f,									ReadWrite,	DirectValue,	"Focal plane depth",												"")
-		pl_attribute(FarBlurDepth,		float,				25.0f,									ReadWrite,	DirectValue,	"Far blur depth",													"")
-		pl_attribute(BlurrinessCutoff,	float,				0.8f,									ReadWrite,	DirectValue,	"Blurriness cutoff constant for objects behind the focal plane",	"")
-		pl_attribute(BloomScale,		float,				1.0f,									ReadWrite,	DirectValue,	"Bloom scale",														"")
-		pl_attribute(Strength,			PLMath::Vector2,	PLMath::Vector2(4.0f, 4.0f),			ReadWrite,	DirectValue,	"Blur strength",													"")
+		pl_attribute_directvalue(					NearBlurDepth,		float,				0.15f,									ReadWrite)
+		pl_attribute_directvalue(					FocalPlaneDepth,	float,				0.25f,									ReadWrite)
+		pl_attribute_directvalue(					FarBlurDepth,		float,				25.0f,									ReadWrite)
+		pl_attribute_directvalue(					BlurrinessCutoff,	float,				0.8f,									ReadWrite)
+		pl_attribute_directvalue(					BloomScale,			float,				1.0f,									ReadWrite)
+		pl_attribute_directvalue(					Strength,			PLMath::Vector2,	PLMath::Vector2(4.0f, 4.0f),			ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,			PLCore::String,		"Data/PostProcesses/DepthOfField.pp",	ReadWrite,	ModifyAttr,		"Filename of the post process to use",								"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(SNMPostProcess,	Filename,			PLCore::String,		"Data/PostProcesses/DepthOfField.pp",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

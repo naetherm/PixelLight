@@ -69,10 +69,8 @@ class SNMPhysicsUpdateVelocity : public SNMPhysics {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsUpdateVelocity, "PLPhysics", PLPhysics::SNMPhysics, "Updates the linear and angular velocity of physics bodies according to the scene node movement")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+	pl_class_def(PLPHYSICS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

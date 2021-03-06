@@ -46,7 +46,16 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMLookController)
+pl_class_metadata(SNMLookController, "PLEngine", PLScene::SNMTransform, "Scene node rotation input controller modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InputSemantic,	PLCore::String,									"",									ReadWrite,	"Semantic of this input controller (e.g. \"Camera\")",	"")
+		// Overwritten PLScene::SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNMLookController, EFlags),	SNMLookController::UseRotationKey,	ReadWrite,	"Flags",												"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
+pl_class_metadata_end(SNMLookController)
 
 
 //[-------------------------------------------------------]

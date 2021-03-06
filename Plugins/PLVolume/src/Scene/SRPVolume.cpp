@@ -48,7 +48,10 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPVolume)
+pl_class_metadata(SRPVolume, "PLVolume", PLScene::SceneRendererPass, "Abstract scene renderer pass for volume scene nodes")
+	// Attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SRPVolume, EFlags),	0,	ReadWrite,	"Flags",	"")
+pl_class_metadata_end(SRPVolume)
 
 
 //[-------------------------------------------------------]

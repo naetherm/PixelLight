@@ -67,7 +67,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Gui)
+pl_class_metadata(Gui, "PLGui", PLCore::Object, "Main GUI class")
+	// Methods
+	pl_method_1_metadata(SetMouseVisible,	pl_ret_type(void),	bool,	"Set the mouse cursor visibility. 'true' as first parameter if the mouse cursor shall be visible.",	"")
+pl_class_metadata_end(Gui)
 
 
 //[-------------------------------------------------------]

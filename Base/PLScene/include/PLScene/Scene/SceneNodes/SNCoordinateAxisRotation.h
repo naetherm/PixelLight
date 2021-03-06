@@ -55,13 +55,11 @@ class SNCoordinateAxisRotation : public SNCoordinateAxis {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNCoordinateAxisRotation, "PLScene", PLScene::SNCoordinateAxis, "Scene node that draws coordinate axis (on the lower right by default) of the screen showing the current rotation")
+	pl_class_def(PLS_API)
 		// Attributes
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	NoCulling,	ReadWrite,	GetSet,	"Flags",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNCoordinateAxisRotation,	Flags,	PLCore::uint32,	NoCulling,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

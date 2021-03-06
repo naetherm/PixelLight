@@ -272,6 +272,10 @@ void FrontendMainWindow::keyPressEvent(QKeyEvent *pQKeyEvent)
 		// Toggle fullscreen mode
 		m_pFrontendQt->SetFullscreen(!m_pFrontendQt->IsFullscreen());
 	}
+	// The Escape key minimizes a window, not closes
+	if(pQKeyEvent->key() == Qt::Key_Escape) {
+		QWidget::showMinimized();
+	}
 }
 
 void FrontendMainWindow::paintEvent(QPaintEvent *)

@@ -47,7 +47,14 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorSphere)
+pl_class_metadata(MeshCreatorSphere, "PLMesh", PLMesh::MeshCreator, "Sphere mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Radius,	float,				0.5f,					ReadWrite,	"Sphere radius",							"")
+	pl_attribute_metadata(Detail,	PLCore::uint32,		20,						ReadWrite,	"Sphere detail (must be a multiple of 2)",	"")
+	pl_attribute_metadata(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Offset to center",							"")
+pl_class_metadata_end(MeshCreatorSphere)
 
 
 //[-------------------------------------------------------]

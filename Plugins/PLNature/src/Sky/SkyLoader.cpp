@@ -37,7 +37,12 @@ namespace PLNature {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SkyLoader)
+pl_class_metadata(SkyLoader, "PLNature", PLCore::LoaderImpl, "Abstract sky loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Sky")
+	pl_properties_end
+pl_class_metadata_end(SkyLoader)
 
 
 //[-------------------------------------------------------]

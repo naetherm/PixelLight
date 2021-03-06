@@ -97,12 +97,8 @@ class DockWidget : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLFRONTENDQT_RTTI_EXPORT, DockWidget, "PLFrontendQt", PLCore::Object, "Abstract PixelLight RTTI class encapsulating a Qt dock widget")
-		// Properties
-		pl_properties
-			pl_property("Title", "")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLFRONTENDQT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -215,7 +211,7 @@ class DockWidget : public PLCore::Object {
 		*  @see
 		*    - "void SetDockWidgetsAttribute(const PLCore::String &sName, const PLCore::String &sValue)"
 		*/
-		PLFRONTENDQT_API void SetDockWidgetsAttribute(const PLCore::String &sName, const PLCore::DynVar *pVar);
+		PLFRONTENDQT_API void SetDockWidgetsAttribute(const PLCore::String &sName, const PLCore::DynVarPtr pVar);
 
 		/**
 		*  @brief

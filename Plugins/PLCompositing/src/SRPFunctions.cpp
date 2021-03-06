@@ -37,7 +37,8 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPFunctions)
+pl_class_metadata(SRPFunctions, "PLCompositing", PLScene::SceneRendererPass, "Abstract scene renderer pass calling all <x>-draw functions of the visible scene nodes")
+pl_class_metadata_end(SRPFunctions)
 
 
 //[-------------------------------------------------------]

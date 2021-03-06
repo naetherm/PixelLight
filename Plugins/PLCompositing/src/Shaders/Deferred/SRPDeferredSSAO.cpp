@@ -52,7 +52,17 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredSSAO)
+pl_class_metadata(SRPDeferredSSAO, "PLCompositing", PLCompositing::SRPDeferred, "Abstract scene renderer pass for deferred rendering 'Screen-Space Ambient Occlusion' (SSAO)")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,								"",		ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",																																		"")
+	pl_attribute_metadata(Contrast,			float,										1.25f,	ReadWrite,	"This value allows to scales up the ambient occlusion values",																																																				"Min='0.0'")
+	pl_attribute_metadata(BlurRadius,		float,										2.0f,	ReadWrite,	"Blur kernel radius in pixel",																																																												"Min='0.0'")
+	pl_attribute_metadata(BlurSharpness,	float,										16.0f,	ReadWrite,	"Controls the depth-dependent weight of the bilateral filter, to avoid bleeding across edges. A zero sharpness is a pure Gaussian blur. Increasing the blur sharpness removes bleeding by using lower weights for samples with large depth delta from the current pixel.",	"Min='0.0'")
+	pl_attribute_metadata(ResolutionScale,	float,										0.5f,	ReadWrite,	"If less 1, the ambient occlusion is computed with a lower resolution and then stretched up to the full resolution. This can be used to trade visual quality for better performance.",																						"Min='0.0' Max='1.0'")
+	pl_attribute_metadata(SceneScale,		float,										1.0f,	ReadWrite,	"Scene scale ",																																																																"Min='0.0'")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPDeferredSSAO, EFlags),	0,		ReadWrite,	"Flags",																																																																	"")
+pl_class_metadata_end(SRPDeferredSSAO)
 
 
 //[-------------------------------------------------------]

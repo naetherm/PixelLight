@@ -52,14 +52,8 @@ class SceneCreatorLoadableTypeMaterial : public SceneCreatorLoadableType {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SceneCreatorLoadableTypeMaterial, "PLEngine", PLEngine::SceneCreatorLoadableType, "Material loadable type scene creator")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Material")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -45,7 +45,15 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureCreatorTurbulence3D)
+pl_class_metadata(TextureCreatorTurbulence3D, "PLRenderer", PLRenderer::TextureCreator, "3D turbulence texture (TextureBuffer::L8) creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(XSize,	PLCore::uint32,		128,									ReadWrite,	"Texture x size (must be a power of 2)",	"Min='8'")
+	pl_attribute_metadata(YSize,	PLCore::uint32,		32,										ReadWrite,	"Texture y size (must be a power of 2)",	"Min='8'")
+	pl_attribute_metadata(ZSize,	PLCore::uint32,		32,										ReadWrite,	"Texture z size (must be a power of 2)",	"Min='8'")
+	pl_attribute_metadata(Scale,	PLMath::Vector3,	PLMath::Vector3(0.08f, 0.16f, 0.16f),	ReadWrite,	"Texture scale",							"")
+pl_class_metadata_end(TextureCreatorTurbulence3D)
 
 
 //[-------------------------------------------------------]

@@ -54,7 +54,12 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredVolumetricFog)
+pl_class_metadata(SRPDeferredVolumetricFog, "PLCompositing", PLCompositing::SRPDeferred, "Deferred rendering based volumetric fog scene renderer pass implementation")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,	"",	ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+pl_class_metadata_end(SRPDeferredVolumetricFog)
 
 
 //[-------------------------------------------------------]

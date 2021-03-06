@@ -96,7 +96,7 @@ class TestClass2 : public DummyClass, public TestClass1 {
 		// Attributes
 		pl_attribute(Bool,	bool,						true,		ReadWrite,	DirectValue,	"Boolean variable",			"")
 			// Overwritten TestClass1 attributes
-		pl_attribute(Float,	float,						2.71828f,	ReadWrite,	ModifyAttr,		"Euler number",				"")
+		pl_attribute(Float,	float,						2.71828f,	ReadWrite,	ModifyAttr)
 		pl_attribute(Flags,	pl_flag_type(TestFlags2),	32,			ReadWrite,	ModifyAttr,		"Flags test (extended)",	"")
 		// Constructors
 		pl_constructor_0(Create,	"Default constructor",	"")

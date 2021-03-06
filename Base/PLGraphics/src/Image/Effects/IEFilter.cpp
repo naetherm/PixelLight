@@ -38,7 +38,8 @@ namespace PLGraphics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(IEFilter)
+pl_class_metadata(IEFilter, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Generic image filter")
+pl_class_metadata_end(IEFilter)
 
 
 //[-------------------------------------------------------]

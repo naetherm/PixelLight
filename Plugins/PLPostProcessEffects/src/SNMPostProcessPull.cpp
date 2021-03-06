@@ -41,7 +41,16 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessPull)
+pl_class_metadata(SNMPostProcessPull, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(WarpPoint,		PLMath::Vector2,	PLMath::Vector2(300.0f, 300.0f),	ReadWrite,	"Warp point, (0, 0) = (left, lower)",	"")
+	pl_attribute_metadata(WarpScale,		float,				-5.0f,								ReadWrite,	"Warp scale",							"")
+	pl_attribute_metadata(WarpDimension,	float,				500.0f,								ReadWrite,	"Warp dimension",						"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,			PLCore::String,		"Data/PostProcesses/Pull.pp",		ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessPull)
 
 
 //[-------------------------------------------------------]

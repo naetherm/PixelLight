@@ -56,7 +56,14 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDiffuseOnlyShaders)
+pl_class_metadata(SRPDiffuseOnlyShaders, "PLCompositing", PLCompositing::SRPDiffuseOnly, "Shaders based diffuse only scene renderer pass implementation, can also be used as depth only renderer pass")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,										"",	ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPDiffuseOnlyShaders, EFlags),	0,	ReadWrite,	"Flags",																																"")
+pl_class_metadata_end(SRPDiffuseOnlyShaders)
 
 
 //[-------------------------------------------------------]

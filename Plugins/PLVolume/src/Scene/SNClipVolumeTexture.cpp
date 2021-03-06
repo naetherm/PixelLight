@@ -57,7 +57,18 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNClipVolumeTexture)
+pl_class_metadata(SNClipVolumeTexture, "PLVolume", PLVolume::SNClip, "Clip volume texture scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(LoaderParameters,	PLCore::String,									"",										ReadWrite,	"Optional parameters for the used file loader",							"")
+	pl_attribute_metadata(VolumeFilename,	PLCore::String,									"",										ReadWrite,	"Filename of the volume data to use",									"Type='Volume'")
+	pl_attribute_metadata(ClipThreshold,	float,											0.5f,									ReadWrite,	"Clip threshold, everything above will be clipped",						"")
+		// Overwritten PLScene::SceneNode attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNClipVolumeTexture, EFlags),	0,										ReadWrite,	"Flags",																"")
+	pl_attribute_metadata(AABBMin,			PLMath::Vector3,								PLMath::Vector3(-0.5f, -0.5f, -0.5f),	ReadWrite,	"Minimum position of the 'scene node space' axis aligned bounding box",	"")
+	pl_attribute_metadata(AABBMax,			PLMath::Vector3,								PLMath::Vector3( 0.5f,  0.5f,  0.5f),	ReadWrite,	"Maximum position of the 'scene node space' axis aligned bounding box",	"")
+pl_class_metadata_end(SNClipVolumeTexture)
 
 
 //[-------------------------------------------------------]

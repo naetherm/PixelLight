@@ -37,6 +37,7 @@ PL_WARNING_PUSH
 	#include <QtGui/qfiledialog.h>
 	#include <QtGui/qinputdialog.h>
 	#include <QtGui/qdesktopservices.h>
+	#include <QtGui/QMessageBox.h>
 PL_WARNING_POP
 #include <PLCore/Log/Log.h>
 #include <PLCore/File/Url.h>
@@ -46,6 +47,8 @@ PL_WARNING_POP
 #include <PLScene/Scene/SceneContainer.h>
 #include <PLScene/Scene/SceneQueries/SQByClassName.h>
 #include <PLEngine/SceneCreator/SceneCreatorLoadableType.h>
+#include <PLRenderer/RendererContext.h>
+#include <PLRenderer/Material/MaterialManager.h>
 #include <PLFrontendQt/Frontend.h>
 #include <PLFrontendQt/QtStringAdapter.h>
 #include <PLFrontendQt/FrontendMainWindow.h>
@@ -64,6 +67,7 @@ using namespace PLCore;
 using namespace PLScene;
 using namespace PLEngine;
 using namespace PLFrontendQt;
+using namespace PLRenderer;
 
 
 //[-------------------------------------------------------]
@@ -79,14 +83,19 @@ Gui::Gui(ApplicationQt &cApplication) :
 	m_pGuiPicking(nullptr),
 	m_pQFileSystemWatcher(new QFileSystemWatcher()),
 	// Menu bar
+	m_pQActionNew(nullptr),
 	m_pQActionReload(nullptr),
 	m_pQActionAutomaticReload(nullptr),
+	m_pQActionSave(nullptr),
+	m_pQActionSaveAs(nullptr),
 	m_pQMenuCamera(nullptr),
 	m_pQActionGroupCamera(nullptr),
 	m_pQMenuWindow(nullptr),
 	m_pQActionGroupWindow(nullptr),
 	m_pQActionShowColorGradientBackground(nullptr),
 	m_pQActionShowBackfacesAndSilhouettes(nullptr),
+	m_pQActionReloadMaterials(nullptr),
+	m_pQActionReloadScene(nullptr),
 	// Status bar
 	m_pQLabelStatusBar(nullptr)
 {
@@ -172,11 +181,15 @@ void Gui::SetEnabled(bool bEnabled)
 			// Setup the update interval of the Qt main window (in milliseconds)
 			pFrontendMainWindow->SetUpdateInterval(10);
 
-			// Update reload Qt action
+			// Update reload and save Qt action
 			m_pQActionReload->setEnabled(m_pApplication->GetResourceFilename().GetLength() != 0);
+			m_pQActionSave->setEnabled(m_pApplication->GetResourceFilename().GetLength() != 0);
 
 			// Reset and fill the Qt file system watcher instance
 			ResetAndFillQFileSystemWatcher();
+
+			// Automatically activate the GUI
+			//pFrontendMainWindow->GetDockWidgetManager().CallDockWidgetsMethod("SelectObject", Params<void, Object*>(reinterpret_cast<Object*>(m_pApplication->GetScene())));
 		} else {
 			// Disable the timed update of the Qt main window
 			pFrontendMainWindow->SetUpdateInterval(0);
@@ -283,26 +296,53 @@ void Gui::InitMainWindow(QMainWindow &cQMainWindow)
 		{ // Setup the file menu
 			QMenu *pQMenu = cQMainWindow.menuBar()->addMenu(tr("&File"));
 
+			{ // Setup the new action
+				m_pQActionNew = new QAction(tr("&New"), &cQMainWindow);
+				connect(m_pQActionNew, SIGNAL(triggered()), this, SLOT(QtSlotTriggeredNew()));
+				m_pQActionNew->setShortcut(tr("Ctrl+T"));
+				pQMenu->addAction(m_pQActionNew);
+			}
+
+			// Add a separator
+			pQMenu->addSeparator();
+
 			{ // Setup the load action
-				QAction *pQAction = new QAction(tr("L&oad"), &cQMainWindow);
+				QAction *pQAction = new QAction(tr("&Load"), &cQMainWindow);
 				connect(pQAction, SIGNAL(triggered()), this, SLOT(QtSlotTriggeredLoad()));
 				pQAction->setShortcut(tr("Ctrl+L"));
 				pQMenu->addAction(pQAction);
 			}
 
 			{ // Setup the reload action
-				m_pQActionReload = new QAction(tr("R&eload"), &cQMainWindow);
+				m_pQActionReload = new QAction(tr("&Reload"), &cQMainWindow);
 				connect(m_pQActionReload, SIGNAL(triggered()), this, SLOT(QtSlotTriggeredReload()));
 				m_pQActionReload->setShortcut(tr("F5"));
 				pQMenu->addAction(m_pQActionReload);
 			}
 
 			{ // Setup the automatic reload action
-				m_pQActionAutomaticReload = new QAction(tr("A&utomatic Reload"), &cQMainWindow);
+				m_pQActionAutomaticReload = new QAction(tr("&Automatic Reload"), &cQMainWindow);
 				m_pQActionAutomaticReload->setCheckable(true);
 				m_pQActionAutomaticReload->setChecked(true);
 				connect(m_pQActionAutomaticReload, SIGNAL(triggered()), this, SLOT(QtSlotTriggeredAutomaticReload()));
 				pQMenu->addAction(m_pQActionAutomaticReload);
+			}
+
+			// Add a separator
+			pQMenu->addSeparator();
+
+			{ // Setup the save action
+				m_pQActionSave = new QAction(tr("&Save"), &cQMainWindow);
+				connect(m_pQActionSave, SIGNAL(triggered()), this, SLOT(QtSlotTriggeredSave()));
+				m_pQActionSave->setShortcut(tr("Ctrl+S"));
+				pQMenu->addAction(m_pQActionSave);
+			}
+
+			{ // Setup the save dialog action
+				m_pQActionSaveAs = new QAction(tr("Save &As..."), &cQMainWindow);
+				connect(m_pQActionSaveAs, SIGNAL(triggered()), this, SLOT(QtSlotTriggeredSaveAs()));
+				m_pQActionSaveAs->setShortcut(tr("Ctrl+Shift+S"));
+				pQMenu->addAction(m_pQActionSaveAs);
 			}
 
 			// Add a separator
@@ -353,6 +393,22 @@ void Gui::InitMainWindow(QMainWindow &cQMainWindow)
 				m_pQActionShowBackfacesAndSilhouettes->setCheckable(true);
 				connect(m_pQActionShowBackfacesAndSilhouettes, SIGNAL(triggered()), this, SLOT(QtSlotTriggeredShowBackfacesAndSilhouettes()));
 				pQMenu->addAction(m_pQActionShowBackfacesAndSilhouettes);
+			}
+
+			// Add a separator
+			pQMenu->addSeparator();
+
+			{ // Setup the reload materials action
+				m_pQActionReloadMaterials = new QAction(tr("Reload only materials"), &cQMainWindow);
+				connect(m_pQActionReloadMaterials, SIGNAL(triggered()), this, SLOT(QtSlotTriggeredReloadMaterials()));
+				m_pQActionReloadMaterials->setShortcut(tr("Ctrl+Shift+R"));
+				pQMenu->addAction(m_pQActionReloadMaterials);
+			}
+			{ // Setup the reload scene action
+				m_pQActionReloadScene = new QAction(tr("Reload only scene"), &cQMainWindow);
+				connect(m_pQActionReloadScene, SIGNAL(triggered()), this, SLOT(QtSlotTriggeredReloadScene()));
+				m_pQActionReloadScene->setShortcut(tr("Alt+F5"));
+				pQMenu->addAction(m_pQActionReloadScene);
 			}
 		}
 
@@ -501,6 +557,10 @@ void Gui::ResetAndFillQFileSystemWatcher()
 //[-------------------------------------------------------]
 void Gui::QtSlotFileChanged(const QString &path)
 {
+	// Resetting materials
+	RendererContext *pMaterials = m_pApplication->GetRendererContext();
+	pMaterials->GetMaterialManager().Clear();
+
 	// Reload the resource, not the provided file
 	// -> In case of scripts, the main script may be "Main.lua" but the included "Application.lua" may have just been changed
 	const String sResourceFilename = m_pApplication->GetResourceFilename();
@@ -561,15 +621,109 @@ void Gui::QtSlotTriggeredLoad()
 
 void Gui::QtSlotTriggeredReload()
 {
+	//Reload materials
+	RendererContext *pMaterials = m_pApplication->GetRendererContext();
+	pMaterials->GetMaterialManager().ReloadMaterials();
+
+	//Reload scene
 	const String sResourceFilename = m_pApplication->GetResourceFilename();
-	if (sResourceFilename.GetLength())
-		m_pApplication->LoadResource(sResourceFilename);
+	m_pApplication->LoadResource(sResourceFilename);
 }
 
 void Gui::QtSlotTriggeredAutomaticReload()
 {
 	// Reset and fill the Qt file system watcher instance
 	ResetAndFillQFileSystemWatcher();
+}
+
+void Gui::QtSlotTriggeredSave()
+{
+	// Get the scene container with our 'concrete scene'
+	SceneContainer *pSceneContainer = m_pApplication->GetScene();
+
+	// Hack(?) :(
+	pSceneContainer->SetAttribute("Filename", "");
+
+	// Get filename
+	const String sResourceFilename = m_pApplication->GetResourceFilename();
+
+	// Save scene (not reloading the scene when saving even if the "Automatic Reload" tick is checked)
+	if (m_pQActionAutomaticReload->isChecked()) {
+		m_pQActionAutomaticReload->setChecked(false);
+		ResetAndFillQFileSystemWatcher();
+		pSceneContainer->SaveByFilename(sResourceFilename);
+		m_pQActionAutomaticReload->setChecked(true);
+		ResetAndFillQFileSystemWatcher();
+	} else {
+		pSceneContainer->SaveByFilename(sResourceFilename);
+	}
+
+}
+
+void Gui::QtSlotTriggeredSaveAs()
+{
+	// Fill the file filter Scene (*.scene *.SCENE)")
+	//String sFileFilter = ConstructFileFilter::ByLoadableType(QtStringAdapter::QtToPL(tr("Scene")), "Scene");
+	String sFileFilter = "Scene (*.scene)";
+
+	// Open a file dialog were the user can choose a filename
+	const QString sQFilename = QFileDialog::getSaveFileName(GetFrontendMainWindow(), "", "", QtStringAdapter::PLToQt(sFileFilter));
+
+	// Get the scene container with our 'concrete scene'
+	SceneContainer *pSceneContainer = m_pApplication->GetScene();
+
+	// Hack(?) :(
+	pSceneContainer->SetAttribute("Filename", "");
+
+	// Save scene (not reloading the scene when saving even if the "Automatic Reload" tick is checked)
+	if (m_pQActionAutomaticReload->isChecked()) {
+		m_pQActionAutomaticReload->setChecked(false);
+		ResetAndFillQFileSystemWatcher();
+		pSceneContainer->SaveByFilename(QtStringAdapter::QtToPL(sQFilename));
+		m_pQActionAutomaticReload->setChecked(true);
+		ResetAndFillQFileSystemWatcher();
+	} else {
+		pSceneContainer->SaveByFilename(QtStringAdapter::QtToPL(sQFilename));
+	}	
+}
+
+void Gui::QtSlotTriggeredNew()
+{
+	// Get filename
+	const String sResourceFilename = m_pApplication->GetResourceFilename();
+
+	// To display a dialogue with warning
+	QMessageBox msgBox;
+	msgBox.setWindowTitle("PLViewerQt");
+	msgBox.setText(
+		"You're going to create a new scene.\n"
+		"All changes of the current scene will be lost."
+	);
+	msgBox.setIcon(QMessageBox::Warning);
+	msgBox.setInformativeText("Would you like to save the current scene?");
+	msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+	msgBox.setDefaultButton(QMessageBox::Save);
+	int dialog = msgBox.exec(); 
+	switch (dialog) {
+		case QMessageBox::Save:
+			// To display a dialogue "save as"
+			Gui::QtSlotTriggeredSaveAs();
+			// Then create an empty scene
+			m_pApplication->OnCreateRootScene();
+			// And unload old scene
+			m_pApplication->LoadResource("");
+			break;
+		case QMessageBox::Discard:
+			// Create an empty scene
+			m_pApplication->OnCreateRootScene();
+			// And unload old scene (if the scene has already been unloaded, do not make unnecessary actions)
+			if (sResourceFilename.GetLength())
+				m_pApplication->LoadResource("");
+			break;
+		default:
+			// nothing
+			break;
+	}
 }
 
 void Gui::QtSlotTriggeredExit()
@@ -733,6 +887,20 @@ void Gui::QtSlotTriggeredShowBackfacesAndSilhouettes()
 	// Update the configuration
 	if (m_pQActionShowBackfacesAndSilhouettes)
 		m_pApplication->GetConfig().SetVar("PLViewerQtConfig", "ShowBackfacesAndSilhouettes", m_pQActionShowBackfacesAndSilhouettes->isChecked());
+}
+
+void Gui::QtSlotTriggeredReloadMaterials()
+{
+	//Reload only materials
+	RendererContext *pMaterials = m_pApplication->GetRendererContext();
+	pMaterials->GetMaterialManager().ReloadMaterials();
+}
+
+void Gui::QtSlotTriggeredReloadScene()
+{
+	//Reload only scene
+	const String sResourceFilename = m_pApplication->GetResourceFilename();
+	m_pApplication->LoadResource(sResourceFilename);
 }
 
 void Gui::QtSlotTriggeredOpenPixelLightWebsite()

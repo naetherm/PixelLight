@@ -41,7 +41,12 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessLaplaceSharpen)
+pl_class_metadata(SNMPostProcessLaplaceSharpen, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Filename,	PLCore::String,	"Data/PostProcesses/LaplaceSharpen.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessLaplaceSharpen)
 
 
 //[-------------------------------------------------------]

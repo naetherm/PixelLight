@@ -37,7 +37,8 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMBillboard)
+pl_class_metadata(SNMBillboard, "PLScene", PLScene::SNMDraw, "Abstract billboard scene node modifier class")
+pl_class_metadata_end(SNMBillboard)
 
 
 //[-------------------------------------------------------]

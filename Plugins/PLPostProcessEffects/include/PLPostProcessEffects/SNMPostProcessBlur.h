@@ -56,15 +56,13 @@ class SNMPostProcessBlur : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessBlur, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(BloomScale,	float,				1.0f,							ReadWrite,	DirectValue,	"Bloom scale",							"")
-		pl_attribute(Strength,		PLMath::Vector2,	PLMath::Vector2(4.0f, 4.0f),	ReadWrite,	DirectValue,	"Blur strength",						"")
+		pl_attribute_directvalue(								BloomScale,	float,				1.0f,							ReadWrite)
+		pl_attribute_directvalue(								Strength,	PLMath::Vector2,	PLMath::Vector2(4.0f, 4.0f),	ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,		PLCore::String,		"Data/PostProcesses/Blur.pp",	ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,	PLCore::String,		"Data/PostProcesses/Blur.pp",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

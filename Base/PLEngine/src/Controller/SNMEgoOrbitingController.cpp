@@ -43,7 +43,15 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMEgoOrbitingController)
+pl_class_metadata(SNMEgoOrbitingController, "PLEngine", PLEngine::SNMOrbitingController, "Scene node modifier class rotating a scene node towards a target scene node using an input controller with 3D restriction")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	//Attributes
+	pl_attribute_metadata(UpVector,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	"Up vector",																											"")
+	pl_attribute_metadata(RollFactor,	float,				0.25f,					ReadWrite,	"Roll factor. If there's an absolute z-axis (e.g. when using a 3D mouse), apply roll -> looks & feels more natural.",	"")
+	// Slots
+	pl_slot_0_metadata(OnRotation,	"Called when the scene node rotation changed",	"")
+pl_class_metadata_end(SNMEgoOrbitingController)
 
 
 //[-------------------------------------------------------]
@@ -135,7 +143,7 @@ void SNMEgoOrbitingController::OnUpdate()
 				// Y rotation axis: Update yaw (also called 'heading', change is turning to the left or right) - in degree
 				m_fYaw += fY;
 
-				// Limit the pitch (no full 90° to avoid dead angles)
+				// Limit the pitch (no full 90ï¿½ to avoid dead angles)
 				if (m_fPitch > 89.9f)
 					m_fPitch = 89.9f;
 				if (m_fPitch < -89.9f)

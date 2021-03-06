@@ -63,20 +63,16 @@ class SNMScript : public PLScene::SceneNodeModifier {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMScript, "PLScriptBindings", PLScene::SceneNodeModifier, "Script scene node modifier")
+	pl_class_def()
 		// Attributes
-		pl_attribute(Script,			PLCore::String,	"",			ReadWrite,	GetSet,			"Script to use (set the script again in order to reload it)",																									"")
-		pl_attribute(OnInitFunction,	PLCore::String,	"OnInit",	ReadWrite,	DirectValue,	"Name of the optional script function called by C++ when the scene node modifier should initialize itself",														"")
-		pl_attribute(OnUpdateFunction,	PLCore::String,	"OnUpdate",	ReadWrite,	GetSet,			"Name of the optional script function called by C++ when the scene node modifier should update itself",															"")
-		pl_attribute(OnDeInitFunction,	PLCore::String,	"OnDeInit",	ReadWrite,	DirectValue,	"Name of the optional script function called by C++ when the scene node modifier should de-initialize itself",													"")
-		pl_attribute(ScriptExecute,		PLCore::String,	"",			ReadWrite,	GetSet,			"Script source code to execute, can be used to set global variables (Lua example: ScriptExecute=\"PublicVariables.Speed=0.07 PublicVariables.Radius=0.01\")",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-		// Methods
-		pl_method_0(GetScriptInstance,	pl_ret_type(PLCore::Script*),	"Returns the instance of the used script (can be a null pointer)",	"")
+		pl_attribute_getset		(SNMScript,	Script,				PLCore::String,	"",			ReadWrite)
+		pl_attribute_directvalue(			OnInitFunction,		PLCore::String,	"OnInit",	ReadWrite)
+		pl_attribute_getset		(SNMScript,	OnUpdateFunction,	PLCore::String,	"OnUpdate",	ReadWrite)
+		pl_attribute_directvalue(			OnDeInitFunction,	PLCore::String,	"OnDeInit",	ReadWrite)
+		pl_attribute_getset		(SNMScript,	ScriptExecute,		PLCore::String,	"",			ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
-	pl_class_end
+		pl_slot_0_def(SNMScript,	OnUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -34,15 +34,9 @@
 #ifdef PLPHYSICSNEWTON_EXPORTS
 	// To export classes, methods and variables
 	#define PLPHYSICSNEWTON_API __declspec(dllexport)
-
-	// To export RTTI elements
-	#define PLPHYSICSNEWTON_RTTI_EXPORT 1
 #else
 	// To import classes, methods and variables
 	#define PLPHYSICSNEWTON_API __declspec(dllimport)
-
-	// To import RTTI elements
-	#define PLPHYSICSNEWTON_RTTI_EXPORT 0
 #endif
 
 

@@ -57,7 +57,17 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNPhysicsMouseInteraction)
+pl_class_metadata(SNPhysicsMouseInteraction, "PLEngine", PLScene::SceneNode, "Mouse physics interaction scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InputSemantic,	PLCore::String,											"",										ReadWrite,	"Semantic of this input controller (e.g. \"Camera\")",								"")
+	pl_attribute_metadata(MaxPickingRange,	float,													0.0f,									ReadWrite,	"Maximum picking range, if 0.0, there's no range limit (physics container space)",	"Min='0.0'")
+	pl_attribute_metadata(ThrowForce,		float,													2.0f,									ReadWrite,	"Throw force",																		"Min='0.0'")
+	pl_attribute_metadata(ForceLineName,	PLCore::String,											"PhysicsForceLine",						ReadWrite,	"Name of the force visualization line node",										"")
+		// Overwritten PLScene::SceneNode attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNPhysicsMouseInteraction, EFlags),	SNPhysicsMouseInteraction::NoCulling,	ReadWrite,	"Flags",																			"")
+pl_class_metadata_end(SNPhysicsMouseInteraction)
 
 
 //[-------------------------------------------------------]

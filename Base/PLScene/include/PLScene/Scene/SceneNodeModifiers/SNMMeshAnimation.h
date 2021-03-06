@@ -56,17 +56,15 @@ class SNMMeshAnimation : public SNMMesh {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMMeshAnimation, "PLScene", PLScene::SNMMesh, "Mesh scene node animation modifier class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Name,		PLCore::String,	"",		ReadWrite,	GetSet,	"Name of the animation",										"")
-		pl_attribute(Frame,		float,			0.0f,	ReadWrite,	GetSet,	"Current animation frame",										"")
-		pl_attribute(Speed,		float,			1.0f,	ReadWrite,	GetSet,	"Animation playback speed (multiplied with original speed)",	"")
-		pl_attribute(Weight,	float,			1.0f,	ReadWrite,	GetSet,	"Animation weight",												"")
-		pl_attribute(MinWeight,	float,			0.0f,	ReadWrite,	GetSet,	"Minimum animation weight",										"")
-		pl_attribute(MaxWeight,	float,			1.0f,	ReadWrite,	GetSet,	"Maximum animation weight",										"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMMeshAnimation,	Name,		PLCore::String,	"",		ReadWrite)
+		pl_attribute_getset(SNMMeshAnimation,	Frame,		float,			0.0f,	ReadWrite)
+		pl_attribute_getset(SNMMeshAnimation,	Speed,		float,			1.0f,	ReadWrite)
+		pl_attribute_getset(SNMMeshAnimation,	Weight,		float,			1.0f,	ReadWrite)
+		pl_attribute_getset(SNMMeshAnimation,	MinWeight,	float,			0.0f,	ReadWrite)
+		pl_attribute_getset(SNMMeshAnimation,	MaxWeight,	float,			1.0f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

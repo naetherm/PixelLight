@@ -41,7 +41,15 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessBlur)
+pl_class_metadata(SNMPostProcessBlur, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(BloomScale,	float,				1.0f,							ReadWrite,	"Bloom scale",							"")
+	pl_attribute_metadata(Strength,		PLMath::Vector2,	PLMath::Vector2(4.0f, 4.0f),	ReadWrite,	"Blur strength",						"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,		"Data/PostProcesses/Blur.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessBlur)
 
 
 //[-------------------------------------------------------]

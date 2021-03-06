@@ -61,7 +61,18 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SCMirror)
+pl_class_metadata(SCMirror, "PLScene", PLScene::SCRenderToTexture, "Planar mirror scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Material,		PLCore::String,	"",										ReadWrite,	"Material to use",																				"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(DynamicMap,	PLCore::String,	"DynamicMap",							ReadWrite,	"Name of the material/effect parameter to assign the dynamic texture with",						"")
+	pl_attribute_metadata(Vertices,		PLCore::String,	"1.0 -1.0 -1.0 -1.0 -1.0 1.0 1.0 1.0",	ReadWrite,	"The vertices (x/y position) defining the mirror polygon. Each vertex has 3 components. (xyz)",	"")
+	pl_attribute_metadata(NearScale,	float,			1.0f,									ReadWrite,	"Virtual camera near plane scale",																"")
+	pl_attribute_metadata(Far,			float,			1000.0f,								ReadWrite,	"Virtual camera far plane",																		"")
+		// Overwritten SCRenderToTexture attributes
+	pl_attribute_metadata(FPSLimit,		float,			0.0f,									ReadWrite,	"Frames per second limitation, if 0, there's no limitation",									"Min='0.0'")
+pl_class_metadata_end(SCMirror)
 
 
 //[-------------------------------------------------------]

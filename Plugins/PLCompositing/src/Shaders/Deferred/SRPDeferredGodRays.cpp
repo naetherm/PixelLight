@@ -50,7 +50,20 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredGodRays)
+pl_class_metadata(SRPDeferredGodRays, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering god rays effect (volumetric light scattering as a post-process)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,									"",											ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+	pl_attribute_metadata(NumberOfSamples,	PLCore::uint32,									20,											ReadWrite,	"Number of samples, higher is better but costs more performance",																		"")
+	pl_attribute_metadata(Density,			float,											0.3f,										ReadWrite,	"Density",																																"")
+	pl_attribute_metadata(Weight,			float,											0.2f,										ReadWrite,	"The weight constant to influences the brightness",																						"")
+	pl_attribute_metadata(Decay,			float,											0.9f,										ReadWrite,	"Exponential decay attenuation coefficient",																							"")
+	pl_attribute_metadata(LightPosition,	PLMath::Vector2,								PLMath::Vector2(0.5f, 0.5f),				ReadWrite,	"Light position on screen, lower/left is (0,0) and upper/right is (1,1)",																"")
+	pl_attribute_metadata(Color,			PLGraphics::Color3,								PLGraphics::Color3(0.15f, 0.15f, 0.15f),	ReadWrite,	"God rays color",																														"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPDeferredGodRays, EFlags),	0,											ReadWrite,	"Flags",																																"")
+pl_class_metadata_end(SRPDeferredGodRays)
 
 
 //[-------------------------------------------------------]

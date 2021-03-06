@@ -62,19 +62,8 @@ class TransferFunctionLoaderTABLE : public TransferFunctionLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, TransferFunctionLoaderTABLE, "PLVolume", PLVolume::TransferFunctionLoader, "Transfer function loader implementation for the \"TABLE\" file format from the University of Erlangen, Germany")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"table,TABLE")
-			pl_property("Load",		"1")
-			pl_property("Save",		"0")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_2(Load,	pl_ret_type(bool),	TransferFunction&,			PLCore::File&,	"Load method",	"")
-		pl_method_2(Save,	pl_ret_type(bool),	const TransferFunction&,	PLCore::File&,	"Save method",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

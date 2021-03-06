@@ -30,17 +30,10 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include "PLCore/Base/Var/DynVar.h"
 #include "PLFrontendQt/DataModels/TreeItemBase.h"
 #include "PLFrontendQt/DataModels/PLTreeItems/PLDynVarTreeItemTypes.h"
 #include <QtCore/QStringList>
-
-
-//[-------------------------------------------------------]
-//[ Forward declarations                                  ]
-//[-------------------------------------------------------]
-namespace PLCore {
-	class DynVar;
-}
 
 
 //[-------------------------------------------------------]
@@ -64,7 +57,7 @@ class PLFRONTENDQT_API PLDynVarStringTreeItem : public TreeItemBase {
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
 	public:
-		explicit PLDynVarStringTreeItem(PLCore::DynVar *dynVar, PLDynVarTreeItemTypes::DynVarTreeItemTypes dynVarType = PLDynVarTreeItemTypes::String, TreeItemBase *parent = nullptr);
+		explicit PLDynVarStringTreeItem(PLCore::DynVarPtr dynVar, PLDynVarTreeItemTypes::DynVarTreeItemTypes dynVarType = PLDynVarTreeItemTypes::String, TreeItemBase *parent = nullptr);
 		virtual QVariant data(const int column, const int role) override;
 		virtual bool setData(const int column, const QVariant &value, const int role) override;
 
@@ -80,7 +73,7 @@ class PLFRONTENDQT_API PLDynVarStringTreeItem : public TreeItemBase {
 	//[ Protected data                                        ]
 	//[-------------------------------------------------------]
 	protected:
-		PLCore::DynVar 								*m_dynVar;
+		PLCore::DynVarPtr 							m_dynVar;
 
 
 	//[-------------------------------------------------------]

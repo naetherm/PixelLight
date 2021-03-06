@@ -49,7 +49,13 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(CoreApplication)
+pl_class_metadata(CoreApplication, "PLCore", PLCore::Object, "Application class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_0_metadata(GetApplicationContext,	pl_ret_type(const ApplicationContext&),			"Get application context.",																		"")
+	pl_method_1_metadata(Exit,					pl_ret_type(void),						int,	"Exit application. Return code for application as first parameter (usually 0 means no error).",	"")
+pl_class_metadata_end(CoreApplication)
 
 
 //[-------------------------------------------------------]

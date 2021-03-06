@@ -67,12 +67,10 @@ class SNMOrbitingController : public PLScene::SNMOrbiting {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNMOrbitingController, "PLEngine", PLScene::SNMOrbiting, "Scene node modifier class rotating a scene node towards a target scene node using an input controller")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(InputSemantic,	PLCore::String,	"",	ReadWrite,	DirectValue,	"Semantic of this input controller (e.g. \"Camera\")",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(InputSemantic,	PLCore::String,	"",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

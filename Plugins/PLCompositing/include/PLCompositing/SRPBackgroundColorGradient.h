@@ -54,16 +54,14 @@ class SRPBackgroundColorGradient : public SRPBackground {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPBackgroundColorGradient, "PLCompositing", PLCompositing::SRPBackground, "Color gradient background scene renderer pass")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(Color1,	PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite,	DirectValue,	"First color to use",																"")
-		pl_attribute(Color2,	PLGraphics::Color4,	PLGraphics::Color4::Black,	ReadWrite,	DirectValue,	"Second color to use",																"")
-		pl_attribute(Angle,		float,				135.0f,						ReadWrite,	DirectValue,	"Clockwise angle (in degree) of the gradient color. 0° means from left to right.",	"")
-		pl_attribute(Position,	PLMath::Vector2,	PLMath::Vector2::Zero,		ReadWrite,	DirectValue,	"Gradient quad position (0..1), (0, 0)=left top",									"")
-		pl_attribute(Size,		PLMath::Vector2,	PLMath::Vector2::One,		ReadWrite,	DirectValue,	"Gradient quad size (0..1)",														"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Color1,	PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite)
+		pl_attribute_directvalue(Color2,	PLGraphics::Color4,	PLGraphics::Color4::Black,	ReadWrite)
+		pl_attribute_directvalue(Angle,		float,				135.0f,						ReadWrite)
+		pl_attribute_directvalue(Position,	PLMath::Vector2,	PLMath::Vector2::Zero,		ReadWrite)
+		pl_attribute_directvalue(Size,		PLMath::Vector2,	PLMath::Vector2::One,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

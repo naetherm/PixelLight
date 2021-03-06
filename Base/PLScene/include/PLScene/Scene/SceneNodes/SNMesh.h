@@ -72,7 +72,7 @@ class SNMesh : public SceneNode {
 			CalculateNormals	   = 1<<14,	/**< Calculate normal vectors? (if not already there) (if possible, don't use this flag -> loading times...) */
 			CalculateTSVs		   = 1<<15	/**< Calculate tangent space vectors? (if not already there) (if possible, don't use this flag -> loading times...) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(NoAutomaticBoundingBox,	"Do not create the bounding box of the scene node automatically using the bounding box of the used mesh")
 			pl_enum_value(LoadAtOnce,				"Load the mesh at once even if not used at the moment")
@@ -101,7 +101,7 @@ class SNMesh : public SceneNode {
 			// Misc
 			DebugShowAnchorPoints   = 1<<17		/**< Draw anchor points */
 		};
-		pl_enum(EDebugFlags)
+		pl_flag(EDebugFlags)
 			pl_enum_base(SceneNode::EDebugFlags)
 			// Mesh
 			pl_enum_value(DebugShowWireframe,		"Draw wireframe")
@@ -122,20 +122,14 @@ class SNMesh : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMesh, "PLScene", PLScene::SceneNode, "An mesh is a special scene node that has a 3D mesh attached to it by default")
-		// Properties
-		pl_properties
-			pl_property("Icon",	"Data/Textures/IconMesh.dds")
-		pl_properties_end
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Mesh,			PLCore::String,				"",	ReadWrite,	GetSet,	"Mesh to use",																		"Type='Mesh'")
-		pl_attribute(Skin,			PLCore::String,				"",	ReadWrite,	GetSet,	"Skin file or material name overwriting the default materials of the used mesh",	"Type='Skin'")
+		pl_attribute_getset(SNMesh,	Mesh,		PLCore::String,	"",	ReadWrite)
+		pl_attribute_getset(SNMesh,	Skin,		PLCore::String,	"",	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),		0,	ReadWrite,	GetSet,	"Flags",																			"")
-		pl_attribute(DebugFlags,	pl_flag_type(EDebugFlags),	0,	ReadWrite,	GetSet,	"Debug flags",																		"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMesh,	Flags,		PLCore::uint32,	0,	ReadWrite)
+		pl_attribute_getset(SNMesh,	DebugFlags,	PLCore::uint32,	0,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

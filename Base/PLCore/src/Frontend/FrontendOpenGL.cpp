@@ -43,7 +43,10 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(FrontendOpenGL)
+pl_class_metadata(FrontendOpenGL, "PLCore", PLCore::Frontend, "Simple test frontend that uses OpenGL")
+	// Constructors
+	pl_constructor_2_metadata(ParameterConstructor,	const FrontendContext&, FrontendImpl&,	"Parameter constructor. Frontend context this frontend is using as first parameter, frontend implementation this frontend is using as second parameter.",	"")
+pl_class_metadata_end(FrontendOpenGL)
 
 
 //[-------------------------------------------------------]

@@ -50,7 +50,13 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorBezierPatch)
+pl_class_metadata(MeshCreatorBezierPatch, "PLMesh", PLMesh::MeshCreator, "Bezier batch mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Offset,		PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Offset to center",		"")
+	pl_attribute_metadata(Divisions,	PLCore::uint32,		10,						ReadWrite,	"Number of divisions",	"")
+pl_class_metadata_end(MeshCreatorBezierPatch)
 
 
 //[-------------------------------------------------------]

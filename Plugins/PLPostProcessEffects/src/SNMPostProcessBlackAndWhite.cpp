@@ -42,7 +42,15 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessBlackAndWhite)
+pl_class_metadata(SNMPostProcessBlackAndWhite, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(LuminanceConvert,	PLGraphics::Color3,	PLGraphics::Color3(0.299f, 0.587f, 0.184f),	ReadWrite,	"Luminance convert",													"")
+	pl_attribute_metadata(MiddleIntensity,	float,				0.5f,										ReadWrite,	"If intensity is below this value, pixel is black, white otherwise",	"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,			PLCore::String,		"Data/PostProcesses/BlackAndWhite.pp",		ReadWrite,	"Filename of the post process to use",									"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessBlackAndWhite)
 
 
 //[-------------------------------------------------------]

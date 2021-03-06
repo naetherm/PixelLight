@@ -54,8 +54,8 @@ class GuiLabel : public GuiBase {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, GuiLabel, "", GuiBase, "Ingame Gui - Label (text item)")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

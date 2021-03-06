@@ -52,13 +52,11 @@ class SNMPhysicsBodyChamferCylinder : public SNMPhysicsBody {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsBodyChamferCylinder, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics chamfer cylinder body scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(Radius,	float,	1.0f,	ReadWrite,	GetSet,	"Chamfer cylinder radius at the base",				"Min='0.0'")
-		pl_attribute(Height,	float,	1.0f,	ReadWrite,	GetSet,	"Chamfer cylinder height along the x local axis",	"Min='0.0'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMPhysicsBodyChamferCylinder,	Radius,	float,	1.0f,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsBodyChamferCylinder,	Height,	float,	1.0f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

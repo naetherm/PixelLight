@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoaderAutoCADDXF)
+pl_class_metadata(SceneLoaderAutoCADDXF, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for dxf (AutoCAD DXF) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"dxf,DXF")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneLoaderAutoCADDXF)
 
 
 //[-------------------------------------------------------]

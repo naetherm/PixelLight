@@ -84,16 +84,16 @@ class LuaContext : public PLCore::AbstractContext {
 		static inline RTTIObjectPointer &GetRTTIObjectPointer(Script &cScript, PLCore::Object *pRTTIObject);
 		static inline void ReleaseRTTIObjectPointer(RTTIObjectPointer &cInstance);
 		// RTTIObjectSlotPointer
-		static inline RTTIObjectSlotPointer &GetRTTIObjectSlotPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventHandler *pDynEventHandler);
+		static inline RTTIObjectSlotPointer &GetRTTIObjectSlotPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventHandlerPtr pDynEventHandler);
 		static inline void ReleaseRTTIObjectSlotPointer(RTTIObjectSlotPointer &cInstance);
 		// RTTIObjectMethodPointer
 		static inline RTTIObjectMethodPointer &GetRTTIObjectMethodPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynFuncPtr pDynFunc);
 		static inline void ReleaseRTTIObjectMethodPointer(RTTIObjectMethodPointer &cInstance);
 		// RTTIObjectSignalPointer
-		static inline RTTIObjectSignalPointer &GetRTTIObjectSignalPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEvent *pDynEvent);
+		static inline RTTIObjectSignalPointer &GetRTTIObjectSignalPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventPtr pDynEvent);
 		static inline void ReleaseRTTIObjectSignalPointer(RTTIObjectSignalPointer &cInstance);
 		// RTTIObjectSignalMethodPointer
-		static inline RTTIObjectSignalMethodPointer &GetRTTIObjectSignalMethodPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEvent *pDynEvent, RTTIObjectSignalMethodPointer::EMethod nMethod);
+		static inline RTTIObjectSignalMethodPointer &GetRTTIObjectSignalMethodPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventPtr pDynEvent, RTTIObjectSignalMethodPointer::EMethod nMethod);
 		static inline void ReleaseRTTIObjectSignalMethodPointer(RTTIObjectSignalMethodPointer &cInstance);
 
 

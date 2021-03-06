@@ -51,7 +51,10 @@ using namespace PLMesh;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPMeshShaders)
+pl_class_metadata(SPMeshShaders, "", SPMesh, "Shaders based mesh surface painter")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLRenderer::Renderer&,	"Parameter constructor",	"")
+pl_class_metadata_end(SPMeshShaders)
 
 
 //[-------------------------------------------------------]

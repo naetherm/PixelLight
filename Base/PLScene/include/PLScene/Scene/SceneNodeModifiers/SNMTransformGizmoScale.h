@@ -52,11 +52,11 @@ class SNMTransformGizmoScale : public SNMTransformGizmo {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMTransformGizmoScale, "PLScene", PLScene::SNMTransformGizmo, "Abstract scale transform gizmo scene node modifier base class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(LineWidth,	float,	2.0f,	ReadWrite,	DirectValue,	"Line width",					"")
-		pl_attribute(Tolerance,	float,	0.6f,	ReadWrite,	DirectValue,	"Tolerance for axis selection",	"")
-	pl_class_end
+		pl_attribute_directvalue(LineWidth,	float,	2.0f,	ReadWrite)
+		pl_attribute_directvalue(Tolerance,	float,	0.6f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

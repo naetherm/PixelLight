@@ -44,7 +44,21 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNLineGrid)
+pl_class_metadata(SNLineGrid, "PLScene", PLScene::SceneNode, "Line grid scene node on the nodes local space x/y-plane")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(NumOfXLines,	PLCore::uint32,							5,												ReadWrite,	"Number of lines along each +/- x axis",								"")
+	pl_attribute_metadata(NumOfYLines,	PLCore::uint32,							5,												ReadWrite,	"Number of lines along each +/- y axis",								"")
+	pl_attribute_metadata(MainWidth,	float,									1.0f,											ReadWrite,	"Main lines width (if supported by the the used renderer API)",			"Min='1.0'")
+	pl_attribute_metadata(MainColor,	PLGraphics::Color4,						PLGraphics::Color4(0.1f, 0.1f, 0.1f, 1.0f),		ReadWrite,	"Main lines color (r/g/b/a)",											"")
+	pl_attribute_metadata(MinorWidth,	float,									1.0f,											ReadWrite,	"Minor lines width (if supported by the the used renderer API)",		"Min='1.0'")
+	pl_attribute_metadata(MinorColor,	PLGraphics::Color4,						PLGraphics::Color4(0.55f, 0.55f, 0.55f, 1.0f),	ReadWrite,	"Minor lines color (r/g/b/a)",											"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,		pl_flag_type_def3(SNLineGrid, EFlags),	0,												ReadWrite,	"Flags",																"")
+	pl_attribute_metadata(AABBMin,		PLMath::Vector3,						PLMath::Vector3(-0.5f, -0.5f, -0.5f),			ReadWrite,	"Minimum position of the 'scene node space' axis aligned bounding box",	"")
+	pl_attribute_metadata(AABBMax,		PLMath::Vector3,						PLMath::Vector3( 0.5f,  0.5f,  0.5f),			ReadWrite,	"Maximum position of the 'scene node space' axis aligned bounding box",	"")
+pl_class_metadata_end(SNLineGrid)
 
 
 //[-------------------------------------------------------]

@@ -68,10 +68,8 @@ class Renderer : public PLRenderer::RendererBackend {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDEREROPENGL_RTTI_EXPORT, Renderer, "PLRendererOpenGL", PLRenderer::RendererBackend, "OpenGL 1.1 + extensions renderer backend")
-		// Constructors
-		pl_constructor_6(DefaultConstructor,	PLCore::handle,	pl_enum_type(EMode),	PLCore::uint32,	PLCore::uint32,	PLCore::uint32,	PLCore::String,	"Constructor with renderer mode, Z buffer bits, stencil buffer bits, the number of multisample antialiasing samples per pixel and the default shader language as parameter",	"")
-	pl_class_end
+	pl_class_def(PLRENDEREROPENGL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

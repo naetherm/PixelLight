@@ -52,10 +52,8 @@ class Button : public AbstractButton {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, Button, "PLGui", PLGui::AbstractButton, "Standard command button")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

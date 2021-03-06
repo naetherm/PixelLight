@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoaderDoom3)
+pl_class_metadata(SceneLoaderDoom3, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for md5 (Doom 3) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"md5mesh,MD5MESH")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneLoaderDoom3)
 
 
 //[-------------------------------------------------------]

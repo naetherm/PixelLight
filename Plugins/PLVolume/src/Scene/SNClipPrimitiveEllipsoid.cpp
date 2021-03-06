@@ -48,7 +48,13 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNClipPrimitiveEllipsoid)
+pl_class_metadata(SNClipPrimitiveEllipsoid, "PLVolume", PLVolume::SNClipPrimitive, "Clip primitive ellipsoid scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(AABBMin,	PLMath::Vector3,	PLMath::Vector3(-0.5f, -0.5f, -0.5f),	ReadWrite,	"Minimum position of the 'scene node space' axis aligned bounding box",	"")
+	pl_attribute_metadata(AABBMax,	PLMath::Vector3,	PLMath::Vector3( 0.5f,  0.5f,  0.5f),	ReadWrite,	"Maximum position of the 'scene node space' axis aligned bounding box",	"")
+pl_class_metadata_end(SNClipPrimitiveEllipsoid)
 
 
 //[-------------------------------------------------------]

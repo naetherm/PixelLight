@@ -52,17 +52,15 @@ class PGSpring : public PGPhysics {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGSpring, "PLParticleGroups", PLParticleGroups::PGPhysics, "Spring particle group")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(Size,			float,			0.2f,							ReadWrite,	DirectValue,	"Size",						"Min='0.0001'")
-		pl_attribute(RotVelocity,	float,			1.0f,							ReadWrite,	DirectValue,	"Rotation velocity",		"")
-		pl_attribute(VelocityScale,	float,			1.0f,							ReadWrite,	DirectValue,	"Velocity scale",			"")
+		pl_attribute_directvalue(			Size,			float,			0.2f,							ReadWrite)
+		pl_attribute_directvalue(			RotVelocity,	float,			1.0f,							ReadWrite)
+		pl_attribute_directvalue(			VelocityScale,	float,			1.0f,							ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,		PLCore::String,	"Data/Textures/PGSpring.dds",	ReadWrite,	GetSet,			"Particle group material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,		PLCore::uint32,	20,								ReadWrite,	GetSet,			"Number of particles",		"Min=1")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGSpring,	Material,		PLCore::String,	"Data/Textures/PGSpring.dds",	ReadWrite)
+		pl_attribute_getset		(PGSpring,	Particles,		PLCore::uint32,	20,								ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

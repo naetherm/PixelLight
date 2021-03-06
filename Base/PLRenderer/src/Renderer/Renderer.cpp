@@ -38,7 +38,8 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Renderer)
+pl_class_metadata(Renderer, "PLRenderer", PLCore::Object, "Abstract renderer main class")
+pl_class_metadata_end(Renderer)
 
 
 //[-------------------------------------------------------]

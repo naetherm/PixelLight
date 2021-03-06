@@ -56,14 +56,12 @@ class SNMPostProcessMonochrome : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessMonochrome, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(LuminanceConvert,	PLGraphics::Color3,	PLGraphics::Color3(0.2125f, 0.7154f, 0.0721f),	ReadWrite,	DirectValue,	"Luminance convert",					"")
+		pl_attribute_directvalue(								LuminanceConvert,	PLGraphics::Color3,	PLGraphics::Color3(0.2125f, 0.7154f, 0.0721f),	ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,			PLCore::String,		"Data/PostProcesses/Monochrome.pp",				ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,			PLCore::String,		"Data/PostProcesses/Monochrome.pp",				ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -39,7 +39,10 @@ namespace PLFrontendPLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ModTrapMouse)
+pl_class_metadata(ModTrapMouse, "PLFrontendPLGui", PLGui::Modifier, "Modifier which traps the mouse within the widget as soon as it gets active")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ModTrapMouse)
 
 
 //[-------------------------------------------------------]

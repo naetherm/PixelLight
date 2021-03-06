@@ -44,7 +44,10 @@ namespace PLFrontendNull {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Frontend)
+pl_class_metadata(Frontend, "PLFrontendNull", PLCore::FrontendImpl, "Null frontend implementation class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Frontend)
 
 
 //[-------------------------------------------------------]

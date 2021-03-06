@@ -37,7 +37,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionRaySetup)
+pl_class_metadata(ShaderFunctionRaySetup, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for ray setup")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"1.0 - Ray Setup")
+		pl_property("FunctionName",				"RaySetup")
+		pl_property("FunctionSignature_GLSL",	"void main()")
+		pl_property("FunctionSignature_Cg",		"void main()")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionRaySetup)
 
 
 //[-------------------------------------------------------]

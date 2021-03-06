@@ -60,8 +60,8 @@ class ThemeDesktop : public Theme {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, ThemeDesktop, "PLGui", PLGui::Theme, "PixelLight desktop theme")
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

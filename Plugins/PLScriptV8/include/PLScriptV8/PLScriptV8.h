@@ -49,15 +49,9 @@
 #ifdef PLSCRIPTV8_EXPORTS
 	// To export classes, methods and variables
 	#define PLSCRIPTV8_API			PL_GENERIC_API_EXPORT
-
-	// To export RTTI elements
-	#define PLSCRIPTV8_RTTI_EXPORT	PL_GENERIC_RTTI_EXPORT
 #else
 	// To import classes, methods and variables
 	#define PLSCRIPTV8_API			PL_GENERIC_API_IMPORT
-
-	// To import RTTI elements
-	#define PLSCRIPTV8_RTTI_EXPORT	PL_GENERIC_RTTI_IMPORT
 #endif
 
 

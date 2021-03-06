@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include <PLRenderer/Renderer/Backend/RendererBackend.h>
+#include "PLRendererOpenGLES2/PLRendererOpenGLES2.h"
 
 
 //[-------------------------------------------------------]
@@ -67,10 +68,8 @@ class Renderer : public PLRenderer::RendererBackend {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, Renderer, "PLRendererOpenGLES2", PLRenderer::RendererBackend, "OpenGL ES renderer backend")
-		// Constructors
-		pl_constructor_6(DefaultConstructor,	PLCore::handle,	pl_enum_type(EMode),	PLCore::uint32,	PLCore::uint32,	PLCore::uint32,	PLCore::String,	"Constructor with renderer mode, Z buffer bits, stencil buffer bits, the number of multisample antialiasing samples per pixel and the default shader language as parameter",	"")
-	pl_class_end
+	pl_class_def(PLRENDEREROPENGLES2_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

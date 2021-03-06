@@ -60,9 +60,8 @@ class TabBarEntry : public Widget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, TabBarEntry, "PLGui", PLGui::Widget, "Tab bar entry")
-		pl_constructor_0(DefaultConstructor, "Default constructor", "")
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

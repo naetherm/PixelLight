@@ -46,7 +46,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ContainerWidget)
+pl_class_metadata(ContainerWidget, "PLGui", PLGui::Widget, "Base class for container widgets")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ContainerWidget)
 
 
 //[-------------------------------------------------------]

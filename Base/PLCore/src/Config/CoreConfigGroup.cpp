@@ -37,9 +37,29 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(CoreConfigGroup)
-pl_implement_class(CoreConfig)
-pl_implement_class(FrontendConfig)
+// CoreConfigGroup
+pl_class_metadata(CoreConfigGroup, "PLCore", PLCore::ConfigGroup, "PLCore general configuration 'collection' class")
+pl_class_metadata_end(CoreConfigGroup)
+
+// CoreConfig
+pl_class_metadata(CoreConfig, "PLCore", PLCore::CoreConfigGroup, "PLCore configuration classes")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(FirstRun,	bool,	true,	ReadWrite,	"Is this the first application start?",																	"")
+	pl_attribute_metadata(Language,	String,	"",		ReadWrite,	"Current used language, if empty the current set OS locale language is used (for instance 'German'",	"")
+pl_class_metadata_end(CoreConfig)
+
+// FrontendConfig
+pl_class_metadata(FrontendConfig, "PLCore", PLCore::CoreConfigGroup, "PLCore frontend configuration classes")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(X,		int,	0,		ReadWrite,	"X position of the frontend (in screen coordinates)",	"")
+	pl_attribute_metadata(Y,		int,	0,		ReadWrite,	"Y position of the frontend (in screen coordinates)",	"")
+	pl_attribute_metadata(Width,	uint32,	800,	ReadWrite,	"Width of the frontend",								"")
+	pl_attribute_metadata(Height,	uint32,	600,	ReadWrite,	"Height of the frontend",								"")
+pl_class_metadata_end(FrontendConfig)
 
 
 // CoreConfigGroup

@@ -47,7 +47,13 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Screenshot)
+pl_class_metadata(Screenshot, "PLEngine", PLCore::Object, "Class offering screenshot functionality")
+	// Methods
+	pl_method_0_metadata(GetScreenshotDirectory,	pl_ret_type(PLCore::String),							"Get screenshot directory in which the screenshots are saved",																																																															"")
+	pl_method_1_metadata(SetScreenshotDirectory,	pl_ret_type(void),				const PLCore::String&,	"Set screenshot directory, directory in which the screenshots are saved as first parameter (if set to \"\", the current directory will be used)",																																										"")
+	pl_method_1_metadata(SaveScreenshot,			pl_ret_type(bool),				const PLCore::String&,	"Save screenshot from current render target, screenshot filename (e.g. \"Screenshot.png\") as first parameter (if string is empty, GetScreenshotFilename() will be used). Returns 'true' if all went fine, else 'false'. Uses the dimension of the current render target.",												"")
+	pl_method_1_metadata(GetScreenshotFilename,	pl_ret_type(PLCore::String),	const PLCore::String&,	"Get a screenshot filename recommendation, file name extension (for example \"png\") as first parameter. Returns the recommended screenshot filename, empty string on error. The screenshot filename is automatically generated: \"/_Screenshots/Screenshot_0.png\", \"/_Screenshots/Screenshot_1.png\" and so on...",	"")
+pl_class_metadata_end(Screenshot)
 
 
 //[-------------------------------------------------------]

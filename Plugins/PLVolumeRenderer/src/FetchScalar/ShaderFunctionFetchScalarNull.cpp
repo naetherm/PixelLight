@@ -38,7 +38,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionFetchScalarNull)
+pl_class_metadata(ShaderFunctionFetchScalarNull, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionFetchScalar, "Null shader function implementation class for fetch scalar")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionFetchScalarNull)
 
 
 //[-------------------------------------------------------]

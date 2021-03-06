@@ -62,10 +62,10 @@ class RenderWindow : public PLGui::Window, public WindowConnection {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLFRONTENDPLGUI_RTTI_EXPORT, RenderWindow, "PLFrontendPLGui", PLGui::Window, "GUI window that implements a renderer surface")
+	pl_class_def(PLFRONTENDPLGUI_API)
 		// Slots
-		pl_slot_0(OnTimer,	"Timer callback",	"");
-	pl_class_end
+		pl_slot_0_def(RenderWindow,	OnTimer);
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -65,7 +65,10 @@ namespace PLRendererOpenGLES2 {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Renderer)
+pl_class_metadata(Renderer, "PLRendererOpenGLES2", PLRenderer::RendererBackend, "OpenGL ES renderer backend")
+	// Constructors
+	pl_constructor_6_metadata(DefaultConstructor,	PLCore::handle,	pl_enum_type_def(EMode),	PLCore::uint32,	PLCore::uint32,	PLCore::uint32,	PLCore::String,	"Constructor with renderer mode, Z buffer bits, stencil buffer bits, the number of multisample antialiasing samples per pixel and the default shader language as parameter",	"")
+pl_class_metadata_end(Renderer)
 
 
 //[-------------------------------------------------------]

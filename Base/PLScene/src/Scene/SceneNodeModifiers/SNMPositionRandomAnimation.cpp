@@ -41,7 +41,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPositionRandomAnimation)
+pl_class_metadata(SNMPositionRandomAnimation, "PLScene", PLScene::SNMTransform, "Random position animation scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Speed,		float,				1.0f,					ReadWrite,	"Animation speed",													"")
+	pl_attribute_metadata(Radius,		float,				10.0f,					ReadWrite,	"Animation radius",													"")
+	pl_attribute_metadata(FixPosition,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Position, if default, the initial scene node position is used",	"")
+pl_class_metadata_end(SNMPositionRandomAnimation)
 
 
 //[-------------------------------------------------------]

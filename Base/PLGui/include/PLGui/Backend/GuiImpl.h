@@ -82,8 +82,8 @@ class GuiImpl : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, GuiImpl, "PLGui", PLCore::Object, "Gui implementation backend")
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

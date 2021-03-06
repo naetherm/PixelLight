@@ -50,7 +50,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Tooltip)
+pl_class_metadata(Tooltip, "PLGui", PLGui::AbstractTooltip, "A simple tooltip widget")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Tooltip)
 
 
 //[-------------------------------------------------------]

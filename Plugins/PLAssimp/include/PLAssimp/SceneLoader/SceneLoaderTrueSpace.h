@@ -52,14 +52,8 @@ class SceneLoaderTrueSpace : public SceneLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SceneLoaderTrueSpace, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for cob/scn (TrueSpace) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"cob,scn,COB,SCN")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

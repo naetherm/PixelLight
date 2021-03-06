@@ -41,7 +41,20 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMCameraZoom)
+pl_class_metadata(SNMCameraZoom, "PLScene", PLScene::SceneNodeModifier, "Scene node modifier class implementing camera zoom")
+	// Properties
+	pl_properties
+		pl_property("SceneNodeClass",	"PLScene::SNCamera")
+	pl_properties_end
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ZoomDegree,	float,	30.0f,	ReadWrite,	"Zoom in degree, added to original camera FOV",												"")
+	pl_attribute_metadata(ZoomFactor,	float,	0.0f,	ReadWrite,	"Target zoom factor [0..1]",																"")
+	pl_attribute_metadata(ZoomSpeed,	float,	4.0f,	ReadWrite,	"Current zoom factor update speed, if 0, current factor is set to target factor at once",	"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
+pl_class_metadata_end(SNMCameraZoom)
 
 
 //[-------------------------------------------------------]

@@ -47,7 +47,17 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMDrawRectangle)
+pl_class_metadata(SNMDrawRectangle, "PLScene", PLScene::SNMDraw, "Scene node modifier class drawing a 2D rectangle around the owner scene node")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Width,	float,											1.0f,						ReadWrite,	"Rectangle width (if supported by the the used renderer API, if not may have no effect)",	"Min='1.0'")
+	pl_attribute_metadata(Color,	PLGraphics::Color4,								PLGraphics::Color4::White,	ReadWrite,	"Rectangle color (r/g/b/a)",																"")
+		// Overwritten SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNMDrawRectangle, EFlags),	0,							ReadWrite,	"Flags",																					"")
+	// Slots
+	pl_slot_2_metadata(OnDrawTransparent,	PLRenderer::Renderer&,	const VisNode*,	"Called on scene node transparent draw, the used renderer as first parameter, the current visibility node of this scene node, can be a null pointer as second parameter",	"")
+pl_class_metadata_end(SNMDrawRectangle)
 
 
 //[-------------------------------------------------------]

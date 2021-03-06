@@ -58,8 +58,8 @@ class OrbitingController : public PLInput::Controller {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, OrbitingController, "PLEngine", PLInput::Controller, "Orbiting input controller")
-	pl_class_end
+	pl_class_def(PL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

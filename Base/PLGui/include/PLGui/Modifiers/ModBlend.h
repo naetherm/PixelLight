@@ -58,12 +58,10 @@ class ModBlend : public Modifier {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, ModBlend, "PLGui", PLGui::Modifier, "Modifier that blends a widget in and out according to the mouse cursor")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
+	pl_class_def(PLGUI_API)
 		// Slots
-		pl_slot_0(OnTimer,	"Timer callback",	"")
-	pl_class_end
+		pl_slot_0_def(ModBlend,	OnTimer)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

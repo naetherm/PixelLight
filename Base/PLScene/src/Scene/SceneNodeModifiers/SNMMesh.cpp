@@ -38,7 +38,8 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMMesh)
+pl_class_metadata(SNMMesh, "PLScene", PLScene::SceneNodeModifier, "Abstract scene node modifier base class for modifiers that promise to ONLY manipulate mesh properties of the owner scene node")
+pl_class_metadata_end(SNMMesh)
 
 
 //[-------------------------------------------------------]

@@ -46,7 +46,8 @@ using namespace PLRenderer;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPTexturing)
+pl_class_metadata(SPTexturing, "", PLRenderer::SurfacePainter, "Abstract textured surface painter")
+pl_class_metadata_end(SPTexturing)
 
 
 //[-------------------------------------------------------]

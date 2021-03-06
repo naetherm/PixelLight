@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoaderTerragenTerrain)
+pl_class_metadata(SceneLoaderTerragenTerrain, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for ter (Terragen Terrain) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"ter,TER")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneLoaderTerragenTerrain)
 
 
 //[-------------------------------------------------------]

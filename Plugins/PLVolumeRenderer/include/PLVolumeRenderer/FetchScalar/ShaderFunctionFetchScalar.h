@@ -56,15 +56,8 @@ class ShaderFunctionFetchScalar : public ShaderFunction {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionFetchScalar, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for fetch scalar")
-		// Properties
-		pl_properties
-			pl_property("FunctionTitle",			"2.2 - Fetch Scalar")
-			pl_property("FunctionName",				"FetchScalar")
-			pl_property("FunctionSignature_GLSL",	"float FetchScalar(vec3 Position)")
-			pl_property("FunctionSignature_Cg",		"float FetchScalar(float3 Position)")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -49,7 +49,13 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDebugHierarchies)
+pl_class_metadata(SRPDebugHierarchies, "PLCompositing", PLCompositing::SRPDebug, "Scene renderer pass drawing scene container hierarchies for 'debugging'")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(LineWidth,	float,				1.0f,						ReadWrite,	"Line width (if supported by the the used renderer API)",	"Min='1.0'")
+	pl_attribute_metadata(LineColor,	PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite,	"Line color",												"")
+pl_class_metadata_end(SRPDebugHierarchies)
 
 
 //[-------------------------------------------------------]

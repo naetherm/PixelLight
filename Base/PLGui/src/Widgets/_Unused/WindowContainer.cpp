@@ -45,7 +45,9 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(WindowContainer)
+pl_class_metadata(WindowContainer, "PLGui", PLGui::Widget, "Base class for window containers")
+	pl_constructor_0_metadata(DefaultConstructor, "Default constructor", "")
+pl_class_metadata_end(WindowContainer)
 
 
 //[-------------------------------------------------------]

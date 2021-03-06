@@ -37,8 +37,35 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ConfigGroup)
-pl_implement_class(Config)
+pl_class_metadata(ConfigGroup, "PLRenderer", PLCore::ConfigGroup, "Renderer configuration 'collection' class")
+pl_class_metadata_end(ConfigGroup)
+pl_class_metadata(Config, "PLRenderer", PLRenderer::ConfigGroup, "Renderer configuration class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	#ifdef ANDROID
+	pl_attribute_metadata(RendererAPI,						PLCore::String,						"PLRendererOpenGLES2::Renderer",	ReadWrite,	"The used renderer API",																																													"")
+	#else
+	pl_attribute_metadata(RendererAPI,						PLCore::String,						"PLRendererOpenGL::Renderer",		ReadWrite,	"The used renderer API",																																													"")
+	#endif	
+	pl_attribute_metadata(RendererMode,						pl_enum_type_def3(Renderer, EMode),	Renderer::ModeBoth,					ReadWrite,	"The mode the renderer should run in (fixed functions, shaders or both)",																																	"")
+	pl_attribute_metadata(Fullscreen,						bool,								false,								ReadWrite,	"Fullscreen mode?",																																															"")
+	pl_attribute_metadata(ZBufferBits,						PLCore::uint32,						24,									ReadWrite,	"Z buffer bits (just a hint)",																																												"")
+	pl_attribute_metadata(StencilBits,						PLCore::uint32,						8,									ReadWrite,	"Stencil buffer bits (just a hint)",																																										"")
+	pl_attribute_metadata(MultisampleAntialiasingSamples,	PLCore::uint32,						4,									ReadWrite,	"Number of multisample antialiasing samples per pixel (just a hint)",																																		"")
+	pl_attribute_metadata(DefaultShaderLanguage,			PLCore::String,						"",									ReadWrite,	"The name of the default shader language of the renderer (for example \"GLSL\" or \"Cg\"), if the string is empty, the default is chosen by the renderer implementation, this information is just a hint",	"")
+		// Display mode
+	pl_attribute_metadata(DisplayWidth,						PLCore::uint32,						800,								ReadWrite,	"Display width",																																															"")
+	pl_attribute_metadata(DisplayHeight,					PLCore::uint32,						600,								ReadWrite,	"Display height",																																															"")
+	pl_attribute_metadata(DisplayColorBits,					PLCore::uint32,						32,									ReadWrite,	"Color bits",																																																"")
+	pl_attribute_metadata(DisplayFrequency,					PLCore::uint32,						0,									ReadWrite,	"Display frequency",																																														"")
+		// Misc
+	pl_attribute_metadata(SwapInterval,						PLCore::uint32,						1,									ReadWrite,	"The swap interval (vertical synchronization)",																																								"")
+	pl_attribute_metadata(UseExtensions,					bool,								true,								ReadWrite,	"Use extensions?",																																															"")
+	pl_attribute_metadata(TextureQuality,					float,								1.0f,								ReadWrite,	"Texture quality",																																															"Min='0.0' Max='1.0'")
+	pl_attribute_metadata(TextureMipmaps,					bool,								true,								ReadWrite,	"Use texture mipmaps by default?",																																											"")
+	pl_attribute_metadata(TextureCompression,				bool,								true,								ReadWrite,	"Use texture compression by default?",																																										"")
+pl_class_metadata_end(Config)
 
 
 //[-------------------------------------------------------]

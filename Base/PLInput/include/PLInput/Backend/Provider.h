@@ -70,8 +70,8 @@ class Provider : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, Provider, "PLInput", PLCore::Object, "Input provider")
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

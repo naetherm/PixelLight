@@ -44,7 +44,15 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcess)
+pl_class_metadata(SNMPostProcess, "PLCompositing", PLScene::SceneNodeModifier, "Abstract camera scene node post process modifier class")
+	// Properties
+	pl_properties
+		pl_property("SceneNodeClass",	"PLScene::SNCamera")
+	pl_properties_end
+	// Attributes
+	pl_attribute_metadata(Filename,		PLCore::String,	"",		ReadWrite,	"Filename of the post process to use",														"Type='PostProcess'")
+	pl_attribute_metadata(EffectWeight,	float,			1.0f,	ReadWrite,	"Effect weight, 0 means that this effect has no influence, 1 for the intended influence",	"Min=0 Max=1")
+pl_class_metadata_end(SNMPostProcess)
 
 
 //[-------------------------------------------------------]

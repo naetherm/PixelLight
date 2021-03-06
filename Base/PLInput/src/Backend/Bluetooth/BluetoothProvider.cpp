@@ -41,7 +41,10 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(BluetoothProvider)
+pl_class_metadata(BluetoothProvider, "PLInput", PLInput::Provider, "Input provider for Bluetooth devices")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(BluetoothProvider)
 
 
 //[-------------------------------------------------------]

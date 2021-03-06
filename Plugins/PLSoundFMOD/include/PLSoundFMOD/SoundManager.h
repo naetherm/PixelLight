@@ -115,17 +115,15 @@ class SoundManager : public PLSound::SoundManager {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SoundManager, "PLSoundFMOD", PLSound::SoundManager, "FMOD sound backend")
+	pl_class_def()
 		// Attributes
-		pl_attribute(BufferSize,	PLCore::uint32,					200,				ReadWrite,	DirectValue,	"FMOD internal mixing buffer size (in milliseconds)",																							"")
-		pl_attribute(Output,		pl_enum_type(ESoundcardDriver),	AUTODETECT,			ReadWrite,	DirectValue,	"The output system to be used",																													"")
-		pl_attribute(Driver,		PLCore::uint32,					0,					ReadWrite,	DirectValue,	"Selects a sound card driver. It is used when an output mode has enumerated more than one output device, and you need to select between them.",	"")
-		pl_attribute(Mixer,			pl_enum_type(EQuality),			QUALITY_AUTODETECT,	ReadWrite,	DirectValue,	"Digital mixer type",																															"")
-		pl_attribute(OutputRate,	PLCore::uint32,					44100,				ReadWrite,	DirectValue,	"Output rate in Hz between 4000 and 65535",																										"")
-		pl_attribute(Channels,		PLCore::uint32,					32,					ReadWrite,	DirectValue,	"Maximum number of SOFTWARE channels available (HARDWARE channels are auto detected)",															"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(BufferSize,	PLCore::uint32,		200,				ReadWrite)
+		pl_attribute_directvalue(Output,		ESoundcardDriver,	AUTODETECT,			ReadWrite)
+		pl_attribute_directvalue(Driver,		PLCore::uint32,		0,					ReadWrite)
+		pl_attribute_directvalue(Mixer,			EQuality,			QUALITY_AUTODETECT,	ReadWrite)
+		pl_attribute_directvalue(OutputRate,	PLCore::uint32,		44100,				ReadWrite)
+		pl_attribute_directvalue(Channels,		PLCore::uint32,		32,					ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

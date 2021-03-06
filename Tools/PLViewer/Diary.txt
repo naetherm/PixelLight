@@ -1,3 +1,16 @@
+>> 23.03.2013
+[NF]
+PLViewerQt:
+- Save scene feature.
+- Possibility to create a new scene/close the current one.
+- Made the materials reloading during the scene reloading.
+- Added items "Reload only materials" and "Reload only scene".
+- The scene reload when saving does not happen anymore but reload when the file is being externally changed remains.
+- Also, the widgets "Scene Graph" and "Object" now appear automatically during the scene opening (need to uncomment).
+- Bugfix: materials do not get resetted if after loading one scene you open another one.
+
+
+
 >> 18.08.2012
 [CO]
 PLViewerQt:

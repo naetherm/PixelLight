@@ -44,7 +44,10 @@ namespace PLDatabaseMySQL {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Database)
+pl_class_metadata(Database, "PLDatabaseMySQL", PLDatabase::Database, "MySQL 5.0.24a (http://www.mysql.com/) database implementation")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Database)
 
 
 //[-------------------------------------------------------]

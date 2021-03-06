@@ -82,7 +82,7 @@ class SNEngineInformation : public PLScene::SceneNode {
 			Planes         = 1<<2,	/**< Draw planes */
 			Profiling      = 1<<3	/**< Draw profiling */
 		};
-		pl_enum(EInfoFlags)
+		pl_flag(EInfoFlags)
 			pl_enum_value(FPS,				"Draw FPS")
 			pl_enum_value(CoordinateAxis,	"Draw coordinate axis")
 			pl_enum_value(Planes,			"Draw planes")
@@ -93,15 +93,13 @@ class SNEngineInformation : public PLScene::SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNEngineInformation, "PLEngine", PLScene::SceneNode, "Engine information scene node")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(InfoFlags,			pl_flag_type(EInfoFlags),	FPS|CoordinateAxis|Planes|Profiling,	ReadWrite,	DirectValue,	"Information flags",	"")
-		pl_attribute(ProfilingMaterial,	PLCore::String,				"Data/Effects/PLProfiling.plfx",		ReadWrite,	GetSet,			"Profiling material",	"Type='Material Effect Image TextureAni'")
+		pl_attribute_directvalue(						InfoFlags,			PLCore::uint32,	FPS|CoordinateAxis|Planes|Profiling,	ReadWrite)
+		pl_attribute_getset		(SNEngineInformation,	ProfilingMaterial,	PLCore::String,	"Data/Effects/PLProfiling.plfx",		ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),		NoCulling,								ReadWrite,	GetSet,			"Flags",				"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNEngineInformation,	Flags,				PLCore::uint32,	NoCulling,								ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

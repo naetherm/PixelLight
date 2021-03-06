@@ -70,14 +70,12 @@ class SNMRotationTarget : public SNMTransform {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMRotationTarget, "PLScene", PLScene::SNMTransform, "Scene node modifier class rotating a scene node towards a target scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Target,	PLCore::String,		"",						ReadWrite,	DirectValue,	"Target scene node to 'look at', if empty nothing happens",	"")
-		pl_attribute(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Rotation offset to add in degree, [0, 360]",				"")
-		pl_attribute(UpVector,	PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	DirectValue,	"Up vector",												"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Target,	PLCore::String,		"",						ReadWrite)
+		pl_attribute_directvalue(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_directvalue(UpVector,	PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -70,7 +70,7 @@ class SNMMeshUpdate : public SNMMesh {
 		enum EFlags {
 			UpdateUnseen = 1<<2	/**< Do also perform an update if the owner scene node is currently not seen */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNodeModifier::EFlags)
 			pl_enum_value(UpdateUnseen, "Do also perform an update if the owner scene node is currently not seen")
 		pl_enum_end
@@ -79,13 +79,11 @@ class SNMMeshUpdate : public SNMMesh {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMMeshUpdate, "PLScene", PLScene::SNMMesh, "Mesh scene node modifier which performs frequent mesh updates")
+	pl_class_def(PLS_API)
 		// Attributes
 			// Overwritten SceneNodeModifier attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	0,	ReadWrite,	GetSet,	"Flags",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMMeshUpdate,	Flags,	PLCore::uint32,	0,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -40,7 +40,8 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Theme)
+pl_class_metadata(Theme, "PLGui", PLCore::Object, "GUI theme class")
+pl_class_metadata_end(Theme)
 
 
 //[-------------------------------------------------------]

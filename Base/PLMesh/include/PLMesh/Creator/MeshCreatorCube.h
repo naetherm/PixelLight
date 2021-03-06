@@ -67,14 +67,12 @@ class MeshCreatorCube : public MeshCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLMESH_RTTI_EXPORT, MeshCreatorCube, "PLMesh", PLMesh::MeshCreator, "Cube mesh creator class")
+	pl_class_def(PLMESH_API)
 		// Attributes
-		pl_attribute(Dimension,			PLMath::Vector3,	PLMath::Vector3(0.5f, 0.5f, 0.5f),	ReadWrite,	DirectValue,	"Cube dimension into positive/negative direction around the center",	"")
-		pl_attribute(MultiMaterials,	bool,				false,								ReadWrite,	DirectValue,	"Should each side has it's own material?",								"")
-		pl_attribute(Offset,			PLMath::Vector3,	PLMath::Vector3::Zero,				ReadWrite,	DirectValue,	"Offset to center",														"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Dimension,			PLMath::Vector3,	PLMath::Vector3(0.5f, 0.5f, 0.5f),	ReadWrite)
+		pl_attribute_directvalue(MultiMaterials,	bool,				false,								ReadWrite)
+		pl_attribute_directvalue(Offset,			PLMath::Vector3,	PLMath::Vector3::Zero,				ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -52,14 +52,8 @@ class SceneLoaderDoom3 : public SceneLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SceneLoaderDoom3, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for md5 (Doom 3) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"md5mesh,MD5MESH")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

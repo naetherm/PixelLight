@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Container/SimpleList.h"
+#include "PLCore/Core/SmartPtr.h"
 #include "PLCore/Base/Func/DynSignature.h"
 
 
@@ -101,14 +102,13 @@ class DynEventHandler : public DynSignature {
 		PLCORE_API virtual const EventHandlerDesc *GetDesc() const;
 
 
-	//[-------------------------------------------------------]
-	//[ Protected data                                        ]
-	//[-------------------------------------------------------]
-	protected:
-		SimpleList<DynEvent*> m_lstEvents;	/**< List of events */
-
-
 };
+
+
+//[-------------------------------------------------------]
+//[ Type definitions                                      ]
+//[-------------------------------------------------------]
+typedef SmartPtr<DynEventHandler> DynEventHandlerPtr;
 
 
 //[-------------------------------------------------------]

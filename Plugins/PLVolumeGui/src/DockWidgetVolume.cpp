@@ -38,7 +38,17 @@ namespace PLVolumeGui {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetVolume)
+pl_class_metadata(DockWidgetVolume, "PLVolumeGui", PLFrontendQt::DockWidget, "Abstract volume Qt dock widget base class")
+	// Properties
+	pl_properties
+		pl_property("Title", "Volume")
+	pl_properties_end
+	// Methods
+	pl_method_0_metadata(GetSelectedObject,	pl_ret_type(PLCore::Object*),						"Returns the currently selected object, can be a null pointer.",	"")
+	pl_method_1_metadata(SelectObject,		pl_ret_type(void),				PLCore::Object*,	"Selects the given object. Object to select as first parameter.",	"")
+	// Slots
+	pl_slot_0_metadata(OnDestroyed,	"Called when the object assigned with this dock widget was destroyed",	"")
+pl_class_metadata_end(DockWidgetVolume)
 
 
 //[-------------------------------------------------------]

@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderMilkshape3D)
+pl_class_metadata(MeshLoaderMilkshape3D, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for ms3d (Milkshape 3D) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"ms3d,MS3D")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderMilkshape3D)
 
 
 //[-------------------------------------------------------]

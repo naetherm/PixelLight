@@ -50,7 +50,9 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(TabBarEntry)
+pl_class_metadata(TabBarEntry, "PLGui", PLGui::Widget, "Tab bar entry")
+	pl_constructor_0_metadata(DefaultConstructor, "Default constructor", "")
+pl_class_metadata_end(TabBarEntry)
 
 
 //[-------------------------------------------------------]

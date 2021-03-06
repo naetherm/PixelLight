@@ -48,7 +48,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(PopupMenu)
+pl_class_metadata(PopupMenu, "PLGui", PLGui::AbstractMenu, "Popup menu widget")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(PopupMenu)
 
 
 //[-------------------------------------------------------]

@@ -42,7 +42,14 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessASCII)
+pl_class_metadata(SNMPostProcessASCII, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(LetterSize,	PLMath::Vector2,	PLMath::Vector2(16.0f, 16.0f),	ReadWrite,	"Size of one letter in pixels",			"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,		"Data/PostProcesses/ASCII.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessASCII)
 
 
 //[-------------------------------------------------------]

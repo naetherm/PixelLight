@@ -57,19 +57,17 @@ class SNMPostProcessBloomToneMap : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessBloomToneMap, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(BloomScale,	float,				0.8f,									ReadWrite,	DirectValue,	"Bloom scale",							"")
-		pl_attribute(Strength,		PLMath::Vector2,	PLMath::Vector2(4.0f, 4.0f),			ReadWrite,	DirectValue,	"Blur strength",						"")
-		pl_attribute(ExposureLevel,	float,				0.05f,									ReadWrite,	DirectValue,	"Exposure level",						"")
-		pl_attribute(GammaLevel,	float,				1.8f,									ReadWrite,	DirectValue,	"Gamma level",							"")
-		pl_attribute(DeFogLevel,	float,				0.0f,									ReadWrite,	DirectValue,	"De-fog level",							"")
-		pl_attribute(FogColor,		PLGraphics::Color3,	PLGraphics::Color3(1.0, 1.0, 1.0f),		ReadWrite,	DirectValue,	"Fog color",							"")
+		pl_attribute_directvalue(								BloomScale,		float,				0.8f,									ReadWrite)
+		pl_attribute_directvalue(								Strength,		PLMath::Vector2,	PLMath::Vector2(4.0f, 4.0f),			ReadWrite)
+		pl_attribute_directvalue(								ExposureLevel,	float,				0.05f,									ReadWrite)
+		pl_attribute_directvalue(								GammaLevel,		float,				1.8f,									ReadWrite)
+		pl_attribute_directvalue(								DeFogLevel,		float,				0.0f,									ReadWrite)
+		pl_attribute_directvalue(								FogColor,		PLGraphics::Color3,	PLGraphics::Color3(1.0, 1.0, 1.0f),		ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,		PLCore::String,		"Data/PostProcesses/BloomToneMap.pp",	ReadWrite,	ModifyAttr,		"Filename of the post process to use", "Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,		PLCore::String,		"Data/PostProcesses/BloomToneMap.pp",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

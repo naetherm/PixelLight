@@ -47,7 +47,14 @@ const String ShaderLanguageCg::Cg = "Cg";
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderLanguageCg)
+pl_class_metadata(ShaderLanguageCg, "PLRendererOpenGLES2", PLRenderer::ShaderLanguage, "OpenGL ES Cg shader language class using the \"GL_EXT_Cg_shader\"-extension")
+	// Properties
+	pl_properties
+		pl_property("ShaderLanguage",	"Cg")
+	pl_properties_end
+	// Constructors
+	pl_constructor_1_metadata(DefaultConstructor,	PLRenderer::Renderer&,	"Constructor with used renderer as parameter",	"")
+pl_class_metadata_end(ShaderLanguageCg)
 
 
 //[-------------------------------------------------------]

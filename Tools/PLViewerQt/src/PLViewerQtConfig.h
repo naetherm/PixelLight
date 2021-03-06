@@ -46,13 +46,11 @@ class PLViewerQtConfig : public PLCore::ConfigGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, PLViewerQtConfig, "", PLCore::ConfigGroup, "PLViewerQt general configuration classes")
+	pl_class_def()
 		// Attributes
-		pl_attribute(ShowColorGradientBackground,	bool,	true,	ReadWrite,	GetSet,	"Show color gradient background? (whether or not this has an effect depends on the used scene renderer)",	"")
-		pl_attribute(ShowBackfacesAndSilhouettes,	bool,	true,	ReadWrite,	GetSet,	"Show backfaces and silhouettes? (whether or not this has an effect depends on the used scene renderer)",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(PLViewerQtConfig,	ShowColorGradientBackground,	bool,	true,	ReadWrite)
+		pl_attribute_getset(PLViewerQtConfig,	ShowBackfacesAndSilhouettes,	bool,	true,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

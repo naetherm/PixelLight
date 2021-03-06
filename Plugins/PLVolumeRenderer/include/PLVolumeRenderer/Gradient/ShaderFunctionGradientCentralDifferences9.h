@@ -57,10 +57,8 @@ class ShaderFunctionGradientCentralDifferences9 : public ShaderFunctionGradient 
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionGradientCentralDifferences9, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionGradient, "Central differences (finite differences) shader function implementation class for on-the-fly gradient (gradients of neighbour voxels weighted, 6*9=54 volume texture fetches for the gradient)")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

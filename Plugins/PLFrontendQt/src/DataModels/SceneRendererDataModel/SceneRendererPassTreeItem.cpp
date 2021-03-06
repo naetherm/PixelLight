@@ -46,9 +46,9 @@ SceneRendererPassTreeItem::SceneRendererPassTreeItem(PLScene::SceneRendererPass 
 {
 	SetFlags(0, Qt::ItemIsDragEnabled);
 	if (m_pPass) {
-		List<PLCore::DynVar*> list = m_pPass->GetAttributes();
+		List<PLCore::DynVarPtr> list = m_pPass->GetAttributes();
 		for (uint32 i=0; i<list.GetNumOfElements(); i++) {
-			PLCore::DynVar *var = list[i];
+			PLCore::DynVarPtr var = list[i];
 			PLDynVarTreeItemsFactory::CreateDynVarTreeItem(var, this);
 		}
 	}

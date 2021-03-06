@@ -38,7 +38,8 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PhysicsMouseInteraction)
+pl_class_metadata(PhysicsMouseInteraction, "PLEngine", PLInput::Controller, "Mouse physics interaction input controller")
+pl_class_metadata_end(PhysicsMouseInteraction)
 
 
 //[-------------------------------------------------------]

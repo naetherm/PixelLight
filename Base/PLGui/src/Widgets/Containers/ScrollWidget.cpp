@@ -47,7 +47,17 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ScrollWidget)
+pl_class_metadata(ScrollWidget, "PLGui", PLGui::ContainerWidget, "Container that allows it's content to be scrolled")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ScrollBarStyleX,	pl_enum_type(EScrollBarStyle),	ScrollBarStyleDynamic,	ReadWrite,	"Style of horizontal scrollbar",	"")
+	pl_attribute_metadata(ScrollBarStyleY,	pl_enum_type(EScrollBarStyle),	ScrollBarStyleDynamic,	ReadWrite,	"Style of horizontal scrollbar",	"")
+	// Slots
+	pl_slot_1_metadata(OnInnerWidgetSize,		const PLMath::Vector2i&,	"Size callback",		"")
+	pl_slot_1_metadata(OnScrollBarXChanged,	int,						"Scrollbar callback",	"")
+	pl_slot_1_metadata(OnScrollBarYChanged,	int,						"Scrollbar callback",	"")
+pl_class_metadata_end(ScrollWidget)
 
 
 //[-------------------------------------------------------]

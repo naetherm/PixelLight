@@ -38,7 +38,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionIlluminationCookTorrance)
+pl_class_metadata(ShaderFunctionIlluminationCookTorrance, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionIllumination, "Cook-Torrance (aka Torrance-Sparrow) shader function implementation class for local illumination")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionIlluminationCookTorrance)
 
 
 //[-------------------------------------------------------]

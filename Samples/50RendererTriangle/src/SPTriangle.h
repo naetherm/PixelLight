@@ -54,8 +54,8 @@ class SPTriangle : public PLRenderer::SurfacePainter {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SPTriangle, "", PLRenderer::SurfacePainter, "Abstract triangle surface painter")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

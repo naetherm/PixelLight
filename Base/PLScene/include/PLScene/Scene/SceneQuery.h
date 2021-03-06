@@ -95,10 +95,10 @@ class SceneQuery : public PLCore::Object, public PLCore::Element<SceneQuery> {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SceneQuery, "PLScene", PLCore::Object, "Abstract scene query class")
+	pl_class_def(PLS_API)
 		// Signals
-		pl_signal_2(SignalSceneNode,	SceneQuery&,	SceneNode&,	"A scene node was 'touched' during the query. Event causing scene query and found scene node as parameters.",	"")
-	pl_class_end
+		pl_signal_2_def(SignalSceneNode,	SceneQuery&,	SceneNode&)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

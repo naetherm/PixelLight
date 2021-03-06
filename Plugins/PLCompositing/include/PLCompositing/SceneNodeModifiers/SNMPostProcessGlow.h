@@ -56,18 +56,16 @@ class SNMPostProcessGlow : public SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SNMPostProcessGlow, "PLCompositing", PLCompositing::SNMPostProcess, "Glow camera scene node post process modifier class")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(Strength,		PLMath::Vector2,	PLMath::Vector2(8.0f, 8.0f),	ReadWrite,	DirectValue,	"Blur strength",						"")
-		pl_attribute(Luminance,		float,				0.08f,							ReadWrite,	DirectValue,	"Luminance",							"")
-		pl_attribute(MiddleGray,	float,				0.18f,							ReadWrite,	DirectValue,	"Middle gray",							"")
-		pl_attribute(WhiteCutoff,	float,				0.99f,							ReadWrite,	DirectValue,	"White cutoff",							"")
-		pl_attribute(BloomScale,	float,				1.5f,							ReadWrite,	DirectValue,	"Bloom scale",							"")
+		pl_attribute_directvalue(					Strength,		PLMath::Vector2,	PLMath::Vector2(8.0f, 8.0f),	ReadWrite)
+		pl_attribute_directvalue(					Luminance,		float,				0.08f,							ReadWrite)
+		pl_attribute_directvalue(					MiddleGray,		float,				0.18f,							ReadWrite)
+		pl_attribute_directvalue(					WhiteCutoff,	float,				0.99f,							ReadWrite)
+		pl_attribute_directvalue(					BloomScale,		float,				1.5f,							ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,		PLCore::String,		"Data/PostProcesses/Glow.pp",	ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(SNMPostProcess,	Filename,		PLCore::String,		"Data/PostProcesses/Glow.pp",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

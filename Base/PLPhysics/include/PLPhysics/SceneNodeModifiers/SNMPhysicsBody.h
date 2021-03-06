@@ -78,7 +78,7 @@ class SNMPhysicsBody : public SNMPhysics {
 			NoGravity    = 1<<4,	/**< The body is not influenced by gravity */
 			NoRotation   = 1<<5		/**< Rotation is not used */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNMPhysics::EFlags)
 			pl_enum_value(InitUnfrozen,	"The body is not frozen on initialization")
 			pl_enum_value(NoAutoFreeze,	"Do not freeze the body automatically")
@@ -90,20 +90,20 @@ class SNMPhysicsBody : public SNMPhysics {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsBody, "PLPhysics", PLPhysics::SNMPhysics, "Abstract physics body scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(Mass,				float,					0.0f,					ReadWrite,	GetSet,	"Mass of the physics body, 0=static body",				"Min='0.0'")
-		pl_attribute(CenterOfMass,		PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	GetSet,	"Relative center of mass",								"")
-		pl_attribute(PositionOffset,	PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	GetSet,	"Position offset relative to the scene node (=origin)",	"")
-		pl_attribute(CollisionGroup,	PLCore::uint8,			0,						ReadWrite,	GetSet,	"The collision group the body is in (0-31)",			"Min='0' Max='31'")
+		pl_attribute_getset(SNMPhysicsBody,	Mass,			float,				0.0f,					ReadWrite)
+		pl_attribute_getset(SNMPhysicsBody,	CenterOfMass,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsBody,	PositionOffset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsBody,	CollisionGroup,	PLCore::uint8,		0,						ReadWrite)
 			// Overwritten PLScene::SceneNodeModifier attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,						ReadWrite,	GetSet,	"Flags",												"")
+		pl_attribute_getset(SNMPhysicsBody,	Flags,			PLCore::uint32,		0,						ReadWrite)
 		// Slots
-		pl_slot_0(OnActive,		"Called when the scene node active state changed",		"")
-		pl_slot_0(OnPosition,	"Called when the scene node position changed",			"")
-		pl_slot_0(OnRotation,	"Called when the scene node rotation changed",			"")
-		pl_slot_0(OnTransform,	"Called when the transform was changed by the physics",	"")
-	pl_class_end
+		pl_slot_0_def(SNMPhysicsBody,	OnActive)
+		pl_slot_0_def(SNMPhysicsBody,	OnPosition)
+		pl_slot_0_def(SNMPhysicsBody,	OnRotation)
+		pl_slot_0_def(SNMPhysicsBody,	OnTransform)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

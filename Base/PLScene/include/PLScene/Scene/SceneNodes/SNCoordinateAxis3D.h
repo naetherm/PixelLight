@@ -55,13 +55,11 @@ class SNCoordinateAxis3D : public SNCoordinateAxis {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNCoordinateAxis3D, "PLScene", PLScene::SNCoordinateAxis, "Scene node for 3D coordinate axis visualization")
+	pl_class_def(PLS_API)
 		// Attributes
 			// Overwritten SceneNode attributes
-		pl_attribute(AABBMax,	PLMath::Vector3,	PLMath::Vector3::One,	ReadWrite,	GetSet,	"Maximum position of the 'scene node space' axis aligned bounding box",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNCoordinateAxis3D,	AABBMax,	PLMath::Vector3,	PLMath::Vector3::One,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

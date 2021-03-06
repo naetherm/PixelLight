@@ -38,7 +38,8 @@ using namespace PLInput;
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(GameBoyController)
+pl_class_metadata(GameBoyController, "", PLInput::Controller, "Sample GameBoy input controller")
+pl_class_metadata_end(GameBoyController)
 
 
 //[-------------------------------------------------------]

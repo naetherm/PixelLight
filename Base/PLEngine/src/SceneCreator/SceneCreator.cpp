@@ -42,7 +42,8 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneCreator)
+pl_class_metadata(SceneCreator, "PLEngine", PLCore::Object, "Abstract scene creator base class")
+pl_class_metadata_end(SceneCreator)
 
 
 //[-------------------------------------------------------]

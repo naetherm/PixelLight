@@ -38,7 +38,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionGradientNull)
+pl_class_metadata(ShaderFunctionGradientNull, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionGradient, "Null shader function implementation class for gradient")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionGradientNull)
 
 
 //[-------------------------------------------------------]

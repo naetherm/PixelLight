@@ -54,7 +54,13 @@ using namespace PLPhysics;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Application62)
+pl_class_metadata(Application62, "", PLEngine::EngineApplication, "Application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+	// Slots
+	pl_slot_1_metadata(OnControl,	PLInput::Control&,				"Called when a control event has occurred, occurred control as first parameter",								"")
+	pl_slot_1_metadata(OnContact,	PLPhysics::ContactInformation&,	"Called when a contact between two bodies was detected by the physics, contact information as first parameter",	"")
+pl_class_metadata_end(Application62)
 
 
 //[-------------------------------------------------------]

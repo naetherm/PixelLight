@@ -64,8 +64,8 @@ class ShaderLanguage : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, ShaderLanguage, "PLRenderer", PLCore::Object, "Abstract shader language class")
-	pl_class_end
+	pl_class_def(PLRENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

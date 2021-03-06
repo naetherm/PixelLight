@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoader3dsMax3DS)
+pl_class_metadata(MeshLoader3dsMax3DS, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for 3ds (3D Studio Max) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"3ds,prj,3DS,PRJ")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoader3dsMax3DS)
 
 
 //[-------------------------------------------------------]

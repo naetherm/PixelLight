@@ -58,12 +58,10 @@ class TextureCreatorNormalizationCubeMap : public TextureCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, TextureCreatorNormalizationCubeMap, "PLRenderer", PLRenderer::TextureCreator, "Normalization cube map (TextureBuffer::R8G8B8) texture creator class")
+	pl_class_def(PLRENDERER_API)
 		// Attributes
-		pl_attribute(Size,	PLCore::uint32,	64,	ReadWrite,	DirectValue,	"Texture size (must be a power of 2)",	"Min='8'")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Size,	PLCore::uint32,	64,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -40,7 +40,15 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Script)
+pl_class_metadata(Script, "PLCore", PLCore::Object, "Abstract script base class")
+	// Properties
+	pl_properties
+		pl_property("Language",	"Unknown")
+		pl_property("Formats",	"Unknown")
+	pl_properties_end
+	// Attributes
+	pl_attribute_metadata(Name,	String,	"",	ReadWrite,	"Name of this script, optional but recommended for better debugging",	"")
+pl_class_metadata_end(Script)
 
 
 //[-------------------------------------------------------]

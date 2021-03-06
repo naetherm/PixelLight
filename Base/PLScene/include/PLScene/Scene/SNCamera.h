@@ -83,7 +83,7 @@ class SNCamera : public SceneNode {
 			InvCullMode  = 1<<11,	/**< Invert cull mode */
 			NoZFar       = 1<<12	/**< Do not use the far clipping plane */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(FlipY,		"Flip y axis")
 			pl_enum_value(InvCullMode,	"Invert cull mode")
@@ -98,7 +98,7 @@ class SNCamera : public SceneNode {
 			DebugNoFrustum       = 1<<8,	/**< Do not draw the (green) frustum */
 			DebugFrustumVertices = 1<<9		/**< Draw the (green) frustum vertices */
 		};
-		pl_enum(EDebugFlags)
+		pl_flag(EDebugFlags)
 			pl_enum_base(SceneNode::EDebugFlags)
 			pl_enum_value(DebugNoFrustum,		"Do not draw the (green) frustum")
 			pl_enum_value(DebugFrustumVertices,	"Draw the (green) frustum vertices")
@@ -108,23 +108,17 @@ class SNCamera : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNCamera, "PLScene", PLScene::SceneNode, "PixelLight standard camera scene node")
-		// Properties
-		pl_properties
-			pl_property("Icon",	"Data/Textures/IconCamera.dds")
-		pl_properties_end
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(FOV,					float,						45.0f,		ReadWrite,	GetSet,	"Field of view in degree",																									"Min='10.0' Max='170.0'")
-		pl_attribute(Aspect,				float,						1.0f,		ReadWrite,	GetSet,	"Aspect factor",																											"")
-		pl_attribute(ZNear,					float,						0.1f,		ReadWrite,	GetSet,	"Near clipping plane",																										"")
-		pl_attribute(ZFar,					float,						1000.0f,	ReadWrite,	GetSet,	"Far clipping plane",																										"")
-		pl_attribute(SceneRendererFilename,	PLCore::String,				"",			ReadWrite,	GetSet,	"Filename of the scene renderer to use, if empty the default scene renderer of the scene graph surface painter is used",	"Type='SceneRenderer'")
+		pl_attribute_getset(SNCamera,	FOV,					float,			45.0f,		ReadWrite)
+		pl_attribute_getset(SNCamera,	Aspect,					float,			1.0f,		ReadWrite)
+		pl_attribute_getset(SNCamera,	ZNear,					float,			0.1f,		ReadWrite)
+		pl_attribute_getset(SNCamera,	ZFar,					float,			1000.0f,	ReadWrite)
+		pl_attribute_getset(SNCamera,	SceneRendererFilename,	PLCore::String,	"",			ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,					pl_flag_type(EFlags),		0,			ReadWrite,	GetSet,	"Flags",																													"")
-		pl_attribute(DebugFlags,			pl_flag_type(EDebugFlags),	0,			ReadWrite,	GetSet,	"Debug flags",																												"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNCamera,	Flags,					PLCore::uint32,	0,			ReadWrite)
+		pl_attribute_getset(SNCamera,	DebugFlags,				PLCore::uint32,	0,			ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -46,7 +46,12 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMOrbitingController)
+pl_class_metadata(SNMOrbitingController, "PLEngine", PLScene::SNMOrbiting, "Scene node modifier class rotating a scene node towards a target scene node using an input controller")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InputSemantic,	PLCore::String,	"",	ReadWrite,	"Semantic of this input controller (e.g. \"Camera\")",	"")
+pl_class_metadata_end(SNMOrbitingController)
 
 
 //[-------------------------------------------------------]

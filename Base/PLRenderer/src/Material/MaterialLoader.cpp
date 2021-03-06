@@ -37,7 +37,12 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MaterialLoader)
+pl_class_metadata(MaterialLoader, "PLRenderer", PLCore::LoaderImpl, "Abstract material loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Material")
+	pl_properties_end
+pl_class_metadata_end(MaterialLoader)
 
 
 //[-------------------------------------------------------]

@@ -52,14 +52,8 @@ class MeshLoaderAC3D : public MeshLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, MeshLoaderAC3D, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for ac (AC3D) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"ac,ac3d,acc,AC,AC3D,ACC")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

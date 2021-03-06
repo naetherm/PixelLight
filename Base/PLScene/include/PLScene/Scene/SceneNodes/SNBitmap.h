@@ -67,7 +67,7 @@ class SNBitmap : public SceneNode {
 		enum EFlags {
 			IgnoreColor = 1<<10	/**< Ignore the color variable of the bitmap */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(IgnoreColor, "Ignore the color variable of the bitmap")
 		pl_enum_end
@@ -76,15 +76,15 @@ class SNBitmap : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNBitmap, "PLScene", PLScene::SceneNode, "Abstract bitmap scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Material,		PLCore::String,			"Data/Effects/DefaultBitmap.plfx",	ReadWrite,	GetSet,	"Material to use",											"Type='Material Effect Image TextureAni'")
-		pl_attribute(Color,			PLGraphics::Color4,		PLGraphics::Color4::White,			ReadWrite,	GetSet,	"Bitmap color",												"")
-		pl_attribute(TexelStart,	PLMath::Vector2,		PLMath::Vector2::Zero,				ReadWrite,	GetSet,	"Bitmap texture source rectangle (0..1) start coordinate",	"")
-		pl_attribute(TexelEnd,		PLMath::Vector2,		PLMath::Vector2::One,				ReadWrite,	GetSet,	"Bitmap texture source rectangle (0..1) end coordinate",	"")
+		pl_attribute_getset(SNBitmap,	Material,	PLCore::String,		"Data/Effects/DefaultBitmap.plfx",	ReadWrite)
+		pl_attribute_getset(SNBitmap,	Color,		PLGraphics::Color4,	PLGraphics::Color4::White,			ReadWrite)
+		pl_attribute_getset(SNBitmap,	TexelStart,	PLMath::Vector2,	PLMath::Vector2::Zero,				ReadWrite)
+		pl_attribute_getset(SNBitmap,	TexelEnd,	PLMath::Vector2,	PLMath::Vector2::One,				ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),	0,									ReadWrite,	GetSet,	"Flags",													"")
-	pl_class_end
+		pl_attribute_getset(SNBitmap,	Flags,		PLCore::uint32,		0,									ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -53,15 +53,8 @@ namespace PLCore {
 *  @note
 *    - Implementation of the observer design pattern (this class is the observer, the destination)
 */
-template <typename DESC>
-class Slot : public DESC::EventHandlerType {
-
-
-	//[-------------------------------------------------------]
-	//[ Public static data                                    ]
-	//[-------------------------------------------------------]
-	public:
-		static DESC	Desc;	/**< Event handler descriptor */
+template <class EventHandlerType, typename ClassType, typename MethType>
+class Slot : public EventHandlerType {
 
 
 	//[-------------------------------------------------------]
@@ -77,11 +70,9 @@ class Slot : public DESC::EventHandlerType {
 		*  @param[in] pObject
 		*    Pointer to object to which the method belongs
 		*/
-		Slot(const typename DESC::MethType::MemFuncType &pMemFunc, typename DESC::ClassType *pObject) :
-			DESC::EventHandlerType(pMemFunc, pObject)
+		Slot(const typename MethType::MemFuncType &pMemFunc, ClassType *pObject) :
+			EventHandlerType(pMemFunc, pObject)
 		{
-			// Ensure that the compiler will actually create static instances
-			Desc.Dummy();
 		}
 
 		/**
@@ -93,30 +84,7 @@ class Slot : public DESC::EventHandlerType {
 		}
 
 
-	//[-------------------------------------------------------]
-	//[ Public virtual DynFunc functions                      ]
-	//[-------------------------------------------------------]
-	public:
-		/**
-		*  @brief
-		*    Get event handler descriptor
-		*
-		*  @return
-		*    Event handler descriptor
-		*/
-		virtual const EventHandlerDesc *GetDesc() const override
-		{
-			// Return descriptor
-			return &Desc;
-		}
-
-
 };
-
-
-// Static data instances
-template<typename DESC>
-DESC Slot<DESC>::Desc;
 
 
 //[-------------------------------------------------------]

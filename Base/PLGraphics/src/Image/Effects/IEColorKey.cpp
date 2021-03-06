@@ -148,7 +148,8 @@ class ProcessData {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(IEColorKey)
+pl_class_metadata(IEColorKey, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Apply color key")
+pl_class_metadata_end(IEColorKey)
 
 
 //[-------------------------------------------------------]

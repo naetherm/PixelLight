@@ -281,8 +281,8 @@ void QPLSceneContext::OnSceneNode(SceneQuery &cQuery, SceneNode &cSceneNode)
 			}
 
 		// StartCamera
-		} else*/ if (cKeyValue.Key.GetString() == "StartCamera") {
-			m_sStartCamera = cKeyValue.Value.GetString();
+		} else*/ if (cKeyValue.Key.Get() == "StartCamera") {
+			m_sStartCamera = cKeyValue.Value.Get();
 		}
 
 	// Load screen scene node?

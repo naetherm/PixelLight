@@ -65,7 +65,15 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredGBuffer)
+pl_class_metadata(SRPDeferredGBuffer, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering GBuffer (Geometry Buffer) fill")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,														"",											ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+	pl_attribute_metadata(TextureFiltering,	pl_enum_type_def3(SRPDeferredGBufferMaterial, ETextureFiltering),	SRPDeferredGBufferMaterial::Anisotropic8,	ReadWrite,	"Texture filtering",																													"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPDeferredGBuffer, EFlags),						0,											ReadWrite,	"Flags",																																"")
+pl_class_metadata_end(SRPDeferredGBuffer)
 
 
 //[-------------------------------------------------------]

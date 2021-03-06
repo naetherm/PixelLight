@@ -48,7 +48,14 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Border)
+pl_class_metadata(Border, "PLGui", PLGui::ContainerWidget, "Container widget that displays a border around it's content")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(LineStyle,	pl_enum_type(ELineStyle),	SolidLine,					ReadWrite,	"Line style",	"")
+	pl_attribute_metadata(BorderSize,	int,						1,							ReadWrite,	"Border size",	"")
+	pl_attribute_metadata(BorderColor,	PLGraphics::Color4,			PLGraphics::Color4::Black,	ReadWrite,	"Border color",	"")
+pl_class_metadata_end(Border)
 
 
 //[-------------------------------------------------------]

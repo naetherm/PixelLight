@@ -69,20 +69,8 @@ class VolumeLoaderDDS : public VolumeLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, VolumeLoaderDDS, "PLVolume", PLVolume::VolumeLoader, "Volume loader implementation for the \"DDS\" volume data file format")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"dds,DDS")
-			pl_property("Load",		"1")
-			pl_property("Save",		"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_2(Load,		pl_ret_type(bool),	Volume&,		PLCore::File&,							"Load method, voxel size is set to default",															"")
-		pl_method_5(LoadParams,	pl_ret_type(bool),	Volume&,		PLCore::File&,	float,	float,	float,	"Load method. Parameters: First, second and third 'float' parameters are the x, y and z voxel size.",	"")
-		pl_method_2(Save,		pl_ret_type(bool),	const Volume&,	PLCore::File&,							"Save method",																							"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

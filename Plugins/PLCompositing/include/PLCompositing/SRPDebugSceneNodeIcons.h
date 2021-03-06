@@ -61,13 +61,11 @@ class SRPDebugSceneNodeIcons : public SRPDebug {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDebugSceneNodeIcons, "PLCompositing", PLCompositing::SRPDebug, "Abstract scene renderer pass drawing just simple scene node icons")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(Size,				float,	30.0f,	ReadWrite,	DirectValue,	"Icon size",																				"Min='1.0'")
-		pl_attribute(MaxDrawDistance,	float,	20.0f,	ReadWrite,	DirectValue,	"Maximum draw distance of icons to the camera, if less or equal 0, there's no limitation",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Size,				float,	30.0f,	ReadWrite)
+		pl_attribute_directvalue(MaxDrawDistance,	float,	20.0f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

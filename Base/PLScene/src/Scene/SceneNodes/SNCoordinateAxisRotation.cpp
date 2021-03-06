@@ -48,7 +48,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNCoordinateAxisRotation)
+pl_class_metadata(SNCoordinateAxisRotation, "PLScene", PLScene::SNCoordinateAxis, "Scene node that draws coordinate axis (on the lower right by default) of the screen showing the current rotation")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNCoordinateAxisRotation, EFlags),	SNCoordinateAxisRotation::NoCulling,	ReadWrite,	"Flags",	"")
+pl_class_metadata_end(SNCoordinateAxisRotation)
 
 
 //[-------------------------------------------------------]

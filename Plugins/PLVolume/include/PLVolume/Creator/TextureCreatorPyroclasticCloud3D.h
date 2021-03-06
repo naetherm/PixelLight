@@ -57,13 +57,10 @@ class TextureCreatorPyroclasticCloud3D : public PLRenderer::TextureCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, TextureCreatorPyroclasticCloud3D, "PLVolume", PLRenderer::TextureCreator, "3D pyroclastic cloud texture (TextureBuffer::L8) creator class")
-		// PLVOLUME_RTTI_EXPORT
-		pl_attribute(TextureSize,	PLCore::uint32,	128,	ReadWrite,	DirectValue,	"Texture size",	"Min='8'")
-		pl_attribute(Radius,		float,			0.025f,	ReadWrite,	DirectValue,	"Radius",		"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+		pl_attribute_directvalue(TextureSize,	PLCore::uint32,	128,	ReadWrite)
+		pl_attribute_directvalue(Radius,		float,			0.025f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -41,7 +41,19 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessBloomToneMap)
+pl_class_metadata(SNMPostProcessBloomToneMap, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(BloomScale,		float,				0.8f,									ReadWrite,	"Bloom scale",							"")
+	pl_attribute_metadata(Strength,			PLMath::Vector2,	PLMath::Vector2(4.0f, 4.0f),			ReadWrite,	"Blur strength",						"")
+	pl_attribute_metadata(ExposureLevel,	float,				0.05f,									ReadWrite,	"Exposure level",						"")
+	pl_attribute_metadata(GammaLevel,		float,				1.8f,									ReadWrite,	"Gamma level",							"")
+	pl_attribute_metadata(DeFogLevel,		float,				0.0f,									ReadWrite,	"De-fog level",							"")
+	pl_attribute_metadata(FogColor,			PLGraphics::Color3,	PLGraphics::Color3(1.0, 1.0, 1.0f),		ReadWrite,	"Fog color",							"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,			PLCore::String,		"Data/PostProcesses/BloomToneMap.pp",	ReadWrite,	"Filename of the post process to use", "Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessBloomToneMap)
 
 
 //[-------------------------------------------------------]

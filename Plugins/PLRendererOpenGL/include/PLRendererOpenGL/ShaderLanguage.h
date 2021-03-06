@@ -59,8 +59,8 @@ class ShaderLanguage : public PLRenderer::ShaderLanguage {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDEREROPENGL_RTTI_EXPORT, ShaderLanguage, "PLRendererOpenGL", PLRenderer::ShaderLanguage, "Abstract OpenGL shader language class")
-	pl_class_end
+	pl_class_def(PLRENDEREROPENGL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

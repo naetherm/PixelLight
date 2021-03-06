@@ -49,7 +49,12 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Slider)
+pl_class_metadata(Slider, "PLGui", PLGui::AbstractSlider, "Slider widget")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Orientation,	pl_enum_type(EOrientation),	Horizontal,	ReadWrite,	"Slider orientation",	"")
+pl_class_metadata_end(Slider)
 
 
 //[-------------------------------------------------------]

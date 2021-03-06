@@ -66,27 +66,25 @@ class SCPhysicsWorld : public PLScene::SceneContainer {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SCPhysicsWorld, "PLPhysics", PLScene::SceneContainer, "Physics world scene node container")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(PhysicsAPI,			PLCore::String,		"PLPhysicsNewton::World",				ReadWrite,	DirectValue,	"Name of the physics API this world is using",																			"")
-		pl_attribute(SimulationActive,		bool,				true,									ReadWrite,	GetSet,			"Is the physics simulation currently active?",																			"")
-		pl_attribute(SimulationSpeed,		float,				1.0f,									ReadWrite,	GetSet,			"Physics simulation speed. A speed of <= 0 is NOT allowed! Do NOT make the factor 'too' (for example > 4) extreme.",	"Min='0.0001'")
-		pl_attribute(SimulationQuality,		float,				1.0f,									ReadWrite,	GetSet,			"Physics simulation quality. 1 means best realistic behavior, 0 for the fastest possible configuration.",				"Min='0.0' Max='1.0'")
-		pl_attribute(FrameRate,				float,				60.0f,									ReadWrite,	GetSet,			"Frame rate the simulation runs on: smaller=more performance, larger=more accurate simulation",							"Min='60.0' Max='1000.0'")
-		pl_attribute(CacheDirectory,		PLCore::String,		"",										ReadWrite,	DirectValue,	"Physics cache directory, if empty, no caching is used (best to avoid cache problems during development)",				"")
+		pl_attribute_directvalue(					PhysicsAPI,			PLCore::String,		"PLPhysicsNewton::World",				ReadWrite)
+		pl_attribute_getset		(SCPhysicsWorld,	SimulationActive,	bool,				true,									ReadWrite)
+		pl_attribute_getset		(SCPhysicsWorld,	SimulationSpeed,	float,				1.0f,									ReadWrite)
+		pl_attribute_getset		(SCPhysicsWorld,	SimulationQuality,	float,				1.0f,									ReadWrite)
+		pl_attribute_getset		(SCPhysicsWorld,	FrameRate,			float,				60.0f,									ReadWrite)
+		pl_attribute_directvalue(					CacheDirectory,		PLCore::String,		"",										ReadWrite)
 
 		// [TODO] New RTTI usage
-	//	DEFINE_VAR(PL_VAR_ENUM,		m_nThreadPriorityClass,	"",	"",							,							"Idle=0 BelowNormal=1 Normal=2 AboveNormal=3 High=4 Realtime=5 None=6")
-	//	DEFINE_VAR(PL_VAR_ENUM,		m_nThreadPriority,		"",		"",						,							"Idle=0 Lowest=1 BelowNormal=2 Normal=3 AboveNormal=4 Highest=5 TimeCritical=6")
-	//	pl_attribute(ThreadPriorityClass,	pl_enum_type(),		None,									ReadWrite,	GetSet,			"Physics thread priority class (use realtime priority class ONLY if you REALLY need it, 'None' = do not use a thread)",	"")
-	//	pl_attribute(ThreadPriority,		pl_enum_type(),		Normal,									ReadWrite,	GetSet,			"Physics thread priority within the priority class it is in",															"")
+		//	DEFINE_VAR(PL_VAR_ENUM,		m_nThreadPriorityClass,	"",	"",							,							"Idle=0 BelowNormal=1 Normal=2 AboveNormal=3 High=4 Realtime=5 None=6")
+		//	DEFINE_VAR(PL_VAR_ENUM,		m_nThreadPriority,		"",		"",						,							"Idle=0 Lowest=1 BelowNormal=2 Normal=3 AboveNormal=4 Highest=5 TimeCritical=6")
+		//	pl_attribute_getset		(SCPhysicsWorld,	ThreadPriorityClass,	pl_enum_type(),		None,									ReadWrite)
+		//	pl_attribute_getset		(SCPhysicsWorld,	ThreadPriority,			pl_enum_type(),		Normal,									ReadWrite)
 
-		pl_attribute(Gravity,				PLMath::Vector3,	PLMath::Vector3(0.0f, -9.81f, 0.0f),	ReadWrite,	GetSet,			"Gravity vector",																										"")
-		pl_attribute(BuoyancyActive,		bool,				false,									ReadWrite,	GetSet,			"Is buoyancy force active?",																							"")
-		pl_attribute(BuoyancyPlaneY,		float,				0.0f,									ReadWrite,	GetSet,			"Buoyancy plane y position",																							"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SCPhysicsWorld,	Gravity,			PLMath::Vector3,	PLMath::Vector3(0.0f, -9.81f, 0.0f),	ReadWrite)
+		pl_attribute_getset		(SCPhysicsWorld,	BuoyancyActive,		bool,				false,									ReadWrite)
+		pl_attribute_getset		(SCPhysicsWorld,	BuoyancyPlaneY,		float,				0.0f,									ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

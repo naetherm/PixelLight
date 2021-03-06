@@ -48,7 +48,15 @@ namespace PLScriptLua {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Script)
+pl_class_metadata(Script, "PLScriptLua", PLCore::Script, "Lua (http://www.lua.org/) script implementation")
+	// Properties
+	pl_properties
+		pl_property("Language",	"Lua")
+		pl_property("Formats",	"lua,LUA")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Script)
 
 
 //[-------------------------------------------------------]
@@ -1364,7 +1372,7 @@ bool Script::GetNestedTable(const String &sTableName)
 *  @brief
 *    Returns event user data key
 */
-String Script::GetEventUserDataKey(DynEvent *pDynEvent, const void *pLuaPointer) const
+String Script::GetEventUserDataKey(DynEventPtr pDynEvent, const void *pLuaPointer) const
 {
 	return String(pDynEvent) + String(const_cast<void*>(pLuaPointer));
 }
@@ -1373,7 +1381,7 @@ String Script::GetEventUserDataKey(DynEvent *pDynEvent, const void *pLuaPointer)
 *  @brief
 *    Returns event user data
 */
-Script::EventUserData *Script::GetEventUserData(DynEvent *pDynEvent, const void *pLuaPointer) const
+Script::EventUserData *Script::GetEventUserData(DynEventPtr pDynEvent, const void *pLuaPointer) const
 {
 	return m_mapEventUserData.Get(GetEventUserDataKey(pDynEvent, pLuaPointer));
 }
@@ -1382,7 +1390,7 @@ Script::EventUserData *Script::GetEventUserData(DynEvent *pDynEvent, const void 
 *  @brief
 *    Adds event user data
 */
-void Script::AddEventUserData(DynEvent *pDynEvent, const void *pLuaPointer, EventUserData *pEventUserData)
+void Script::AddEventUserData(DynEventPtr pDynEvent, const void *pLuaPointer, EventUserData *pEventUserData)
 {
 	m_mapEventUserData.Add(GetEventUserDataKey(pDynEvent, pLuaPointer), pEventUserData);
 }
@@ -1400,7 +1408,6 @@ void Script::DestroyEventUserData()
 		EventUserData *pEventUserData = m_mapEventUserData.Get(cKeyIterator.Next());
 		
 		// Destroy the event user data
-		delete pEventUserData->pDynEventHandler;
 		luaL_unref(m_pLuaState, LUA_REGISTRYINDEX, pEventUserData->nLuaFunctionReference);
 		delete pEventUserData;
 	}

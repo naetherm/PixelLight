@@ -52,22 +52,20 @@ class PGSparkles : public PGPhysics {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGSparkles, "PLParticleGroups", PLParticleGroups::PGPhysics, "Sparkles particle group")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(EnergyPerSec,		PLCore::uint32,	100,							ReadWrite,	DirectValue,	"The energy consumption per second of one particle",					"")
-		pl_attribute(EnergyMin,			PLCore::uint32,	100,							ReadWrite,	DirectValue,	"Minimum of energy",													"")
-		pl_attribute(EnergyRange,		PLCore::uint32,	65,								ReadWrite,	DirectValue,	"EnergyMin + EnergyRange = particles energy",							"")
-		pl_attribute(Brightness,		PLCore::uint32,	250,							ReadWrite,	DirectValue,	"Brightness",															"")
-		pl_attribute(MediumSpeed,		float,			100.0f,							ReadWrite,	DirectValue,	"The speed factor of the particles",									"")
-		pl_attribute(MediumSize,		PLCore::uint32,	5,								ReadWrite,	DirectValue,	"Medium size for each particles",										"")
-		pl_attribute(DownVsAwayRatio,	PLCore::uint32,	20,								ReadWrite,	DirectValue,	"20 -> every 20 particle fly randomly away instead of falling down",	"")
-		pl_attribute(BuildPerSec,		PLCore::uint32,	100,							ReadWrite,	DirectValue,	"Particle building speed",												"")
+		pl_attribute_directvalue(				EnergyPerSec,		PLCore::uint32,	100,							ReadWrite)
+		pl_attribute_directvalue(				EnergyMin,			PLCore::uint32,	100,							ReadWrite)
+		pl_attribute_directvalue(				EnergyRange,		PLCore::uint32,	65,								ReadWrite)
+		pl_attribute_directvalue(				Brightness,			PLCore::uint32,	250,							ReadWrite)
+		pl_attribute_directvalue(				MediumSpeed,		float,			100.0f,							ReadWrite)
+		pl_attribute_directvalue(				MediumSize,			PLCore::uint32,	5,								ReadWrite)
+		pl_attribute_directvalue(				DownVsAwayRatio,	PLCore::uint32,	20,								ReadWrite)
+		pl_attribute_directvalue(				BuildPerSec,		PLCore::uint32,	100,							ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,			PLCore::String,	"Data/Textures/PGSparkles.dds",	ReadWrite,	GetSet,			"Particle group material",												"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,			PLCore::uint32,	300,							ReadWrite,	GetSet,			"Number of particles",													"Min=1")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGSparkles,	Material,			PLCore::String,	"Data/Textures/PGSparkles.dds",	ReadWrite)
+		pl_attribute_getset		(PGSparkles,	Particles,			PLCore::uint32,	300,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

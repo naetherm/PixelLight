@@ -39,7 +39,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneQuery)
+pl_class_metadata(SceneQuery, "PLScene", PLCore::Object, "Abstract scene query class")
+	// Signals
+	pl_signal_2_metadata(SignalSceneNode,	SceneQuery&,	SceneNode&,	"A scene node was 'touched' during the query. Event causing scene query and found scene node as parameters.",	"")
+pl_class_metadata_end(SceneQuery)
 
 
 //[-------------------------------------------------------]

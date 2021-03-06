@@ -46,7 +46,13 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorFlashlight)
+pl_class_metadata(MeshCreatorFlashlight, "PLMesh", PLMesh::MeshCreator, "Flashlight mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Detail,	PLCore::uint32,		16,						ReadWrite,	"Detail level",		"")
+	pl_attribute_metadata(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Offset to center",	"")
+pl_class_metadata_end(MeshCreatorFlashlight)
 
 
 //[-------------------------------------------------------]

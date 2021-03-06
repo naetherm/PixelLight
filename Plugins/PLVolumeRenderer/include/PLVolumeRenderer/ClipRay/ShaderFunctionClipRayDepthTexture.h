@@ -49,7 +49,7 @@ namespace PLVolumeRenderer {
 *  @remarks
 *    Depth buffer information usage for ray clipping as described within the paper
 *    "GPU-Based High-Quality Volume Rendering For Virtual Environments" by Andrea Kratz,
-*    Markus Hadwiger, Anton Fuhrmann, Rainer Splechtna, Katja Bühler and the book
+*    Markus Hadwiger, Anton Fuhrmann, Rainer Splechtna, Katja Bï¿½hler and the book
 *    "Real-Time Volume Graphics", section "11.4.1 Opaque Scene Geometry Intersection with a Ray-Cast Volume" (page 286).
 */
 class ShaderFunctionClipRayDepthTexture : public ShaderFunctionClipRay {
@@ -58,10 +58,8 @@ class ShaderFunctionClipRayDepthTexture : public ShaderFunctionClipRay {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionClipRayDepthTexture, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClipRay, "Depth texture shader function implementation class for clip ray")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

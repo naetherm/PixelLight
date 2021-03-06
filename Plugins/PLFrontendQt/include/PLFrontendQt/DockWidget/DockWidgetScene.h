@@ -52,12 +52,8 @@ class DockWidgetScene : public DockWidget {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLFRONTENDQT_RTTI_EXPORT, DockWidgetScene, "PLFrontendQt", PLFrontendQt::DockWidget, "Abstract scene Qt dock widget base class")
-		// Properties
-		pl_properties
-			pl_property("Title", "Scene")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLFRONTENDQT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

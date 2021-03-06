@@ -49,7 +49,12 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorTeapot)
+pl_class_metadata(MeshCreatorTeapot, "PLMesh", PLMesh::MeshCreator, "Mesh creator class which will create \"THE\" teapot :)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Offset to center",	"")
+pl_class_metadata_end(MeshCreatorTeapot)
 
 
 //[-------------------------------------------------------]

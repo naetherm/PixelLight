@@ -43,7 +43,23 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMLightRandomAnimation)
+pl_class_metadata(SNMLightRandomAnimation, "PLScene", PLScene::SceneNodeModifier, "Scene node modifier class for a random light color animation")
+	// Properties
+	pl_properties
+		pl_property("SceneNodeClass",	"PLScene::SNLight")
+	pl_properties_end
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Speed,	float,												2.0f,									ReadWrite,	"Animation speed",	"")
+	pl_attribute_metadata(Radius,	float,												0.5f,									ReadWrite,	"Animation radius",	"")
+	pl_attribute_metadata(FixColor,	PLGraphics::Color3,									PLGraphics::Color3(0.5f, 0.5f, 0.5f),	ReadWrite,	"Fix color",		"")
+	pl_attribute_metadata(Color,	PLGraphics::Color3,									PLGraphics::Color3::White,				ReadWrite,	"Color to apply",	"")
+		// Overwritten SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNMLightRandomAnimation, EFlags),	0,										ReadWrite,	"Flags",			"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
+pl_class_metadata_end(SNMLightRandomAnimation)
 
 
 //[-------------------------------------------------------]

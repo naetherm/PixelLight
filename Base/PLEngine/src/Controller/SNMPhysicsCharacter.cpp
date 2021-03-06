@@ -48,7 +48,19 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsCharacter)
+pl_class_metadata(SNMPhysicsCharacter, "PLEngine", PLPhysics::SNMPhysics, "Basic PL physics character scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Speed,				float,											2.0f,	ReadWrite,	"Speed",										"Min='0.0'")
+	pl_attribute_metadata(Acceleration,			float,											20.0f,	ReadWrite,	"Acceleration",									"Min='0.0'")
+	pl_attribute_metadata(MaxAcceleration,		float,											30.0f,	ReadWrite,	"Maximum acceleration",							"Min='0.0'")
+	pl_attribute_metadata(JumpForce,			float,											4.0f,	ReadWrite,	"Jump force, if 0, jumping is not allowed",		"Min='0.0'")
+	pl_attribute_metadata(JumpReadyTime,		float,											0.5f,	ReadWrite,	"Time to past until we can jump again",			"Min='0.0'")
+	pl_attribute_metadata(JumpGroundDistance,	float,											0.05f,	ReadWrite,	"Minimum ground distance required for jumping",	"Min='0.001'")
+		// Overwritten PLScene::SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SNMPhysicsCharacter, EFlags),	0,		ReadWrite,	"Flags",										"")
+pl_class_metadata_end(SNMPhysicsCharacter)
 
 
 //[-------------------------------------------------------]

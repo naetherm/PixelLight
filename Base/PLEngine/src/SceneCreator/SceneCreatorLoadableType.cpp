@@ -40,7 +40,14 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneCreatorLoadableType)
+pl_class_metadata(SceneCreatorLoadableType, "PLEngine", PLEngine::SceneCreator, "Abstract loadable type scene creator base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Unknown")
+	pl_properties_end
+	// Attributes
+	pl_attribute_metadata(Filename,	PLCore::String,	"",	ReadWrite,	"Resource filename",	"")
+pl_class_metadata_end(SceneCreatorLoadableType)
 
 
 //[-------------------------------------------------------]

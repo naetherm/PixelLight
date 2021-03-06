@@ -52,16 +52,14 @@ class PGMagic1 : public PGPhysics {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGMagic1, "PLParticleGroups", PLParticleGroups::PGPhysics, "Magic particle group 1")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(Size,			float,			0.2f,							ReadWrite,	DirectValue,	"Size",						"Min='0.0001'")
-		pl_attribute(BuildPerSec,	PLCore::uint32,	100,							ReadWrite,	DirectValue,	"Particle building speed",	"")
+		pl_attribute_directvalue(			Size,			float,			0.2f,							ReadWrite)
+		pl_attribute_directvalue(			BuildPerSec,	PLCore::uint32,	100,							ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,		PLCore::String,	"Data/Textures/PGMagic1.dds",	ReadWrite,	GetSet,			"Particle group material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,		PLCore::uint32,	200,							ReadWrite,	GetSet,			"Number of particles",		"Min=1")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGMagic1,	Material,		PLCore::String,	"Data/Textures/PGMagic1.dds",	ReadWrite)
+		pl_attribute_getset		(PGMagic1,	Particles,		PLCore::uint32,	200,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

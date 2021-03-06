@@ -28,6 +28,7 @@
 #include <QtGui/qtreeview.h>
 #include <QtGui/qboxlayout.h>
 #include <QtGui/qdockwidget.h>
+#include <QtGui/QMainWindow>
 #include <PLCore/Base/Class.h>
 #include <PLScene/Scene/SceneContainer.h>
 #include <PLScene/Scene/SceneNodeModifier.h>
@@ -51,7 +52,22 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetSceneGraph)
+pl_class_metadata(DockWidgetSceneGraph, "PLFrontendQt", PLFrontendQt::DockWidgetScene, "Scene graph Qt dock widget class")
+	// Properties
+	pl_properties
+		pl_property("Title", "Scene Graph")
+	pl_properties_end
+	// Methods
+	pl_method_0_metadata(GetSceneContainer,	pl_ret_type(PLScene::SceneContainer*),										"Returns the used scene container, can be a null pointer.",																																			"")
+	pl_method_1_metadata(SetSceneContainer,	pl_ret_type(void),						PLScene::SceneContainer*,			"Sets the scene container to use. Scene container to use as first parameter.",																														"")
+	pl_method_0_metadata(GetSelectedObject,	pl_ret_type(PLCore::Object*),												"Returns the currently selected object, can be a null pointer.",																																	"")
+	pl_method_1_metadata(PostSelectObject,	pl_ret_type(void),						PLCore::Object*,					"Selects the given object (post-broadcast). Object to select as first parameter.",																													"")
+	pl_method_2_metadata(AddedObject,		pl_ret_type(void),						PLCore::Object&,			int,	"An object was added. Added object as first parameter, index position specifying the location within the object list where the object should be added (<0 for at the end) as second parameter.",	"")
+	// Constructors
+	pl_constructor_2_metadata(DefaultConstructor,	QMainWindow*,	DockWidgetManager*,	"Constructor with a pointer to the Qt main window as first parameter, pointer to the dock widget manager this dock widget should be registered to as second parameter",	"")
+	// Slots
+	pl_slot_0_metadata(OnDestroy,	"Called when the scene container assigned with this dock widget was destroyed",	"")
+pl_class_metadata_end(DockWidgetSceneGraph)
 
 
 //[-------------------------------------------------------]
@@ -61,7 +77,7 @@ pl_implement_class(DockWidgetSceneGraph)
 *  @brief
 *    Constructor
 */
-DockWidgetSceneGraph::DockWidgetSceneGraph(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetScene(reinterpret_cast<QWidget*>(pQMainWindow), pDockWidgetManager),
+DockWidgetSceneGraph::DockWidgetSceneGraph(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetScene(pQMainWindow, pDockWidgetManager),
 	SlotOnDestroy(this),
 	m_pQTreeView(nullptr),
 	m_pSceneGraphTreeModel(nullptr),

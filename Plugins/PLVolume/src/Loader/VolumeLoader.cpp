@@ -37,7 +37,12 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(VolumeLoader)
+pl_class_metadata(VolumeLoader, "PLVolume", PLCore::LoaderImpl, "Abstract volume loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Volume")
+	pl_properties_end
+pl_class_metadata_end(VolumeLoader)
 
 
 //[-------------------------------------------------------]

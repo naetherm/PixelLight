@@ -65,7 +65,19 @@ namespace PLImageLoaderEXR {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ImageLoaderEXR)
+pl_class_metadata(ImageLoaderEXR, "PLImageLoaderEXR", PLGraphics::ImageLoader, "Image loader implementation for the OpenEXR format (high dynamic range image file format)")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"exr,EXR")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	PLGraphics::Image&,			PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const PLGraphics::Image&,	PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(ImageLoaderEXR)
 
 
 //[-------------------------------------------------------]

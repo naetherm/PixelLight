@@ -52,7 +52,25 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SCRenderToTexture)
+pl_class_metadata(SCRenderToTexture, "PLScene", PLScene::SceneContainer, "Render to texture scene container")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Cube,				bool,													false,															ReadWrite,	"Render to cube texture? If 'true', only 'Width' is used which must be a power of two",	"")
+	pl_attribute_metadata(Width,			PLCore::uint16,											512,															ReadWrite,	"Texture width",																		"Min='16'")
+	pl_attribute_metadata(Height,			PLCore::uint16,											512,															ReadWrite,	"Texture height",																		"Min='16'")
+	pl_attribute_metadata(Format,			pl_enum_type_def3(SCRenderToTexture, EFormat),			SCRenderToTexture::R8G8B8A8,									ReadWrite,	"Texture format",																		"")
+	pl_attribute_metadata(SurfaceFlags,		pl_flag_type_def3(SCRenderToTexture, ESurfaceFlags),	SCRenderToTexture::Depth|SCRenderToTexture::Mipmaps,			ReadWrite,	"Texture surface flags",																"")
+	pl_attribute_metadata(TextureName,		PLCore::String,											"",																ReadWrite,	"Name of the resulting texture",														"")
+	pl_attribute_metadata(FPSLimit,			float,													30.0f,															ReadWrite,	"Frames per second limitation, if 0, there's no limitation",							"Min='0.0'")
+	pl_attribute_metadata(Painter,			PLCore::String,											"PLScene::SPScene",												ReadWrite,	"Name of the used surface painter",														"")
+	pl_attribute_metadata(SceneRenderer,	PLCore::String,											"Forward.sr",													ReadWrite,	"Name of the used scene renderer, only used if the painter is derived of 'SPScene'",	"")
+	pl_attribute_metadata(SceneName,		PLCore::String,											"Parent",														ReadWrite,	"Name of the scene to renderer, only used if the painter is derived of 'SPScene'",		"")
+	pl_attribute_metadata(CameraName,		PLCore::String,											"",																ReadWrite,	"Name of the camera to use, only used if the painter is derived of 'SPScene'",			"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SCRenderToTexture, EFlags),			SCRenderToTexture::NoCulling|SCRenderToTexture::NoRecursion,	ReadWrite,	"Flags",																				"")
+	pl_attribute_metadata(DebugFlags,		pl_flag_type_def3(SCRenderToTexture, EDebugFlags),		0,																ReadWrite,	"Debug flags",																			"")
+pl_class_metadata_end(SCRenderToTexture)
 
 
 //[-------------------------------------------------------]

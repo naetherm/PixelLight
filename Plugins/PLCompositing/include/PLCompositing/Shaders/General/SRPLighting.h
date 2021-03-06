@@ -189,7 +189,7 @@ class SRPLighting : public PLScene::SceneRendererPass {
 			NoProjectiveSpotLights  = 1<<17,	/**< No projective spot lights */
 			NoDiscard               = 1<<18		/**< Disable discard (may result in better or worse performance) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(PLScene::SceneRendererPass::EFlags)
 			pl_enum_value(NoGammaCorrection,		"Do not perform gamma correction (in general gamma correction done for: DiffuseMap, ReflectionMap) - if gamma correction is enabled, there should be a gamma correction at the end of the render pipeline")
 			pl_enum_value(NoDiffuseMap,				"Ignore diffuse map")
@@ -215,16 +215,14 @@ class SRPLighting : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPLighting, "PLCompositing", PLScene::SceneRendererPass, "Shaders based lighting scene renderer pass implementation")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(TextureFiltering,	pl_enum_type(ETextureFiltering),	Anisotropic8,	ReadWrite,	DirectValue,	"Texture filtering",																													"")
-		pl_attribute(ShaderLanguage,	PLCore::String,						"",				ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
-		pl_attribute(LightingIntensity,	float,								1.0f,			ReadWrite,	DirectValue,	"General lighting intensity",																											"")
+		pl_attribute_directvalue(				TextureFiltering,	ETextureFiltering,	Anisotropic8,	ReadWrite)
+		pl_attribute_directvalue(				ShaderLanguage,		PLCore::String,		"",				ReadWrite)
+		pl_attribute_directvalue(				LightingIntensity,	float,				1.0f,			ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),				0,				ReadWrite,	GetSet,			"Flags",																																"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPLighting,	Flags,				PLCore::uint32,		0,				ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

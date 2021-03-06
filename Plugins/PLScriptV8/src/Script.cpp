@@ -39,7 +39,15 @@ namespace PLScriptV8 {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Script)
+pl_class_metadata(Script, "PLScriptV8", PLCore::Script, "V8 (ECMA-262 compliant JavaScript engine, see http://code.google.com/p/v8/) script implementation")
+	// Properties
+	pl_properties
+		pl_property("Language",	"JavaScript")
+		pl_property("Formats",	"js,JS")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Script)
 
 
 //[-------------------------------------------------------]

@@ -44,7 +44,8 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneHierarchy)
+pl_class_metadata(SceneHierarchy, "PLScene", PLCore::Object, "Abstract scene hierarchy class (spatial database, Bounding Volume Hierarchies (BVHs))")
+pl_class_metadata_end(SceneHierarchy)
 
 
 //[-------------------------------------------------------]

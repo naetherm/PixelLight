@@ -45,7 +45,16 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMRotationKeyframeAnimation)
+pl_class_metadata(SNMRotationKeyframeAnimation, "PLScene", PLScene::SNMTransform, "Keyframe rotation animation scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Speed,			float,														1.0f,	ReadWrite,	"Animation playback speed",												"")
+	pl_attribute_metadata(FramesPerSecond,	PLCore::uint32,												24,		ReadWrite,	"Frames per second",													"")
+	pl_attribute_metadata(Keys,				PLCore::String,												"",		ReadWrite,	"Rotation keys (w, x, y and z quaternion components) chunk filename",	"")
+		// Overwritten SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNMRotationKeyframeAnimation, EFlags),	0,		ReadWrite,	"Flags",																"")
+pl_class_metadata_end(SNMRotationKeyframeAnimation)
 
 
 //[-------------------------------------------------------]

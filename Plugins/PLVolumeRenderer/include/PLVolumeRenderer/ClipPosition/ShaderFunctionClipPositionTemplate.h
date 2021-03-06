@@ -52,14 +52,8 @@ class ShaderFunctionClipPositionTemplate : public ShaderFunctionClipPosition {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionClipPositionTemplate, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClipPosition, "Template shader function implementation class for clip position")
-		// Properties
-		pl_properties
-			pl_property("FunctionTemplate",	"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

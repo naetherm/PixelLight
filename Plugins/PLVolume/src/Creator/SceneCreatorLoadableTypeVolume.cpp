@@ -41,7 +41,14 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneCreatorLoadableTypeVolume)
+pl_class_metadata(SceneCreatorLoadableTypeVolume, "PLVolume", PLEngine::SceneCreatorLoadableType, "Volume loadable type scene creator")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Volume")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneCreatorLoadableTypeVolume)
 
 
 //[-------------------------------------------------------]

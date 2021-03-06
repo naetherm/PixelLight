@@ -54,25 +54,25 @@ class FixedFunctionsRenderStates : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, FixedFunctionsRenderStates, "PLRenderer", PLCore::Object, "Fixed functions render states RTTI wrapper class")
+	pl_class_def(PLRENDERER_API)
 		// Attributes
 			// Fog
-		pl_attribute(FogEnable,				bool,										false,										ReadWrite,	GetSet,	"Enable/disable fog",				"")
-		pl_attribute(FogColor,				PLGraphics::Color4,							PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite,	GetSet,	"RGBA fog color",					"")
-		pl_attribute(FogDensity,			float,										1.0f,										ReadWrite,	GetSet,	"Fog density",						"")
-		pl_attribute(FogStart,				float,										0.0f,										ReadWrite,	GetSet,	"Fog start",						"")
-		pl_attribute(FogEnd,				float,										1.0f,										ReadWrite,	GetSet,	"Fog end",							"")
-		pl_attribute(FogMode,				pl_enum_type(FixedFunctions::Fog::Enum),	FixedFunctions::Fog::Exp,					ReadWrite,	GetSet,	"Fog mode",							"")
+		pl_attribute_getset(FixedFunctionsRenderStates,	FogEnable,			bool,							false,										ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	FogColor,			PLGraphics::Color4,				PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	FogDensity,			float,							1.0f,										ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	FogStart,			float,							0.0f,										ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	FogEnd,				float,							1.0f,										ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	FogMode,			FixedFunctions::Fog::Enum,		FixedFunctions::Fog::Exp,					ReadWrite)
 			// Alpha test
-		pl_attribute(AlphaTestEnable,		bool,										false,										ReadWrite,	GetSet,	"Enable/disable alpha test",		"")
-		pl_attribute(AlphaTestFunction,		pl_enum_type(Compare::Enum),				Compare::GreaterEqual,						ReadWrite,	GetSet,	"Alpha test comparison function",	"")
-		pl_attribute(AlphaTestReference,	float,										1.0f,										ReadWrite,	GetSet,	"Alpha test reference value",		"")
+		pl_attribute_getset(FixedFunctionsRenderStates,	AlphaTestEnable,	bool,							false,										ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	AlphaTestFunction,	Compare::Enum,					Compare::GreaterEqual,						ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	AlphaTestReference,	float,							1.0f,										ReadWrite)
 			// Misc
-		pl_attribute(Lighting,				bool,										true,										ReadWrite,	GetSet,	"Enable/disable lighting",			"")
-		pl_attribute(Ambient,				PLGraphics::Color4,							PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite,	GetSet,	"General RGBA ambient color",		"")
-		pl_attribute(NormalizeNormals,		bool,										true,										ReadWrite,	GetSet,	"Enable/disable normalize normals",	"")
-		pl_attribute(ShadeMode,				pl_enum_type(FixedFunctions::Shade::Enum),	FixedFunctions::Shade::Smooth,				ReadWrite,	GetSet,	"Shade mode",						"")
-	pl_class_end
+		pl_attribute_getset(FixedFunctionsRenderStates,	Lighting,			bool,							true,										ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	Ambient,			PLGraphics::Color4,				PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	NormalizeNormals,	bool,							true,										ReadWrite)
+		pl_attribute_getset(FixedFunctionsRenderStates,	ShadeMode,			FixedFunctions::Shade::Enum,	FixedFunctions::Shade::Smooth,				ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

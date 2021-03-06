@@ -41,7 +41,10 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshAnimationManagerHardware)
+pl_class_metadata(MeshAnimationManagerHardware, "PLMesh", PLMesh::MeshAnimationManager, "This is a hardware manager for the mesh animation element")
+	// Constructors
+	pl_constructor_0_metadata(ParameterConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshAnimationManagerHardware)
 
 
 //[-------------------------------------------------------]

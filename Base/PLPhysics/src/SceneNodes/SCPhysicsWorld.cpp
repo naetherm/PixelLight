@@ -43,7 +43,20 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SCPhysicsWorld)
+pl_class_metadata(SCPhysicsWorld, "PLPhysics", PLScene::SceneContainer, "Physics world scene node container")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(PhysicsAPI,			PLCore::String,		"PLPhysicsNewton::World",				ReadWrite,	"Name of the physics API this world is using",																			"")
+	pl_attribute_metadata(SimulationActive,		bool,				true,									ReadWrite,	"Is the physics simulation currently active?",																			"")
+	pl_attribute_metadata(SimulationSpeed,		float,				1.0f,									ReadWrite,	"Physics simulation speed. A speed of <= 0 is NOT allowed! Do NOT make the factor 'too' (for example > 4) extreme.",	"Min='0.0001'")
+	pl_attribute_metadata(SimulationQuality,	float,				1.0f,									ReadWrite,	"Physics simulation quality. 1 means best realistic behavior, 0 for the fastest possible configuration.",				"Min='0.0' Max='1.0'")
+	pl_attribute_metadata(FrameRate,			float,				60.0f,									ReadWrite,	"Frame rate the simulation runs on: smaller=more performance, larger=more accurate simulation",							"Min='60.0' Max='1000.0'")
+	pl_attribute_metadata(CacheDirectory,		PLCore::String,		"",										ReadWrite,	"Physics cache directory, if empty, no caching is used (best to avoid cache problems during development)",				"")
+	pl_attribute_metadata(Gravity,				PLMath::Vector3,	PLMath::Vector3(0.0f, -9.81f, 0.0f),	ReadWrite,	"Gravity vector",																										"")
+	pl_attribute_metadata(BuoyancyActive,		bool,				false,									ReadWrite,	"Is buoyancy force active?",																							"")
+	pl_attribute_metadata(BuoyancyPlaneY,		float,				0.0f,									ReadWrite,	"Buoyancy plane y position",																							"")
+pl_class_metadata_end(SCPhysicsWorld)
 
 
 //[-------------------------------------------------------]

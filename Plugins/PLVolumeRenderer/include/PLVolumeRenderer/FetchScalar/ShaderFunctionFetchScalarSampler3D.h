@@ -52,10 +52,8 @@ class ShaderFunctionFetchScalarSampler3D : public ShaderFunctionFetchScalar {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionFetchScalarSampler3D, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionFetchScalar, "3D sampler shader function implementation class for fetch scalar, nearest neighbour filtering (1 volume texture fetch for the reconstruction) or trilinear filtering (1 volume texture fetch for the reconstruction)")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

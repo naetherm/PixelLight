@@ -37,4 +37,22 @@
 */
 
 
+//[-------------------------------------------------------]
+//[ Includes                                              ]
+//[-------------------------------------------------------]
+#include <PLCore/PLCore.h>
+
+
+//[-------------------------------------------------------]
+//[ Import/Export                                         ]
+//[-------------------------------------------------------]
+#ifdef PLRENDEREROPENGL_EXPORTS
+	// To export classes, methods and variables
+	#define PLRENDEREROPENGLES2_API	PL_GENERIC_API_EXPORT
+#else
+	// To import classes, methods and variables
+	#define PLRENDEREROPENGLES2_API	PL_GENERIC_API_IMPORT
+#endif
+
+
 #endif // __PLRENDEREROPENGLES2_PLRENDEREROPENGLES2_H__

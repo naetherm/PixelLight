@@ -43,7 +43,20 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGLeaf)
+pl_class_metadata(PGLeaf, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Leaf particle group")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Radius,				float,				5.0f,								ReadWrite,	"Leaf area radius",			"Min='0.0001'")
+	pl_attribute_metadata(Height,				float,				15.0f,								ReadWrite,	"Maximum leaf height",		"")
+	pl_attribute_metadata(FloorHeight,			float,				0.0f,								ReadWrite,	"Floor height",				"")
+	pl_attribute_metadata(Wind,					PLMath::Vector3,	PLMath::Vector3(0.2f, 0.5f, -1.5f),	ReadWrite,	"Wind direction",			"")
+	pl_attribute_metadata(LeafSize,				float,				0.8f,								ReadWrite,	"Leaf size",				"Min='0.0001'")
+	pl_attribute_metadata(LeafSizeVariation,	float,				0.5f,								ReadWrite,	"Leaf size variation",		"Min='0.0'")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,				PLCore::String,		"Data/Effects/PGLeaf.plfx",			ReadWrite,	"Particle group material",	"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,			PLCore::uint32,		100,								ReadWrite,	"Number of particles",		"Min=1")
+pl_class_metadata_end(PGLeaf)
 
 
 //[-------------------------------------------------------]

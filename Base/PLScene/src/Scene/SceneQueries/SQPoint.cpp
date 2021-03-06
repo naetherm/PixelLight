@@ -46,7 +46,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SQPoint)
+pl_class_metadata(SQPoint, "PLScene", PLScene::SceneQuery, "Point intersection scene query class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SQPoint)
 
 
 //[-------------------------------------------------------]

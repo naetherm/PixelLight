@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderQuick3D)
+pl_class_metadata(MeshLoaderQuick3D, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for q3d/q3s (Quick3D) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"q3d,q3s,q3o,Q3D,Q3S,Q3O")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderQuick3D)
 
 
 //[-------------------------------------------------------]

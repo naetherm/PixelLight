@@ -46,18 +46,8 @@ class ScriptBindingSample : public PLCore::ScriptBinding {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, ScriptBindingSample, "", PLCore::ScriptBinding, "Sample script binding class, don't take it to serious")
-		// Properties
-		pl_properties
-			pl_property("Namespace",	"Sample")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_0(Return42,			pl_ret_type(int),			"Returns 42",						"")
-		pl_method_1(IgnoreTheParameter,	pl_ret_type(void), float,	"Ignores the provided parameter",	"")
-		pl_method_0(SaySomethingWise,	pl_ret_type(void),			"Says something wise",				"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

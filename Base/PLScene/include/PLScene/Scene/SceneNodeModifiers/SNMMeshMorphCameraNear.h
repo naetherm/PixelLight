@@ -55,17 +55,15 @@ class SNMMeshMorphCameraNear : public SNMMeshMorph {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMMeshMorphCameraNear, "PLScene", PLScene::SNMMeshMorph, "Animated scene node mesh morph modifier class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Joint,		PLCore::String,	"",		ReadWrite,	DirectValue,	"Name of the skeleton joint to use as reference point, if not given, the scene node position is used instead",	"")
-		pl_attribute(Distance,	float,			1.0f,	ReadWrite,	DirectValue,	"Camera near distance",																							"")
-		pl_attribute(InSpeed,	float,			4.0f,	ReadWrite,	DirectValue,	"Blend in speed",																								"")
-		pl_attribute(OutSpeed,	float,			2.0f,	ReadWrite,	DirectValue,	"Blend out speed",																								"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_directvalue(Joint,		PLCore::String,	"",		ReadWrite)
+		pl_attribute_directvalue(Distance,	float,			1.0f,	ReadWrite)
+		pl_attribute_directvalue(InSpeed,	float,			4.0f,	ReadWrite)
+		pl_attribute_directvalue(OutSpeed,	float,			2.0f,	ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
-	pl_class_end
+		pl_slot_0_def(SNMMeshMorphCameraNear,	OnUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

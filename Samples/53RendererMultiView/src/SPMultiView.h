@@ -55,8 +55,8 @@ class SPMultiView : public PLRenderer::SurfacePainter {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SPMultiView, "", PLRenderer::SurfacePainter, "Abstract multi view surface painter")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

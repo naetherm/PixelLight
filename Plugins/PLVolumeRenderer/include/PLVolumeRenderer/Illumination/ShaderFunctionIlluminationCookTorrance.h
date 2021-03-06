@@ -52,10 +52,8 @@ class ShaderFunctionIlluminationCookTorrance : public ShaderFunctionIllumination
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionIlluminationCookTorrance, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionIllumination, "Cook-Torrance (aka Torrance-Sparrow) shader function implementation class for local illumination")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

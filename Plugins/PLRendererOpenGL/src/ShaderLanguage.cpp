@@ -37,7 +37,8 @@ namespace PLRendererOpenGL {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderLanguage)
+pl_class_metadata(ShaderLanguage, "PLRendererOpenGL", PLRenderer::ShaderLanguage, "Abstract OpenGL shader language class")
+pl_class_metadata_end(ShaderLanguage)
 
 
 //[-------------------------------------------------------]

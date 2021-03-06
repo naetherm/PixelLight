@@ -62,10 +62,8 @@ class Database : public PLDatabase::Database {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLDATABASESQLITE_RTTI_EXPORT, Database, "PLDatabaseSQLite", PLDatabase::Database, "SQLite 3.3.7 (http://www.sqlite.org/) database implementation")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLDATABASESQLITE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

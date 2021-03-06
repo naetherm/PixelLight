@@ -58,7 +58,7 @@ RTTIObjectSignalPointerBase::~RTTIObjectSignalPointerBase()
 *  @brief
 *    Returns the pointer to the RTTI object signal to wrap
 */
-DynEvent *RTTIObjectSignalPointerBase::GetDynEvent() const
+DynEventPtr RTTIObjectSignalPointerBase::GetDynEvent() const
 {
 	return m_pDynEvent;
 }
@@ -80,7 +80,7 @@ RTTIObjectSignalPointerBase::RTTIObjectSignalPointerBase(EType nType) : RTTIObje
 *  @brief
 *    Initializes this instance
 */
-void RTTIObjectSignalPointerBase::InitializeInstance(Script &cScript, Object *pRTTIObject, DynEvent *pDynEvent)
+void RTTIObjectSignalPointerBase::InitializeInstance(Script &cScript, Object *pRTTIObject, DynEventPtr pDynEvent)
 {
 	// Call base implementation
 	RTTIObjectPointerBase::InitializeInstance(cScript, pRTTIObject);

@@ -57,7 +57,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ModSnap)
+pl_class_metadata(ModSnap, "PLGui", PLGui::Modifier, "Modifier that snaps a widget to window borders")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ModSnap)
 
 
 //[-------------------------------------------------------]

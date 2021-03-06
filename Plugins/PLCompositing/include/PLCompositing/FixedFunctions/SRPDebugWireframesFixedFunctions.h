@@ -60,10 +60,8 @@ class SRPDebugWireframesFixedFunctions : public SRPDebugWireframes {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDebugWireframesFixedFunctions, "PLCompositing", PLCompositing::SRPDebugWireframes, "Fixed functions based scene renderer pass drawing just simple wireframes")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLCOM_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

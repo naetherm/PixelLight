@@ -37,7 +37,12 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TransferFunctionLoader)
+pl_class_metadata(TransferFunctionLoader, "PLVolume", PLCore::LoaderImpl, "Abstract transfer function loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"TransferFunction")
+	pl_properties_end
+pl_class_metadata_end(TransferFunctionLoader)
 
 
 //[-------------------------------------------------------]

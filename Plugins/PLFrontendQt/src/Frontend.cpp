@@ -43,7 +43,10 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Frontend)
+pl_class_metadata(Frontend, "PLFrontendQt", PLCore::FrontendImpl, "Qt frontend implementation class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Frontend)
 
 
 //[-------------------------------------------------------]

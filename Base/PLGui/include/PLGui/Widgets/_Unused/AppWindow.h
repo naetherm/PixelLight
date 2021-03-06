@@ -52,9 +52,8 @@ class AppWindow : public Window {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, AppWindow, "PLGui", PLGui::Window, "An application window is usually a top-level window with a border and a title bar")
-		pl_constructor_0(DefaultConstructor, "Default constructor", "")
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

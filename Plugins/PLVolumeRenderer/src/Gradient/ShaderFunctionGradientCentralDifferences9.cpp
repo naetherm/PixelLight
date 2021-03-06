@@ -45,7 +45,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionGradientCentralDifferences9)
+pl_class_metadata(ShaderFunctionGradientCentralDifferences9, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionGradient, "Central differences (finite differences) shader function implementation class for on-the-fly gradient (gradients of neighbour voxels weighted, 6*9=54 volume texture fetches for the gradient)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionGradientCentralDifferences9)
 
 
 //[-------------------------------------------------------]

@@ -43,7 +43,19 @@ namespace PLMath {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(GraphLoaderPL)
+pl_class_metadata(GraphLoaderPL, "PLMath", PLMath::GraphLoader, "Graph loader implementation for the PixelLight graph XML file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"graph,GRAPH")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	Graph&,			PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const Graph&,	PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(GraphLoaderPL)
 
 
 //[-------------------------------------------------------]

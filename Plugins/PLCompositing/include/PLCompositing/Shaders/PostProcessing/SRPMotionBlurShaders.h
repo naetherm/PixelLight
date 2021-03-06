@@ -81,7 +81,7 @@ class SRPMotionBlurShaders : public PLScene::SceneRendererPass {
 			ShowVelocity     = 1<<2,	/**< Show velocity (for debugging) */
 			ShowOnlyVelocity = 1<<3		/**< Show only velocity, everything else black (for debugging) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(PLScene::SceneRendererPass::EFlags)
 			pl_enum_value(NoTargetFPS,		"Do not use the target FPS for adaptive motion blur factor")
 			pl_enum_value(ShowVelocity	,	"Show velocity (for debugging)")
@@ -92,17 +92,15 @@ class SRPMotionBlurShaders : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPMotionBlurShaders, "PLCompositing", PLScene::SceneRendererPass, "Shaders based scene renderer pass for image based motion blur")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,	PLCore::String,			"",		ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
-		pl_attribute(NumberOfSamples,	PLCore::uint32,			20,		ReadWrite,	DirectValue,	"Number of samples, higher is better but costs more performance",																		"")
-		pl_attribute(MotionBlurFactor,	float,					1.0f,	ReadWrite,	DirectValue,	"Motion blur factor (normally between 0..1)",																							"")
-		pl_attribute(TargetFPS,			float,					60.0f,	ReadWrite,	DirectValue,	"Target FPS for adaptive motion blur factor (not physically realistic, just a compensation for a variable FPS)",						"")
+		pl_attribute_directvalue(						ShaderLanguage,		PLCore::String,	"",		ReadWrite)
+		pl_attribute_directvalue(						NumberOfSamples,	PLCore::uint32,	20,		ReadWrite)
+		pl_attribute_directvalue(						MotionBlurFactor,	float,			1.0f,	ReadWrite)
+		pl_attribute_directvalue(						TargetFPS,			float,			60.0f,	ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,		ReadWrite,	GetSet,			"Flags",																																"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPMotionBlurShaders,	Flags,				PLCore::uint32,	0,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

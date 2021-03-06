@@ -47,7 +47,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionRaySetupBoundingBoxIntersection)
+pl_class_metadata(ShaderFunctionRaySetupBoundingBoxIntersection, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRaySetup, "Bounding box intersection shader function implementation class for ray setup")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionRaySetupBoundingBoxIntersection)
 
 
 //[-------------------------------------------------------]

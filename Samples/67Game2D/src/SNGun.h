@@ -52,19 +52,17 @@ class SNGun : public PLSound::SNSound {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNGun, "", PLSound::SNSound, "Gun scene node")
+	pl_class_def()
 		// Attributes
-		pl_attribute(InputSemantic,	PLCore::String,			"Gun",					ReadWrite,	DirectValue,	"Semantic of this input controller (e.g. \"Camera\")",													"")
+		pl_attribute_directvalue(		InputSemantic,	PLCore::String,	"Gun",					ReadWrite)
 			// Overwritten PLSound::SNSound attributes
-		pl_attribute(Sound,			PLCore::String,			"Data/Sounds/Shot.ogg",	ReadWrite,	GetSet,			"Filename of the sound which should be played (full path, supported file formats are API dependent)",	"Ext='mp3 ogg wav mid midi it mod s3m xm'")
+		pl_attribute_getset		(SNGun,	Sound,			PLCore::String,	"Data/Sounds/Shot.ogg",	ReadWrite)
 			// Overwritten PLScene::SceneNode attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),	NoLoop|NoStartPlayback,	ReadWrite,	GetSet,			"Flags",																								"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
+		pl_attribute_getset		(SNGun,	Flags,			PLCore::uint32,	NoLoop|NoStartPlayback,	ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,														"Called when the scene node needs to be updated",																			"")
-		pl_slot_2(OnSceneNode,	PLScene::SceneQuery&,	PLScene::SceneNode&,	"Called when a scene node was found, query found the scene node as first parameter, found scene node as second parameter",	"")
-	pl_class_end
+		pl_slot_0_def(SNGun,	OnUpdate)
+		pl_slot_2_def(SNGun,	OnSceneNode,	PLScene::SceneQuery&,	PLScene::SceneNode&)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

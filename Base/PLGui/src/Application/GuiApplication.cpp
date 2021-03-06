@@ -48,7 +48,13 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(GuiApplication)
+pl_class_metadata(GuiApplication, "PLGui", PLCore::CoreApplication, "Gui application class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_0_metadata(GetMainWindow,	pl_ret_type(Widget*),				"Get the main window. Returns pointer to the main window of the application, a null pointer on error.",						"")
+	pl_method_1_metadata(SetMainWindow,	pl_ret_type(void),		Widget*,	"Set the main window, pointer to the main window of the application (a null pointer is also valid) as first parameter.",	"")
+pl_class_metadata_end(GuiApplication)
 
 
 //[-------------------------------------------------------]

@@ -27,6 +27,7 @@
 //[-------------------------------------------------------]
 #include <QtGui/qdockwidget.h>
 #include <QtGui/qplaintextedit.h>
+#include <QtGui/QMainWindow>
 #include <PLCore/Log/Log.h>
 #include <PLCore/Base/Class.h>
 #include "PLFrontendQt/QtStringAdapter.h"
@@ -43,7 +44,14 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetLog)
+pl_class_metadata(DockWidgetLog, "PLFrontendQt", PLFrontendQt::DockWidget, "\"PLCore::Log\" Qt dock widget class")
+	// Properties
+	pl_properties
+		pl_property("Title", "Log")
+	pl_properties_end
+	// Constructors
+	pl_constructor_2_metadata(DefaultConstructor,	QMainWindow*,	DockWidgetManager*,	"Constructor with a pointer to the Qt main window as first parameter, pointer to the dock widget manager this dock widget should be registered to as second parameter",	"")
+pl_class_metadata_end(DockWidgetLog)
 
 
 //[-------------------------------------------------------]
@@ -53,7 +61,7 @@ pl_implement_class(DockWidgetLog)
 *  @brief
 *    Constructor
 */
-DockWidgetLog::DockWidgetLog(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidget(reinterpret_cast<QWidget*>(pQMainWindow), pDockWidgetManager),
+DockWidgetLog::DockWidgetLog(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidget(pQMainWindow, pDockWidgetManager),
 	SlotNewEntry(&DockWidgetLog::OnNewEntry, this),
 	m_pQPlainTextEdit(nullptr)
 {

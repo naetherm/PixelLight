@@ -42,7 +42,17 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGStretch)
+pl_class_metadata(PGStretch, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Stretch particle group")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Size,			float,				2.0f,							ReadWrite,	"Size",						"Min='0.0001'")
+	pl_attribute_metadata(Length,		float,				10.0f,							ReadWrite,	"Length",					"")
+	pl_attribute_metadata(Color,		PLGraphics::Color4,	PLGraphics::Color4::White,		ReadWrite,	"Particle color",			"")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,		PLCore::String,		"Data/Textures/PGStretch.dds",	ReadWrite,	"Particle group material",	"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,	PLCore::uint32,		1,								ReadWrite,	"Number of particles",		"Min=1")
+pl_class_metadata_end(PGStretch)
 
 
 //[-------------------------------------------------------]

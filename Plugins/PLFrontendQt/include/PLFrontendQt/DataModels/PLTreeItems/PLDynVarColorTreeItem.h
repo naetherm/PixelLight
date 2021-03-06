@@ -60,7 +60,7 @@ class PLFRONTENDQT_API PLDynVarColorTreeItem : public PLDynVarStringTreeItem {
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
 	public:
-		explicit PLDynVarColorTreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent = nullptr);
+		explicit PLDynVarColorTreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent = nullptr);
 		virtual QVariant data(const int column, const int role) override;
 		bool setData(const int column, const QVariant &value, const int role);
 

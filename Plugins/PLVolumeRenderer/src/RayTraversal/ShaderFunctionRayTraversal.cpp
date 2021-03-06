@@ -37,7 +37,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionRayTraversal)
+pl_class_metadata(ShaderFunctionRayTraversal, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for ray traversal")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"2.0 - Ray Traversal")
+		pl_property("FunctionName",				"RayTraversal")
+		pl_property("FunctionSignature_GLSL",	"vec4 RayTraversal(vec3 StartPosition, int NumberOfSteps, vec3 StepPositionDelta, float MaximumTravelLength)")
+		pl_property("FunctionSignature_Cg",		"float4 RayTraversal(float3 StartPosition, int NumberOfSteps, float3 StepPositionDelta, float MaximumTravelLength)")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionRayTraversal)
 
 
 //[-------------------------------------------------------]

@@ -45,7 +45,13 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(RendererApplication)
+pl_class_metadata(RendererApplication, "PLRenderer", PLCore::FrontendApplication, "Renderer application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+	// Methods
+	pl_method_0_metadata(GetPainter,	pl_ret_type(PLRenderer::SurfacePainter*),									"Get the surface painter of the main window. Returns pointer to surface painter of the main window (can be a null pointer).",				"")
+	pl_method_1_metadata(SetPainter,	pl_ret_type(void),							PLRenderer::SurfacePainter*,	"Set the surface painter of the main window. Pointer to surface painter of the main window (can be a null pointer) as first parameter.",	"")
+pl_class_metadata_end(RendererApplication)
 
 
 //[-------------------------------------------------------]

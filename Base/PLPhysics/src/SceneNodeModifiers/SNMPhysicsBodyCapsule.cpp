@@ -42,7 +42,13 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsBodyCapsule)
+pl_class_metadata(SNMPhysicsBodyCapsule, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics capsule body scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Radius,	float,	1.0f,	ReadWrite,	"Capsule radius at the base",								"Min='0.0'")
+	pl_attribute_metadata(Height,	float,	1.0f,	ReadWrite,	"Capsule height along the x local axis from base to top",	"Min='0.0'")
+pl_class_metadata_end(SNMPhysicsBodyCapsule)
 
 
 //[-------------------------------------------------------]

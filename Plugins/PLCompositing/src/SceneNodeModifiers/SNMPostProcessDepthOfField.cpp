@@ -42,7 +42,19 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessDepthOfField)
+pl_class_metadata(SNMPostProcessDepthOfField, "PLCompositing", PLCompositing::SNMPostProcess, "Depth of field camera scene node post process modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(NearBlurDepth,	float,				0.15f,									ReadWrite,	"Near blur depth",													"")
+	pl_attribute_metadata(FocalPlaneDepth,	float,				0.25f,									ReadWrite,	"Focal plane depth",												"")
+	pl_attribute_metadata(FarBlurDepth,		float,				25.0f,									ReadWrite,	"Far blur depth",													"")
+	pl_attribute_metadata(BlurrinessCutoff,	float,				0.8f,									ReadWrite,	"Blurriness cutoff constant for objects behind the focal plane",	"")
+	pl_attribute_metadata(BloomScale,		float,				1.0f,									ReadWrite,	"Bloom scale",														"")
+	pl_attribute_metadata(Strength,			PLMath::Vector2,	PLMath::Vector2(4.0f, 4.0f),			ReadWrite,	"Blur strength",													"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,			PLCore::String,		"Data/PostProcesses/DepthOfField.pp",	ReadWrite,	"Filename of the post process to use",								"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessDepthOfField)
 
 
 //[-------------------------------------------------------]

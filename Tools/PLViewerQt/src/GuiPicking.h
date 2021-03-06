@@ -70,14 +70,9 @@ class GuiPicking : public PLFrontendQt::DockWidget, public PLEngine::MousePickin
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, GuiPicking, "", PLFrontendQt::DockWidget, "Picking & selection application component")
-		// Methods
-		pl_method_0(GetSceneContainer,	pl_ret_type(PLScene::SceneContainer*),						"Returns the used scene container, can be a null pointer.",			"")
-		pl_method_0(GetSelectedObject,	pl_ret_type(PLCore::Object*),								"Returns the currently selected object, can be a null pointer.",	"")
-		pl_method_1(SelectObject,		pl_ret_type(void),						PLCore::Object*,	"Selects the given object. Object to select as first parameter.",	"")
-		// Slots
-		pl_slot_0(OnDestroyed,	"Called when the scene node assigned with this dock widget was destroyed",	"")
-	pl_class_end
+	pl_class_def()
+		pl_slot_0_def(GuiPicking,	OnDestroyed)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

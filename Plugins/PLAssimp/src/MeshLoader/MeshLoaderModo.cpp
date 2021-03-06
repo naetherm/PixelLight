@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderModo)
+pl_class_metadata(MeshLoaderModo, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for lxo (Modo) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"lxo,LXO")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderModo)
 
 
 //[-------------------------------------------------------]

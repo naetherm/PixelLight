@@ -65,18 +65,16 @@ class SCMirror : public SCRenderToTexture {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SCMirror, "PLScene", PLScene::SCRenderToTexture, "Planar mirror scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Material,		PLCore::String,	"",										ReadWrite,	DirectValue,	"Material to use",																				"Type='Material Effect Image TextureAni'")
-		pl_attribute(DynamicMap,	PLCore::String,	"DynamicMap",							ReadWrite,	DirectValue,	"Name of the material/effect parameter to assign the dynamic texture with",						"")
-		pl_attribute(Vertices,		PLCore::String,	"1.0 -1.0 -1.0 -1.0 -1.0 1.0 1.0 1.0",	ReadWrite,	DirectValue,	"The vertices (x/y position) defining the mirror polygon. Each vertex has 3 components. (xyz)",	"")
-		pl_attribute(NearScale,		float,			1.0f,									ReadWrite,	DirectValue,	"Virtual camera near plane scale",																"")
-		pl_attribute(Far,			float,			1000.0f,								ReadWrite,	DirectValue,	"Virtual camera far plane",																		"")
+		pl_attribute_directvalue(					Material,	PLCore::String,	"",										ReadWrite)
+		pl_attribute_directvalue(					DynamicMap,	PLCore::String,	"DynamicMap",							ReadWrite)
+		pl_attribute_directvalue(					Vertices,	PLCore::String,	"1.0 -1.0 -1.0 -1.0 -1.0 1.0 1.0 1.0",	ReadWrite)
+		pl_attribute_directvalue(					NearScale,	float,			1.0f,									ReadWrite)
+		pl_attribute_directvalue(					Far,		float,			1000.0f,								ReadWrite)
 			// Overwritten SCRenderToTexture attributes
-		pl_attribute(FPSLimit,		float,			0.0f,									ReadWrite,	ModifyAttr,		"Frames per second limitation, if 0, there's no limitation",									"Min='0.0'")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(SCRenderToTexture,	FPSLimit,	float,			0.0f,									ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

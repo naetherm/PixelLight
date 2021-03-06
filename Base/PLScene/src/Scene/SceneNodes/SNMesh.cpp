@@ -63,7 +63,20 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMesh)
+pl_class_metadata(SNMesh, "PLScene", PLScene::SceneNode, "An mesh is a special scene node that has a 3D mesh attached to it by default")
+	// Properties
+	pl_properties
+		pl_property("Icon",	"Data/Textures/IconMesh.dds")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Mesh,			PLCore::String,							"",	ReadWrite,	"Mesh to use",																		"Type='Mesh'")
+	pl_attribute_metadata(Skin,			PLCore::String,							"",	ReadWrite,	"Skin file or material name overwriting the default materials of the used mesh",	"Type='Skin'")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,		pl_flag_type_def3(SNMesh, EFlags),		0,	ReadWrite,	"Flags",																			"")
+	pl_attribute_metadata(DebugFlags,	pl_flag_type_def3(SNMesh, EDebugFlags),	0,	ReadWrite,	"Debug flags",																		"")
+pl_class_metadata_end(SNMesh)
 
 
 //[-------------------------------------------------------]

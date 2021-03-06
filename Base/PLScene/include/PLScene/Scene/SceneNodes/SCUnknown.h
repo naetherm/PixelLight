@@ -59,10 +59,8 @@ class SCUnknown : public SceneContainer {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SCUnknown, "PLScene", PLScene::SceneContainer, "Unknown scene container")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

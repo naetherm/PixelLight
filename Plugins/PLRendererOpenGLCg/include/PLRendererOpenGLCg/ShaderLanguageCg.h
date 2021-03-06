@@ -67,14 +67,8 @@ class ShaderLanguageCg : public PLRendererOpenGL::ShaderLanguage {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, ShaderLanguageCg, "PLRendererOpenGLCg", PLRendererOpenGL::ShaderLanguage, "OpenGL Cg shader language class")
-		// Properties
-		pl_properties
-			pl_property("ShaderLanguage",	"Cg")
-		pl_properties_end
-		// Constructors
-		pl_constructor_1(DefaultConstructor,	PLRenderer::Renderer&,	"Constructor with used renderer as parameter",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

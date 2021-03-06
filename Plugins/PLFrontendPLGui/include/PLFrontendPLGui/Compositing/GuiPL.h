@@ -84,12 +84,10 @@ class GuiPL : public PLGui::GuiImpl {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLFRONTENDPLGUI_RTTI_EXPORT, GuiPL, "PLFrontendPLGui", PLGui::GuiImpl, "PixelLight ingame GUI implementation")
+	pl_class_def(PLFRONTENDPLGUI_API)
 		// Attributes
-		pl_attribute(InputSemantic,	PLCore::String,	"",	ReadWrite,	DirectValue,	"Semantic of this input controller (e.g. \"Camera\")",	"")
-		// Constructors
-		pl_constructor_1(DefaultConstructor,	PLGui::Gui*,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(InputSemantic,	PLCore::String,	"",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

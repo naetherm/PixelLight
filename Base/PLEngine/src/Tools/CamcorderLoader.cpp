@@ -37,7 +37,12 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(CamcorderLoader)
+pl_class_metadata(CamcorderLoader, "PLEngine", PLCore::LoaderImpl, "Abstract camcorder loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Camcorder")
+	pl_properties_end
+pl_class_metadata_end(CamcorderLoader)
 
 
 //[-------------------------------------------------------]

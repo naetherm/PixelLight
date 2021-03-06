@@ -53,19 +53,10 @@ class DockWidgetVolume : public PLFrontendQt::DockWidget {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMEGUI_RTTI_EXPORT, DockWidgetVolume, "PLVolumeGui", PLFrontendQt::DockWidget, "Abstract volume Qt dock widget base class")
-		// Properties
-		pl_properties
-			pl_property("Title", "Volume")
-		pl_properties_end
-		#ifdef PLVOLUMEGUI_EXPORTS	// The following is only required when compiling PLVolumeGui
-			// Methods
-			pl_method_0(GetSelectedObject,	pl_ret_type(PLCore::Object*),						"Returns the currently selected object, can be a null pointer.",	"")
-			pl_method_1(SelectObject,		pl_ret_type(void),				PLCore::Object*,	"Selects the given object. Object to select as first parameter.",	"")
-		#endif
+	pl_class_def(PLVOLUMEGUI_API)
 		// Slots
-		pl_slot_0(OnDestroyed,	"Called when the object assigned with this dock widget was destroyed",	"")
-	pl_class_end
+		pl_slot_0_def(DockWidgetVolume,	OnDestroyed)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

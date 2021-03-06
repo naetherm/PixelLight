@@ -39,7 +39,26 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MyRTTIClass)
+pl_class_metadata(MyRTTIClass, "", PLCore::Object, "Sample RTTI class, don't take it to serious")
+	// Properties
+	pl_properties
+		pl_property("MyProperty",	"This is a property value")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_0_metadata(Return42,				pl_ret_type(int),					"Returns 42",							"")
+	pl_method_1_metadata(IgnoreTheParameter,	pl_ret_type(void),			float,	"Ignores the provided parameter",		"")
+	pl_method_0_metadata(SaySomethingWise,		pl_ret_type(void),					"Says something wise",					"")
+	pl_method_0_metadata(GetSelf,				pl_ret_type(MyRTTIClass*),			"Returns a pointer to this instance",	"")
+	// Attributes
+	pl_attribute_metadata(Name,		PLCore::String,		"Bob",	ReadWrite,	"A name, emits MySignal after the name was changed",			"")
+	pl_attribute_metadata(Level,	int,				1,		ReadWrite,	"Level, automatically increased on get/set name and OnMyEvent",	"")
+	// Signals
+	pl_signal_1_metadata(MySignal,	PLCore::String,	"My signal, automatically emitted after the name was changed, message as first parameter",	"")
+	// Slots
+	pl_slot_1_metadata(OnMyEvent,	PLCore::String,	"My slot, message as first parameter",	"")
+pl_class_metadata_end(MyRTTIClass)
 
 
 //[-------------------------------------------------------]

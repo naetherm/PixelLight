@@ -60,18 +60,8 @@ class ScriptBinding_PL_ClassManager : public PLCore::ScriptBinding {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, ScriptBinding_PL_ClassManager, "PLScriptBindings", PLCore::ScriptBinding, "Class manager script binding class")
-		// Properties
-		pl_properties
-			pl_property("Namespace",	"PL.ClassManager")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_3(ScanPlugins,			pl_ret_type(bool),				PLCore::String,	bool,			bool,							"Scan a directory for compatible plugins and load them in. Directory to search in as first parameter, boolean value deciding whether or not to take sub-directories into account as second parameter, boolean value deciding whether or not its allowed to perform delayed shared library loading to speed up the program start as third parameter. Returns 'true' if all went fine, else 'false'.",																																							"")
-		pl_method_2(Create,					pl_ret_type(PLCore::Object*),	PLCore::String,	PLCore::String,									"Creates a new RTTI class instance by using the default constructor. Name of the RTTI class to create an instance from as first parameter and optional parameter string for the created instance as second parameter. Returns a pointer to the new RTTI class instance or a null pointer if something went wrong (maybe unknown class). Created instance has initially no references, meaning that a script usually automatically destroys the instance when no longer used.",																					"")
-		pl_method_4(CreateByConstructor,	pl_ret_type(PLCore::Object*),	PLCore::String,	PLCore::String,	PLCore::String,	PLCore::String,	"Creates a new RTTI class instance by using a specified constructor. Name of the RTTI class to create an instance from as first parameter, constructor name as second parameter, constructor parameters as third parameter and optional parameter string for the created instance as fourth parameter. Returns a pointer to the new RTTI class instance or a null pointer if something went wrong (maybe unknown class). Created instance has initially no references, meaning that a script usually automatically destroys the instance when no longer used.",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -54,14 +54,12 @@ class SNEffectLight : public SNLight {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNEffectLight, "PLScene", PLScene::SNLight, "Effect light scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(CoronaMaterial,	PLCore::String,	"Data/Effects/DefaultCorona.plfx",	ReadWrite,	GetSet,	"Corona material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(FlareMaterial,		PLCore::String,	"Data/Effects/DefaultFlare.plfx",	ReadWrite,	GetSet,	"Flare material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(BlendMaterial,		PLCore::String,	"Data/Effects/DefaultBlend.plfx",	ReadWrite,	GetSet,	"Blend material",	"Type='Material Effect Image TextureAni'")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNEffectLight,	CoronaMaterial,	PLCore::String,	"Data/Effects/DefaultCorona.plfx",	ReadWrite)
+		pl_attribute_getset(SNEffectLight,	FlareMaterial,	PLCore::String,	"Data/Effects/DefaultFlare.plfx",	ReadWrite)
+		pl_attribute_getset(SNEffectLight,	BlendMaterial,	PLCore::String,	"Data/Effects/DefaultBlend.plfx",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

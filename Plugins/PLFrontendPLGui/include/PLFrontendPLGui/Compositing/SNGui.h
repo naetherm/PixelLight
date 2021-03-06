@@ -64,10 +64,8 @@ class SNGui : public PLScene::SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLFRONTENDPLGUI_RTTI_EXPORT, SNGui, "PLFrontendPLGui", PLScene::SceneNode, "GUI scene node")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLFRONTENDPLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

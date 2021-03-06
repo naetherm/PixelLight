@@ -38,7 +38,8 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(OrbitingController)
+pl_class_metadata(OrbitingController, "PLEngine", PLInput::Controller, "Orbiting input controller")
+pl_class_metadata_end(OrbitingController)
 
 
 //[-------------------------------------------------------]

@@ -63,8 +63,8 @@ class ImageEffect : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, ImageEffect, "PLGraphics", PLCore::Object, "Abstract image effect base class")
-	pl_class_end
+	pl_class_def(PLGRAPHICS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

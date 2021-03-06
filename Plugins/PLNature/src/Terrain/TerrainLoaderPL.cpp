@@ -51,7 +51,19 @@ namespace PLNature {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TerrainLoaderPL)
+pl_class_metadata(TerrainLoaderPL, "PLNature", PLNature::TerrainLoader, "Terrain loader implementation for the PixelLight terrain XML file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"terrain,TERRAIN")
+		pl_property("Load",		"1")
+		pl_property("Save",		"0")
+	pl_properties_end
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	SNTerrain&,	PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	SNTerrain&,	PLCore::File&,	"Save method",	"")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(TerrainLoaderPL)
 
 
 //[-------------------------------------------------------]

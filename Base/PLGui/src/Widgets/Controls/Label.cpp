@@ -50,7 +50,17 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Label)
+pl_class_metadata(Label, "PLGui", PLGui::Widget, "Widget that displays a static text")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Color,	PLGraphics::Color4,			PLGraphics::Color4::Black,	ReadWrite,	"Text color",					"")
+	pl_attribute_metadata(Align,	pl_enum_type(EAlign),		AlignLeft,					ReadWrite,	"Text alignment (horizontal)",	"")
+	pl_attribute_metadata(VAlign,	pl_enum_type(EVAlign),		AlignMiddle,				ReadWrite,	"Text alignment (vertical)",	"")
+	pl_attribute_metadata(Wrap,		pl_enum_type(ETextWrap),	TextWrap,					ReadWrite,	"Text wrapping",				"")
+	pl_attribute_metadata(Style,	pl_flag_type(ETextStyle),	0,							ReadWrite,	"Text style",					"")
+	pl_attribute_metadata(Text,		PLCore::String,				"",							ReadWrite,	"Text label",					"")
+pl_class_metadata_end(Label)
 
 
 //[-------------------------------------------------------]

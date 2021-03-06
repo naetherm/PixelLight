@@ -74,7 +74,7 @@ class SRPDeferredHDAO : public SRPDeferredSSAO {
 		enum EFlags {
 			NoNormals = 1<<2	/**< Ignore the per fragment normals when calculating the ambient occlusion (less AO details for heavy normal mapped scenes) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPDeferredSSAO::EFlags)
 			pl_enum_value(NoNormals, "Ignore the per fragment normals when calculating the ambient occlusion (less AO details for heavy normal mapped scenes)")
 		pl_enum_end
@@ -83,19 +83,17 @@ class SRPDeferredHDAO : public SRPDeferredSSAO {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferredHDAO, "PLCompositing", PLCompositing::SRPDeferredSSAO, "Scene renderer pass for deferred rendering 'High Definition Ambient Occlusion' (HDAO), a 'Screen-Space Ambient Occlusion' (SSAO) technique")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(AORejectRadius,		float,					0.43f,		ReadWrite,	DirectValue,	"If either of a twin pair of sampled camera Z values is further away from the central pixel’s camera Z value than the “Reject Radius”, then the twin pair of samples will not contribute to the occlusion factor. This alleviates a common problem with SSAO, where distant objects can cause a halo of occlusion on the silhouette edges of close by objects.",	"Min='0.0'")
-		pl_attribute(AOAcceptRadius,		float,					0.00312f,	ReadWrite,	DirectValue,	"This works in a similar fashion to the “Reject Radius”. Again if either of a twin pair is closer to the central sample than the “Accept Radius”, then the twin pair of samples will not contribute to the occlusion factor. This can be particularly useful for avoiding unwanted occlusion on low density meshes.",												"Min='0.0'")
-		pl_attribute(NormalScale,			float,					0.3f,		ReadWrite,	DirectValue,	"Controls the influence of per fragment normal vectors.",																																																																											"Min='0.0'")
-		pl_attribute(AcceptAngle,			float,					0.98f,		ReadWrite,	DirectValue,	"Accept angle",																																																																																						"Min='0.0'")
-		pl_attribute(NumberOfRingGathers,	PLCore::uint32,			20,			ReadWrite,	DirectValue,	"Number of ring gathers",																																																																																			"Min='1' Max='20'")
-		pl_attribute(NumberOfRings,			PLCore::uint32,			4,			ReadWrite,	DirectValue,	"Number of rings",																																																																																					"Min='1' Max='4'")
+		pl_attribute_directvalue(					AORejectRadius,			float,			0.43f,		ReadWrite)
+		pl_attribute_directvalue(					AOAcceptRadius,			float,			0.00312f,	ReadWrite)
+		pl_attribute_directvalue(					NormalScale,			float,			0.3f,		ReadWrite)
+		pl_attribute_directvalue(					AcceptAngle,			float,			0.98f,		ReadWrite)
+		pl_attribute_directvalue(					NumberOfRingGathers,	PLCore::uint32,	20,			ReadWrite)
+		pl_attribute_directvalue(					NumberOfRings,			PLCore::uint32,	4,			ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,					pl_flag_type(EFlags),	0,			ReadWrite,	GetSet,			"Flags",																																																																																							"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPDeferredHDAO,	Flags,					PLCore::uint32,	0,			ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

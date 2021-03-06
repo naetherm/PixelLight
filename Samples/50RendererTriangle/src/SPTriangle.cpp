@@ -40,7 +40,8 @@ using namespace PLRenderer;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPTriangle)
+pl_class_metadata(SPTriangle, "", PLRenderer::SurfacePainter, "Abstract triangle surface painter")
+pl_class_metadata_end(SPTriangle)
 
 
 //[-------------------------------------------------------]

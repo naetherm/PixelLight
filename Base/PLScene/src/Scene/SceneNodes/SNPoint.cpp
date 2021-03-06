@@ -44,7 +44,15 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNPoint)
+pl_class_metadata(SNPoint, "PLScene", PLScene::SceneNode, "Simple point scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Size,		float,								1.0f,						ReadWrite,	"Point size",				"")
+	pl_attribute_metadata(Color,	PLGraphics::Color4,					PLGraphics::Color4::White,	ReadWrite,	"Point color (r/g/b/a)",	"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNPoint, EFlags),	0,							ReadWrite,	"Flags",					"")
+pl_class_metadata_end(SNPoint)
 
 
 //[-------------------------------------------------------]

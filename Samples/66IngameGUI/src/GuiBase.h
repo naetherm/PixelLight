@@ -46,8 +46,8 @@ class GuiBase : public PLGui::Widget {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, GuiBase, "", PLGui::Widget, "Ingame Gui - Window base class")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

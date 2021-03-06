@@ -56,16 +56,14 @@ class MeshCreatorTorus : public MeshCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLMESH_RTTI_EXPORT, MeshCreatorTorus, "PLMesh", PLMesh::MeshCreator, "Torus mesh creator class")
+	pl_class_def(PLMESH_API)
 		// Attributes
-		pl_attribute(Radius,	float,				0.5f,					ReadWrite,	DirectValue,	"Torus radius",		"")
-		pl_attribute(Width,		float,				0.2f,					ReadWrite,	DirectValue,	"Torus width",		"")
-		pl_attribute(Sides,		PLCore::uint32,		20,						ReadWrite,	DirectValue,	"Number of sides",	"")
-		pl_attribute(Rings,		PLCore::uint32,		20,						ReadWrite,	DirectValue,	"Number of rings",	"")
-		pl_attribute(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Offset to center",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Radius,	float,				0.5f,					ReadWrite)
+		pl_attribute_directvalue(Width,		float,				0.2f,					ReadWrite)
+		pl_attribute_directvalue(Sides,		PLCore::uint32,		20,						ReadWrite)
+		pl_attribute_directvalue(Rings,		PLCore::uint32,		20,						ReadWrite)
+		pl_attribute_directvalue(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

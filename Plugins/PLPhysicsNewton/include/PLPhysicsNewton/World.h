@@ -76,19 +76,17 @@ class World : public PLPhysics::World {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICSNEWTON_RTTI_EXPORT, World, "PLPhysicsNewton", PLPhysics::World, "Newton physics world base class")
+	pl_class_def(PLPHYSICSNEWTON_API)
 		// Attributes
-		pl_attribute(CacheDirectory,		PLCore::String,	"",					ReadWrite,	DirectValue,	"Newton physics cache directory, if empty, no caching is used (best to avoid cache problems during development)",		"")
+		pl_attribute_directvalue(CacheDirectory,		PLCore::String,	"",					ReadWrite)
 
 		// [TODO] New RTTI usage
-		//pl_attribute(ThreadPriorityClass,	pl_enum_type(),		PriorityClassNone,	ReadWrite,	DirectValue,	"Physics thread priority class (use realtime priority class ONLY if you REALLY need it, 'None' = do not use a thread)",	"")
-		//pl_attribute(ThreadPriority,		pl_enum_type(),		PriorityNormal,		ReadWrite,	DirectValue,	"Physics thread priority within the priority class it is in",															"")
+		//pl_attribute_directvalue(ThreadPriorityClass,	pl_enum_type(),		PriorityClassNone,	ReadWrite,	"Physics thread priority class (use realtime priority class ONLY if you REALLY need it, 'None' = do not use a thread)",	"")
+		//pl_attribute_directvalue(ThreadPriority,		pl_enum_type(),		PriorityNormal,		ReadWrite)
 		//DEFINE_VAR(PL_VAR_ENUM,		m_nThreadPriorityClass,	"",	"None",		"Physics thread priority class (use realtime priority class ONLY if you REALLY need it, 'None' = do not use a thread)",	"",	"Idle=0 BelowNormal=1 Normal=2 AboveNormal=3 High=4 Realtime=5 None=6")
 		//DEFINE_VAR(PL_VAR_ENUM,		m_nThreadPriority,		"",		"Normal",	"Physics thread priority within the priority class it is in",															"",	"Idle=0 Lowest=1 BelowNormal=2 Normal=3 AboveNormal=4 Highest=5 TimeCritical=6")
 
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

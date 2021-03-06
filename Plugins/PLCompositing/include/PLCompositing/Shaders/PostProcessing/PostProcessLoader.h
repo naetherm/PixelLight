@@ -59,12 +59,8 @@ class PostProcessLoader : public PLCore::LoaderImpl {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, PostProcessLoader, "PLCompositing", PLCore::LoaderImpl, "Abstract post process loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"PostProcess")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLCOM_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

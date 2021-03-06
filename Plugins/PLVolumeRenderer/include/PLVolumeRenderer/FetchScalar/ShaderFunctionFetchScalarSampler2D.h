@@ -52,10 +52,8 @@ class ShaderFunctionFetchScalarSampler2D : public ShaderFunctionFetchScalar {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionFetchScalarSampler2D, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionFetchScalar, "2D texture atlas sampler shader function implementation class for fetch scalar")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

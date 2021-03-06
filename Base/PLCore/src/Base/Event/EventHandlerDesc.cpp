@@ -73,10 +73,10 @@ void EventHandlerDesc::Dummy()
 *  @brief
 *    Get slot
 */
-DynEventHandler *EventHandlerDesc::GetSlot(const Object &cObject) const
+DynEventHandlerPtr EventHandlerDesc::GetSlot(const Object &cObject) const
 {
 	// To be implemented in derived classes
-	return nullptr;
+	return DynEventHandlerPtr(nullptr);
 }
 
 

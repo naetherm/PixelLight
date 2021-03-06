@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoader3DGameStudio)
+pl_class_metadata(SceneLoader3DGameStudio, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for mdl (3D GameStudio) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"mdl,MDL")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneLoader3DGameStudio)
 
 
 //[-------------------------------------------------------]

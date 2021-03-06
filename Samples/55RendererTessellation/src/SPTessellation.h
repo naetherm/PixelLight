@@ -55,8 +55,8 @@ class SPTessellation : public PLRenderer::SurfacePainter {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SPTessellation, "", PLRenderer::SurfacePainter, "Abstract tessellation surface painter")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

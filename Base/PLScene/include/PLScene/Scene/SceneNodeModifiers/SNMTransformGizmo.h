@@ -79,13 +79,13 @@ class SNMTransformGizmo : public SNMTransform {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMTransformGizmo, "PLScene", PLScene::SNMTransform, "Abstract transform gizmo scene node modifier base class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(DistanceFromCamera,	float,	50.0f,	ReadWrite,	DirectValue,	"Distance from the camera (for size control)",	"")
+		pl_attribute_directvalue(DistanceFromCamera,	float,	50.0f,	ReadWrite)
 		// Slots
-		pl_slot_2(OnDrawTransparent,	PLRenderer::Renderer&,	const VisNode*,	"Called on scene node transparent draw, the used renderer as first parameter, the current visibility node of this scene node, can be a null pointer as second parameter",	"")
-		pl_slot_0(OnUpdate,														"Called when the scene node modifier needs to be updated",																													"")
-	pl_class_end
+		pl_slot_2_def(SNMTransformGizmo,	OnDrawTransparent,	PLRenderer::Renderer&,	const VisNode*)
+		pl_slot_0_def(SNMTransformGizmo,	OnUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

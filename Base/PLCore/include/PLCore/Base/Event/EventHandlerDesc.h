@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Base/MemberDesc.h"
+#include "PLCore/Base/Event/DynEventHandler.h"
 
 
 //[-------------------------------------------------------]
@@ -43,7 +44,6 @@ namespace PLCore {
 //[ Forward declarations                                  ]
 //[-------------------------------------------------------]
 class Object;
-class DynEventHandler;
 
 
 //[-------------------------------------------------------]
@@ -118,7 +118,7 @@ class EventHandlerDesc : public MemberDesc {
 		*  @return
 		*    Pointer to slot (can be a null pointer, do not destroy the returned instance)
 		*/
-		PLCORE_API virtual DynEventHandler *GetSlot(const Object &cObject) const;
+		PLCORE_API virtual DynEventHandlerPtr GetSlot(const Object &cObject) const;
 
 
 	//[-------------------------------------------------------]

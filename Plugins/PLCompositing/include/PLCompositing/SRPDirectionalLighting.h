@@ -111,7 +111,7 @@ class SRPDirectionalLighting : public PLScene::SceneRendererPass {
 			NoDiffuseMap    = 1<<3,	/**< Ignore diffuse map */
 			NoLighting      = 1<<4	/**< Do not perform lighting by using the first found directional light source */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneRendererPass::EFlags)
 			pl_enum_value(TransparentPass,	"This is a transparent render pass")
 			pl_enum_value(NoZWrite,			"Do not write z-values")
@@ -123,14 +123,14 @@ class SRPDirectionalLighting : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDirectionalLighting, "PLCompositing", PLScene::SceneRendererPass, "Abstract directional lighting scene renderer pass")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(AmbientColor,		PLGraphics::Color3,					PLGraphics::Color3::White,	ReadWrite,	DirectValue,	"Ambient color",				"")
-		pl_attribute(LightingIntensity,	float,								1.0f,						ReadWrite,	DirectValue,	"General lighting intensity",	"")
-		pl_attribute(TextureFiltering,	pl_enum_type(ETextureFiltering),	Anisotropic8,				ReadWrite,	DirectValue,	"Texture filtering",			"")
+		pl_attribute_directvalue(							AmbientColor,		PLGraphics::Color3,	PLGraphics::Color3::White,	ReadWrite)
+		pl_attribute_directvalue(							LightingIntensity,	float,				1.0f,						ReadWrite)
+		pl_attribute_directvalue(							TextureFiltering,	ETextureFiltering,	Anisotropic8,				ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),				0,							ReadWrite,	GetSet,			"Flags",						"")
-	pl_class_end
+		pl_attribute_getset		(SRPDirectionalLighting,	Flags,				PLCore::uint32,		0,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

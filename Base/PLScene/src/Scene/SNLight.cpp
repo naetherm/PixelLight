@@ -38,7 +38,27 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNLight)
+pl_class_metadata(SNLight, "PLScene", PLScene::SceneNode, "Abstract light scene node base class")
+	// Properties
+	pl_properties
+		pl_property("Icon",	"Data/Textures/IconLight.dds")
+	pl_properties_end
+	// Methods
+	pl_method_0_metadata(IsRenderLight,				pl_ret_type(bool),	"Returns whether this is a render light or not. Returns 'true' if this is a render light, else 'false'.",																		"")
+	pl_method_0_metadata(IsEffectLight,				pl_ret_type(bool),	"Returns whether this scene node is a effect light (SNEffectLight) or not. Returns 'true' if this scene node is a effect light, else 'false'.",									"")
+	pl_method_0_metadata(IsPointLight,				pl_ret_type(bool),	"Returns whether this scene node is a point light (SNPointLight) or not. Returns 'true' if this scene node is a point light, else 'false'.",									"")
+	pl_method_0_metadata(IsProjectivePointLight,	pl_ret_type(bool),	"Returns whether this scene node is a projective point light (SNProjectivePointLight) or not. Returns 'true' if this scene node is a projective point light, else 'false'.",	"")
+	pl_method_0_metadata(IsSpotLight,				pl_ret_type(bool),	"Returns whether this scene node is a spot light (SNSpotLight) or not. Returns 'true' if this scene node is a spot light, else 'false'.",										"")
+	pl_method_0_metadata(IsProjectiveSpotLight,		pl_ret_type(bool),	"Returns whether this scene node is a projective spot light (SNProjectiveSpotLight) or not. Returns 'true' if this scene node is a projective spot light, else 'false'.",		"")
+	pl_method_0_metadata(IsDirectionalLight,		pl_ret_type(bool),	"Returns whether this scene node is a directional light (SNDirectionalLight) or not. Returns 'true' if this scene node is a directional light, else 'false'.",					"")
+	// Attributes
+	pl_attribute_metadata(Color,			PLGraphics::Color3,					PLGraphics::Color3::White,	ReadWrite,	"Light color (r/g/b)",	"")
+	pl_attribute_metadata(CoronaSize,		float,								0.2f,						ReadWrite,	"Corona size",			"")
+	pl_attribute_metadata(FlareSize,		float,								0.1f,						ReadWrite,	"Lens flare size",		"")
+	pl_attribute_metadata(ScreenBrighten,	float,								0.3f,						ReadWrite,	"Screen brighten",		"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNLight, EFlags),	0,							ReadWrite,	"Flags",				"")
+pl_class_metadata_end(SNLight)
 
 
 //[-------------------------------------------------------]

@@ -45,7 +45,10 @@ using namespace PLScene;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNFireSample)
+pl_class_metadata(SNFireSample, "", SPARK_PL::SNSystem, "Fire SPARK particle system sample scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SNFireSample)
 
 
 //[-------------------------------------------------------]

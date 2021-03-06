@@ -60,17 +60,8 @@ class MeshLoader : public PLMesh::MeshLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, MeshLoader, "PLAssimp", PLMesh::MeshLoader, "Abstract mesh loader implementation using Assimp base class")
-		// Properties
-		pl_properties
-			pl_property("Load",	"1")
-			pl_property("Save",	"0")
-		pl_properties_end
-		// Methods
-		pl_method_2(Load,		pl_ret_type(bool),	PLMesh::Mesh&,	PLCore::File&,							"Load method. The loaded mesh is static and is post processed for maximum quality.",																															"")
-		pl_method_4(LoadParams,	pl_ret_type(bool),	PLMesh::Mesh&,	PLCore::File&,	bool,	PLCore::uint8,	"Load method. Parameters: First boolean parameter determines whether or not the mesh is static, second integer parameter for post processing quality (0=none ... 3=maximum quality but slowest processing).",	"")
-		pl_method_2(Save,		pl_ret_type(bool),	PLMesh::Mesh&,	PLCore::File&,							"Save method",																																																	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

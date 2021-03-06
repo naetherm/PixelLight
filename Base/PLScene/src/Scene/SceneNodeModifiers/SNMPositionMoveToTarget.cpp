@@ -43,7 +43,13 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPositionMoveToTarget)
+pl_class_metadata(SNMPositionMoveToTarget, "PLScene", PLScene::SNMTransform, "Scene node modifier class moving the owner scene node towards a target scene node")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Target,	PLCore::String,	"",		ReadWrite,	"Target scene node to move to",	"")
+	pl_attribute_metadata(Speed,	float,			2.0f,	ReadWrite,	"Movement speed",				"Min='0.0001'")
+pl_class_metadata_end(SNMPositionMoveToTarget)
 
 
 //[-------------------------------------------------------]

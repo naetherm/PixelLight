@@ -41,7 +41,8 @@ namespace PLGraphics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(IERemovePalette)
+pl_class_metadata(IERemovePalette, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Removes the palette")
+pl_class_metadata_end(IERemovePalette)
 
 
 //[-------------------------------------------------------]

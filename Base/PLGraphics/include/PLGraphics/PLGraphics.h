@@ -49,15 +49,9 @@
 #ifdef PLGRAPHICS_EXPORTS
 	// To export classes, methods and variables
 	#define PLGRAPHICS_API			PL_GENERIC_API_EXPORT
-
-	// To export RTTI elements
-	#define PLGRAPHICS_RTTI_EXPORT	PL_GENERIC_RTTI_EXPORT
 #else
 	// To import classes, methods and variables
 	#define PLGRAPHICS_API			PL_GENERIC_API_IMPORT
-
-	// To import RTTI elements
-	#define PLGRAPHICS_RTTI_EXPORT	PL_GENERIC_RTTI_IMPORT
 #endif
 
 

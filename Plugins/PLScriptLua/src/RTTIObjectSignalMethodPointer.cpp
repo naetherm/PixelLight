@@ -124,7 +124,7 @@ void RTTIObjectSignalMethodPointer::CallMetamethod(lua_State *pLuaState)
 			case MethodConnect:
 			{
 				// Get the valid RTTI slot to connect the RTTI signal with from the Lua stack without removing it
-				DynEventHandler *pDynEventHandler = GetSlotFromLuaStack(pLuaState);
+				DynEventHandlerPtr pDynEventHandler = GetSlotFromLuaStack(pLuaState);
 				if (pDynEventHandler) {
 					// Connect the RTTI slot with the RTTI signal
 					m_pDynEvent->Connect(*pDynEventHandler);
@@ -136,7 +136,7 @@ void RTTIObjectSignalMethodPointer::CallMetamethod(lua_State *pLuaState)
 			case MethodDisconnect:
 			{
 				// Get the valid RTTI slot to disconnect the RTTI signal with from the Lua stack without removing it
-				DynEventHandler *pDynEventHandler = GetSlotFromLuaStack(pLuaState);
+				DynEventHandlerPtr pDynEventHandler = GetSlotFromLuaStack(pLuaState);
 				if (pDynEventHandler) {
 					// Disconnect the RTTI slot with the RTTI signal
 					m_pDynEvent->Disconnect(*pDynEventHandler);
@@ -244,7 +244,7 @@ void RTTIObjectSignalMethodPointer::EventCallback(DynParams &cDynParams, void *p
 *  @brief
 *    Initializes this instance
 */
-void RTTIObjectSignalMethodPointer::InitializeInstance(Script &cScript, Object *pRTTIObject, DynEvent *pDynEvent, EMethod nMethod)
+void RTTIObjectSignalMethodPointer::InitializeInstance(Script &cScript, Object *pRTTIObject, DynEventPtr pDynEvent, EMethod nMethod)
 {
 	// Call base implementation
 	RTTIObjectSignalPointerBase::InitializeInstance(cScript, pRTTIObject, pDynEvent);
@@ -257,7 +257,7 @@ void RTTIObjectSignalMethodPointer::InitializeInstance(Script &cScript, Object *
 *  @brief
 *    Returns a RTTI slot from the Lua stack without removing it
 */
-DynEventHandler *RTTIObjectSignalMethodPointer::GetSlotFromLuaStack(lua_State *pLuaState)
+DynEventHandlerPtr RTTIObjectSignalMethodPointer::GetSlotFromLuaStack(lua_State *pLuaState)
 {
 	// Is there user data on the Lua stack?
 	if (lua_isuserdata(pLuaState, 2)) {
@@ -266,7 +266,7 @@ DynEventHandler *RTTIObjectSignalMethodPointer::GetSlotFromLuaStack(lua_State *p
 
 		// Must be a slot
 		if (pLuaUserData && pLuaUserData->GetType() == TypeObjectSlotPointer) {
-			DynEventHandler *pDynEventHandler = reinterpret_cast<RTTIObjectSlotPointer*>(pLuaUserData)->GetDynEventHandler();
+			DynEventHandlerPtr pDynEventHandler = reinterpret_cast<RTTIObjectSlotPointer*>(pLuaUserData)->GetDynEventHandler();
 			if (pDynEventHandler) {
 				// The signatures must match
 				if (m_pDynEvent->GetSignature() == pDynEventHandler->GetSignature()) {

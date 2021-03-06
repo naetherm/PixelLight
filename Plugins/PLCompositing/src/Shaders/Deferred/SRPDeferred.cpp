@@ -44,7 +44,8 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferred)
+pl_class_metadata(SRPDeferred, "PLCompositing", PLScene::SceneRendererPass, "Abstract scene renderer pass for deferred rendering")
+pl_class_metadata_end(SRPDeferred)
 
 
 //[-------------------------------------------------------]

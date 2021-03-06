@@ -60,7 +60,14 @@ namespace SPARK_PL {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNSystem)
+pl_class_metadata(SNSystem, "SPARK_PL", PLScene::SceneNode, "Abstract SPARK particle system scene node base class")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,							"",	ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+		// Overwritten PLScene::SceneNode attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNSystem, EFlags),	0,	ReadWrite,	"Flags",																																"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node needs to be updated",	"")
+pl_class_metadata_end(SNSystem)
 
 
 //[-------------------------------------------------------]

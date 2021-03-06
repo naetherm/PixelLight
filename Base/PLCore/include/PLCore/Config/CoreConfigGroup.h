@@ -52,8 +52,8 @@ class CoreConfigGroup : public ConfigGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, CoreConfigGroup, "PLCore", PLCore::ConfigGroup, "PLCore general configuration 'collection' class")
-	pl_class_end
+	pl_class_def(PLCORE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -85,13 +85,11 @@ class CoreConfig : public CoreConfigGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, CoreConfig, "PLCore", PLCore::CoreConfigGroup, "PLCore configuration classes")
+	pl_class_def(PLCORE_API)
 		// Attributes
-		pl_attribute(FirstRun,	bool,	true,	ReadWrite,	DirectValue,	"Is this the first application start?",																	"")
-		pl_attribute(Language,	String,	"",		ReadWrite,	DirectValue,	"Current used language, if empty the current set OS locale language is used (for instance 'German'",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(FirstRun,	bool,	true,	ReadWrite)
+		pl_attribute_directvalue(Language,	String,	"",		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -123,15 +121,13 @@ class FrontendConfig : public CoreConfigGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, FrontendConfig, "PLCore", PLCore::CoreConfigGroup, "PLCore frontend configuration classes")
+	pl_class_def(PLCORE_API)
 		// Attributes
-		pl_attribute(X,			int,	0,		ReadWrite,	DirectValue,	"X position of the frontend (in screen coordinates)",	"")
-		pl_attribute(Y,			int,	0,		ReadWrite,	DirectValue,	"Y position of the frontend (in screen coordinates)",	"")
-		pl_attribute(Width,		uint32,	800,	ReadWrite,	DirectValue,	"Width of the frontend",								"")
-		pl_attribute(Height,	uint32,	600,	ReadWrite,	DirectValue,	"Height of the frontend",								"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(X,			int,	0,		ReadWrite)
+		pl_attribute_directvalue(Y,			int,	0,		ReadWrite)
+		pl_attribute_directvalue(Width,		uint32,	800,	ReadWrite)
+		pl_attribute_directvalue(Height,	uint32,	600,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

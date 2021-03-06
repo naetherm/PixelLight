@@ -38,11 +38,29 @@
 
 
 //[-------------------------------------------------------]
+//[ Includes                                              ]
+//[-------------------------------------------------------]
+#include <PLCore/PLCore.h>
+
+
+//[-------------------------------------------------------]
 //[ OS definitions                                        ]
 //[-------------------------------------------------------]
 // Windows platform
 #ifdef WIN32
 	#include "PLRendererD3D9/PLRendererD3D9Windows.h"
+#endif
+
+
+//[-------------------------------------------------------]
+//[ Import/Export                                         ]
+//[-------------------------------------------------------]
+#ifdef PLRENDERERD3D9_EXPORTS
+	// To export classes, methods and variables
+	#define PLRENDERERD3D9_API	PL_GENERIC_API_EXPORT
+#else
+	// To import classes, methods and variables
+	#define PLRENDERERD3D9_API	PL_GENERIC_API_IMPORT
 #endif
 
 

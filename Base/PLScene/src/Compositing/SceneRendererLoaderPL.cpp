@@ -42,7 +42,20 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneRendererLoaderPL)
+pl_class_metadata(SceneRendererLoaderPL, "PLScene", PLScene::SceneRendererLoader, "Scene renderer loader implementation for the PixelLight scene renderer XML file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"sr,SR")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,			pl_ret_type(bool),	SceneRenderer&,	PLCore::File&,			"Load method",												"")
+	pl_method_2_metadata(Save,			pl_ret_type(bool),	SceneRenderer&,	PLCore::File&,			"Save method. Default values are not written.",				"")
+	pl_method_3_metadata(SaveParams,	pl_ret_type(bool),	SceneRenderer&,	PLCore::File&,	bool,	"Save method. Parameters: No default values as 'bool'.",	"")
+pl_class_metadata_end(SceneRendererLoaderPL)
 
 
 //[-------------------------------------------------------]

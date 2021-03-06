@@ -53,7 +53,11 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMTransformGizmoPosition)
+pl_class_metadata(SNMTransformGizmoPosition, "PLScene", PLScene::SNMTransformGizmo, "Abstract position transform gizmo scene node modifier base class")
+	// Attributes
+	pl_attribute_metadata(LineWidth,	float,	2.0f,	ReadWrite,	"Line width",					"")
+	pl_attribute_metadata(Tolerance,	float,	0.6f,	ReadWrite,	"Tolerance for axis selection",	"")
+pl_class_metadata_end(SNMTransformGizmoPosition)
 
 
 //[-------------------------------------------------------]

@@ -46,7 +46,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionFetchScalarSampler3D)
+pl_class_metadata(ShaderFunctionFetchScalarSampler3D, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionFetchScalar, "3D sampler shader function implementation class for fetch scalar, nearest neighbour filtering (1 volume texture fetch for the reconstruction) or trilinear filtering (1 volume texture fetch for the reconstruction)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionFetchScalarSampler3D)
 
 
 //[-------------------------------------------------------]

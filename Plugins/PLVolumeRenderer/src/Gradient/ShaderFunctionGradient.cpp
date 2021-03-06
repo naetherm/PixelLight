@@ -37,7 +37,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionGradient)
+pl_class_metadata(ShaderFunctionGradient, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for gradient")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"2.5 - Gradient")
+		pl_property("FunctionName",				"Gradient")
+		pl_property("FunctionSignature_GLSL",	"vec3 Gradient(vec3 Position)")
+		pl_property("FunctionSignature_Cg",		"float3 Gradient(float3 Position)")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionGradient)
 
 
 //[-------------------------------------------------------]

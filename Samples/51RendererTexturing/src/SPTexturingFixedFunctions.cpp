@@ -45,7 +45,10 @@ using namespace PLRenderer;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPTexturingFixedFunctions)
+pl_class_metadata(SPTexturingFixedFunctions, "", SPTexturing, "Fixed functions texturing surface painter")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLRenderer::Renderer&,	"Parameter constructor",	"")
+pl_class_metadata_end(SPTexturingFixedFunctions)
 
 
 //[-------------------------------------------------------]

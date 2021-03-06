@@ -41,7 +41,16 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessBrightPass)
+pl_class_metadata(SNMPostProcessBrightPass, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Luminance,	float,			0.08f,								ReadWrite,	"Luminance",							"")
+	pl_attribute_metadata(MiddleGray,	float,			0.18f,								ReadWrite,	"Middle gray value",					"")
+	pl_attribute_metadata(WhiteCutoff,	float,			0.8f,								ReadWrite,	"White cutoff",							"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,	"Data/PostProcesses/BrightPass.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessBrightPass)
 
 
 //[-------------------------------------------------------]

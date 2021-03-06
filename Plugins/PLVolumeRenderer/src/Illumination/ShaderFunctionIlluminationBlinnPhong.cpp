@@ -38,7 +38,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionIlluminationBlinnPhong)
+pl_class_metadata(ShaderFunctionIlluminationBlinnPhong, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionIllumination, "Blinn-Phong shader function implementation class for local illumination")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionIlluminationBlinnPhong)
 
 
 //[-------------------------------------------------------]

@@ -53,9 +53,8 @@ class Dialog : public Window {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, Dialog, "PLGui", PLGui::Widget, "Base class for dialog windows")
-		pl_constructor_0(DefaultConstructor, "Default constructor", "")
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

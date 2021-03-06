@@ -71,14 +71,12 @@ class SNMCameraZoomController : public PLScene::SNMCameraZoom {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNMCameraZoomController, "PLEngine", PLScene::SNMCameraZoom, "Scene node modifier class implementing camera zoom input control")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(InputSemantic,	PLCore::String,	"",	ReadWrite,	DirectValue,	"Semantic of this input controller (e.g. \"Camera\")",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_directvalue(InputSemantic,	PLCore::String,	"",	ReadWrite)
 		// Slot
-		pl_slot_1(OnControl,	PLInput::Control&,	"Called when a control event has occurred, the control causing the event as first parameter",	"")
-	pl_class_end
+		pl_slot_1_def(SNMCameraZoomController,	OnControl,	PLInput::Control&)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

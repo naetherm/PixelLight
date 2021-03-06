@@ -44,7 +44,14 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionClipRayTemplate)
+pl_class_metadata(ShaderFunctionClipRayTemplate, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClipRay, "Template shader function implementation class for clip ray")
+	// Properties
+	pl_properties
+		pl_property("FunctionTemplate",	"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_2_metadata(ParamsConstructor,	PLCore::uint8,	PLCore::uint8,	"Parameter constructor",	"")
+pl_class_metadata_end(ShaderFunctionClipRayTemplate)
 
 
 //[-------------------------------------------------------]

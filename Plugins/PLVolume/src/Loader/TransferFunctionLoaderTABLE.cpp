@@ -45,7 +45,19 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TransferFunctionLoaderTABLE)
+pl_class_metadata(TransferFunctionLoaderTABLE, "PLVolume", PLVolume::TransferFunctionLoader, "Transfer function loader implementation for the \"TABLE\" file format from the University of Erlangen, Germany")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"table,TABLE")
+		pl_property("Load",		"1")
+		pl_property("Save",		"0")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	TransferFunction&,			PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const TransferFunction&,	PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(TransferFunctionLoaderTABLE)
 
 
 //[-------------------------------------------------------]

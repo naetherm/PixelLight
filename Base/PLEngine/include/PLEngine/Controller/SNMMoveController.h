@@ -68,13 +68,11 @@ class SNMMoveController : public PLScene::SNMTransform {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNMMoveController, "PLEngine", PLScene::SNMTransform, "Scene node move input controller modifier class")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(InputSemantic,	PLCore::String,	"",		ReadWrite,	DirectValue,	"Semantic of this input controller (e.g. \"Camera\")",	"")
-		pl_attribute(Speed,			float,			1.0f,	ReadWrite,	DirectValue,	"Movement speed",										"Min='0.0001'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(InputSemantic,	PLCore::String,	"",		ReadWrite)
+		pl_attribute_directvalue(Speed,			float,			1.0f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

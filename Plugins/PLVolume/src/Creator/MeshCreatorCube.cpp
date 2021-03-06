@@ -50,7 +50,13 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorCube)
+pl_class_metadata(MeshCreatorCube, "PLVolume", PLMesh::MeshCreator, "Cube mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Dimension,	PLMath::Vector3,	PLMath::Vector3(1.0f, 1.0f, 1.0f),	ReadWrite,	"Cube dimension",	"")
+	pl_attribute_metadata(Offset,		PLMath::Vector3,	PLMath::Vector3(0.0f, 0.0f, 0.0f),	ReadWrite,	"Offset to center",	"")
+pl_class_metadata_end(MeshCreatorCube)
 
 
 //[-------------------------------------------------------]

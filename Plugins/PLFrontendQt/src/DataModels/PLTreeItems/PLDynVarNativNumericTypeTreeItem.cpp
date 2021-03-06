@@ -37,7 +37,7 @@ namespace PLFrontendQt {
 namespace DataModels {
 
 
-PLDynVarNativNumericTypeTreeItem::PLDynVarNativNumericTypeTreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent) : PLDynVarStringTreeItem(dynVar, GetNumericTypeFromDynVar(dynVar), parent)
+PLDynVarNativNumericTypeTreeItem::PLDynVarNativNumericTypeTreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent) : PLDynVarStringTreeItem(dynVar, GetNumericTypeFromDynVar(dynVar), parent)
 	, m_basisTypeId(dynVar ? dynVar->GetTypeID() : -1)
 {
 	if (m_basisTypeId == PLCore::TypeBool)
@@ -149,7 +149,7 @@ bool PLDynVarNativNumericTypeTreeItem::setBaseTypeData(const QVariant& value)
 	return bRet;
 }
 
-PLDynVarTreeItemTypes::DynVarTreeItemTypes PLDynVarNativNumericTypeTreeItem::GetNumericTypeFromDynVar(const PLCore::DynVar* dynVar)
+PLDynVarTreeItemTypes::DynVarTreeItemTypes PLDynVarNativNumericTypeTreeItem::GetNumericTypeFromDynVar(const PLCore::DynVarPtr dynVar)
 {
 	int typeId = dynVar ? dynVar->GetTypeID() : -1;
 	switch(typeId)

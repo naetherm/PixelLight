@@ -50,7 +50,18 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMOrbiting)
+pl_class_metadata(SNMOrbiting, "PLScene", PLScene::SceneNodeModifier, "Scene node modifier class for orbiting around a target scene node")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Target,		PLCore::String,		"",						ReadWrite,	"Target scene node to 'look at', if empty nothing happens",								"")
+	pl_attribute_metadata(MinDistance,	float,				0.0f,					ReadWrite,	"Minimum distance to the target, negative = no minimum, always <= 'MaxDistance'",		"")
+	pl_attribute_metadata(MaxDistance,	float,				-1.0f,					ReadWrite,	"Maximum distance to the target, negative = no maximum, always >= 'MinDistance'",		"")
+	pl_attribute_metadata(Distance,		float,				-1.0f,					ReadWrite,	"Distance to the target, negative = not initialized yet",								"")
+	pl_attribute_metadata(Offset,		PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Target scene node position offset (same scene container space as target scene node)",	"")
+	pl_attribute_metadata(UpVector,		PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Up vector (null vector for no limitation)",											"")
+	pl_attribute_metadata(Pan,			PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Pan",																					"")
+pl_class_metadata_end(SNMOrbiting)
 
 
 //[-------------------------------------------------------]

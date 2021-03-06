@@ -109,7 +109,7 @@ class SRPDiffuseOnly : public PLScene::SceneRendererPass {
 			ZWriteOnly      = 1<<3,	/**< Do only write z-values, but no color values (depth only renderer pass) */
 			NoDiffuseMap    = 1<<4	/**< Ignore diffuse map */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneRendererPass::EFlags)
 			pl_enum_value(TransparentPass,	"This is a transparent render pass")
 			pl_enum_value(NoZWrite,			"Do not write z-values")
@@ -121,12 +121,12 @@ class SRPDiffuseOnly : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDiffuseOnly, "PLCompositing", PLScene::SceneRendererPass, "Abstract diffuse only scene renderer pass, can also be used as depth only renderer pass")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(TextureFiltering,	pl_enum_type(ETextureFiltering),	Anisotropic8,	ReadWrite,	DirectValue,	"Texture filtering",	"")
+		pl_attribute_directvalue(					TextureFiltering,	ETextureFiltering,	Anisotropic8,	ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),				0,				ReadWrite,	GetSet,			"Flags",				"")
-	pl_class_end
+		pl_attribute_getset		(SRPDiffuseOnly,	Flags,				PLCore::uint32,		0,				ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

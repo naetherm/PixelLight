@@ -38,7 +38,13 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(LED)
+pl_class_metadata(LED, "PLInput", PLInput::Control, "LED control")
+	// Methods
+	pl_method_0_metadata(GetLEDs,	pl_ret_type(PLCore::uint32),							"Returns the state of all LEDs as a bit field.",																		"")
+	pl_method_1_metadata(SetLEDs,	pl_ret_type(void),				PLCore::uint32,			"Set state of all LEDs as a bit field. LED states as first parameter.",													"")
+	pl_method_1_metadata(IsOn,		pl_ret_type(bool),				int,					"Get LED status. Index of LED (0..31) as first parameter. Returns 'true' if the LED is currently on, else 'false'.",	"")
+	pl_method_2_metadata(SetOn,		pl_ret_type(void),				int,			bool,	"Set LED status. Index of LED (0..31) as first parameter. 'true' as second parameter, if the LED is on, else 'false'.",	"")
+pl_class_metadata_end(LED)
 
 
 //[-------------------------------------------------------]

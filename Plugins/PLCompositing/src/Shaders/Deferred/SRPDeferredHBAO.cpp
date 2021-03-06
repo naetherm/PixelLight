@@ -53,7 +53,19 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredHBAO)
+pl_class_metadata(SRPDeferredHBAO, "PLCompositing", PLCompositing::SRPDeferredSSAO, "Scene renderer pass for deferred rendering 'Horizon Based Ambient Occlusion' (HBAO), a 'Screen-Space Ambient Occlusion' (SSAO) technique")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(NumberOfSteps,		PLCore::uint32,								8,								ReadWrite,	"The maximum number samples per direction",																																														"Min='1'")
+	pl_attribute_metadata(NumberOfDirections,	PLCore::uint32,								8,								ReadWrite,	"The number of randomly-rotated 2D directions in image space distributed around the current pixel. The higher this parameter, the lower is the noise in the ambient occlusion.",												"Min='1'")
+	pl_attribute_metadata(AORadius,				float,										0.25f,							ReadWrite,	"AO radius in scene metrics. The radius is the distance outside which occludes are ignored.",																																	"Min='0.0'")
+	pl_attribute_metadata(AngleBias,			float,										30.0f,							ReadWrite,	"For low-tessellated geometry, occlusion variations tend to appear at creases and ridges, which betray the underlying tessellation. To remove these artifacts, we use an angle bias parameter which restricts the hemisphere.",	"Min='0.0'")
+	pl_attribute_metadata(Attenuation,			float,										1.0f,							ReadWrite,	"This scale factor W0 is applied to the per-sample attenuation function. The occlusion contribution of a given sample is attenuated by W0 * W(r/ R) where W(x) = 1  x2.",														"Min='0.0'")
+	pl_attribute_metadata(RandomUVScale,		PLMath::Vector2,							PLMath::Vector2(20.0f, 20.f),	ReadWrite,	"UV scale for the random normals texture",																																														"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SRPDeferredHBAO, EFlags),	0,								ReadWrite,	"Flags",																																																						"")
+pl_class_metadata_end(SRPDeferredHBAO)
 
 
 //[-------------------------------------------------------]

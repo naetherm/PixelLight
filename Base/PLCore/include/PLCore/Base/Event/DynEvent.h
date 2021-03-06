@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Container/SimpleList.h"
+#include "PLCore/Core/SmartPtr.h"
 #include "PLCore/Base/Func/Signature.h"
 #include "PLCore/Base/Func/DynSignature.h"
 
@@ -96,7 +97,7 @@ class DynEvent : public DynSignature {
 		*  @param[in] cHandler
 		*    Event handler
 		*/
-		PLCORE_API void Connect(DynEventHandler &cHandler);
+		PLCORE_API virtual void Connect(DynEventHandler &cHandler);
 
 		/**
 		*  @brief
@@ -105,7 +106,7 @@ class DynEvent : public DynSignature {
 		*  @param[in] cHandler
 		*    Event handler
 		*/
-		PLCORE_API void Disconnect(DynEventHandler &cHandler);
+		PLCORE_API virtual void Disconnect(DynEventHandler &cHandler);
 
 		/**
 		*  @brief
@@ -118,7 +119,7 @@ class DynEvent : public DynSignature {
 		*    - Don't use this method within performance critical situations because due internal
 		*      implementation, this request has a linear, not constant runtime!
 		*/
-		inline uint32 GetNumOfConnects() const;
+		PLCORE_API virtual uint32 GetNumOfConnects() const { return 0; }
 
 
 	//[-------------------------------------------------------]
@@ -189,15 +190,13 @@ class DynEvent : public DynSignature {
 		*/
 		PLCORE_API virtual void Emit(const XmlElement &cElement) const;
 
-
-	//[-------------------------------------------------------]
-	//[ Protected data                                        ]
-	//[-------------------------------------------------------]
-	protected:
-		SimpleList<DynEventHandler*> m_lstHandlers;	/**< List of event handlers */
-
-
 };
+
+
+//[-------------------------------------------------------]
+//[ Type definitions                                      ]
+//[-------------------------------------------------------]
+typedef SmartPtr<DynEvent> DynEventPtr;
 
 
 //[-------------------------------------------------------]
@@ -205,11 +204,6 @@ class DynEvent : public DynSignature {
 //[-------------------------------------------------------]
 } // PLCore
 
-
-//[-------------------------------------------------------]
-//[ Implementation                                        ]
-//[-------------------------------------------------------]
-#include "PLCore/Base/Event/DynEvent.inl"
 
 
 #endif // __PLCORE_DYNEVENT_H__

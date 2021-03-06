@@ -58,8 +58,8 @@ class ConfigGroup : public PLCore::ConfigGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, ConfigGroup, "PLEngine", PLCore::ConfigGroup, "Engine configuration 'collection' class")
-	pl_class_end
+	pl_class_def(PL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -117,14 +117,12 @@ class Config : public ConfigGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, Config, "PLEngine", PLEngine::ConfigGroup, "Engine configuration classes")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(ConsoleActivated,	bool,	true,	ReadWrite,	DirectValue,	"Is the console active?",										"")
-		pl_attribute(MaxTimeDifference,	float,	0.15f,	ReadWrite,	GetSet,			"The maximum time difference since the last frame in seconds",	"Min='0.0001'")
-		pl_attribute(FPSLimit,			float,	0.0f,	ReadWrite,	GetSet,			"FPS limit, 0 if there's no FPS limitation",					"Min='0.0'")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(			ConsoleActivated,	bool,	true,	ReadWrite)
+		pl_attribute_getset		(Config,	MaxTimeDifference,	float,	0.15f,	ReadWrite)
+		pl_attribute_getset		(Config,	FPSLimit,			float,	0.0f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -167,16 +165,14 @@ class DebugConfig : public ConfigGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, DebugConfig, "PLEngine", PLEngine::ConfigGroup, "Engine debug configuration classes")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(ShowFPS,				bool,	false,	ReadWrite,	DirectValue,	"Show FPS?",				"")
-		pl_attribute(ShowCoordinateAxis,	bool,	false,	ReadWrite,	DirectValue,	"Show coordinate axis?",	"")
-		pl_attribute(ShowXZPlane,			bool,	false,	ReadWrite,	DirectValue,	"Show x/z plane?",			"")
-		pl_attribute(ShowXYPlane,			bool,	false,	ReadWrite,	DirectValue,	"Show x/y plane?",			"")
-		pl_attribute(ShowYZPlane,			bool,	false,	ReadWrite,	DirectValue,	"Show y/z plane?",			"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(ShowFPS,				bool,	false,	ReadWrite)
+		pl_attribute_directvalue(ShowCoordinateAxis,	bool,	false,	ReadWrite)
+		pl_attribute_directvalue(ShowXZPlane,			bool,	false,	ReadWrite)
+		pl_attribute_directvalue(ShowXYPlane,			bool,	false,	ReadWrite)
+		pl_attribute_directvalue(ShowYZPlane,			bool,	false,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

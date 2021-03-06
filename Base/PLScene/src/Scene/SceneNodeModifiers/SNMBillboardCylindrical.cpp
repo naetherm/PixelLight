@@ -43,7 +43,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMBillboardCylindrical)
+pl_class_metadata( SNMBillboardCylindrical, "PLScene", PLScene::SNMBillboard, "Cylindrical (axis aligned) billboard scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(UpVector,	PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	"Up vector",	"")
+	// Slots
+	pl_slot_1_metadata(OnAddedToVisibilityTree,	VisNode&,	"Called when the owner scene node was added to a visibility tree, visibility node which is representing the owner scene node within the visibility tree as first parameter",	"")
+pl_class_metadata_end(SNMBillboardCylindrical)
 
 
 //[-------------------------------------------------------]

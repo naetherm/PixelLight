@@ -59,14 +59,12 @@ class SNMPhysicsJointUniversal : public SNMPhysicsJoint {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsJointUniversal, "PLPhysics", PLPhysics::SNMPhysicsJoint, "Physics universal joint scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	GetSet,	"Origin of the universal in local space",																																				"")
-		pl_attribute(PinDir1,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	GetSet,	"First axis of rotation fixed on THIS body and perpendicular to 'PinDir2' in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",			"")
-		pl_attribute(PinDir2,		PLMath::Vector3,	PLMath::Vector3::UnitZ,	ReadWrite,	GetSet,	"Second axis of rotation fixed on 'Target' body and perpendicular to 'PinDir1' in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMPhysicsJointUniversal,	PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsJointUniversal,	PinDir1,	PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsJointUniversal,	PinDir2,	PLMath::Vector3,	PLMath::Vector3::UnitZ,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -47,7 +47,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNPointLight)
+pl_class_metadata(SNPointLight, "PLScene", PLScene::SNLight, "Omni directional point light scene node were light is emitted from a single point in space")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Range,		float,											1.0f,	ReadWrite,	"Light range",	"Min='0.0001'")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(DebugFlags,	pl_flag_type_def3(SNPointLight, EDebugFlags),	0,		ReadWrite,	"Flags",		"")
+pl_class_metadata_end(SNPointLight)
 
 
 //[-------------------------------------------------------]

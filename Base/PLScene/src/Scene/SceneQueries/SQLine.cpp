@@ -47,7 +47,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SQLine)
+pl_class_metadata(SQLine, "PLScene", PLScene::SceneQuery, "Line intersection scene query class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SQLine)
 
 
 //[-------------------------------------------------------]

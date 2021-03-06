@@ -42,7 +42,10 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(FrontendApplication)
+pl_class_metadata(FrontendApplication, "PLCore", PLCore::CoreApplication, "Frontend application class")
+	// Methods
+	pl_method_0_metadata(GetFrontend,	pl_ret_type(Frontend&),	"Returns the frontend this application is running in.",	"")
+pl_class_metadata_end(FrontendApplication)
 
 
 //[-------------------------------------------------------]

@@ -37,7 +37,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoader)
+pl_class_metadata(SceneLoader, "PLScene", PLCore::LoaderImpl, "Abstract scene loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Scene")
+	pl_properties_end
+pl_class_metadata_end(SceneLoader)
 
 
 //[-------------------------------------------------------]

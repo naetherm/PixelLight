@@ -50,7 +50,12 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDiffuseOnly)
+pl_class_metadata(SRPDiffuseOnly, "PLCompositing", PLScene::SceneRendererPass, "Abstract diffuse only scene renderer pass, can also be used as depth only renderer pass")
+	// Attributes
+	pl_attribute_metadata(TextureFiltering,	pl_enum_type_def3(SRPDiffuseOnly, ETextureFiltering),	SRPDiffuseOnly::Anisotropic8,	ReadWrite,	"Texture filtering",	"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPDiffuseOnly, EFlags),				0,								ReadWrite,	"Flags",				"")
+pl_class_metadata_end(SRPDiffuseOnly)
 
 
 //[-------------------------------------------------------]

@@ -59,8 +59,8 @@ class IEColorKey : public ImageEffect {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, IEColorKey, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Apply color key")
-	pl_class_end
+	pl_class_def(PLGRAPHICS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

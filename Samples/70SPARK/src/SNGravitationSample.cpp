@@ -45,7 +45,10 @@ using namespace PLScene;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNGravitationSample)
+pl_class_metadata(SNGravitationSample, "", SPARK_PL::SNSystem, "Gravitation SPARK particle system sample scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SNGravitationSample)
 
 
 //[-------------------------------------------------------]

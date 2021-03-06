@@ -38,7 +38,12 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Axis)
+pl_class_metadata(Axis, "PLInput", PLInput::Control, "Axis control")
+	// Methods
+	pl_method_0_metadata(GetValue,			pl_ret_type(float),					"Returns the axis value.",																																	"")
+	pl_method_2_metadata(SetValue,			pl_ret_type(void),	float,	bool,	"Set axis value. Current value as first parameter. As second parameter 'true' if the current value is relative, else 'false' if it's a absolute value.",	"")
+	pl_method_0_metadata(IsValueRelative,	pl_ret_type(bool),					"Returns 'true' if the current value is relative, else 'false' if it's a absolute value.",																	"")
+pl_class_metadata_end(Axis)
 
 
 //[-------------------------------------------------------]

@@ -41,7 +41,12 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidget)
+pl_class_metadata(DockWidget, "PLFrontendQt", PLCore::Object, "Abstract PixelLight RTTI class encapsulating a Qt dock widget")
+	// Properties
+	pl_properties
+		pl_property("Title", "")
+	pl_properties_end
+pl_class_metadata_end(DockWidget)
 
 
 //[-------------------------------------------------------]
@@ -221,7 +226,7 @@ void DockWidget::SetDockWidgetsAttribute(const String &sName, const DynVar &cVar
 *  @brief
 *    Set dock widgets attribute value by using a given dynamic variable pointer (dock widget broadcast, excludes the emitting dock widget)
 */
-void DockWidget::SetDockWidgetsAttribute(const String &sName, const DynVar *pVar)
+void DockWidget::SetDockWidgetsAttribute(const String &sName, const DynVarPtr pVar)
 {
 	// If there's a dock widget manager provided, perform a dock widget manager broadcast
 	if (m_pDockWidgetManager) {

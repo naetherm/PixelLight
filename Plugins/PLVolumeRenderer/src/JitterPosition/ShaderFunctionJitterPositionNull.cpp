@@ -38,7 +38,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionJitterPositionNull)
+pl_class_metadata(ShaderFunctionJitterPositionNull, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionJitterPosition, "Null shader function implementation class for jitter position")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionJitterPositionNull)
 
 
 //[-------------------------------------------------------]

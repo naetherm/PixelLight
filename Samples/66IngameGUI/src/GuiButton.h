@@ -58,10 +58,10 @@ class GuiButton : public GuiBase {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, GuiButton, "", GuiBase, "Ingame Gui - Button")
+	pl_class_def()
 		// Signals
-		pl_signal_1(SignalPressed,	PLCore::uint32,	"Button has been pressed",	"")
-	pl_class_end
+		pl_signal_1_def(SignalPressed,	PLCore::uint32)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -45,7 +45,18 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNSpotLight)
+pl_class_metadata(SNSpotLight, "PLScene", PLScene::SNPointLight, "Spot light scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(OuterAngle,	float,											45.0f,	ReadWrite,	"Outer cone angle in degree",									"")
+	pl_attribute_metadata(InnerAngle,	float,											35.0f,	ReadWrite,	"Inner cone angle in degree (smaller than the outer angle)",	"")
+	pl_attribute_metadata(ZNear,		float,											0.1f,	ReadWrite,	"Near clipping plane",											"")
+	pl_attribute_metadata(Aspect,		float,											1.0f,	ReadWrite,	"Aspect factor (only used if 'NoCone'-flag is set!)",			"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,		pl_flag_type_def3(SNSpotLight, EFlags),			0,		ReadWrite,	"Flags",														"")
+	pl_attribute_metadata(DebugFlags,	pl_flag_type_def3(SNSpotLight, EDebugFlags),	0,		ReadWrite,	"Debug flags",													"")
+pl_class_metadata_end(SNSpotLight)
 
 
 //[-------------------------------------------------------]

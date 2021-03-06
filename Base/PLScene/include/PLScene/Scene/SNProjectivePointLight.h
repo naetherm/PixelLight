@@ -62,7 +62,7 @@ class SNProjectivePointLight : public SNPointLight {
 		enum EFlags {
 			NoProjection = 1<<13	/**< Disable texture projection */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNPointLight::EFlags)
 			pl_enum_value(NoProjection, "Disable texture projection")
 		pl_enum_end
@@ -71,14 +71,12 @@ class SNProjectivePointLight : public SNPointLight {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNProjectivePointLight, "PLScene", PLScene::SNPointLight, "Omni directional projective point light scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(ProjectedMaterial,	PLCore::String,			"Data/Textures/DefaultCubeMap.dds",	ReadWrite,	GetSet,	"Projected material",	"Type='Material Effect Image TextureAni'")
+		pl_attribute_getset(SNProjectivePointLight,	ProjectedMaterial,	PLCore::String,	"Data/Textures/DefaultCubeMap.dds",	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,									ReadWrite,	GetSet,	"Flags",				"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNProjectivePointLight,	Flags,				PLCore::uint32,	0,									ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -60,13 +60,13 @@ class AbstractMenu : public Widget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, AbstractMenu, "PLGui", PLGui::Widget, "Abstract base class for widgets that display a menu")
+	pl_class_def(PLGUI_API)
 		// Signals
-		pl_signal_1(SignalItemSelected,		int,		"Current selection has been changed",	"")
-		pl_signal_1(SignalItemClicked,		MenuItem*,	"A menu item has been clicked",			"")
-		pl_signal_1(SignalSubmenuOpened,	MenuItem*,	"A submenu has been opened",			"")
-		pl_signal_1(SignalSubmenuClosed,	MenuItem*,	"A submenu has been closed",			"")
-	pl_class_end
+		pl_signal_1_def(SignalItemSelected,		int)
+		pl_signal_1_def(SignalItemClicked,		MenuItem*)
+		pl_signal_1_def(SignalSubmenuOpened,	MenuItem*)
+		pl_signal_1_def(SignalSubmenuClosed,	MenuItem*)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

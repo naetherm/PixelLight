@@ -42,7 +42,14 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPLightEffects)
+pl_class_metadata(SRPLightEffects, "PLCompositing", PLScene::SceneRendererPass, "Abstract scene renderer pass drawing light effects like lens flares")
+	// Attributes
+	pl_attribute_metadata(CoronaMaterial,	PLCore::String,								"Data/Effects/DefaultCorona.plfx",	ReadWrite,	"Corona material",	"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(FlareMaterial,	PLCore::String,								"Data/Effects/DefaultFlare.plfx",	ReadWrite,	"Flare material",	"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(BlendMaterial,	PLCore::String,								"Data/Effects/DefaultBlend.plfx",	ReadWrite,	"Blend material",	"Type='Material Effect Image TextureAni'")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPLightEffects, EFlags),	0,									ReadWrite,	"Flags",			"")
+pl_class_metadata_end(SRPLightEffects)
 
 
 //[-------------------------------------------------------]

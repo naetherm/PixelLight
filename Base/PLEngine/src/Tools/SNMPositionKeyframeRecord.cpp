@@ -44,7 +44,16 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPositionKeyframeRecord)
+pl_class_metadata(SNMPositionKeyframeRecord, "PLEngine", PLScene::SNMTransform, "Keyframe position animation scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(FramesPerSecond,	PLCore::uint32,	24,	ReadWrite,	"Frames per second",																											"")
+	pl_attribute_metadata(Keys,				PLCore::String,	"",	ReadWrite,	"Position keys (x, y and z) chunk filename",																					"")
+	pl_attribute_metadata(CoordinateSystem,	PLCore::String,	"",	ReadWrite,	"Name of the scene container the position keys are in, empty string means scene container of the modifiers owner scene node",	"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node needs to be updated",	"")
+pl_class_metadata_end(SNMPositionKeyframeRecord)
 
 
 //[-------------------------------------------------------]

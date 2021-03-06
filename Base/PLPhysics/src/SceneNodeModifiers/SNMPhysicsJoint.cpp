@@ -44,7 +44,12 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsJoint)
+pl_class_metadata(SNMPhysicsJoint, "PLPhysics", PLPhysics::SNMPhysics, "Abstract physics joint scene node modifier")
+	// Attributes
+	pl_attribute_metadata(Target,	PLCore::String,								"",	ReadWrite,	"Name of the target scene node (which must have a 'PLPhysics::SNMPhysicsBody' modifier!), can left undefined",	"")
+		// Overwritten PLScene::SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNMPhysicsJoint, EFlags),	0,	ReadWrite,	"Flags",																										"")
+pl_class_metadata_end(SNMPhysicsJoint)
 
 
 //[-------------------------------------------------------]

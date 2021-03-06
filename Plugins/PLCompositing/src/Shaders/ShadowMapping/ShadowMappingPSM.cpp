@@ -39,7 +39,10 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShadowMappingPSM)
+pl_class_metadata(ShadowMappingPSM, "PLCompositing", PLCompositing::ShadowMapping, "Perspective Shadow Mapping (PSM) class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShadowMappingPSM)
 
 
 //[-------------------------------------------------------]

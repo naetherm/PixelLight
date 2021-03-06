@@ -46,7 +46,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionClassificationPreIntegration)
+pl_class_metadata(ShaderFunctionClassificationPreIntegration, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClassification, "Pre-integration shader function implementation class for classification")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionClassificationPreIntegration)
 
 
 //[-------------------------------------------------------]

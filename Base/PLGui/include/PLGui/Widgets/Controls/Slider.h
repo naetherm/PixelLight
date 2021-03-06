@@ -53,12 +53,10 @@ class Slider : public AbstractSlider {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, Slider, "PLGui", PLGui::AbstractSlider, "Slider widget")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(Orientation,	pl_enum_type(EOrientation),	Horizontal,	ReadWrite,	GetSet,	"Slider orientation",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(Slider,	Orientation,	EOrientation,	Horizontal,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

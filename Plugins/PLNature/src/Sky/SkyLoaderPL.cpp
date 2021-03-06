@@ -43,7 +43,19 @@ namespace PLNature {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SkyLoaderPL)
+pl_class_metadata(SkyLoaderPL, "PLNature", PLNature::SkyLoader, "Sky loader implementation for the PixelLight sky XML file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"sky,SKY")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	SNSky&,		PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	SNSky&,		PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(SkyLoaderPL)
 
 
 //[-------------------------------------------------------]

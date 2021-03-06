@@ -52,10 +52,8 @@ class ShaderFunctionRaySetupHybrid : public ShaderFunctionRaySetup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionRaySetupHybrid, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRaySetup, "Hybrid shader function implementation class for ray setup")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

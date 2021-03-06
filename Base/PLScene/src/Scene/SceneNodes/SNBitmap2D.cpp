@@ -47,7 +47,15 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNBitmap2D)
+pl_class_metadata(SNBitmap2D, "PLScene", PLScene::SNBitmap, "2D bitmap (overlay) scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Width,	float,									1.0f,					ReadWrite,	"Bitmap width 'screen space' between 0.0 and 1.0",	"")
+	pl_attribute_metadata(Height,	float,									1.0f,					ReadWrite,	"Bitmap height 'screen space' between 0.0 and 1.0",	"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNBitmap2D, EFlags),	SNBitmap2D::NoCulling,	ReadWrite,	"Flags",											"")
+pl_class_metadata_end(SNBitmap2D)
 
 
 //[-------------------------------------------------------]

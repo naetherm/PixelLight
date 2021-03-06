@@ -78,7 +78,7 @@ class SNSystem : public PLScene::SceneNode {
 			NoAutomaticAABB = 1<<11,	/**< Do not automatically update the axis aligned bounding box */
 			NoShaders       = 1<<12		/**< Do not use shaders, use fixed functions instead (not recommended) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(UpdateInvisible,	"Do also update the particle system if it's currently not visible")
 			pl_enum_value(NoAutomaticAABB,	"Do not automatically update the axis aligned bounding box")
@@ -89,14 +89,14 @@ class SNSystem : public PLScene::SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(SPARK_PL_RTTI_EXPORT, SNSystem, "SPARK_PL", PLScene::SceneNode, "Abstract SPARK particle system scene node base class")
+	pl_class_def(SPARK_PL_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,	PLCore::String,			"",	ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+		pl_attribute_directvalue(			ShaderLanguage,	PLCore::String,	"",	ReadWrite)
 			// Overwritten PLScene::SceneNode attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,	ReadWrite,	GetSet,			"Flags",																																"")
+		pl_attribute_getset		(SNSystem,	Flags,			PLCore::uint32,	0,	ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,	"Called when the scene node needs to be updated",	"")
-	pl_class_end
+		pl_slot_0_def(SNSystem,	OnUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

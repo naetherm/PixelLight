@@ -52,8 +52,8 @@ class SRPBackgroundSky : public SRPBackground {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPBackgroundSky, "PLCompositing", PLCompositing::SRPBackground, "Abstract sky background scene renderer pass")
-	pl_class_end
+	pl_class_def(PLCOM_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

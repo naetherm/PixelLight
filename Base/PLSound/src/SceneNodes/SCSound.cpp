@@ -48,7 +48,23 @@ namespace PLSound {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SCSound)
+pl_class_metadata(SCSound, "PLSound", PLScene::SceneContainer, "Sound scene node container")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	#ifdef ANDROID
+	// [TODO] Make PLSoundOpenSLES to the default (because it's open and free) as soon as it's implemented
+	pl_attribute_metadata(SoundAPI,	PLCore::String,	"PLSoundFMODEx::SoundManager",	ReadWrite,	"Name of the sound API this scene container is using",						"")
+	//		pl_attribute_metadata(SoundAPI,	PLCore::String,	"PLSoundOpenSLES::SoundManager",	ReadWrite,	"Name of the sound API this scene container is using",						"")
+	#else
+	pl_attribute_metadata(SoundAPI,	PLCore::String,	"PLSoundOpenAL::SoundManager",	ReadWrite,	"Name of the sound API this scene container is using",						"")
+	#endif
+	pl_attribute_metadata(Volume,	float,			1.0f,							ReadWrite,	"Volume (value from 0.0-1.0 -> 0.0 = silence, 1.0 = full volume)",			"Min='0.0' Max='1.0'")
+	pl_attribute_metadata(Pitch,	float,			1.0f,							ReadWrite,	"Pitch multiplier (pitch<1.0=slower/pitch=1.0=normal/pitch>1.0=faster)",	"Min='0.0'")
+	pl_attribute_metadata(Listener,	PLCore::String,	"",								ReadWrite,	"Name of the scene node used as listener",									"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node needs to be updated",	"")
+pl_class_metadata_end(SCSound)
 
 
 //[-------------------------------------------------------]

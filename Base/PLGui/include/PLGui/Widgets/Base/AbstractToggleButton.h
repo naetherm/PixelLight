@@ -58,15 +58,15 @@ class AbstractToggleButton : public AbstractButton {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, AbstractToggleButton, "PLGui", PLGui::AbstractButton, "Abstract base class for toggle buttons (two or three states)")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(PartiallyAllowed,	bool,						false,		ReadWrite,	GetSet,	"Is the third state (PartiallyChecked) allowed?",	"")
-		pl_attribute(State,				pl_enum_type(ECheckState),	NotChecked,	ReadWrite,	GetSet,	"Current check state",								"")
+		pl_attribute_getset(AbstractToggleButton,	PartiallyAllowed,	bool,			false,		ReadWrite)
+		pl_attribute_getset(AbstractToggleButton,	State,				ECheckState,	NotChecked,	ReadWrite)
 		// Signals
-		pl_signal_1(SignalToggled,	ECheckState,	"The button has been toggled",	"")
+		pl_signal_1_def(SignalToggled,	ECheckState)
 		// Slots
-		pl_slot_1(OnGroupActivate,	AbstractToggleButton*,	"Group callback",	"")
-	pl_class_end
+		pl_slot_1_def(AbstractToggleButton,	OnGroupActivate,	AbstractToggleButton*)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

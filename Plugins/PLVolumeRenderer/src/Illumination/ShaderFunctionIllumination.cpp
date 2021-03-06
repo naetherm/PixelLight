@@ -49,7 +49,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionIllumination)
+pl_class_metadata(ShaderFunctionIllumination, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for illumination")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"2.6 - Illumination")
+		pl_property("FunctionName",				"Illumination")
+		pl_property("FunctionSignature_GLSL",	"vec3 Illumination(vec3 SurfaceColor, vec3 SurfaceNormal, vec3 ViewingDirection, vec3 LightDirection)")
+		pl_property("FunctionSignature_Cg",		"float3 Illumination(float3 SurfaceColor, float3 SurfaceNormal, float3 ViewingDirection, float3 LightDirection)")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionIllumination)
 
 
 //[-------------------------------------------------------]

@@ -54,7 +54,14 @@ using namespace PLEngine;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(GuiPicking)
+pl_class_metadata(GuiPicking, "", PLFrontendQt::DockWidget, "Picking & selection application component")
+	// Methods
+	pl_method_0_metadata(GetSceneContainer,	pl_ret_type(PLScene::SceneContainer*),						"Returns the used scene container, can be a null pointer.",			"")
+	pl_method_0_metadata(GetSelectedObject,	pl_ret_type(PLCore::Object*),								"Returns the currently selected object, can be a null pointer.",	"")
+	pl_method_1_metadata(SelectObject,		pl_ret_type(void),						PLCore::Object*,	"Selects the given object. Object to select as first parameter.",	"")
+	// Slots
+	pl_slot_0_metadata(OnDestroyed,	"Called when the scene node assigned with this dock widget was destroyed",	"")
+pl_class_metadata_end(GuiPicking)
 
 
 //[-------------------------------------------------------]

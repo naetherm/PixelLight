@@ -47,7 +47,17 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorCylinder)
+pl_class_metadata(MeshCreatorCylinder, "PLMesh", PLMesh::MeshCreator, "Cylinder mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(BaseRadius,	float,				0.5f,					ReadWrite,	"The radius of the cylinder at z = 0",			"")
+	pl_attribute_metadata(TopRadius,	float,				0.5f,					ReadWrite,	"The radius of the cylinder at z = height",		"")
+	pl_attribute_metadata(Height,		float,				1.0f,					ReadWrite,	"The height of the cylinder",					"")
+	pl_attribute_metadata(Slices,		PLCore::uint32,		20,						ReadWrite,	"The number of subdivisions around the z-axis",	"")
+	pl_attribute_metadata(Offset,		PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Offset to center",								"")
+	pl_attribute_metadata(Closed,		bool,				true,					ReadWrite,	"Shall the shape be closed on all sides?",		"")
+pl_class_metadata_end(MeshCreatorCylinder)
 
 
 //[-------------------------------------------------------]

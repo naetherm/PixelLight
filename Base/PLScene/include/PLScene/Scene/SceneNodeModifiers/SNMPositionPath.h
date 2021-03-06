@@ -97,7 +97,7 @@ class SNMPositionPath : public SNMTransform {
 		enum EFlags {
 			NodeIndexProgress = 1<<2	/**< 'Progress' defined by 'node index' instead or 'percentage along path' */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNMTransform::EFlags)
 			pl_enum_value(NodeIndexProgress, "'Progress' defined by 'node index' instead or 'percentage along path'")
 		pl_enum_end
@@ -106,17 +106,15 @@ class SNMPositionPath : public SNMTransform {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMPositionPath, "PLScene", PLScene::SNMTransform, "Scene node modifier class moving the position of a scene node along a given path")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Filename,		PLCore::String,					"",		ReadWrite,	GetSet,			"Filename of the path the node should move on",									"Type='GraphPath'")
-		pl_attribute(Progress,		float,							0.0f,	ReadWrite,	DirectValue,	"Path progress (0-1, automatically wrapped into that range -> or node index)",	"")
-		pl_attribute(Speed,			float,							1.0f,	ReadWrite,	DirectValue,	"Path movement speed",															"")
-		pl_attribute(Interpolation,	pl_enum_type(EInterpolation),	Linear,	ReadWrite,	DirectValue,	"Interpolation type",															"")
+		pl_attribute_getset		(SNMPositionPath,	Filename,	PLCore::String,	"",				ReadWrite)
+		pl_attribute_directvalue(								Progress,		float,			0.0f,	ReadWrite)
+		pl_attribute_directvalue(								Speed,			float,			1.0f,	ReadWrite)
+		pl_attribute_directvalue(								Interpolation,	EInterpolation,	Linear,	ReadWrite)
 			// Overwritten SceneNodeModifier attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),			0,		ReadWrite,	GetSet,			"Flags",																		"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNMPositionPath,	Flags,		PLCore::uint32,	0,				ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

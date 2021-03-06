@@ -43,7 +43,8 @@ namespace PLGraphics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(IEScale)
+pl_class_metadata(IEScale, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Apply scale")
+pl_class_metadata_end(IEScale)
 
 
 //[-------------------------------------------------------]

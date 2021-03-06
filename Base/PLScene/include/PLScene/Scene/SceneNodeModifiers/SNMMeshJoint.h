@@ -76,7 +76,7 @@ class SNMMeshJoint : public SNMMesh {
 		enum EFlags {
 			UseFallbackRotation = 1<<2	/**< Use fallback rotation if the target is 'out of rotation range' */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNMMesh::EFlags)
 			pl_enum_value(UseFallbackRotation, "Use fallback rotation if the target is 'out of rotation range'")
 		pl_enum_end
@@ -85,24 +85,22 @@ class SNMMeshJoint : public SNMMesh {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMMeshJoint, "PLScene", PLScene::SNMMesh, "Mesh scene node joint modifier class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Name,				PLCore::String,			"",						ReadWrite,	GetSet,			"Name of the joint to modify",															"")
-		pl_attribute(Rotation,			PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	GetSet,			"Joint rotation in degree (joint space)",												"")
-		pl_attribute(RotationFrom,		PLCore::String,			"",						ReadWrite,	DirectValue,	"Name of the scene node to take the rotation from (transformed into joint space)",		"")
-		pl_attribute(Min,				PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	GetSet,			"Minimum joint rotation in in degree, if min = max -> no limitation, per component",	"")
-		pl_attribute(Max,				PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	GetSet,			"Maximum joint rotation in in degree, if min = max -> no limitation, per component",	"")
-		pl_attribute(Speed,				float,					5.0f,					ReadWrite,	DirectValue,	"Rotation speed",																		"")
-		pl_attribute(MaxDifference,		float,					50.0f,					ReadWrite,	DirectValue,	"Maximum rotation difference in degree, use it to void TO fast rotations",				"")
-		pl_attribute(FallbackRotation,	PLMath::Vector3,		PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Rotation that is used if the target is 'out of rotation range'",						"")
+		pl_attribute_getset		(SNMMeshJoint,		Name,				PLCore::String,		"",						ReadWrite)
+		pl_attribute_getset		(SNMMeshJoint,		Rotation,			PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_directvalue(					RotationFrom,		PLCore::String,		"",						ReadWrite)
+		pl_attribute_getset		(SNMMeshJoint,		Min,				PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_getset		(SNMMeshJoint,		Max,				PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_directvalue(					Speed,				float,				5.0f,					ReadWrite)
+		pl_attribute_directvalue(					MaxDifference,		float,				50.0f,					ReadWrite)
+		pl_attribute_directvalue(					FallbackRotation,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
 			// Overwritten SceneNodeModifier attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,						ReadWrite,	GetSet,			"Flags",																				"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_getset		(SNMMeshJoint,		Flags,				PLCore::uint32,		0,						ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,												"Called when the scene node modifier needs to be updated",																												"")
-		pl_slot_2(OnDrawDebug,	PLRenderer::Renderer&,	const VisNode*,	"Called on scene node debug draw, the used renderer as first parameter, the current visibility node of this scene node (can be a null pointer) as second parameter",	"")
-	pl_class_end
+		pl_slot_0_def(SNMMeshJoint,	OnUpdate)
+		pl_slot_2_def(SNMMeshJoint,	OnDrawDebug,	PLRenderer::Renderer&,	const VisNode*)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

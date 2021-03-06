@@ -62,7 +62,10 @@ PLCore::uint32 World::m_nODEInstanceCounter = 0;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(World)
+pl_class_metadata(World, "PLPhysicsODE", PLPhysics::World, "ODE physics world base class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(World)
 
 
 //[-------------------------------------------------------]

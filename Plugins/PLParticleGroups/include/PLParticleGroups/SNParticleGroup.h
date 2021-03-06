@@ -86,7 +86,7 @@ class SNParticleGroup : public PLScene::SceneNode {
 			UseGlobalColor          = 1<<12,	/**< Use global particle color. Only possible if the 'PointSprites'-flag is set! */
 			SceneNodeSpaceParticles = 1<<13		/**< Particles are within the local scene node space */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(ForceUpdate,				"Do always update the particle group, even if it's currently not visible on the screen.")
 			pl_enum_value(PointSprites,				"Use point sprites. Setup the point sprites within the material.")
@@ -98,20 +98,16 @@ class SNParticleGroup : public PLScene::SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, SNParticleGroup, "PLParticleGroups", PLScene::SceneNode, "Abstract particle group scene node")
-		// Properties
-		pl_properties
-			pl_property("Icon",	"Data/Textures/IconParticles.dds")
-		pl_properties_end
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(Material,					PLCore::String,			"Data/Effects/DefaultParticle.plfx",	ReadWrite,	GetSet,			"Particle group material",							"Type='Material Effect Image TextureAni'")
-		pl_attribute(GlobalColor,				PLGraphics::Color4,		PLGraphics::Color4::White,				ReadWrite,	DirectValue,	"Global particle color",							"")
-		pl_attribute(Particles,					PLCore::uint32,			10,										ReadWrite,	GetSet,			"Number of particles",								"Min=1")
-		pl_attribute(TextureAnimationColumns,	PLCore::uint32,			1,										ReadWrite,	GetSet,			"Number of animation frame columns in the texture",	"")
-		pl_attribute(TextureAnimationRows,		PLCore::uint32,			1,										ReadWrite,	GetSet,			"Number of animation frame rows in the texture",	"")
+		pl_attribute_getset		(SNParticleGroup,	Material,					PLCore::String,		"Data/Effects/DefaultParticle.plfx",	ReadWrite)
+		pl_attribute_directvalue(					GlobalColor,				PLGraphics::Color4,	PLGraphics::Color4::White,				ReadWrite)
+		pl_attribute_getset		(SNParticleGroup,	Particles,					PLCore::uint32,		10,										ReadWrite)
+		pl_attribute_getset		(SNParticleGroup,	TextureAnimationColumns,	PLCore::uint32,		1,										ReadWrite)
+		pl_attribute_getset		(SNParticleGroup,	TextureAnimationRows,		PLCore::uint32,		1,										ReadWrite)
 			// Overwritten PLScene::SceneNode attributes
-		pl_attribute(Flags,						pl_flag_type(EFlags),	0,										ReadWrite,	GetSet,			"Flags",											"")
-	pl_class_end
+		pl_attribute_getset		(SNParticleGroup,	Flags,						PLCore::uint32,		0,										ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

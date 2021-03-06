@@ -52,8 +52,8 @@ class SNMBillboard : public SNMDraw {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMBillboard, "PLScene", PLScene::SNMDraw, "Abstract billboard scene node modifier class")
-	pl_class_end
+	pl_class_def(PLS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

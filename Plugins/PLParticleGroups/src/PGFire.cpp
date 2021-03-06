@@ -43,7 +43,15 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGFire)
+pl_class_metadata(PGFire, "PLParticleGroups", PLParticleGroups::PGPhysics, "Fire particle group")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Size,			float,			1.0f,						ReadWrite,	"Size",						"")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,		PLCore::String,	"Data/Textures/PGFire.dds",	ReadWrite,	"Particle group material",	"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,	PLCore::uint32,	50,							ReadWrite,	"Number of particles",		"Min=1")
+pl_class_metadata_end(PGFire)
 
 
 //[-------------------------------------------------------]

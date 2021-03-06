@@ -58,8 +58,8 @@ class SPRTT : public PLRenderer::SurfacePainter {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SPRTT, "", PLRenderer::SurfacePainter, "Abstract render to texture surface painter")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -57,21 +57,19 @@ class PGFountain : public SNParticleGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGFountain, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Fountain particle group")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(Steps,					PLCore::uint32,		8,								ReadWrite,	GetSet,	"Steps",					"")
-		pl_attribute(RaysPerStep,			PLCore::uint32,		6,								ReadWrite,	GetSet,	"Rays per step",			"")
-		pl_attribute(DropsPerRay,			PLCore::uint32,		50,								ReadWrite,	GetSet,	"Drops per ray",			"")
-		pl_attribute(AngleOfDeepestStep,	float,				80.0f,							ReadWrite,	GetSet,	"Angle of deepest step",	"")
-		pl_attribute(AngleOfHighestStep,	float,				85.0f,							ReadWrite,	GetSet,	"Angle of highest step",	"")
-		pl_attribute(RandomAngleAddition,	float,				20.0f,							ReadWrite,	GetSet,	"Random angle addition",	"")
-		pl_attribute(AccFactor,				float,				0.11f,							ReadWrite,	GetSet,	"Acc factor",				"")
+		pl_attribute_getset(PGFountain,	Steps,					PLCore::uint32,		8,								ReadWrite)
+		pl_attribute_getset(PGFountain,	RaysPerStep,			PLCore::uint32,		6,								ReadWrite)
+		pl_attribute_getset(PGFountain,	DropsPerRay,			PLCore::uint32,		50,								ReadWrite)
+		pl_attribute_getset(PGFountain,	AngleOfDeepestStep,		float,				80.0f,							ReadWrite)
+		pl_attribute_getset(PGFountain,	AngleOfHighestStep,		float,				85.0f,							ReadWrite)
+		pl_attribute_getset(PGFountain,	RandomAngleAddition,	float,				20.0f,							ReadWrite)
+		pl_attribute_getset(PGFountain,	AccFactor,				float,				0.11f,							ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,				PLCore::String,		"Data/Textures/PGFountain.dds",	ReadWrite,	GetSet,	"Particle group material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,				PLCore::uint32,		600,							ReadWrite,	GetSet,	"Number of particles",		"Min=1")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(PGFountain,	Material,				PLCore::String,		"Data/Textures/PGFountain.dds",	ReadWrite)
+		pl_attribute_getset(PGFountain,	Particles,				PLCore::uint32,		600,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -58,12 +58,10 @@ class Box : public Widget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, Box, "PLGui", PLGui::Widget, "Box container widget (using LayoutBox)")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(Orientation,	pl_enum_type(EOrientation),	Horizontal,	ReadWrite,	GetSet,	"Box orientation",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(Box,	Orientation,	EOrientation,	Horizontal,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

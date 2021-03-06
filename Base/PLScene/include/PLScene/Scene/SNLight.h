@@ -66,7 +66,7 @@ class SNLight : public SceneNode {
 			Corona = 1<<11,	/**< Corona around the light */
 			Blend  = 1<<12	/**< Brighten the screen (blend effect) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(Flares,	"Lens flares")
 			pl_enum_value(Corona,	"Corona around the light")
@@ -77,29 +77,15 @@ class SNLight : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNLight, "PLScene", PLScene::SceneNode, "Abstract light scene node base class")
-		// Properties
-		pl_properties
-			pl_property("Icon",	"Data/Textures/IconLight.dds")
-		pl_properties_end
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Color,				PLGraphics::Color3,		PLGraphics::Color3::White,	ReadWrite,	DirectValue,	"Light color (r/g/b)",	"")
-		pl_attribute(CoronaSize,		float,					0.2f,						ReadWrite,	DirectValue,	"Corona size",			"")
-		pl_attribute(FlareSize,			float,					0.1f,						ReadWrite,	DirectValue,	"Lens flare size",		"")
-		pl_attribute(ScreenBrighten,	float,					0.3f,						ReadWrite,	DirectValue,	"Screen brighten",		"")
+		pl_attribute_directvalue(			Color,			PLGraphics::Color3,	PLGraphics::Color3::White,	ReadWrite)
+		pl_attribute_directvalue(			CoronaSize,		float,				0.2f,						ReadWrite)
+		pl_attribute_directvalue(			FlareSize,		float,				0.1f,						ReadWrite)
+		pl_attribute_directvalue(			ScreenBrighten,	float,				0.3f,						ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,							ReadWrite,	GetSet,			"Flags",				"")
-		#ifdef PLSCENE_EXPORTS	// The following is only required when compiling PLScene
-			// Methods
-			pl_method_0(IsRenderLight,			pl_ret_type(bool),	"Returns whether this is a render light or not. Returns 'true' if this is a render light, else 'false'.",																		"")
-			pl_method_0(IsEffectLight,			pl_ret_type(bool),	"Returns whether this scene node is a effect light (SNEffectLight) or not. Returns 'true' if this scene node is a effect light, else 'false'.",									"")
-			pl_method_0(IsPointLight,			pl_ret_type(bool),	"Returns whether this scene node is a point light (SNPointLight) or not. Returns 'true' if this scene node is a point light, else 'false'.",									"")
-			pl_method_0(IsProjectivePointLight,	pl_ret_type(bool),	"Returns whether this scene node is a projective point light (SNProjectivePointLight) or not. Returns 'true' if this scene node is a projective point light, else 'false'.",	"")
-			pl_method_0(IsSpotLight,			pl_ret_type(bool),	"Returns whether this scene node is a spot light (SNSpotLight) or not. Returns 'true' if this scene node is a spot light, else 'false'.",										"")
-			pl_method_0(IsProjectiveSpotLight,	pl_ret_type(bool),	"Returns whether this scene node is a projective spot light (SNProjectiveSpotLight) or not. Returns 'true' if this scene node is a projective spot light, else 'false'.",		"")
-			pl_method_0(IsDirectionalLight,		pl_ret_type(bool),	"Returns whether this scene node is a directional light (SNDirectionalLight) or not. Returns 'true' if this scene node is a directional light, else 'false'.",					"")
-		#endif
-	pl_class_end
+		pl_attribute_getset		(SNLight,	Flags,			PLCore::uint32,		0,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -63,16 +63,8 @@ class Control : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, Control, "PLInput", PLCore::Object, "Input control base class")
-		#ifdef PLINPUT_EXPORTS	// The following is only required when compiling PLInput
-			// Methods
-			pl_method_0(GetController,	pl_ret_type(Controller*),					"Returns the controller that owns the control, can be a null pointer.",											"")
-			pl_method_0(GetType,		pl_ret_type(pl_enum_type(EControlType)),	"Returns the type of control.",																					"")
-			pl_method_0(IsInputControl,	pl_ret_type(bool),							"Check if control is input or output control. Returns 'true' if control is input control, 'false' if output.",	"")
-			pl_method_0(GetName,		pl_ret_type(PLCore::String),				"Returns the control name.",																					"")
-			pl_method_0(GetDescription,	pl_ret_type(PLCore::String),				"Returns the control description.",																				"")
-		#endif
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

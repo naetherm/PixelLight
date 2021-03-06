@@ -39,7 +39,15 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ApplicationContext)
+pl_class_metadata(ApplicationContext, "PLCore", PLCore::Object,"Application context")
+	// Methods
+	pl_method_0_metadata(GetExecutableFilename,		pl_ret_type(String),	"Get absolute path of application executable (native path style, e.g. on Windows: 'C:\MyApplication\x86\Test.exe').",				"")
+	pl_method_0_metadata(GetExecutableDirectory,	pl_ret_type(String),	"Get directory of executable (native path style, e.g. on Windows: 'C:\MyApplication\x86').",										"")
+	pl_method_0_metadata(GetAppDirectory,			pl_ret_type(String),	"Get directory of application (native path style, e.g. on Windows: 'C:\MyApplication').",											"")
+	pl_method_0_metadata(GetStartupDirectory,		pl_ret_type(String),	"Get current directory when the application constructor was called (native path style, e.g. on Windows: 'C:\MyApplication\x86').",	"")
+	pl_method_0_metadata(GetLogFilename,			pl_ret_type(String),	"Get absolute path to log file, empty if log has not been opened (native path style).",												"")
+	pl_method_0_metadata(GetConfigFilename,			pl_ret_type(String),	"Get absolute path to config file, empty if no config is used (native path style).",												"")
+pl_class_metadata_end(ApplicationContext)
 
 
 //[-------------------------------------------------------]

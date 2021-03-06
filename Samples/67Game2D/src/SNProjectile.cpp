@@ -43,7 +43,15 @@ using namespace PLScene;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNProjectile)
+pl_class_metadata(SNProjectile, "", PLScene::SceneNode, "Projectile scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Direction,	PLMath::Vector2,	PLMath::Vector2::Zero,	ReadWrite,	"Projectile direction",	"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,													"Called when the scene node needs to be updated",																			"")
+	pl_slot_2_metadata(OnSceneNode,	PLScene::SceneQuery&,	PLScene::SceneNode&,	"Called when a scene node was found, query found the scene node as first parameter, found scene node as second parameter",	"")
+pl_class_metadata_end(SNProjectile)
 
 
 //[-------------------------------------------------------]

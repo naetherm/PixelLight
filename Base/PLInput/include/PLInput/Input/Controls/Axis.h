@@ -52,14 +52,8 @@ class Axis : public Control {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, Axis, "PLInput", PLInput::Control, "Axis control")
-		#ifdef PLINPUT_EXPORTS	// The following is only required when compiling PLInput
-			// Methods
-			pl_method_0(GetValue,			pl_ret_type(float),					"Returns the axis value.",																																	"")
-			pl_method_2(SetValue,			pl_ret_type(void),	float,	bool,	"Set axis value. Current value as first parameter. As second parameter 'true' if the current value is relative, else 'false' if it's a absolute value.",	"")
-			pl_method_0(IsValueRelative,	pl_ret_type(bool),					"Returns 'true' if the current value is relative, else 'false' if it's a absolute value.",																	"")
-		#endif
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

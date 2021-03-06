@@ -37,7 +37,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionJitterPosition)
+pl_class_metadata(ShaderFunctionJitterPosition, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for jitter position")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"1.2 - Jitter Position")
+		pl_property("FunctionName",				"JitterPosition")
+		pl_property("FunctionSignature_GLSL",	"float JitterPosition(vec3 Position)")
+		pl_property("FunctionSignature_Cg",		"float JitterPosition(float3 Position)")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionJitterPosition)
 
 
 //[-------------------------------------------------------]

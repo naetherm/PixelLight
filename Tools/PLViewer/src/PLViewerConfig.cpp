@@ -31,7 +31,12 @@
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PLViewerConfig)
+pl_class_metadata(PLViewerConfig, "", PLCore::ConfigGroup, "PLViewer general configuration classes")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(DefaultFilename,	PLCore::String,	"",	ReadWrite,	"Default resource (e.g. scene or script)",	"")
+pl_class_metadata_end(PLViewerConfig)
 
 
 //[-------------------------------------------------------]

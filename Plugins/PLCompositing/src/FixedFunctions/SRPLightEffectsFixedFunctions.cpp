@@ -53,7 +53,10 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPLightEffectsFixedFunctions)
+pl_class_metadata(SRPLightEffectsFixedFunctions, "PLCompositing", PLCompositing::SRPLightEffects, "Fixed functions based scene renderer pass drawing light effects like lens flares")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SRPLightEffectsFixedFunctions)
 
 
 //[-------------------------------------------------------]

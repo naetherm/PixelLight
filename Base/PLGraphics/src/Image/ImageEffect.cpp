@@ -42,7 +42,8 @@ namespace PLGraphics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ImageEffect)
+pl_class_metadata(ImageEffect, "PLGraphics", PLCore::Object, "Abstract image effect base class")
+pl_class_metadata_end(ImageEffect)
 
 
 //[-------------------------------------------------------]

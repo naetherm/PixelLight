@@ -57,7 +57,24 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMMeshJoint)
+pl_class_metadata(SNMMeshJoint, "PLScene", PLScene::SNMMesh, "Mesh scene node joint modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Name,				PLCore::String,								"",						ReadWrite,	"Name of the joint to modify",															"")
+	pl_attribute_metadata(Rotation,			PLMath::Vector3,							PLMath::Vector3::Zero,	ReadWrite,	"Joint rotation in degree (joint space)",												"")
+	pl_attribute_metadata(RotationFrom,		PLCore::String,								"",						ReadWrite,	"Name of the scene node to take the rotation from (transformed into joint space)",		"")
+	pl_attribute_metadata(Min,				PLMath::Vector3,							PLMath::Vector3::Zero,	ReadWrite,	"Minimum joint rotation in in degree, if min = max -> no limitation, per component",	"")
+	pl_attribute_metadata(Max,				PLMath::Vector3,							PLMath::Vector3::Zero,	ReadWrite,	"Maximum joint rotation in in degree, if min = max -> no limitation, per component",	"")
+	pl_attribute_metadata(Speed,			float,										5.0f,					ReadWrite,	"Rotation speed",																		"")
+	pl_attribute_metadata(MaxDifference,	float,										50.0f,					ReadWrite,	"Maximum rotation difference in degree, use it to void TO fast rotations",				"")
+	pl_attribute_metadata(FallbackRotation,	PLMath::Vector3,							PLMath::Vector3::Zero,	ReadWrite,	"Rotation that is used if the target is 'out of rotation range'",						"")
+		// Overwritten SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNMMeshJoint, EFlags),	0,						ReadWrite,	"Flags",																				"")
+	// Slota
+	pl_slot_0_metadata(OnUpdate,											"Called when the scene node modifier needs to be updated",																												"")
+	pl_slot_2_metadata(OnDrawDebug,	PLRenderer::Renderer&,	const VisNode*,	"Called on scene node debug draw, the used renderer as first parameter, the current visibility node of this scene node (can be a null pointer) as second parameter",	"")
+pl_class_metadata_end(SNMMeshJoint)
 
 
 //[-------------------------------------------------------]

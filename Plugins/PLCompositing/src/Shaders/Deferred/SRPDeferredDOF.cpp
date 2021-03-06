@@ -56,7 +56,21 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredDOF)
+pl_class_metadata(SRPDeferredDOF, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering DOF effect")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,								"",		ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+	pl_attribute_metadata(EffectWeight,		float,										1.0f,	ReadWrite,	"Effect weight, 0 means that this effect has no influence, 1 for the intended influence",												"Min=0 Max=1")
+	pl_attribute_metadata(NearPlaneDepth,	float,										0.5f,	ReadWrite,	"Everything closer than this is fully blurred (only used if IgnoreCameraSettings is set)",												"")
+	pl_attribute_metadata(FocalPlaneDepth,	float,										5.0f,	ReadWrite,	"Points on this plane are in focus (only used if IgnoreCameraSettings is set)",															"")
+	pl_attribute_metadata(FarPlaneDepth,	float,										10.0f,	ReadWrite,	"Everything beyond the far plane is fully blurred (only used if IgnoreCameraSettings is set)",											"")
+	pl_attribute_metadata(BlurrinessCutoff,	float,										0.8f,	ReadWrite,	"Blurriness cutoff constant for objects behind the focal plane (only used if IgnoreCameraSettings is set)",								"")
+	pl_attribute_metadata(BlurPasses,		PLCore::uint32,								2,		ReadWrite,	"Number of blur passes, should be a multiple of 2",																						"")
+	pl_attribute_metadata(BlurDownscale,	float,										4.0f,	ReadWrite,	"Blur downscale factor, should be a multiple of 2",																						"Min='1.0'")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPDeferredDOF, EFlags),	0,		ReadWrite,	"Flags",																																"")
+pl_class_metadata_end(SRPDeferredDOF)
 
 
 //[-------------------------------------------------------]

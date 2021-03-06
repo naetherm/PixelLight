@@ -46,7 +46,15 @@ namespace PLScriptAngelScript {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Script)
+pl_class_metadata(Script, "PLScriptAngelScript", PLCore::Script, "AngelScript (http://www.angelcode.com/angelscript/) script implementation")
+	// Properties
+	pl_properties
+		pl_property("Language",	"AngelScript")
+		pl_property("Formats",	"as,AS")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Script)
 
 
 //[-------------------------------------------------------]

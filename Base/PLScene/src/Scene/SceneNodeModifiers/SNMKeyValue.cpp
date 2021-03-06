@@ -37,7 +37,13 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMKeyValue)
+pl_class_metadata(SNMKeyValue, "PLScene", PLScene::SceneNodeModifier, "Key/value data scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Key,		PLCore::String,	"",	ReadWrite,	"Key",		"")
+	pl_attribute_metadata(Value,	PLCore::String,	"",	ReadWrite,	"Value",	"")
+pl_class_metadata_end(SNMKeyValue)
 
 
 //[-------------------------------------------------------]

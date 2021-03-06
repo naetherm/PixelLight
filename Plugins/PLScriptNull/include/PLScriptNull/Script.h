@@ -53,15 +53,8 @@ class Script : public PLCore::Script {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLSCRIPTNULL_RTTI_EXPORT, Script, "PLScriptNull", PLCore::Script, "Null script implementation")
-		// Properties
-		pl_properties
-			pl_property("Language",	"Null")
-			pl_property("Formats",	"")		// The null backend has no load and runnable scripts
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLSCRIPTNULL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

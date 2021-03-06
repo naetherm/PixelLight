@@ -75,7 +75,7 @@ class SNSound : public PLScene::SceneNode {
 			NoLoop          = 1<<12,	/**< Do not loop the sound playback */
 			NoStartPlayback = 1<<13		/**< Do not start sound playback after scene node initialization */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(PLScene::SceneNode::EFlags)
 			pl_enum_value(Stream,			"Stream the file (recommended for large files!)")
 			pl_enum_value(No3D,				"No 3D sound")
@@ -87,25 +87,19 @@ class SNSound : public PLScene::SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLSOUND_RTTI_EXPORT, SNSound, "PLSound", PLScene::SceneNode, "Scene node which is able to playback a sound")
-		// Properties
-		pl_properties
-			pl_property("Icon",	"Data/Textures/IconSound.dds")
-		pl_properties_end
+	pl_class_def(PLSOUND_API)
 		// Attributes
-		pl_attribute(Sound,				PLCore::String,			"",			ReadWrite,	GetSet,	"Filename of the sound which should be played (full path, supported file formats are API dependent). For 3D spatialization, do only use one channel buffers for best compatibility.",	"Ext='mp3 ogg wav mid midi it mod s3m xm'")
-		pl_attribute(Volume,			float,					1.0f,		ReadWrite,	GetSet,	"Volume (value from 0.0-1.0 -> 0.0 = silence, 1.0 = full volume)",																														"Min='0.0' Max='1.0'")
-		pl_attribute(Pitch,				float,					1.0f,		ReadWrite,	GetSet,	"Pitch multiplier (pitch<1.0=slower/pitch=1.0=normal/pitch>1.0=faster)",																												"Min='0.0'")
-		pl_attribute(ReferenceDistance,	float,					1.0f,		ReadWrite,	GetSet,	"Used to increase or decrease the range of a source by decreasing or increasing the attenuation, respectively",																			"Min='0.0'")
-		pl_attribute(MaxDistance,		float,					10000.0f,	ReadWrite,	GetSet,	"Defines a distance beyond which the source will not be further attenuated by distance",																								"Min='0.0'")
-		pl_attribute(RolloffFactor,		float,					1.0f,		ReadWrite,	GetSet,	"This will scale the distance attenuation over the applicable range",																													"Min='0.0'")
+		pl_attribute_getset(SNSound,	Sound,				PLCore::String,	"",			ReadWrite)
+		pl_attribute_getset(SNSound,	Volume,				float,			1.0f,		ReadWrite)
+		pl_attribute_getset(SNSound,	Pitch,				float,			1.0f,		ReadWrite)
+		pl_attribute_getset(SNSound,	ReferenceDistance,	float,			1.0f,		ReadWrite)
+		pl_attribute_getset(SNSound,	MaxDistance,		float,			10000.0f,	ReadWrite)
+		pl_attribute_getset(SNSound,	RolloffFactor,		float,			1.0f,		ReadWrite)
 			// Overwritten PLScene::SceneNode attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,			ReadWrite,	GetSet,	"Flags",																																												"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
+		pl_attribute_getset(SNSound,	Flags,				PLCore::uint32,	0,			ReadWrite)
 		// Slots
-		pl_slot_0(OnPosition,	"Called when the scene node position changed",	"")
-	pl_class_end
+		pl_slot_0_def(SNSound,	OnPosition)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

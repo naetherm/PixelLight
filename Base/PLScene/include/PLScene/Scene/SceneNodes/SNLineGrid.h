@@ -63,7 +63,7 @@ class SNLineGrid : public SceneNode {
 			NoMainLines  = 1<<11,	/**< Do not draw the main lines */
 			NoMinorLines = 1<<12	/**< Do not draw the minor lines */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(NoDepthTest,	"Do not perform a depth test")
 			pl_enum_value(NoMainLines,	"Do not draw the main lines")
@@ -74,21 +74,19 @@ class SNLineGrid : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNLineGrid, "PLScene", PLScene::SceneNode, "Line grid scene node on the nodes local space x/y-plane")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(NumOfXLines,	PLCore::uint32,			5,												ReadWrite,	DirectValue,	"Number of lines along each +/- x axis",								"")
-		pl_attribute(NumOfYLines,	PLCore::uint32,			5,												ReadWrite,	DirectValue,	"Number of lines along each +/- y axis",								"")
-		pl_attribute(MainWidth,		float,					1.0f,											ReadWrite,	DirectValue,	"Main lines width (if supported by the the used renderer API)",			"Min='1.0'")
-		pl_attribute(MainColor,		PLGraphics::Color4,		PLGraphics::Color4(0.1f, 0.1f, 0.1f, 1.0f),		ReadWrite,	DirectValue,	"Main lines color (r/g/b/a)",											"")
-		pl_attribute(MinorWidth,	float,					1.0f,											ReadWrite,	DirectValue,	"Minor lines width (if supported by the the used renderer API)",		"Min='1.0'")
-		pl_attribute(MinorColor,	PLGraphics::Color4,		PLGraphics::Color4(0.55f, 0.55f, 0.55f, 1.0f),	ReadWrite,	DirectValue,	"Minor lines color (r/g/b/a)",											"")
+		pl_attribute_directvalue(				NumOfXLines,	PLCore::uint32,		5,												ReadWrite)
+		pl_attribute_directvalue(				NumOfYLines,	PLCore::uint32,		5,												ReadWrite)
+		pl_attribute_directvalue(				MainWidth,		float,				1.0f,											ReadWrite)
+		pl_attribute_directvalue(				MainColor,		PLGraphics::Color4,	PLGraphics::Color4(0.1f, 0.1f, 0.1f, 1.0f),		ReadWrite)
+		pl_attribute_directvalue(				MinorWidth,		float,				1.0f,											ReadWrite)
+		pl_attribute_directvalue(				MinorColor,		PLGraphics::Color4,	PLGraphics::Color4(0.55f, 0.55f, 0.55f, 1.0f),	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),	0,												ReadWrite,	GetSet,			"Flags",																"")
-		pl_attribute(AABBMin,		PLMath::Vector3,		PLMath::Vector3(-0.5f, -0.5f, -0.5f),			ReadWrite,	GetSet,			"Minimum position of the 'scene node space' axis aligned bounding box",	"")
-		pl_attribute(AABBMax,		PLMath::Vector3,		PLMath::Vector3( 0.5f,  0.5f,  0.5f),			ReadWrite,	GetSet,			"Maximum position of the 'scene node space' axis aligned bounding box",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNLineGrid,	Flags,			PLCore::uint32,		0,												ReadWrite)
+		pl_attribute_getset		(SNLineGrid,	AABBMin,		PLMath::Vector3,	PLMath::Vector3(-0.5f, -0.5f, -0.5f),			ReadWrite)
+		pl_attribute_getset		(SNLineGrid,	AABBMax,		PLMath::Vector3,	PLMath::Vector3( 0.5f,  0.5f,  0.5f),			ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

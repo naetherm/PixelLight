@@ -50,7 +50,10 @@ using namespace PLMesh;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPMultiViewFixedFunctions)
+pl_class_metadata(SPMultiViewFixedFunctions, "", SPMultiView, "Fixed functions multi view surface painter")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLRenderer::Renderer&,	"Parameter constructor",	"")
+pl_class_metadata_end(SPMultiViewFixedFunctions)
 
 
 //[-------------------------------------------------------]

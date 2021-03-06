@@ -53,7 +53,13 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDebugSceneNodeIcons)
+pl_class_metadata(SRPDebugSceneNodeIcons, "PLCompositing", PLCompositing::SRPDebug, "Abstract scene renderer pass drawing just simple scene node icons")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Size,				float,	30.0f,	ReadWrite,	"Icon size",																				"Min='1.0'")
+	pl_attribute_metadata(MaxDrawDistance,	float,	20.0f,	ReadWrite,	"Maximum draw distance of icons to the camera, if less or equal 0, there's no limitation",	"")
+pl_class_metadata_end(SRPDebugSceneNodeIcons)
 
 
 //[-------------------------------------------------------]

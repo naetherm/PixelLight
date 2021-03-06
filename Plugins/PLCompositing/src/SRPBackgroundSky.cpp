@@ -37,7 +37,8 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPBackgroundSky)
+pl_class_metadata(SRPBackgroundSky, "PLCompositing", PLCompositing::SRPBackground, "Abstract sky background scene renderer pass")
+pl_class_metadata_end(SRPBackgroundSky)
 
 
 //[-------------------------------------------------------]

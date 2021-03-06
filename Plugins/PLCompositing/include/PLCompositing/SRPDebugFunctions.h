@@ -52,10 +52,8 @@ class SRPDebugFunctions : public SRPDebug {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDebugFunctions, "PLCompositing", PLCompositing::SRPDebug, "Scene renderer pass calling all 'debug'-draw functions")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLCOM_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -69,7 +69,7 @@ class SNClipVolumeTexture : public SNClip {
 			NoTextureMipmapping  = 1<<12,	/**< Disable the usage of mipmaps? Has only an effect when loading new volume data. Lookout! When using mipmaps, it may take a moment to generate mipmaps if no mipmap data is provided. */
 			NoVolumeScale        = 1<<13	/**< When loading, do not use volume scale information to modify the scale of this scene node */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(PLVolume::SNClip::EFlags)
 			pl_enum_value(NoTextureCompression,	"Disable the usage of texture compression? Has only an effect when loading new volume data. Lookout! When using compression, it may take a moment to compress if no compressed data is provided.")
 			pl_enum_value(NoTextureMipmapping,	"Disable the usage of mipmaps? Has only an effect when loading new volume data. Lookout! When using mipmaps, it may take a moment to generate mipmaps if no mipmap data is provided.")
@@ -80,18 +80,16 @@ class SNClipVolumeTexture : public SNClip {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, SNClipVolumeTexture, "PLVolume", PLVolume::SNClip, "Clip volume texture scene node")
+	pl_class_def(PLVOLUME_API)
 		// Attributes
-		pl_attribute(LoaderParameters,	PLCore::String,			"",										ReadWrite,	DirectValue,	"Optional parameters for the used file loader",							"")
-		pl_attribute(VolumeFilename,	PLCore::String,			"",										ReadWrite,	GetSet,			"Filename of the volume data to use",									"Type='Volume'")
-		pl_attribute(ClipThreshold,		float,					0.5f,									ReadWrite,	DirectValue,	"Clip threshold, everything above will be clipped",						"")
+		pl_attribute_directvalue(						LoaderParameters,	PLCore::String,		"",										ReadWrite)
+		pl_attribute_getset		(SNClipVolumeTexture,	VolumeFilename,		PLCore::String,		"",										ReadWrite)
+		pl_attribute_directvalue(						ClipThreshold,		float,				0.5f,									ReadWrite)
 			// Overwritten PLScene::SceneNode attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,										ReadWrite,	GetSet,			"Flags",																"")
-		pl_attribute(AABBMin,			PLMath::Vector3,		PLMath::Vector3(-0.5f, -0.5f, -0.5f),	ReadWrite,	GetSet,			"Minimum position of the 'scene node space' axis aligned bounding box",	"")
-		pl_attribute(AABBMax,			PLMath::Vector3,		PLMath::Vector3( 0.5f,  0.5f,  0.5f),	ReadWrite,	GetSet,			"Maximum position of the 'scene node space' axis aligned bounding box",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNClipVolumeTexture,	Flags,				PLCore::uint32,		0,										ReadWrite)
+		pl_attribute_getset		(SNClipVolumeTexture,	AABBMin,			PLMath::Vector3,	PLMath::Vector3(-0.5f, -0.5f, -0.5f),	ReadWrite)
+		pl_attribute_getset		(SNClipVolumeTexture,	AABBMax,			PLMath::Vector3,	PLMath::Vector3( 0.5f,  0.5f,  0.5f),	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

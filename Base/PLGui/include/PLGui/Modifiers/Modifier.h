@@ -59,8 +59,8 @@ class Modifier : public PLCore::Object, public WidgetFunctions {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, Modifier, "PLGui", PLCore::Object, "Modifier base class")
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

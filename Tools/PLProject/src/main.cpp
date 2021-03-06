@@ -440,6 +440,9 @@ bool ParseProject(Project &cProject)
 		return false;
 	}
 
+	// Parse the found source files in the given source path for pl_class_metadata..pl_class_metadata_end blocks
+	cProject.cPLPluginInfo.ParseSourceFiles(sSourcePath);
+
 	// Find include files
 	String sIncludePath = sPath + "/include";
 	FileObject cIncFile(sIncludePath);

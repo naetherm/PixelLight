@@ -43,7 +43,22 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ScriptApplication)
+pl_class_metadata(ScriptApplication, "PLEngine", PLEngine::EngineApplication, "Script application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor1,	PLCore::Frontend&,																	"Parameter constructor. Frontend this application instance is running in as first parameter.",																																																																				"")
+	pl_constructor_2_metadata(ParameterConstructor2,	PLCore::Frontend&, PLCore::String,													"Parameter constructor. Frontend this application instance is running in as first parameter, parameter with the filename of the script to load as second parameter.",																																																		"")
+	pl_constructor_5_metadata(ParameterConstructor5,	PLCore::Frontend&, PLCore::String,	PLCore::String,	PLCore::String,	PLCore::String,	"Parameter constructor. Frontend this application instance is running in as first parameter, parameter with the filename of the script to load as second parameter, the following parameters name, title and subdirectory for application data files are optional and will be constructed automatically by using the filename of the script if an empty string is given",	"")
+	// Methods
+	pl_method_0_metadata(GetBaseDirectory,		pl_ret_type(PLCore::String),							"Returns the base directory of the application (native path style, e.g. on Windows: 'C:\MyApplication\').",																		"")
+	pl_method_1_metadata(SetBaseDirectory,		pl_ret_type(void),				const PLCore::String&,	"Sets the base directory of the application (e.g. on Windows: 'C:\MyApplication\'). Base directory as the first parameter.",													"")
+	pl_method_0_metadata(GetScript,				pl_ret_type(PLCore::Script*),							"Returns the used script instance.",																																			"")
+	pl_method_0_metadata(GetScriptFilename,		pl_ret_type(PLCore::String),							"Returns the absolute filename of the used script (native path style, e.g. on Windows: 'C:\MyApplication\Main.lua').",															"")
+	pl_method_0_metadata(GetScriptDirectory,	pl_ret_type(PLCore::String),							"Returns the absolute directory the used script is in (native path style, e.g. on Windows: 'C:\MyApplication\' if currently the script 'C:\MyApplication\Main.lua' is used).",	"")
+	// Attributes
+	pl_attribute_metadata(OnInitFunction,	PLCore::String,	"OnInit",	ReadWrite,	"Name of the optional script function called by C++ when the application should initialize itself",		"")
+	pl_attribute_metadata(OnUpdateFunction,	PLCore::String,	"OnUpdate",	ReadWrite,	"Name of the optional script function called by C++ when the application should update itself",			"")
+	pl_attribute_metadata(OnDeInitFunction,	PLCore::String,	"OnDeInit",	ReadWrite,	"Name of the optional script function called by C++ when the application should de-initialize itself",	"")
+pl_class_metadata_end(ScriptApplication)
 
 
 //[-------------------------------------------------------]
@@ -224,7 +239,7 @@ void ScriptApplication::OnUpdate()
 	// Is there a script? If so, do also check whether or not our optional global script function is there.
 	if (m_pScript && m_pScript->IsGlobalFunction(OnUpdateFunction.Get())) {
 		// Call the update script function
-		FuncScriptPtr<void>(m_pScript, OnUpdateFunction.Get()).Call(Params<void>());
+		FuncScriptPtr<void>(m_pScript, OnUpdateFunction.Get())();
 	}
 }
 
@@ -265,7 +280,7 @@ bool ScriptApplication::LoadScript(const String &sFilename)
 
 				// Call the initialize script function, but only when it's really there because it's optional
 				if (m_pScript->IsGlobalFunction(OnInitFunction.Get()))
-					FuncScriptPtr<void>(m_pScript, OnInitFunction.Get()).Call(Params<void>());
+					FuncScriptPtr<void>(m_pScript, OnInitFunction.Get())();
 
 				// Done
 				return true;
@@ -287,7 +302,7 @@ void ScriptApplication::DestroyScript()
 	if (m_pScript) {
 		// Call the de-initialize script function, but only when it's really there because it's optional
 		if (m_pScript->IsGlobalFunction(OnDeInitFunction.Get()))
-			FuncScriptPtr<void>(m_pScript, OnDeInitFunction.Get()).Call(Params<void>());
+			FuncScriptPtr<void>(m_pScript, OnDeInitFunction.Get())();
 
 		// Destroy the used script instance
 		delete m_pScript;

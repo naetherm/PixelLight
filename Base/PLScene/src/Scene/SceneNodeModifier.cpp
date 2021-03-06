@@ -39,7 +39,23 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneNodeModifier)
+pl_class_metadata(SceneNodeModifier, "PLScene", PLCore::Object, "Abstract scene node modifier (other name: controller) class")
+	// Properties
+	pl_properties
+		pl_property("SceneNodeClass",	"PLScene::SceneNode")
+	pl_properties_end
+	// Methods
+	pl_method_0_metadata(GetSceneNode,			pl_ret_type(SceneNode&),					"Returns the owner scene node.",																																																																																												"")
+	pl_method_0_metadata(GetSceneNodeIndex,		pl_ret_type(int),							"Returns the index of this scene node modifier within the scene node modifier list of the owner scene node, <0 on failure.",																																																																					"")
+	pl_method_0_metadata(Clone,					pl_ret_type(SceneNodeModifier*),			"Creates a clone of this scene node modifier within the owner scene node. Returns the created clone of this scene node modifier within the owner scene node, null pointer on error.",																																																							"")
+	pl_method_1_metadata(CloneAtIndex,			pl_ret_type(SceneNodeModifier*),	int,	"Creates a clone of this scene node modifier within the owner scene node at a certain index inside the scene node modifier list. Index position specifying the location within the scene node modifier list where the scene node modifier should be added as first parameter (<0 for at the end). Returns the created clone of this scene node modifier within the owner scene node, null pointer on error.",	"")
+	pl_method_0_metadata(GetAbsoluteName,		pl_ret_type(PLCore::String),				"Constructs an unique absolute name for the scene node modifier by using \"<absolute owner scene node name>:<scene node modifier class name>.<zero based index>\" (for instance 'Root.MyScene.MyNode:SNMRotationLinearAnimation.0'). Do not use this method on a regular basis.",																																"")
+	pl_method_0_metadata(IsActive,				pl_ret_type(bool),							"Returns whether the scene node modifier is active or not. Returns 'true' if the scene node modifier is active, else 'false'.",																																																																					"")
+	pl_method_1_metadata(SetActive,				pl_ret_type(void),					bool,	"Sets whether the scene node modifier is active or not. 'true' as first parameter if the scene node modifier should be active, else 'false' (sets/unsets the 'Inactive'-flag).",																																																								"")
+	pl_method_0_metadata(GetInputController,	pl_ret_type(PLInput::Controller*),			"Get the input controller. Returns the input controller (can be a null pointer).",																																																																																"")
+	// Attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SceneNodeModifier, EFlags),	0,	ReadWrite,	"Flags",	"")
+pl_class_metadata_end(SceneNodeModifier)
 
 
 //[-------------------------------------------------------]

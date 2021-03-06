@@ -41,7 +41,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoaderQuakeIIIBSP)
+pl_class_metadata(SceneLoaderQuakeIIIBSP, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for pk3 (Quake III BSP) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"pk3,PK3")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneLoaderQuakeIIIBSP)
 
 
 //[-------------------------------------------------------]

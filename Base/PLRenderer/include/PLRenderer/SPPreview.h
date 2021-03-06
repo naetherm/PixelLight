@@ -53,8 +53,8 @@ class SPPreview : public SurfacePainter {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, SPPreview, "PLRenderer", PLRenderer::SurfacePainter, "Abstract preview surface painter base class")
-	pl_class_end
+	pl_class_def(PLRENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

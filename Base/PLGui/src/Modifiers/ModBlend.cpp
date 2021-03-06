@@ -50,7 +50,12 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ModBlend)
+pl_class_metadata(ModBlend, "PLGui", PLGui::Modifier, "Modifier that blends a widget in and out according to the mouse cursor")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Slots
+	pl_slot_0_metadata(OnTimer,	"Timer callback",	"")
+pl_class_metadata_end(ModBlend)
 
 
 //[-------------------------------------------------------]

@@ -72,7 +72,7 @@ class SNMDrawRectangle : public SNMDraw {
 		enum EFlags {
 			DepthTest = 1<<2	/**< Perform a depth test */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNMDraw::EFlags)
 			pl_enum_value(DepthTest, "Perform a depth test")
 		pl_enum_end
@@ -81,17 +81,15 @@ class SNMDrawRectangle : public SNMDraw {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMDrawRectangle, "PLScene", PLScene::SNMDraw, "Scene node modifier class drawing a 2D rectangle around the owner scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Width,	float,					1.0f,						ReadWrite,	DirectValue,	"Rectangle width (if supported by the the used renderer API, if not may have no effect)",	"Min='1.0'")
-		pl_attribute(Color,	PLGraphics::Color4,		PLGraphics::Color4::White,	ReadWrite,	DirectValue,	"Rectangle color (r/g/b/a)",																"")
+		pl_attribute_directvalue(					Width,	float,				1.0f,						ReadWrite)
+		pl_attribute_directvalue(					Color,	PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite)
 			// Overwritten SceneNodeModifier attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	0,							ReadWrite,	GetSet,			"Flags",																					"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_getset		(SNMDrawRectangle,	Flags,	PLCore::uint32,		0,							ReadWrite)
 		// Slots
-		pl_slot_2(OnDrawTransparent,	PLRenderer::Renderer&,	const VisNode*,	"Called on scene node transparent draw, the used renderer as first parameter, the current visibility node of this scene node, can be a null pointer as second parameter",	"")
-	pl_class_end
+		pl_slot_2_def(SNMDrawRectangle,	OnDrawTransparent,	PLRenderer::Renderer&,	const VisNode*)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

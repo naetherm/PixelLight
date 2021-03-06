@@ -37,7 +37,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionClipRay)
+pl_class_metadata(ShaderFunctionClipRay, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for clip ray")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"1.1 - Clip Ray")
+		pl_property("FunctionName",				"ClipRay")
+		pl_property("FunctionSignature_GLSL",	"void ClipRay(inout vec3 RayOrigin, vec3 RayDirection, inout float MaximumTravelLength)")
+		pl_property("FunctionSignature_Cg",		"void ClipRay(inout float3 RayOrigin, float3 RayDirection, inout float MaximumTravelLength)")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionClipRay)
 
 
 //[-------------------------------------------------------]

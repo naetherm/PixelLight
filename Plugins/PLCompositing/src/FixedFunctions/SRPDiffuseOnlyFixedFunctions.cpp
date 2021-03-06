@@ -54,7 +54,10 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDiffuseOnlyFixedFunctions)
+pl_class_metadata(SRPDiffuseOnlyFixedFunctions, "PLCompositing", PLCompositing::SRPDiffuseOnly, "Fixed functions based diffuse only scene renderer pass implementation, can also be used as depth only renderer pass")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SRPDiffuseOnlyFixedFunctions)
 
 
 //[-------------------------------------------------------]

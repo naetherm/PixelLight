@@ -53,13 +53,11 @@ class SRPDebugHierarchies : public SRPDebug {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDebugHierarchies, "PLCompositing", PLCompositing::SRPDebug, "Scene renderer pass drawing scene container hierarchies for 'debugging'")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(LineWidth,	float,				1.0f,						ReadWrite,	DirectValue,	"Line width (if supported by the the used renderer API)",	"Min='1.0'")
-		pl_attribute(LineColor,	PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite,	DirectValue,	"Line color",												"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(LineWidth,	float,				1.0f,						ReadWrite)
+		pl_attribute_directvalue(LineColor,	PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

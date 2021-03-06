@@ -50,6 +50,7 @@ class Url;
 class Class;
 class Module;
 class ClassImpl;
+class XmlElement;
 template <typename T> class ModuleID;
 
 

@@ -52,14 +52,8 @@ class ShaderFunctionClipRayTemplate : public ShaderFunctionClipRay {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionClipRayTemplate, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClipRay, "Template shader function implementation class for clip ray")
-		// Properties
-		pl_properties
-			pl_property("FunctionTemplate",	"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_2(ParamsConstructor,	PLCore::uint8,	PLCore::uint8,	"Parameter constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -39,7 +39,18 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ScriptBindingSample)
+pl_class_metadata(ScriptBindingSample, "", PLCore::ScriptBinding, "Sample script binding class, don't take it to serious")
+	// Properties
+	pl_properties
+		pl_property("Namespace",	"Sample")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_0_metadata(Return42,				pl_ret_type(int),			"Returns 42",						"")
+	pl_method_1_metadata(IgnoreTheParameter,	pl_ret_type(void), float,	"Ignores the provided parameter",	"")
+	pl_method_0_metadata(SaySomethingWise,		pl_ret_type(void),			"Says something wise",				"")
+pl_class_metadata_end(ScriptBindingSample)
 
 
 //[-------------------------------------------------------]

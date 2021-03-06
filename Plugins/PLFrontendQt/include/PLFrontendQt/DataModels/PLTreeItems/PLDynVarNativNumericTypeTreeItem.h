@@ -54,7 +54,7 @@ class PLFRONTENDQT_API PLDynVarNativNumericTypeTreeItem : public PLDynVarStringT
 	//[ Public functions                                      ]
 	//[-------------------------------------------------------]
 	public:
-		explicit PLDynVarNativNumericTypeTreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent = nullptr);
+		explicit PLDynVarNativNumericTypeTreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent = nullptr);
 		virtual QVariant data(const int column, const int role) override;
 		bool setData(const int column, const QVariant &value, const int role);
 
@@ -65,7 +65,7 @@ class PLFRONTENDQT_API PLDynVarNativNumericTypeTreeItem : public PLDynVarStringT
 	private:
 		QVariant getBaseTypeData();
 		bool setBaseTypeData(const QVariant &value);
-		static PLDynVarTreeItemTypes::DynVarTreeItemTypes GetNumericTypeFromDynVar(const PLCore::DynVar *dynVar);
+		static PLDynVarTreeItemTypes::DynVarTreeItemTypes GetNumericTypeFromDynVar(const PLCore::DynVarPtr dynVar);
 
 	//[-------------------------------------------------------]
 	//[ Private data                                          ]

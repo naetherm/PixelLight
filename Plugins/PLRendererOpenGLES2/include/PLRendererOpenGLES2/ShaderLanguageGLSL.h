@@ -73,14 +73,8 @@ class ShaderLanguageGLSL : public PLRenderer::ShaderLanguage {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, ShaderLanguageGLSL, "PLRendererOpenGLES2", PLRenderer::ShaderLanguage, "OpenGL ES GLSL shader language class")
-		// Properties
-		pl_properties
-			pl_property("ShaderLanguage",	"GLSL")
-		pl_properties_end
-		// Constructors
-		pl_constructor_1(DefaultConstructor,	PLRenderer::Renderer&,	"Constructor with used renderer as parameter",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

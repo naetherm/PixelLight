@@ -31,6 +31,7 @@ PL_WARNING_PUSH
 	#include <QtGui/qdockwidget.h>
 	#include <QtGui/qheaderview.h>
 	#include <QtGui/qstandarditemmodel.h>
+	#include <QtGui/QMainWindow>
 PL_WARNING_POP
 #include <PLCore/Base/Class.h>
 #include <PLGraphics/Image/Image.h>
@@ -54,7 +55,14 @@ namespace PLVolumeGui {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetVolumeInformation)
+pl_class_metadata(DockWidgetVolumeInformation, "PLVolumeGui", PLVolumeGui::DockWidgetVolume, "Volume information Qt dock widget class")
+	// Properties
+	pl_properties
+		pl_property("Title", "Volume Information")
+	pl_properties_end
+	// Constructors
+	pl_constructor_2_metadata(DefaultConstructor,	QMainWindow*,	PLFrontendQt::DockWidgetManager*,	"Constructor with a pointer to the Qt main window as first parameter, pointer to the dock widget manager this dock widget should be registered to as second parameter",	"")
+pl_class_metadata_end(DockWidgetVolumeInformation)
 
 
 //[-------------------------------------------------------]
@@ -64,7 +72,7 @@ pl_implement_class(DockWidgetVolumeInformation)
 *  @brief
 *    Constructor
 */
-DockWidgetVolumeInformation::DockWidgetVolumeInformation(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetVolume(reinterpret_cast<QWidget*>(pQMainWindow), pDockWidgetManager),
+DockWidgetVolumeInformation::DockWidgetVolumeInformation(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetVolume(pQMainWindow, pDockWidgetManager),
 	m_pQTableView(nullptr)
 {
 	// Get encapsulated Qt dock widget

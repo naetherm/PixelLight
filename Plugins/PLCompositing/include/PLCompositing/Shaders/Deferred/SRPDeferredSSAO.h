@@ -80,7 +80,7 @@ class SRPDeferredSSAO : public SRPDeferred {
 		enum EFlags {
 			NoBlur = 1<<1	/**< Do not blur the calculated ambient occlusion */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPDeferred::EFlags)
 			pl_enum_value(NoBlur, "Do not blur the calculated ambient occlusion")
 		pl_enum_end
@@ -89,17 +89,17 @@ class SRPDeferredSSAO : public SRPDeferred {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferredSSAO, "PLCompositing", PLCompositing::SRPDeferred, "Abstract scene renderer pass for deferred rendering 'Screen-Space Ambient Occlusion' (SSAO)")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,	PLCore::String,			"",		ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",																																		"")
-		pl_attribute(Contrast,			float,					1.25f,	ReadWrite,	DirectValue,	"This value allows to scales up the ambient occlusion values",																																																				"Min='0.0'")
-		pl_attribute(BlurRadius,		float,					2.0f,	ReadWrite,	DirectValue,	"Blur kernel radius in pixel",																																																												"Min='0.0'")
-		pl_attribute(BlurSharpness,		float,					16.0f,	ReadWrite,	DirectValue,	"Controls the depth-dependent weight of the bilateral filter, to avoid bleeding across edges. A zero sharpness is a pure Gaussian blur. Increasing the blur sharpness removes bleeding by using lower weights for samples with large depth delta from the current pixel.",	"Min='0.0'")
-		pl_attribute(ResolutionScale,	float,					0.5f,	ReadWrite,	DirectValue,	"If less 1, the ambient occlusion is computed with a lower resolution and then stretched up to the full resolution. This can be used to trade visual quality for better performance.",																						"Min='0.0' Max='1.0'")
-		pl_attribute(SceneScale,		float,					1.0f,	ReadWrite,	DirectValue,	"Scene scale ",																																																																"Min='0.0'")
+		pl_attribute_directvalue(					ShaderLanguage,		PLCore::String,	"",		ReadWrite)
+		pl_attribute_directvalue(					Contrast,			float,			1.25f,	ReadWrite)
+		pl_attribute_directvalue(					BlurRadius,			float,			2.0f,	ReadWrite)
+		pl_attribute_directvalue(					BlurSharpness,		float,			16.0f,	ReadWrite)
+		pl_attribute_directvalue(					ResolutionScale,	float,			0.5f,	ReadWrite)
+		pl_attribute_directvalue(					SceneScale,			float,			1.0f,	ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,		ReadWrite,	GetSet,			"Flags",																																																																	"")
-	pl_class_end
+		pl_attribute_getset		(SRPDeferredSSAO,	Flags,				PLCore::uint32,	0,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

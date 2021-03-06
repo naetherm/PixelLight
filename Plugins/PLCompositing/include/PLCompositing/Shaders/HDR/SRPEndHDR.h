@@ -95,7 +95,7 @@ class SRPEndHDR : public SRPEnd {
 			DebugShowBloomTexture       = 1<<8,	/**< Show the bloom texture (for debugging) */
 			DebugCheckAndFixNANValues   = 1<<9	/**< Check for NAN and fix NAN values by using a red color (for debugging, SLOW!) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPEnd::EFlags)
 			pl_enum_value(NoToneMapping,				"Do not perform tone mapping")
 			pl_enum_value(NoAutomaticAverageLuminance,	"Do not calculate the average luminance automatically (used for tone mapping)")
@@ -112,24 +112,22 @@ class SRPEndHDR : public SRPEnd {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPEndHDR, "PLCompositing", PLCompositing::SRPEnd, "HDR render pipeline finishing scene renderer pass")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,		PLCore::String,			"",												ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",		"")
-		pl_attribute(LuminanceConvert,		PLGraphics::Color3,		PLGraphics::Color3(0.2125f, 0.7154f, 0.0721f),	ReadWrite,	DirectValue,	"Luminance convert (tone mapping)",																											"")
-		pl_attribute(Key,					float,					0.72f,											ReadWrite,	DirectValue,	"Key value, midzone luminance (tone mapping)",																								"")
-		pl_attribute(WhiteLevel,			float,					100.0f,											ReadWrite,	DirectValue,	"The smallest luminance that will be mapped to pure white, values above 'burn out' (tone mapping)",											"")
-		pl_attribute(AverageLuminance,		float,					0.02f,											ReadWrite,	DirectValue,	"User set average luminance (tone mapping, only used if NoAutomaticAverageLuminance is set)",												"")
-		pl_attribute(Tau,					float,					0.5f,											ReadWrite,	DirectValue,	"Light adaptation 'tau', lower value for longer light adaption time (tone mapping, only used if NoAutomaticAverageLuminance is not set)",	"")
-		pl_attribute(BloomBrightThreshold,	float,					0.5f,											ReadWrite,	DirectValue,	"Bloom bright threshold, only color components >= this value bloom (only used if NoBloom is not set)",										"")
-		pl_attribute(BloomFactor,			float,					1.0f,											ReadWrite,	DirectValue,	"Bloom factor (only used if NoBloom is not set)",																							"")
-		pl_attribute(BloomBlurPasses,		PLCore::uint32,			4,												ReadWrite,	DirectValue,	"Number of bloom blur passes, should be a multiple of 2 (only used if NoBloom is not set)",													"")
-		pl_attribute(BloomDownscale,		float,					8.0f,											ReadWrite,	DirectValue,	"Bloom downscale factor, should be a multiple of 2 (only used if NoBloom is not set)",														"Min='1'")
-		pl_attribute(Gamma,					float,					2.2f,											ReadWrite,	DirectValue,	"Gamma correction value, higher values lighten the image, smaller values darken the image",													"")
+		pl_attribute_directvalue(			ShaderLanguage,			PLCore::String,		"",												ReadWrite)
+		pl_attribute_directvalue(			LuminanceConvert,		PLGraphics::Color3,	PLGraphics::Color3(0.2125f, 0.7154f, 0.0721f),	ReadWrite)
+		pl_attribute_directvalue(			Key,					float,				0.72f,											ReadWrite)
+		pl_attribute_directvalue(			WhiteLevel,				float,				100.0f,											ReadWrite)
+		pl_attribute_directvalue(			AverageLuminance,		float,				0.02f,											ReadWrite)
+		pl_attribute_directvalue(			Tau,					float,				0.5f,											ReadWrite)
+		pl_attribute_directvalue(			BloomBrightThreshold,	float,				0.5f,											ReadWrite)
+		pl_attribute_directvalue(			BloomFactor,			float,				1.0f,											ReadWrite)
+		pl_attribute_directvalue(			BloomBlurPasses,		PLCore::uint32,		4,												ReadWrite)
+		pl_attribute_directvalue(			BloomDownscale,			float,				8.0f,											ReadWrite)
+		pl_attribute_directvalue(			Gamma,					float,				2.2f,											ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,					pl_flag_type(EFlags),	0,												ReadWrite,	GetSet,			"Flags",																																	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPEndHDR,	Flags,					PLCore::uint32,		0,												ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

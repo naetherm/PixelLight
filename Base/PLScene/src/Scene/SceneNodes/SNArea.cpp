@@ -41,7 +41,17 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNArea)
+pl_class_metadata(SNArea, "PLScene", PLScene::SceneNode, "An area is a set of planes defining a convex area in your scene")
+	// Properties
+	pl_properties
+		pl_property("Icon",	"Data/Textures/IconArea.dds")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Box,		PLCore::String,	"-0.5 -0.5 -0.5 0.5 0.5 0.5",	ReadWrite,	"Box min/max position (creates automatically the required planes)",	"")
+	pl_attribute_metadata(Planes,	PLCore::String,	"",								ReadWrite,	"Planes defining the (normally convex) area",						"")
+pl_class_metadata_end(SNArea)
 
 
 //[-------------------------------------------------------]

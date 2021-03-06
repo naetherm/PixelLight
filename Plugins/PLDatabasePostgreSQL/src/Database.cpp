@@ -42,7 +42,10 @@ namespace PLDatabasePostgreSQL {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Database)
+pl_class_metadata(Database, "PLDatabasePostgreSQL", PLDatabase::Database, "PostgreSQL 8.1.4 (http://www.postgresql.org/) database implementation")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Database)
 
 
 //[-------------------------------------------------------]

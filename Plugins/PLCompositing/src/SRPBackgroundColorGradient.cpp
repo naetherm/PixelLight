@@ -44,7 +44,16 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPBackgroundColorGradient)
+pl_class_metadata(SRPBackgroundColorGradient, "PLCompositing", PLCompositing::SRPBackground, "Color gradient background scene renderer pass")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Color1,	PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite,	"First color to use",																"")
+	pl_attribute_metadata(Color2,	PLGraphics::Color4,	PLGraphics::Color4::Black,	ReadWrite,	"Second color to use",																"")
+	pl_attribute_metadata(Angle,	float,				135.0f,						ReadWrite,	"Clockwise angle (in degree) of the gradient color. 0° means from left to right.",	"")
+	pl_attribute_metadata(Position,	PLMath::Vector2,	PLMath::Vector2::Zero,		ReadWrite,	"Gradient quad position (0..1), (0, 0)=left top",									"")
+	pl_attribute_metadata(Size,		PLMath::Vector2,	PLMath::Vector2::One,		ReadWrite,	"Gradient quad size (0..1)",														"")
+pl_class_metadata_end(SRPBackgroundColorGradient)
 
 
 //[-------------------------------------------------------]

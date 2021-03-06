@@ -42,7 +42,17 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGExplosion)
+pl_class_metadata(PGExplosion, "PLParticleGroups", PLParticleGroups::PGPhysics, "Explosion particle group")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Mode,						pl_enum_type_def3(PGExplosion, EMode),	PGExplosion::Repeat,				ReadWrite,	"Explosion mode",									"")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,					PLCore::String,							"Data/Textures/PGExplosion.dds",	ReadWrite,	"Particle group material",							"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,				PLCore::uint32,							5,									ReadWrite,	"Number of particles",								"Min=1")
+	pl_attribute_metadata(TextureAnimationColumns,	PLCore::uint32,							4,									ReadWrite,	"Number of animation frame columns in the texture",	"")
+	pl_attribute_metadata(TextureAnimationRows,		PLCore::uint32,							4,									ReadWrite,	"Number of animation frame rows in the texture",	"")
+pl_class_metadata_end(PGExplosion)
 
 
 //[-------------------------------------------------------]

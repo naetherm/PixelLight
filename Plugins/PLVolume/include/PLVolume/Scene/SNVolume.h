@@ -203,7 +203,7 @@ class SNVolume : public PLScene::SceneNode {
 			NoTextureMipmapping  = 1<<11,	/**< Disable the usage of mipmaps? Has only an effect when loading new volume data. Lookout! When using mipmaps, it may take a moment to generate mipmaps if no mipmap data is provided. */
 			NoVolumeScale        = 1<<12	/**< When loading, do not use volume scale information to modify the scale of this scene node */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(PLScene::SceneNode::EFlags)
 			pl_enum_value(NoTextureCompression,	"Disable the usage of texture compression? Has only an effect when loading new volume data. Lookout! When using compression, it may take a moment to compress if no compressed data is provided.")
 			pl_enum_value(NoTextureMipmapping,	"Disable the usage of mipmaps? Has only an effect when loading new volume data. Lookout! When using mipmaps, it may take a moment to generate mipmaps if no mipmap data is provided.")
@@ -214,38 +214,37 @@ class SNVolume : public PLScene::SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, SNVolume, "PLVolume", PLScene::SceneNode, "Scene node representing a volume")
+	pl_class_def(PLVOLUME_API)
 		// Attributes
-		pl_attribute(VolumeFilenameSave,			PLCore::String,						"",									ReadWrite,	DirectValue,	"In case this filename is not empty, the loaded volume will be saved directly after loading by using this filename (can e.g. be used for data conversion)",				"Type='Volume'")
-		pl_attribute(LoaderParameters,				PLCore::String,						"",									ReadWrite,	DirectValue,	"Optional parameters for the used file loader",																															"")
-		pl_attribute(VolumeFilename,				PLCore::String,						"",									ReadWrite,	GetSet,			"Filename of the volume data to use",																																	"Type='Volume'")
+		pl_attribute_directvalue(			VolumeFilenameSave,				PLCore::String,		"",									ReadWrite)
+		pl_attribute_directvalue(			LoaderParameters,				PLCore::String,		"",									ReadWrite)
+		pl_attribute_getset		(SNVolume,	VolumeFilename,					PLCore::String,		"",									ReadWrite)
 		// 1.0 - Ray Setup
-		pl_attribute(SampleRateFactor,				float,								1.0f,								ReadWrite,	DirectValue,	"Sample rate factor to use (1.0 = 100% for correct result, 0.0 = 50% = take only half of the samples) (1.0 - Ray Setup)",												"Max='10'")
+		pl_attribute_directvalue(			SampleRateFactor,				float,				1.0f,								ReadWrite)
 		// 2.0 - Ray Traversal
-		pl_attribute(RayTraversal,					pl_enum_type(ERayTraversal),		RayTraversalDVRFrontToBack,			ReadWrite,	DirectValue,	"Technique to use for the ray traversal (2.0 - Ray Traversal)",																											"")
-		pl_attribute(Opacity,						float,								1.0f,								ReadWrite,	DirectValue,	"Opacity, usually within the interval [~0 .. 1] = [transparent .. solid] (2.0 - Ray Traversal)",																		"")
-		pl_attribute(IsosurfaceValue,				float,								0.2f,								ReadWrite,	DirectValue,	"Isosurface value, usually within the interval [0 .. 1] (2.0 - Ray Traversal)",																							"")
+		pl_attribute_directvalue(			RayTraversal,					ERayTraversal,		RayTraversalDVRFrontToBack,			ReadWrite)
+		pl_attribute_directvalue(			Opacity,						float,				1.0f,								ReadWrite)
+		pl_attribute_directvalue(			IsosurfaceValue,				float,				0.2f,								ReadWrite)
 		// 2.2 - Reconstruction
 		// 2.2 - Fetch Scalar
-		pl_attribute(Reconstruction,				pl_enum_type(EReconstruction),		TrilinearFiltering,					ReadWrite,	DirectValue,	"Continues volume reconstruction (2.2 - Fetch Scalar)",																													"")
-		pl_attribute(VolumeTextureLOD,				float,								0.0,								ReadWrite,	DirectValue,	"Volume texture level of detail (0...<number of mipmaps>-1), usually the value 3 shows a well notable effect (2.2 - Reconstruction)(2.2 - Fetch Scalar)",				"Min='0'")
+		pl_attribute_directvalue(			Reconstruction,					EReconstruction,	TrilinearFiltering,					ReadWrite)
+		pl_attribute_directvalue(			VolumeTextureLOD,				float,				0.0,								ReadWrite)
 		// 2.3 - Shading
-		pl_attribute(Shading,						pl_enum_type(EShading),				ShadingLighting,					ReadWrite,	DirectValue,	"Technique to use for the shading (2.3 - Shading)",																														"")
+		pl_attribute_directvalue(			Shading,						EShading,			ShadingLighting,					ReadWrite)
 		// 2.4 - Classification
-		pl_attribute(Classification,				pl_enum_type(EClassification),		ClassificationTransferFunction,		ReadWrite,	DirectValue,	"Technique to use for the classification (2.4 - Classification)",																										"")
-		pl_attribute(ScalarClassificationThreshold,	float,								0.06f,								ReadWrite,	DirectValue,	"Scalar classification threshold (2.4 - Classification)",																												"")
+		pl_attribute_directvalue(			Classification,					EClassification,	ClassificationTransferFunction,		ReadWrite)
+		pl_attribute_directvalue(			ScalarClassificationThreshold,	float,				0.06f,								ReadWrite)
 		// 2.5 - Gradient
-		pl_attribute(Gradient,						pl_enum_type(EGradient),			GradientCentralDifferences,			ReadWrite,	DirectValue,	"Technique to use for the gradient (2.5 - Gradient)",																													"")
-		pl_attribute(PostClassificationGradient,	bool,								false,								ReadWrite,	DirectValue,	"If 'true', the gradient is calculated using the alpha channel of the classified scalar, else the unclassified scalar is used (better performance)(2.5 - Gradient)",	"")
+		pl_attribute_directvalue(			Gradient,						EGradient,			GradientCentralDifferences,			ReadWrite)
+		pl_attribute_directvalue(			PostClassificationGradient,		bool,				false,								ReadWrite)
 		// 2.6 - Illumination
-		pl_attribute(Illumination,					pl_enum_type(EIllumination),		IlluminationBlinnPhong,				ReadWrite,	DirectValue,	"Technique to use for the illumination (2.6 - Illumination)",																											"")
+		pl_attribute_directvalue(			Illumination,					EIllumination,		IlluminationBlinnPhong,				ReadWrite)
 			// Overwritten PLScene::SceneNode attributes
-		pl_attribute(Flags,							pl_flag_type(EFlags),				0,									ReadWrite,	GetSet,			"Flags",																																								"")
-		pl_attribute(AABBMin,						PLMath::Vector3,					PLMath::Vector3(0.0f, 0.0f, 0.0f),	ReadWrite,	GetSet,			"Minimum position of the 'scene node space' axis aligned bounding box",																									"")
-		pl_attribute(AABBMax,						PLMath::Vector3,					PLMath::Vector3(1.0f, 1.0f, 1.0f),	ReadWrite,	GetSet,			"Maximum position of the 'scene node space' axis aligned bounding box",																									"")
+		pl_attribute_getset		(SNVolume,	Flags,							PLCore::uint32,		0,									ReadWrite)
+		pl_attribute_getset		(SNVolume,	AABBMin,						PLMath::Vector3,	PLMath::Vector3(0.0f, 0.0f, 0.0f),	ReadWrite)
+		pl_attribute_getset		(SNVolume,	AABBMax,						PLMath::Vector3,	PLMath::Vector3(1.0f, 1.0f, 1.0f),	ReadWrite)
 		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

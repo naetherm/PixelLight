@@ -56,17 +56,15 @@ class SNMPostProcessToneMap : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessToneMap, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(ExposureLevel,	float,				1.0f,								ReadWrite,	DirectValue,	"Exposure level",						"")
-		pl_attribute(GammaLevel,	float,				1.0f,								ReadWrite,	DirectValue,	"Gamma level",							"")
-		pl_attribute(DeFogLevel,	float,				0.0f,								ReadWrite,	DirectValue,	"De-fog level",							"")
-		pl_attribute(FogColor,		PLGraphics::Color3,	PLGraphics::Color3::White,			ReadWrite,	DirectValue,	"Fog color",							"")
+		pl_attribute_directvalue(								ExposureLevel,	float,				1.0f,								ReadWrite)
+		pl_attribute_directvalue(								GammaLevel,		float,				1.0f,								ReadWrite)
+		pl_attribute_directvalue(								DeFogLevel,		float,				0.0f,								ReadWrite)
+		pl_attribute_directvalue(								FogColor,		PLGraphics::Color3,	PLGraphics::Color3::White,			ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,		PLCore::String,		"Data/PostProcesses/ToneMap.pp",	ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,		PLCore::String,		"Data/PostProcesses/ToneMap.pp",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -30,15 +30,8 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include <PLCore/Base/Event/DynEvent.h>
 #include "PLScriptLua/RTTIObjectPointerBase.h"
-
-
-//[-------------------------------------------------------]
-//[ Forward declarations                                  ]
-//[-------------------------------------------------------]
-namespace PLCore {
-	class DynEvent;
-}
 
 
 //[-------------------------------------------------------]
@@ -74,7 +67,7 @@ class RTTIObjectSignalPointerBase : public RTTIObjectPointerBase {
 		*  @return
 		*    Pointer to the RTTI object signal to wrap, can be a null pointer
 		*/
-		PLCore::DynEvent *GetDynEvent() const;
+		PLCore::DynEventPtr GetDynEvent() const;
 
 
 	//[-------------------------------------------------------]
@@ -101,7 +94,7 @@ class RTTIObjectSignalPointerBase : public RTTIObjectPointerBase {
 		*  @param[in] pDynEvent
 		*    Pointer to the RTTI object signal to wrap, can be a null pointer
 		*/
-		void InitializeInstance(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEvent *pDynEvent);
+		void InitializeInstance(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventPtr pDynEvent);
 
 
 	//[-------------------------------------------------------]
@@ -117,7 +110,7 @@ class RTTIObjectSignalPointerBase : public RTTIObjectPointerBase {
 	//[ Protected data                                        ]
 	//[-------------------------------------------------------]
 	protected:
-		PLCore::DynEvent *m_pDynEvent;	/**< Pointer to the RTTI object signal to wrap, can be a null pointer */
+		PLCore::DynEventPtr m_pDynEvent;	/**< Pointer to the RTTI object signal to wrap, can be a null pointer */
 
 
 };

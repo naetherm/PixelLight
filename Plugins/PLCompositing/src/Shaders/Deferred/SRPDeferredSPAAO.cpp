@@ -53,7 +53,18 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredSPAAO)
+pl_class_metadata(SRPDeferredSPAAO, "PLCompositing", PLCompositing::SRPDeferredSSAO, "Scene renderer pass for deferred rendering 'A Simple and Practical Approach to SSAO' (SPAAO), a 'Screen-Space Ambient Occlusion' (SSAO) technique")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(NumberOfDirections,	PLCore::uint32,									8,		ReadWrite,	"The number of randomly-rotated 2D directions in image space distributed around the current pixel. The higher this parameter, the lower is the noise in the ambient occlusion.",	"Min='1'")
+	pl_attribute_metadata(SampleRadius,			float,											0.1f,	ReadWrite,	"The sampling radius",																																								"Min='0.0'")
+	pl_attribute_metadata(Intensity,			float,											4.0f,	ReadWrite,	"The ambient occlusion intensity",																																					"Min='0.0'")
+	pl_attribute_metadata(Scale,				float,											10.0f,	ReadWrite,	"Scales distance between occluders and occlude",																																	"Min='0.0'")
+	pl_attribute_metadata(Bias,					float,											0.2f,	ReadWrite,	"Controls the width of the occlusion cone considered by the occlude",																												"Min='0.0'")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SRPDeferredSPAAO, EFlags),	0,		ReadWrite,	"Flags",																																											"")
+pl_class_metadata_end(SRPDeferredSPAAO)
 
 
 //[-------------------------------------------------------]

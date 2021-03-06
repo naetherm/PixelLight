@@ -47,7 +47,21 @@ namespace PLGraphics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ImageLoaderJPG)
+pl_class_metadata(ImageLoaderJPG, "PLGraphics", PLGraphics::ImageLoader, "Image loader implementation for JPEG (\"Joint Photographic Experts Group\") file formats")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"jpg,jpeg,jpe,jif,jfif,jfi,JPG,JPEG,JPE,JIF,JFIF,JFI")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,			pl_ret_type(bool),	Image&,			PLCore::File&,					"Load method, no fancy upsampling and no interblock smoothing is applied",																											"")
+	pl_method_4_metadata(LoadParams,	pl_ret_type(bool),	Image&,			PLCore::File&,	bool,	bool,	"Load method. Parameters: First 'bool' parameter determines whether or not fancy upsampling is applied, second 'bool' parameter whether or not interblock smoothing is applied.",	"")
+	pl_method_2_metadata(Save,			pl_ret_type(bool),	const Image&,	PLCore::File&,					"Save method, using 100% quality setting",																																			"")
+	pl_method_3_metadata(SaveParams,	pl_ret_type(bool),	const Image&,	PLCore::File&,	PLCore::uint32,	"Save method, quality (0...100) as first parameter",																																"")
+pl_class_metadata_end(ImageLoaderJPG)
 
 
 //[-------------------------------------------------------]

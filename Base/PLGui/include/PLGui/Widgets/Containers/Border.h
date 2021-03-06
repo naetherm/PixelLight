@@ -54,14 +54,12 @@ class Border : public ContainerWidget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, Border, "PLGui", PLGui::ContainerWidget, "Container widget that displays a border around it's content")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(LineStyle,		pl_enum_type(ELineStyle),	SolidLine,					ReadWrite,	GetSet,	"Line style",	"")
-		pl_attribute(BorderSize,	int,						1,							ReadWrite,	GetSet,	"Border size",	"")
-		pl_attribute(BorderColor,	PLGraphics::Color4,			PLGraphics::Color4::Black,	ReadWrite,	GetSet,	"Border color",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(Border,	LineStyle,		ELineStyle,			SolidLine,					ReadWrite)
+		pl_attribute_getset(Border,	BorderSize,		int,				1,							ReadWrite)
+		pl_attribute_getset(Border,	BorderColor,	PLGraphics::Color4,	PLGraphics::Color4::Black,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

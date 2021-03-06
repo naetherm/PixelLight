@@ -42,7 +42,10 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(RawInputProvider)
+pl_class_metadata(RawInputProvider, "PLInput", PLInput::Provider, "Input provider for Windows using Raw-Input methods for keyboard and mouse")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(RawInputProvider)
 
 
 //[-------------------------------------------------------]

@@ -73,7 +73,7 @@ class SNMLookController : public PLScene::SNMTransform {
 		enum EFlags {
 			UseRotationKey = 1<<2	/**< If this flag is set, it's required to keep the rotation key pressed in order to rotate */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(PLScene::SNMTransform::EFlags)
 			pl_enum_value(UseRotationKey, "If this flag is set, it's required to keep the rotation key pressed in order to rotate without 3D restriction")
 		pl_enum_end
@@ -82,16 +82,14 @@ class SNMLookController : public PLScene::SNMTransform {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNMLookController, "PLEngine", PLScene::SNMTransform, "Scene node rotation input controller modifier class")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(InputSemantic,	PLCore::String,			"",				ReadWrite,	DirectValue,	"Semantic of this input controller (e.g. \"Camera\")",	"")
+		pl_attribute_directvalue(					InputSemantic,	PLCore::String,			"",		ReadWrite)
 			// Overwritten PLScene::SceneNodeModifier attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),	UseRotationKey,	ReadWrite,	GetSet,			"Flags",												"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_getset		(SNMLookController,	Flags,			PLCore::uint32,	UseRotationKey,	ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
-	pl_class_end
+		pl_slot_0_def(SNMLookController,	OnUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

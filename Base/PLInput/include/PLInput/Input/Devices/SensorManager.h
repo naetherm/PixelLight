@@ -65,8 +65,8 @@ class SensorManager : public Device {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, SensorManager, "PLInput", PLInput::Device, "Sensor manager input controller")
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

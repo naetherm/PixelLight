@@ -41,7 +41,18 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetManager)
+pl_class_metadata(DockWidgetManager, "PLFrontendQt", PLCore::Object, "PixelLight RTTI dock widget manager")
+	// Methods
+	pl_method_1_metadata(ShowDockWidget,					pl_ret_type(DockWidget*),	const PLCore::String&,							"Shows a dock widget. Class name of the PixelLight RTTI class encapsulating a Qt dock widget (must be derived from \"PLFrontendQt::DockWidget\") as first parameter.",																"")
+	pl_method_1_metadata(GetFirstDockWidget,				pl_ret_type(DockWidget*),	const PLCore::String&,							"Returns the first dock widget instance which is an instance of the given class. Class name of the PixelLight RTTI class encapsulating a Qt dock widget (must be derived from \"PLFrontendQt::DockWidget\") as first parameter.",	"")
+	pl_method_0_metadata(HideDockWidgets,					pl_ret_type(void),															"Hides all registered dock widgets.",																																																"")
+	pl_method_0_metadata(DestroyDockWidgets,				pl_ret_type(void),															"Destroys all registered dock widgets.",																																															"")
+	pl_method_2_metadata(SetDockWidgetsAttribute,			pl_ret_type(void),			const PLCore::String&,	const PLCore::String&,	"Set dock widgets attribute value (dock widget broadcast). Attribute name as first parameter, attribute value as second parameter.",																								"")
+	pl_method_1_metadata(SetDockWidgetsAttributeDefault,	pl_ret_type(void),			const PLCore::String&,							"Set dock widgets attribute to it's default value (dock widget broadcast). Attribute name as first parameter.",																														"")
+	pl_method_2_metadata(CallDockWidgetsMethod,				pl_ret_type(void),			const PLCore::String&,	const PLCore::String&,	"Call dock widgets method (dock widget broadcast). Method name as first parameter, parameters as string (e.g. \"Param0='x' Param1='y'\") as second parameter.",																		"")
+	pl_method_1_metadata(SetDockWidgetsValues,				pl_ret_type(void),			const PLCore::String&,							"Set multiple dock widgets attribute values as a string at once (dock widget broadcast). String containing attributes and values as first parameter (e.g. \"Name='Bob' Position='1 2 3'\").",										"")
+	pl_method_0_metadata(SetDockWidgetsDefaultValues,		pl_ret_type(void),															"Set all dock widgets attributes to default (dock widget broadcast).",																																								"")
+pl_class_metadata_end(DockWidgetManager)
 
 
 //[-------------------------------------------------------]
@@ -176,7 +187,7 @@ void DockWidgetManager::SetDockWidgetsAttribute(const String &sName, const DynVa
 *  @brief
 *    Set dock widgets attribute value by using a given dynamic variable pointer (dock widget broadcast)
 */
-void DockWidgetManager::SetDockWidgetsAttribute(const String &sName, const DynVar *pVar)
+void DockWidgetManager::SetDockWidgetsAttribute(const String &sName, const DynVarPtr pVar)
 {
 	for (uint32 i=0; i<m_lstDockWidgets.GetNumOfElements(); i++)
 		m_lstDockWidgets[i]->SetAttribute(sName, pVar);

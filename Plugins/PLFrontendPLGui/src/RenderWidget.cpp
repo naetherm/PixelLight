@@ -43,7 +43,10 @@ namespace PLFrontendPLGui {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(RenderWidget)
+pl_class_metadata(RenderWidget, "PLFrontendPLGui", PLGui::Widget, "GUI widget with implements a renderer surface")
+	// Slots
+	pl_slot_0_metadata(OnTimer,	"Timer callback",	"");
+pl_class_metadata_end(RenderWidget)
 
 
 //[-------------------------------------------------------]

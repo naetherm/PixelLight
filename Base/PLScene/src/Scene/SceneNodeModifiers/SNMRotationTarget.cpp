@@ -50,7 +50,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMRotationTarget)
+pl_class_metadata(SNMRotationTarget, "PLScene", PLScene::SNMTransform, "Scene node modifier class rotating a scene node towards a target scene node")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Target,	PLCore::String,		"",						ReadWrite,	"Target scene node to 'look at', if empty nothing happens",	"")
+	pl_attribute_metadata(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Rotation offset to add in degree, [0, 360]",				"")
+	pl_attribute_metadata(UpVector,	PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	"Up vector",												"")
+pl_class_metadata_end(SNMRotationTarget)
 
 
 //[-------------------------------------------------------]

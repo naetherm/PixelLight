@@ -37,7 +37,12 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ChunkLoader)
+pl_class_metadata(ChunkLoader, "PLCore", PLCore::LoaderImpl, "Abstract chunk loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Chunk")
+	pl_properties_end
+pl_class_metadata_end(ChunkLoader)
 
 
 //[-------------------------------------------------------]

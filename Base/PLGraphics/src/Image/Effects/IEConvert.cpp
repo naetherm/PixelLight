@@ -585,7 +585,8 @@ class ConvertData {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(IEConvert)
+pl_class_metadata(IEConvert, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Convert data and color type of an image")
+pl_class_metadata_end(IEConvert)
 
 
 //[-------------------------------------------------------]

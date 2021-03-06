@@ -37,7 +37,8 @@ using namespace PLGui;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(GuiBase)
+pl_class_metadata(GuiBase, "", PLGui::Widget, "Ingame Gui - Window base class")
+pl_class_metadata_end(GuiBase)
 
 
 //[-------------------------------------------------------]

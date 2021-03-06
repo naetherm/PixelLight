@@ -46,7 +46,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SQPlaneSet)
+pl_class_metadata(SQPlaneSet, "PLScene", PLScene::SceneQuery, "Plane set volume intersection scene query class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SQPlaneSet)
 
 
 //[-------------------------------------------------------]

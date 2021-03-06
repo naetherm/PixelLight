@@ -44,7 +44,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Button)
+pl_class_metadata(Button, "PLGui", PLGui::AbstractButton, "Standard command button")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Button)
 
 
 //[-------------------------------------------------------]

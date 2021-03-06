@@ -37,7 +37,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SCCell)
+pl_class_metadata(SCCell, "PLScene", PLScene::SceneContainer, "Cell (other names: area/sector/zone/room/cluster) scene node container")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SCCell)
 
 
 //[-------------------------------------------------------]

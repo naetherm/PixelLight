@@ -72,7 +72,16 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPLighting)
+pl_class_metadata(SRPLighting, "PLCompositing", PLScene::SceneRendererPass, "Shaders based lighting scene renderer pass implementation")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(TextureFiltering,		pl_enum_type_def3(SRPLighting, ETextureFiltering),	SRPLighting::Anisotropic8,	ReadWrite,	"Texture filtering",																													"")
+	pl_attribute_metadata(ShaderLanguage,		PLCore::String,										"",							ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+	pl_attribute_metadata(LightingIntensity,	float,												1.0f,						ReadWrite,	"General lighting intensity",																											"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SRPLighting, EFlags),				0,							ReadWrite,	"Flags",																																"")
+pl_class_metadata_end(SRPLighting)
 
 
 //[-------------------------------------------------------]

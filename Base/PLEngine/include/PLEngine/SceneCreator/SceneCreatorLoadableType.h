@@ -62,14 +62,10 @@ class SceneCreatorLoadableType : public SceneCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SceneCreatorLoadableType, "PLEngine", PLEngine::SceneCreator, "Abstract loadable type scene creator base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Unknown")
-		pl_properties_end
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(Filename,	PLCore::String,	"",	ReadWrite,	DirectValue,	"Resource filename",	"")
-	pl_class_end
+		pl_attribute_directvalue(Filename,	PLCore::String,	"",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

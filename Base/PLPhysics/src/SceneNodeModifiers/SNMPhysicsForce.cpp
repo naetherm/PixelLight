@@ -42,7 +42,12 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsForce)
+pl_class_metadata(SNMPhysicsForce, "PLPhysics", PLPhysics::SNMPhysics, "Physics scene node modifier adding a force to the first found physics body of the owner scene node")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Force,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Force to add",	"")
+pl_class_metadata_end(SNMPhysicsForce)
 
 
 //[-------------------------------------------------------]

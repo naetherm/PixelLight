@@ -39,7 +39,13 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNDirectionalLight)
+pl_class_metadata(SNDirectionalLight, "PLScene", PLScene::SNLight, "Directional light scene node representing parallel light beams coming from an infinite distance at a certain direction")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(AABBMin,	PLMath::Vector3,	PLMath::Vector3(-10000.0f, -10000.0f, -10000.0f),	ReadWrite,	"Minimum position of the 'scene node space' axis aligned bounding box",	"")
+	pl_attribute_metadata(AABBMax,	PLMath::Vector3,	PLMath::Vector3( 10000.0f,  10000.0f,  10000.0f),	ReadWrite,	"Maximum position of the 'scene node space' axis aligned bounding box",	"")
+pl_class_metadata_end(SNDirectionalLight)
 
 
 //[-------------------------------------------------------]

@@ -67,7 +67,7 @@ class SNMLightRandomAnimation : public SceneNodeModifier {
 			NG       = 1<<4,	/**< Do NOT manipulate the green color component */
 			NB       = 1<<5		/**< Do NOT manipulate the blue color component */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNodeModifier::EFlags)
 			pl_enum_value(Multiply,	"Multiply the color to the fix color, if not set, the color is added to the fix color")
 			pl_enum_value(NR,		"Do NOT manipulate the red color component")
@@ -79,23 +79,17 @@ class SNMLightRandomAnimation : public SceneNodeModifier {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMLightRandomAnimation, "PLScene", PLScene::SceneNodeModifier, "Scene node modifier class for a random light color animation")
-		// Properties
-		pl_properties
-			pl_property("SceneNodeClass",	"PLScene::SNLight")
-		pl_properties_end
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Speed,		float,					2.0f,									ReadWrite,	DirectValue,	"Animation speed",	"")
-		pl_attribute(Radius,	float,					0.5f,									ReadWrite,	DirectValue,	"Animation radius",	"")
-		pl_attribute(FixColor,	PLGraphics::Color3,		PLGraphics::Color3(0.5f, 0.5f, 0.5f),	ReadWrite,	DirectValue,	"Fix color",		"")
-		pl_attribute(Color,		PLGraphics::Color3,		PLGraphics::Color3::White,				ReadWrite,	DirectValue,	"Color to apply",	"")
+		pl_attribute_directvalue(							Speed,		float,				2.0f,									ReadWrite)
+		pl_attribute_directvalue(							Radius,		float,				0.5f,									ReadWrite)
+		pl_attribute_directvalue(							FixColor,	PLGraphics::Color3,	PLGraphics::Color3(0.5f, 0.5f, 0.5f),	ReadWrite)
+		pl_attribute_directvalue(							Color,		PLGraphics::Color3,	PLGraphics::Color3::White,				ReadWrite)
 			// Overwritten SceneNodeModifier attributes
-		pl_attribute(Flags,		pl_flag_type(EFlags),	0,										ReadWrite,	GetSet,			"Flags",			"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_getset		(SNMLightRandomAnimation,	Flags,		PLCore::uint32,		0,										ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
-	pl_class_end
+		pl_slot_0_def(SNMLightRandomAnimation,	OnUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -42,9 +42,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SHKdTree)
-
-
+pl_class_metadata(SHKdTree, "PLScene", PLScene::SceneHierarchy, "Kd tree scene hierarchy (axis aligned binary tree)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SHKdTree)
 
 
 //[-------------------------------------------------------]

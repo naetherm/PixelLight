@@ -65,8 +65,8 @@ class VirtualStandardController : public VirtualController {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, VirtualStandardController, "PLInput", PLInput::VirtualController, "Standard virtual input controller")
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

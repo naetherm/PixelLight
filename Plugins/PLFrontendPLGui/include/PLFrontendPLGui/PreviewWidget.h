@@ -56,8 +56,8 @@ class PreviewWidget : public RenderWidget {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLFRONTENDPLGUI_RTTI_EXPORT, PreviewWidget, "PLFrontendPLGui", PLFrontendPLGui::RenderWidget, "GUI renderer preview widget")
-	pl_class_end
+	pl_class_def(PLFRONTENDPLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

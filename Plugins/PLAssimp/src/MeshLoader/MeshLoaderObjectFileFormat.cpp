@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderObjectFileFormat)
+pl_class_metadata(MeshLoaderObjectFileFormat, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for off (Object File Format) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"off,OFF")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderObjectFileFormat)
 
 
 //[-------------------------------------------------------]

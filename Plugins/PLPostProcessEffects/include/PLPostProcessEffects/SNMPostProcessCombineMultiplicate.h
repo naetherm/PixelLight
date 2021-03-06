@@ -56,14 +56,12 @@ class SNMPostProcessCombineMultiplicate : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessCombineMultiplicate, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(Scale,		PLMath::Vector2,	PLMath::Vector2::One,							ReadWrite,	DirectValue,	"Scale",								"")
+		pl_attribute_directvalue(								Scale,		PLMath::Vector2,	PLMath::Vector2::One,							ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,	PLCore::String,		"Data/PostProcesses/CombineMultiplicate.pp",	ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,	PLCore::String,		"Data/PostProcesses/CombineMultiplicate.pp",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

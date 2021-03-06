@@ -42,7 +42,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionRayTraversalMIP)
+pl_class_metadata(ShaderFunctionRayTraversalMIP, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRayTraversal, "\"Maximum Intensity Projection\" (MIP) shader function implementation class for ray traversal")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionRayTraversalMIP)
 
 
 //[-------------------------------------------------------]

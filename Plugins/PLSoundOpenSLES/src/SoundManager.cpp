@@ -42,7 +42,10 @@ namespace PLSoundOpenSLES {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SoundManager)
+pl_class_metadata(SoundManager, "PLSoundOpenSLES", PLSound::SoundManager, "OpenSL ES sound backend")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SoundManager)
 
 
 //[-------------------------------------------------------]

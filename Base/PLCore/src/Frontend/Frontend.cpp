@@ -43,7 +43,33 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Frontend)
+pl_class_metadata(Frontend, "PLCore", PLCore::Object, "Abstract frontend base class")
+	// Methods
+	pl_method_0_metadata(Redraw,					pl_ret_type(void),						"Redraw frontend.",																																				"")
+	pl_method_0_metadata(Ping,						pl_ret_type(void),						"Give the frontend a chance to process OS messages.",																											"")
+	pl_method_0_metadata(RedrawAndPing,				pl_ret_type(void),						"Redraw frontend and give the frontend a chance to process OS messages.",																						"")
+	pl_method_0_metadata(GetTitle,					pl_ret_type(String),					"Returns the frontend title.",																																	"")
+	pl_method_1_metadata(SetTitle,					pl_ret_type(void),		const String&,	"Sets the frontend title.",																																		"")
+	// Position and size methods
+	pl_method_0_metadata(GetX,						pl_ret_type(int),						"Returns the x position of the frontend (in screen coordinates).",																								"")
+	pl_method_0_metadata(GetY,						pl_ret_type(int),						"Returns the y position of the frontend (in screen coordinates).",																								"")
+	pl_method_0_metadata(GetWidth,					pl_ret_type(uint32),					"Returns the frontend width.",																																	"")
+	pl_method_0_metadata(GetHeight,					pl_ret_type(uint32),					"Returns the frontend height.",																																	"")
+	// Fullscreen methods
+	pl_method_0_metadata(GetToggleFullscreenMode,	pl_ret_type(bool),						"Returns whether it's allowed to toggle the fullscreen mode using hotkeys. 'true' if it's possible to toggle the fullscreen mode using hotkeys, else 'false'.",	"")
+	pl_method_1_metadata(SetToggleFullscreenMode,	pl_ret_type(void),		bool,			"Sets whether it's allowed to toggle the fullscreen mode using hotkeys. 'true' as first parameter to allow it, else 'false'.",									"")
+	pl_method_0_metadata(GetFullscreenAltTab,		pl_ret_type(bool),						"Returns whether it's allowed to use Alt-Tab if fullscreen mode is used. 'true' if it's possible to use Alt-Tab if fullscreen mode is used, else 'false'.",		"")
+	pl_method_1_metadata(SetFullscreenAltTab,		pl_ret_type(void),		bool,			"Sets whether it's allowed to use Alt-Tab if fullscreen mode is used. 'true' as first parameter to allow it, else 'false'.",									"")
+	pl_method_0_metadata(IsFullscreen,				pl_ret_type(bool),						"Returns whether or not the frontend is currently fullscreen or not. Returns 'true' if the frontend is currently fullscreen, else 'false'.",					"")
+	pl_method_1_metadata(SetFullscreen,				pl_ret_type(void),		bool,			"Sets whether or not the frontend is currently fullscreen or not. 'true' as first parameter if the frontend is currently fullscreen, else 'false'.",			"")
+	// Mouse methods
+	pl_method_0_metadata(IsMouseOver,				pl_ret_type(bool),						"Returns whether or not the mouse cursor is currently over the frontend. Returns 'true' if the mouse cursor is currently over the frontend, else 'false'.",		"")
+	pl_method_0_metadata(GetMousePositionX,			pl_ret_type(int),						"Returns the current mouse cursor X position inside the frontend, negative value if the mouse cursor isn't currently over the frontend",						"")
+	pl_method_0_metadata(GetMousePositionY,			pl_ret_type(int),						"Returns the current mouse cursor Y position inside the frontend, negative value if the mouse cursor isn't currently over the frontend",						"")
+	pl_method_0_metadata(IsMouseVisible,			pl_ret_type(bool),						"Returns whether or not the mouse cursor is currently visible. Returns 'true' if the mouse cursor is currently visible, else 'false'.",							"")
+	pl_method_1_metadata(SetMouseVisible,			pl_ret_type(void),		bool,			"Set the mouse cursor visibility. 'true' as first parameter if the mouse cursor shall be visible.",																"")
+	pl_method_1_metadata(SetTrapMouse,				pl_ret_type(void),		bool,			"Trap the mouse inside the frontend. 'true' as first parameter if the mouse should be trapped inside the frontend, else 'false'.",								"")
+pl_class_metadata_end(Frontend)
 
 
 //[-------------------------------------------------------]

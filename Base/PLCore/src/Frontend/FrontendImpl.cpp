@@ -41,7 +41,8 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(FrontendImpl)
+pl_class_metadata(FrontendImpl, "PLCore", PLCore::Object, "Abstract frontend implementation base class")
+pl_class_metadata_end(FrontendImpl)
 
 
 //[-------------------------------------------------------]

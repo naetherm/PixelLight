@@ -56,13 +56,11 @@ class SNMPhysicsBodyCone : public SNMPhysicsBody {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsBodyCone, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics cone body scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(Radius,	float,	1.0f,	ReadWrite,	GetSet,	"Cone radius at the base",								"Min='0.0'")
-		pl_attribute(Height,	float,	1.0f,	ReadWrite,	GetSet,	"Cone height along the x local axis from base to tip",	"Min='0.0'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMPhysicsBodyCone,	Radius,	float,	1.0f,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsBodyCone,	Height,	float,	1.0f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

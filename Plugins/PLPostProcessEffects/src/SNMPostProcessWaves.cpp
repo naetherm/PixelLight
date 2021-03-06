@@ -44,7 +44,18 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessWaves)
+pl_class_metadata(SNMPostProcessWaves, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Offset,	PLMath::Vector2,	PLMath::Vector2( 1.0f,  1.0f),	ReadWrite,	"Offset",								"")
+	pl_attribute_metadata(Speed,	PLMath::Vector2,	PLMath::Vector2(10.0f, 10.0f),	ReadWrite,	"Speed",								"")
+	pl_attribute_metadata(Scale,	PLMath::Vector2,	PLMath::Vector2( 2.0f,  2.0f),	ReadWrite,	"Scale",								"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,	PLCore::String,		"Data/PostProcesses/Waves.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+	// Slots
+	pl_slot_0_metadata(OnSceneNodeUpdate,	"Slot for SceneNode::EventUpdate",	"")
+pl_class_metadata_end(SNMPostProcessWaves)
 
 
 //[-------------------------------------------------------]

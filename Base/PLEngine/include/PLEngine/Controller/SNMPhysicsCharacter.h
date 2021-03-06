@@ -79,7 +79,7 @@ class SNMPhysicsCharacter : public PLPhysics::SNMPhysics {
 		enum EFlags {
 			YMovement = 1<<2	/**< Perform movement also on the y axis, else movement is just performed on the x/z plane */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNMPhysics::EFlags)
 			pl_enum_value(YMovement, "Perform movement also on the y axis, else movement is just performed on the x/z plane")
 		pl_enum_end
@@ -88,19 +88,17 @@ class SNMPhysicsCharacter : public PLPhysics::SNMPhysics {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNMPhysicsCharacter, "PLEngine", PLPhysics::SNMPhysics, "Basic PL physics character scene node modifier class")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(Speed,					float,					2.0f,	ReadWrite,	DirectValue,	"Speed",										"Min='0.0'")
-		pl_attribute(Acceleration,			float,					20.0f,	ReadWrite,	DirectValue,	"Acceleration",									"Min='0.0'")
-		pl_attribute(MaxAcceleration,		float,					30.0f,	ReadWrite,	DirectValue,	"Maximum acceleration",							"Min='0.0'")
-		pl_attribute(JumpForce,				float,					4.0f,	ReadWrite,	DirectValue,	"Jump force, if 0, jumping is not allowed",		"Min='0.0'")
-		pl_attribute(JumpReadyTime,			float,					0.5f,	ReadWrite,	DirectValue,	"Time to past until we can jump again",			"Min='0.0'")
-		pl_attribute(JumpGroundDistance,	float,					0.05f,	ReadWrite,	DirectValue,	"Minimum ground distance required for jumping",	"Min='0.001'")
+		pl_attribute_directvalue(						Speed,				float,			2.0f,	ReadWrite)
+		pl_attribute_directvalue(						Acceleration,		float,			20.0f,	ReadWrite)
+		pl_attribute_directvalue(						MaxAcceleration,	float,			30.0f,	ReadWrite)
+		pl_attribute_directvalue(						JumpForce,			float,			4.0f,	ReadWrite)
+		pl_attribute_directvalue(						JumpReadyTime,		float,			0.5f,	ReadWrite)
+		pl_attribute_directvalue(						JumpGroundDistance,	float,			0.05f,	ReadWrite)
 			// Overwritten PLScene::SceneNodeModifier attributes
-		pl_attribute(Flags,					pl_flag_type(EFlags),	0,		ReadWrite,	GetSet,			"Flags",										"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNMPhysicsCharacter,	Flags,				PLCore::uint32,	0,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

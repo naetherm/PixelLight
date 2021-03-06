@@ -46,7 +46,10 @@ using namespace PLGui;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(GuiButton)
+pl_class_metadata(GuiButton, "", GuiBase, "Ingame Gui - Button")
+	// Signals
+	pl_signal_1_metadata(SignalPressed,	PLCore::uint32,	"Button has been pressed",	"")
+pl_class_metadata_end(GuiButton)
 
 
 //[-------------------------------------------------------]

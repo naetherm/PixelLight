@@ -55,18 +55,16 @@ class SNMMeshMorphBlink : public SNMMeshMorph {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMMeshMorphBlink, "PLScene", PLScene::SNMMeshMorph, "Animated scene node mesh morph modifier class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Time,			float,	10.0f,	ReadWrite,	DirectValue,	"Current time to next animation start",					"")
-		pl_attribute(TimeBase,		float,	1.0f,	ReadWrite,	DirectValue,	"Base time to next animation start",					"")
-		pl_attribute(TimeRandom,	float,	2.0f,	ReadWrite,	DirectValue,	"Maximum added random time to next animation start",	"")
-		pl_attribute(Direction,		bool,	false,	ReadWrite,	DirectValue,	"Current animation direction 1=+ 0=-",					"")
-		pl_attribute(Speed,			float,	6.0f,	ReadWrite,	DirectValue,	"Animation speed",										"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_directvalue(Time,			float,	10.0f,	ReadWrite)
+		pl_attribute_directvalue(TimeBase,		float,	1.0f,	ReadWrite)
+		pl_attribute_directvalue(TimeRandom,	float,	2.0f,	ReadWrite)
+		pl_attribute_directvalue(Direction,		bool,	false,	ReadWrite)
+		pl_attribute_directvalue(Speed,			float,	6.0f,	ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
-	pl_class_end
+		pl_slot_0_def(SNMMeshMorphBlink,	OnUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

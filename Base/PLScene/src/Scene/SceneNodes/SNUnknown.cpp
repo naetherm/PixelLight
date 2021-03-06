@@ -37,7 +37,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNUnknown)
+pl_class_metadata(SNUnknown, "PLScene", PLScene::SceneNode, "Unknown scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SNUnknown)
 
 
 //[-------------------------------------------------------]

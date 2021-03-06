@@ -47,7 +47,12 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Panel)
+pl_class_metadata(Panel, "PLGui", PLGui::ContainerWidget, "Container widget that displays a raised or sunken panel")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(BorderStyle,	pl_enum_type(EBorderStyle),	RaisedBorder,	ReadWrite,	"Border style",	"")
+pl_class_metadata_end(Panel)
 
 
 //[-------------------------------------------------------]

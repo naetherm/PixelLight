@@ -44,7 +44,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionRayTraversalDVRBackToFront)
+pl_class_metadata(ShaderFunctionRayTraversalDVRBackToFront, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRayTraversal, "Back-to-front compositing (DVR) shader function implementation class for ray traversal (no early ray termination)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionRayTraversalDVRBackToFront)
 
 
 //[-------------------------------------------------------]

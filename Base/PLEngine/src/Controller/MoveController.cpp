@@ -38,7 +38,8 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MoveController)
+pl_class_metadata(MoveController, "PLEngine", PLInput::Controller, "Move input controller")
+pl_class_metadata_end(MoveController)
 
 
 //[-------------------------------------------------------]

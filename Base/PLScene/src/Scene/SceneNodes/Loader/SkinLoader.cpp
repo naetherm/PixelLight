@@ -37,7 +37,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SkinLoader)
+pl_class_metadata(SkinLoader, "PLScene", PLCore::LoaderImpl, "Abstract skin loader base class (embedded within SNMesh)")
+	// Properties
+	pl_properties
+		pl_property("Type", "Skin")
+	pl_properties_end
+pl_class_metadata_end(SkinLoader)
 
 
 //[-------------------------------------------------------]

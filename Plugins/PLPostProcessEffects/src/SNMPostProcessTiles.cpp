@@ -41,7 +41,16 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessTiles)
+pl_class_metadata(SNMPostProcessTiles, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Tiles,		float,				65.0f,									ReadWrite,	"Tiles",								"")
+	pl_attribute_metadata(EdgeWidth,	float,				0.15f,									ReadWrite,	"Edge width",							"")
+	pl_attribute_metadata(EdgeColor,	PLGraphics::Color3,	PLGraphics::Color3(0.7f, 0.7f, 0.7f),	ReadWrite,	"Edge color",							"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,		"Data/PostProcesses/Tiles.pp",			ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessTiles)
 
 
 //[-------------------------------------------------------]

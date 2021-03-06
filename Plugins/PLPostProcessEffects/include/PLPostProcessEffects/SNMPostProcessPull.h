@@ -56,16 +56,14 @@ class SNMPostProcessPull : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessPull, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(WarpPoint,		PLMath::Vector2,	PLMath::Vector2(300.0f, 300.0f),	ReadWrite,	DirectValue,	"Warp point, (0, 0) = (left, lower)",	"")
-		pl_attribute(WarpScale,		float,				 -5.0f,								ReadWrite,	DirectValue,	"Warp scale",							"")
-		pl_attribute(WarpDimension,	float,				500.0f,								ReadWrite,	DirectValue,	"Warp dimension",						"")
+		pl_attribute_directvalue(								WarpPoint,		PLMath::Vector2,	PLMath::Vector2(300.0f, 300.0f),	ReadWrite)
+		pl_attribute_directvalue(								WarpScale,		float,				-5.0f,								ReadWrite)
+		pl_attribute_directvalue(								WarpDimension,	float,				500.0f,								ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,		PLCore::String,		"Data/PostProcesses/Pull.pp",		ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,		PLCore::String,		"Data/PostProcesses/Pull.pp",		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

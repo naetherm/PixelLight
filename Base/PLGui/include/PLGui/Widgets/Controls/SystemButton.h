@@ -58,12 +58,10 @@ class SystemButton: public AbstractButton {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, SystemButton, "PLGui", PLGui::AbstractButton, "Button that represents a system button in a title bar (minimize, maximize, ...)")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(SystemCommand,	pl_enum_type(ESystemCommand),	CommandRestore,	ReadWrite,	GetSet,	"System command that is emitted by the button",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SystemButton,	SystemCommand,	ESystemCommand,	CommandRestore,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

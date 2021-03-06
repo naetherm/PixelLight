@@ -38,7 +38,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionGradientBackwardDifferences)
+pl_class_metadata(ShaderFunctionGradientBackwardDifferences, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionGradient, "Backward differences (finite differences) shader function implementation class for on-the-fly gradient (4 volume texture fetches for the gradient)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionGradientBackwardDifferences)
 
 
 //[-------------------------------------------------------]

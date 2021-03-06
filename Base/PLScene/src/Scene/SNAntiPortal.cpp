@@ -37,7 +37,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNAntiPortal)
+pl_class_metadata(SNAntiPortal, "PLScene", PLScene::SNPortal, "Anti-portal scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SNAntiPortal)
 
 
 //[-------------------------------------------------------]

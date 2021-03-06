@@ -53,12 +53,8 @@ class VolumeLoader : public PLCore::LoaderImpl {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, VolumeLoader, "PLVolume", PLCore::LoaderImpl, "Abstract volume loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Volume")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLVOLUME_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -31,6 +31,8 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Base/Func/Func.h"
+#include "PLCore/Base/Func/Signature.h"
+#include "PLCore/Base/Func/Params.h"
 
 
 //[-------------------------------------------------------]
@@ -42,6 +44,20 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ Classes                                               ]
 //[-------------------------------------------------------]
+template <typename R, typename T0 = NullType, typename T1 = NullType, typename T2 = NullType, typename T3 = NullType, typename T4 = NullType, typename T5 = NullType, typename T6 = NullType, typename T7 = NullType, typename T8 = NullType, typename T9 = NullType, typename T10 = NullType, typename T11 = NullType, typename T12 = NullType, typename T13 = NullType, typename T14 = NullType, typename T15 = NullType>
+class FuncGenFunBasePtr : public Func<typename Type<R>::_Type,
+		 typename Type<T0>::_Type, typename Type<T1>::_Type,
+		 typename Type<T2>::_Type, typename Type<T3>::_Type,
+		 typename Type<T4>::_Type, typename Type<T5>::_Type,
+		 typename Type<T6>::_Type, typename Type<T7>::_Type,
+		 typename Type<T8>::_Type, typename Type<T9>::_Type,
+		 typename Type<T10>::_Type, typename Type<T11>::_Type,
+		 typename Type<T12>::_Type, typename Type<T13>::_Type,
+		 typename Type<T14>::_Type, typename Type<T15>::_Type>
+{
+	
+};
+
 /**
 *  @brief
 *    Static generic function pointer
@@ -50,7 +66,7 @@ namespace PLCore {
 *    This is a functoid that calls a static generic function
 */
 template <typename R, typename T0 = NullType, typename T1 = NullType, typename T2 = NullType, typename T3 = NullType, typename T4 = NullType, typename T5 = NullType, typename T6 = NullType, typename T7 = NullType, typename T8 = NullType, typename T9 = NullType, typename T10 = NullType, typename T11 = NullType, typename T12 = NullType, typename T13 = NullType, typename T14 = NullType, typename T15 = NullType>
-class FuncGenFunPtr : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> {
+class FuncGenFunPtr : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -93,7 +109,7 @@ class FuncGenFunPtr : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11, _T12, _T13, _T14, _T15> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -110,7 +126,7 @@ class FuncGenFunPtr : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10
 *    Implementation for up to 16 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -147,7 +163,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12,
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11, _T12, _T13, _T14, _T15> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -164,7 +180,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12,
 *    Implementation for 15 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -206,7 +222,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T1
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11, _T12, _T13, _T14> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -223,7 +239,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T1
 *    Implementation for 15 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -259,7 +275,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12,
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11, _T12, _T13, _T14> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -276,7 +292,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12,
 *    Implementation for 14 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -317,7 +333,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T1
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11, _T12, _T13> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -334,7 +350,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T1
 *    Implementation for 14 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -369,7 +385,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12,
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11, _T12, _T13> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -386,7 +402,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12,
 *    Implementation for 13 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -426,7 +442,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : 
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11, _T12> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -443,7 +459,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : 
 *    Implementation for 13 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -477,7 +493,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11, _T12> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -494,7 +510,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>
 *    Implementation for 12 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -533,7 +549,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : publi
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -550,7 +566,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : publi
 *    Implementation for 12 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -583,7 +599,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : pu
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10, _T11> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -600,7 +616,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : pu
 *    Implementation for 11 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -638,7 +654,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Fun
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -655,7 +671,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Fun
 *    Implementation for 11 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -687,7 +703,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public 
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9, _T10> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -704,7 +720,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public 
 *    Implementation for 10 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -741,7 +757,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<R, 
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -758,7 +774,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<R, 
 *    Implementation for 10 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -789,7 +805,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8, _T9> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -806,7 +822,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<
 *    Implementation for 9 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -842,7 +858,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, T0, 
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -859,7 +875,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, T0, 
 *    Implementation for 9 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -889,7 +905,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<void
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7, _T8> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -906,7 +922,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<void
 *    Implementation for 8 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6, T7> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -941,7 +957,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, T1, 
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -958,7 +974,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, T1, 
 *    Implementation for 8 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6, T7> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -987,7 +1003,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void, T0
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6, _T7> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1004,7 +1020,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void, T0
 *    Implementation for 7 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, T2, T3, T4, T5, T6> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5, T6> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -1038,7 +1054,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, T2, 
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5, _T6> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1055,7 +1071,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, T2, 
 *    Implementation for 7 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0, T1, T2, T3, T4, T5, T6> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5, T6> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -1083,7 +1099,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0, T1
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5, _T6> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1100,7 +1116,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0, T1
 *    Implementation for 6 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, T3, T4, T5> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4, T5> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -1133,7 +1149,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, T3, 
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4, _T5> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1150,7 +1166,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, T3, 
 *    Implementation for 6 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1, T2, T3, T4, T5> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4, T5> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -1177,7 +1193,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1, T2
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4, _T5> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1194,7 +1210,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1, T2
 *    Implementation for 5 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4>
-class FuncGenFunPtr<R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, T4> {
+class FuncGenFunPtr<R, T0, T1, T2, T3, T4> : public FuncGenFunBasePtr<R, T0, T1, T2, T3, T4> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -1226,7 +1242,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, T4> 
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3, _T4> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1243,7 +1259,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, T4> 
 *    Implementation for 5 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3, typename T4>
-class FuncGenFunPtr<void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2, T3, T4> {
+class FuncGenFunPtr<void, T0, T1, T2, T3, T4> : public FuncGenFunBasePtr<void, T0, T1, T2, T3, T4> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -1269,7 +1285,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2, T3
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3, _T4> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1286,7 +1302,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2, T3
 *    Implementation for 4 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2, typename T3>
-class FuncGenFunPtr<R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
+class FuncGenFunPtr<R, T0, T1, T2, T3> : public FuncGenFunBasePtr<R, T0, T1, T2, T3> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -1317,7 +1333,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2, _T3> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1334,7 +1350,7 @@ class FuncGenFunPtr<R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
 *    Implementation for 4 parameters without a return value
 */
 template <typename T0, typename T1, typename T2, typename T3>
-class FuncGenFunPtr<void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3> {
+class FuncGenFunPtr<void, T0, T1, T2, T3> : public FuncGenFunBasePtr<void, T0, T1, T2, T3> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -1359,7 +1375,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2, _T3> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1376,7 +1392,7 @@ class FuncGenFunPtr<void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3> {
 *    Implementation for 3 parameters and a return value
 */
 template <typename R, typename T0, typename T1, typename T2>
-class FuncGenFunPtr<R, T0, T1, T2> : public Func<R, T0, T1, T2> {
+class FuncGenFunPtr<R, T0, T1, T2> : public FuncGenFunBasePtr<R, T0, T1, T2> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -1406,7 +1422,7 @@ class FuncGenFunPtr<R, T0, T1, T2> : public Func<R, T0, T1, T2> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1, _T2> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1423,7 +1439,7 @@ class FuncGenFunPtr<R, T0, T1, T2> : public Func<R, T0, T1, T2> {
 *    Implementation for 3 parameters without a return value
 */
 template <typename T0, typename T1, typename T2>
-class FuncGenFunPtr<void, T0, T1, T2> : public Func<void, T0, T1, T2> {
+class FuncGenFunPtr<void, T0, T1, T2> : public FuncGenFunBasePtr<void, T0, T1, T2> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -1447,7 +1463,7 @@ class FuncGenFunPtr<void, T0, T1, T2> : public Func<void, T0, T1, T2> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1, _T2> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1464,7 +1480,7 @@ class FuncGenFunPtr<void, T0, T1, T2> : public Func<void, T0, T1, T2> {
 *    Implementation for 2 parameters and a return value
 */
 template <typename R, typename T0, typename T1>
-class FuncGenFunPtr<R, T0, T1> : public Func<R, T0, T1> {
+class FuncGenFunPtr<R, T0, T1> : public FuncGenFunBasePtr<R, T0, T1> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -1493,7 +1509,7 @@ class FuncGenFunPtr<R, T0, T1> : public Func<R, T0, T1> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0, _T1> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1510,7 +1526,7 @@ class FuncGenFunPtr<R, T0, T1> : public Func<R, T0, T1> {
 *    Implementation for 2 parameters without a return value
 */
 template <typename T0, typename T1>
-class FuncGenFunPtr<void, T0, T1> : public Func<void, T0, T1> {
+class FuncGenFunPtr<void, T0, T1> : public FuncGenFunBasePtr<void, T0, T1> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Type<T1> ::_Type _T1;
@@ -1533,7 +1549,7 @@ class FuncGenFunPtr<void, T0, T1> : public Func<void, T0, T1> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0, _T1> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1550,7 +1566,7 @@ class FuncGenFunPtr<void, T0, T1> : public Func<void, T0, T1> {
 *    Implementation for 1 parameters and a return value
 */
 template <typename R, typename T0>
-class FuncGenFunPtr<R, T0> : public Func<R, T0> {
+class FuncGenFunPtr<R, T0> : public FuncGenFunBasePtr<R, T0> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Type<T0> ::_Type _T0;
@@ -1578,7 +1594,7 @@ class FuncGenFunPtr<R, T0> : public Func<R, T0> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R, _T0> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1595,7 +1611,7 @@ class FuncGenFunPtr<R, T0> : public Func<R, T0> {
 *    Implementation for 1 parameters without a return value
 */
 template <typename T0>
-class FuncGenFunPtr<void, T0> : public Func<void, T0> {
+class FuncGenFunPtr<void, T0> : public FuncGenFunBasePtr<void, T0> {
 	public:
 		typedef typename Type<T0> ::_Type _T0;
 		typedef typename Signature<void, DynParams&, void*>::FuncType FUNC;
@@ -1617,7 +1633,7 @@ class FuncGenFunPtr<void, T0> : public Func<void, T0> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, _T0> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1634,7 +1650,7 @@ class FuncGenFunPtr<void, T0> : public Func<void, T0> {
 *    Implementation for 0 parameters and a return value
 */
 template <typename R>
-class FuncGenFunPtr<R> : public Func<R> {
+class FuncGenFunPtr<R> : public FuncGenFunBasePtr<R> {
 	public:
 		typedef typename Type<R>  ::_Type _R;
 		typedef typename Signature<void, DynParams&, void*>::FuncType FUNC;
@@ -1661,7 +1677,7 @@ class FuncGenFunPtr<R> : public Func<R> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<_R> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 
@@ -1678,7 +1694,7 @@ class FuncGenFunPtr<R> : public Func<R> {
 *    Implementation for 0 parameters without a return value
 */
 template <>
-class FuncGenFunPtr<void> : public Func<void> {
+class FuncGenFunPtr<void> : public FuncGenFunBasePtr<void> {
 	public:
 		typedef Signature<void, DynParams&, void*>::FuncType FUNC;
 
@@ -1699,7 +1715,7 @@ class FuncGenFunPtr<void> : public Func<void> {
 			}
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void> *Clone() const override {
 			return new FuncGenFunPtr(m_pFunc, m_pUserData);
 		}
 

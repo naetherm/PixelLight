@@ -46,7 +46,7 @@ inline void LuaContext::ReleaseRTTIObjectPointer(RTTIObjectPointer &cInstance)
 }
 
 // RTTIObjectSlotPointer
-inline RTTIObjectSlotPointer &LuaContext::GetRTTIObjectSlotPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventHandler *pDynEventHandler)
+inline RTTIObjectSlotPointer &LuaContext::GetRTTIObjectSlotPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventHandlerPtr pDynEventHandler)
 {
 	RTTIObjectSlotPointer &cInstance = m_lstRTTIObjectSlotPointer.Add();
 	cInstance.InitializeInstance(cScript, pRTTIObject, pDynEventHandler);
@@ -74,7 +74,7 @@ inline void LuaContext::ReleaseRTTIObjectMethodPointer(RTTIObjectMethodPointer &
 }
 
 // RTTIObjectSignalPointer
-inline RTTIObjectSignalPointer &LuaContext::GetRTTIObjectSignalPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEvent *pDynEvent)
+inline RTTIObjectSignalPointer &LuaContext::GetRTTIObjectSignalPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventPtr pDynEvent)
 {
 	RTTIObjectSignalPointer &cInstance = m_lstRTTIObjectSignalPointer.Add();
 	cInstance.InitializeInstance(cScript, pRTTIObject, pDynEvent);
@@ -88,7 +88,7 @@ inline void LuaContext::ReleaseRTTIObjectSignalPointer(RTTIObjectSignalPointer &
 }
 
 // RTTIObjectSignalMethodPointer
-inline RTTIObjectSignalMethodPointer &LuaContext::GetRTTIObjectSignalMethodPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEvent *pDynEvent, RTTIObjectSignalMethodPointer::EMethod nMethod)
+inline RTTIObjectSignalMethodPointer &LuaContext::GetRTTIObjectSignalMethodPointer(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventPtr pDynEvent, RTTIObjectSignalMethodPointer::EMethod nMethod)
 {
 	RTTIObjectSignalMethodPointer &cInstance = m_lstRTTIObjectSignalMethodPointer.Add();
 	cInstance.InitializeInstance(cScript, pRTTIObject, pDynEvent, nMethod);

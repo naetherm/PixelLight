@@ -37,7 +37,12 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoader)
+pl_class_metadata(MeshLoader, "PLMesh", PLCore::LoaderImpl, "Abstract mesh loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Mesh")
+	pl_properties_end
+pl_class_metadata_end(MeshLoader)
 
 
 //[-------------------------------------------------------]

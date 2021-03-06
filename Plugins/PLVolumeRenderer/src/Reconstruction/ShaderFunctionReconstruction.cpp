@@ -37,7 +37,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionReconstruction)
+pl_class_metadata(ShaderFunctionReconstruction, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for reconstruction")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"2.2 - Reconstruction")
+		pl_property("FunctionName",				"Reconstruction")
+		pl_property("FunctionSignature_GLSL",	"float Reconstruction(vec3 Position)")
+		pl_property("FunctionSignature_Cg",		"float Reconstruction(float3 Position)")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionReconstruction)
 
 
 //[-------------------------------------------------------]

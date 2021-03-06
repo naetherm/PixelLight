@@ -52,12 +52,10 @@ class ModTooltip : public Modifier {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, ModTooltip, "PLGui", PLGui::Modifier, "Modifier that displays a tooltip for a widget")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(Tooltip,	PLCore::String,	"",	ReadWrite,	GetSet,	"Tooltip text",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(ModTooltip,	Tooltip,	PLCore::String,	"",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

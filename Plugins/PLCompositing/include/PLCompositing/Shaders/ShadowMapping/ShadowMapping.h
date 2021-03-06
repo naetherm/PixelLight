@@ -64,8 +64,8 @@ class ShadowMapping : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, ShadowMapping, "PLCompositing", PLCore::Object, "Abstract shadow mapping algorithm base class")
-	pl_class_end
+	pl_class_def(PLCOM_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

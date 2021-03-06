@@ -45,7 +45,12 @@ namespace PLSoundOpenAL {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SoundManager)
+pl_class_metadata(SoundManager, "PLSoundOpenAL", PLSound::SoundManager, "OpenAL sound backend")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(DeviceName,	PLCore::String,	"",	ReadWrite,	"Device name. If not defined the 'preferred device' is selected.",	"")
+pl_class_metadata_end(SoundManager)
 
 
 //[-------------------------------------------------------]
@@ -308,9 +313,9 @@ bool SoundManager::SetListenerAttribute(EListener nAttribute, const Vector3 &vV)
 bool SoundManager::Init()
 {
 	// Create device
-	if (DeviceName.GetString().GetLength()) {
+	if (DeviceName.Get().GetLength()) {
 		// Have a name from enumeration process above, so use it...
-		m_pDevice = alcOpenDevice(static_cast<const ALchar*>(DeviceName.GetString().GetASCII()));
+		m_pDevice = alcOpenDevice(static_cast<const ALchar*>(DeviceName.Get().GetASCII()));
 	} else {
 		// This is supposed to select the "preferred device"
 		m_pDevice = alcOpenDevice(nullptr);

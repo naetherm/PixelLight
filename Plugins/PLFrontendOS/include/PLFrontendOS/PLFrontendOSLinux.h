@@ -39,15 +39,9 @@
 		// To import classes, methods and variables
 		#define PLFRONTENDOS_API
 	#endif
-
-	// To export RTTI elements
-	#define PLFRONTENDOS_RTTI_EXPORT 1
 #else
 	// To import classes, methods and variables
 	#define PLFRONTENDOS_API
-
-	// To import RTTI elements
-	#define PLFRONTENDOS_RTTI_EXPORT 0
 #endif
 
 

@@ -52,10 +52,8 @@ class ShaderFunctionRayTraversalNull : public ShaderFunctionRayTraversal {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionRayTraversalNull, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRayTraversal, "Null shader function implementation class for ray traversal")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

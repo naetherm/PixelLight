@@ -37,7 +37,8 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNClipPrimitive)
+pl_class_metadata(SNClipPrimitive, "PLVolume", PLVolume::SNClip, "Abstract clip primitive scene node base class")
+pl_class_metadata_end(SNClipPrimitive)
 
 
 //[-------------------------------------------------------]

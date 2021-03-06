@@ -52,10 +52,8 @@ class MacOSXProvider : public Provider {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, MacOSXProvider, "PLInput", PLInput::Provider, "Standard input provider for Mac OS X")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

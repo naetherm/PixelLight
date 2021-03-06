@@ -52,10 +52,8 @@ class RawInputProvider : public Provider {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, RawInputProvider, "PLInput", PLInput::Provider, "Input provider for Windows using Raw-Input methods for keyboard and mouse")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

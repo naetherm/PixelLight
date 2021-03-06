@@ -49,7 +49,10 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPPostProcessing)
+pl_class_metadata(SRPPostProcessing, "PLCompositing", PLScene::SceneRendererPass, "Scene renderer pass performing post processing (also known as 'composing')")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SRPPostProcessing)
 
 
 //[-------------------------------------------------------]
@@ -100,7 +103,7 @@ bool SRPPostProcessing::IsPostProcessingRequired(SNCamera &cCamera)
 	SNMPostProcess *pModifier = static_cast<SNMPostProcess*>(cCamera.GetModifier("PLCompositing::SNMPostProcess", nModifier));
 	while (pModifier) {
 		// Is this modifier active and the effect weight greater than zero?
-		if (pModifier->IsActive() && pModifier->EffectWeight.GetFloat() > 0.0f) {
+		if (pModifier->IsActive() && pModifier->EffectWeight.Get() > 0.0f) {
 
 
 			// [TODO] If there's an "PLCompositing::SRPDeferredDOF" instance, "PLCompositing::SNMPostProcessDepthOfField" has already been processed -> Find a way to deal with build in post process effects!
@@ -174,7 +177,7 @@ void SRPPostProcessing::Draw(Renderer &cRenderer, const SQCull &cCullQuery)
 						SNMPostProcess *pModifier = static_cast<SNMPostProcess*>(pCamera->GetModifier("PLCompositing::SNMPostProcess", nModifier));
 						while (pModifier) {
 							// Is this modifier active and the effect weight greater than zero?
-							if (pModifier->IsActive() && pModifier->EffectWeight.GetFloat() > 0.0f) {
+							if (pModifier->IsActive() && pModifier->EffectWeight.Get() > 0.0f) {
 
 
 								// [TODO] If there's an "PLCompositing::SRPDeferredDOF" instance, "PLCompositing::SNMPostProcessDepthOfField" has already been processed -> Find a way to deal with build in post process effects!

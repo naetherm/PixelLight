@@ -38,7 +38,8 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(LookController)
+pl_class_metadata(LookController, "PLEngine", PLInput::Controller, "Look input controller")
+pl_class_metadata_end(LookController)
 
 
 //[-------------------------------------------------------]

@@ -37,7 +37,12 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureAniLoader)
+pl_class_metadata(TextureAniLoader, "PLRenderer", PLCore::LoaderImpl, "Abstract texture animation loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"TextureAni")
+	pl_properties_end
+pl_class_metadata_end(TextureAniLoader)
 
 
 //[-------------------------------------------------------]

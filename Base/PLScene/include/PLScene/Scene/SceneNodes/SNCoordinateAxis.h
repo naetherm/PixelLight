@@ -64,7 +64,7 @@ class SNCoordinateAxis : public SceneNode {
 			NoYText   = 1<<12,	/**< Do NOT draw the y-axis text  */
 			NoZText   = 1<<13	/**< Do NOT draw the z-axis text  */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(DepthTest,	"Perform a depth test")
 			pl_enum_value(NoXText,		"Do NOT draw the x-axis text")
@@ -76,15 +76,15 @@ class SNCoordinateAxis : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNCoordinateAxis, "PLScene", PLScene::SceneNode, "Abstract base scene node for coordinate axis visualization")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Width,		float,					1.0f,										ReadWrite,	DirectValue,	"Line width (if supported by the the used renderer API)",	"Min='1.0'")
-		pl_attribute(XColor,	PLGraphics::Color4,		PLGraphics::Color4(1.0f, 0.0f, 0.0f, 1.0f),	ReadWrite,	DirectValue,	"Color of the x-axis",										"")
-		pl_attribute(YColor,	PLGraphics::Color4,		PLGraphics::Color4(0.0f, 1.0f, 0.0f, 1.0f),	ReadWrite,	DirectValue,	"Color of the y-axis",										"")
-		pl_attribute(ZColor,	PLGraphics::Color4,		PLGraphics::Color4(0.0f, 0.0f, 1.0f, 1.0f),	ReadWrite,	DirectValue,	"Color of the z-axis",										"")
+		pl_attribute_directvalue(					Width,	float,				1.0f,										ReadWrite)
+		pl_attribute_directvalue(					XColor,	PLGraphics::Color4,	PLGraphics::Color4(1.0f, 0.0f, 0.0f, 1.0f),	ReadWrite)
+		pl_attribute_directvalue(					YColor,	PLGraphics::Color4,	PLGraphics::Color4(0.0f, 1.0f, 0.0f, 1.0f),	ReadWrite)
+		pl_attribute_directvalue(					ZColor,	PLGraphics::Color4,	PLGraphics::Color4(0.0f, 0.0f, 1.0f, 1.0f),	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,		pl_flag_type(EFlags),	0,											ReadWrite,	GetSet,			"Flags",													"")
-	pl_class_end
+		pl_attribute_getset		(SNCoordinateAxis,	Flags,	PLCore::uint32,		0,											ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

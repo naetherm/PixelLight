@@ -76,17 +76,17 @@ class Controller : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, Controller, "PLInput", PLCore::Object, "Input controller base class")
+	pl_class_def(PLINPUT_API)
 		// Attributes
-		pl_attribute(Type,			pl_enum_type(EControllerType),	ControllerVirtual,	ReadOnly,	GetSet,	"Controller type",			"")
-		pl_attribute(Name,			PLCore::String,					"",					ReadOnly,	GetSet,	"Controller name",			"")
-		pl_attribute(Description,	PLCore::String,					"",					ReadOnly,	GetSet,	"Controller description",	"")
-		pl_attribute(Active,		bool,							true,				ReadWrite,	GetSet,	"State of controller",		"")
+		pl_attribute_getset(Controller,	Type,			EControllerType,	ControllerVirtual,	ReadOnly)
+		pl_attribute_getset(Controller,	Name,			PLCore::String,		"",					ReadOnly)
+		pl_attribute_getset(Controller,	Description,	PLCore::String,		"",					ReadOnly)
+		pl_attribute_getset(Controller,	Active,		bool,					true,				ReadWrite)
 		// Signals
-		pl_signal_1(SignalOnActivate,	bool,		"Controller has been activated or deactivated. 'true' as parameter if the controller has been activated, else 'false'.",	"")
-		pl_signal_1(SignalOnControl,	Control&,	"Control event has occurred, control as parameter",																			"")
-		pl_signal_0(SignalOnChanged,				"Controller state has changed",																								"")
-	pl_class_end
+		pl_signal_1_def(SignalOnActivate,	bool)
+		pl_signal_1_def(SignalOnControl,	Control&)
+		pl_signal_0_def(SignalOnChanged)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

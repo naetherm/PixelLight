@@ -52,20 +52,18 @@ class PGLeaf : public SNParticleGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGLeaf, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Leaf particle group")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(Radius,			float,				5.0f,								ReadWrite,	DirectValue,	"Leaf area radius",			"Min='0.0001'")
-		pl_attribute(Height,			float,				15.0f,								ReadWrite,	DirectValue,	"Maximum leaf height",		"")
-		pl_attribute(FloorHeight,		float,				0.0f,								ReadWrite,	DirectValue,	"Floor height",				"")
-		pl_attribute(Wind,				PLMath::Vector3,	PLMath::Vector3(0.2f, 0.5f, -1.5f),	ReadWrite,	DirectValue,	"Wind direction",			"")
-		pl_attribute(LeafSize,			float,				0.8f,								ReadWrite,	DirectValue,	"Leaf size",				"Min='0.0001'")
-		pl_attribute(LeafSizeVariation,	float,				0.5f,								ReadWrite,	DirectValue,	"Leaf size variation",		"Min='0.0'")
+		pl_attribute_directvalue(			Radius,				float,				5.0f,								ReadWrite)
+		pl_attribute_directvalue(			Height,				float,				15.0f,								ReadWrite)
+		pl_attribute_directvalue(			FloorHeight,		float,				0.0f,								ReadWrite)
+		pl_attribute_directvalue(			Wind,				PLMath::Vector3,	PLMath::Vector3(0.2f, 0.5f, -1.5f),	ReadWrite)
+		pl_attribute_directvalue(			LeafSize,			float,				0.8f,								ReadWrite)
+		pl_attribute_directvalue(			LeafSizeVariation,	float,				0.5f,								ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,			PLCore::String,		"Data/Effects/PGLeaf.plfx",			ReadWrite,	GetSet,			"Particle group material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,			PLCore::uint32,		100,								ReadWrite,	GetSet,			"Number of particles",		"Min=1")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGLeaf,	Material,			PLCore::String,		"Data/Effects/PGLeaf.plfx",			ReadWrite)
+		pl_attribute_getset		(PGLeaf,	Particles,			PLCore::uint32,		100,								ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

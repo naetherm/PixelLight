@@ -52,14 +52,8 @@ class MeshLoader3DGameStudioTerrain : public MeshLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, MeshLoader3DGameStudioTerrain, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for hmp (3D GameStudio Terrain) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"hmp,HMP")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

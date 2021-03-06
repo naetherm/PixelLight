@@ -46,7 +46,10 @@ using namespace PLGui;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Application)
+pl_class_metadata(Application, "", PLGui::GuiApplication, "Application class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Application)
 
 
 //[-------------------------------------------------------]

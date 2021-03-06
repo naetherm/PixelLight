@@ -66,7 +66,7 @@ class SNText3D : public SNText {
 		enum EFlags {
 			NoBackfaceCulling = 1<<11	/**< No backface culling so 'both' sides of the text can be seen */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNText::EFlags)
 			pl_enum_value(NoBackfaceCulling, "No backface culling so 'both' sides of the text can be seen")
 		pl_enum_end
@@ -75,14 +75,12 @@ class SNText3D : public SNText {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNText3D, "PLScene", PLScene::SNText, "3D (\"flat\") text scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(BackgroundMaterial,	PLCore::String,			"",	ReadWrite,	GetSet,	"Background material to use",	"Type='Material Effect Image TextureAni'")
+		pl_attribute_getset(SNText3D,	BackgroundMaterial,	PLCore::String,	"",	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,					pl_flag_type(EFlags),	0,	ReadWrite,	GetSet,	"Flags",						"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNText3D,	Flags,				PLCore::uint32,	0,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

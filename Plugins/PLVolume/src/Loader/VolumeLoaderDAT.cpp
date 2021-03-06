@@ -47,7 +47,19 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(VolumeLoaderDAT)
+pl_class_metadata(VolumeLoaderDAT, "PLVolume", PLVolume::VolumeLoader, "Volume loader implementation for the \"DAT\" volume data file format from the University of Erlangen, Germany")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"dat,DAT")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	Volume&,		PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const Volume&,	PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(VolumeLoaderDAT)
 
 
 //[-------------------------------------------------------]

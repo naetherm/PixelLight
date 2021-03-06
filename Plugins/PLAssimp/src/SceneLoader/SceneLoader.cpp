@@ -39,7 +39,17 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoader)
+pl_class_metadata(SceneLoader, "PLAssimp", PLScene::SceneLoader, "Abstract scene loader implementation using Assimp base class")
+	// Properties
+	pl_properties
+		pl_property("Load",	"1")
+		pl_property("Save",	"0")
+	pl_properties_end
+	// Methods
+	pl_method_2_metadata(Load,			pl_ret_type(bool),	PLScene::SceneContainer&,	PLCore::File&,					"Load method. The loaded scene is post processed for maximum quality.",																	"")
+	pl_method_3_metadata(LoadParams,	pl_ret_type(bool),	PLScene::SceneContainer&,	PLCore::File&,	PLCore::uint8,	"Load method. Parameters: First integer parameter for post processing quality (0=none ... 3=maximum quality but slowest processing).",	"")
+	pl_method_2_metadata(Save,			pl_ret_type(bool),	PLScene::SceneContainer&,	PLCore::File&,					"Save method",																															"")
+pl_class_metadata_end(SceneLoader)
 
 
 //[-------------------------------------------------------]

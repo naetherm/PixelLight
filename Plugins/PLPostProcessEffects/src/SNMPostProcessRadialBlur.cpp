@@ -41,7 +41,16 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessRadialBlur)
+pl_class_metadata(SNMPostProcessRadialBlur, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(WarpPoint,	PLMath::Vector2,	PLMath::Vector2(300.0f, 300.0f),	ReadWrite,	"Warp point",							"")
+	pl_attribute_metadata(BlurStart,	float,				 1.0f,								ReadWrite,	"Blur start",							"")
+	pl_attribute_metadata(BlurWidth,	float,				-0.2f,								ReadWrite,	"Blur width",							"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,		"Data/PostProcesses/RadialBlur.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessRadialBlur)
 
 
 //[-------------------------------------------------------]

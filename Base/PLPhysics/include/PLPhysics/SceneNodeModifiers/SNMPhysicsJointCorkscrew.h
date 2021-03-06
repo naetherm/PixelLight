@@ -53,13 +53,11 @@ class SNMPhysicsJointCorkscrew : public SNMPhysicsJoint {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsJointCorkscrew, "PLPhysics", PLPhysics::SNMPhysicsJoint, "Physics corkscrew joint scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	GetSet,	"Origin of the corkscrew in local space",																									"")
-		pl_attribute(PinDir,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	GetSet,	"The line of action of the corkscrew in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMPhysicsJointCorkscrew,	PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsJointCorkscrew,	PinDir,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

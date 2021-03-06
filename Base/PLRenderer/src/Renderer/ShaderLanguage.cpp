@@ -43,7 +43,8 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderLanguage)
+pl_class_metadata(ShaderLanguage, "PLRenderer", PLCore::Object, "Abstract shader language class")
+pl_class_metadata_end(ShaderLanguage)
 
 
 //[-------------------------------------------------------]

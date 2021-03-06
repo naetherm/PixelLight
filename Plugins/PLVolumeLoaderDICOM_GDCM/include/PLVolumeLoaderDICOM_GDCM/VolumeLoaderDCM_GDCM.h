@@ -63,22 +63,8 @@ class VolumeLoaderDCM_GDCM : public PLVolume::VolumeLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, VolumeLoaderDCM_GDCM, "PLVolumeLoaderDICOM_GDCM", PLVolume::VolumeLoader, "Volume loader implementation for the \"dcm\" image data file format by using GDCM (Grassroots DICOM) (http://sourceforge.net/projects/gdcm/)")
-		// Properties
-		pl_properties
-			pl_property("Formats",	",dcm,DCM,dicom,DICOM")	// DICOM data can be within a given directory instead of a file, the comma at the beginning of the string denotes that no extension is also valid
-			pl_property("Load",		"1")
-			pl_property("Save",		"0")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_2(Load,					pl_ret_type(bool),	PLVolume::Volume&,			PLCore::File&,				"Load method, by default 8 bit is enforced",																									"")
-		pl_method_3(LoadParams,				pl_ret_type(bool),	PLVolume::Volume&,			PLCore::File&,		bool,	"Load method. Parameters: First 'bool' parameter determines whether or not to enforce 8 bit (may result in a visible quality loss).",			"")
-		pl_method_2(LoadDirectory,			pl_ret_type(bool),	PLVolume::Volume&,			PLCore::Directory&,			"Load directory method, by default 8 bit is enforced",																							"")
-		pl_method_3(LoadDirectoryParams,	pl_ret_type(bool),	PLVolume::Volume&,			PLCore::Directory&,	bool,	"Load directory method. Parameters: First 'bool' parameter determines whether or not to enforce 8 bit (may result in a visible quality loss).",	"")
-		pl_method_2(Save,					pl_ret_type(bool),	const PLVolume::Volume&,	PLCore::File&,				"Save method",																																	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

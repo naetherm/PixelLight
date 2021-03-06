@@ -41,7 +41,8 @@ using namespace PLRenderer;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPTessellation)
+pl_class_metadata(SPTessellation, "", PLRenderer::SurfacePainter, "Abstract tessellation surface painter")
+pl_class_metadata_end(SPTessellation)
 
 
 //[-------------------------------------------------------]

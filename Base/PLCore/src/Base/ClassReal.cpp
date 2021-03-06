@@ -28,6 +28,7 @@
 #include "PLCore/Base/Class.h"
 #include "PLCore/Base/ClassManager.h"
 #include "PLCore/Base/Var/VarDesc.h"
+#include "PLCore/Base/Func/Params.h"
 #include "PLCore/Base/Func/FuncDesc.h"
 #include "PLCore/Base/Func/ConstructorDesc.h"
 #include "PLCore/Base/Event/EventDesc.h"

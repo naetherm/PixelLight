@@ -41,7 +41,15 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessBrighten)
+pl_class_metadata(SNMPostProcessBrighten, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(BlendColor,	PLGraphics::Color3,	PLGraphics::Color3::White,			ReadWrite,	"Blending color",						"")
+	pl_attribute_metadata(Opacity,		float,				0.5f,								ReadWrite,	"Opacity of color",						"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,		"Data/PostProcesses/Brighten.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessBrighten)
 
 
 //[-------------------------------------------------------]

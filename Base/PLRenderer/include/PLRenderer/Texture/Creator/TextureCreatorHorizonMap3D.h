@@ -59,16 +59,14 @@ class TextureCreatorHorizonMap3D : public TextureCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, TextureCreatorHorizonMap3D, "PLRenderer", PLRenderer::TextureCreator, "3D horizon map texture (TextureBuffer::L8) creator class")
+	pl_class_def(PLRENDERER_API)
 		// Attributes
-		pl_attribute(Filename2D,	PLCore::String,	"",		ReadWrite,	DirectValue,	"2D height map filename to create the horizon map for",	"")
-		pl_attribute(XSize,			PLCore::uint32,	64,		ReadWrite,	DirectValue,	"Texture x size (must be a power of 2)",				"Min='8'")
-		pl_attribute(YSize,			PLCore::uint32,	64,		ReadWrite,	DirectValue,	"Texture y size (must be a power of 2)",				"Min='8'")
-		pl_attribute(ZSize,			PLCore::uint32,	64,		ReadWrite,	DirectValue,	"Texture z size (must be a power of 2)",				"Min='8'")
-		pl_attribute(Height,		float,			0.16f,	ReadWrite,	DirectValue,	"Height",												"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Filename2D,	PLCore::String,	"",		ReadWrite)
+		pl_attribute_directvalue(XSize,			PLCore::uint32,	64,		ReadWrite)
+		pl_attribute_directvalue(YSize,			PLCore::uint32,	64,		ReadWrite)
+		pl_attribute_directvalue(ZSize,			PLCore::uint32,	64,		ReadWrite)
+		pl_attribute_directvalue(Height,		float,			0.16f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

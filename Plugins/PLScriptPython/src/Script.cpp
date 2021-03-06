@@ -48,7 +48,15 @@ namespace PLScriptPython {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Script)
+pl_class_metadata(Script, "PLScriptPython", PLCore::Script, "Python (http://www.python.org/) script implementation")
+	// Properties
+	pl_properties
+		pl_property("Language",	"Python")
+		pl_property("Formats",	"py,PY")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Script)
 
 
 //[-------------------------------------------------------]

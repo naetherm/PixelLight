@@ -51,7 +51,7 @@ namespace DataModels {
 using namespace PLCore;
 
 
-TreeItemBase *PLDynVarTreeItemsFactory::CreateDynVarTreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent)
+TreeItemBase *PLDynVarTreeItemsFactory::CreateDynVarTreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent)
 {
 	if (dynVar == nullptr)
 		return nullptr;

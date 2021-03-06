@@ -56,13 +56,11 @@ class SNMPhysicsBodyCapsule : public SNMPhysicsBody {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsBodyCapsule, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics capsule body scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(Radius,	float,	1.0f,	ReadWrite,	GetSet,	"Capsule radius at the base",								"Min='0.0'")
-		pl_attribute(Height,	float,	1.0f,	ReadWrite,	GetSet,	"Capsule height along the x local axis from base to top",	"Min='0.0'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMPhysicsBodyCapsule,	Radius,	float,	1.0f,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsBodyCapsule,	Height,	float,	1.0f,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

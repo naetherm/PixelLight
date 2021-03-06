@@ -51,7 +51,20 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNParticleGroup)
+pl_class_metadata(SNParticleGroup, "PLParticleGroups", PLScene::SceneNode, "Abstract particle group scene node")
+	// Properties
+	pl_properties
+		pl_property("Icon",	"Data/Textures/IconParticles.dds")
+	pl_properties_end
+	// Attributes
+	pl_attribute_metadata(Material,					PLCore::String,								"Data/Effects/DefaultParticle.plfx",	ReadWrite,	"Particle group material",							"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(GlobalColor,				PLGraphics::Color4,							PLGraphics::Color4::White,				ReadWrite,	"Global particle color",							"")
+	pl_attribute_metadata(Particles,				PLCore::uint32,								10,										ReadWrite,	"Number of particles",								"Min=1")
+	pl_attribute_metadata(TextureAnimationColumns,	PLCore::uint32,								1,										ReadWrite,	"Number of animation frame columns in the texture",	"")
+	pl_attribute_metadata(TextureAnimationRows,		PLCore::uint32,								1,										ReadWrite,	"Number of animation frame rows in the texture",	"")
+		// Overwritten PLScene::SceneNode attributes
+	pl_attribute_metadata(Flags,					pl_flag_type_def3(SNParticleGroup, EFlags),	0,										ReadWrite,	"Flags",											"")
+pl_class_metadata_end(SNParticleGroup)
 
 
 //[-------------------------------------------------------]
@@ -460,7 +473,7 @@ bool SNParticleGroup::InitParticles(uint32 nMaxNumOfParticles, const String &sMa
 			String sExtension = Url(pMaterial->GetName()).GetExtension();
 			if (sExtension != "mat" && sExtension != "plfx") {
 				// Set the particle default effect
-				PLRenderer::Material *pDefaultMaterial = cMaterialManager.LoadResource(Material.GetDefault());
+				PLRenderer::Material *pDefaultMaterial = cMaterialManager.LoadResource(Material.Default());
 				if (pDefaultMaterial)
 					pMaterial->SetEffect(pDefaultMaterial->GetEffect());
 			}

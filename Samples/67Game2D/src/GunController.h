@@ -48,8 +48,8 @@ class GunController : public PLInput::Controller {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, GunController, "", PLInput::Controller, "Demo2DGame gun input controller")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

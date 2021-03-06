@@ -68,7 +68,12 @@ namespace PLFrontendPLGui {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(GuiPL)
+pl_class_metadata(GuiPL, "PLFrontendPLGui", PLGui::GuiImpl, "PixelLight ingame GUI implementation")
+	// Constructors
+	pl_constructor_1_metadata(DefaultConstructor,	PLGui::Gui*,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InputSemantic,	PLCore::String,	"",	ReadWrite,	"Semantic of this input controller (e.g. \"Camera\")",	"")
+pl_class_metadata_end(GuiPL)
 
 
 //[-------------------------------------------------------]

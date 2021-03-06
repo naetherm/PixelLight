@@ -37,7 +37,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionClipPosition)
+pl_class_metadata(ShaderFunctionClipPosition, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for clip position")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"2.1 - Clip Position")
+		pl_property("FunctionName",				"ClipPosition")
+		pl_property("FunctionSignature_GLSL",	"bool ClipPosition(vec3 Position)")
+		pl_property("FunctionSignature_Cg",		"bool ClipPosition(float3 Position)")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionClipPosition)
 
 
 //[-------------------------------------------------------]

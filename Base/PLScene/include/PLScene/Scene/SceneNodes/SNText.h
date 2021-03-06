@@ -61,7 +61,7 @@ class SNText : public SceneNode {
 		enum EFlags {
 			NoCenter = 1<<10	/**< Do not center the text */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(NoCenter,	"Do not center the text")
 		pl_enum_end
@@ -70,15 +70,15 @@ class SNText : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNText, "PLScene", PLScene::SceneNode, "Abstract text scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Text,		PLCore::String,			"",							ReadWrite,	GetSet,			"Text do draw",																						"")
-		pl_attribute(Color,		PLGraphics::Color4,		PLGraphics::Color4::White,	ReadWrite,	DirectValue,	"Text color",																						"")
-		pl_attribute(Font,		PLCore::String,			"",							ReadWrite,	GetSet,			"The used font, if empty the default font is used",													"")
-		pl_attribute(FontSize,	PLCore::uint32,			0,							ReadWrite,	GetSet,			"The font size, if null the default font size is used - use scene node scale for dynamic scale",	"Max='100'")
+		pl_attribute_getset		(SNText,	Text,		PLCore::String,		"",							ReadWrite)
+		pl_attribute_directvalue(			Color,		PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite)
+		pl_attribute_getset		(SNText,	Font,		PLCore::String,		"",							ReadWrite)
+		pl_attribute_getset		(SNText,	FontSize,	PLCore::uint32,		0,							ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,		pl_flag_type(EFlags),	0,							ReadWrite,	GetSet,			"Flags",																							"")
-	pl_class_end
+		pl_attribute_getset		(SNText,	Flags,		PLCore::uint32,		0,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

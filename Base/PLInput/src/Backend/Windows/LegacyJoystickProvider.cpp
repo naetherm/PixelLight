@@ -41,7 +41,10 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(LegacyJoystickProvider)
+pl_class_metadata(LegacyJoystickProvider, "PLInput", PLInput::Provider, "Input provider for Windows legacy joystick API")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(LegacyJoystickProvider)
 
 
 //[-------------------------------------------------------]

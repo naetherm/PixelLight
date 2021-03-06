@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoaderQuakeIIMesh)
+pl_class_metadata(SceneLoaderQuakeIIMesh, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for md2 (Quake II mesh) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"md2,MD2")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneLoaderQuakeIIMesh)
 
 
 //[-------------------------------------------------------]

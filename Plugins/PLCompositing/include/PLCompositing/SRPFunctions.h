@@ -56,8 +56,8 @@ class SRPFunctions : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPFunctions, "PLCompositing", PLScene::SceneRendererPass, "Abstract scene renderer pass calling all <x>-draw functions of the visible scene nodes")
-	pl_class_end
+	pl_class_def(PLCOM_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

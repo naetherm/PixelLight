@@ -42,7 +42,21 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGSmoke)
+pl_class_metadata(PGSmoke, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Smoke particle group")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Size,						float,				2.0f,							ReadWrite,	"Size",												"Min='0.0001'")
+	pl_attribute_metadata(SizeTimeScale,			float,				1.0f,							ReadWrite,	"Size time scale",									"")
+	pl_attribute_metadata(Energie,					float,				1.0f,							ReadWrite,	"Energy",											"")
+	pl_attribute_metadata(Color,					PLGraphics::Color4,	PLGraphics::Color4::White,		ReadWrite,	"Color",											"")
+	pl_attribute_metadata(PositionScale,			float,				1.0f,							ReadWrite,	"Position scale",									"")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,					PLCore::String,		"Data/Textures/PGSmoke.dds",	ReadWrite,	"Particle group material",							"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,				PLCore::uint32,		20,								ReadWrite,	"Number of particles",								"Min=1")
+	pl_attribute_metadata(TextureAnimationColumns,	PLCore::uint32,		4,								ReadWrite,	"Number of animation frame columns in the texture",	"")
+	pl_attribute_metadata(TextureAnimationRows,		PLCore::uint32,		4,								ReadWrite,	"Number of animation frame rows in the texture",	"")
+pl_class_metadata_end(PGSmoke)
 
 
 //[-------------------------------------------------------]

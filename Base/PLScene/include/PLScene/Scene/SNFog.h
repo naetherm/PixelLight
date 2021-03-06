@@ -53,10 +53,10 @@ class SNFog : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNFog, "PLScene", PLScene::SceneNode, "Abstract fog scene node base class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Color,	PLGraphics::Color3,	PLGraphics::Color3::White,	ReadWrite,	DirectValue,	"Fog color (r/g/b)",	"")
-	pl_class_end
+		pl_attribute_directvalue(Color,	PLGraphics::Color3,	PLGraphics::Color3::White,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

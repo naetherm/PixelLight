@@ -52,14 +52,8 @@ class SceneLoaderBlender3D : public SceneLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SceneLoaderBlender3D, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for blend (Blender 3D) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"blend,BLEND")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

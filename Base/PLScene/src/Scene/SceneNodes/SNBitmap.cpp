@@ -45,7 +45,15 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNBitmap)
+pl_class_metadata(SNBitmap, "PLScene", PLScene::SceneNode, "Abstract bitmap scene node")
+	// Attributes
+	pl_attribute_metadata(Material,		PLCore::String,							"Data/Effects/DefaultBitmap.plfx",	ReadWrite,	"Material to use",											"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Color,		PLGraphics::Color4,						PLGraphics::Color4::White,			ReadWrite,	"Bitmap color",												"")
+	pl_attribute_metadata(TexelStart,	PLMath::Vector2,						PLMath::Vector2::Zero,				ReadWrite,	"Bitmap texture source rectangle (0..1) start coordinate",	"")
+	pl_attribute_metadata(TexelEnd,		PLMath::Vector2,						PLMath::Vector2::One,				ReadWrite,	"Bitmap texture source rectangle (0..1) end coordinate",	"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,		pl_flag_type_def3(SNBitmap, EFlags),	0,									ReadWrite,	"Flags",													"")
+pl_class_metadata_end(SNBitmap)
 
 
 //[-------------------------------------------------------]
@@ -114,7 +122,7 @@ const MaterialHandler &SNBitmap::GetMaterialHandler()
 			const String sExtension = Url(pMaterial->GetName()).GetExtension();
 			if (sExtension != "mat" && sExtension != "plfx") {
 				// Set the billboard default effect
-				PLRenderer::Material *pDefaultMaterial = GetSceneContext()->GetRendererContext().GetMaterialManager().LoadResource(Material.GetDefault());
+				PLRenderer::Material *pDefaultMaterial = GetSceneContext()->GetRendererContext().GetMaterialManager().LoadResource(Material.Default());
 				if (pDefaultMaterial)
 					pMaterial->SetEffect(pDefaultMaterial->GetEffect());
 			}

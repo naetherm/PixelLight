@@ -46,7 +46,10 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPFunctionsPre)
+pl_class_metadata(SRPFunctionsPre, "PLCompositing", PLCompositing::SRPFunctions, "Scene renderer pass calling all 'pre'-draw functions")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SRPFunctionsPre)
 
 
 //[-------------------------------------------------------]

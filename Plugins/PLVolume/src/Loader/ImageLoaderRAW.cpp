@@ -45,7 +45,20 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ImageLoaderRAW)
+pl_class_metadata(ImageLoaderRAW, "PLVolume", PLGraphics::ImageLoader, "Image loader implementation for the \"RAW\" volume data file format (Lookout! You have to provide correct data type, width, height and depth loader parameters!)")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"raw,RAW")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	// [TODO] This is just a proof-of-concept and not that useful within the master-thesis (results in a question within PLViewerQt when loading a resource)
+	// pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_6_metadata(LoadParams,	pl_ret_type(bool),	PLGraphics::Image&,			PLCore::File&,	PLCore::uint8, PLCore::uint16, PLCore::uint16, PLCore::uint16,	"Load method. Parameters: First 'integer' parameter determines the data type (0=byte, 1=word, 2=half, 3=float, 4=double), the other parameters are the width, height and depth.",	"")
+	pl_method_2_metadata(Save,			pl_ret_type(bool),	const PLGraphics::Image&,	PLCore::File&,																	"Save method",																																										"")
+pl_class_metadata_end(ImageLoaderRAW)
 
 
 //[-------------------------------------------------------]

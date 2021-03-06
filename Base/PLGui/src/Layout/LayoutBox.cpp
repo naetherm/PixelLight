@@ -48,7 +48,12 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(LayoutBox)
+pl_class_metadata(LayoutBox, "PLGui", PLGui::Layout, "Box layout")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Orientation,	pl_enum_type(EOrientation),	Horizontal,	ReadWrite,	"Box orientation",	"")
+pl_class_metadata_end(LayoutBox)
 
 
 //[-------------------------------------------------------]

@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderLightWave)
+pl_class_metadata(MeshLoaderLightWave, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for lwo (LightWave) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"lwo,LWO")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderLightWave)
 
 
 //[-------------------------------------------------------]

@@ -27,6 +27,7 @@
 //[-------------------------------------------------------]
 #include <QtGui/qtreeview.h>
 #include <QtGui/qdockwidget.h>
+#include <QtGui/QMainWindow>
 #include <PLScene/Compositing/SceneRenderer.h>
 #include "PLFrontendQt/DataModels/PLTreeItemsDelegate.h"
 #include "PLFrontendQt/DataModels/SceneRendererDataModel/SceneRendererDataModel.h"
@@ -45,7 +46,16 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetSceneRenderer)
+pl_class_metadata(DockWidgetSceneRenderer, "PLFrontendQt", PLFrontendQt::DockWidgetScene, "Scene renderer Qt dock widget class")
+	// Properties
+	pl_properties
+		pl_property("Title", "Scene Renderer")
+	pl_properties_end
+	// Constructors
+	pl_constructor_2_metadata(DefaultConstructor,	QMainWindow*,	DockWidgetManager*,	"Constructor with a pointer to the Qt main window as first parameter, pointer to the dock widget manager this dock widget should be registered to as second parameter",	"")
+	// Slots
+	pl_slot_0_metadata(OnDestroyed,	"Called when the scene renderer assigned with this dock widget was destroyed",	"")
+pl_class_metadata_end(DockWidgetSceneRenderer)
 
 
 //[-------------------------------------------------------]
@@ -55,7 +65,7 @@ pl_implement_class(DockWidgetSceneRenderer)
 *  @brief
 *    Constructor
 */
-DockWidgetSceneRenderer::DockWidgetSceneRenderer(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetScene(reinterpret_cast<QWidget*>(pQMainWindow), pDockWidgetManager),
+DockWidgetSceneRenderer::DockWidgetSceneRenderer(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetScene(pQMainWindow, pDockWidgetManager),
 	SlotOnDestroyed(this),
 	m_pQTreeView(nullptr),
 	m_pSceneRendererDataModel(nullptr),

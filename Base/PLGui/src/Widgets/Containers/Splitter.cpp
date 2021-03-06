@@ -50,7 +50,15 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Splitter)
+pl_class_metadata(Splitter, "PLGui", PLGui::Widget, "Container widget that splits an area into two sides")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Orientation,	pl_enum_type(EOrientation),	Horizontal,	ReadWrite,	"Orientation",							"")
+	pl_attribute_metadata(Sizable,		bool,						true,		ReadWrite,	"Is the widget sizable?",				"")
+	pl_attribute_metadata(SizeLeft,		SizeHint,					SizeHint(),	ReadWrite,	"Size of left (or top) container",		"")
+	pl_attribute_metadata(SizeRight,	SizeHint,					SizeHint(),	ReadWrite,	"Size of right (or bottom) container",	"")
+pl_class_metadata_end(Splitter)
 
 
 //[-------------------------------------------------------]

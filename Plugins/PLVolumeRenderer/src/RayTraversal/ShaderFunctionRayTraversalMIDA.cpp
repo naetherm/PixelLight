@@ -42,7 +42,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionRayTraversalMIDA)
+pl_class_metadata(ShaderFunctionRayTraversalMIDA, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRayTraversal, "\"Maximum intensity differences accumulation\" (MIDA, hybrid combining the advantages of MIP and DVR) shader function implementation class for ray traversal (early ray termination)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionRayTraversalMIDA)
 
 
 //[-------------------------------------------------------]

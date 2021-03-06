@@ -53,17 +53,15 @@ class MeshCreatorDome : public MeshCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLMESH_RTTI_EXPORT, MeshCreatorDome, "PLMesh", PLMesh::MeshCreator, "Dome mesh creator class")
+	pl_class_def(PLMESH_API)
 		// Attributes
-		pl_attribute(Radius,	float,				0.5f,					ReadWrite,	DirectValue,	"Dome radius",		"")
-		pl_attribute(DTheta,	float,				10.0f,					ReadWrite,	DirectValue,	"Number of slices",	"")
-		pl_attribute(DPhi,		float,				10.0f,					ReadWrite,	DirectValue,	"Number of rings",	"")
-		pl_attribute(HTile,		float,				1.0f,					ReadWrite,	DirectValue,	"Size of a slice",	"")
-		pl_attribute(VTile,		float,				1.0f,					ReadWrite,	DirectValue,	"Size of a ring",	"")
-		pl_attribute(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Offset to center",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Radius,	float,				0.5f,					ReadWrite)
+		pl_attribute_directvalue(DTheta,	float,				10.0f,					ReadWrite)
+		pl_attribute_directvalue(DPhi,		float,				10.0f,					ReadWrite)
+		pl_attribute_directvalue(HTile,		float,				1.0f,					ReadWrite)
+		pl_attribute_directvalue(VTile,		float,				1.0f,					ReadWrite)
+		pl_attribute_directvalue(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

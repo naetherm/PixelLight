@@ -52,8 +52,8 @@ class SNMTransform : public SceneNodeModifier {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMTransform, "PLScene", PLScene::SceneNodeModifier, "Abstract scene node modifier base class for modifiers that promise to ONLY manipulate the transform of the owner scene node")
-	pl_class_end
+	pl_class_def(PLS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

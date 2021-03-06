@@ -52,19 +52,17 @@ class PGMagic2 : public SNParticleGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGMagic2, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Magic particle group 2")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(SmallParticles,			bool,			true,							ReadWrite,	DirectValue,	"Small particles?",									"")
-		pl_attribute(TexAni,					bool,			false,							ReadWrite,	DirectValue,	"Texture animation?",								"")
-		pl_attribute(Size,						float,			1.0f,							ReadWrite,	DirectValue,	"Size",												"Min='0.0001'")
+		pl_attribute_directvalue(			SmallParticles,				bool,			true,							ReadWrite)
+		pl_attribute_directvalue(			TexAni,						bool,			false,							ReadWrite)
+		pl_attribute_directvalue(			Size,						float,			1.0f,							ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,					PLCore::String,	"Data/Textures/PGMagic2.dds",	ReadWrite,	GetSet,			"Particle group material",							"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,					PLCore::uint32,	100,							ReadWrite,	GetSet,			"Number of particles",								"Min=1")
-		pl_attribute(TextureAnimationColumns,	PLCore::uint32,	2,								ReadWrite,	GetSet,			"Number of animation frame columns in the texture",	"")
-		pl_attribute(TextureAnimationRows,		PLCore::uint32,	1,								ReadWrite,	GetSet,			"Number of animation frame rows in the texture",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGMagic2,	Material,					PLCore::String,	"Data/Textures/PGMagic2.dds",	ReadWrite)
+		pl_attribute_getset		(PGMagic2,	Particles,					PLCore::uint32,	100,							ReadWrite)
+		pl_attribute_getset		(PGMagic2,	TextureAnimationColumns,	PLCore::uint32,	2,								ReadWrite)
+		pl_attribute_getset		(PGMagic2,	TextureAnimationRows,		PLCore::uint32,	1,								ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

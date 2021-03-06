@@ -57,7 +57,20 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderPL)
+pl_class_metadata(MeshLoaderPL, "PLMesh", PLMesh::MeshLoader, "Mesh loader implementation for the PixelLight mesh binary (Little-Endian) file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"mesh,MESH")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,			pl_ret_type(bool),	Mesh&,	PLCore::File&,			"Load method. The loaded mesh is static.",															"")
+	pl_method_3_metadata(LoadParams,	pl_ret_type(bool),	Mesh&,	PLCore::File&,	bool,	"Load method. Parameters: First 'bool' parameter determines whether or not the mesh is static.",	"")
+	pl_method_2_metadata(Save,			pl_ret_type(bool),	Mesh&,	PLCore::File&,			"Save method",																						"")
+pl_class_metadata_end(MeshLoaderPL)
 
 
 //[-------------------------------------------------------]

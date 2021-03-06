@@ -42,7 +42,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMRotationLinearAnimation)
+pl_class_metadata(SNMRotationLinearAnimation, "PLScene", PLScene::SNMTransform, "Linear rotation animation scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Velocity,	PLMath::Vector3,	PLMath::Vector3(0.0f, 10.0f, 0.0f),	ReadWrite,	"Rotation velocity (degree, [0, 360])",	"")
+pl_class_metadata_end(SNMRotationLinearAnimation)
 
 
 //[-------------------------------------------------------]

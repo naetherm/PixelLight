@@ -57,7 +57,24 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPEndHDR)
+pl_class_metadata(SRPEndHDR, "PLCompositing", PLCompositing::SRPEnd, "HDR render pipeline finishing scene renderer pass")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,		PLCore::String,							"",												ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",		"")
+	pl_attribute_metadata(LuminanceConvert,		PLGraphics::Color3,						PLGraphics::Color3(0.2125f, 0.7154f, 0.0721f),	ReadWrite,	"Luminance convert (tone mapping)",																											"")
+	pl_attribute_metadata(Key,					float,									0.72f,											ReadWrite,	"Key value, midzone luminance (tone mapping)",																								"")
+	pl_attribute_metadata(WhiteLevel,			float,									100.0f,											ReadWrite,	"The smallest luminance that will be mapped to pure white, values above 'burn out' (tone mapping)",											"")
+	pl_attribute_metadata(AverageLuminance,		float,									0.02f,											ReadWrite,	"User set average luminance (tone mapping, only used if NoAutomaticAverageLuminance is set)",												"")
+	pl_attribute_metadata(Tau,					float,									0.5f,											ReadWrite,	"Light adaptation 'tau', lower value for longer light adaption time (tone mapping, only used if NoAutomaticAverageLuminance is not set)",	"")
+	pl_attribute_metadata(BloomBrightThreshold,	float,									0.5f,											ReadWrite,	"Bloom bright threshold, only color components >= this value bloom (only used if NoBloom is not set)",										"")
+	pl_attribute_metadata(BloomFactor,			float,									1.0f,											ReadWrite,	"Bloom factor (only used if NoBloom is not set)",																							"")
+	pl_attribute_metadata(BloomBlurPasses,		PLCore::uint32,							4,												ReadWrite,	"Number of bloom blur passes, should be a multiple of 2 (only used if NoBloom is not set)",													"")
+	pl_attribute_metadata(BloomDownscale,		float,									8.0f,											ReadWrite,	"Bloom downscale factor, should be a multiple of 2 (only used if NoBloom is not set)",														"Min='1'")
+	pl_attribute_metadata(Gamma,				float,									2.2f,											ReadWrite,	"Gamma correction value, higher values lighten the image, smaller values darken the image",													"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SRPEndHDR, EFlags),	0,												ReadWrite,	"Flags",																																	"")
+pl_class_metadata_end(SRPEndHDR)
 
 
 //[-------------------------------------------------------]

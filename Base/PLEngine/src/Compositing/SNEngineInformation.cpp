@@ -60,7 +60,15 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNEngineInformation)
+pl_class_metadata(SNEngineInformation, "PLEngine", PLScene::SceneNode, "Engine information scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InfoFlags,			pl_flag_type_def3(SNEngineInformation, EInfoFlags),	SNEngineInformation::FPS|SNEngineInformation::CoordinateAxis|SNEngineInformation::Planes|SNEngineInformation::Profiling,	ReadWrite,	"Information flags",	"")
+	pl_attribute_metadata(ProfilingMaterial,	PLCore::String,										"Data/Effects/PLProfiling.plfx",																							ReadWrite,	"Profiling material",	"Type='Material Effect Image TextureAni'")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SNEngineInformation, EFlags),		SNEngineInformation::NoCulling,																								ReadWrite,	"Flags",				"")
+pl_class_metadata_end(SNEngineInformation)
 
 
 //[-------------------------------------------------------]

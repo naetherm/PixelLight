@@ -48,7 +48,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionShadingLighting)
+pl_class_metadata(ShaderFunctionShadingLighting, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionShading, "Lighting shader function implementation class for shading (gradient-based shading)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionShadingLighting)
 
 
 //[-------------------------------------------------------]

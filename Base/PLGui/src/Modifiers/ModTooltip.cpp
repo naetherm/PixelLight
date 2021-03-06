@@ -48,7 +48,12 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ModTooltip)
+pl_class_metadata(ModTooltip, "PLGui", PLGui::Modifier, "Modifier that displays a tooltip for a widget")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Tooltip,	PLCore::String,	"",	ReadWrite,	"Tooltip text",	"")
+pl_class_metadata_end(ModTooltip)
 
 
 //[-------------------------------------------------------]

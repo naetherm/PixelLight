@@ -37,7 +37,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNString)
+pl_class_metadata(SNString, "PLScene", PLScene::SceneNode, "String data scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(String,	PLCore::String,	"",	ReadWrite,	"String",	"")
+pl_class_metadata_end(SNString)
 
 
 //[-------------------------------------------------------]

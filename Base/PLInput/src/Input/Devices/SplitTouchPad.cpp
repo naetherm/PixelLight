@@ -39,7 +39,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(SplitTouchPad)
+pl_class_metadata(SplitTouchPad, "PLInput", PLInput::Device, "Gamepad device emulation by using a touch screen making it possible to e.g. move & look at the same time")
+pl_class_metadata_end(SplitTouchPad)
 
 
 //[-------------------------------------------------------]

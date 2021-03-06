@@ -52,7 +52,13 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNPortal)
+pl_class_metadata(SNPortal, "PLScene", PLScene::SceneNode, "Abstract portal scene node")
+	// Attributes
+	pl_attribute_metadata(Vertices,		PLCore::String,								"-1.0 -1.0 0.0 -1.0 1.0 0.0 1.0 1.0 0.0 1.0 -1.0 0.0",	ReadWrite,	"Vertices (xyz, counterclockwise) defining the portal polygon. There should be at least 3 vertices.",	"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,		pl_flag_type_def3(SNPortal, EFlags),		SNPortal::CastShadow|SNPortal::ReceiveShadow,			ReadWrite,	"Flags",																								"")
+	pl_attribute_metadata(DebugFlags,	pl_flag_type_def3(SNPortal, EDebugFlags),	0,														ReadWrite,	"Debug flags",																							"")
+pl_class_metadata_end(SNPortal)
 
 
 //[-------------------------------------------------------]

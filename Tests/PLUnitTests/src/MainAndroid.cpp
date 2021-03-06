@@ -65,10 +65,8 @@ class Application : public PLCore::FrontendApplication {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, Application, "", PLCore::FrontendApplication, "Application class")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -117,5 +115,7 @@ class Application : public PLCore::FrontendApplication {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Application)
-
+pl_class_metadata(Application, "", PLCore::FrontendApplication, "Application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+pl_class_metadata_end(Application)

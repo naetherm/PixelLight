@@ -63,7 +63,7 @@ class SNText2D : public SNText {
 		enum EFlags {
 			No3DPosition = 1<<11	/**< The text is not placed within 3D. If this flag is set, the node position is in 'screen space' between 0.0 and 1.0. */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNText::EFlags)
 			pl_enum_value(No3DPosition,	"The text is not placed within 3D. If this flag is set, the node position is in 'screen space' between 0.0 and 1.0.")
 		pl_enum_end
@@ -72,13 +72,11 @@ class SNText2D : public SNText {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNText2D, "PLScene", PLScene::SNText, "2D text scene node")
+	pl_class_def(PLS_API)
 		// Attributes
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	0,	ReadWrite,	GetSet,	"Flags",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNText2D,	Flags,	PLCore::uint32,	0,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -80,7 +80,7 @@ class SNMPhysicsJoint : public SNMPhysics {
 		enum EFlags {
 			LocalPinDirection  = 1<<2	/**< If this flag is set, the pin direction(s) of the joint is/are defined in local scene node space instead of scene container space */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNMPhysics::EFlags)
 			pl_enum_value(LocalPinDirection,	"If this flag is set, the pin direction(s) of the joint is/are defined in local scene node space instead of scene container space")
 		pl_enum_end
@@ -89,12 +89,12 @@ class SNMPhysicsJoint : public SNMPhysics {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsJoint, "PLPhysics", PLPhysics::SNMPhysics, "Abstract physics joint scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(Target,	PLCore::String,			"",	ReadWrite,	GetSet,	"Name of the target scene node (which must have a 'PLPhysics::SNMPhysicsBody' modifier!), can left undefined",	"")
+		pl_attribute_getset(SNMPhysicsJoint,	Target,	PLCore::String,	"",	ReadWrite)
 			// Overwritten PLScene::SceneNodeModifier attributes
-		pl_attribute(Flags,		pl_flag_type(EFlags),	0,	ReadWrite,	GetSet,	"Flags",																										"")
-	pl_class_end
+		pl_attribute_getset(SNMPhysicsJoint,	Flags,	PLCore::uint32,	0,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

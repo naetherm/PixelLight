@@ -49,7 +49,15 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorCappedCylinder)
+pl_class_metadata(MeshCreatorCappedCylinder, "PLMesh", PLMesh::MeshCreator, "Capped cylinder mesh creator class aligned along the x axis")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Length,	float,				1.0f,					ReadWrite,	"The length of the capped cylinder",	"")
+	pl_attribute_metadata(Radius,	float,				0.5f,					ReadWrite,	"The height of the cylinder",			"")
+	pl_attribute_metadata(Quality,	PLCore::uint32,		3,						ReadWrite,	"The quality/tesselation",				"")
+	pl_attribute_metadata(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Offset to center",						"")
+pl_class_metadata_end(MeshCreatorCappedCylinder)
 
 
 //[-------------------------------------------------------]

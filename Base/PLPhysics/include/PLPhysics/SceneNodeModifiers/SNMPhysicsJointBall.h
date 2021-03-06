@@ -58,16 +58,14 @@ class SNMPhysicsJointBall : public SNMPhysicsJoint {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsJointBall, "PLPhysics", PLPhysics::SNMPhysicsJoint, "Physics ball and socket joint scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	GetSet,	"Origin of the ball and socket in local space",																							"")
-		pl_attribute(PinDir,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	GetSet,	"Vector defining the cone axis in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",	"")
+		pl_attribute_getset(SNMPhysicsJointBall,	PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsJointBall,	PinDir,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite)
 		// [TODO] Implement me
 		// DEFINE_VAR(PL_VAR_FLOAT,	m_fMaxConeAngle,	"MaxConeAngle",		"0.0",			"Max angle in degree the attached body is allow to swing relative to the pin axis, a value of zero will disable this limits",	"",	"")
 		// DEFINE_VAR(PL_VAR_FLOAT,	m_fMaxTwistAngle,	"MaxTwistAngle",	"0.0",			"Max angle in degree the attached body is allow to twist relative to the pin axis, a value of zero will disable this limits",	"",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

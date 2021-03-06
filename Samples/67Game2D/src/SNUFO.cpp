@@ -43,7 +43,14 @@ using namespace PLScene;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNUFO)
+pl_class_metadata(SNUFO, "", PLSound::SNSound, "UFO scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Sound,	PLCore::String,	"Data/Sounds/UFO.ogg",	ReadWrite,	"Filename of the sound which should be played (full path, supported file formats are API dependent)",	"Ext='mp3 ogg wav mid midi it mod s3m xm'")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node needs to be updated",	"")
+pl_class_metadata_end(SNUFO)
 
 
 //[-------------------------------------------------------]

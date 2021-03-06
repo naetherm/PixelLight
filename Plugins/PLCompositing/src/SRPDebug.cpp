@@ -37,7 +37,8 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDebug)
+pl_class_metadata(SRPDebug, "PLCompositing", PLScene::SceneRendererPass, "Abstract scene renderer pass for debug rendering")
+pl_class_metadata_end(SRPDebug)
 
 
 //[-------------------------------------------------------]

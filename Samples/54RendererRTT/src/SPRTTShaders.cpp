@@ -57,7 +57,10 @@ using namespace PLMesh;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPRTTShaders)
+pl_class_metadata(SPRTTShaders, "", SPRTT, "Shaders based render to texture surface painter")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLRenderer::Renderer&,	"Parameter constructor",	"")
+pl_class_metadata_end(SPRTTShaders)
 
 
 //[-------------------------------------------------------]
@@ -140,11 +143,11 @@ SPRTTShaders::SPRTTShaders(Renderer &cRenderer) : SPRTT(cRenderer),
 			}
 
 			// Create a vertex shader instance
-			// -> I define a Cg profile because when using an GLSL Cg profile (which is the default), the shader is not working correctly on my AMD/ATI ("AMD Catalyst™ 11.3") system while it worked on the tested NVIDIA system...
+			// -> I define a Cg profile because when using an GLSL Cg profile (which is the default), the shader is not working correctly on my AMD/ATI ("AMD Catalystï¿½ 11.3") system while it worked on the tested NVIDIA system...
 			m_pSceneVertexShader = pShaderLanguage->CreateVertexShader(sVertexShaderSourceCode, "arbvp1");
 
 			// Create a fragment shader instance
-			// -> I define a Cg profile because when using an GLSL Cg profile (which is the default), the shader is not working correctly on my AMD/ATI ("AMD Catalyst™ 11.3") system while it worked on the tested NVIDIA system...
+			// -> I define a Cg profile because when using an GLSL Cg profile (which is the default), the shader is not working correctly on my AMD/ATI ("AMD Catalystï¿½ 11.3") system while it worked on the tested NVIDIA system...
 			m_pSceneFragmentShader = pShaderLanguage->CreateFragmentShader(sFragmentShaderSourceCode, "arbfp1");
 
 			// Create a program instance and assign the created vertex and fragment shaders to it
@@ -174,11 +177,11 @@ SPRTTShaders::SPRTTShaders(Renderer &cRenderer) : SPRTT(cRenderer),
 			}
 
 			// Create a vertex shader instance
-			// -> I define a Cg profile because when using an GLSL Cg profile (which is the default), the shader is not working correctly on my AMD/ATI ("AMD Catalyst™ 11.3") system while it worked on the tested NVIDIA system...
+			// -> I define a Cg profile because when using an GLSL Cg profile (which is the default), the shader is not working correctly on my AMD/ATI ("AMD Catalystï¿½ 11.3") system while it worked on the tested NVIDIA system...
 			m_pVertexShader = pShaderLanguage->CreateVertexShader(sVertexShaderSourceCode, "arbvp1");
 
 			// Create a fragment shader instance
-			// -> I define a Cg profile because when using an GLSL Cg profile (which is the default), the shader is not working correctly on my AMD/ATI ("AMD Catalyst™ 11.3") system while it worked on the tested NVIDIA system...
+			// -> I define a Cg profile because when using an GLSL Cg profile (which is the default), the shader is not working correctly on my AMD/ATI ("AMD Catalystï¿½ 11.3") system while it worked on the tested NVIDIA system...
 			m_pFragmentShader = pShaderLanguage->CreateFragmentShader(sFragmentShaderSourceCode, "arbfp1");
 
 			// Create a program instance and assign the created vertex and fragment shaders to it

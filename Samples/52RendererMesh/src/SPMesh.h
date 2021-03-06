@@ -55,8 +55,8 @@ class SPMesh : public PLRenderer::SurfacePainter {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SPMesh, "", PLRenderer::SurfacePainter, "Abstract mesh surface painter")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -75,7 +75,7 @@ class SRPDeferredHBAO : public SRPDeferredSSAO {
 		enum EFlags {
 			NoNormals = 1<<2,	/**< Ignore the per fragment normals when calculating the ambient occlusion (less AO details for heavy normal mapped scenes) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPDeferredSSAO::EFlags)
 			pl_enum_value(NoNormals, "Ignore the per fragment normals when calculating the ambient occlusion (less AO details for heavy normal mapped scenes)")
 		pl_enum_end
@@ -84,19 +84,17 @@ class SRPDeferredHBAO : public SRPDeferredSSAO {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferredHBAO, "PLCompositing", PLCompositing::SRPDeferredSSAO, "Scene renderer pass for deferred rendering 'Horizon Based Ambient Occlusion' (HBAO), a 'Screen-Space Ambient Occlusion' (SSAO) technique")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(NumberOfSteps,			PLCore::uint32,			8,								ReadWrite,	DirectValue,	"The maximum number samples per direction",																																														"Min='1'")
-		pl_attribute(NumberOfDirections,	PLCore::uint32,			8,								ReadWrite,	DirectValue,	"The number of randomly-rotated 2D directions in image space distributed around the current pixel. The higher this parameter, the lower is the noise in the ambient occlusion.",												"Min='1'")
-		pl_attribute(AORadius,				float,					0.25f,							ReadWrite,	DirectValue,	"AO radius in scene metrics. The radius is the distance outside which occludes are ignored.",																																	"Min='0.0'")
-		pl_attribute(AngleBias,				float,					30.0f,							ReadWrite,	DirectValue,	"For low-tessellated geometry, occlusion variations tend to appear at creases and ridges, which betray the underlying tessellation. To remove these artifacts, we use an angle bias parameter which restricts the hemisphere.",	"Min='0.0'")
-		pl_attribute(Attenuation,			float,					1.0f,							ReadWrite,	DirectValue,	"This scale factor W0 is applied to the per-sample attenuation function. The occlusion contribution of a given sample is attenuated by W0 * W(r/ R) where W(x) = 1 – x2.",														"Min='0.0'")
-		pl_attribute(RandomUVScale,			PLMath::Vector2,		PLMath::Vector2(20.0f, 20.f),	ReadWrite,	DirectValue,	"UV scale for the random normals texture",																																														"")
+		pl_attribute_directvalue(					NumberOfSteps,		PLCore::uint32,		8,								ReadWrite)
+		pl_attribute_directvalue(					NumberOfDirections,	PLCore::uint32,		8,								ReadWrite)
+		pl_attribute_directvalue(					AORadius,			float,				0.25f,							ReadWrite)
+		pl_attribute_directvalue(					AngleBias,			float,				30.0f,							ReadWrite)
+		pl_attribute_directvalue(					Attenuation,		float,				1.0f,							ReadWrite)
+		pl_attribute_directvalue(					RandomUVScale,		PLMath::Vector2,	PLMath::Vector2(20.0f, 20.f),	ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,					pl_flag_type(EFlags),	0,								ReadWrite,	GetSet,			"Flags",																																																						"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPDeferredHBAO,	Flags,				PLCore::uint32,		0,								ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

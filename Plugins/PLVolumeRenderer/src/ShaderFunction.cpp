@@ -45,7 +45,16 @@ const String ShaderFunction::Cg   = "Cg";
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunction)
+pl_class_metadata(ShaderFunction, "PLVolumeRenderer", PLCore::Object, "Abstract shader function base class")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"Unknown")
+		pl_property("FunctionName",				"Unknown")
+		pl_property("FunctionSignature_GLSL",	"Unknown")
+		pl_property("FunctionSignature_Cg",		"Unknown")
+		pl_property("FunctionTemplate",			"0")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunction)
 
 
 //[-------------------------------------------------------]

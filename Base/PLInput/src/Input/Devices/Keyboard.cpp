@@ -39,7 +39,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Keyboard)
+pl_class_metadata(Keyboard, "PLInput", PLInput::Device, "Keyboard input controller")
+pl_class_metadata_end(Keyboard)
 
 
 //[-------------------------------------------------------]

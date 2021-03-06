@@ -37,7 +37,12 @@ namespace PLMath {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(GraphPathLoader)
+pl_class_metadata(GraphPathLoader, "PLMath", PLCore::LoaderImpl, "Abstract graph path loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"GraphPath")
+	pl_properties_end
+pl_class_metadata_end(GraphPathLoader)
 
 
 //[-------------------------------------------------------]

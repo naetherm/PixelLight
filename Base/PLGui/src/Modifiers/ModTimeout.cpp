@@ -49,7 +49,14 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ModTimeout)
+pl_class_metadata(ModTimeout, "PLGui", PLGui::Modifier, "Modifier that closes the widget after a specific time")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Timeout,	PLCore::uint64,	1000,	ReadWrite,	"Timeout in milliseconds",	"")
+	// Slots
+	pl_slot_0_metadata(OnTimer,	"Timer callback",	"")
+pl_class_metadata_end(ModTimeout)
 
 
 //[-------------------------------------------------------]

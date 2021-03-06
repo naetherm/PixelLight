@@ -31,15 +31,8 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include <PLCore/Container/FastPool.h>
+#include <PLCore/Base/Event/DynEventHandler.h>
 #include "PLScriptLua/RTTIObjectPointerBase.h"
-
-
-//[-------------------------------------------------------]
-//[ Forward declarations                                  ]
-//[-------------------------------------------------------]
-namespace PLCore {
-	class DynEventHandler;
-}
 
 
 //[-------------------------------------------------------]
@@ -87,7 +80,7 @@ class RTTIObjectSlotPointer : public RTTIObjectPointerBase, public PLCore::FastP
 		*  @return
 		*    Pointer to the RTTI object slot to wrap, can be a null pointer
 		*/
-		PLCore::DynEventHandler *GetDynEventHandler() const;
+		PLCore::DynEventHandlerPtr GetDynEventHandler() const;
 
 
 	//[-------------------------------------------------------]
@@ -104,7 +97,7 @@ class RTTIObjectSlotPointer : public RTTIObjectPointerBase, public PLCore::FastP
 	//[ Protected data                                        ]
 	//[-------------------------------------------------------]
 	protected:
-		PLCore::DynEventHandler *m_pDynEventHandler;	/**< Pointer to the RTTI object slot to wrap, can be a null pointer */
+		PLCore::DynEventHandlerPtr m_pDynEventHandler;	/**< Pointer to the RTTI object slot to wrap, can be a null pointer */
 
 
 	//[-------------------------------------------------------]
@@ -122,7 +115,7 @@ class RTTIObjectSlotPointer : public RTTIObjectPointerBase, public PLCore::FastP
 		*  @param[in] pDynEventHandler
 		*    Pointer to the RTTI object slot to wrap, can be a null pointer
 		*/
-		void InitializeInstance(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventHandler *pDynEventHandler);
+		void InitializeInstance(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventHandlerPtr pDynEventHandler);
 
 
 };

@@ -49,7 +49,8 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ThemeDesktop)
+pl_class_metadata(ThemeDesktop, "PLGui", PLGui::Theme, "PixelLight desktop theme")
+pl_class_metadata_end(ThemeDesktop)
 
 
 //[-------------------------------------------------------]

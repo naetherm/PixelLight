@@ -46,7 +46,18 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPBegin)
+pl_class_metadata(SRPBegin, "PLCompositing", PLScene::SceneRendererPass, "First scene renderer pass")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(TextureFormat,	pl_enum_type_def3(SRPBegin, ETextureFormat),	PLRenderer::TextureBuffer::Unknown,									ReadWrite,	"Render target texture format, unknown means no render to texture",	"")
+	pl_attribute_metadata(TextureSize,		PLMath::Vector2i,								PLMath::Vector2i::Zero,												ReadWrite,	"Render target size, only used in case the ''-flag is set",			"")
+	pl_attribute_metadata(ClearFlags,		pl_flag_type_def3(SRPBegin, EClearFlags),		SRPBegin::ClearColor|SRPBegin::ClearDepth|SRPBegin::ClearStencil,	ReadWrite,	"Clear flags",														"")
+	pl_attribute_metadata(ColorClear,		PLGraphics::Color4,								PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),							ReadWrite,	"Clear color (r/g/b/a)",											"")
+	pl_attribute_metadata(FillMode,			pl_enum_type_def3(SRPBegin, EFillMode),			SRPBegin::SolidMode,												ReadWrite,	"Fill mode",														"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPBegin, EFlags),			0,																	ReadWrite,	"Flags",															"")
+pl_class_metadata_end(SRPBegin)
 
 
 //[-------------------------------------------------------]
@@ -204,7 +215,7 @@ void SRPBegin::Draw(Renderer &cRenderer, const SQCull &cCullQuery)
 				uint32 nFlags = (GetFlags() & NoMultisampleAntialiasing) ? SurfaceTextureBuffer::NoMultisampleAntialiasing : 0;
 
 				// Create the render target
-				m_pRenderTarget[i] = cRenderer.CreateSurfaceTextureBufferRectangle(vRenderTargetSize, static_cast<TextureBuffer::EPixelFormat>(TextureFormat.GetInt()), nFlags);
+				m_pRenderTarget[i] = cRenderer.CreateSurfaceTextureBufferRectangle(vRenderTargetSize, static_cast<TextureBuffer::EPixelFormat>(TextureFormat.Get()), nFlags);
 				m_bCurrentFrontRenderTarget = 1;
 			}
 		}

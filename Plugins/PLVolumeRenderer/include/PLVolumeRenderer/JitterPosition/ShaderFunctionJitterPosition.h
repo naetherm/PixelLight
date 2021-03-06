@@ -55,15 +55,8 @@ class ShaderFunctionJitterPosition : public ShaderFunction {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionJitterPosition, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for jitter position")
-		// Properties
-		pl_properties
-			pl_property("FunctionTitle",			"1.2 - Jitter Position")
-			pl_property("FunctionName",				"JitterPosition")
-			pl_property("FunctionSignature_GLSL",	"float JitterPosition(vec3 Position)")
-			pl_property("FunctionSignature_Cg",		"float JitterPosition(float3 Position)")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -39,7 +39,8 @@ namespace PLSound {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SoundManager)
+pl_class_metadata(SoundManager, "PLSound", PLCore::Object, "Abstract sound manager main class")
+pl_class_metadata_end(SoundManager)
 
 
 //[-------------------------------------------------------]

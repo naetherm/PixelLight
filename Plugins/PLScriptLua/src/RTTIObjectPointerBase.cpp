@@ -141,7 +141,7 @@ int RTTIObjectPointerBase::IndexMetamethod(lua_State *pLuaState)
 		// [TODO] Currently we can use within Lua the dot operator to access RTTI attributes and properties, but there may occur name conflicts...
 
 		// Is it an attribute or a property?
-		DynVar *pDynVar = m_pRTTIObject->GetAttribute(sName);
+		DynVarPtr pDynVar = m_pRTTIObject->GetAttribute(sName);
 		if (pDynVar) {
 			// It's an attribute
 			switch (pDynVar->GetType().GetTypeID()) {
@@ -186,7 +186,7 @@ int RTTIObjectPointerBase::IndexMetamethod(lua_State *pLuaState)
 					return 1;
 				} else {
 					// Is it a signal?
-					DynEvent *pDynEvent = m_pRTTIObject->GetSignal(sName);
+					DynEventPtr pDynEvent = m_pRTTIObject->GetSignal(sName);
 					if (pDynEvent) {
 						// It's a signal... just put another user data instance on the Lua stack...
 						// The destruction of the new RTTIObjectSignalPointer instance is done by the Lua garbage collector
@@ -196,7 +196,7 @@ int RTTIObjectPointerBase::IndexMetamethod(lua_State *pLuaState)
 						return 1;
 					} else {
 						// Is it a slot?
-						DynEventHandler *pDynEventHandler = m_pRTTIObject->GetSlot(sName);
+						DynEventHandlerPtr pDynEventHandler = m_pRTTIObject->GetSlot(sName);
 						if (pDynEventHandler) {
 							// It's a slot... just put another user data instance on the Lua stack...
 							// The destruction of the new RTTIObjectSlotPointer instance is done by the Lua garbage collector
@@ -228,7 +228,7 @@ int RTTIObjectPointerBase::NewIndexMetamethod(lua_State *pLuaState)
 		case LUA_TNIL:
 		{
 			// Get the RTTI attribute were we want to assign our value to and set value
-			DynVar *pDynVar = m_pRTTIObject->GetAttribute(lua_tostring(pLuaState, LuaNameIndex));
+			DynVarPtr pDynVar = m_pRTTIObject->GetAttribute(lua_tostring(pLuaState, LuaNameIndex));
 			if (pDynVar)
 				pDynVar->SetUIntPtr(0); // Setting a null pointer is a little bit problematic
 			break;
@@ -237,7 +237,7 @@ int RTTIObjectPointerBase::NewIndexMetamethod(lua_State *pLuaState)
 		case LUA_TNUMBER:
 		{
 			// Get the RTTI attribute were we want to assign our value to and set value
-			DynVar *pDynVar = m_pRTTIObject->GetAttribute(lua_tostring(pLuaState, LuaNameIndex));
+			DynVarPtr pDynVar = m_pRTTIObject->GetAttribute(lua_tostring(pLuaState, LuaNameIndex));
 			if (pDynVar)
 				pDynVar->SetDouble(lua_tonumber(pLuaState, LuaValueIndex));
 			break;
@@ -246,7 +246,7 @@ int RTTIObjectPointerBase::NewIndexMetamethod(lua_State *pLuaState)
 		case LUA_TBOOLEAN:
 		{
 			// Get the RTTI attribute were we want to assign our value to and set value
-			DynVar *pDynVar = m_pRTTIObject->GetAttribute(lua_tostring(pLuaState, LuaNameIndex));
+			DynVarPtr pDynVar = m_pRTTIObject->GetAttribute(lua_tostring(pLuaState, LuaNameIndex));
 			if (pDynVar)
 				pDynVar->SetBool(lua_toboolean(pLuaState, LuaValueIndex) != 0);
 			break;
@@ -255,7 +255,7 @@ int RTTIObjectPointerBase::NewIndexMetamethod(lua_State *pLuaState)
 		case LUA_TSTRING:
 		{
 			// Get the RTTI attribute were we want to assign our value to and set value
-			DynVar *pDynVar = m_pRTTIObject->GetAttribute(lua_tostring(pLuaState, LuaNameIndex));
+			DynVarPtr pDynVar = m_pRTTIObject->GetAttribute(lua_tostring(pLuaState, LuaNameIndex));
 			if (pDynVar)
 				pDynVar->SetString(lua_tostring(pLuaState, LuaValueIndex));
 			break;

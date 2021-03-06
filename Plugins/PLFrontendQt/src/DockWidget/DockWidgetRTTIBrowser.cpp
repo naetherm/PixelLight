@@ -26,6 +26,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include <QtGui/qdockwidget.h>
+#include <QtGui/QMainWindow>
 #include <PLCore/Base/Class.h>
 #include "PLFrontendQt/Widget/RTTIBrowserWidget.h"
 #include "PLFrontendQt/DockWidget/DockWidgetRTTIBrowser.h"
@@ -41,7 +42,14 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetRTTIBrowser)
+pl_class_metadata(DockWidgetRTTIBrowser, "PLFrontendQt", PLFrontendQt::DockWidget, "RTTI browser Qt dock widget class")
+	// Properties
+	pl_properties
+		pl_property("Title", "RTTI Browser")
+	pl_properties_end
+	// Constructors
+	pl_constructor_2_metadata(DefaultConstructor,	QMainWindow*,	DockWidgetManager*,	"Constructor with a pointer to the Qt main window as first parameter, pointer to the dock widget manager this dock widget should be registered to as second parameter",	"")
+pl_class_metadata_end(DockWidgetRTTIBrowser)
 
 
 //[-------------------------------------------------------]
@@ -51,7 +59,7 @@ pl_implement_class(DockWidgetRTTIBrowser)
 *  @brief
 *    Constructor
 */
-DockWidgetRTTIBrowser::DockWidgetRTTIBrowser(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidget(reinterpret_cast<QWidget*>(pQMainWindow), pDockWidgetManager)
+DockWidgetRTTIBrowser::DockWidgetRTTIBrowser(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidget(pQMainWindow, pDockWidgetManager)
 {
 	// Get encapsulated Qt dock widget
 	QDockWidget *pQDockWidget = GetQDockWidget();

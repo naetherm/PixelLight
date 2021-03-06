@@ -81,7 +81,7 @@ class SCRenderToTexture : public SceneContainer {
 		enum EDebugFlags {
 			DebugNoTexturePreview = 1<<8	/**< Do not draw the texture preview */
 		};
-		pl_enum(EDebugFlags)
+		pl_flag(EDebugFlags)
 			pl_enum_base(SceneContainer::EDebugFlags)
 			pl_enum_value(DebugNoTexturePreview, "Do not draw the texture preview")
 		pl_enum_end
@@ -108,7 +108,7 @@ class SCRenderToTexture : public SceneContainer {
 			Stencil = 1<<1,	/**< Surface has a stencil buffer */
 			Mipmaps = 1<<2	/**< Surface has mipmaps */
 		};
-		pl_enum(ESurfaceFlags)
+		pl_flag(ESurfaceFlags)
 			pl_enum_value(Depth,	"Surface has a depth buffer")
 			pl_enum_value(Stencil,	"Surface has a stencil buffer")
 			pl_enum_value(Mipmaps,	"Surface has mipmaps")
@@ -118,25 +118,23 @@ class SCRenderToTexture : public SceneContainer {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SCRenderToTexture, "PLScene", PLScene::SceneContainer, "Render to texture scene container")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Cube,			bool,							false,					ReadWrite,	GetSet,			"Render to cube texture? If 'true', only 'Width' is used which must be a power of two",	"")
-		pl_attribute(Width,			PLCore::uint16,					512,					ReadWrite,	GetSet,			"Texture width",																		"Min='16'")
-		pl_attribute(Height,		PLCore::uint16,					512,					ReadWrite,	GetSet,			"Texture height",																		"Min='16'")
-		pl_attribute(Format,		pl_enum_type(EFormat),			R8G8B8A8,				ReadWrite,	GetSet,			"Texture format",																		"")
-		pl_attribute(SurfaceFlags,	pl_flag_type(ESurfaceFlags),	Depth|Mipmaps,			ReadWrite,	GetSet,			"Texture surface flags",																"")
-		pl_attribute(TextureName,	PLCore::String,					"",						ReadWrite,	GetSet,			"Name of the resulting texture",														"")
-		pl_attribute(FPSLimit,		float,							30.0f,					ReadWrite,	DirectValue,	"Frames per second limitation, if 0, there's no limitation",							"Min='0.0'")
-		pl_attribute(Painter,		PLCore::String,					"PLScene::SPScene",	ReadWrite,	GetSet,			"Name of the used surface painter",														"")
-		pl_attribute(SceneRenderer,	PLCore::String,					"Forward.sr",			ReadWrite,	GetSet,			"Name of the used scene renderer, only used if the painter is derived of 'SPScene'",	"")
-		pl_attribute(SceneName,		PLCore::String,					"Parent",				ReadWrite,	GetSet,			"Name of the scene to renderer, only used if the painter is derived of 'SPScene'",		"")
-		pl_attribute(CameraName,	PLCore::String,					"",						ReadWrite,	DirectValue,	"Name of the camera to use, only used if the painter is derived of 'SPScene'",			"")
+		pl_attribute_getset		(SCRenderToTexture,	Cube,			bool,			false,					ReadWrite)
+		pl_attribute_getset		(SCRenderToTexture,	Width,			PLCore::uint16,	512,					ReadWrite)
+		pl_attribute_getset		(SCRenderToTexture,	Height,			PLCore::uint16,	512,					ReadWrite)
+		pl_attribute_getset		(SCRenderToTexture,	Format,			EFormat,		R8G8B8A8,				ReadWrite)
+		pl_attribute_getset		(SCRenderToTexture,	SurfaceFlags,	PLCore::uint32,	Depth|Mipmaps,			ReadWrite)
+		pl_attribute_getset		(SCRenderToTexture,	TextureName,	PLCore::String,	"",						ReadWrite)
+		pl_attribute_directvalue(					FPSLimit,		float,			30.0f,					ReadWrite)
+		pl_attribute_getset		(SCRenderToTexture,	Painter,		PLCore::String,	"PLScene::SPScene",		ReadWrite)
+		pl_attribute_getset		(SCRenderToTexture,	SceneRenderer,	PLCore::String,	"Forward.sr",			ReadWrite)
+		pl_attribute_getset		(SCRenderToTexture,	SceneName,		PLCore::String,	"Parent",				ReadWrite)
+		pl_attribute_directvalue(					CameraName,		PLCore::String,	"",						ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),			NoCulling|NoRecursion,	ReadWrite,	GetSet,			"Flags",																				"")
-		pl_attribute(DebugFlags,	pl_flag_type(EDebugFlags),		0,						ReadWrite,	GetSet,			"Debug flags",																			"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SCRenderToTexture,	Flags,			PLCore::uint32,	NoCulling|NoRecursion,	ReadWrite)
+		pl_attribute_getset		(SCRenderToTexture,	DebugFlags,		PLCore::uint32,	0,						ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

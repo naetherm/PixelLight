@@ -45,7 +45,9 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Dialog)
+pl_class_metadata(Dialog, "PLGui", PLGui::Widget, "Base class for dialog windows")
+	pl_constructor_0_metadata(DefaultConstructor, "Default constructor", "")
+pl_class_metadata_end(Dialog)
 
 
 //[-------------------------------------------------------]

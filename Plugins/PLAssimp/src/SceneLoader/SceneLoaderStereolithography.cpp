@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoaderStereolithography)
+pl_class_metadata(SceneLoaderStereolithography, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for stl (Stereolithography) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"stl,STL")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneLoaderStereolithography)
 
 
 //[-------------------------------------------------------]

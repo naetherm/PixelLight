@@ -64,9 +64,9 @@ void PLIntrospectionModel::SetObject(PLCore::Object *Obj)
 		PLCore::List<PLCore::DynFuncPtr> funcs;
 		Obj->GetMethods(funcs);
 
-		PLCore::List<PLCore::DynVar*> list = Obj->GetAttributes();
+		PLCore::List<PLCore::DynVarPtr> list = Obj->GetAttributes();
 		for (PLCore::uint32 i=0; i<list.GetNumOfElements(); i++) {
-			PLCore::DynVar *var = list[i];
+			PLCore::DynVarPtr var = list[i];
 			PLDynVarTreeItemsFactory::CreateDynVarTreeItem(var, GetRootItem());
 		}
 	}

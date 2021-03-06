@@ -65,15 +65,8 @@ class GuiApplication : public PLCore::CoreApplication {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, GuiApplication, "PLGui", PLCore::CoreApplication, "Gui application class")
-		#ifdef PLGUI_EXPORTS	// The following is only required when compiling PLGui
-			// Constructors
-			pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-			// Methods
-			pl_method_0(GetMainWindow,	pl_ret_type(Widget*),				"Get the main window. Returns pointer to the main window of the application, a null pointer on error.",						"")
-			pl_method_1(SetMainWindow,	pl_ret_type(void),		Widget*,	"Set the main window, pointer to the main window of the application (a null pointer is also valid) as first parameter.",	"")
-		#endif
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

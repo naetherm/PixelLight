@@ -59,9 +59,8 @@ class TabContainer : public WindowContainer {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, TabContainer, "PLGui", PLGui::WindowContainer, "Tab container")
-		pl_constructor_0(DefaultConstructor, "Default constructor", "")
-	pl_class_end
+	pl_class_def(PLGUI_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

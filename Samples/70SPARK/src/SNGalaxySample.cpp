@@ -45,7 +45,10 @@ using namespace PLScene;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNGalaxySample)
+pl_class_metadata(SNGalaxySample, "", SPARK_PL::SNSystem, "Galaxy SPARK particle system sample scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SNGalaxySample)
 
 
 //[-------------------------------------------------------]

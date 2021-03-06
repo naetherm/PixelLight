@@ -49,15 +49,9 @@
 #ifdef PLSCRIPTPYTHON_EXPORTS
 	// To export classes, methods and variables
 	#define PLSCRIPTPYTHON_API			PL_GENERIC_API_EXPORT
-
-	// To export RTTI elements
-	#define PLSCRIPTPYTHON_RTTI_EXPORT	PL_GENERIC_RTTI_EXPORT
 #else
 	// To import classes, methods and variables
 	#define PLSCRIPTPYTHON_API			PL_GENERIC_API_IMPORT
-
-	// To import RTTI elements
-	#define PLSCRIPTPYTHON_RTTI_EXPORT	PL_GENERIC_RTTI_IMPORT
 #endif
 
 

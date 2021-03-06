@@ -37,7 +37,12 @@ namespace PLGraphics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ImageLoader)
+pl_class_metadata(ImageLoader, "PLGraphics", PLCore::LoaderImpl, "Abstract image loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Image")
+	pl_properties_end
+pl_class_metadata_end(ImageLoader)
 
 
 //[-------------------------------------------------------]

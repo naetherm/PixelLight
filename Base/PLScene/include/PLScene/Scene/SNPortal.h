@@ -66,7 +66,7 @@ class SNPortal : public SceneNode {
 			DebugNoPortalPolygon = 1<<8,	/**< Do not draw the (pink) portal polygon */
 			DebugPortalVertices  = 1<<9		/**< Draw the (white) portal vertices */
 		};
-		pl_enum(EDebugFlags)
+		pl_flag(EDebugFlags)
 			pl_enum_base(SceneNode::EDebugFlags)
 			pl_enum_value(DebugNoPortalPolygon,	"Do not draw the (pink) portal polygon")
 			pl_enum_value(DebugPortalVertices,	"Draw the (white) portal vertices")
@@ -76,13 +76,13 @@ class SNPortal : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNPortal, "PLScene", PLScene::SceneNode, "Abstract portal scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Vertices,		PLCore::String,				"-1.0 -1.0 0.0 -1.0 1.0 0.0 1.0 1.0 0.0 1.0 -1.0 0.0",	ReadWrite,	GetSet,	"Vertices (xyz, counterclockwise) defining the portal polygon. There should be at least 3 vertices.",	"")
+		pl_attribute_getset(SNPortal,	Vertices,	PLCore::String,	"-1.0 -1.0 0.0 -1.0 1.0 0.0 1.0 1.0 0.0 1.0 -1.0 0.0",	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),		CastShadow|ReceiveShadow,								ReadWrite,	GetSet,	"Flags",																								"")
-		pl_attribute(DebugFlags,	pl_flag_type(EDebugFlags),	0,														ReadWrite,	GetSet,	"Debug flags",																							"")
-	pl_class_end
+		pl_attribute_getset(SNPortal,	Flags,		PLCore::uint32,	CastShadow|ReceiveShadow,								ReadWrite)
+		pl_attribute_getset(SNPortal,	DebugFlags,	PLCore::uint32,	0,														ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -173,7 +173,7 @@ class SNPortal : public SceneNode {
 	private:
 		/**
 		*  @brief
-		*    Flags which hold ínternal portal information
+		*    Flags which hold ï¿½nternal portal information
 		*/
 		enum EInternalPortalFlags {
 			// Recalculate

@@ -43,7 +43,16 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGMagic1)
+pl_class_metadata(PGMagic1, "PLParticleGroups", PLParticleGroups::PGPhysics, "Magic particle group 1")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Size,			float,			0.2f,							ReadWrite,	"Size",						"Min='0.0001'")
+	pl_attribute_metadata(BuildPerSec,	PLCore::uint32,	100,							ReadWrite,	"Particle building speed",	"")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,		PLCore::String,	"Data/Textures/PGMagic1.dds",	ReadWrite,	"Particle group material",	"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,	PLCore::uint32,	200,							ReadWrite,	"Number of particles",		"Min=1")
+pl_class_metadata_end(PGMagic1)
 
 
 //[-------------------------------------------------------]

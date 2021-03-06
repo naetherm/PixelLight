@@ -52,12 +52,10 @@ class SNEventArea : public SNArea {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNEventArea, "PLScene", PLScene::SNArea, "An event area is a region in the scene where an event can be caused")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(EventID,	int,	0,	ReadWrite,	DirectValue,	"Event ID",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(EventID,	int,	0,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

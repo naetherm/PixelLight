@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoaderNeutralFileFormat)
+pl_class_metadata(SceneLoaderNeutralFileFormat, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for nff (Neutral File Format) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"nff,enff,NFF,ENFF")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneLoaderNeutralFileFormat)
 
 
 //[-------------------------------------------------------]

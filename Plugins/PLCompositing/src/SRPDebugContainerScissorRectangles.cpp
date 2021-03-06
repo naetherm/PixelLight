@@ -50,7 +50,13 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDebugContainerScissorRectangles)
+pl_class_metadata(SRPDebugContainerScissorRectangles, "PLCompositing", PLCompositing::SRPDebug, "Scene renderer pass drawing just simple container scissor rectangles")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(LineWidth,	float,				2.0f,										ReadWrite,	"Line width (if supported by the the used renderer API)",	"Min='1.0'")
+	pl_attribute_metadata(LineColor,	PLGraphics::Color4,	PLGraphics::Color4(0.8f, 0.8f, 1.0f, 1.0f),	ReadWrite,	"Line color",												"")
+pl_class_metadata_end(SRPDebugContainerScissorRectangles)
 
 
 //[-------------------------------------------------------]

@@ -47,7 +47,10 @@ using namespace PLInput;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Application30)
+pl_class_metadata(Application30, "", PLCore::FrontendApplication, "Application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+pl_class_metadata_end(Application30)
 
 
 //[-------------------------------------------------------]

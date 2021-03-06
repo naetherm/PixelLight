@@ -46,7 +46,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNText2D)
+pl_class_metadata(SNText2D, "PLScene", PLScene::SNText, "2D text scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNText2D, EFlags),	0,	ReadWrite,	"Flags",	"")
+pl_class_metadata_end(SNText2D)
 
 
 //[-------------------------------------------------------]

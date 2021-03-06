@@ -44,7 +44,12 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsJointUpVector)
+pl_class_metadata(SNMPhysicsJointUpVector, "PLPhysics", PLPhysics::SNMPhysicsJoint, "Physics up vector joint scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(PinDir,	PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	"The aligning vector in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",	"")
+pl_class_metadata_end(SNMPhysicsJointUpVector)
 
 
 //[-------------------------------------------------------]

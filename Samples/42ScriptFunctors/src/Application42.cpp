@@ -45,7 +45,10 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Application42)
+pl_class_metadata(Application42, "", PLCore::FrontendApplication, "Application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+pl_class_metadata_end(Application42)
 
 
 //[-------------------------------------------------------]
@@ -96,23 +99,27 @@ float Application42::RunScript(const String &sScriptFilename, float fFirst, floa
 
 			// Functor pointing to the static method "Application42::StaticMethod"
 			Functor<int, int> cStaticMethod(StaticMethod);
+			FunctorWrapper<int, int> cStaticMethodWrapper(&cStaticMethod);
 
 			// Functor pointing to the static method "Application42::StaticStringMethod"
 			Functor<String, String> cStaticStringMethod(StaticStringMethod);
+			FunctorWrapper<String, String> cStaticStringMethodWrapper(&cStaticStringMethod);
 
 			// Functor pointing to the member method "Application42::Method"
 			Functor<int, int> cMethod(&Application42::Method, this);
+			FunctorWrapper<int, int> cMethodWrapper(&cMethod);
 
 			// Functor pointing to the script function "ScriptFunction"
 			Functor<int, int> cScriptFunction(new FuncScriptPtr<int, int>(pScript, "ScriptFunction"));
+			FunctorWrapper<int, int> cScriptFunctionWrapper(&cScriptFunction);
 
 			// Tell our script about those functors so that we can use them within the script...
-			pScript->AddGlobalFunction("CppFunction", cStaticMethod, "FirstNamespace.SecondNamespace");
-			pScript->AddGlobalFunction("CppStringFunction", cStaticStringMethod);
-			pScript->AddGlobalFunction("CppMethod", cMethod);
+			pScript->AddGlobalFunction("CppFunction", cStaticMethodWrapper, "FirstNamespace.SecondNamespace");
+			pScript->AddGlobalFunction("CppStringFunction", cStaticStringMethodWrapper);
+			pScript->AddGlobalFunction("CppMethod", cMethodWrapper);
 
 			// The following is possible as well: Script is calling C++, C++ is calling script... *g*
-			pScript->AddGlobalFunction("CppScriptFunction", cScriptFunction);
+			pScript->AddGlobalFunction("CppScriptFunction", cScriptFunctionWrapper);
 			// ... although it depends on the used internal script API whether or not it actually works without issues. With
 			// the Lua, Python and V8 (JavaScript) API there are no issues, but AngelScript can't run another AngelScript while one is already running.
 			// But using this way, one can e.g. call an AngelScript function from inside a Lua script function...
@@ -136,7 +143,8 @@ float Application42::RunScript(const String &sScriptFilename, float fFirst, floa
 						Params<int, int> cParams(nValue);
 
 						// Call the script function
-						FuncScriptPtr<int, int>(pScript, "CallCpp").Call(cParams);
+						FuncScriptPtr<int, int> callCppMethod(pScript, "CallCpp");
+						FuncWrapper<int, int>(&callCppMethod).Call(cParams);
 
 						// Get and check result
 						const bool bEqual = (cParams.Return == (nFunctionResult + nMethodResult + nScriptFunctionResult));
@@ -149,21 +157,24 @@ float Application42::RunScript(const String &sScriptFilename, float fFirst, floa
 					Params<float> cParams;
 
 					// Call the script function
-					FuncScriptPtr<float>(pScript, "GetFactor").Call(cParams);
+					FuncScriptPtr<float> getFactorMethod(pScript, "GetFactor");
+					FuncWrapper<float>(&getFactorMethod).Call(cParams);
 
 					// Get the result
 					fFactor = cParams.Return;
 				}
 
 				// Call the script function "SetFactor"
-				FuncScriptPtr<void, float>(pScript, "SetFactor").Call(Params<void, float>(fFactor + 1.0f));
+				FuncScriptPtr<void, float> setFactorMethod(pScript, "SetFactor");
+				FuncWrapper<void, float>(&setFactorMethod).Call(Params<void, float>(fFactor + 1.0f));
 
 				{ // Call the script function "Calculate"
 					// Get the typed dynamic parameters
 					Params<float, float, float> cParams(fFirst, fSecond);
 
 					// Call the script function
-					FuncScriptPtr<float, float, float>(pScript, "Calculate").Call(cParams);
+					FuncScriptPtr<float, float, float> calculateMethod(pScript, "Calculate");
+					FuncWrapper<float, float, float>(&calculateMethod).Call(cParams);
 
 					// Get the result
 					fResult = cParams.Return;
@@ -174,7 +185,8 @@ float Application42::RunScript(const String &sScriptFilename, float fFirst, floa
 					Params<String, String> cParams("MyString");
 
 					// Call the script function
-					FuncScriptPtr<String, String>(pScript, "ReturnMyString").Call(cParams);
+					FuncScriptPtr<String, String> returnMyStringMethod(pScript, "ReturnMyString");
+					FuncWrapper<String, String>(&returnMyStringMethod).Call(cParams);
 
 					// Check the result
 					System::GetInstance()->GetConsole().Print(String("Got my string: ") + (cParams.Return == "MyString" ? "Yes" : "No") + '\n');
@@ -188,7 +200,8 @@ float Application42::RunScript(const String &sScriptFilename, float fFirst, floa
 					Params<String> cParams;
 
 					// Call the script function
-					FuncScriptPtr<String>(pScript, "SayHello", "PublicFunctions").Call(cParams);
+					FuncScriptPtr<String> publicFunctionsMethod(pScript, "SayHello", "PublicFunctions");
+					FuncWrapper<String>(&publicFunctionsMethod).Call(cParams);
 
 					// Get the result
 					System::GetInstance()->GetConsole().Print("The script function \"SayHello\" which is inside the \"PublicFunctions\"-namespace says \"" + cParams.Return + "\"\n");

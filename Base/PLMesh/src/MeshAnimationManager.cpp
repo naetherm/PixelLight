@@ -43,7 +43,8 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshAnimationManager)
+pl_class_metadata(MeshAnimationManager, "PLMesh", PLCore::Object, "This is a manager for the mesh animation element")
+pl_class_metadata_end(MeshAnimationManager)
 
 
 //[-------------------------------------------------------]

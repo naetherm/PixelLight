@@ -58,8 +58,8 @@ class FrontendAndroid : public PLCore::FrontendImpl {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLFRONTENDOS_RTTI_EXPORT, FrontendAndroid, "PLFrontendOS", PLCore::FrontendImpl, "Android frontend implementation class")
-	pl_class_end
+	pl_class_def(PLFRONTENDOS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -41,7 +41,24 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(FixedFunctionsRenderStates)
+pl_class_metadata(FixedFunctionsRenderStates, "PLRenderer", PLCore::Object, "Fixed functions render states RTTI wrapper class")
+	// Attributes
+	pl_attribute_metadata(FogEnable,			bool,											false,										ReadWrite,	"Enable/disable fog",				"")
+	pl_attribute_metadata(FogColor,				PLGraphics::Color4,								PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite,	"RGBA fog color",					"")
+	pl_attribute_metadata(FogDensity,			float,											1.0f,										ReadWrite,	"Fog density",						"")
+	pl_attribute_metadata(FogStart,				float,											0.0f,										ReadWrite,	"Fog start",						"")
+	pl_attribute_metadata(FogEnd,				float,											1.0f,										ReadWrite,	"Fog end",							"")
+	pl_attribute_metadata(FogMode,				pl_enum_type_def3(FixedFunctions, Fog::Enum),	FixedFunctions::Fog::Exp,					ReadWrite,	"Fog mode",							"")
+		// Alpha test
+	pl_attribute_metadata(AlphaTestEnable,		bool,											false,										ReadWrite,	"Enable/disable alpha test",		"")
+	pl_attribute_metadata(AlphaTestFunction,	pl_enum_type(Compare::Enum),					Compare::GreaterEqual,						ReadWrite,	"Alpha test comparison function",	"")
+	pl_attribute_metadata(AlphaTestReference,	float,											1.0f,										ReadWrite,	"Alpha test reference value",		"")
+		// Misc
+	pl_attribute_metadata(Lighting,				bool,											true,										ReadWrite,	"Enable/disable lighting",			"")
+	pl_attribute_metadata(Ambient,				PLGraphics::Color4,								PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite,	"General RGBA ambient color",		"")
+	pl_attribute_metadata(NormalizeNormals,		bool,											true,										ReadWrite,	"Enable/disable normalize normals",	"")
+	pl_attribute_metadata(ShadeMode,			pl_enum_type_def3(FixedFunctions, Shade::Enum),	FixedFunctions::Shade::Smooth,				ReadWrite,	"Shade mode",						"")
+pl_class_metadata_end(FixedFunctionsRenderStates)
 
 
 //[-------------------------------------------------------]

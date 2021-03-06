@@ -71,7 +71,7 @@ class SNCellPortal : public SNPortal {
 			NoSeeThrough  = 1<<10,	/**< It's not possible to 'see through' this cell-portal into the target cell (example usage: closed door) */
 			NoPassThrough = 1<<11	/**< It's not possible to 'pass through' this cell-portal into the target cell (example usage: window) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNPortal::EFlags)
 			pl_enum_value(NoSeeThrough,		"It's not possible to 'see through' this cell-portal into the target cell (example usage: closed door)")
 			pl_enum_value(NoPassThrough,	"It's not possible to 'pass through' this cell-portal into the target cell (example usage: window)")
@@ -81,14 +81,12 @@ class SNCellPortal : public SNPortal {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNCellPortal, "PLScene", PLScene::SNPortal, "Cell-portal scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(TargetCell,	PLCore::String,			"",	ReadWrite,	GetSet,	"Name of the cell this cell-portal links to (for instance 'Parent.Cell2')",	"")
+		pl_attribute_getset(SNCellPortal,	TargetCell,	PLCore::String,	"",	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),	0,	ReadWrite,	GetSet,	"Flags",																	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNCellPortal,	Flags,		PLCore::uint32,	0,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -147,7 +145,7 @@ class SNCellPortal : public SNPortal {
 	private:
 		/**
 		*  @brief
-		*    Flags which hold ínternal portal information (SNPortal flags extension)
+		*    Flags which hold ï¿½nternal portal information (SNPortal flags extension)
 		*/
 		enum EInternalPortalFlags {
 			// Recalculate

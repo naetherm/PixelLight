@@ -45,7 +45,10 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDebugFunctions)
+pl_class_metadata(SRPDebugFunctions, "PLCompositing", PLCompositing::SRPDebug, "Scene renderer pass calling all 'debug'-draw functions")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SRPDebugFunctions)
 
 
 //[-------------------------------------------------------]

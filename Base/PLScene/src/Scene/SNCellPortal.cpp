@@ -41,7 +41,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNCellPortal)
+pl_class_metadata(SNCellPortal, "PLScene", PLScene::SNPortal, "Cell-portal scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(TargetCell,	PLCore::String,								"", ReadWrite,	"Name of the cell this cell-portal links to (for instance 'Parent.Cell2')",	"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,		pl_flag_type_def3(SNCellPortal, EFlags),	0,	ReadWrite,	"Flags",																	"")
+pl_class_metadata_end(SNCellPortal)
 
 
 //[-------------------------------------------------------]

@@ -67,24 +67,12 @@ class ScriptApplication : public EngineApplication {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, ScriptApplication, "PLEngine", PLEngine::EngineApplication, "Script application class")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(OnInitFunction,	PLCore::String,	"OnInit",	ReadWrite,	DirectValue,	"Name of the optional script function called by C++ when the application should initialize itself",		"")
-		pl_attribute(OnUpdateFunction,	PLCore::String,	"OnUpdate",	ReadWrite,	DirectValue,	"Name of the optional script function called by C++ when the application should update itself",			"")
-		pl_attribute(OnDeInitFunction,	PLCore::String,	"OnDeInit",	ReadWrite,	DirectValue,	"Name of the optional script function called by C++ when the application should de-initialize itself",	"")
-		#ifdef PLENGINE_EXPORTS	// The following is only required when compiling PLEngine
-			// Constructors
-			pl_constructor_1(ParameterConstructor1,	PLCore::Frontend&,																	"Parameter constructor. Frontend this application instance is running in as first parameter.",																																																																				"")
-			pl_constructor_2(ParameterConstructor2,	PLCore::Frontend&, PLCore::String,													"Parameter constructor. Frontend this application instance is running in as first parameter, parameter with the filename of the script to load as second parameter.",																																																		"")
-			pl_constructor_5(ParameterConstructor5,	PLCore::Frontend&, PLCore::String,	PLCore::String,	PLCore::String,	PLCore::String,	"Parameter constructor. Frontend this application instance is running in as first parameter, parameter with the filename of the script to load as second parameter, the following parameters name, title and subdirectory for application data files are optional and will be constructed automatically by using the filename of the script if an empty string is given",	"")
-			// Methods
-			pl_method_0(GetBaseDirectory,	pl_ret_type(PLCore::String),							"Returns the base directory of the application (native path style, e.g. on Windows: 'C:\MyApplication\').",																		"")
-			pl_method_1(SetBaseDirectory,	pl_ret_type(void),				const PLCore::String&,	"Sets the base directory of the application (e.g. on Windows: 'C:\MyApplication\'). Base directory as the first parameter.",													"")
-			pl_method_0(GetScript,			pl_ret_type(PLCore::Script*),							"Returns the used script instance.",																																			"")
-			pl_method_0(GetScriptFilename,	pl_ret_type(PLCore::String),							"Returns the absolute filename of the used script (native path style, e.g. on Windows: 'C:\MyApplication\Main.lua').",															"")
-			pl_method_0(GetScriptDirectory,	pl_ret_type(PLCore::String),							"Returns the absolute directory the used script is in (native path style, e.g. on Windows: 'C:\MyApplication\' if currently the script 'C:\MyApplication\Main.lua' is used).",	"")
-		#endif
-	pl_class_end
+		pl_attribute_directvalue(OnInitFunction,	PLCore::String,	"OnInit",	ReadWrite)
+		pl_attribute_directvalue(OnUpdateFunction,	PLCore::String,	"OnUpdate",	ReadWrite)
+		pl_attribute_directvalue(OnDeInitFunction,	PLCore::String,	"OnDeInit",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

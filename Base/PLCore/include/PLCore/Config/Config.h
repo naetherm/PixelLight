@@ -61,14 +61,14 @@ namespace PLCore {
 *
 *   class CoreConfigGroup : public ConfigGroup {
 *     pl_class(CoreConfigGroup, "PLCore", PLCore::ConfigGroup, "PLCore configuration classes")
-*     pl_class_end
+*     pl_class_end_def
 *   };
 *
 *   class CoreConfig : public CoreConfigGroup {
 *     pl_class(CoreConfig, "PLCore", PLCore::CoreConfigGroup, "PLCore general configuration classes")
 *       pl_constructor_0(DefaultConstructor, "Default constructor", "")
 *       pl_attribute(Blabla, bool, true, ReadWrite, DirectValue, "Blabla setting", "")
-*     pl_class_end
+*     pl_class_end_def
 *   };
 *  @endverbatim
 */
@@ -84,8 +84,8 @@ class ConfigGroup : public Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, ConfigGroup, "PLCore", PLCore::Object, "Configuration group")
-	pl_class_end
+	pl_class_def(PLCORE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -120,13 +120,14 @@ class ConfigGroup : public Object {
 *  @verbatim
 *    // Somewhere deep within your custom configuration class header...
 *    class ConfigTest : public ConfigGroup {
-*      pl_class(ConfigTest, "PLCore", PLCore::ConfigGroup, "Test config class")
-*        pl_constructor_0(DefaultConstructor, "Default constructor", "")
-*        pl_attribute(Detail, float, 1.0f, ReadWrite, DirectValue, "Detail description text", "")
-*      pl_class_end
+*      pl_class_def(<EXPORT_MACRO>)
+*      pl_class_def_end
 *    };
 *    // Somewhere in your custom configuration class source code
-*    pl_implement_class(ConfigTest)
+*    pl_class_metadata(ConfigTest, "PLCore", PLCore::ConfigGroup, "Test config class")
+*        pl_constructor_0_metadata(DefaultConstructor, "Default constructor", "")
+*        pl_attribute(Detail, float, 1.0f, ReadWrite, DirectValue, "Detail description text", "")
+*    pl_class_metadata_end(ConfigTest)
 *    // Set ConfigTest variable value
 *    cConfig.SetVar("ConfigTest", "Detail", "2.0");
 *    // Get ConfigTest variable value

@@ -55,10 +55,8 @@ class ShaderFunctionClassificationTransferFunction : public ShaderFunctionClassi
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionClassificationTransferFunction, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClassification, "Standard post-interpolative function shader function implementation class for classification")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

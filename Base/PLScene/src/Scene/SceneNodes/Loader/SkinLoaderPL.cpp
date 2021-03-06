@@ -45,7 +45,19 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SkinLoaderPL)
+pl_class_metadata(SkinLoaderPL, "PLScene", PLScene::SkinLoader, "Skin loader implementation for the PixelLight skin XML file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"skin,SKIN")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	SNMesh&,	PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	SNMesh&,	PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(SkinLoaderPL)
 
 
 //[-------------------------------------------------------]

@@ -56,19 +56,12 @@
 #ifdef PLCORE_STATIC
 	// Static library
 	#define PLCORE_API			// -
-	#define PLCORE_RTTI_EXPORT	1
 #elif defined(PLCORE_EXPORTS)
 	// To export classes, methods and variables
 	#define PLCORE_API			PL_GENERIC_API_EXPORT
-
-	// To export RTTI elements
-	#define PLCORE_RTTI_EXPORT	PL_GENERIC_RTTI_EXPORT
 #else
 	// To import classes, methods and variables
 	#define PLCORE_API			PL_GENERIC_API_IMPORT
-
-	// To import RTTI elements
-	#define PLCORE_RTTI_EXPORT	PL_GENERIC_RTTI_IMPORT
 #endif
 
 

@@ -90,7 +90,7 @@ class SRPDeferredDepthFog : public SRPDeferred {
 		enum EFlags {
 			DisableBlending = 1<<1	/**< Disable blending (for debugging) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPDeferred::EFlags)
 			pl_enum_value(DisableBlending, "Disable blending (for debugging)")
 		pl_enum_end
@@ -99,19 +99,17 @@ class SRPDeferredDepthFog : public SRPDeferred {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferredDepthFog, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering classic depth fog")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,	PLCore::String,			"",											ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
-		pl_attribute(FogColor,			PLGraphics::Color4,		PLGraphics::Color4(0.5f, 0.5f, 0.5f, 1.0f),	ReadWrite,	DirectValue,	"Fog color",																															"")
-		pl_attribute(FogMode,			pl_enum_type(EFogMode),	ExponentialMode,							ReadWrite,	DirectValue,	"Fog mode",																																"")
-		pl_attribute(FogStart,			float,					0.0f,										ReadWrite,	DirectValue,	"Fog start, only for LinearMode",																										"")
-		pl_attribute(FogEnd,			float,					1.0f,										ReadWrite,	DirectValue,	"Fog end, only for LinearMode",																											"")
-		pl_attribute(FogDensity,		float,					1.0f,										ReadWrite,	DirectValue,	"Fog density, only for ExponentialMode and Exponential2Mode",																			"")
+		pl_attribute_directvalue(						ShaderLanguage,	PLCore::String,		"",											ReadWrite)
+		pl_attribute_directvalue(						FogColor,		PLGraphics::Color4,	PLGraphics::Color4(0.5f, 0.5f, 0.5f, 1.0f),	ReadWrite)
+		pl_attribute_directvalue(						FogMode,		EFogMode,			ExponentialMode,							ReadWrite)
+		pl_attribute_directvalue(						FogStart,		float,				0.0f,										ReadWrite)
+		pl_attribute_directvalue(						FogEnd,			float,				1.0f,										ReadWrite)
+		pl_attribute_directvalue(						FogDensity,		float,				1.0f,										ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,											ReadWrite,	GetSet,			"Flags",																																"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPDeferredDepthFog,	Flags,			PLCore::uint32,		0,											ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

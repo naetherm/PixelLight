@@ -44,7 +44,14 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessOldFilm)
+pl_class_metadata(SNMPostProcessOldFilm, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Filename,	PLCore::String,	"Data/PostProcesses/OldFilm.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+	// Slot
+	pl_slot_0_metadata(OnSceneNodeUpdate,	"Slot for SceneNode::EventUpdate",	"")
+pl_class_metadata_end(SNMPostProcessOldFilm)
 
 
 //[-------------------------------------------------------]

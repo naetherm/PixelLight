@@ -42,7 +42,13 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsBodyCone)
+pl_class_metadata(SNMPhysicsBodyCone, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics cone body scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Radius,	float,	1.0f,	ReadWrite,	"Cone radius at the base",								"Min='0.0'")
+	pl_attribute_metadata(Height,	float,	1.0f,	ReadWrite,	"Cone height along the x local axis from base to tip",	"Min='0.0'")
+pl_class_metadata_end(SNMPhysicsBodyCone)
 
 
 //[-------------------------------------------------------]

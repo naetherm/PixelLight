@@ -58,7 +58,24 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(EngineApplication)
+pl_class_metadata(EngineApplication, "PLEngine", PLScene::SceneApplication, "Basic scene application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+	// Methods
+	pl_method_0_metadata(GetScene,				pl_ret_type(PLScene::SceneContainer*),										"Returns the scene container (the 'concrete scene'), can be a null pointer.",																								"")
+	pl_method_1_metadata(SetScene,				pl_ret_type(void),							PLScene::SceneContainer*,		"Sets the scene container (the 'concrete scene'). New scene container as first parameter (can be a null pointer).",															"")
+	pl_method_0_metadata(ClearScene,			pl_ret_type(void),															"Clears the scene, after calling this method the scene is empty.",																											"")
+	pl_method_1_metadata(LoadScene,				pl_ret_type(bool),							const PLCore::String&,			"Loads a scene. Filename of the scene to load as first argument. Returns 'true' if all went fine, else 'false'. This method will completely replace the current scene.",	"")
+	pl_method_0_metadata(GetCamera,				pl_ret_type(PLScene::SNCamera*),											"Get the scene camera, can be a null pointer.",																																"")
+	pl_method_1_metadata(SetCamera,				pl_ret_type(void),							PLScene::SNCamera*,				"Sets the scene camera. New scene camera as first parameter (can be a null pointer).",																						"")
+	pl_method_0_metadata(GetInputController,	pl_ret_type(PLInput::VirtualController*),									"Get the virtual input controller (can be a null pointer).",																												"")
+	pl_method_1_metadata(SetInputController,	pl_ret_type(void),							PLInput::VirtualController*,	"Set the virtual input controller. Virtual input controller (can be a null pointer) as first parameter.",																	"")
+	pl_method_0_metadata(GetSceneRendererTool,	pl_ret_type(SceneRendererTool&),											"Returns the scene renderer tool.",																																			"")
+	pl_method_0_metadata(GetScreenshotTool,		pl_ret_type(Screenshot&),													"Returns the screenshot tool.",																																				"")
+	// Signals
+	pl_signal_0_metadata(SignalCameraSet,				"A new camera has been set",					"")
+	pl_signal_0_metadata(SignalSceneLoadingFinished,	"Scene loading has been finished successfully",	"")
+pl_class_metadata_end(EngineApplication)
 
 
 //[-------------------------------------------------------]
@@ -641,28 +658,28 @@ void EngineApplication::OnSceneNode(SceneQuery &cQuery, SceneNode &cSceneNode)
 		const SNKeyValue &cKeyValue = static_cast<const SNKeyValue&>(cSceneNode);
 
 		// SceneRenderer
-		if (cKeyValue.Key.GetString() == "SceneRenderer") {
+		if (cKeyValue.Key.Get() == "SceneRenderer") {
 			// Use the first found key
 			if (!m_sDefaultSceneRenderer.GetLength())
-				m_sDefaultSceneRenderer = cKeyValue.Value.GetString();
+				m_sDefaultSceneRenderer = cKeyValue.Value.Get();
 
 		// SceneRendererVariables
-		} else if (cKeyValue.Key.GetString() == "SceneRendererVariables") {
+		} else if (cKeyValue.Key.Get() == "SceneRendererVariables") {
 			// Use the first found key
 			if (!m_sSceneRendererVariables.GetLength())
-				m_sSceneRendererVariables = cKeyValue.Value.GetString();
+				m_sSceneRendererVariables = cKeyValue.Value.Get();
 
 		// ClearColor
-		} else if (cKeyValue.Key.GetString() == "ClearColor") {
+		} else if (cKeyValue.Key.Get() == "ClearColor") {
 			// Use the first found key
 			if (!m_sClearColor.GetLength())
-				m_sClearColor = cKeyValue.Value.GetString();
+				m_sClearColor = cKeyValue.Value.Get();
 
 		// StartCamera
-		} else if (cKeyValue.Key.GetString() == "StartCamera") {
+		} else if (cKeyValue.Key.Get() == "StartCamera") {
 			// Use the first found key
 			if (!m_sStartCamera.GetLength())
-				m_sStartCamera = cKeyValue.Value.GetString();
+				m_sStartCamera = cKeyValue.Value.Get();
 		}
 
 	// Load screen scene node?

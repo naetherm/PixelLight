@@ -56,14 +56,12 @@ class SNMPostProcessColorFilter : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessColorFilter, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(Filter,	PLGraphics::Color4,	PLGraphics::Color4(1.0f, 0.4f, 0.4f, 1.0f),	ReadWrite,	DirectValue,	"Color filter",							"")
+		pl_attribute_directvalue(								Filter,		PLGraphics::Color4,	PLGraphics::Color4(1.0f, 0.4f, 0.4f, 1.0f),	ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,	PLCore::String,		"Data/PostProcesses/ColorFilter.pp",		ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,	PLCore::String,		"Data/PostProcesses/ColorFilter.pp",		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

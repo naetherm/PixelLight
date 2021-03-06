@@ -39,7 +39,8 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysics)
+pl_class_metadata(SNMPhysics, "PLPhysics", PLScene::SceneNodeModifier, "Abstract physics scene node modifier base class")
+pl_class_metadata_end(SNMPhysics)
 
 
 //[-------------------------------------------------------]

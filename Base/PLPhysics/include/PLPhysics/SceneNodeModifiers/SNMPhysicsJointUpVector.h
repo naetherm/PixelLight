@@ -64,12 +64,10 @@ class SNMPhysicsJointUpVector : public SNMPhysicsJoint {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsJointUpVector, "PLPhysics", PLPhysics::SNMPhysicsJoint, "Physics up vector joint scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(PinDir,	PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	GetSet,	"The aligning vector in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMPhysicsJointUpVector,	PinDir,	PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

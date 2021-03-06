@@ -76,26 +76,11 @@ class EngineApplication : public PLScene::SceneApplication {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, EngineApplication, "PLEngine", PLScene::SceneApplication, "Basic scene application class")
-		#ifdef PLENGINE_EXPORTS	// The following is only required when compiling PLEngine
-			// Constructors
-			pl_constructor_1(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
-			// Methods
-			pl_method_0(GetScene,				pl_ret_type(PLScene::SceneContainer*),										"Returns the scene container (the 'concrete scene'), can be a null pointer.",																								"")
-			pl_method_1(SetScene,				pl_ret_type(void),							PLScene::SceneContainer*,		"Sets the scene container (the 'concrete scene'). New scene container as first parameter (can be a null pointer).",															"")
-			pl_method_0(ClearScene,				pl_ret_type(void),															"Clears the scene, after calling this method the scene is empty.",																											"")
-			pl_method_1(LoadScene,				pl_ret_type(bool),							const PLCore::String&,			"Loads a scene. Filename of the scene to load as first argument. Returns 'true' if all went fine, else 'false'. This method will completely replace the current scene.",	"")
-			pl_method_0(GetCamera,				pl_ret_type(PLScene::SNCamera*),											"Get the scene camera, can be a null pointer.",																																"")
-			pl_method_1(SetCamera,				pl_ret_type(void),							PLScene::SNCamera*,				"Sets the scene camera. New scene camera as first parameter (can be a null pointer).",																						"")
-			pl_method_0(GetInputController,		pl_ret_type(PLInput::VirtualController*),									"Get the virtual input controller (can be a null pointer).",																												"")
-			pl_method_1(SetInputController,		pl_ret_type(void),							PLInput::VirtualController*,	"Set the virtual input controller. Virtual input controller (can be a null pointer) as first parameter.",																	"")
-			pl_method_0(GetSceneRendererTool,	pl_ret_type(SceneRendererTool&),											"Returns the scene renderer tool.",																																			"")
-			pl_method_0(GetScreenshotTool,		pl_ret_type(Screenshot&),													"Returns the screenshot tool.",																																				"")
-		#endif
+	pl_class_def(PL_API)
 		// Signals
-		pl_signal_0(SignalCameraSet,			"A new camera has been set",					"")
-		pl_signal_0(SignalSceneLoadingFinished,	"Scene loading has been finished successfully",	"")
-	pl_class_end
+		pl_signal_0_def(SignalCameraSet)
+		pl_signal_0_def(SignalSceneLoadingFinished)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

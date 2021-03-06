@@ -41,7 +41,16 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessSepia2)
+pl_class_metadata(SNMPostProcessSepia2, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(TintColor0,	PLGraphics::Color4,	PLGraphics::Color4(0.299f, 0.587f, 0.184f,  0.31f),	ReadWrite,	"Tint color 0 (red component)",			"")
+	pl_attribute_metadata(TintColor1,	PLGraphics::Color4,	PLGraphics::Color4(0.299f, 0.587f, 0.184f,  0.17f),	ReadWrite,	"Tint color 1 (green component)",		"")
+	pl_attribute_metadata(TintColor2,	PLGraphics::Color4,	PLGraphics::Color4(0.299f, 0.587f, 0.184f, -0.09f),	ReadWrite,	"Tint color 2 (blue component)",		"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,		"Data/PostProcesses/Sepia2.pp",						ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessSepia2)
 
 
 //[-------------------------------------------------------]

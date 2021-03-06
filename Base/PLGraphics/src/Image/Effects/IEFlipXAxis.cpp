@@ -40,7 +40,8 @@ namespace PLGraphics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(IEFlipXAxis)
+pl_class_metadata(IEFlipXAxis, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Flip the image around the x axis")
+pl_class_metadata_end(IEFlipXAxis)
 
 
 //[-------------------------------------------------------]

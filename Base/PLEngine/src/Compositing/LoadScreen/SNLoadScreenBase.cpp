@@ -40,7 +40,10 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNLoadScreenBase)
+pl_class_metadata(SNLoadScreenBase, "PLEngine", PLScene::SceneNode, "Abstract load screen base scene node")
+	// Attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNLoadScreenBase, EFlags),	SNLoadScreenBase::NoCulling,	ReadWrite,	"Flags",	"")
+pl_class_metadata_end(SNLoadScreenBase)
 
 
 //[-------------------------------------------------------]

@@ -60,23 +60,21 @@ class SCSound : public PLScene::SceneContainer {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLSOUND_RTTI_EXPORT, SCSound, "PLSound", PLScene::SceneContainer, "Sound scene node container")
+	pl_class_def(PLSOUND_API)
 		// Attributes
 	#ifdef ANDROID
 		// [TODO] Make PLSoundOpenSLES to the default (because it's open and free) as soon as it's implemented
-		pl_attribute(SoundAPI,	PLCore::String,	"PLSoundFMODEx::SoundManager",		ReadWrite,	DirectValue,	"Name of the sound API this scene container is using",						"")
-//		pl_attribute(SoundAPI,	PLCore::String,	"PLSoundOpenSLES::SoundManager",	ReadWrite,	DirectValue,	"Name of the sound API this scene container is using",						"")
+		pl_attribute_directvalue(			SoundAPI,	PLCore::String,	"PLSoundFMODEx::SoundManager",		ReadWrite)
+//		pl_attribute_directvalue(			SoundAPI,	PLCore::String,	"PLSoundOpenSLES::SoundManager",	ReadWrite)
 	#else
-		pl_attribute(SoundAPI,	PLCore::String,	"PLSoundOpenAL::SoundManager",		ReadWrite,	DirectValue,	"Name of the sound API this scene container is using",						"")
+		pl_attribute_directvalue(			SoundAPI,	PLCore::String,	"PLSoundOpenAL::SoundManager",		ReadWrite)
 	#endif
-		pl_attribute(Volume,	float,			1.0f,								ReadWrite,	GetSet,			"Volume (value from 0.0-1.0 -> 0.0 = silence, 1.0 = full volume)",			"Min='0.0' Max='1.0'")
-		pl_attribute(Pitch,		float,			1.0f,								ReadWrite,	GetSet,			"Pitch multiplier (pitch<1.0=slower/pitch=1.0=normal/pitch>1.0=faster)",	"Min='0.0'")
-		pl_attribute(Listener,	PLCore::String,	"",									ReadWrite,	GetSet,			"Name of the scene node used as listener",									"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
+		pl_attribute_getset		(SCSound,	Volume,		float,			1.0f,								ReadWrite)
+		pl_attribute_getset		(SCSound,	Pitch,		float,			1.0f,								ReadWrite)
+		pl_attribute_getset		(SCSound,	Listener,	PLCore::String,	"",									ReadWrite)
 		// Slots
-		pl_slot_0(OnUpdate,	"Called when the scene node needs to be updated",	"")
-	pl_class_end
+		pl_slot_0_def(SCSound,	OnUpdate)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

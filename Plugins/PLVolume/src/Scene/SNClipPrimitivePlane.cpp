@@ -44,7 +44,13 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNClipPrimitivePlane)
+pl_class_metadata(SNClipPrimitivePlane, "PLVolume", PLVolume::SNClipPrimitive, "Clip primitive plane scene node (plane in scene node space, xy-plane clipping everything <0 on the z-axis)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(AABBMin,	PLMath::Vector3,	PLMath::Vector3(-10.0f, -10.0f, -10.0f),	ReadWrite,	"Minimum position of the 'scene node space' axis aligned bounding box",	"")
+	pl_attribute_metadata(AABBMax,	PLMath::Vector3,	PLMath::Vector3( 10.0f,  10.0f,  10.0f),	ReadWrite,	"Maximum position of the 'scene node space' axis aligned bounding box",	"")
+pl_class_metadata_end(SNClipPrimitivePlane)
 
 
 //[-------------------------------------------------------]

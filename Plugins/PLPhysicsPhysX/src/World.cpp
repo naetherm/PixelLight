@@ -66,7 +66,10 @@ uint32        World::m_nPhysXInstanceCounter = 0;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(World)
+pl_class_metadata(World, "PLPhysicsPhysX", PLPhysics::World, "PhysX physics world base class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(World)
 
 
 //[-------------------------------------------------------]

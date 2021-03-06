@@ -48,7 +48,10 @@ namespace SPARK_PL {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNBasicDemo)
+pl_class_metadata(SNBasicDemo, "SPARK_PL", SPARK_PL::SNSystem, "Basic SPARK particle system demo scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SNBasicDemo)
 
 
 //[-------------------------------------------------------]

@@ -53,17 +53,15 @@ class MeshCreatorCylinder : public MeshCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLMESH_RTTI_EXPORT, MeshCreatorCylinder, "PLMesh", PLMesh::MeshCreator, "Cylinder mesh creator class")
+	pl_class_def(PLMESH_API)
 		// Attributes
-		pl_attribute(BaseRadius,	float,				0.5f,					ReadWrite,	DirectValue,	"The radius of the cylinder at z = 0",			"")
-		pl_attribute(TopRadius,		float,				0.5f,					ReadWrite,	DirectValue,	"The radius of the cylinder at z = height",		"")
-		pl_attribute(Height,		float,				1.0f,					ReadWrite,	DirectValue,	"The height of the cylinder",					"")
-		pl_attribute(Slices,		PLCore::uint32,		20,						ReadWrite,	DirectValue,	"The number of subdivisions around the z-axis",	"")
-		pl_attribute(Offset,		PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Offset to center",								"")
-		pl_attribute(Closed,		bool,				true,					ReadWrite,	DirectValue,	"Shall the shape be closed on all sides?",		"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(BaseRadius,	float,				0.5f,					ReadWrite)
+		pl_attribute_directvalue(TopRadius,		float,				0.5f,					ReadWrite)
+		pl_attribute_directvalue(Height,		float,				1.0f,					ReadWrite)
+		pl_attribute_directvalue(Slices,		PLCore::uint32,		20,						ReadWrite)
+		pl_attribute_directvalue(Offset,		PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_directvalue(Closed,		bool,				true,					ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

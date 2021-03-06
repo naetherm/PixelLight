@@ -41,7 +41,10 @@ namespace PLlibRocket {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPlibRocket)
+pl_class_metadata(SRPlibRocket, "PLlibRocket", PLScene::SceneRendererPass, "libRocket scene renderer pass")
+	// Constructors
+	pl_constructor_2_metadata(ParameterConstructor,	Rocket::Core::Context&,	RenderInterfacePL&,	"Parameter constructor",	"")
+pl_class_metadata_end(SRPlibRocket)
 
 
 //[-------------------------------------------------------]

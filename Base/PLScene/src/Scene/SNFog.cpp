@@ -37,7 +37,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNFog)
+pl_class_metadata(SNFog, "PLScene", PLScene::SceneNode, "Abstract fog scene node base class")
+	// Attributes
+	pl_attribute_metadata(Color,	PLGraphics::Color3,	PLGraphics::Color3::White,	ReadWrite,	"Fog color (r/g/b)",	"")
+pl_class_metadata_end(SNFog)
 
 
 //[-------------------------------------------------------]

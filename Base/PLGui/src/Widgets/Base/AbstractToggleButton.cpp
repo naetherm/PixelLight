@@ -46,7 +46,15 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(AbstractToggleButton)
+pl_class_metadata(AbstractToggleButton, "PLGui", PLGui::AbstractButton, "Abstract base class for toggle buttons (two or three states)")
+	// Attributes
+	pl_attribute_metadata(PartiallyAllowed,	bool,						false,		ReadWrite,	"Is the third state (PartiallyChecked) allowed?",	"")
+	pl_attribute_metadata(State,			pl_enum_type(ECheckState),	NotChecked,	ReadWrite,	"Current check state",								"")
+	// Signals
+	pl_signal_1_metadata(SignalToggled,	ECheckState,	"The button has been toggled",	"")
+	// Slots
+	pl_slot_1_metadata(OnGroupActivate,	AbstractToggleButton*,	"Group callback",	"")
+pl_class_metadata_end(AbstractToggleButton)
 
 
 //[-------------------------------------------------------]

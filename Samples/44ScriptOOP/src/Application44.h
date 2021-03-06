@@ -52,12 +52,10 @@ class Application44 : public PLCore::FrontendApplication {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, Application44, "", PLCore::FrontendApplication, "Application class")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+	pl_class_def()
 		// Slots
-		pl_slot_1(OnMySignal,	PLCore::String,	"Called on MySignal signal, a string as first parameter",	"")
-	pl_class_end
+		pl_slot_1_def(Application44,	OnMySignal,	PLCore::String)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

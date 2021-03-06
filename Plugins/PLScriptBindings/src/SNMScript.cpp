@@ -43,7 +43,20 @@ namespace PLScriptBindings {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMScript)
+pl_class_metadata(SNMScript, "PLScriptBindings", PLScene::SceneNodeModifier, "Script scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Methods
+	pl_method_0_metadata(GetScriptInstance,	pl_ret_type(PLCore::Script*),	"Returns the instance of the used script (can be a null pointer)",	"")
+	// Attributes
+	pl_attribute_metadata(Script,			PLCore::String,	"",			ReadWrite,	"Script to use (set the script again in order to reload it)",																									"")
+	pl_attribute_metadata(OnInitFunction,	PLCore::String,	"OnInit",	ReadWrite,	"Name of the optional script function called by C++ when the scene node modifier should initialize itself",														"")
+	pl_attribute_metadata(OnUpdateFunction,	PLCore::String,	"OnUpdate",	ReadWrite,	"Name of the optional script function called by C++ when the scene node modifier should update itself",															"")
+	pl_attribute_metadata(OnDeInitFunction,	PLCore::String,	"OnDeInit",	ReadWrite,	"Name of the optional script function called by C++ when the scene node modifier should de-initialize itself",													"")
+	pl_attribute_metadata(ScriptExecute,	PLCore::String,	"",			ReadWrite,	"Script source code to execute, can be used to set global variables (Lua example: ScriptExecute=\"PublicVariables.Speed=0.07 PublicVariables.Radius=0.01\")",	"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
+pl_class_metadata_end(SNMScript)
 
 
 //[-------------------------------------------------------]
@@ -73,7 +86,7 @@ void SNMScript::SetScript(const String &sValue)
 
 		// Call the initialize script function, but only when it's really there because it's optional
 		if (m_pScript->IsGlobalFunction(OnInitFunction.Get()))
-			FuncScriptPtr<void>(m_pScript, OnInitFunction.Get()).Call(Params<void>());
+			FuncScriptPtr<void>(m_pScript, OnInitFunction.Get())();
 
 		// Is there any script source code to execute?
 		if (m_sScriptExecute.GetLength())
@@ -184,7 +197,7 @@ void SNMScript::DestroyScript()
 	if (m_pScript) {
 		// Call the de-initialize script function, but only when it's really there because it's optional
 		if (m_pScript->IsGlobalFunction(OnDeInitFunction.Get()))
-			FuncScriptPtr<void>(m_pScript, OnDeInitFunction.Get()).Call(Params<void>());
+			FuncScriptPtr<void>(m_pScript, OnDeInitFunction.Get())();
 
 		// Destroy the used script instance
 		delete m_pScript;
@@ -201,7 +214,7 @@ void SNMScript::OnUpdate()
 	// When we're in here, we know that the script instance and the optional global script update function are both valid (see "SNMScript::OnActivate()")
 
 	// Call the update script function
-	FuncScriptPtr<void>(m_pScript, m_sOnUpdateFunction).Call(Params<void>());
+	FuncScriptPtr<void>(m_pScript, m_sOnUpdateFunction)();
 }
 
 

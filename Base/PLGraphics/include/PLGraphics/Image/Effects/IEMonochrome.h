@@ -55,8 +55,8 @@ class IEMonochrome : public ImageEffect {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLGRAPHICS_RTTI_EXPORT, IEMonochrome, "PLGraphics", PLGraphics::ImageEffect, "Image effect: Convert color to gray scale using \"human eye formula\" (red*0.299 + green*0.587 + blue*0.114)")
-	pl_class_end
+	pl_class_def(PLGRAPHICS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

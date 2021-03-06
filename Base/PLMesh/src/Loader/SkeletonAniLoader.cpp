@@ -37,7 +37,12 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SkeletonAniLoader)
+pl_class_metadata(SkeletonAniLoader, "PLMesh", PLCore::LoaderImpl, "Abstract skeleton animation loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Skeleton")
+	pl_properties_end
+pl_class_metadata_end(SkeletonAniLoader)
 
 
 //[-------------------------------------------------------]

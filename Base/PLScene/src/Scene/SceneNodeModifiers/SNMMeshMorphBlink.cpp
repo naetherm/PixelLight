@@ -41,7 +41,18 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMMeshMorphBlink)
+pl_class_metadata(SNMMeshMorphBlink, "PLScene", PLScene::SNMMeshMorph, "Animated scene node mesh morph modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Time,			float,	10.0f,	ReadWrite,	"Current time to next animation start",					"")
+	pl_attribute_metadata(TimeBase,		float,	1.0f,	ReadWrite,	"Base time to next animation start",					"")
+	pl_attribute_metadata(TimeRandom,	float,	2.0f,	ReadWrite,	"Maximum added random time to next animation start",	"")
+	pl_attribute_metadata(Direction,	bool,	false,	ReadWrite,	"Current animation direction 1=+ 0=-",					"")
+	pl_attribute_metadata(Speed,		float,	6.0f,	ReadWrite,	"Animation speed",										"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
+pl_class_metadata_end(SNMMeshMorphBlink)
 
 
 //[-------------------------------------------------------]

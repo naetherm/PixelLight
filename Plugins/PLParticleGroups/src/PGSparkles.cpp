@@ -43,7 +43,22 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGSparkles)
+pl_class_metadata(PGSparkles, "PLParticleGroups", PLParticleGroups::PGPhysics, "Sparkles particle group")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(EnergyPerSec,		PLCore::uint32,	100,							ReadWrite,	"The energy consumption per second of one particle",					"")
+	pl_attribute_metadata(EnergyMin,		PLCore::uint32,	100,							ReadWrite,	"Minimum of energy",													"")
+	pl_attribute_metadata(EnergyRange,		PLCore::uint32,	65,								ReadWrite,	"EnergyMin + EnergyRange = particles energy",							"")
+	pl_attribute_metadata(Brightness,		PLCore::uint32,	250,							ReadWrite,	"Brightness",															"")
+	pl_attribute_metadata(MediumSpeed,		float,			100.0f,							ReadWrite,	"The speed factor of the particles",									"")
+	pl_attribute_metadata(MediumSize,		PLCore::uint32,	5,								ReadWrite,	"Medium size for each particles",										"")
+	pl_attribute_metadata(DownVsAwayRatio,	PLCore::uint32,	20,								ReadWrite,	"20 -> every 20 particle fly randomly away instead of falling down",	"")
+	pl_attribute_metadata(BuildPerSec,		PLCore::uint32,	100,							ReadWrite,	"Particle building speed",												"")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,			PLCore::String,	"Data/Textures/PGSparkles.dds",	ReadWrite,	"Particle group material",												"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,		PLCore::uint32,	300,							ReadWrite,	"Number of particles",													"Min=1")
+pl_class_metadata_end(PGSparkles)
 
 
 //[-------------------------------------------------------]

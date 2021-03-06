@@ -48,7 +48,10 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPEnd)
+pl_class_metadata(SRPEnd, "PLCompositing", PLScene::SceneRendererPass, "Finishing scene renderer pass")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SRPEnd)
 
 
 //[-------------------------------------------------------]

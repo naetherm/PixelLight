@@ -31,7 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Base/Func/Functor.h"
-#include "PLCore/Base/Event/DynEventHandler.h"
+#include "PLCore/Base/Event/EventHandlerBase.h"
 
 
 //[-------------------------------------------------------]
@@ -55,21 +55,20 @@ class Event;
 *    Generic event handler class
 */
 template <typename T0 = NullType, typename T1 = NullType, typename T2 = NullType, typename T3 = NullType, typename T4 = NullType, typename T5 = NullType, typename T6 = NullType, typename T7 = NullType, typename T8 = NullType, typename T9 = NullType, typename T10 = NullType, typename T11 = NullType, typename T12 = NullType, typename T13 = NullType, typename T14 = NullType, typename T15 = NullType>
-class EventHandler : public DynEventHandler {
+class EventHandler : public EventHandlerBase<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> {
 
 
 	//[-------------------------------------------------------]
 	//[ Friends                                               ]
 	//[-------------------------------------------------------]
 	friend class Event<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>;
-
+	
 
 	//[-------------------------------------------------------]
 	//[ Public data types                                     ]
 	//[-------------------------------------------------------]
 	public:
-		typedef Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>		TypeFunctor;
-		typedef Signature<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>	TypeSignature;
+		typedef Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>	TypeFunctor; // Needed as member
 
 
 	//[-------------------------------------------------------]
@@ -134,20 +133,10 @@ class EventHandler : public DynEventHandler {
 
 
 	//[-------------------------------------------------------]
-	//[ Public virtual DynEventHandler functions              ]
-	//[-------------------------------------------------------]
-	public:
-		virtual String GetSignature() const override
-		{
-			return TypeSignature::GetSignatureID();
-		}
-
-
-	//[-------------------------------------------------------]
 	//[ Protected data                                        ]
 	//[-------------------------------------------------------]
 	protected:
-		TypeFunctor m_cFunctor;		/**< Functor containing the event handler */
+		TypeFunctor m_cFunctor;	/**< Functor containing the event handler */
 
 
 };

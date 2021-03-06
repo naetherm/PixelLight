@@ -47,15 +47,9 @@
 #ifdef PLDATABASEMYSQL_EXPORTS
 	// To export classes, methods and variables
 	#define PLDATABASEMYSQL_API			PL_GENERIC_API_EXPORT
-
-	// To export RTTI elements
-	#define PLDATABASEMYSQL_RTTI_EXPORT	PL_GENERIC_RTTI_EXPORT
 #else
 	// To import classes, methods and variables
 	#define PLDATABASEMYSQL_API			PL_GENERIC_API_IMPORT
-
-	// To import RTTI elements
-	#define PLDATABASEMYSQL_RTTI_EXPORT	PL_GENERIC_RTTI_IMPORT
 #endif
 
 

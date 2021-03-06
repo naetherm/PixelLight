@@ -45,7 +45,10 @@ namespace PLFrontendPLGui {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNGui)
+pl_class_metadata(SNGui, "PLFrontendPLGui", PLScene::SceneNode, "GUI scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SNGui)
 
 
 //[-------------------------------------------------------]

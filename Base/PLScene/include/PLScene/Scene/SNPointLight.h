@@ -63,7 +63,7 @@ class SNPointLight : public SNLight {
 		enum EDebugFlags {
 			DebugNoScissorRectangle = 1<<8	/**< Do not draw the (pink) scissor rectangle */
 		};
-		pl_enum(EDebugFlags)
+		pl_flag(EDebugFlags)
 			pl_enum_base(SNLight::EDebugFlags)
 			pl_enum_value(DebugNoScissorRectangle, "Do not draw the (pink) scissor rectangle")
 		pl_enum_end
@@ -72,14 +72,12 @@ class SNPointLight : public SNLight {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNPointLight, "PLScene", PLScene::SNLight, "Omni directional point light scene node were light is emitted from a single point in space")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Range,			float,						1.0f,	ReadWrite,	GetSet,	"Light range",	"Min='0.0001'")
+		pl_attribute_getset(SNPointLight,	Range,		float,			1.0f,	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(DebugFlags,	pl_flag_type(EDebugFlags),	0,		ReadWrite,	GetSet,	"Flags",					"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNPointLight,	DebugFlags,	PLCore::uint32,	0,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -122,7 +120,7 @@ class SNPointLight : public SNLight {
 	protected:
 		/**
 		*  @brief
-		*    Flags which hold ínternal light information
+		*    Flags which hold ï¿½nternal light information
 		*/
 		enum EInternalLightFlags {
 			// Recalculate

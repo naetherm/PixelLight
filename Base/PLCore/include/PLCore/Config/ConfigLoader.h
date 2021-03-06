@@ -65,12 +65,8 @@ class ConfigLoader : public LoaderImpl {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, ConfigLoader, "PLCore", PLCore::LoaderImpl, "Abstract config loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Config")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLCORE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

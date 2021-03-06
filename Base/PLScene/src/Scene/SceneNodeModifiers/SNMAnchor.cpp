@@ -48,7 +48,22 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMAnchor)
+pl_class_metadata(SNMAnchor, "PLScene", PLScene::SceneNodeModifier, "Scene node anchor modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(AttachedNode,			PLCore::String,							"",						ReadWrite,	"Name of the attached scene node",																				"")
+	pl_attribute_metadata(PositionOffset,		PLMath::Vector3,						PLMath::Vector3::Zero,	ReadWrite,	"Position offset (node space)",																					"")
+	pl_attribute_metadata(RotationOffset,		PLMath::Vector3,						PLMath::Vector3::Zero,	ReadWrite,	"Rotation offset in degree (node space)",																		"")
+	pl_attribute_metadata(SkeletonJoint,		PLCore::String,							"",						ReadWrite,	"If not empty, the attached node is relative to this skeleton joint (there must be a mesh handler + skeleton)",	"")
+	pl_attribute_metadata(JointPositionOffset,	PLMath::Vector3,						PLMath::Vector3::Zero,	ReadWrite,	"Joint position offset (joint space)",																			"")
+	pl_attribute_metadata(JointRotationOffset,	PLMath::Vector3,						PLMath::Vector3::Zero,	ReadWrite,	"Joint rotation offset in degree (joint space)",																"")
+		// Overwritten SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SNMAnchor, EFlags),	0,						ReadWrite,	"Flags",																										"")
+	// Slots
+	pl_slot_0_metadata(OnContainer,					"Called when the scene node container changed",									"")
+	pl_slot_0_metadata(OnPositionRotationUpdate,	"Called when the scene node position or rotation changed or on update request",	"")
+pl_class_metadata_end(SNMAnchor)
 
 
 //[-------------------------------------------------------]

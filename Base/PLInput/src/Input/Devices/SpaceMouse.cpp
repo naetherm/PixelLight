@@ -39,7 +39,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(SpaceMouse)
+pl_class_metadata(SpaceMouse, "PLInput", PLInput::Device, "Joystick input controller")
+pl_class_metadata_end(SpaceMouse)
 
 
 //[-------------------------------------------------------]

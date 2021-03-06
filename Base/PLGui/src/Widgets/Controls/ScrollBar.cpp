@@ -49,7 +49,14 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ScrollBar)
+pl_class_metadata(ScrollBar, "PLGui", PLGui::AbstractSlider, "Scroll bar widget")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Orientation,	pl_enum_type(EOrientation),	Horizontal,	ReadWrite,	"Scrollbar orientation",	"")
+	// Slots
+	pl_slot_0_metadata(OnTimer,	"Timer callback",	"")
+pl_class_metadata_end(ScrollBar)
 
 
 //[-------------------------------------------------------]

@@ -38,9 +38,28 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ConfigGroup)
-pl_implement_class(Config)
-pl_implement_class(DebugConfig)
+pl_class_metadata(ConfigGroup, "PLEngine", PLCore::ConfigGroup, "Engine configuration 'collection' class")
+pl_class_metadata_end(ConfigGroup)
+pl_class_metadata(Config, "PLEngine", PLEngine::ConfigGroup, "Engine configuration classes")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	//Attributes
+	pl_attribute_metadata(ConsoleActivated,		bool,	true,	ReadWrite,	"Is the console active?",										"")
+	pl_attribute_metadata(MaxTimeDifference,	float,	0.15f,	ReadWrite,	"The maximum time difference since the last frame in seconds",	"Min='0.0001'")
+	pl_attribute_metadata(FPSLimit,				float,	0.0f,	ReadWrite,	"FPS limit, 0 if there's no FPS limitation",					"Min='0.0'")
+pl_class_metadata_end(Config)
+
+
+pl_class_metadata(DebugConfig, "PLEngine", PLEngine::ConfigGroup, "Engine debug configuration classes")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	//Attributes
+	pl_attribute_metadata(ShowFPS,				bool,	false,	ReadWrite,	"Show FPS?",				"")
+	pl_attribute_metadata(ShowCoordinateAxis,	bool,	false,	ReadWrite,	"Show coordinate axis?",	"")
+	pl_attribute_metadata(ShowXZPlane,			bool,	false,	ReadWrite,	"Show x/z plane?",			"")
+	pl_attribute_metadata(ShowXYPlane,			bool,	false,	ReadWrite,	"Show x/y plane?",			"")
+	pl_attribute_metadata(ShowYZPlane,			bool,	false,	ReadWrite,	"Show y/z plane?",			"")
+pl_class_metadata_end(DebugConfig)
 
 
 //[-------------------------------------------------------]

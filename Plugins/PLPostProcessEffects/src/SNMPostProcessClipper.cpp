@@ -41,7 +41,15 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessClipper)
+pl_class_metadata(SNMPostProcessClipper, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(MinColor,	PLGraphics::Color4,	PLGraphics::Color4(0.2f, 0.5f, 0.3f, 1.0f),	ReadWrite,	"Minimum color",						"")
+	pl_attribute_metadata(MaxColor,	PLGraphics::Color4,	PLGraphics::Color4(0.8f, 0.9f, 1.0f, 1.0f),	ReadWrite,	"Maximum color",						"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,	PLCore::String,		"Data/PostProcesses/Clipper.pp",			ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessClipper)
 
 
 //[-------------------------------------------------------]

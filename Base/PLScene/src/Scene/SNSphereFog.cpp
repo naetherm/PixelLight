@@ -39,7 +39,13 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNSphereFog)
+pl_class_metadata(SNSphereFog, "PLScene", PLScene::SNFog, "Spherical volumetric fog scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attribute
+	pl_attribute_metadata(Range,		float,	1.0f,	ReadWrite,	"Fog range",	"Min='0.0001'")
+	pl_attribute_metadata(Volumetricy,	float,	1.0f,	ReadWrite,	"Fog volume",	"")
+pl_class_metadata_end(SNSphereFog)
 
 
 //[-------------------------------------------------------]

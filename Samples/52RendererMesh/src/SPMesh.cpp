@@ -39,7 +39,8 @@ using namespace PLMesh;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPMesh)
+pl_class_metadata(SPMesh, "", PLRenderer::SurfacePainter, "Abstract mesh surface painter")
+pl_class_metadata_end(SPMesh)
 
 
 //[-------------------------------------------------------]

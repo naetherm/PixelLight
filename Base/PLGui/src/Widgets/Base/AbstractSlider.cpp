@@ -46,8 +46,16 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(AbstractSlider)
-
+pl_class_metadata(AbstractSlider, "PLGui", PLGui::Widget, "Abstract base class for all kind of sliders, scrollbars etc.")
+	// Attributes
+	pl_attribute_metadata(MinValue,		int,	1,		ReadWrite,	"Minimum value",		"")
+	pl_attribute_metadata(MaxValue,		int,	100,	ReadWrite,	"Maximum value",		"")
+	pl_attribute_metadata(Value,		int,	1,		ReadWrite,	"Current value",		"")
+	pl_attribute_metadata(StepSize,		int,	10,		ReadWrite,	"Standard step size",	"")
+	pl_attribute_metadata(StepSizeFast,	int,	50,		ReadWrite,	"Fast step size",		"")
+	// Signals
+	pl_signal_1_metadata(SignalChangeValue,	int,	"The current value has been changed",	"")
+pl_class_metadata_end(AbstractSlider)
 
 //[-------------------------------------------------------]
 //[ Public functions                                      ]

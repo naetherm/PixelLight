@@ -49,7 +49,14 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorCube)
+pl_class_metadata(MeshCreatorCube, "PLMesh", PLMesh::MeshCreator, "Cube mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Dimension,		PLMath::Vector3,	PLMath::Vector3(0.5f, 0.5f, 0.5f),	ReadWrite,	"Cube dimension into positive/negative direction around the center",	"")
+	pl_attribute_metadata(MultiMaterials,	bool,				false,								ReadWrite,	"Should each side has it's own material?",								"")
+	pl_attribute_metadata(Offset,			PLMath::Vector3,	PLMath::Vector3::Zero,				ReadWrite,	"Offset to center",														"")
+pl_class_metadata_end(MeshCreatorCube)
 
 
 //[-------------------------------------------------------]

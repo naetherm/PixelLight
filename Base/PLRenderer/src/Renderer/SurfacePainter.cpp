@@ -39,7 +39,8 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SurfacePainter)
+pl_class_metadata(SurfacePainter, "PLRenderer", PLCore::Object, "Abstract surface painter base class")
+pl_class_metadata_end(SurfacePainter)
 
 
 //[-------------------------------------------------------]

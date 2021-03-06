@@ -31,6 +31,7 @@ PL_WARNING_PUSH
 	#include <QtGui/qdockwidget.h>
 	#include <QtGui/qheaderview.h>
 	#include <QtGui/qstandarditemmodel.h>
+	#include <QtGui/QMainWindow>
 PL_WARNING_POP
 #include <PLCore/Base/Class.h>
 #include <PLRenderer/Renderer/IndexBuffer.h>
@@ -58,7 +59,19 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetSceneMeshInformation)
+pl_class_metadata(DockWidgetSceneMeshInformation, "PLFrontendQt", PLFrontendQt::DockWidgetScene, "Mesh information Qt dock widget class")
+	// Properties
+	pl_properties
+		pl_property("Title", "Mesh Information")
+	pl_properties_end
+	// Methods
+	pl_method_0_metadata(GetSelectedObject,	pl_ret_type(PLCore::Object*),						"Returns the currently selected object, can be a null pointer.",	"")
+	pl_method_1_metadata(SelectObject,		pl_ret_type(void),				PLCore::Object*,	"Selects the given object. Object to select as first parameter.",	"")
+	// Constructors
+	pl_constructor_2_metadata(DefaultConstructor,	QMainWindow*,	PLFrontendQt::DockWidgetManager*,	"Constructor with a pointer to the Qt main window as first parameter, pointer to the dock widget manager this dock widget should be registered to as second parameter",	"")
+	// Slots
+	pl_slot_0_metadata(OnDestroyed,	"Called when the object assigned with this dock widget was destroyed",	"")
+pl_class_metadata_end(DockWidgetSceneMeshInformation)
 
 
 //[-------------------------------------------------------]
@@ -68,7 +81,7 @@ pl_implement_class(DockWidgetSceneMeshInformation)
 *  @brief
 *    Constructor
 */
-DockWidgetSceneMeshInformation::DockWidgetSceneMeshInformation(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetScene(reinterpret_cast<QWidget*>(pQMainWindow), pDockWidgetManager),
+DockWidgetSceneMeshInformation::DockWidgetSceneMeshInformation(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetScene(pQMainWindow, pDockWidgetManager),
 	SlotOnDestroyed(this),
 	m_pObject(nullptr),
 	m_pQTableView(nullptr)

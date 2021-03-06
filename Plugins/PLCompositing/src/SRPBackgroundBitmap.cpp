@@ -48,7 +48,19 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPBackgroundBitmap)
+pl_class_metadata(SRPBackgroundBitmap, "PLCompositing", PLCompositing::SRPBackground, "Abstract bitmap background scene renderer pass")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Material,		PLCore::String,									"",							ReadWrite,	"Material to use",											"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Color,		PLGraphics::Color4,								PLGraphics::Color4::White,	ReadWrite,	"Bitmap color",												"")
+	pl_attribute_metadata(Position,		PLMath::Vector2,								PLMath::Vector2::Zero,		ReadWrite,	"Bitmap position (0..1), (0, 0)=left top",					"")
+	pl_attribute_metadata(Size,			PLMath::Vector2,								PLMath::Vector2::One,		ReadWrite,	"Bitmap size (0..1)",										"")
+	pl_attribute_metadata(TexelStart,	PLMath::Vector2,								PLMath::Vector2::Zero,		ReadWrite,	"Bitmap texture source rectangle (0..1) start coordinate",	"")
+	pl_attribute_metadata(TexelEnd,		PLMath::Vector2,								PLMath::Vector2::One,		ReadWrite,	"Bitmap texture source rectangle (0..1) end coordinate",	"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,		pl_flag_type_def3(SRPBackgroundBitmap, EFlags),	0,							ReadWrite,	"Flags",													"")
+pl_class_metadata_end(SRPBackgroundBitmap)
 
 
 //[-------------------------------------------------------]

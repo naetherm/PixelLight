@@ -38,7 +38,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(VirtualController)
+pl_class_metadata(VirtualController, "PLInput", PLInput::Controller, "Virtual input controller base class")
+pl_class_metadata_end(VirtualController)
 
 
 //[-------------------------------------------------------]

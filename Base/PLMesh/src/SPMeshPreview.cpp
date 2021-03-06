@@ -41,7 +41,10 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPMeshPreview)
+pl_class_metadata(SPMeshPreview, "PLMesh", PLRenderer::SPPreview, "Mesh preview surface painter class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLRenderer::Renderer&,	"Parameter constructor",	"")
+pl_class_metadata_end(SPMeshPreview)
 
 
 //[-------------------------------------------------------]

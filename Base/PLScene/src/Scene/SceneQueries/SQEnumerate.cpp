@@ -39,7 +39,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SQEnumerate)
+pl_class_metadata(SQEnumerate, "PLScene", PLScene::SceneQuery, "Scene node enumeration scene query class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SQEnumerate)
 
 
 //[-------------------------------------------------------]

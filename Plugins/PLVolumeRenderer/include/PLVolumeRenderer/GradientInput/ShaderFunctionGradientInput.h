@@ -52,15 +52,8 @@ class ShaderFunctionGradientInput : public ShaderFunction {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionGradientInput, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for gradient input")
-		// Properties
-		pl_properties
-			pl_property("FunctionTitle",			"2.5 - Gradient Input")
-			pl_property("FunctionName",				"GradientInput")
-			pl_property("FunctionSignature_GLSL",	"float GradientInput(vec3 Position)")
-			pl_property("FunctionSignature_Cg",		"float GradientInput(float3 Position)")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

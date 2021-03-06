@@ -58,8 +58,8 @@ class SplitTouchPad : public Device {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, SplitTouchPad, "PLInput", PLInput::Device, "Gamepad device emulation by using a touch screen making it possible to e.g. move & look at the same time")
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

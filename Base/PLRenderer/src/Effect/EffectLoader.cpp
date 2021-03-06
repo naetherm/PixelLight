@@ -37,7 +37,12 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(EffectLoader)
+pl_class_metadata(EffectLoader, "PLRenderer", PLCore::LoaderImpl, "Abstract effect loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Effect")
+	pl_properties_end
+pl_class_metadata_end(EffectLoader)
 
 
 //[-------------------------------------------------------]

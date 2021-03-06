@@ -41,7 +41,19 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(LocalizationLoaderPL)
+pl_class_metadata(LocalizationLoaderPL, "PLCore", PLCore::LocalizationLoader, "Localization loader implementation for the PixelLight localization XML file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"loc,LOC")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	LocalizationGroup&,			File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const LocalizationGroup&,	File&,	"Save method",	"")
+pl_class_metadata_end(LocalizationLoaderPL)
 
 
 //[-------------------------------------------------------]

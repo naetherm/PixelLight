@@ -53,7 +53,13 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(AbstractMenu)
+pl_class_metadata(AbstractMenu, "PLGui", PLGui::Widget, "Abstract base class for widgets that display a menu")
+	// Signals
+	pl_signal_1_metadata(SignalItemSelected,		int,		"Current selection has been changed",	"")
+	pl_signal_1_metadata(SignalItemClicked,		MenuItem*,	"A menu item has been clicked",			"")
+	pl_signal_1_metadata(SignalSubmenuOpened,	MenuItem*,	"A submenu has been opened",			"")
+	pl_signal_1_metadata(SignalSubmenuClosed,	MenuItem*,	"A submenu has been closed",			"")
+pl_class_metadata_end(AbstractMenu)
 
 
 //[-------------------------------------------------------]

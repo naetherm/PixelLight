@@ -56,10 +56,8 @@ class SPMeshShaders : public SPMesh {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SPMeshShaders, "", SPMesh, "Shaders based mesh surface painter")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLRenderer::Renderer&,	"Parameter constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -58,17 +58,15 @@ class Window : public ContainerWidget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, Window, "PLGui", PLGui::Widget, "Base class for windows (widgets with a border and a title bar)")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(SystemButtons,	pl_flag_type(ESystemButton),	7,							ReadWrite,	GetSet,	"System Buttons",				"")
-		pl_attribute(ShowTitleBar,	bool,							true,						ReadWrite,	GetSet,	"Show title bar?",				"")
-		pl_attribute(ShowBorder,	bool,							true,						ReadWrite,	GetSet,	"Show border?",					"")
-		pl_attribute(Resizable,		bool,							true,						ReadWrite,	GetSet,	"Is window resizable?",			"")
-		pl_attribute(MinSize,		PLMath::Vector2i,				PLMath::Vector2i(-1, -1),	ReadWrite,	GetSet,	"Minimum size for resizing",	"")
-		pl_attribute(MaxSize,		PLMath::Vector2i,				PLMath::Vector2i(-1, -1),	ReadWrite,	GetSet,	"Maximum size for resizing",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(Window,	SystemButtons,	PLCore::uint32,		7,							ReadWrite)
+		pl_attribute_getset(Window,	ShowTitleBar,	bool,				true,						ReadWrite)
+		pl_attribute_getset(Window,	ShowBorder,		bool,				true,						ReadWrite)
+		pl_attribute_getset(Window,	Resizable,		bool,				true,						ReadWrite)
+		pl_attribute_getset(Window,	MinSize,		PLMath::Vector2i,	PLMath::Vector2i(-1, -1),	ReadWrite)
+		pl_attribute_getset(Window,	MaxSize,		PLMath::Vector2i,	PLMath::Vector2i(-1, -1),	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -56,7 +56,12 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDirectionalLightingFixedFunctions)
+pl_class_metadata(SRPDirectionalLightingFixedFunctions, "PLCompositing", PLCompositing::SRPDirectionalLighting, "Scene renderer pass for rendering transparent meshes with lighting")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SRPDirectionalLightingFixedFunctions, EFlags),	0,	ReadWrite,	"Flags",	"")
+pl_class_metadata_end(SRPDirectionalLightingFixedFunctions)
 
 
 //[-------------------------------------------------------]

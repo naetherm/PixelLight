@@ -58,10 +58,8 @@ class ShaderFunctionRayTraversalDVRBackToFront : public ShaderFunctionRayTravers
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionRayTraversalDVRBackToFront, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRayTraversal, "Back-to-front compositing (DVR) shader function implementation class for ray traversal (no early ray termination)")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

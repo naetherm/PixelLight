@@ -52,13 +52,11 @@ class SNDirectionalLight : public SNLight {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNDirectionalLight, "PLScene", PLScene::SNLight, "Directional light scene node representing parallel light beams coming from an infinite distance at a certain direction")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(AABBMin,	PLMath::Vector3,	PLMath::Vector3(-10000.0f, -10000.0f, -10000.0f),	ReadWrite,	GetSet,	"Minimum position of the 'scene node space' axis aligned bounding box",	"")
-		pl_attribute(AABBMax,	PLMath::Vector3,	PLMath::Vector3( 10000.0f,  10000.0f,  10000.0f),	ReadWrite,	GetSet,	"Maximum position of the 'scene node space' axis aligned bounding box",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNDirectionalLight,	AABBMin,	PLMath::Vector3,	PLMath::Vector3(-10000.0f, -10000.0f, -10000.0f),	ReadWrite)
+		pl_attribute_getset(SNDirectionalLight,	AABBMax,	PLMath::Vector3,	PLMath::Vector3( 10000.0f,  10000.0f,  10000.0f),	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -63,19 +63,8 @@ class CamcorderLoaderPL : public CamcorderLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, CamcorderLoaderPL, "PLEngine", PLEngine::CamcorderLoader, "Camcorder loader implementation for the PixelLight camcorder XML file format")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"cam,CAM")
-			pl_property("Load",		"1")
-			pl_property("Save",		"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_2(Load,	pl_ret_type(bool),	Camcorder&,	PLCore::File&,	"Load method",	"")
-		pl_method_2(Save,	pl_ret_type(bool),	Camcorder&,	PLCore::File&,	"Save method",	"")
-	pl_class_end
+	pl_class_def(PL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -45,7 +45,13 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureCreatorPyroclasticCloud3D)
+pl_class_metadata(TextureCreatorPyroclasticCloud3D, "PLVolume", PLRenderer::TextureCreator, "3D pyroclastic cloud texture (TextureBuffer::L8) creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(TextureSize,	PLCore::uint32,	128,	ReadWrite,	"Texture size",	"Min='8'")
+	pl_attribute_metadata(Radius,		float,			0.025f,	ReadWrite,	"Radius",		"")
+pl_class_metadata_end(TextureCreatorPyroclasticCloud3D)
 
 
 //[-------------------------------------------------------]

@@ -46,7 +46,12 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Application44)
+pl_class_metadata(Application44, "", PLCore::FrontendApplication, "Application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+	// Slots
+	pl_slot_1_metadata(OnMySignal,	PLCore::String,	"Called on MySignal signal, a string as first parameter",	"")
+pl_class_metadata_end(Application44)
 
 
 //[-------------------------------------------------------]
@@ -98,7 +103,8 @@ void Application44::RunScript(const String &sScriptFilename)
 		Script *pScript = ScriptManager::GetInstance()->Create(ScriptManager::GetInstance()->GetScriptLanguageByExtension(Url(sScriptFilename).GetExtension()));
 		if (pScript) {
 			// Tell the script about "Application44::GetMyRTTIClassInstance"
-			pScript->AddGlobalFunction("GetMyRTTIClassInstance", Functor<MyRTTIClass*, MyRTTIClass*>(&Application44::GetMyRTTIClassInstance, this));
+			Functor<MyRTTIClass*, MyRTTIClass*> getInstanceMethod(&Application44::GetMyRTTIClassInstance, this);
+			pScript->AddGlobalFunction("GetMyRTTIClassInstance", FunctorWrapper< MyRTTIClass*, MyRTTIClass* >(&getInstanceMethod));
 
 			// Set the script source code
 			if (pScript->SetSourceCode(sSourceCode)) {
@@ -106,11 +112,13 @@ void Application44::RunScript(const String &sScriptFilename)
 				System::GetInstance()->GetConsole().Print("-- " + pScript->GetScriptLanguage() + " script language --\n");
 
 				// Call the script function "OOP"
-				FuncScriptPtr<void>(pScript, "OOP").Call(Params<void>());
+				FuncScriptPtr<void> ooPMethod(pScript, "OOP");
+				FuncWrapper<void>(&ooPMethod).Call(Params<void>());
 
 				{ // Call the script function "UseCppRTTIObject"
 					Params<MyRTTIClass*, MyRTTIClass*> cParams(m_pMyRTTIClass);
-					FuncScriptPtr<MyRTTIClass*, MyRTTIClass*>(pScript, "UseCppRTTIObject").Call(cParams);
+					FuncScriptPtr<MyRTTIClass*, MyRTTIClass*> useCppRTTIObjectMethod(pScript, "UseCppRTTIObject");
+					FuncWrapper<MyRTTIClass*, MyRTTIClass*>(&useCppRTTIObjectMethod).Call(cParams);
 					if (cParams.Return != m_pMyRTTIClass)
 						System::GetInstance()->GetConsole().Print("Error, script returned invalid RTTI object instance!\n");
 				}

@@ -38,7 +38,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionRayTraversalDebugRayLength)
+pl_class_metadata(ShaderFunctionRayTraversalDebugRayLength, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRayTraversalDebug, "Debug ray length shader function implementation class for ray traversal")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionRayTraversalDebugRayLength)
 
 
 //[-------------------------------------------------------]

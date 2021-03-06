@@ -46,7 +46,16 @@ namespace PLNature {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsBodyTerrain)
+pl_class_metadata(SNMPhysicsBodyTerrain, "PLNature", PLPhysics::SNMPhysicsBody, "Physics terrain body scene node modifier")
+	// Properties
+	pl_properties
+		pl_property("SceneNodeClass",	"PLNature::SNTerrain")
+	pl_properties_end
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Scale,	PLMath::Vector3,	PLMath::Vector3::One,	ReadWrite,	"Height field scale",	"")
+pl_class_metadata_end(SNMPhysicsBodyTerrain)
 
 
 //[-------------------------------------------------------]

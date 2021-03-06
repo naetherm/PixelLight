@@ -62,7 +62,15 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredLighting)
+pl_class_metadata(SRPDeferredLighting, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering lighting")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,												"",																			ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+	pl_attribute_metadata(TextureFiltering,	pl_enum_type_def3(SRPDeferredLighting, ETextureFiltering),	SRPDeferredLighting::Anisotropic8,											ReadWrite,	"Texture filtering, used for projective lights",																						"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPDeferredLighting, EFlags),				SRPDeferredLighting::NoShadowLOD|SRPDeferredLighting::NoAmbientOcclusion,	ReadWrite,	"Flags",																																"")
+pl_class_metadata_end(SRPDeferredLighting)
 
 
 //[-------------------------------------------------------]

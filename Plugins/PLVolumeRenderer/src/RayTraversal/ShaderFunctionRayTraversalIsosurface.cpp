@@ -42,7 +42,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionRayTraversalIsosurface)
+pl_class_metadata(ShaderFunctionRayTraversalIsosurface, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRayTraversal, "Isosurface (also known as \"first-hit ray casting\") shader function implementation class for ray traversal")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionRayTraversalIsosurface)
 
 
 //[-------------------------------------------------------]

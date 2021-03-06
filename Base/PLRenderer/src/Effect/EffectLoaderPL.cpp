@@ -49,7 +49,19 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(EffectLoaderPL)
+pl_class_metadata(EffectLoaderPL, "PLRenderer", PLRenderer::EffectLoader, "Effect loader implementation for the PixelLight effect XML file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"plfx,PLFX")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	Effect&,		PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const Effect&,	PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(EffectLoaderPL)
 
 
 //[-------------------------------------------------------]

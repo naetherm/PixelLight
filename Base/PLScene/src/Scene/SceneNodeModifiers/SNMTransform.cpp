@@ -37,7 +37,8 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMTransform)
+pl_class_metadata(SNMTransform, "PLScene", PLScene::SceneNodeModifier, "Abstract scene node modifier base class for modifiers that promise to ONLY manipulate the transform of the owner scene node")
+pl_class_metadata_end(SNMTransform)
 
 
 //[-------------------------------------------------------]

@@ -60,18 +60,8 @@ class ScriptBinding_PL_System : public PLCore::ScriptBinding {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, ScriptBinding_PL_System, "PLScriptBindings", PLCore::ScriptBinding, "System script binding class")
-		// Properties
-		pl_properties
-			pl_property("Namespace",	"PL.System")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_0(IsWindows,					pl_ret_type(bool),				"Returns 'true' if we're currently running on a Windows platform, else 'false'",						"")
-		pl_method_0(IsLinux,					pl_ret_type(bool),				"Returns 'true' if we're currently running on a Linux platform, else 'false'",							"")
-		pl_method_0(GetPlatformArchitecture,	pl_ret_type(PLCore::String),	"Returns the platform architecture (for instance 'x86', 'x64', 'armeabi', 'armeabi-v7a' and so on)",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

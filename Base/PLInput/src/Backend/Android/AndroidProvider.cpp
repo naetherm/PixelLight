@@ -48,7 +48,10 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(AndroidProvider)
+pl_class_metadata(AndroidProvider, "PLInput", PLInput::Provider, "Standard input provider for Android")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(AndroidProvider)
 
 
 //[-------------------------------------------------------]

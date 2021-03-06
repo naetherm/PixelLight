@@ -37,7 +37,15 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNCoordinateAxis)
+pl_class_metadata(SNCoordinateAxis, "PLScene", PLScene::SceneNode, "Abstract base scene node for coordinate axis visualization")
+	// Attributes
+	pl_attribute_metadata(Width,	float,											1.0f,										ReadWrite,	"Line width (if supported by the the used renderer API)",	"Min='1.0'")
+	pl_attribute_metadata(XColor,	PLGraphics::Color4,								PLGraphics::Color4(1.0f, 0.0f, 0.0f, 1.0f),	ReadWrite,	"Color of the x-axis",										"")
+	pl_attribute_metadata(YColor,	PLGraphics::Color4,								PLGraphics::Color4(0.0f, 1.0f, 0.0f, 1.0f),	ReadWrite,	"Color of the y-axis",										"")
+	pl_attribute_metadata(ZColor,	PLGraphics::Color4,								PLGraphics::Color4(0.0f, 0.0f, 1.0f, 1.0f),	ReadWrite,	"Color of the z-axis",										"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNCoordinateAxis, EFlags),	0,											ReadWrite,	"Flags",													"")
+pl_class_metadata_end(SNCoordinateAxis)
 
 
 //[-------------------------------------------------------]

@@ -52,10 +52,8 @@ class ShaderFunctionFetchScalarNull : public ShaderFunctionFetchScalar {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionFetchScalarNull, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionFetchScalar, "Null shader function implementation class for fetch scalar")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

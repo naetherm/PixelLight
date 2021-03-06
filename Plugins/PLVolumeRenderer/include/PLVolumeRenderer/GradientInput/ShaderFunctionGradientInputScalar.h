@@ -52,10 +52,8 @@ class ShaderFunctionGradientInputScalar : public ShaderFunctionGradientInput {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionGradientInputScalar, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionGradientInput, "Scalar shader function implementation class for gradient input")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

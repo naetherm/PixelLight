@@ -222,9 +222,12 @@ class Gui : public QObject {
 	//[-------------------------------------------------------]
 	private slots:
 		void QtSlotFileChanged(const QString &path);
+		void QtSlotTriggeredNew();
 		void QtSlotTriggeredLoad();
 		void QtSlotTriggeredReload();
 		void QtSlotTriggeredAutomaticReload();
+		void QtSlotTriggeredSave();
+		void QtSlotTriggeredSaveAs();
 		void QtSlotTriggeredExit();
 		void QtSlotAboutToShowMenuCamera();
 		void QtSlotTriggeredCameraSelectCurrentCamera();
@@ -236,6 +239,8 @@ class Gui : public QObject {
 		void QtSlotTriggeredOpenLogFile();
 		void QtSlotTriggeredShowColorGradientBackground();
 		void QtSlotTriggeredShowBackfacesAndSilhouettes();
+		void QtSlotTriggeredReloadMaterials();
+		void QtSlotTriggeredReloadScene();
 		void QtSlotTriggeredOpenPixelLightWebsite();
 
 
@@ -254,14 +259,19 @@ class Gui : public QObject {
 		GuiPicking			*m_pGuiPicking;							/**< GUI picking component instance, can be a null pointer */
 		QFileSystemWatcher	*m_pQFileSystemWatcher;					/**< Qt file system watcher, always valid */
 		// Menu bar
+		QAction				*m_pQActionNew;							/**< Automatic reload Qt action, can be a null pointer */
 		QAction				*m_pQActionReload;						/**< Reload Qt action, can be a null pointer */
 		QAction				*m_pQActionAutomaticReload;				/**< Automatic reload Qt action, can be a null pointer */
+		QAction				*m_pQActionSave;						/**< Save Qt action, can be a null pointer */
+		QAction				*m_pQActionSaveAs;						/**< Save dialog Qt action, can be a null pointer */
 		QMenu				*m_pQMenuCamera;						/**< Camera Qt menu, can be a null pointer */
 		QActionGroup		*m_pQActionGroupCamera;					/**< Camera Qt action group, can be a null pointer */
 		QMenu				*m_pQMenuWindow;						/**< Window Qt menu, can be a null pointer */
 		QActionGroup		*m_pQActionGroupWindow;					/**< Window Qt action group, can be a null pointer */
 		QAction				*m_pQActionShowColorGradientBackground;	/**< Show color gradient background Qt action, can be a null pointer */
 		QAction				*m_pQActionShowBackfacesAndSilhouettes;	/**< Show backfaces and silhouettes Qt action, can be a null pointer */
+		QAction				*m_pQActionReloadMaterials;				/**< Reload only materials Qt action, can be a null pointer */
+		QAction				*m_pQActionReloadScene;					/**< Reload only scene Qt action, can be a null pointer */
 		// Status bar
 		QLabel				*m_pQLabelStatusBar;					/**< Qt label shown in the status bar of the Qt main window, can be a null pointer */
 

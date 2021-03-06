@@ -77,14 +77,8 @@ class ShaderLanguageCg : public PLRenderer::ShaderLanguage {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, ShaderLanguageCg, "PLRendererOpenGLES2", PLRenderer::ShaderLanguage, "OpenGL ES Cg shader language class using the \"GL_EXT_Cg_shader\"-extension")
-		// Properties
-		pl_properties
-			pl_property("ShaderLanguage",	"Cg")
-		pl_properties_end
-		// Constructors
-		pl_constructor_1(DefaultConstructor,	PLRenderer::Renderer&,	"Constructor with used renderer as parameter",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

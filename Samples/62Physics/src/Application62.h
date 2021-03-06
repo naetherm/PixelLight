@@ -58,13 +58,11 @@ class Application62 : public PLEngine::EngineApplication {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, Application62, "", PLEngine::EngineApplication, "Application class")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+	pl_class_def()
 		// Slots
-		pl_slot_1(OnControl,	PLInput::Control&,				"Called when a control event has occurred, occurred control as first parameter",								"")
-		pl_slot_1(OnContact,	PLPhysics::ContactInformation&,	"Called when a contact between two bodies was detected by the physics, contact information as first parameter",	"")
-	pl_class_end
+		pl_slot_1_def(Application62,	OnControl,	PLInput::Control&)
+		pl_slot_1_def(Application62,	OnContact,	PLPhysics::ContactInformation&)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

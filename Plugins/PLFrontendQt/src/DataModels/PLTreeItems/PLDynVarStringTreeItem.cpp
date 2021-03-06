@@ -39,7 +39,7 @@ namespace PLFrontendQt {
 namespace DataModels {
 
 
-PLDynVarStringTreeItem::PLDynVarStringTreeItem(PLCore::DynVar *dynVar, PLDynVarTreeItemTypes::DynVarTreeItemTypes dynVarType, TreeItemBase *parent) : TreeItemBase(2, parent),
+PLDynVarStringTreeItem::PLDynVarStringTreeItem(PLCore::DynVarPtr dynVar, PLDynVarTreeItemTypes::DynVarTreeItemTypes dynVarType, TreeItemBase *parent) : TreeItemBase(2, parent),
 	m_dynVar(dynVar),
 	m_varName(dynVar ? QtStringAdapter::PLToQt(dynVar->GetDesc()->GetName()): ""),
 	m_typeName(dynVar ? QtStringAdapter::PLToQt(dynVar->GetTypeName()): ""),

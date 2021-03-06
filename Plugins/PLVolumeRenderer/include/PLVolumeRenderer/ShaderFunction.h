@@ -116,16 +116,8 @@ class ShaderFunction : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunction, "PLVolumeRenderer", PLCore::Object, "Abstract shader function base class")
-		// Properties
-		pl_properties
-			pl_property("FunctionTitle",			"Unknown")
-			pl_property("FunctionName",				"Unknown")
-			pl_property("FunctionSignature_GLSL",	"Unknown")
-			pl_property("FunctionSignature_Cg",		"Unknown")
-			pl_property("FunctionTemplate",			"0")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

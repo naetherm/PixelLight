@@ -52,22 +52,20 @@ class PGImage : public SNParticleGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGImage, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Image particle group")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(ImageFilename,		PLCore::String,			"Data/Textures/PGImage_Test.dds",	ReadWrite,	DirectValue,	"Image to create the particles from",	"Type='Image'")
-		pl_attribute(RedColorKey,		PLCore::uint8,			0,									ReadWrite,	DirectValue,	"Color key red component",				"")
-		pl_attribute(GreenColorKey,		PLCore::uint8,			0,									ReadWrite,	DirectValue,	"Color key green component",			"")
-		pl_attribute(BlueColorKey,		PLCore::uint8,			0,									ReadWrite,	DirectValue,	"Color key blue component",				"")
-		pl_attribute(ColorKeyTolerance,	char,					0,									ReadWrite,	DirectValue,	"Color key tolerance",					"")
-		pl_attribute(ImageScale,		float,					0.1f,								ReadWrite,	DirectValue,	"Image scale",							"")
+		pl_attribute_directvalue(			ImageFilename,		PLCore::String,	"Data/Textures/PGImage_Test.dds",	ReadWrite)
+		pl_attribute_directvalue(			RedColorKey,		PLCore::uint8,	0,									ReadWrite)
+		pl_attribute_directvalue(			GreenColorKey,		PLCore::uint8,	0,									ReadWrite)
+		pl_attribute_directvalue(			BlueColorKey,		PLCore::uint8,	0,									ReadWrite)
+		pl_attribute_directvalue(			ColorKeyTolerance,	char,			0,									ReadWrite)
+		pl_attribute_directvalue(			ImageScale,			float,			0.1f,								ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,			PLCore::String,			"Data/Effects/PGImage.plfx",		ReadWrite,	GetSet,			"Particle group material",				"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,			PLCore::uint32,			1,									ReadWrite,	GetSet,			"Number of particles",					"Min=1")
+		pl_attribute_getset		(PGImage,	Material,			PLCore::String,	"Data/Effects/PGImage.plfx",		ReadWrite)
+		pl_attribute_getset		(PGImage,	Particles,			PLCore::uint32,	1,									ReadWrite)
 			// Overwritten PLScene::SceneNode attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	PointSprites,						ReadWrite,	GetSet,			"Flags",								"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGImage,	Flags,				PLCore::uint32,	PointSprites,						ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

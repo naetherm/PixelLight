@@ -46,7 +46,10 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(LinuxProvider)
+pl_class_metadata(LinuxProvider, "PLInput", PLInput::Provider, "Standard input provider for Linux")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(LinuxProvider)
 
 
 //[-------------------------------------------------------]

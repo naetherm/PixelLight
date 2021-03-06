@@ -37,7 +37,14 @@ namespace PLVolume {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNClip)
+pl_class_metadata(SNClip, "PLVolume", PLScene::SceneNode, "Abstract clip scene node base class")
+	// Attributes
+	pl_attribute_metadata(DebugColorPositive,	PLGraphics::Color4,						PLGraphics::Color4(0.0f, 1.0f, 0.0f, 0.1f),	ReadWrite,	"Debug color for the view side allowing to see the non-clipped rest",	"")
+	pl_attribute_metadata(DebugColorNegative,	PLGraphics::Color4,						PLGraphics::Color4(1.0f, 0.0f, 0.0f, 0.1f),	ReadWrite,	"Debug color for the view side allowing to see the clipped part",		"")
+		// Overwritten PLScene::SceneNode attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SNClip, EFlags),		0,											ReadWrite,	"Flags",																"")
+	pl_attribute_metadata(DebugFlags,			pl_flag_type_def3(SNClip, EDebugFlags),	0,											ReadWrite,	"Debug flags",															"")
+pl_class_metadata_end(SNClip)
 
 
 //[-------------------------------------------------------]

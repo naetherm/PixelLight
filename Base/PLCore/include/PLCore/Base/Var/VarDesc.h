@@ -30,6 +30,7 @@
 //[-------------------------------------------------------]
 //[ Includes                                              ]
 //[-------------------------------------------------------]
+#include "PLCore/Base/Var/DynVar.h"
 #include "PLCore/Base/MemberDesc.h"
 
 
@@ -43,7 +44,6 @@ namespace PLCore {
 //[ Forward declarations                                  ]
 //[-------------------------------------------------------]
 class Object;
-class DynVar;
 
 
 //[-------------------------------------------------------]
@@ -138,7 +138,7 @@ class VarDesc : public MemberDesc {
 		*  @return
 		*    Pointer to var (can be a null pointer, do not destroy the returned instance)
 		*/
-		PLCORE_API virtual DynVar *GetAttribute(const Object &cObject) const;
+		PLCORE_API virtual DynVarPtr GetAttribute(const Object &cObject) const;
 
 
 	//[-------------------------------------------------------]

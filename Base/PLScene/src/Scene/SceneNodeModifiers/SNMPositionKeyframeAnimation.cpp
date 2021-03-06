@@ -46,7 +46,17 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPositionKeyframeAnimation)
+pl_class_metadata(SNMPositionKeyframeAnimation, "PLScene", PLScene::SNMTransform, "Keyframe position animation scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Speed,			float,														1.0f,	ReadWrite,	"Animation playback speed",																										"")
+	pl_attribute_metadata(FramesPerSecond,	PLCore::uint32,												24,		ReadWrite,	"Frames per second",																											"")
+	pl_attribute_metadata(Keys,				PLCore::String,												"",		ReadWrite,	"Position keys (x, y and z) chunk filename",																					"")
+	pl_attribute_metadata(CoordinateSystem,	PLCore::String,												"",		ReadWrite,	"Name of the scene container the position keys are in, empty string means scene container of the modifiers owner scene node",	"")
+		// Overwritten SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNMPositionKeyframeAnimation, EFlags),	0,		ReadWrite,	"Flags",																														"")
+pl_class_metadata_end(SNMPositionKeyframeAnimation)
 
 
 //[-------------------------------------------------------]

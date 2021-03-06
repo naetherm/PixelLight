@@ -55,10 +55,8 @@ class ShaderFunctionClassificationThreshold : public ShaderFunctionClassificatio
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionClassificationThreshold, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionClassification, "Threshold shader function implementation class for classification")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

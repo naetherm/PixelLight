@@ -53,10 +53,8 @@ class SNMTransformGizmoPositionController : public PLScene::SNMTransformGizmoPos
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNMTransformGizmoPositionController, "PLEngine", PLScene::SNMTransformGizmoPosition, "Position transform gizmo controller scene node modifier")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+	pl_class_def(PL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

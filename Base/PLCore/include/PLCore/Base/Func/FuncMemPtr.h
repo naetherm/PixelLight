@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Base/Func/Func.h"
+#include "PLCore/Base/Func/Signature.h"
 
 
 //[-------------------------------------------------------]
@@ -52,23 +53,6 @@ namespace PLCore {
 template <typename CLASS, typename R, typename T0 = NullType, typename T1 = NullType, typename T2 = NullType, typename T3 = NullType, typename T4 = NullType, typename T5 = NullType, typename T6 = NullType, typename T7 = NullType, typename T8 = NullType, typename T9 = NullType, typename T10 = NullType, typename T11 = NullType, typename T12 = NullType, typename T13 = NullType, typename T14 = NullType, typename T15 = NullType>
 class FuncMemPtr : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
-		typedef typename Type<T14>::_Type _T14;
-		typedef typename Type<T15>::_Type _T15;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>::MemFuncType MEMFUNC;
 
 	public:
@@ -78,11 +62,11 @@ class FuncMemPtr : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13, _T14 t14, _T15 t15) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -101,22 +85,6 @@ class FuncMemPtr : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
-		typedef typename Type<T14>::_Type _T14;
-		typedef typename Type<T15>::_Type _T15;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>::MemFuncType MEMFUNC;
 
 	public:
@@ -126,12 +94,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13, _T14 t14, _T15 t15) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -150,22 +118,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, 
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
-		typedef typename Type<T14>::_Type _T14;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>::MemFuncType MEMFUNC;
 
 	public:
@@ -175,11 +127,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13, _T14 t14) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -198,21 +150,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
-		typedef typename Type<T14>::_Type _T14;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>::MemFuncType MEMFUNC;
 
 	public:
@@ -222,12 +159,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13, _T14 t14) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -246,21 +183,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, 
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>::MemFuncType MEMFUNC;
 
 	public:
@@ -270,11 +192,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -293,20 +215,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>::MemFuncType MEMFUNC;
 
 	public:
@@ -316,12 +224,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -340,20 +248,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, 
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>::MemFuncType MEMFUNC;
 
 	public:
@@ -363,11 +257,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -386,19 +280,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>::MemFuncType MEMFUNC;
 
 	public:
@@ -408,12 +289,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -432,19 +313,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, 
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>::MemFuncType MEMFUNC;
 
 	public:
@@ -454,11 +322,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : p
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -477,18 +345,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : p
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>::MemFuncType MEMFUNC;
 
 	public:
@@ -498,12 +354,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -522,18 +378,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> 
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>::MemFuncType MEMFUNC;
 
 	public:
@@ -543,11 +387,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -566,17 +410,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>::MemFuncType MEMFUNC;
 
 	public:
@@ -586,12 +419,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : pub
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -610,17 +443,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : pub
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>::MemFuncType MEMFUNC;
 
 	public:
@@ -630,11 +452,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -653,16 +475,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>::MemFuncType MEMFUNC;
 
 	public:
@@ -672,12 +484,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public F
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -696,16 +508,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public F
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8>::MemFuncType MEMFUNC;
 
 	public:
@@ -715,11 +517,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -738,15 +540,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, 
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8>::MemFuncType MEMFUNC;
 
 	public:
@@ -756,12 +549,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -780,15 +573,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7>::MemFuncType MEMFUNC;
 
 	public:
@@ -798,11 +582,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6, T7> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -821,14 +605,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, 
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7>::MemFuncType MEMFUNC;
 
 	public:
@@ -838,12 +614,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6, t7);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6, T7> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -862,14 +638,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, T2, T3, T4, T5, T6> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6>::MemFuncType MEMFUNC;
 
 	public:
@@ -879,11 +647,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5, T6> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -902,13 +670,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, 
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0, T1, T2, T3, T4, T5, T6> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5, T6>::MemFuncType MEMFUNC;
 
 	public:
@@ -918,12 +679,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5, t6);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5, T6> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -942,13 +703,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, T3, T4, T5> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5>::MemFuncType MEMFUNC;
 
 	public:
@@ -958,11 +712,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4, T5> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -981,12 +735,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, 
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1, T2, T3, T4, T5> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4, T5>::MemFuncType MEMFUNC;
 
 	public:
@@ -996,12 +744,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4, t5);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4, T5> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1020,12 +768,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3, typename T4>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, T4> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4>::MemFuncType MEMFUNC;
 
 	public:
@@ -1035,11 +777,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, 
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3, T4> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1058,11 +800,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, 
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3, typename T4>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2, T3, T4> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3, T4>::MemFuncType MEMFUNC;
 
 	public:
@@ -1072,12 +809,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3, t4);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3, T4> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1096,11 +833,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2
 template <typename CLASS, typename R, typename T0, typename T1, typename T2, typename T3>
 class FuncMemPtr<CLASS, R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2, T3>::MemFuncType MEMFUNC;
 
 	public:
@@ -1110,11 +842,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2, T3> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1133,10 +865,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
 template <typename CLASS, typename T0, typename T1, typename T2, typename T3>
 class FuncMemPtr<CLASS, void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2, T3>::MemFuncType MEMFUNC;
 
 	public:
@@ -1146,12 +874,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2, t3);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2, T3> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1170,10 +898,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3
 template <typename CLASS, typename R, typename T0, typename T1, typename T2>
 class FuncMemPtr<CLASS, R, T0, T1, T2> : public Func<R, T0, T1, T2> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
 		typedef typename MethodSignature<CLASS, R, T0, T1, T2>::MemFuncType MEMFUNC;
 
 	public:
@@ -1183,11 +907,11 @@ class FuncMemPtr<CLASS, R, T0, T1, T2> : public Func<R, T0, T1, T2> {
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2) override {
+		virtual R operator ()(T0 t0, T1 t1, T2 t2) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1, t2) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1, T2> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1206,9 +930,6 @@ class FuncMemPtr<CLASS, R, T0, T1, T2> : public Func<R, T0, T1, T2> {
 template <typename CLASS, typename T0, typename T1, typename T2>
 class FuncMemPtr<CLASS, void, T0, T1, T2> : public Func<void, T0, T1, T2> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
 		typedef typename MethodSignature<CLASS, void, T0, T1, T2>::MemFuncType MEMFUNC;
 
 	public:
@@ -1218,12 +939,12 @@ class FuncMemPtr<CLASS, void, T0, T1, T2> : public Func<void, T0, T1, T2> {
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2) override {
+		virtual void operator ()(T0 t0, T1 t1, T2 t2) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1, t2);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1, T2> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1242,9 +963,6 @@ class FuncMemPtr<CLASS, void, T0, T1, T2> : public Func<void, T0, T1, T2> {
 template <typename CLASS, typename R, typename T0, typename T1>
 class FuncMemPtr<CLASS, R, T0, T1> : public Func<R, T0, T1> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
 		typedef typename MethodSignature<CLASS, R, T0, T1>::MemFuncType MEMFUNC;
 
 	public:
@@ -1254,11 +972,11 @@ class FuncMemPtr<CLASS, R, T0, T1> : public Func<R, T0, T1> {
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1) override {
+		virtual R operator ()(T0 t0, T1 t1) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0, t1) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0, T1> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1277,8 +995,6 @@ class FuncMemPtr<CLASS, R, T0, T1> : public Func<R, T0, T1> {
 template <typename CLASS, typename T0, typename T1>
 class FuncMemPtr<CLASS, void, T0, T1> : public Func<void, T0, T1> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
 		typedef typename MethodSignature<CLASS, void, T0, T1>::MemFuncType MEMFUNC;
 
 	public:
@@ -1288,12 +1004,12 @@ class FuncMemPtr<CLASS, void, T0, T1> : public Func<void, T0, T1> {
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1) override {
+		virtual void operator ()(T0 t0, T1 t1) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0, t1);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0, T1> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1312,8 +1028,6 @@ class FuncMemPtr<CLASS, void, T0, T1> : public Func<void, T0, T1> {
 template <typename CLASS, typename R, typename T0>
 class FuncMemPtr<CLASS, R, T0> : public Func<R, T0> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
 		typedef typename MethodSignature<CLASS, R, T0>::MemFuncType MEMFUNC;
 
 	public:
@@ -1323,11 +1037,11 @@ class FuncMemPtr<CLASS, R, T0> : public Func<R, T0> {
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()(_T0 t0) override {
+		virtual R operator ()(T0 t0) override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)(t0) : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R, T0> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1346,7 +1060,6 @@ class FuncMemPtr<CLASS, R, T0> : public Func<R, T0> {
 template <typename CLASS, typename T0>
 class FuncMemPtr<CLASS, void, T0> : public Func<void, T0> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
 		typedef typename MethodSignature<CLASS, void, T0>::MemFuncType MEMFUNC;
 
 	public:
@@ -1356,12 +1069,12 @@ class FuncMemPtr<CLASS, void, T0> : public Func<void, T0> {
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual void operator ()(_T0 t0) override {
+		virtual void operator ()(T0 t0) override {
 			if (m_pMemFunc && m_pObject)
 				((*m_pObject).*m_pMemFunc)(t0);
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void, T0> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1380,7 +1093,6 @@ class FuncMemPtr<CLASS, void, T0> : public Func<void, T0> {
 template <typename CLASS, typename R>
 class FuncMemPtr<CLASS, R> : public Func<R> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
 		typedef typename MethodSignature<CLASS, R>::MemFuncType MEMFUNC;
 
 	public:
@@ -1390,11 +1102,11 @@ class FuncMemPtr<CLASS, R> : public Func<R> {
 		virtual ~FuncMemPtr() {
 		}
 
-		virtual _R operator ()() override {
+		virtual R operator ()() override {
 			return (m_pMemFunc && m_pObject) ? ((*m_pObject).*m_pMemFunc)() : DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<R> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 
@@ -1427,7 +1139,7 @@ class FuncMemPtr<CLASS, void> : public Func<void> {
 				((*m_pObject).*m_pMemFunc)();
 		}
 
-		virtual DynFunc *Clone() const override {
+		virtual Func<void> *Clone() const override {
 			return new FuncMemPtr(m_pMemFunc, m_pObject);
 		}
 

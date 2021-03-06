@@ -37,7 +37,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionClassification)
+pl_class_metadata(ShaderFunctionClassification, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for classification")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"2.4 - Classification")
+		pl_property("FunctionName",				"Classification")
+		pl_property("FunctionSignature_GLSL",	"vec4 Classification(float Scalar)")
+		pl_property("FunctionSignature_Cg",		"float4 Classification(float Scalar)")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionClassification)
 
 
 //[-------------------------------------------------------]

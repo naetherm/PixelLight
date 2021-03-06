@@ -41,7 +41,15 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(FrontendPixelLight)
+pl_class_metadata(FrontendPixelLight, "PLCore", PLCore::Frontend, "PixelLight frontend")
+	// Constructors
+	pl_constructor_2_metadata(ParameterConstructor,	const FrontendContext&, FrontendImpl&,	"Parameter constructor. Frontend context this frontend is using as first parameter, frontend implementation this frontend is using as second parameter.",	"")
+	// Attributes
+	pl_attribute_metadata(ApplicationClass,					String,	"Application",	ReadWrite,	"Name of the frontend application RTTI class to use",				"")
+	pl_attribute_metadata(ApplicationConstructor,			String,	"",				ReadWrite,	"Name of the frontend application RTTI class constructor to use",	"")
+	pl_attribute_metadata(ApplicationConstructorParameters,	String,	"",				ReadWrite,	"Parameters for the frontend application RTTI class constructor",	"")
+	pl_attribute_metadata(ApplicationParameters,			String,	"",				ReadWrite,	"Parameters for the frontend application RTTI class instance",		"")
+pl_class_metadata_end(FrontendPixelLight)
 
 
 //[-------------------------------------------------------]
@@ -100,17 +108,17 @@ void FrontendPixelLight::OnRun(const String &sExecutableFilename, const Array<St
 void FrontendPixelLight::OnCreate()
 {
 	// Get the frontend application RTTI class
-	const Class *pClass = ClassManager::GetInstance()->GetClass(ApplicationClass.GetString());
+	const Class *pClass = ClassManager::GetInstance()->GetClass(ApplicationClass.Get());
 	if (pClass && pClass->IsDerivedFrom("PLCore::FrontendApplication")) {
 		// Create the frontend application RTTI class instance
-		if (ApplicationConstructor.GetString().GetLength())
-			m_pFrontendApplication = static_cast<FrontendApplication*>(pClass->Create(ApplicationConstructor.GetString(), "Frontend=\"" + Type<Frontend&>::ConvertToString(*this) + "\" " + ApplicationConstructorParameters.GetString()));
+		if (ApplicationConstructor.Get().GetLength())
+			m_pFrontendApplication = static_cast<FrontendApplication*>(pClass->Create(ApplicationConstructor.Get(), "Frontend=\"" + Type<Frontend&>::ConvertToString(*this) + "\" " + ApplicationConstructorParameters.Get()));
 		else
 			m_pFrontendApplication = static_cast<FrontendApplication*>(pClass->Create(Params<Object*, Frontend&>(*this)));
 		if (m_pFrontendApplication) {
 			// Set parameters for the instanced frontend application RTTI class
-			if (ApplicationParameters.GetString().GetLength())
-				m_pFrontendApplication->SetValues(ApplicationParameters.GetString());
+			if (ApplicationParameters.Get().GetLength())
+				m_pFrontendApplication->SetValues(ApplicationParameters.Get());
 
 			// Do the frontend life cycle thing - let the world know that we have been created
 			m_pFrontendApplication->OnCreate();

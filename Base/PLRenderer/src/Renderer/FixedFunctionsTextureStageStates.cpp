@@ -38,7 +38,12 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(FixedFunctionsTextureStageStates)
+pl_class_metadata(FixedFunctionsTextureStageStates, "PLRenderer", PLCore::Object, "Fixed functions texture stage states RTTI wrapper class")
+	// Attributes
+	pl_attribute_metadata(ColorTexEnv,	pl_enum_type_def3(FixedFunctions, TextureEnvironment::Enum),	FixedFunctions::TextureEnvironment::Modulate,	ReadWrite,	"Color texture environment mode",		"")
+	pl_attribute_metadata(AlphaTexEnv,	pl_enum_type_def3(FixedFunctions, TextureEnvironment::Enum),	FixedFunctions::TextureEnvironment::Modulate,	ReadWrite,	"Alpha texture environment mode",		"")
+	pl_attribute_metadata(TexGen,		pl_enum_type_def3(FixedFunctions, TexCoordGen::Enum),			FixedFunctions::TexCoordGen::None,				ReadWrite,	"Texture coordinate generation mode",	"")
+pl_class_metadata_end(FixedFunctionsTextureStageStates)
 
 
 //[-------------------------------------------------------]

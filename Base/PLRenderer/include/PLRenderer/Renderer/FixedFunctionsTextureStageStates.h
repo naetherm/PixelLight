@@ -53,12 +53,12 @@ class FixedFunctionsTextureStageStates : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, FixedFunctionsTextureStageStates, "PLRenderer", PLCore::Object, "Fixed functions texture stage states RTTI wrapper class")
+	pl_class_def(PLRENDERER_API)
 		// Attributes
-		pl_attribute(ColorTexEnv,	pl_enum_type(FixedFunctions::TextureEnvironment::Enum),	FixedFunctions::TextureEnvironment::Modulate,	ReadWrite,	GetSet,	"Color texture environment mode",		"")
-		pl_attribute(AlphaTexEnv,	pl_enum_type(FixedFunctions::TextureEnvironment::Enum),	FixedFunctions::TextureEnvironment::Modulate,	ReadWrite,	GetSet,	"Alpha texture environment mode",		"")
-		pl_attribute(TexGen,		pl_enum_type(FixedFunctions::TexCoordGen::Enum),		FixedFunctions::TexCoordGen::None,				ReadWrite,	GetSet,	"Texture coordinate generation mode",	"")
-	pl_class_end
+		pl_attribute_getset(FixedFunctionsTextureStageStates,	ColorTexEnv,	FixedFunctions::TextureEnvironment::Enum,	FixedFunctions::TextureEnvironment::Modulate,	ReadWrite)
+		pl_attribute_getset(FixedFunctionsTextureStageStates,	AlphaTexEnv,	FixedFunctions::TextureEnvironment::Enum,	FixedFunctions::TextureEnvironment::Modulate,	ReadWrite)
+		pl_attribute_getset(FixedFunctionsTextureStageStates,	TexGen,			FixedFunctions::TexCoordGen::Enum,			FixedFunctions::TexCoordGen::None,				ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

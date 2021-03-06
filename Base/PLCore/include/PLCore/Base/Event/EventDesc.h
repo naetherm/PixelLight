@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Base/MemberDesc.h"
+#include "PLCore/Base/Event/DynEvent.h"
 
 
 //[-------------------------------------------------------]
@@ -43,7 +44,6 @@ namespace PLCore {
 //[ Forward declarations                                  ]
 //[-------------------------------------------------------]
 class Object;
-class DynEvent;
 
 
 //[-------------------------------------------------------]
@@ -118,7 +118,7 @@ class EventDesc : public MemberDesc {
 		*  @return
 		*    Pointer to signal (can be a null pointer, do not destroy the returned instance)
 		*/
-		PLCORE_API virtual DynEvent *GetSignal(const Object &cObject) const;
+		PLCORE_API virtual DynEventPtr GetSignal(const Object &cObject) const;
 
 
 	//[-------------------------------------------------------]

@@ -60,18 +60,16 @@ class SNMPostProcessEdgeDetect : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessEdgeDetect, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(LuminanceConvert,	PLMath::Vector3,	PLMath::Vector3(0.2125f, 0.7154f, 0.0721f),	ReadWrite,	DirectValue,	"Color scale (for pixel kernel 0 and 1)",	"")
-		pl_attribute(PixelKernel0,		PLMath::Vector2,	PLMath::Vector2( 0.0f,  1.0f),				ReadWrite,	DirectValue,	"Pixel kernel 0",							"")
-		pl_attribute(PixelKernel1,		PLMath::Vector2,	PLMath::Vector2( 1.0f,  0.0f),				ReadWrite,	DirectValue,	"Pixel kernel 1",							"")
-		pl_attribute(PixelKernel2,		PLMath::Vector2,	PLMath::Vector2( 0.0f, -1.0f),				ReadWrite,	DirectValue,	"Pixel kernel 2",							"")
-		pl_attribute(PixelKernel3,		PLMath::Vector2,	PLMath::Vector2(-1.0f,  0.0f),				ReadWrite,	DirectValue,	"Pixel kernel 3",							"")
+		pl_attribute_directvalue(								LuminanceConvert,	PLMath::Vector3,	PLMath::Vector3(0.2125f, 0.7154f, 0.0721f),	ReadWrite)
+		pl_attribute_directvalue(								PixelKernel0,		PLMath::Vector2,	PLMath::Vector2( 0.0f,  1.0f),				ReadWrite)
+		pl_attribute_directvalue(								PixelKernel1,		PLMath::Vector2,	PLMath::Vector2( 1.0f,  0.0f),				ReadWrite)
+		pl_attribute_directvalue(								PixelKernel2,		PLMath::Vector2,	PLMath::Vector2( 0.0f, -1.0f),				ReadWrite)
+		pl_attribute_directvalue(								PixelKernel3,		PLMath::Vector2,	PLMath::Vector2(-1.0f,  0.0f),				ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,			PLCore::String,		"Data/PostProcesses/EdgeDetect.pp",			ReadWrite,	ModifyAttr,		"Filename of the post process to use",		"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,			PLCore::String,		"Data/PostProcesses/EdgeDetect.pp",			ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

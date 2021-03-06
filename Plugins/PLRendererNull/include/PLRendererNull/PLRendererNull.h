@@ -38,6 +38,12 @@
 
 
 //[-------------------------------------------------------]
+//[ Includes                                              ]
+//[-------------------------------------------------------]
+#include <PLCore/PLCore.h>
+
+
+//[-------------------------------------------------------]
 //[ OS definitions                                        ]
 //[-------------------------------------------------------]
 // Windows platform
@@ -48,6 +54,18 @@
 // Linux platform
 #ifdef LINUX
 	#include "PLRendererNull/PLRendererNullLinux.h"
+#endif
+
+
+//[-------------------------------------------------------]
+//[ Import/Export                                         ]
+//[-------------------------------------------------------]
+#ifdef PLRENDERERNULL_EXPORTS
+	// To export classes, methods and variables
+	#define PLRENDERERNULL_API	PL_GENERIC_API_EXPORT
+#else
+	// To import classes, methods and variables
+	#define PLRENDERERNULL_API	PL_GENERIC_API_IMPORT
 #endif
 
 

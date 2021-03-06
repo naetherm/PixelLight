@@ -48,7 +48,13 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ModClose)
+pl_class_metadata(ModClose, "PLGui", PLGui::Modifier, "Modifier that adds actions to the close button (close window or exit application)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(CloseWindow,		bool,	false,	ReadWrite,	"Destroy window on 'close'-button?",	"")
+	pl_attribute_metadata(ExitApplication,	bool,	false,	ReadWrite,	"Exit application on 'close'-button?",	"")
+pl_class_metadata_end(ModClose)
 
 
 //[-------------------------------------------------------]

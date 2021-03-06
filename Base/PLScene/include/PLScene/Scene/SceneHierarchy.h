@@ -86,8 +86,8 @@ class SceneHierarchy : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SceneHierarchy, "PLScene", PLCore::Object, "Abstract scene hierarchy class (spatial database, Bounding Volume Hierarchies (BVHs))")
-	pl_class_end
+	pl_class_def(PLS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

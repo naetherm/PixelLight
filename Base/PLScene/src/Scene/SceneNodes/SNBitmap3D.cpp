@@ -45,7 +45,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNBitmap3D)
+pl_class_metadata(SNBitmap3D, "PLScene", PLScene::SNBitmap, "3D bitmap scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(PositionOffset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Position offset (scene node space)",	"")
+pl_class_metadata_end(SNBitmap3D)
 
 
 //[-------------------------------------------------------]

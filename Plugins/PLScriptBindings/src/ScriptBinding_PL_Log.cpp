@@ -39,7 +39,21 @@ namespace PLScriptBindings {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ScriptBinding_PL_Log)
+pl_class_metadata(ScriptBinding_PL_Log, "PLScriptBindings", PLCore::ScriptBinding, "Log script binding class")
+	// Properties
+	pl_properties
+		pl_property("Namespace",	"PL.Log")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_1_metadata(OutputAlways,		pl_ret_type(void),	PLCore::String,	"Writes the given string into the log ('always' log level)",	"")
+	pl_method_1_metadata(OutputCritical,	pl_ret_type(void),	PLCore::String,	"Writes the given string into the log ('critical' log level)",	"")
+	pl_method_1_metadata(OutputError,		pl_ret_type(void),	PLCore::String,	"Writes the given string into the log ('error' log level)",		"")
+	pl_method_1_metadata(OutputWarning,		pl_ret_type(void),	PLCore::String,	"Writes the given string into the log ('warning' log level)",	"")
+	pl_method_1_metadata(OutputInfo,		pl_ret_type(void),	PLCore::String,	"Writes the given string into the log ('info' log level)",		"")
+	pl_method_1_metadata(OutputDebug,		pl_ret_type(void),	PLCore::String,	"Writes the given string into the log ('debug' log level)",		"")
+pl_class_metadata_end(ScriptBinding_PL_Log)
 
 
 //[-------------------------------------------------------]

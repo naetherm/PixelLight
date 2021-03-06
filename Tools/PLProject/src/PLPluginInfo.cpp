@@ -162,6 +162,25 @@ void PLPluginInfo::ParseIncludeFiles(const String &sIncludePath)
 
 /**
 *  @brief
+*    Parses the found cpp files in the given source path for pl_class_metadata..pl_class_metadata_end blocks
+*/
+void PLPluginInfo::ParseSourceFiles(const PLCore::String &sSourcePath)
+{
+	// Check if path exists and if it points to a directory
+	FileObject cIncFile(sSourcePath);
+	if (cIncFile.Exists() && cIncFile.IsDirectory()) {
+		// Get all header files from the include directory
+		Array<String> lstFiles;
+		Find(lstFiles, sSourcePath, "*.cpp", true);
+
+		// Parse each header file
+		for (uint32 i=0; i<lstFiles.GetNumOfElements(); i++)
+			ParseFileMetaData(lstFiles[i]);
+	}
+}
+
+/**
+*  @brief
 *    Parses the given main module source file for pl_module_plugin..pl_module_end blocks
 */
 bool PLPluginInfo::ParseMainModuleFile(const String &sMainModuleFilename)
@@ -222,6 +241,30 @@ void PLPluginInfo::ParseFile(const String &sFilename)
 			// Add RTTI class
 			PLPluginClassInfo *pInfo = new PLPluginClassInfo();
 			pInfo->ParsePLClassBlock(cPLClassPLClassEndBlock.GetResult(0));
+			m_lstClasses.Add(pInfo);
+
+			// Update the current position
+			sContent = sContent.GetSubstring(cPLClassPLClassEndBlock.GetPosition());
+		}
+	}
+}
+
+/**
+*  @brief
+*    Parses a single file for an pl_class_metadata..pl_class_metadata_end block
+*/
+void PLPluginInfo::ParseFileMetaData(const String &sFilename)
+{
+	// Get the complete content of the file as text
+	String sContent = GetContentFromFile(sFilename);
+	if (sContent.GetLength()) {
+		RegEx cPLClassPLClassEndBlock("^\\s*(pl_class_metadata\\s*.*\\s*pl_class_metadata_end)", RegEx::Multiline | RegEx::DotAll);
+
+		// Although not recommended, it's possible that there are multiple RTTI classes defined within a single file
+		while (cPLClassPLClassEndBlock.Match(sContent)) {
+			// Add RTTI class
+			PLPluginClassInfo *pInfo = new PLPluginClassInfo();
+			pInfo->ParsePLClassMetadataBlock(cPLClassPLClassEndBlock.GetResult(0));
 			m_lstClasses.Add(pInfo);
 
 			// Update the current position

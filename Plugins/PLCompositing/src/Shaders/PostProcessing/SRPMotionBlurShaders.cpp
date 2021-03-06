@@ -51,7 +51,17 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPMotionBlurShaders)
+pl_class_metadata(SRPMotionBlurShaders, "PLCompositing", PLScene::SceneRendererPass, "Shaders based scene renderer pass for image based motion blur")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,										"",		ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+	pl_attribute_metadata(NumberOfSamples,	PLCore::uint32,										20,		ReadWrite,	"Number of samples, higher is better but costs more performance",																		"")
+	pl_attribute_metadata(MotionBlurFactor,	float,												1.0f,	ReadWrite,	"Motion blur factor (normally between 0..1)",																							"")
+	pl_attribute_metadata(TargetFPS,		float,												60.0f,	ReadWrite,	"Target FPS for adaptive motion blur factor (not physically realistic, just a compensation for a variable FPS)",						"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPMotionBlurShaders, EFlags),	0,		ReadWrite,	"Flags",																																"")
+pl_class_metadata_end(SRPMotionBlurShaders)
 
 
 //[-------------------------------------------------------]

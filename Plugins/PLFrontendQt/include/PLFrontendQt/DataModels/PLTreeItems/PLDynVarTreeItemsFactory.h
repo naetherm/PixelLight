@@ -31,14 +31,12 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLFrontendQt/PLFrontendQt.h"
+#include "PLCore/Base/Var/DynVar.h"
 
 
 //[-------------------------------------------------------]
 //[ Forward declarations                                  ]
 //[-------------------------------------------------------]
-namespace PLCore {
-	class DynVar;
-}
 class QObject;
 namespace PLFrontendQt {
 	namespace DataModels {
@@ -68,7 +66,7 @@ class PLFRONTENDQT_API PLDynVarTreeItemsFactory {
 	//[ Public static functions                               ]
 	//[-------------------------------------------------------]
 	public:
-		static TreeItemBase *CreateDynVarTreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent = nullptr);
+		static TreeItemBase *CreateDynVarTreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent = nullptr);
 
 
 	//[-------------------------------------------------------]

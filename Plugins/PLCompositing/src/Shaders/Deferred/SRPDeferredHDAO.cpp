@@ -47,7 +47,19 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDeferredHDAO)
+pl_class_metadata(SRPDeferredHDAO, "PLCompositing", PLCompositing::SRPDeferredSSAO, "Scene renderer pass for deferred rendering 'High Definition Ambient Occlusion' (HDAO), a 'Screen-Space Ambient Occlusion' (SSAO) technique")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(AORejectRadius,		float,										0.43f,		ReadWrite,	"If either of a twin pair of sampled camera Z values is further away from the central pixels camera Z value than the Reject Radius, then the twin pair of samples will not contribute to the occlusion factor. This alleviates a common problem with SSAO, where distant objects can cause a halo of occlusion on the silhouette edges of close by objects.",	"Min='0.0'")
+	pl_attribute_metadata(AOAcceptRadius,		float,										0.00312f,	ReadWrite,	"This works in a similar fashion to the Reject Radius. Again if either of a twin pair is closer to the central sample than the Accept Radius, then the twin pair of samples will not contribute to the occlusion factor. This can be particularly useful for avoiding unwanted occlusion on low density meshes.",											"Min='0.0'")
+	pl_attribute_metadata(NormalScale,			float,										0.3f,		ReadWrite,	"Controls the influence of per fragment normal vectors.",																																																																											"Min='0.0'")
+	pl_attribute_metadata(AcceptAngle,			float,										0.98f,		ReadWrite,	"Accept angle",																																																																																						"Min='0.0'")
+	pl_attribute_metadata(NumberOfRingGathers,	PLCore::uint32,								20,			ReadWrite,	"Number of ring gathers",																																																																																			"Min='1' Max='20'")
+	pl_attribute_metadata(NumberOfRings,		PLCore::uint32,								4,			ReadWrite,	"Number of rings",																																																																																					"Min='1' Max='4'")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SRPDeferredHDAO, EFlags),	0,			ReadWrite,	"Flags",																																																																																							"")
+pl_class_metadata_end(SRPDeferredHDAO)
 
 
 //[-------------------------------------------------------]

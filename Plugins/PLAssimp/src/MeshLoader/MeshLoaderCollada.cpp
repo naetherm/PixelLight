@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderCollada)
+pl_class_metadata(MeshLoaderCollada, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for dae (Collada) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"dae,xml,DAE,XML")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderCollada)
 
 
 //[-------------------------------------------------------]

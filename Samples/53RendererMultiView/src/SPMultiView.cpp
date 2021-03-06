@@ -46,7 +46,8 @@ using namespace PLMesh;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPMultiView)
+pl_class_metadata(SPMultiView, "", PLRenderer::SurfacePainter, "Abstract multi view surface painter")
+pl_class_metadata_end(SPMultiView)
 
 
 //[-------------------------------------------------------]

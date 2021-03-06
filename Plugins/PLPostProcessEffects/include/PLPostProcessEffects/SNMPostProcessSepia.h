@@ -56,17 +56,15 @@ class SNMPostProcessSepia : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessSepia, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(Desat,			float,				0.5f,									ReadWrite,	DirectValue,	"Desaturation",							"")
-		pl_attribute(Toned,			float,				1.0f,									ReadWrite,	DirectValue,	"Toning",								"")
-		pl_attribute(LightColor,	PLGraphics::Color3,	PLGraphics::Color3(1.0f, 0.90f, 0.5f),	ReadWrite,	DirectValue,	"Paper tone",							"")
-		pl_attribute(DarkColor,		PLGraphics::Color3,	PLGraphics::Color3(0.2f, 0.05f, 0.0f),	ReadWrite,	DirectValue,	"Stain tone",							"")
+		pl_attribute_directvalue(								Desat,		float,				0.5f,									ReadWrite)
+		pl_attribute_directvalue(								Toned,		float,				1.0f,									ReadWrite)
+		pl_attribute_directvalue(								LightColor,	PLGraphics::Color3,	PLGraphics::Color3(1.0f, 0.90f, 0.5f),	ReadWrite)
+		pl_attribute_directvalue(								DarkColor,	PLGraphics::Color3,	PLGraphics::Color3(0.2f, 0.05f, 0.0f),	ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,		PLCore::String,		"Data/PostProcesses/Sepia.pp",			ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,	PLCore::String,		"Data/PostProcesses/Sepia.pp",			ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

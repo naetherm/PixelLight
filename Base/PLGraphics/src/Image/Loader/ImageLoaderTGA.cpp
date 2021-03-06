@@ -69,7 +69,19 @@ struct TGAHeader {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ImageLoaderTGA)
+pl_class_metadata(ImageLoaderTGA, "PLGraphics", PLGraphics::ImageLoader, "Image loader implementation for TGA (\"Targa Image File\"... \"Targa\"=\"Truevision Advanced Raster Graphics Array\") file formats")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"tga,TGA")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	Image&,			PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const Image&,	PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(ImageLoaderTGA)
 
 
 //[-------------------------------------------------------]

@@ -44,7 +44,14 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsJointUniversal)
+pl_class_metadata(SNMPhysicsJointUniversal, "PLPhysics", PLPhysics::SNMPhysicsJoint, "Physics universal joint scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Origin of the universal in local space",																																				"")
+	pl_attribute_metadata(PinDir1,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	"First axis of rotation fixed on THIS body and perpendicular to 'PinDir2' in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",			"")
+	pl_attribute_metadata(PinDir2,		PLMath::Vector3,	PLMath::Vector3::UnitZ,	ReadWrite,	"Second axis of rotation fixed on 'Target' body and perpendicular to 'PinDir1' in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",	"")
+pl_class_metadata_end(SNMPhysicsJointUniversal)
 
 
 //[-------------------------------------------------------]

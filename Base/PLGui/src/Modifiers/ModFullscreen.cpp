@@ -49,7 +49,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(ModFullscreen)
+pl_class_metadata(ModFullscreen, "PLGui", PLGui::Modifier, "Modifier that toggles a widgets fullscreen mode on 'ALT+ENTER'")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ModFullscreen)
 
 
 //[-------------------------------------------------------]

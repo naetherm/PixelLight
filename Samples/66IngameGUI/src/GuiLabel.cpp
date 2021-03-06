@@ -46,7 +46,8 @@ using namespace PLGui;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(GuiLabel)
+pl_class_metadata(GuiLabel, "", GuiBase, "Ingame Gui - Label (text item)")
+pl_class_metadata_end(GuiLabel)
 
 
 //[-------------------------------------------------------]

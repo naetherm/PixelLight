@@ -41,7 +41,20 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ConfigLoaderPL)
+pl_class_metadata(ConfigLoaderPL, "PLCore", PLCore::ConfigLoader, "Config loader implementation for the PixelLight config XML file format")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"cfg,CFG")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,			pl_ret_type(bool),	Config&,		File&,					"Load method",																						"")
+	pl_method_2_metadata(Save,			pl_ret_type(bool),	const Config&,	File&,					"Save method. Saves all configuration groups and includes default values, too.",					"")
+	pl_method_4_metadata(SaveParams,	pl_ret_type(bool),	const Config&,	File&,	String,	bool,	"Save method. Parameters: Configuration group to save as 'String', no default values as 'bool'.",	"")
+pl_class_metadata_end(ConfigLoaderPL)
 
 
 //[-------------------------------------------------------]

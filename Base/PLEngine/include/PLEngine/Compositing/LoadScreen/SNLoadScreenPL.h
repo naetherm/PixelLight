@@ -63,7 +63,7 @@ class SNLoadScreenPL : public SNLoadScreenBase {
 			Depth   = 1<<1,	/**< Clear depth buffer */
 			Stencil = 1<<2	/**< Clear stencil buffer */
 		};
-		pl_enum(EClearFlags)
+		pl_flag(EClearFlags)
 			pl_enum_value(Color,	"Clear color buffer")
 			pl_enum_value(Depth,	"Clear depth buffer")
 			pl_enum_value(Stencil,	"Clear stencil buffer")
@@ -73,15 +73,13 @@ class SNLoadScreenPL : public SNLoadScreenBase {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNLoadScreenPL, "PLEngine", PLEngine::SNLoadScreenBase, "Load screen scene node")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(ClearFlags,	pl_flag_type(EClearFlags),	Color|Depth,								ReadWrite,	DirectValue,	"Clear flags",				"")
-		pl_attribute(ClearColor,	PLGraphics::Color4,			PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite,	DirectValue,	"Clear color (r/g/b/a)",	"")
+		pl_attribute_directvalue(					ClearFlags,	PLCore::uint32,		Color|Depth,								ReadWrite)
+		pl_attribute_directvalue(					ClearColor,	PLGraphics::Color4,	PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),		NoCulling,									ReadWrite,	GetSet,			"Flags",					"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNLoadScreenPL,	Flags,		PLCore::uint32,		NoCulling,									ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

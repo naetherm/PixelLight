@@ -41,7 +41,18 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessDiagonalBlur)
+pl_class_metadata(SNMPostProcessDiagonalBlur, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ColorScale,	float,				4.0f,									ReadWrite,	"Color scale",							"")
+	pl_attribute_metadata(PixelKernel0,	PLMath::Vector2,	PLMath::Vector2( 2.0f, 2.0f),			ReadWrite,	"Pixel kernel 0",						"")
+	pl_attribute_metadata(PixelKernel1,	PLMath::Vector2,	PLMath::Vector2( 4.0f, 4.0f),			ReadWrite,	"Pixel kernel 1",						"")
+	pl_attribute_metadata(PixelKernel2,	PLMath::Vector2,	PLMath::Vector2(-6.0f, 6.0f),			ReadWrite,	"Pixel kernel 2",						"")
+	pl_attribute_metadata(PixelKernel3,	PLMath::Vector2,	PLMath::Vector2( 8.0f, 8.0f),			ReadWrite,	"Pixel kernel 3",						"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,		"Data/PostProcesses/DiagonalBlur.pp",	ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessDiagonalBlur)
 
 
 //[-------------------------------------------------------]

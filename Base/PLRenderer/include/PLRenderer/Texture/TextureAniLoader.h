@@ -53,12 +53,8 @@ class TextureAniLoader : public PLCore::LoaderImpl {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, TextureAniLoader, "PLRenderer", PLCore::LoaderImpl, "Abstract texture animation loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"TextureAni")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLRENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

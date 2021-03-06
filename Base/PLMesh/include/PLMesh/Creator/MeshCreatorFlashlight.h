@@ -53,13 +53,11 @@ class MeshCreatorFlashlight : public MeshCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLMESH_RTTI_EXPORT, MeshCreatorFlashlight, "PLMesh", PLMesh::MeshCreator, "Flashlight mesh creator class")
+	pl_class_def(PLMESH_API)
 		// Attributes
-		pl_attribute(Detail,	PLCore::uint32,		16,						ReadWrite,	DirectValue,	"Detail level",		"")
-		pl_attribute(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	DirectValue,	"Offset to center",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Detail,	PLCore::uint32,		16,						ReadWrite)
+		pl_attribute_directvalue(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

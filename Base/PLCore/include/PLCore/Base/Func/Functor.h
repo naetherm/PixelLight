@@ -31,10 +31,9 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include "PLCore/Base/Func/Func.h"
+#include "PLCore/Base/Func/Signature.h"
 #include "PLCore/Base/Func/FuncFunPtr.h"
 #include "PLCore/Base/Func/FuncMemPtr.h"
-#include "PLCore/Base/Func/FuncGenFunPtr.h"
-#include "PLCore/Base/Func/FuncGenMemPtr.h"
 
 
 //[-------------------------------------------------------]
@@ -95,24 +94,7 @@ class Functor : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11,
 	//[ Public data types                                     ]
 	//[-------------------------------------------------------]
 	public:
-		// Storage types
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
-		typedef typename Type<T14>::_Type _T14;
-		typedef typename Type<T15>::_Type _T15;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> _MethodType;
 
 
 	//[-------------------------------------------------------]
@@ -141,7 +123,7 @@ class Functor : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11,
 		*  @remarks
 		*    Wrap a generic function object (functoid)
 		*/
-		Functor(DynFunc *pFunc) :
+		Functor(_MethodType *pFunc) :
 			m_pFunc(pFunc)
 		{
 		}
@@ -176,39 +158,6 @@ class Functor : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11,
 		template <class CLASS>
 		Functor(const typename MethodSignature<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>::MemFuncType &pMemFunc, CLASS *pObject) :
 			m_pFunc(new FuncMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(pMemFunc, pObject))
-		{
-		}
-
-		/**
-		*  @brief
-		*    Constructor
-		*
-		*  @param[in] pFunc
-		*    Pointer to a generic static function
-		*
-		*  @remarks
-		*    Wrap a generic static function pointer
-		*/
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(pFunc))
-		{
-		}
-
-		/**
-		*  @brief
-		*    Constructor
-		*
-		*  @param[in] pMemFunc
-		*    Pointer to a generic member function of a class
-		*  @param[in] pObject
-		*    Pointer to an instance of that class
-		*
-		*  @remarks
-		*    Wrap a generic member function pointer
-		*/
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(pMemFunc, pObject))
 		{
 		}
 
@@ -268,18 +217,18 @@ class Functor : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11,
 
 
 	//[-------------------------------------------------------]
-	//[ Public virtual DynFunc functions                      ]
+	//[ Public virtual Func functions                         ]
 	//[-------------------------------------------------------]
 	public:
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13, _T14 t14, _T15 t15) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
@@ -289,7 +238,7 @@ class Functor : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11,
 	//[ Private data                                          ]
 	//[-------------------------------------------------------]
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 
 
 };
@@ -304,28 +253,13 @@ class Functor : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11,
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14, typename T15>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
-		typedef typename Type<T14>::_Type _T14;
-		typedef typename Type<T15>::_Type _T15;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -340,17 +274,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, 
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -386,19 +309,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, 
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13, _T14 t14, _T15 t15) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14, T15 t15) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, t15);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -411,28 +334,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, 
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
 class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
-		typedef typename Type<T14>::_Type _T14;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -447,17 +355,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -493,21 +390,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13, _T14 t14) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -520,27 +417,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13, typename T14>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
-		typedef typename Type<T14>::_Type _T14;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -555,17 +438,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, 
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -601,19 +473,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, 
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13, _T14 t14) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13, T14 t14) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -626,27 +498,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, 
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
 class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -661,17 +519,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : p
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -707,21 +554,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : p
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -734,26 +581,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : p
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12, typename T13>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
-		typedef typename Type<T13>::_Type _T13;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -768,17 +602,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> 
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -814,19 +637,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> 
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12, _T13 t13) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12, T13 t13) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -839,26 +662,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> 
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
 class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -873,17 +683,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -919,21 +718,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 
@@ -947,25 +746,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11, typename T12>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
-		typedef typename Type<T12>::_Type _T12;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -980,17 +767,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : pub
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1026,19 +802,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : pub
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11, _T12 t12) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11, T12 t12) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -1051,25 +827,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> : pub
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
 class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -1084,17 +848,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public Func
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1130,21 +883,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public Func
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 
@@ -1158,24 +911,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public Func
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10, typename T11>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
-		typedef typename Type<T11>::_Type _T11;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -1190,17 +932,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public F
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1236,19 +967,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public F
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10, _T11 t11) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10, T11 t11) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -1261,24 +992,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> : public F
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
 class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -1293,17 +1013,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<R, T
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1339,21 +1048,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<R, T
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 
@@ -1367,23 +1076,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<R, T
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9, typename T10>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
-		typedef typename Type<T10>::_Type _T10;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -1398,17 +1097,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<v
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1444,19 +1132,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<v
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9, _T10 t10) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9, T10 t10) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -1469,23 +1157,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : public Func<v
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
 class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -1500,17 +1178,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<R, T0, T1
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1546,21 +1213,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<R, T0, T1
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -1573,22 +1240,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<R, T0, T1
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8, typename T9>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
-		typedef typename Type<T9> ::_Type _T9;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -1603,17 +1261,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<void, 
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1649,19 +1296,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<void, 
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8, _T9 t9) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8, T9 t9) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8, t9);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -1674,22 +1321,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : public Func<void, 
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
 class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -1704,17 +1342,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, T0, T1, T2
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7, T8>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7, T8>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1750,21 +1377,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, T0, T1, T2
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6, T7, T8>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -1777,21 +1404,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<R, T0, T1, T2
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7, typename T8>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
-		typedef typename Type<T8> ::_Type _T8;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -1806,17 +1425,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<void, T0, 
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7, T8>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7, T8>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1852,19 +1460,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<void, T0, 
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7, _T8 t8) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7, T8 t8) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6, T7, T8>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7, t8);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7, t8);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -1877,21 +1485,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7, T8> : public Func<void, T0, 
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
 class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, T1, T2, T3, T4, T5, T6, T7> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6, T7> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -1906,17 +1506,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, T1, T2, T3
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6, T7>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6, T7>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -1952,21 +1541,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, T1, T2, T3
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6, T7>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -1979,20 +1568,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<R, T0, T1, T2, T3
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void, T0, T1, T2, T3, T4, T5, T6, T7> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
-		typedef typename Type<T7> ::_Type _T7;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6, T7> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2007,17 +1589,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void, T0, T1, 
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6, T7>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6, T7>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2053,19 +1624,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void, T0, T1, 
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6, _T7 t7) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6, T7>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6, t7);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5, t6, t7);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2078,20 +1649,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6, T7> : public Func<void, T0, T1, 
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
 class Functor<R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, T2, T3, T4, T5, T6> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
+		typedef Func<R, T0, T1, T2, T3, T4, T5, T6> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2106,17 +1670,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, T2, T3, T4
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5, T6>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5, T6>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2152,21 +1705,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, T2, T3, T4
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5, T6>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5, t6);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2179,19 +1732,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5, T6> : public Func<R, T0, T1, T2, T3, T4
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
 class Functor<void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0, T1, T2, T3, T4, T5, T6> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
-		typedef typename Type<T6> ::_Type _T6;
+		typedef Func<void, T0, T1, T2, T3, T4, T5, T6> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2206,17 +1753,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0, T1, T2, 
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5, T6>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5, T6>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2252,19 +1788,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0, T1, T2, 
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5, _T6 t6) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5, T6>* >(m_pFunc))(t0, t1, t2, t3, t4, t5, t6);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5, t6);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2277,19 +1813,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5, T6> : public Func<void, T0, T1, T2, 
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
 class Functor<R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, T3, T4, T5> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
+		typedef Func<R, T0, T1, T2, T3, T4, T5> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2304,17 +1834,6 @@ class Functor<R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, T3, T4, T5
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4, T5>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4, T5>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2350,21 +1869,21 @@ class Functor<R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, T3, T4, T5
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4, T5>* >(m_pFunc))(t0, t1, t2, t3, t4, t5);
+				return (*m_pFunc)(t0, t1, t2, t3, t4, t5);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2377,18 +1896,13 @@ class Functor<R, T0, T1, T2, T3, T4, T5> : public Func<R, T0, T1, T2, T3, T4, T5
 template <typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
 class Functor<void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1, T2, T3, T4, T5> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
-		typedef typename Type<T5> ::_Type _T5;
+		typedef Func<void, T0, T1, T2, T3, T4, T5> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2403,17 +1917,6 @@ class Functor<void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1, T2, T3, 
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4, T5>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4, T5>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2449,19 +1952,19 @@ class Functor<void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1, T2, T3, 
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4, _T5 t5) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4, T5>* >(m_pFunc))(t0, t1, t2, t3, t4, t5);
+				(*m_pFunc)(t0, t1, t2, t3, t4, t5);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2474,18 +1977,13 @@ class Functor<void, T0, T1, T2, T3, T4, T5> : public Func<void, T0, T1, T2, T3, 
 template <typename R, typename T0, typename T1, typename T2, typename T3, typename T4>
 class Functor<R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, T4> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
+		typedef Func<R, T0, T1, T2, T3, T4> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2500,17 +1998,6 @@ class Functor<R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, T4> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3, T4>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3, T4>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2546,21 +2033,21 @@ class Functor<R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, T4> {
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3, T4>* >(m_pFunc))(t0, t1, t2, t3, t4);
+				return (*m_pFunc)(t0, t1, t2, t3, t4);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2573,17 +2060,13 @@ class Functor<R, T0, T1, T2, T3, T4> : public Func<R, T0, T1, T2, T3, T4> {
 template <typename T0, typename T1, typename T2, typename T3, typename T4>
 class Functor<void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2, T3, T4> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
-		typedef typename Type<T4> ::_Type _T4;
+		typedef Func<void, T0, T1, T2, T3, T4> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2598,17 +2081,6 @@ class Functor<void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2, T3, T4> 
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3, T4>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3, T4>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2644,19 +2116,19 @@ class Functor<void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2, T3, T4> 
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3, _T4 t4) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3, T4 t4) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3, T4>* >(m_pFunc))(t0, t1, t2, t3, t4);
+				(*m_pFunc)(t0, t1, t2, t3, t4);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2669,17 +2141,13 @@ class Functor<void, T0, T1, T2, T3, T4> : public Func<void, T0, T1, T2, T3, T4> 
 template <typename R, typename T0, typename T1, typename T2, typename T3>
 class Functor<R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
+		typedef Func<R, T0, T1, T2, T3> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2694,17 +2162,6 @@ class Functor<R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2, T3>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2, T3>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2740,21 +2197,21 @@ class Functor<R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2, T3 t3) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2, T3>* >(m_pFunc))(t0, t1, t2, t3);
+				return (*m_pFunc)(t0, t1, t2, t3);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2767,16 +2224,13 @@ class Functor<R, T0, T1, T2, T3> : public Func<R, T0, T1, T2, T3> {
 template <typename T0, typename T1, typename T2, typename T3>
 class Functor<void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
-		typedef typename Type<T3> ::_Type _T3;
+		typedef Func<void, T0, T1, T2, T3> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2791,17 +2245,6 @@ class Functor<void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2, T3>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2, T3>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2837,19 +2280,19 @@ class Functor<void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3> {
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2, _T3 t3) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2, T3 t3) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2, T3>* >(m_pFunc))(t0, t1, t2, t3);
+				(*m_pFunc)(t0, t1, t2, t3);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2862,16 +2305,13 @@ class Functor<void, T0, T1, T2, T3> : public Func<void, T0, T1, T2, T3> {
 template <typename R, typename T0, typename T1, typename T2>
 class Functor<R, T0, T1, T2> : public Func<R, T0, T1, T2> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
+		typedef Func<R, T0, T1, T2> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2886,17 +2326,6 @@ class Functor<R, T0, T1, T2> : public Func<R, T0, T1, T2> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1, T2>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1, T2>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -2932,21 +2361,21 @@ class Functor<R, T0, T1, T2> : public Func<R, T0, T1, T2> {
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1, _T2 t2) override
+		virtual R operator ()(T0 t0, T1 t1, T2 t2) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1, T2>* >(m_pFunc))(t0, t1, t2);
+				return (*m_pFunc)(t0, t1, t2);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -2959,15 +2388,13 @@ class Functor<R, T0, T1, T2> : public Func<R, T0, T1, T2> {
 template <typename T0, typename T1, typename T2>
 class Functor<void, T0, T1, T2> : public Func<void, T0, T1, T2> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
-		typedef typename Type<T2> ::_Type _T2;
+		typedef Func<void, T0, T1, T2> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -2982,17 +2409,6 @@ class Functor<void, T0, T1, T2> : public Func<void, T0, T1, T2> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1, T2>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1, T2>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -3028,19 +2444,19 @@ class Functor<void, T0, T1, T2> : public Func<void, T0, T1, T2> {
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1, _T2 t2) override
+		virtual void operator ()(T0 t0, T1 t1, T2 t2) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1, T2>* >(m_pFunc))(t0, t1, t2);
+				(*m_pFunc)(t0, t1, t2);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -3053,15 +2469,13 @@ class Functor<void, T0, T1, T2> : public Func<void, T0, T1, T2> {
 template <typename R, typename T0, typename T1>
 class Functor<R, T0, T1> : public Func<R, T0, T1> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
+		typedef Func<R, T0, T1> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -3076,17 +2490,6 @@ class Functor<R, T0, T1> : public Func<R, T0, T1> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0, T1>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0, T1>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -3122,21 +2525,21 @@ class Functor<R, T0, T1> : public Func<R, T0, T1> {
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0, _T1 t1) override
+		virtual R operator ()(T0 t0, T1 t1) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0, T1>* >(m_pFunc))(t0, t1);
+				return (*m_pFunc)(t0, t1);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -3149,14 +2552,13 @@ class Functor<R, T0, T1> : public Func<R, T0, T1> {
 template <typename T0, typename T1>
 class Functor<void, T0, T1> : public Func<void, T0, T1> {
 	public:
-		typedef typename Type<T0> ::_Type _T0;
-		typedef typename Type<T1> ::_Type _T1;
+		typedef Func<void, T0, T1> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -3171,17 +2573,6 @@ class Functor<void, T0, T1> : public Func<void, T0, T1> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0, T1>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0, T1>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -3217,19 +2608,19 @@ class Functor<void, T0, T1> : public Func<void, T0, T1> {
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0, _T1 t1) override
+		virtual void operator ()(T0 t0, T1 t1) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0, T1>* >(m_pFunc))(t0, t1);
+				(*m_pFunc)(t0, t1);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -3242,14 +2633,13 @@ class Functor<void, T0, T1> : public Func<void, T0, T1> {
 template <typename R, typename T0>
 class Functor<R, T0> : public Func<R, T0> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
-		typedef typename Type<T0> ::_Type _T0;
+		typedef Func<R, T0> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -3264,17 +2654,6 @@ class Functor<R, T0> : public Func<R, T0> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R, T0>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R, T0>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -3310,21 +2689,21 @@ class Functor<R, T0> : public Func<R, T0> {
 			return *this;
 		}
 
-		virtual _R operator ()(_T0 t0) override
+		virtual R operator ()(T0 t0) override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R, T0>* >(m_pFunc))(t0);
+				return (*m_pFunc)(t0);
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -3337,14 +2716,14 @@ class Functor<R, T0> : public Func<R, T0> {
 template <typename T0>
 class Functor<void, T0> : public Func<void, T0> {
 	public:
-		typedef typename Type<T0>::_Type _T0;
+		typedef Func<void, T0> _MethodType;
 
 	public:
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -3359,17 +2738,6 @@ class Functor<void, T0> : public Func<void, T0> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void, T0>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void, T0>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -3405,19 +2773,19 @@ class Functor<void, T0> : public Func<void, T0> {
 			return *this;
 		}
 
-		virtual void operator ()(_T0 t0) override
+		virtual void operator ()(T0 t0) override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void, T0>* >(m_pFunc))(t0);
+				(*m_pFunc)(t0);
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -3430,13 +2798,13 @@ class Functor<void, T0> : public Func<void, T0> {
 template <typename R>
 class Functor<R> : public Func<R> {
 	public:
-		typedef typename Type<R>  ::_Type _R;
+		typedef Func<R> _MethodType;
 
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -3451,17 +2819,6 @@ class Functor<R> : public Func<R> {
 		{
 		}
 
-		Functor(const typename Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<R>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, R>(pMemFunc, pObject))
-		{
-		}
-
 		Functor(const Functor &cFunctor) : m_pFunc(nullptr)
 		{
 			// Check wrapped function object
@@ -3497,21 +2854,21 @@ class Functor<R> : public Func<R> {
 			return *this;
 		}
 
-		virtual _R operator ()() override
+		virtual R operator ()() override
 		{
 			if (m_pFunc)
-				return (*static_cast<Func<R>* >(m_pFunc))();
+				return (*m_pFunc)();
 			else
 				return DefaultValue<R>::Default();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 /**
@@ -3524,11 +2881,13 @@ class Functor<R> : public Func<R> {
 template <>
 class Functor<void> : public Func<void> {
 	public:
+		typedef Func<void> _MethodType;
+
 		Functor() : m_pFunc(nullptr)
 		{
 		}
 
-		Functor(DynFunc *pFunc) : m_pFunc(pFunc)
+		Functor(_MethodType *pFunc) : m_pFunc(pFunc)
 		{
 		}
 
@@ -3540,17 +2899,6 @@ class Functor<void> : public Func<void> {
 		template <class CLASS>
 		Functor(const typename MethodSignature<CLASS, void>::MemFuncType &pMemFunc, CLASS *pObject) :
 			m_pFunc(new FuncMemPtr<CLASS, void>(pMemFunc, pObject))
-		{
-		}
-
-		Functor(const Signature<void, PLCore::DynParams&, void*>::FuncType &pFunc) :
-			m_pFunc(new FuncGenFunPtr<void>(pFunc))
-		{
-		}
-
-		template <class CLASS>
-		Functor(const typename MethodSignature<CLASS, void, PLCore::DynParams&, void*>::MemFuncType &pMemFunc, CLASS *pObject) :
-			m_pFunc(new FuncGenMemPtr<CLASS, void>(pMemFunc, pObject))
 		{
 		}
 
@@ -3592,16 +2940,16 @@ class Functor<void> : public Func<void> {
 		virtual void operator ()() override
 		{
 			if (m_pFunc)
-				(*static_cast<Func<void>* >(m_pFunc))();
+				(*m_pFunc)();
 		}
 
-		virtual DynFunc *Clone() const override
+		virtual _MethodType *Clone() const override
 		{
 			return new Functor(m_pFunc ? m_pFunc->Clone() : nullptr);
 		}
 
 	private:
-		DynFunc *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
+		_MethodType *m_pFunc;	/**< Pointer to wrapped function object, can be a null pointer */
 };
 
 

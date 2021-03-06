@@ -46,7 +46,8 @@ using namespace PLMesh;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPRTT)
+pl_class_metadata(SPRTT, "", PLRenderer::SurfacePainter, "Abstract render to texture surface painter")
+pl_class_metadata_end(SPRTT)
 
 
 //[-------------------------------------------------------]

@@ -69,7 +69,7 @@ class SNBitmap2D : public SNBitmap {
 			Pos3D       = 1<<12,	/**< The bitmap is placed within 3D. If this flag is not set, the node position is in 'screen space' between 0.0 and 1.0. */
 			Background  = 1<<13		/**< Draw the bitmap at the background ('pre-draw') */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNBitmap::EFlags)
 			pl_enum_value(Center,		"Center the bitmap")
 			pl_enum_value(Pos3D,		"The bitmap is placed within 3D. If this flag is not set, the node position is in 'screen space' between 0.0 and 1.0.")
@@ -80,15 +80,13 @@ class SNBitmap2D : public SNBitmap {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNBitmap2D, "PLScene", PLScene::SNBitmap, "2D bitmap (overlay) scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Width,		float,					1.0f,		ReadWrite,	DirectValue,	"Bitmap width 'screen space' between 0.0 and 1.0",	"")
-		pl_attribute(Height,	float,					1.0f,		ReadWrite,	DirectValue,	"Bitmap height 'screen space' between 0.0 and 1.0",	"")
+		pl_attribute_directvalue(				Width,	float,			1.0f,		ReadWrite)
+		pl_attribute_directvalue(				Height,	float,			1.0f,		ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,		pl_flag_type(EFlags),	NoCulling,	ReadWrite,	GetSet,			"Flags",											"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNBitmap2D,	Flags,	PLCore::uint32,	NoCulling,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

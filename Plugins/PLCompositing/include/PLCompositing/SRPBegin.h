@@ -82,7 +82,7 @@ class SRPBegin : public PLScene::SceneRendererPass {
 			ClearDepth   = 2,	/**< Clear depth buffer */
 			ClearStencil = 4	/**< Clear stencil buffer */
 		};
-		pl_enum(EClearFlags)
+		pl_flag(EClearFlags)
 			pl_enum_value(ClearColor,	"Clear color buffer")
 			pl_enum_value(ClearDepth,	"Clear depth buffer")
 			pl_enum_value(ClearStencil,	"Clear stencil buffer")
@@ -113,7 +113,7 @@ class SRPBegin : public PLScene::SceneRendererPass {
 			NoDepthTexture			  = 1<<4,	/**< Do not provide a depth texture when rendering into a texture */
 			CustomTextureSize		  = 1<<5	/**< Use a texture size given by the user instead of using the original window size */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneRendererPass::EFlags)
 			pl_enum_value(NoStencil,				 "No stencil buffer")
 			pl_enum_value(NoMultisampleAntialiasing, "Do not use multisample antialiasing")
@@ -150,18 +150,16 @@ class SRPBegin : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPBegin, "PLCompositing", PLScene::SceneRendererPass, "First scene renderer pass")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(TextureFormat,	pl_enum_type(ETextureFormat),	PLRenderer::TextureBuffer::Unknown,			ReadWrite,	DirectValue,	"Render target texture format, unknown means no render to texture",	"")
-		pl_attribute(TextureSize,	PLMath::Vector2i,				PLMath::Vector2i::Zero,						ReadWrite,	DirectValue,	"Render target size, only used in case the ''-flag is set",	"")
-		pl_attribute(ClearFlags,	pl_flag_type(EClearFlags),		ClearColor|ClearDepth|ClearStencil,			ReadWrite,	DirectValue,	"Clear flags",														"")
-		pl_attribute(ColorClear,	PLGraphics::Color4,				PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite,	DirectValue,	"Clear color (r/g/b/a)",											"")
-		pl_attribute(FillMode,		pl_enum_type(EFillMode),		SolidMode,									ReadWrite,	DirectValue,	"Fill mode",														"")
+		pl_attribute_directvalue(			TextureFormat,	int,				PLRenderer::TextureBuffer::Unknown,			ReadWrite)
+		pl_attribute_directvalue(			TextureSize,	PLMath::Vector2i,	PLMath::Vector2i::Zero,						ReadWrite)
+		pl_attribute_directvalue(			ClearFlags,		PLCore::uint32,		ClearColor|ClearDepth|ClearStencil,			ReadWrite)
+		pl_attribute_directvalue(			ColorClear,		PLGraphics::Color4,	PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),	ReadWrite)
+		pl_attribute_directvalue(			FillMode,		EFillMode,			SolidMode,									ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),			0,											ReadWrite,	GetSet,			"Flags",															"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPBegin,	Flags,			PLCore::uint32,		0,											ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -52,7 +52,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(TrayIconWidgetLinux)
+pl_class_metadata(TrayIconWidgetLinux, "PLGui", PLGui::Widget, "Tray icon widget class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(TrayIconWidgetLinux)
 
 
 //[-------------------------------------------------------]

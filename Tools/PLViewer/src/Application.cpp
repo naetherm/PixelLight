@@ -53,7 +53,12 @@ using namespace PLEngine;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Application)
+pl_class_metadata(Application, "", PLEngine::ScriptApplication, "Application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+	// Slots
+	pl_slot_1_metadata(OnControl,	PLInput::Control&,	"Called when a control event has occurred, occurred control as first parameter",	"")
+pl_class_metadata_end(Application)
 
 
 //[-------------------------------------------------------]

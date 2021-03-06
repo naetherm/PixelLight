@@ -53,16 +53,16 @@ class AbstractSlider : public Widget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, AbstractSlider, "PLGui", PLGui::Widget, "Abstract base class for all kind of sliders, scrollbars etc.")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(MinValue,		int,	1,		ReadWrite,	GetSet,	"Minimum value",		"")
-		pl_attribute(MaxValue,		int,	100,	ReadWrite,	GetSet,	"Maximum value",		"")
-		pl_attribute(Value,			int,	1,		ReadWrite,	GetSet,	"Current value",		"")
-		pl_attribute(StepSize,		int,	10,		ReadWrite,	GetSet,	"Standard step size",	"")
-		pl_attribute(StepSizeFast,	int,	50,		ReadWrite,	GetSet,	"Fast step size",		"")
+		pl_attribute_getset(AbstractSlider,	MinValue,		int,	1,		ReadWrite)
+		pl_attribute_getset(AbstractSlider,	MaxValue,		int,	100,	ReadWrite)
+		pl_attribute_getset(AbstractSlider,	Value,			int,	1,		ReadWrite)
+		pl_attribute_getset(AbstractSlider,	StepSize,		int,	10,		ReadWrite)
+		pl_attribute_getset(AbstractSlider,	StepSizeFast,	int,	50,		ReadWrite)
 		// Signals
-		pl_signal_1(SignalChangeValue,	int,	"The current value has been changed",	"")
-	pl_class_end
+		pl_signal_1_def(SignalChangeValue,	int)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

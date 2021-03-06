@@ -50,7 +50,14 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDirectionalLighting)
+pl_class_metadata(SRPDirectionalLighting, "PLCompositing", PLScene::SceneRendererPass, "Abstract directional lighting scene renderer pass")
+	// Attributes
+	pl_attribute_metadata(AmbientColor,			PLGraphics::Color3,												PLGraphics::Color3::White,				ReadWrite,	"Ambient color",				"")
+	pl_attribute_metadata(LightingIntensity,	float,															1.0f,									ReadWrite,	"General lighting intensity",	"")
+	pl_attribute_metadata(TextureFiltering,		pl_enum_type_def3(SRPDirectionalLighting, ETextureFiltering),	SRPDirectionalLighting::Anisotropic8,	ReadWrite,	"Texture filtering",			"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SRPDirectionalLighting, EFlags),				0,										ReadWrite,	"Flags",						"")
+pl_class_metadata_end(SRPDirectionalLighting)
 
 
 //[-------------------------------------------------------]

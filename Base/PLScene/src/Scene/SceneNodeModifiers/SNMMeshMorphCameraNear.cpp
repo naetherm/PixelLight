@@ -43,7 +43,17 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMMeshMorphCameraNear)
+pl_class_metadata(SNMMeshMorphCameraNear, "PLScene", PLScene::SNMMeshMorph, "Animated scene node mesh morph modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Joint,	PLCore::String,	"",		ReadWrite,	"Name of the skeleton joint to use as reference point, if not given, the scene node position is used instead",	"")
+	pl_attribute_metadata(Distance,	float,			1.0f,	ReadWrite,	"Camera near distance",																							"")
+	pl_attribute_metadata(InSpeed,	float,			4.0f,	ReadWrite,	"Blend in speed",																								"")
+	pl_attribute_metadata(OutSpeed,	float,			2.0f,	ReadWrite,	"Blend out speed",																								"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node modifier needs to be updated",	"")
+pl_class_metadata_end(SNMMeshMorphCameraNear)
 
 
 //[-------------------------------------------------------]

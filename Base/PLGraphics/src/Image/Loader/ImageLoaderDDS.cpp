@@ -117,7 +117,20 @@ struct DDSHeaderDX10 {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ImageLoaderDDS)
+pl_class_metadata(ImageLoaderDDS, "PLGraphics", PLGraphics::ImageLoader, "Image loader implementation for DDS file formats")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"dds,DDS")
+		pl_property("Load",		"1")
+		pl_property("Save",		"1")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Methods
+	pl_method_2_metadata(Load,	pl_ret_type(bool),	Image&,			PLCore::File&,	"Load method",	"")
+	pl_method_2_metadata(Save,	pl_ret_type(bool),	const Image&,	PLCore::File&,	"Save method",	"")
+pl_class_metadata_end(ImageLoaderDDS)
+
 
 
 //[-------------------------------------------------------]

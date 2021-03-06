@@ -41,7 +41,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneApplication)
+pl_class_metadata(SceneApplication, "PLScene", PLRenderer::RendererApplication, "Scene application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+	// Methods
+	pl_method_0_metadata(GetRootScene,	pl_ret_type(PLScene::SceneContainer*),	"Returns the root scene container, can be a null pointer.",	"")
+pl_class_metadata_end(SceneApplication)
 
 
 //[-------------------------------------------------------]

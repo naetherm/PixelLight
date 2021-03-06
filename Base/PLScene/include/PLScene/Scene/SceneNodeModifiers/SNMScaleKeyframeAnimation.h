@@ -76,7 +76,7 @@ class SNMScaleKeyframeAnimation : public SNMTransform {
 			PlaybackNoLoop	 = 1<<2,	/**< No loop animation */
 			PlaybackPingPong = 1<<3		/**< Ping pong animation */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNMTransform::EFlags)
 			pl_enum_value(PlaybackNoLoop,	"No loop animation")
 			pl_enum_value(PlaybackPingPong,	"Ping pong animation")
@@ -86,16 +86,14 @@ class SNMScaleKeyframeAnimation : public SNMTransform {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNMScaleKeyframeAnimation, "PLScene", PLScene::SNMTransform, "Keyframe scale animation scene node modifier class")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Speed,				float,					1.0f,	ReadWrite,	DirectValue,	"Animation playback speed",					"")
-		pl_attribute(FramesPerSecond,	PLCore::uint32,			24,		ReadWrite,	DirectValue,	"Frames per second",						"")
-		pl_attribute(Keys,				PLCore::String,			"",		ReadWrite,	GetSet,			"Scale keys (x, y and z) chunk filename",	"")
+		pl_attribute_directvalue(							Speed,				float,			1.0f,	ReadWrite)
+		pl_attribute_directvalue(							FramesPerSecond,	PLCore::uint32,	24,		ReadWrite)
+		pl_attribute_getset		(SNMScaleKeyframeAnimation,	Keys,				PLCore::String,	"",		ReadWrite)
 			// Overwritten SceneNodeModifier attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,		ReadWrite,	GetSet,			"Flags",									"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNMScaleKeyframeAnimation,	Flags,				PLCore::uint32,	0,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

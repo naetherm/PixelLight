@@ -42,7 +42,10 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(CheckBox)
+pl_class_metadata(CheckBox, "PLGui", PLGui::AbstractToggleButton, "A check box that can have two or three states")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(CheckBox)
 
 
 //[-------------------------------------------------------]

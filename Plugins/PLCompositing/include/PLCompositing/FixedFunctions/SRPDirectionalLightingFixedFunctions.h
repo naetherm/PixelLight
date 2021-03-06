@@ -109,7 +109,7 @@ class SRPDirectionalLightingFixedFunctions : public SRPDirectionalLighting {
 			NoLightMap            = 1<<7,	/**< Ignore light map */
 			NoAmbientOcclusionMap = 1<<8	/**< Ignore ambient occlusion map */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPDirectionalLighting::EFlags)
 			pl_enum_value(NoSpecular,				"No specular")
 			pl_enum_value(NoReflectionMap,			"Ignore reflection map")
@@ -121,13 +121,11 @@ class SRPDirectionalLightingFixedFunctions : public SRPDirectionalLighting {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDirectionalLightingFixedFunctions, "PLCompositing", PLCompositing::SRPDirectionalLighting, "Scene renderer pass for rendering transparent meshes with lighting")
+	pl_class_def(PLCOM_API)
 		// Attributes
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	0,	ReadWrite,	GetSet,	"Flags",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SRPDirectionalLightingFixedFunctions,	Flags,	PLCore::uint32,	0,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

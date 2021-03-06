@@ -51,7 +51,15 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNLoadScreenPL)
+pl_class_metadata(SNLoadScreenPL, "PLEngine", PLEngine::SNLoadScreenBase, "Load screen scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ClearFlags,	pl_flag_type_def3(SNLoadScreenPL, EClearFlags),	SNLoadScreenPL::Color|SNLoadScreenPL::Depth,	ReadWrite,	"Clear flags",				"")
+	pl_attribute_metadata(ClearColor,	PLGraphics::Color4,								PLGraphics::Color4(0.0f, 0.0f, 0.0f, 0.0f),		ReadWrite,	"Clear color (r/g/b/a)",	"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,		pl_flag_type_def3(SNLoadScreenPL, EFlags),		SNLoadScreenPL::NoCulling,						ReadWrite,	"Flags",					"")
+pl_class_metadata_end(SNLoadScreenPL)
 
 
 //[-------------------------------------------------------]

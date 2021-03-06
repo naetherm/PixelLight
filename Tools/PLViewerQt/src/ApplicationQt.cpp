@@ -47,7 +47,12 @@ using namespace PLScene;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ApplicationQt)
+pl_class_metadata(ApplicationQt, "", Application, "PLViewer application class with an added lightweight Qt GUI-layer")
+	// Methods
+	pl_method_0_metadata(GetDockWidgetManager,	pl_ret_type(PLFrontendQt::DockWidgetManager*),	"Returns the dock widget manager instance the application is using, can be a null pointer.",	"")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+pl_class_metadata_end(ApplicationQt)
 
 
 //[-------------------------------------------------------]

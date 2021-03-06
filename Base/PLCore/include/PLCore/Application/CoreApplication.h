@@ -74,15 +74,8 @@ class CoreApplication : public Object, protected AbstractLifecycle {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, CoreApplication, "PLCore", PLCore::Object, "Application class")
-		#ifdef PLCORE_EXPORTS	// The following is only required when compiling PLCore
-			// Constructors
-			pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-			// Methods
-			pl_method_0(GetApplicationContext,	pl_ret_type(const ApplicationContext&),			"Get application context.",																		"")
-			pl_method_1(Exit,					pl_ret_type(void),						int,	"Exit application. Return code for application as first parameter (usually 0 means no error).",	"")
-		#endif
-	pl_class_end
+	pl_class_def(PLCORE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

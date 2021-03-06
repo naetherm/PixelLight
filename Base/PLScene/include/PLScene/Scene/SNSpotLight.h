@@ -74,7 +74,7 @@ class SNSpotLight : public SNPointLight {
 		enum EFlags {
 			NoCone = 1<<13	/**< Do not use the given outer and inner angles for lighting */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SNPointLight::EFlags)
 			pl_enum_value(NoCone, "Do not use the given outer and inner angles for lighting")
 		pl_enum_end
@@ -88,7 +88,7 @@ class SNSpotLight : public SNPointLight {
 			DebugNoFrustum       = 1<<10,	/**< Do not draw the (green) frustum */
 			DebugFrustumVertices = 1<<11	/**< Draw the (green) frustum vertices */
 		};
-		pl_enum(EDebugFlags)
+		pl_flag(EDebugFlags)
 			pl_enum_base(SNPointLight::EDebugFlags)
 			pl_enum_value(DebugDepthTest,		"Perform a depth test when render the debug stuff like lines")
 			pl_enum_value(DebugNoFrustum,		"Do not draw the (green) frustum")
@@ -99,18 +99,16 @@ class SNSpotLight : public SNPointLight {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNSpotLight, "PLScene", PLScene::SNPointLight, "Spot light scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(OuterAngle,	float,						45.0f,	ReadWrite,	GetSet,	"Outer cone angle in degree",									"")
-		pl_attribute(InnerAngle,	float,						35.0f,	ReadWrite,	GetSet,	"Inner cone angle in degree (smaller than the outer angle)",	"")
-		pl_attribute(ZNear,			float,						0.1f,	ReadWrite,	GetSet,	"Near clipping plane",											"")
-		pl_attribute(Aspect,		float,						1.0f,	ReadWrite,	GetSet,	"Aspect factor (only used if 'NoCone'-flag is set!)",			"")
+		pl_attribute_getset(SNSpotLight,	OuterAngle,	float,			45.0f,	ReadWrite)
+		pl_attribute_getset(SNSpotLight,	InnerAngle,	float,			35.0f,	ReadWrite)
+		pl_attribute_getset(SNSpotLight,	ZNear,		float,			0.1f,	ReadWrite)
+		pl_attribute_getset(SNSpotLight,	Aspect,		float,			1.0f,	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,			pl_flag_type(EFlags),		0,		ReadWrite,	GetSet,	"Flags",														"")
-		pl_attribute(DebugFlags,	pl_flag_type(EDebugFlags),	0,		ReadWrite,	GetSet,	"Debug flags",													"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNSpotLight,	Flags,		PLCore::uint32,	0,		ReadWrite)
+		pl_attribute_getset(SNSpotLight,	DebugFlags,	PLCore::uint32,	0,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -194,7 +192,7 @@ class SNSpotLight : public SNPointLight {
 	protected:
 		/**
 		*  @brief
-		*    Flags which hold ínternal light information ('SNPointLight::EInternalLightFlags' extension)
+		*    Flags which hold ï¿½nternal light information ('SNPointLight::EInternalLightFlags' extension)
 		*/
 		enum EInternalLightFlags {
 			// Recalculate

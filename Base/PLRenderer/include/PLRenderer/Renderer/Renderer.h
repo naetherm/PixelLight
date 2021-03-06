@@ -113,8 +113,8 @@ class Renderer : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, Renderer, "PLRenderer", PLCore::Object, "Abstract renderer main class")
-	pl_class_end
+	pl_class_def(PLRENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -1036,7 +1036,7 @@ class Renderer : public PLCore::Object {
 		*      to the dimension of the render target surface. If < 0 the dimension of the
 		*      current renderer surface is set.
 		*    - Usually, applications render to the entire target surface; when rendering on a
-		*	   640×480 surface, these cRectangle members from above should be 0, 0, 640, and 480, respectively.
+		*	   640ï¿½480 surface, these cRectangle members from above should be 0, 0, 640, and 480, respectively.
 		*    - pfMinZ and pfMaxZ indicate the depth-ranges into which the scene will be rendered and
 		*      are not used for clipping. Most applications set these members to 0.0 and 1.0 to enable
 		*      the system to render to the entire range of depth values in the depth buffer. In some
@@ -1201,7 +1201,7 @@ class Renderer : public PLCore::Object {
 		*    represents the nearest distance to the viewer, and 1.0 the farthest distance.
 		*  @param[in] nStencil
 		*    Value to clear the stencil-buffer with. This parameter can be in the range from
-		*    0 through 2^n–1, where n is the bit depth of the stencil buffer.
+		*    0 through 2^nï¿½1, where n is the bit depth of the stencil buffer.
 		*
 		*  @return
 		*    'true' if all went fine, else 'false'

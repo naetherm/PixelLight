@@ -40,7 +40,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Provider)
+pl_class_metadata(Provider, "PLInput", PLCore::Object, "Input provider")
+pl_class_metadata_end(Provider)
 
 
 //[-------------------------------------------------------]

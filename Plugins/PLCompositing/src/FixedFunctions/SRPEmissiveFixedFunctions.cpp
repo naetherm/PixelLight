@@ -56,7 +56,12 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPEmissiveFixedFunctions)
+pl_class_metadata(SRPEmissiveFixedFunctions, "PLCompositing", PLScene::SceneRendererPass, "Scene renderer pass for just rendering emissive meshes")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(TextureFiltering,	pl_enum_type_def3(SRPEmissiveFixedFunctions, ETextureFiltering),	SRPEmissiveFixedFunctions::Anisotropic2,	ReadWrite,	"Texture filtering (no anisotropic = better performance)",	"")
+pl_class_metadata_end(SRPEmissiveFixedFunctions)
 
 
 //[-------------------------------------------------------]

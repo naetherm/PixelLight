@@ -53,7 +53,15 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPEndFXAA)
+pl_class_metadata(SRPEndFXAA, "PLCompositing", PLCompositing::SRPEnd, "\"Fast Approximate Anti-Aliasing\" (FXAA) render pipeline finishing scene renderer pass")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ShaderLanguage,	PLCore::String,							"",						ReadWrite,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
+	pl_attribute_metadata(Preset,			pl_enum_type_def3(SRPEndFXAA, EPreset),	SRPEndFXAA::Preset3,	ReadWrite,	"FXAA preset as described within http://developer.download.nvidia.com/assets/gamedev/files/sdk/11/FXAA_WhitePaper.pdf",					"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPEndFXAA, EFlags),	0,						ReadWrite,	"Flags",																																"")
+pl_class_metadata_end(SRPEndFXAA)
 
 
 //[-------------------------------------------------------]

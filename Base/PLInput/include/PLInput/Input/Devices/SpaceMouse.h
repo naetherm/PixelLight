@@ -65,8 +65,8 @@ class SpaceMouse : public Device {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLINPUT_RTTI_EXPORT, SpaceMouse, "PLInput", PLInput::Device, "Joystick input controller")
-	pl_class_end
+	pl_class_def(PLINPUT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

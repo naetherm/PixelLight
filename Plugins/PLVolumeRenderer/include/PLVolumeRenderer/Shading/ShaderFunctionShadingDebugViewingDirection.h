@@ -52,10 +52,8 @@ class ShaderFunctionShadingDebugViewingDirection : public ShaderFunctionShadingD
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionShadingDebugViewingDirection, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionShadingDebug, "Debug viewing direction shader function implementation class for shading")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -48,7 +48,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionShadingLightingThreshold)
+pl_class_metadata(ShaderFunctionShadingLightingThreshold, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionShadingLighting, "Lighting threshold shader function implementation class for shading")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionShadingLightingThreshold)
 
 
 //[-------------------------------------------------------]

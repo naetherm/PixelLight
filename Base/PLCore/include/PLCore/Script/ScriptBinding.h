@@ -64,12 +64,8 @@ class ScriptBinding : public Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCORE_RTTI_EXPORT, ScriptBinding, "PLCore", PLCore::Object, "Abstract script binding class")
-		// Properties
-		pl_properties
-			pl_property("Namespace",	"")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLCORE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

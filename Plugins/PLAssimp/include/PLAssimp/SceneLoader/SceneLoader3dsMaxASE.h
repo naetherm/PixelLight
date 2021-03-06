@@ -52,14 +52,8 @@ class SceneLoader3dsMaxASE : public SceneLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SceneLoader3dsMaxASE, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for ase (3D Studio Max ASCII Export) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"ase,ask,ASE,ASK")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

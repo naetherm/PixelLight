@@ -52,7 +52,18 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDebugSceneNodeNames)
+pl_class_metadata(SRPDebugSceneNodeNames, "PLCompositing", PLCompositing::SRPDebug, "Scene renderer pass drawing just simple scene node names")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(FontName,			PLCore::String,										"",							ReadWrite,	"The used font, if empty the default font is used",											"")
+	pl_attribute_metadata(FontSize,			PLCore::uint32,										0,							ReadWrite,	"The font size, if null the default font size is used - use 'FontScale' for dynamic scale",	"Max='100'")
+	pl_attribute_metadata(FontScale,		float,												1.0f,						ReadWrite,	"The dynamic font scale",																	"Min='0' Max='100'")
+	pl_attribute_metadata(FontColor,		PLGraphics::Color4,									PLGraphics::Color4::White,	ReadWrite,	"The dynamic font color",																	"")
+	pl_attribute_metadata(MaxDrawDistance,	float,												20.0f,						ReadWrite,	"Maximum draw distance of names to the camera, if less or equal 0, there's no limitation",	"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SRPDebugSceneNodeNames, EFlags),	0,							ReadWrite,	"Flags",																					"")
+pl_class_metadata_end(SRPDebugSceneNodeNames)
 
 
 //[-------------------------------------------------------]

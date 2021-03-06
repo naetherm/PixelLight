@@ -49,7 +49,9 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(MessageBox)
+pl_class_metadata(MessageBox, "PLGui", PLGui::Dialog, "Message box")
+	pl_constructor_0_metadata(DefaultConstructor, "Default constructor", "")
+pl_class_metadata_end(MessageBox)
 
 
 //[-------------------------------------------------------]

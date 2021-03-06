@@ -50,7 +50,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderCompositorPC)
+pl_class_metadata(ShaderCompositorPC, "PLVolumeRenderer", PLVolumeRenderer::ShaderCompositor, "PC shader compositor base class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderCompositorPC)
 
 
 //[-------------------------------------------------------]

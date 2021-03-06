@@ -39,7 +39,10 @@ namespace PLDatabaseNull {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Database)
+pl_class_metadata(Database, "PLDatabaseNull", PLDatabase::Database, "Null database implementation")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Database)
 
 
 //[-------------------------------------------------------]

@@ -47,7 +47,15 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorTriangle)
+pl_class_metadata(MeshCreatorTriangle, "PLMesh", PLMesh::MeshCreator, "Triangle mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(V1,		PLMath::Vector3,	PLMath::Vector3(-0.5f, -0.5f, 0.0f),	ReadWrite,	"Vertex 1",			"")
+	pl_attribute_metadata(V2,		PLMath::Vector3,	PLMath::Vector3( 0.5f, -0.5f, 0.0f),	ReadWrite,	"Vertex 2",			"")
+	pl_attribute_metadata(V3,		PLMath::Vector3,	PLMath::Vector3( 0.5f,  0.5f, 0.0f),	ReadWrite,	"Vertex 3",			"")
+	pl_attribute_metadata(Offset,	PLMath::Vector3,	PLMath::Vector3( 0.0f,  0.0f, 0.0f),	ReadWrite,	"Offset to center",	"")
+pl_class_metadata_end(MeshCreatorTriangle)
 
 
 //[-------------------------------------------------------]

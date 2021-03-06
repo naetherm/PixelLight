@@ -46,7 +46,12 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMMeshUpdate)
+pl_class_metadata(SNMMeshUpdate, "PLScene", PLScene::SNMMesh, "Mesh scene node modifier which performs frequent mesh updates")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNMMeshUpdate, EFlags),	0,	ReadWrite,	"Flags",	"")
+pl_class_metadata_end(SNMMeshUpdate)
 
 
 //[-------------------------------------------------------]

@@ -39,7 +39,8 @@ namespace PLDatabase {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Database)
+pl_class_metadata(Database, "PLDatabase", PLCore::Object, "Abstract SQL (Structured Query Language) database base class")
+pl_class_metadata_end(Database)
 
 
 //[-------------------------------------------------------]

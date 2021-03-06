@@ -45,7 +45,9 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(AppWindow)
+pl_class_metadata(AppWindow, "PLGui", PLGui::Window, "An application window is usually a top-level window with a border and a title bar")
+	pl_constructor_0_metadata(DefaultConstructor, "Default constructor", "")
+pl_class_metadata_end(AppWindow)
 
 
 //[-------------------------------------------------------]

@@ -37,7 +37,12 @@ namespace PLNature {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TerrainLoader)
+pl_class_metadata(TerrainLoader, "PLNature", PLCore::LoaderImpl, "Abstract terrain loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Terrain")
+	pl_properties_end
+pl_class_metadata_end(TerrainLoader)
 
 
 //[-------------------------------------------------------]

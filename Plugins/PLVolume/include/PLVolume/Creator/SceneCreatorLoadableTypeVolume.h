@@ -53,14 +53,8 @@ class SceneCreatorLoadableTypeVolume : public PLEngine::SceneCreatorLoadableType
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, SceneCreatorLoadableTypeVolume, "PLVolume", PLEngine::SceneCreatorLoadableType, "Volume loadable type scene creator")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Volume")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUME_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

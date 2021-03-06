@@ -66,18 +66,16 @@ class SRPDeferredSPAAO : public SRPDeferredSSAO {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferredSPAAO, "PLCompositing", PLCompositing::SRPDeferredSSAO, "Scene renderer pass for deferred rendering 'A Simple and Practical Approach to SSAO' (SPAAO), a 'Screen-Space Ambient Occlusion' (SSAO) technique")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(NumberOfDirections,	PLCore::uint32,			8,		ReadWrite,	DirectValue,	"The number of randomly-rotated 2D directions in image space distributed around the current pixel. The higher this parameter, the lower is the noise in the ambient occlusion.",	"Min='1'")
-		pl_attribute(SampleRadius,			float,					0.1f,	ReadWrite,	DirectValue,	"The sampling radius",																																								"Min='0.0'")
-		pl_attribute(Intensity,				float,					4.0f,	ReadWrite,	DirectValue,	"The ambient occlusion intensity",																																					"Min='0.0'")
-		pl_attribute(Scale,					float,					10.0f,	ReadWrite,	DirectValue,	"Scales distance between occluders and occlude",																																	"Min='0.0'")
-		pl_attribute(Bias,					float,					0.2f,	ReadWrite,	DirectValue,	"Controls the width of the occlusion cone considered by the occlude",																												"Min='0.0'")
+		pl_attribute_directvalue(					NumberOfDirections,	PLCore::uint32,	8,		ReadWrite)
+		pl_attribute_directvalue(					SampleRadius,		float,			0.1f,	ReadWrite)
+		pl_attribute_directvalue(					Intensity,			float,			4.0f,	ReadWrite)
+		pl_attribute_directvalue(					Scale,				float,			10.0f,	ReadWrite)
+		pl_attribute_directvalue(					Bias,				float,			0.2f,	ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,					pl_flag_type(EFlags),	0,		ReadWrite,	GetSet,			"Flags",																																											"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPDeferredSPAAO,	Flags,				PLCore::uint32,	0,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

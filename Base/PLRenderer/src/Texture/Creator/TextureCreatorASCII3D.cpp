@@ -45,7 +45,12 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureCreatorASCII3D)
+pl_class_metadata(TextureCreatorASCII3D, "PLRenderer", PLRenderer::TextureCreator, "3D ASCII texture (TextureBuffer::L8) creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ASCIIFilename,	PLCore::String,	"",	ReadWrite,	"2D ASCII texture filename",	"Type='Image'")
+pl_class_metadata_end(TextureCreatorASCII3D)
 
 
 //[-------------------------------------------------------]
@@ -134,7 +139,7 @@ Texture *TextureCreatorASCII3D::Create(TextureManager &cTextureManager, Texture 
 		// Return the created texture
 		return pTexture;
 	} else {
-		PL_LOG(Error, "Can't open: " + ASCIIFilename.GetString())
+		PL_LOG(Error, "Can't open: " + ASCIIFilename.Get())
 	}
 
 	// Error!

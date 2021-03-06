@@ -52,7 +52,10 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMTransformGizmoPositionController)
+pl_class_metadata(SNMTransformGizmoPositionController, "PLEngine", PLScene::SNMTransformGizmoPosition, "Position transform gizmo controller scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+pl_class_metadata_end(SNMTransformGizmoPositionController)
 
 
 //[-------------------------------------------------------]

@@ -69,20 +69,8 @@ class SceneLoaderPL : public SceneLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SceneLoaderPL, "PLScene", PLScene::SceneLoader, "Scene loader implementation for the PixelLight scene XML file format")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"scene,SCENE")
-			pl_property("Load",		"1")
-			pl_property("Save",		"1")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-		// Methods
-		pl_method_2(Load,		pl_ret_type(bool),	SceneContainer&,	PLCore::File&,			"Load method",												"")
-		pl_method_2(Save,		pl_ret_type(bool),	SceneContainer&,	PLCore::File&,			"Save method",												"")
-		pl_method_3(SaveParams,	pl_ret_type(bool),	SceneContainer&,	PLCore::File&,	bool,	"Save method. Parameters: No default values as 'bool'.",	"")
-	pl_class_end
+	pl_class_def(PLS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

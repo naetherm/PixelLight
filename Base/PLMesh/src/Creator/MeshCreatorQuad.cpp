@@ -47,7 +47,16 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorQuad)
+pl_class_metadata(MeshCreatorQuad, "PLMesh", PLMesh::MeshCreator, "Quad mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(V1,		PLMath::Vector3,	PLMath::Vector3(-0.5f, -0.5f, 0.0f),	ReadWrite,	"Vertex 1",			"")
+	pl_attribute_metadata(V2,		PLMath::Vector3,	PLMath::Vector3( 0.5f, -0.5f, 0.0f),	ReadWrite,	"Vertex 2",			"")
+	pl_attribute_metadata(V3,		PLMath::Vector3,	PLMath::Vector3( 0.5f,  0.5f, 0.0f),	ReadWrite,	"Vertex 3",			"")
+	pl_attribute_metadata(V4,		PLMath::Vector3,	PLMath::Vector3(-0.5f,  0.5f, 0.0f),	ReadWrite,	"Vertex 4",			"")
+	pl_attribute_metadata(Offset,	PLMath::Vector3,	PLMath::Vector3( 0.0f,  0.0f, 0.0f),	ReadWrite,	"Offset to center",	"")
+pl_class_metadata_end(MeshCreatorQuad)
 
 
 //[-------------------------------------------------------]

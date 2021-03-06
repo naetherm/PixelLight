@@ -52,17 +52,15 @@ class PGStretch : public SNParticleGroup {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPG_RTTI_EXPORT, PGStretch, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Stretch particle group")
+	pl_class_def(PLPG_API)
 		// Attributes
-		pl_attribute(Size,		float,				2.0f,							ReadWrite,	DirectValue,	"Size",						"Min='0.0001'")
-		pl_attribute(Length,	float,				10.0f,							ReadWrite,	DirectValue,	"Length",					"")
-		pl_attribute(Color,		PLGraphics::Color4,	PLGraphics::Color4::White,		ReadWrite,	DirectValue,	"Particle color",			"")
+		pl_attribute_directvalue(			Size,		float,				2.0f,							ReadWrite)
+		pl_attribute_directvalue(			Length,		float,				10.0f,							ReadWrite)
+		pl_attribute_directvalue(			Color,		PLGraphics::Color4,	PLGraphics::Color4::White,		ReadWrite)
 			// Overwritten SNParticleGroup attributes
-		pl_attribute(Material,	PLCore::String,		"Data/Textures/PGStretch.dds",	ReadWrite,	GetSet,			"Particle group material",	"Type='Material Effect Image TextureAni'")
-		pl_attribute(Particles,	PLCore::uint32,		1,								ReadWrite,	GetSet,			"Number of particles",		"Min=1")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(PGStretch,	Material,	PLCore::String,		"Data/Textures/PGStretch.dds",	ReadWrite)
+		pl_attribute_getset		(PGStretch,	Particles,	PLCore::uint32,		1,								ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

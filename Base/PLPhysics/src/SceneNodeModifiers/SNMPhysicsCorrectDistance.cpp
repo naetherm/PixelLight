@@ -48,7 +48,14 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsCorrectDistance)
+pl_class_metadata(SNMPhysicsCorrectDistance, "PLPhysics", PLPhysics::SNMPhysics, "Scene node modifier class correcting the distance between the owner scene node and a target scene node by using physics tests")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Target,			PLCore::String,	"",		ReadWrite,	"Target scene node",											"")
+	pl_attribute_metadata(BlendOutTarget,	PLCore::String,	"",		ReadWrite,	"Target scene node to blend out, if empty 'Target' is used",	"")
+	pl_attribute_metadata(BlendOutDistance,	float,			0.5f,	ReadWrite,	"Blend out distance",											"Min='0.0'")
+pl_class_metadata_end(SNMPhysicsCorrectDistance)
 
 
 //[-------------------------------------------------------]

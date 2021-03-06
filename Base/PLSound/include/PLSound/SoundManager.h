@@ -83,8 +83,8 @@ class SoundManager : public PLCore::Object, public PLCore::ResourceManager<Buffe
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLSOUND_RTTI_EXPORT, SoundManager, "PLSound", PLCore::Object, "Abstract sound manager main class")
-	pl_class_end
+	pl_class_def(PLSOUND_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -276,13 +276,13 @@ class SoundManager : public PLCore::Object, public PLCore::ResourceManager<Buffe
 		*    If velocities are applied to the listener object or to any source object, then
 		*    doppler shift will be applied to the audio. The following formula is used to 
 		*    calculate doppler shift:\n
-		*    f’ = f*(DV – DF*vl)/(DV + DF*vs)\n
+		*    fï¿½ = f*(DV ï¿½ DF*vl)/(DV + DF*vs)\n
 		*    DV = doppler velocity\n
 		*    DF = doppler factor\n
 		*    vl = listener velocity (scalar value along source-to-listener vector)\n
 		*    vs = source velocity (scalar value along source-to-listener vector)\n
 		*    f = frequency of sample\n
-		*    f’ = Doppler shifted frequency\n
+		*    fï¿½ = Doppler shifted frequency\n
 		*    The doppler velocity (340) represents the speed of sound.\n
 		*    The doppler factor is used to exaggerate or de-emphasize the doppler shift.
 		*/

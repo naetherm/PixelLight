@@ -52,14 +52,8 @@ class MeshLoaderOgreXML : public MeshLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, MeshLoaderOgreXML, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for mesh.xml (Ogre XML) using Assimp")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"mesh.xml,MESH.XML")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

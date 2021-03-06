@@ -50,7 +50,23 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNCamera)
+pl_class_metadata(SNCamera, "PLScene", PLScene::SceneNode, "PixelLight standard camera scene node")
+	// Properties
+	pl_properties
+		pl_property("Icon",	"Data/Textures/IconCamera.dds")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(FOV,						float,										45.0f,		ReadWrite,	"Field of view in degree",																									"Min='10.0' Max='170.0'")
+	pl_attribute_metadata(Aspect,					float,										1.0f,		ReadWrite,	"Aspect factor",																											"")
+	pl_attribute_metadata(ZNear,					float,										0.1f,		ReadWrite,	"Near clipping plane",																										"")
+	pl_attribute_metadata(ZFar,						float,										1000.0f,	ReadWrite,	"Far clipping plane",																										"")
+	pl_attribute_metadata(SceneRendererFilename,	PLCore::String,								"",			ReadWrite,	"Filename of the scene renderer to use, if empty the default scene renderer of the scene graph surface painter is used",	"Type='SceneRenderer'")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,					pl_flag_type_def3(SNCamera, EFlags),		0,			ReadWrite,	"Flags",																													"")
+	pl_attribute_metadata(DebugFlags,				pl_flag_type_def3(SNCamera, EDebugFlags),	0,			ReadWrite,	"Debug flags",																												"")
+pl_class_metadata_end(SNCamera)
 
 
 //[-------------------------------------------------------]

@@ -46,7 +46,13 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMTransformGizmo)
+pl_class_metadata(SNMTransformGizmo, "PLScene", PLScene::SNMTransform, "Abstract transform gizmo scene node modifier base class")
+	// Attributes
+	pl_attribute_metadata(DistanceFromCamera,	float,	50.0f,	ReadWrite,	"Distance from the camera (for size control)",	"")
+	// Slots
+	pl_slot_2_metadata(OnDrawTransparent,	PLRenderer::Renderer&,	const VisNode*,	"Called on scene node transparent draw, the used renderer as first parameter, the current visibility node of this scene node, can be a null pointer as second parameter",	"")
+	pl_slot_0_metadata(OnUpdate,													"Called when the scene node modifier needs to be updated",																													"")
+pl_class_metadata_end(SNMTransformGizmo)
 
 
 //[-------------------------------------------------------]

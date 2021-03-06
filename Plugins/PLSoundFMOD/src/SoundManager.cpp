@@ -48,7 +48,17 @@ namespace PLSoundFMOD {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SoundManager)
+pl_class_metadata(SoundManager, "PLSoundFMOD", PLSound::SoundManager, "FMOD sound backend")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(BufferSize,	PLCore::uint32,										200,								ReadWrite,	"FMOD internal mixing buffer size (in milliseconds)",																							"")
+	pl_attribute_metadata(Output,		pl_enum_type_def3(SoundManager, ESoundcardDriver),	SoundManager::AUTODETECT,			ReadWrite,	"The output system to be used",																													"")
+	pl_attribute_metadata(Driver,		PLCore::uint32,										0,									ReadWrite,	"Selects a sound card driver. It is used when an output mode has enumerated more than one output device, and you need to select between them.",	"")
+	pl_attribute_metadata(Mixer,		pl_enum_type_def3(SoundManager, EQuality),			SoundManager::QUALITY_AUTODETECT,	ReadWrite,	"Digital mixer type",																															"")
+	pl_attribute_metadata(OutputRate,	PLCore::uint32,										44100,								ReadWrite,	"Output rate in Hz between 4000 and 65535",																										"")
+	pl_attribute_metadata(Channels,		PLCore::uint32,										32,									ReadWrite,	"Maximum number of SOFTWARE channels available (HARDWARE channels are auto detected)",															"")
+pl_class_metadata_end(SoundManager)
 
 
 //[-------------------------------------------------------]

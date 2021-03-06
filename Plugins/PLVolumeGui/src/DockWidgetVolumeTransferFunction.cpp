@@ -30,6 +30,7 @@ PL_WARNING_PUSH
 	PL_WARNING_DISABLE(4127)	// "warning C4127: conditional expression is constant"
 	#include <QtGui/qboxlayout.h>
 	#include <QtGui/qdockwidget.h>
+	#include <QtGui/QMainWindow>
 PL_WARNING_POP
 #include <PLCore/Base/Class.h>
 #include <PLGraphics/Image/ImageBuffer.h>
@@ -51,7 +52,14 @@ namespace PLVolumeGui {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetVolumeTransferFunction)
+pl_class_metadata(DockWidgetVolumeTransferFunction, "PLVolumeGui", PLVolumeGui::DockWidgetVolume, "Volume transfer function Qt dock widget class")
+	// Properties
+	pl_properties
+		pl_property("Title", "Transfer Function")
+	pl_properties_end
+	// Constructors
+	pl_constructor_2_metadata(DefaultConstructor,	QMainWindow*,	PLFrontendQt::DockWidgetManager*,	"Constructor with a pointer to the Qt main window as first parameter, pointer to the dock widget manager this dock widget should be registered to as second parameter",	"")
+pl_class_metadata_end(DockWidgetVolumeTransferFunction)
 
 
 //[-------------------------------------------------------]
@@ -61,7 +69,7 @@ pl_implement_class(DockWidgetVolumeTransferFunction)
 *  @brief
 *    Constructor
 */
-DockWidgetVolumeTransferFunction::DockWidgetVolumeTransferFunction(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetVolume(reinterpret_cast<QWidget*>(pQMainWindow), pDockWidgetManager),
+DockWidgetVolumeTransferFunction::DockWidgetVolumeTransferFunction(QMainWindow *pQMainWindow, DockWidgetManager *pDockWidgetManager) : DockWidgetVolume(pQMainWindow, pDockWidgetManager),
 	m_pDockWidgetVolumeTransferFunctionQObject(new DockWidgetVolumeTransferFunctionQObject(*this)),
 	m_pTransferFunctionWidget(nullptr),
 	m_pTransferFunctionResultWidget(nullptr)

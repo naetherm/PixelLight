@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneLoaderIrrlichtMesh)
+pl_class_metadata(SceneLoaderIrrlichtMesh, "PLAssimp", PLAssimp::SceneLoader, "Scene loader implementation for irrmesh (Irrlicht Mesh) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"irrmesh,xml,IRRMESH,XML")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneLoaderIrrlichtMesh)
 
 
 //[-------------------------------------------------------]

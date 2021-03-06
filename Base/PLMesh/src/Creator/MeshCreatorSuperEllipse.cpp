@@ -47,7 +47,15 @@ namespace PLMesh {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshCreatorSuperEllipse)
+pl_class_metadata(MeshCreatorSuperEllipse, "PLMesh", PLMesh::MeshCreator, "Super ellipse mesh creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Power1,	float,				0.5f,					ReadWrite,	"Control parameter 1",	"")
+	pl_attribute_metadata(Power2,	float,				0.1f,					ReadWrite,	"Control parameter 2",	"")
+	pl_attribute_metadata(Detail,	PLCore::uint32,		10,						ReadWrite,	"Detail",				"")
+	pl_attribute_metadata(Offset,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Offset to center",		"")
+pl_class_metadata_end(MeshCreatorSuperEllipse)
 
 
 //[-------------------------------------------------------]

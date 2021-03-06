@@ -53,13 +53,11 @@ class SNMPhysicsJointSlider : public SNMPhysicsJoint {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysicsJointSlider, "PLPhysics", PLPhysics::SNMPhysicsJoint, "Physics slider joint scene node modifier")
+	pl_class_def(PLPHYSICS_API)
 		// Attributes
-		pl_attribute(PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	GetSet,	"Origin of the slider in local space",																									"")
-		pl_attribute(PinDir,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	GetSet,	"The line of action of the slider in scene container space if the 'LocalPinDirection'-flag is not set, else in local scene node space",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_getset(SNMPhysicsJointSlider,	PivotPoint,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite)
+		pl_attribute_getset(SNMPhysicsJointSlider,	PinDir,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

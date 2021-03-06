@@ -81,7 +81,7 @@ class SRPDeferredGlow : public SRPDeferred {
 			NoDiscard  = 1<<1,	/**< Disable discard (may result in better or worse performance) */
 			NoBlending = 1<<2	/**< Disable blending (for debugging) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPDeferred::EFlags)
 			pl_enum_value(NoDiscard,	"Disable discard (may result in better or worse performance)")
 			pl_enum_value(NoBlending,	"Disable blending (for debugging)")
@@ -91,17 +91,15 @@ class SRPDeferredGlow : public SRPDeferred {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDeferredGlow, "PLCompositing", PLCompositing::SRPDeferred, "Scene renderer pass for deferred rendering glow effect")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(ShaderLanguage,	PLCore::String,			"",		ReadWrite,	DirectValue,	"Shader language to use (for example \"GLSL\" or \"Cg\"), if empty string, the default shader language of the renderer will be used",	"")
-		pl_attribute(GlowFactor,		float,					1.0f,	ReadWrite,	DirectValue,	"Glow factor",																															"")
-		pl_attribute(GlowBlurPasses,	PLCore::uint32,			4,		ReadWrite,	DirectValue,	"Number of glow blur passes, should be a multiple of 2",																				"")
-		pl_attribute(GlowDownscale,		float,					8.0f,	ReadWrite,	DirectValue,	"Glow downscale factor, should be a multiple of 2",																						"Min='1.0'")
+		pl_attribute_directvalue(					ShaderLanguage,	PLCore::String,	"",		ReadWrite)
+		pl_attribute_directvalue(					GlowFactor,		float,			1.0f,	ReadWrite)
+		pl_attribute_directvalue(					GlowBlurPasses,	PLCore::uint32,	4,		ReadWrite)
+		pl_attribute_directvalue(					GlowDownscale,	float,			8.0f,	ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),	0,		ReadWrite,	GetSet,			"Flags",																																"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SRPDeferredGlow,	Flags,			PLCore::uint32,	0,		ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

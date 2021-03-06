@@ -37,7 +37,15 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionShading)
+pl_class_metadata(ShaderFunctionShading, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for shading")
+	// Properties
+	pl_properties
+		pl_property("FunctionTitle",			"2.3 - Shading")
+		pl_property("FunctionName",				"Shading")
+		pl_property("FunctionSignature_GLSL",	"vec4 Shading(float Scalar, vec3 Position, vec3 StepPositionDelta)")
+		pl_property("FunctionSignature_Cg",		"float4 Shading(float Scalar, float3 Position, float3 StepPositionDelta)")
+	pl_properties_end
+pl_class_metadata_end(ShaderFunctionShading)
 
 
 //[-------------------------------------------------------]

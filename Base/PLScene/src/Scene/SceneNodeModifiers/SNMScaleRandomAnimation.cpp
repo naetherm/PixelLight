@@ -41,7 +41,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMScaleRandomAnimation)
+pl_class_metadata(SNMScaleRandomAnimation, "PLScene", PLScene::SNMTransform, "Random scale animation scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Speed,	float,				1.0f,					ReadWrite,	"Animation speed",											"")
+	pl_attribute_metadata(Radius,	float,				0.5f,					ReadWrite,	"Animation radius",											"")
+	pl_attribute_metadata(FixScale,	PLMath::Vector3,	PLMath::Vector3::One,	ReadWrite,	"Scale, if default, the initial scene node scale is used",	"")
+pl_class_metadata_end(SNMScaleRandomAnimation)
 
 
 //[-------------------------------------------------------]

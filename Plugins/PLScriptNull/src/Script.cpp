@@ -38,7 +38,15 @@ namespace PLScriptNull {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Script)
+pl_class_metadata(Script, "PLScriptNull", PLCore::Script, "Null script implementation")
+	// Properties
+	pl_properties
+		pl_property("Language",	"Null")
+		pl_property("Formats",	"")		// The null backend has no load and runnable scripts
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Script)
 
 
 //[-------------------------------------------------------]

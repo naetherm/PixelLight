@@ -63,7 +63,10 @@ const String SNConsole::StandardMaterial = "Data/Effects/PLConsole.plfx";
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNConsole)
+pl_class_metadata(SNConsole, "PLEngine", PLEngine::SNConsoleBase, "Standard console implementation")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SNConsole)
 
 
 //[-------------------------------------------------------]

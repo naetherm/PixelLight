@@ -59,8 +59,8 @@ class Database : public PLCore::Object {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLDATABASE_RTTI_EXPORT, Database, "PLDatabase", PLCore::Object, "Abstract SQL (Structured Query Language) database base class")
-	pl_class_end
+	pl_class_def(PLDATABASE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

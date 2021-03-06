@@ -53,15 +53,13 @@ class TextureCreatorTurbulence3D : public TextureCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, TextureCreatorTurbulence3D, "PLRenderer", PLRenderer::TextureCreator, "3D turbulence texture (TextureBuffer::L8) creator class")
+	pl_class_def(PLRENDERER_API)
 		// Attributes
-		pl_attribute(XSize,	PLCore::uint32,		128,									ReadWrite,	DirectValue,	"Texture x size (must be a power of 2)",	"Min='8'")
-		pl_attribute(YSize,	PLCore::uint32,		32,										ReadWrite,	DirectValue,	"Texture y size (must be a power of 2)",	"Min='8'")
-		pl_attribute(ZSize,	PLCore::uint32,		32,										ReadWrite,	DirectValue,	"Texture z size (must be a power of 2)",	"Min='8'")
-		pl_attribute(Scale,	PLMath::Vector3,	PLMath::Vector3(0.08f, 0.16f, 0.16f),	ReadWrite,	DirectValue,	"Texture scale",							"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(XSize,	PLCore::uint32,		128,									ReadWrite)
+		pl_attribute_directvalue(YSize,	PLCore::uint32,		32,										ReadWrite)
+		pl_attribute_directvalue(ZSize,	PLCore::uint32,		32,										ReadWrite)
+		pl_attribute_directvalue(Scale,	PLMath::Vector3,	PLMath::Vector3(0.08f, 0.16f, 0.16f),	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

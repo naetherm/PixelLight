@@ -45,7 +45,8 @@ namespace PLFrontendOS {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(FrontendAndroid)
+pl_class_metadata(FrontendAndroid, "PLFrontendOS", PLCore::FrontendImpl, "Android frontend implementation class")
+pl_class_metadata_end(FrontendAndroid)
 
 
 //[-------------------------------------------------------]

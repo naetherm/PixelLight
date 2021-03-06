@@ -62,15 +62,8 @@ class Script : public PLCore::Script {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLSCRIPTANGELSCRIPT_RTTI_EXPORT, Script, "PLScriptAngelScript", PLCore::Script, "AngelScript (http://www.angelcode.com/angelscript/) script implementation")
-		// Properties
-		pl_properties
-			pl_property("Language",	"AngelScript")
-			pl_property("Formats",	"as,AS")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLSCRIPTANGELSCRIPT_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

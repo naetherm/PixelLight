@@ -61,15 +61,13 @@ class SNMEgoOrbitingController : public SNMOrbitingController {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNMEgoOrbitingController, "PLEngine", PLEngine::SNMOrbitingController, "Scene node modifier class rotating a scene node towards a target scene node using an input controller with 3D restriction")
+	pl_class_def(PL_API)
 		// Attributes
-		pl_attribute(UpVector,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite,	DirectValue,	"Up vector",																											"")
-		pl_attribute(RollFactor,	float,				0.25f,					ReadWrite,	DirectValue,	"Roll factor. If there's an absolute z-axis (e.g. when using a 3D mouse), apply roll -> looks & feels more natural.",	"")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+		pl_attribute_directvalue(UpVector,		PLMath::Vector3,	PLMath::Vector3::UnitY,	ReadWrite)
+		pl_attribute_directvalue(RollFactor,	float,				0.25f,					ReadWrite)
 		// Slots
-		pl_slot_0(OnRotation,	"Called when the scene node rotation changed",	"")
-	pl_class_end
+		pl_slot_0_def(SNMEgoOrbitingController,	OnRotation)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

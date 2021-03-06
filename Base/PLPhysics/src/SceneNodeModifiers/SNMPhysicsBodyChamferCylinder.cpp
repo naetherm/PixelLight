@@ -42,7 +42,13 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsBodyChamferCylinder)
+pl_class_metadata(SNMPhysicsBodyChamferCylinder, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics chamfer cylinder body scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Radius,	float,	1.0f,	ReadWrite,	"Chamfer cylinder radius at the base",				"Min='0.0'")
+	pl_attribute_metadata(Height,	float,	1.0f,	ReadWrite,	"Chamfer cylinder height along the x local axis",	"Min='0.0'")
+pl_class_metadata_end(SNMPhysicsBodyChamferCylinder)
 
 
 //[-------------------------------------------------------]

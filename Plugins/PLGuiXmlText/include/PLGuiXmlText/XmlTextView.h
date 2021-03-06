@@ -55,10 +55,10 @@ class XmlTextView : public PLGui::Widget {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUIXMLTEXT_RTTI_EXPORT, XmlTextView, "PLGuiXmlText", PLGui::Widget, "Control that display's a text using a XML based markup language")
+	pl_class_def(PLGUIXMLTEXT_API)
 		// Attributes
-		pl_attribute(Filename,	PLCore::String,	"",	ReadWrite,	GetSet,	"Filename of XmlText file",	"")
-	pl_class_end
+		pl_attribute_getset(XmlTextView, Filename,	PLCore::String,	"",	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -54,17 +54,15 @@ class Label : public Widget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, Label, "PLGui", PLGui::Widget, "Widget that displays a static text")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(Color,		PLGraphics::Color4,			PLGraphics::Color4::Black,	ReadWrite,	GetSet,	"Text color",					"")
-		pl_attribute(Align,		pl_enum_type(EAlign),		AlignLeft,					ReadWrite,	GetSet,	"Text alignment (horizontal)",	"")
-		pl_attribute(VAlign,	pl_enum_type(EVAlign),		AlignMiddle,				ReadWrite,	GetSet,	"Text alignment (vertical)",	"")
-		pl_attribute(Wrap,		pl_enum_type(ETextWrap),	TextWrap,					ReadWrite,	GetSet,	"Text wrapping",				"")
-		pl_attribute(Style,		pl_flag_type(ETextStyle),	0,							ReadWrite,	GetSet,	"Text style",					"")
-		pl_attribute(Text,		PLCore::String,				"",							ReadWrite,	GetSet,	"Text label",					"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset(Label,	Color,	PLGraphics::Color4,	PLGraphics::Color4::Black,	ReadWrite)
+		pl_attribute_getset(Label,	Align,	EAlign,				AlignLeft,					ReadWrite)
+		pl_attribute_getset(Label,	VAlign,	EVAlign,			AlignMiddle,				ReadWrite)
+		pl_attribute_getset(Label,	Wrap,	ETextWrap,			TextWrap,					ReadWrite)
+		pl_attribute_getset(Label,	Style,	PLCore::uint32,		0,							ReadWrite)
+		pl_attribute_getset(Label,	Text,	PLCore::String,		"",							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

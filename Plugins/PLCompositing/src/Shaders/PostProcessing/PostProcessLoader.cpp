@@ -37,7 +37,12 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PostProcessLoader)
+pl_class_metadata(PostProcessLoader, "PLCompositing", PLCore::LoaderImpl, "Abstract post process loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"PostProcess")
+	pl_properties_end
+pl_class_metadata_end(PostProcessLoader)
 
 
 //[-------------------------------------------------------]

@@ -31,6 +31,7 @@
 //[ Includes                                              ]
 //[-------------------------------------------------------]
 #include <PLCore/Container/FastPool.h>
+#include <PLCore/Base/Event/DynEventHandler.h>
 #include "PLScriptLua/RTTIObjectSignalPointerBase.h"
 
 
@@ -39,7 +40,6 @@
 //[-------------------------------------------------------]
 namespace PLCore {
 	class DynParams;
-	class DynEventHandler;
 }
 
 
@@ -164,7 +164,7 @@ class RTTIObjectSignalMethodPointer : public RTTIObjectSignalPointerBase, public
 		*  @param[in] nMethod
 		*    Build in method
 		*/
-		void InitializeInstance(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEvent *pDynEvent, EMethod nMethod);
+		void InitializeInstance(Script &cScript, PLCore::Object *pRTTIObject, PLCore::DynEventPtr pDynEvent, EMethod nMethod);
 
 		/**
 		*  @brief
@@ -180,7 +180,7 @@ class RTTIObjectSignalMethodPointer : public RTTIObjectSignalPointerBase, public
 		*    - Performs also a signal/slot signature match
 		*    - m_pDynEvent must be valid
 		*/
-		PLCore::DynEventHandler *GetSlotFromLuaStack(lua_State *pLuaState);
+		PLCore::DynEventHandlerPtr GetSlotFromLuaStack(lua_State *pLuaState);
 
 
 };

@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderTrueSpace)
+pl_class_metadata(MeshLoaderTrueSpace, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for cob/scn (TrueSpace) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"cob,scn,COB,SCN")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderTrueSpace)
 
 
 //[-------------------------------------------------------]

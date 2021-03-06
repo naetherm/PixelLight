@@ -40,7 +40,8 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ConfigGroup)
+pl_class_metadata(ConfigGroup, "PLCore", PLCore::Object, "Configuration group")
+pl_class_metadata_end(ConfigGroup)
 
 
 //[-------------------------------------------------------]
@@ -101,7 +102,7 @@ String Config::GetVar(const String &sClass, const String &sVariable)
 	ConfigGroup *pClass = GetClass(sClass);
 	if (pClass) {
 		// Get attribute
-		const DynVar *pDynVar = pClass->GetAttribute(sVariable);
+		const DynVarPtr pDynVar = pClass->GetAttribute(sVariable);
 		if (pDynVar)
 			return pDynVar->GetString();
 	}
@@ -120,7 +121,7 @@ int Config::GetVarInt(const String &sClass, const String &sVariable)
 	ConfigGroup *pClass = GetClass(sClass);
 	if (pClass) {
 		// Get attribute
-		const DynVar *pDynVar = pClass->GetAttribute(sVariable);
+		const DynVarPtr pDynVar = pClass->GetAttribute(sVariable);
 		if (pDynVar)
 			return pDynVar->GetInt();
 	}
@@ -139,7 +140,7 @@ bool Config::SetVar(const String &sClass, const String &sVariable, const String 
 	ConfigGroup *pClass = GetClass(sClass);
 	if (pClass) {
 		// Get attribute
-		DynVar *pDynVar = pClass->GetAttribute(sVariable);
+		DynVarPtr pDynVar = pClass->GetAttribute(sVariable);
 		if (pDynVar) {
 			pDynVar->SetString(sValue);
 
@@ -241,7 +242,7 @@ bool Config::SetClassDefault(const String &sClass, const String &sVariable)
 	// Set all variables to default?
 	if (sVariable.GetLength()) {
 		// Get attribute
-		DynVar *pDynVar = pClass->GetAttribute(sVariable);
+		DynVarPtr pDynVar = pClass->GetAttribute(sVariable);
 		if (pDynVar)
 			pDynVar->SetDefault();
 	} else {

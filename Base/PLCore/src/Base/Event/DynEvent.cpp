@@ -53,12 +53,7 @@ DynEvent::DynEvent()
 */
 DynEvent::~DynEvent()
 {
-	// Force disconnection of event handlers
-	const SimpleList<DynEventHandler*>::ListElement *pElement = m_lstHandlers.pFirstElement;
-	while (pElement) {
-		pElement->Data->m_lstEvents.Remove(this);
-		pElement = pElement->pNextElement;
-	}
+
 }
 
 /**
@@ -67,15 +62,6 @@ DynEvent::~DynEvent()
 */
 void DynEvent::Connect(DynEventHandler &cHandler)
 {
-	// The handler must not be connected already
-	if (!cHandler.m_lstEvents.IsElement(this)) {
-		// Signatures must match!
-		if (cHandler.GetSignature() == GetSignature()) {
-			// Connect handler
-			m_lstHandlers.Add(&cHandler);
-			cHandler.m_lstEvents.Add(this);
-		}
-	}
 }
 
 /**
@@ -84,11 +70,6 @@ void DynEvent::Connect(DynEventHandler &cHandler)
 */
 void DynEvent::Disconnect(DynEventHandler &cHandler)
 {
-	// Disconnect handler
-	if (m_lstHandlers.IsElement(&cHandler)) {
-		m_lstHandlers.Remove(&cHandler);
-		cHandler.m_lstEvents.Remove(this);
-	}
 }
 
 

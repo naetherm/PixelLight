@@ -59,8 +59,8 @@ class ShaderFunctionShadingDebug : public ShaderFunctionShading {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionShadingDebug, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionShading, "Abstract debug shader function implementation base class for shading")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

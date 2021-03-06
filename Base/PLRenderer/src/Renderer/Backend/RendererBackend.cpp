@@ -54,7 +54,8 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(RendererBackend)
+pl_class_metadata(RendererBackend, "PLRenderer", PLRenderer::Renderer, "Renderer backend with general stuff which all backends will need")
+pl_class_metadata_end(RendererBackend)
 
 
 //[-------------------------------------------------------]

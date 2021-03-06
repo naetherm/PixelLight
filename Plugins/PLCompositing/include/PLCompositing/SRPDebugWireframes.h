@@ -62,7 +62,7 @@ class SRPDebugWireframes : public SRPDebug {
 		enum EFlags {
 			UseDepth = 1<<1	/**< Take the depth buffer into account (lines can be hidden by objects) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SRPDebug::EFlags)
 			pl_enum_value(UseDepth, "Take the depth buffer into account (lines can be hidden by objects)")
 		pl_enum_end
@@ -71,17 +71,17 @@ class SRPDebugWireframes : public SRPDebug {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDebugWireframes, "PLCompositing", PLCompositing::SRPDebug, "Abstract scene renderer pass drawing just simple wireframes")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(LineWidth,				float,									1.0f,										ReadWrite,	DirectValue,	"Line width (if supported by the the used renderer API)",										"Min='1.0'")
-		pl_attribute(LineColor,				PLGraphics::Color4,						PLGraphics::Color4(1.0f, 1.0f, 1.0f, 0.4f),	ReadWrite,	DirectValue,	"Line color",																					"")
-		pl_attribute(MaxDrawDistance,		float,									-1.0f,										ReadWrite,	DirectValue,	"Maximum draw distance of wireframes to the camera, if less or equal 0, there's no limitation",	"")
-		pl_attribute(CullMode,				pl_enum_type(PLRenderer::Cull::Enum),	PLRenderer::Cull::CCW,						ReadWrite,	DirectValue,	"Backface cull mode to use",																	"")
-		pl_attribute(SlopeScaleDepthBias,	float,									0.0f,										ReadWrite,	DirectValue,	"Slope scale depth bias (polygon offset to avoid nasty line artifacts)",						"")
-		pl_attribute(DepthBias,				float,									0.0f,										ReadWrite,	DirectValue,	"Depth bias (polygon offset to avoid nasty line artifacts)",									"")
+		pl_attribute_directvalue(						LineWidth,				float,					1.0f,										ReadWrite)
+		pl_attribute_directvalue(						LineColor,				PLGraphics::Color4,		PLGraphics::Color4(1.0f, 1.0f, 1.0f, 0.4f),	ReadWrite)
+		pl_attribute_directvalue(						MaxDrawDistance,		float,					-1.0f,										ReadWrite)
+		pl_attribute_directvalue(						CullMode,				PLRenderer::Cull::Enum,	PLRenderer::Cull::CCW,						ReadWrite)
+		pl_attribute_directvalue(						SlopeScaleDepthBias,	float,					0.0f,										ReadWrite)
+		pl_attribute_directvalue(						DepthBias,				float,					0.0f,										ReadWrite)
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,				pl_flag_type(EFlags),						0,											ReadWrite,	GetSet,			"Flags",																						"")
-	pl_class_end
+		pl_attribute_getset		(SRPDebugWireframes,	Flags,					PLCore::uint32,			0,											ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

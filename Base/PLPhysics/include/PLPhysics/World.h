@@ -99,10 +99,10 @@ class World : public PLCore::Object, public PLCore::ElementManager<Element> {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, World, "PLPhysics", PLCore::Object, "Abstract PL physics world (also called 'simulator') base class")
+	pl_class_def(PLPHYSICS_API)
 		// Signals
-		pl_signal_1(SignalContact,	ContactInformation&,	"A contact between two bodies was detected by the physics. Contact information as parameter.",	"")
-	pl_class_end
+		pl_signal_1_def(SignalContact,	ContactInformation&)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -52,15 +52,8 @@ class ShaderFunctionReconstruction : public ShaderFunction {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionReconstruction, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for reconstruction")
-		// Properties
-		pl_properties
-			pl_property("FunctionTitle",			"2.2 - Reconstruction")
-			pl_property("FunctionName",				"Reconstruction")
-			pl_property("FunctionSignature_GLSL",	"float Reconstruction(vec3 Position)")
-			pl_property("FunctionSignature_Cg",		"float Reconstruction(float3 Position)")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

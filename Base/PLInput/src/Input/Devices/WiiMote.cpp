@@ -41,7 +41,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(WiiMote)
+pl_class_metadata(WiiMote, "PLInput", PLInput::Device, "WiiMote input controller")
+pl_class_metadata_end(WiiMote)
 
 
 //[-------------------------------------------------------]

@@ -42,7 +42,12 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Bitmap)
+pl_class_metadata(Bitmap, "PLGui", PLGui::Widget, "Widget that displays a static image")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ImageName,	PLCore::String,	"",	ReadWrite,	"Image filename",	"")
+pl_class_metadata_end(Bitmap)
 
 
 //[-------------------------------------------------------]

@@ -44,7 +44,17 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessCrazyBars)
+pl_class_metadata(SNMPostProcessCrazyBars, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Slots
+	// Attribute
+	pl_attribute_metadata(ColorScaleY,	float,			1.0f,								ReadWrite,	"Color scale Y (0.002 for a rainbow :) )",	"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,		PLCore::String,	"Data/PostProcesses/CrazyBars.pp",	ReadWrite,	"Filename of the post process to use",		"Type='PostProcess'")
+	// Slots
+	pl_slot_0_metadata(OnSceneNodeUpdate,	"Slot for SceneNode::EventUpdate",	"")
+pl_class_metadata_end(SNMPostProcessCrazyBars)
 
 
 //[-------------------------------------------------------]

@@ -46,8 +46,10 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SQAABoundingBox)
-
+pl_class_metadata(SQAABoundingBox, "PLScene", PLScene::SceneQuery, "Axis aligned bounding box intersection scene query class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SQAABoundingBox)
 
 //[-------------------------------------------------------]
 //[ Public functions                                      ]

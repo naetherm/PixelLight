@@ -158,7 +158,7 @@ void DockWidgetSceneGraphQObject::QtSlotCustomContextMenuRequested(const QPoint 
 		// Show the scene graph context menu
 		if (pObject) {
 			SceneGraphMenu cSceneGraphMenu(*pObject);
-			QAction *pAction = cSceneGraphMenu.exec(reinterpret_cast<QWidget*>(m_pDockWidgetSceneGraph->m_pQTreeView)->mapToGlobal(cQPoint));
+			QAction *pAction = cSceneGraphMenu.exec(m_pDockWidgetSceneGraph->m_pQTreeView->mapToGlobal(cQPoint));
 			if (pAction) {
 				// Evaluate the performed action and update the tree view if required
 				const QVariant cUserData = pAction->data();

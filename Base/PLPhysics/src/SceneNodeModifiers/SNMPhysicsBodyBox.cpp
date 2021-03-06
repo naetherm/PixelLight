@@ -50,7 +50,14 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsBodyBox)
+pl_class_metadata(SNMPhysicsBodyBox, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics box body scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Dimension,	PLMath::Vector3,	PLMath::Vector3::Zero,	ReadWrite,	"Box dimension, if null, axis align bounding box in 'scene node space' is used as default",	"Min='0.0 0.0 0.0'")
+	// Slots
+	pl_slot_2_metadata(OnDrawDebug,	PLRenderer::Renderer&,	const PLScene::VisNode*,	"Called on scene node debug draw, the used renderer as first parameter, the current visibility node of this scene node as second parameter (can be a null pointer)",	"")
+pl_class_metadata_end(SNMPhysicsBodyBox)
 
 
 //[-------------------------------------------------------]

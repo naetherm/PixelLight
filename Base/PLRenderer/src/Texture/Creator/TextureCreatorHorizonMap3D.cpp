@@ -45,7 +45,16 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureCreatorHorizonMap3D)
+pl_class_metadata(TextureCreatorHorizonMap3D, "PLRenderer", PLRenderer::TextureCreator, "3D horizon map texture (TextureBuffer::L8) creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Filename2D,	PLCore::String,	"",		ReadWrite,	"2D height map filename to create the horizon map for",	"")
+	pl_attribute_metadata(XSize,		PLCore::uint32,	64,		ReadWrite,	"Texture x size (must be a power of 2)",				"Min='8'")
+	pl_attribute_metadata(YSize,		PLCore::uint32,	64,		ReadWrite,	"Texture y size (must be a power of 2)",				"Min='8'")
+	pl_attribute_metadata(ZSize,		PLCore::uint32,	64,		ReadWrite,	"Texture z size (must be a power of 2)",				"Min='8'")
+	pl_attribute_metadata(Height,		float,			0.16f,	ReadWrite,	"Height",												"")
+pl_class_metadata_end(TextureCreatorHorizonMap3D)
 
 
 //[-------------------------------------------------------]
@@ -162,7 +171,7 @@ Texture *TextureCreatorHorizonMap3D::Create(TextureManager &cTextureManager, Tex
 			return pTexture;
 		}
 	} else {
-		PL_LOG(Error, "Can't open: " + Filename2D.GetString())
+		PL_LOG(Error, "Can't open: " + Filename2D.Get())
 	}
 
 	// Error!

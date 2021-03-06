@@ -37,7 +37,12 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ScriptBinding)
+pl_class_metadata(ScriptBinding, "PLCore", PLCore::Object, "Abstract script binding class")
+	// Properties
+	pl_properties
+		pl_property("Namespace",	"")
+	pl_properties_end
+pl_class_metadata_end(ScriptBinding)
 
 
 //[-------------------------------------------------------]

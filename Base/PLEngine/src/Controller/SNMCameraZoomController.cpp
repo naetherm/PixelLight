@@ -43,7 +43,14 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMCameraZoomController)
+pl_class_metadata(SNMCameraZoomController, "PLEngine", PLScene::SNMCameraZoom, "Scene node modifier class implementing camera zoom input control")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InputSemantic,	PLCore::String,	"",	ReadWrite,	"Semantic of this input controller (e.g. \"Camera\")",	"")
+	// Slots
+	pl_slot_1_metadata(OnControl,	PLInput::Control&,	"Called when a control event has occurred, the control causing the event as first parameter",	"")
+pl_class_metadata_end(SNMCameraZoomController)
 
 
 //[-------------------------------------------------------]

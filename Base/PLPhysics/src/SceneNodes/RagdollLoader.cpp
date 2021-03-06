@@ -37,7 +37,12 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(RagdollLoader)
+pl_class_metadata(RagdollLoader, "PLPhysics", PLCore::LoaderImpl, "Abstract ragdoll loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Ragdoll")
+	pl_properties_end
+pl_class_metadata_end(RagdollLoader)
 
 
 //[-------------------------------------------------------]

@@ -38,7 +38,15 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNText)
+pl_class_metadata(SNText, "PLScene", PLScene::SceneNode, "Abstract text scene node")
+	// Attributes
+	pl_attribute_metadata(Text,		PLCore::String,						"",							ReadWrite,	"Text do draw",																						"")
+	pl_attribute_metadata(Color,	PLGraphics::Color4,					PLGraphics::Color4::White,	ReadWrite,	"Text color",																						"")
+	pl_attribute_metadata(Font,		PLCore::String,						"",							ReadWrite,	"The used font, if empty the default font is used",													"")
+	pl_attribute_metadata(FontSize,	PLCore::uint32,						0,							ReadWrite,	"The font size, if null the default font size is used - use scene node scale for dynamic scale",	"Max='100'")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNText, EFlags),	0,							ReadWrite,	"Flags",																							"")
+pl_class_metadata_end(SNText)
 
 
 //[-------------------------------------------------------]

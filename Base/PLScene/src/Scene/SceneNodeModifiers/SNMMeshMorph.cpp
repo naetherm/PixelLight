@@ -41,7 +41,15 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMMeshMorph)
+pl_class_metadata(SNMMeshMorph, "PLScene", PLScene::SNMMesh, "Mesh scene node morph modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor, SceneNode&, "Parameter constructor", "")
+	// Attributes
+	pl_attribute_metadata(Name,			PLCore::String,	"",		ReadWrite,	"Name of the morph target",		"")
+	pl_attribute_metadata(Weight,		float,			0.0f,	ReadWrite,	"Morph target weight",			"")
+	pl_attribute_metadata(MinWeight,	float,			0.0f,	ReadWrite,	"Minimum morph target weight",	"")
+	pl_attribute_metadata(MaxWeight,	float,			1.0f,	ReadWrite,	"Maximum morph target weight",	"")
+pl_class_metadata_end(SNMMeshMorph)
 
 
 //[-------------------------------------------------------]

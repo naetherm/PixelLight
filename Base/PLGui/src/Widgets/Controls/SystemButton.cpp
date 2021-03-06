@@ -43,7 +43,12 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(SystemButton)
+pl_class_metadata(SystemButton, "PLGui", PLGui::AbstractButton, "Button that represents a system button in a title bar (minimize, maximize, ...)")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(SystemCommand,	pl_enum_type(ESystemCommand),	CommandRestore,	ReadWrite,	"System command that is emitted by the button",	"")
+pl_class_metadata_end(SystemButton)
 
 
 //[-------------------------------------------------------]

@@ -53,15 +53,8 @@ namespace PLCore {
 *  @note
 *    - Implementation of the observer design pattern (this class is the subject/observable, the source)
 */
-template <typename DESC>
-class Signal : public DESC::EventType {
-
-
-	//[-------------------------------------------------------]
-	//[ Public static data                                    ]
-	//[-------------------------------------------------------]
-	public:
-		static DESC	Desc;	/**< Event descriptor */
+template <class EventType>
+class Signal : public EventType {
 
 
 	//[-------------------------------------------------------]
@@ -73,10 +66,8 @@ class Signal : public DESC::EventType {
 		*    Constructor
 		*/
 		Signal() :
-			DESC::EventType()
+			EventType()
 		{
-			// Ensure that the compiler will actually create static instances
-			Desc.Dummy();
 		}
 
 		/**
@@ -88,30 +79,7 @@ class Signal : public DESC::EventType {
 		}
 
 
-	//[-------------------------------------------------------]
-	//[ Public virtual DynEvent functions                     ]
-	//[-------------------------------------------------------]
-	public:
-		/**
-		*  @brief
-		*    Get event descriptor
-		*
-		*  @return
-		*    Event descriptor
-		*/
-		virtual const EventDesc *GetDesc() const override
-		{
-			// Return descriptor
-			return &Desc;
-		}
-
-
 };
-
-
-// Static data instances
-template<typename DESC>
-DESC Signal<DESC>::Desc;
 
 
 //[-------------------------------------------------------]

@@ -41,7 +41,14 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNProjectivePointLight)
+pl_class_metadata(SNProjectivePointLight, "PLScene", PLScene::SNPointLight, "Omni directional projective point light scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(ProjectedMaterial,	PLCore::String,										"Data/Textures/DefaultCubeMap.dds",	ReadWrite,	"Projected material",	"Type='Material Effect Image TextureAni'")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SNProjectivePointLight, EFlags),	0,									ReadWrite,	"Flags",				"")
+pl_class_metadata_end(SNProjectivePointLight)
 
 
 //[-------------------------------------------------------]

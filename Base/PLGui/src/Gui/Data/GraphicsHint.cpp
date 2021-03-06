@@ -37,7 +37,8 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(GraphicsHint)
+pl_class_metadata(GraphicsHint, "PLGui", PLCore::Object, "Graphics hint base class")
+pl_class_metadata_end(GraphicsHint)
 
 
 //[-------------------------------------------------------]

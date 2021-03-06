@@ -52,14 +52,12 @@ class TextureCreatorSpot2D : public TextureCreator {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLRENDERER_RTTI_EXPORT, TextureCreatorSpot2D, "PLRenderer", PLRenderer::TextureCreator, "Spot 2D texture (TextureBuffer::L8) creator class")
+	pl_class_def(PLRENDERER_API)
 		// Attributes
-		pl_attribute(Width,			PLCore::uint32,	64,		ReadWrite,	DirectValue,	"Texture width (must be a power of 2)",		"Min='8'")
-		pl_attribute(Height,		PLCore::uint32,	64,		ReadWrite,	DirectValue,	"Texture height (must be a power of 2)",	"Min='8'")
-		pl_attribute(Brightness,	PLCore::uint8,	255,	ReadWrite,	DirectValue,	"Spot brightness",							"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(Width,			PLCore::uint32,	64,		ReadWrite)
+		pl_attribute_directvalue(Height,		PLCore::uint32,	64,		ReadWrite)
+		pl_attribute_directvalue(Brightness,	PLCore::uint8,	255,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

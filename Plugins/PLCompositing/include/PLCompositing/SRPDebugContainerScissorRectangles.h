@@ -53,13 +53,11 @@ class SRPDebugContainerScissorRectangles : public SRPDebug {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLCOM_RTTI_EXPORT, SRPDebugContainerScissorRectangles, "PLCompositing", PLCompositing::SRPDebug, "Scene renderer pass drawing just simple container scissor rectangles")
+	pl_class_def(PLCOM_API)
 		// Attributes
-		pl_attribute(LineWidth,	float,				2.0f,										ReadWrite,	DirectValue,	"Line width (if supported by the the used renderer API)",	"Min='1.0'")
-		pl_attribute(LineColor,	PLGraphics::Color4,	PLGraphics::Color4(0.8f, 0.8f, 1.0f, 1.0f),	ReadWrite,	DirectValue,	"Line color",												"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_directvalue(LineWidth,	float,				2.0f,										ReadWrite)
+		pl_attribute_directvalue(LineColor,	PLGraphics::Color4,	PLGraphics::Color4(0.8f, 0.8f, 1.0f, 1.0f),	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

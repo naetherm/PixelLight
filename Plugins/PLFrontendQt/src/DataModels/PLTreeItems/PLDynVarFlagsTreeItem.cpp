@@ -39,7 +39,7 @@ namespace PLFrontendQt {
 namespace DataModels {
 
 
-PLDynVarFlagsTreeItem::PLDynVarFlagsTreeItem(PLCore::DynVar *dynVar, TreeItemBase *parent) : PLDynVarStringTreeItem(dynVar, PLDynVarTreeItemTypes::Flags, parent)
+PLDynVarFlagsTreeItem::PLDynVarFlagsTreeItem(PLCore::DynVarPtr dynVar, TreeItemBase *parent) : PLDynVarStringTreeItem(dynVar, PLDynVarTreeItemTypes::Flags, parent)
 {
 	RemoveFlags(1, Qt::ItemIsEditable);
 

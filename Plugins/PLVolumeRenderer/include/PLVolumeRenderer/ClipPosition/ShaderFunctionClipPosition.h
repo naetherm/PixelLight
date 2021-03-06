@@ -60,15 +60,8 @@ class ShaderFunctionClipPosition : public ShaderFunction {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionClipPosition, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunction, "Abstract shader function base class for clip position")
-		// Properties
-		pl_properties
-			pl_property("FunctionTitle",			"2.1 - Clip Position")
-			pl_property("FunctionName",				"ClipPosition")
-			pl_property("FunctionSignature_GLSL",	"bool ClipPosition(vec3 Position)")
-			pl_property("FunctionSignature_Cg",		"bool ClipPosition(float3 Position)")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

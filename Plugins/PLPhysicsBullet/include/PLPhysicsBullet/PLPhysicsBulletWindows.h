@@ -34,15 +34,9 @@
 #ifdef PLPHYSICSBULLET_EXPORTS
 	// To export classes, methods and variables
 	#define PLPHYSICSBULLET_API __declspec(dllexport)
-
-	// To export RTTI elements
-	#define PLPHYSICSBULLET_RTTI_EXPORT 1
 #else
 	// To import classes, methods and variables
 	#define PLPHYSICSBULLET_API __declspec(dllimport)
-
-	// To import RTTI elements
-	#define PLPHYSICSBULLET_RTTI_EXPORT 0
 #endif
 
 

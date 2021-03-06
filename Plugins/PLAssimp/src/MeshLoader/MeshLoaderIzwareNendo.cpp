@@ -40,7 +40,14 @@ namespace PLAssimp {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(MeshLoaderIzwareNendo)
+pl_class_metadata(MeshLoaderIzwareNendo, "PLAssimp", PLAssimp::MeshLoader, "Mesh loader implementation for ndo (Izware Nendo) using Assimp")
+	// Properties
+	pl_properties
+		pl_property("Formats",	"ndo,NDO")
+	pl_properties_end
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(MeshLoaderIzwareNendo)
 
 
 //[-------------------------------------------------------]

@@ -44,7 +44,15 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMRotationKeyframeRecord)
+pl_class_metadata(SNMRotationKeyframeRecord, "PLEngine", PLScene::SNMTransform, "Keyframe rotation animation scene node modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(FramesPerSecond,	PLCore::uint32,	24,	ReadWrite,	"Frames per second",													"")
+	pl_attribute_metadata(Keys,				PLCore::String,	"",	ReadWrite,	"Rotation keys (w, x, y and z quaternion components) chunk filename",	"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node needs to be updated",	"")
+pl_class_metadata_end(SNMRotationKeyframeRecord)
 
 
 //[-------------------------------------------------------]

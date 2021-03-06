@@ -41,7 +41,10 @@ namespace PLGuiXmlText {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(XmlTextView)
+pl_class_metadata(XmlTextView, "PLGuiXmlText", PLGui::Widget, "Control that display's a text using a XML based markup language")
+	// Attributes
+	pl_attribute_metadata(Filename,	PLCore::String,	"",	ReadWrite,	"Filename of XmlText file",	"")
+pl_class_metadata_end(XmlTextView)
 
 
 //[-------------------------------------------------------]

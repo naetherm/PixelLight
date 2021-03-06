@@ -43,7 +43,11 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneRendererPass)
+pl_class_metadata(SceneRendererPass, "PLScene", PLCore::Object, "Abstract scene renderer pass class")
+	// Attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SceneRendererPass, EFlags),	0,	ReadWrite,	"Flags",																				"")
+	pl_attribute_metadata(Name,		PLCore::String,									"",	ReadWrite,	"Optional scene renderer pass name. If not defined, a name is chosen automatically",	"")
+pl_class_metadata_end(SceneRendererPass)
 
 
 //[-------------------------------------------------------]

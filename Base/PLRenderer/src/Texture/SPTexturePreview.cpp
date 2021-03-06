@@ -45,7 +45,10 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPTexturePreview)
+pl_class_metadata(SPTexturePreview, "PLRenderer", PLRenderer::SPPreview, "Texture preview surface painter class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	Renderer&,	"Parameter constructor",	"")
+pl_class_metadata_end(SPTexturePreview)
 
 
 //[-------------------------------------------------------]

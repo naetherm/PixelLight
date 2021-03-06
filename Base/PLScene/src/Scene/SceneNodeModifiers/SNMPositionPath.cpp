@@ -56,7 +56,17 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPositionPath)
+pl_class_metadata(SNMPositionPath, "PLScene", PLScene::SNMTransform, "Scene node modifier class moving the position of a scene node along a given path")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Filename,			PLCore::String,										"",							ReadWrite,	"Filename of the path the node should move on",									"Type='GraphPath'")
+	pl_attribute_metadata(Progress,			float,												0.0f,						ReadWrite,	"Path progress (0-1, automatically wrapped into that range -> or node index)",	"")
+	pl_attribute_metadata(Speed,			float,												1.0f,						ReadWrite,	"Path movement speed",															"")
+	pl_attribute_metadata(Interpolation,	pl_enum_type_def3(SNMPositionPath, EInterpolation),	SNMPositionPath::Linear,	ReadWrite,	"Interpolation type",															"")
+		// Overwritten SceneNodeModifier attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNMPositionPath, EFlags),			0,							ReadWrite,	"Flags",																		"")
+pl_class_metadata_end(SNMPositionPath)
 
 
 //[-------------------------------------------------------]

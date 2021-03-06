@@ -57,11 +57,11 @@ class SNLoadScreenBase : public PLScene::SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PL_RTTI_EXPORT, SNLoadScreenBase, "PLEngine", PLScene::SceneNode, "Abstract load screen base scene node")
+	pl_class_def(PL_API)
 		// Attributes
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	NoCulling,	ReadWrite,	GetSet,	"Flags",	"")
-	pl_class_end
+		pl_attribute_getset(SNLoadScreenBase,	Flags,	PLCore::uint32,	NoCulling,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

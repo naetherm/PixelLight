@@ -41,7 +41,15 @@ namespace PLPostProcessEffects {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPostProcessLayer)
+pl_class_metadata(SNMPostProcessLayer, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(LayerMap,	PLCore::String,		"Data/Textures/PostProcess/Spot.dds",	ReadWrite,	"Filename of the layer map to use",		"Type='Image'")
+	pl_attribute_metadata(Blend,	PLGraphics::Color4,	PLGraphics::Color4::White,				ReadWrite,	"Blend factor",							"")
+		// Overloaded SNMPostProcess attributes
+	pl_attribute_metadata(Filename,	PLCore::String,		"Data/PostProcesses/Layer.pp",			ReadWrite,	"Filename of the post process to use",	"Type='PostProcess'")
+pl_class_metadata_end(SNMPostProcessLayer)
 
 
 //[-------------------------------------------------------]

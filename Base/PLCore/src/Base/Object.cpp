@@ -47,9 +47,21 @@ namespace PLCore {
 
 
 //[-------------------------------------------------------]
-//[ Rtti interface                                        ]
+//[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Object)
+pl_class_metadata_internal(Object, "PLCore", /* No base class */, "Object base class")
+	// Methods
+	pl_method_1_metadata(IsInstanceOf,			pl_ret_type(bool),		const String&,					"Check if object is instance of a given class. Class name (with namespace) as first parameter. Returns 'true' if the object is an instance of the class or one of it's derived classes, else 'false'.",	"")
+	pl_method_2_metadata(SetAttribute,			pl_ret_type(void),		const String&,	const String&,	"Set attribute value. Attribute name as first parameter, attribute value as second parameter.",																											"")
+	pl_method_1_metadata(SetAttributeDefault,	pl_ret_type(void),		const String&,					"Set attribute to it's default value. Attribute name as first parameter.",																																"")
+	pl_method_2_metadata(CallMethod,			pl_ret_type(void),		const String&,	const String&,	"Call method. Method name as first parameter, parameters as string (e.g. \"Param0='x' Param1='y'\") as second parameter.",																				"")
+	pl_method_1_metadata(SetValues,				pl_ret_type(void),		const String&,					"Set multiple attribute values as a string at once. String containing attributes and values as first parameter (e.g. \"Name='Bob' Position='1 2 3'\").",												"")
+	pl_method_0_metadata(SetDefaultValues,		pl_ret_type(void),										"Set all attributes to default.",																																										"")
+	pl_method_0_metadata(ToString,				pl_ret_type(String),									"Get the object as string. Returns string representation of object.",																																	"")
+	pl_method_1_metadata(FromString,			pl_ret_type(void),		const String&,					"Set the object from string. String representation of object as first parameter.",																														"")
+	// Signals
+	pl_signal_0_metadata(SignalDestroyed,	"Object destroyed signal. When this signal is emitted the object is already in the destruction phase and parts may already be invalid. Best to e.g. only update our object pointer.",	"")
+pl_class_metadata_end(Object)
 
 
 //[-------------------------------------------------------]
@@ -229,10 +241,10 @@ bool Object::IsInstanceOf(const String &sClass) const
 *  @brief
 *    Get attributes
 */
-const List<DynVar*> Object::GetAttributes() const
+const List<DynVarPtr> Object::GetAttributes() const
 {
 	// Create attribute list
-	List<DynVar*> lstAttributes;
+	List<DynVarPtr> lstAttributes;
 
 	// Get class
 	Class *pClass = GetClass();
@@ -253,7 +265,7 @@ const List<DynVar*> Object::GetAttributes() const
 *  @brief
 *    Get attribute
 */
-DynVar *Object::GetAttribute(const String &sName) const
+DynVarPtr Object::GetAttribute(const String &sName) const
 {
 	// Get class
 	Class *pClass = GetClass();
@@ -313,10 +325,10 @@ DynFuncPtr Object::GetMethod(const String &sName)
 *  @brief
 *    Get a list of all signals
 */
-const List<DynEvent*> Object::GetSignals() const
+const List<DynEventPtr> Object::GetSignals() const
 {
 	// Create signal list
-	List<DynEvent*> lstSignals;
+	List<DynEventPtr> lstSignals;
 
 	// Get class
 	Class *pClass = GetClass();
@@ -337,7 +349,7 @@ const List<DynEvent*> Object::GetSignals() const
 *  @brief
 *    Get signal by using a given signal name
 */
-DynEvent *Object::GetSignal(const String &sName) const
+DynEventPtr Object::GetSignal(const String &sName) const
 {
 	// Get class
 	Class *pClass = GetClass();
@@ -358,10 +370,10 @@ DynEvent *Object::GetSignal(const String &sName) const
 *  @brief
 *    Get a list of all slots
 */
-const List<DynEventHandler*> Object::GetSlots() const
+const List<DynEventHandlerPtr> Object::GetSlots() const
 {
 	// Create slot list
-	List<DynEventHandler*> lstSlots;
+	List<DynEventHandlerPtr> lstSlots;
 
 	// Get class
 	Class *pClass = GetClass();
@@ -382,7 +394,7 @@ const List<DynEventHandler*> Object::GetSlots() const
 *  @brief
 *    Get slot by using a given slot name
 */
-DynEventHandler *Object::GetSlot(const String &sName) const
+DynEventHandlerPtr Object::GetSlot(const String &sName) const
 {
 	// Get class
 	Class *pClass = GetClass();
@@ -406,7 +418,7 @@ DynEventHandler *Object::GetSlot(const String &sName) const
 void Object::SetAttribute(const String &sName, const String &sValue)
 {
 	// Get attribute
-	DynVar *pAttribute = GetAttribute(sName);
+	DynVarPtr pAttribute = GetAttribute(sName);
 	if (pAttribute) {
 		// Set value
 		pAttribute->SetString(sValue);
@@ -420,7 +432,7 @@ void Object::SetAttribute(const String &sName, const String &sValue)
 void Object::SetAttribute(const String &sName, const DynVar &cVar)
 {
 	// Get attribute
-	DynVar *pAttribute = GetAttribute(sName);
+	DynVarPtr pAttribute = GetAttribute(sName);
 	if (pAttribute) {
 		// Set value
 		pAttribute->SetVar(cVar);
@@ -436,7 +448,7 @@ void Object::SetAttribute(const String &sName, const DynVar *pVar)
 	// Is the given dynamic variable pointer valid?
 	if (pVar) {
 		// Get attribute
-		DynVar *pAttribute = GetAttribute(sName);
+		DynVarPtr pAttribute = GetAttribute(sName);
 		if (pAttribute) {
 			// Set value
 			pAttribute->SetVar(*pVar);
@@ -451,7 +463,7 @@ void Object::SetAttribute(const String &sName, const DynVar *pVar)
 void Object::SetAttributeDefault(const String &sName)
 {
 	// Get attribute
-	DynVar *pAttribute = GetAttribute(sName);
+	DynVarPtr pAttribute = GetAttribute(sName);
 	if (pAttribute) {
 		// Set default value
 		pAttribute->SetDefault();
@@ -534,7 +546,7 @@ String Object::GetValues(EDefaultValue nDefaultValue) const
 			VarDesc *pVarDesc = cIterator.Next();
 			if (pVarDesc) {
 				// Get attribute
-				DynVar *pVar = pVarDesc->GetAttribute(*this);
+				DynVarPtr pVar = pVarDesc->GetAttribute(*this);
 
 				// Ignore variables with default values?
 				if (nDefaultValue == WithDefault || !pVar->IsDefault()) {
@@ -589,7 +601,7 @@ void Object::GetValuesXml(XmlElement &cElement, EDefaultValue nDefaultValue) con
 			VarDesc *pVarDesc = cIterator.Next();
 			if (pVarDesc) {
 				// Get attribute
-				DynVar *pVar = pVarDesc->GetAttribute(*this);
+				DynVarPtr pVar = pVarDesc->GetAttribute(*this);
 
 				// Ignore variables with default values?
 				if (nDefaultValue == WithDefault || !pVar->IsDefault()) {
@@ -636,7 +648,7 @@ void Object::SetDefaultValues()
 			VarDesc *pVarDesc = cIterator.Next();
 			if (pVarDesc) {
 				// Get attribute
-				DynVar *pVar = pVarDesc->GetAttribute(*this);
+				DynVarPtr pVar = pVarDesc->GetAttribute(*this);
 
 				// Set default value
 				pVar->SetDefault();

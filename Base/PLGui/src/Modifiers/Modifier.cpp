@@ -39,7 +39,8 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Modifier)
+pl_class_metadata(Modifier, "PLGui", PLCore::Object, "Modifier base class")
+pl_class_metadata_end(Modifier)
 
 
 //[-------------------------------------------------------]

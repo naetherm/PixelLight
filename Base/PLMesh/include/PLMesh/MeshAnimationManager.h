@@ -60,8 +60,8 @@ class MeshAnimationManager : public PLRenderer::AnimationManager, public PLCore:
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLMESH_RTTI_EXPORT, MeshAnimationManager, "PLMesh", PLCore::Object, "This is a manager for the mesh animation element")
-	pl_class_end
+	pl_class_def(PLMESH_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -54,15 +54,15 @@ class AbstractTooltip : public Widget {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, AbstractTooltip, "PLGui", PLGui::Widget, "Base class for tooltip windows")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(Text,		PLCore::String,	"",		ReadWrite,	GetSet,	"Tooltip text",											"")
-		pl_attribute(Timeout,	PLCore::uint64,	5000,	ReadWrite,	GetSet,	"Time (in ms) after which the tooltip is blended out",	"")
+		pl_attribute_getset(AbstractTooltip,	Text,		PLCore::String,	"",		ReadWrite)
+		pl_attribute_getset(AbstractTooltip,	Timeout,	PLCore::uint64,	5000,	ReadWrite)
 		// Signals
-		pl_signal_0(SignalTimeout,	"Timeout has been reached",	"")
+		pl_signal_0_def(SignalTimeout)
 		// Slots
-		pl_slot_0(OnTimer,	"Timer callback",	"")
-	pl_class_end
+		pl_slot_0_def(AbstractTooltip,	OnTimer)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

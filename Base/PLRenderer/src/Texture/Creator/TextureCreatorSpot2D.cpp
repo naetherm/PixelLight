@@ -44,7 +44,14 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureCreatorSpot2D)
+pl_class_metadata(TextureCreatorSpot2D, "PLRenderer", PLRenderer::TextureCreator, "Spot 2D texture (TextureBuffer::L8) creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Width,		PLCore::uint32,	64,		ReadWrite,	"Texture width (must be a power of 2)",		"Min='8'")
+	pl_attribute_metadata(Height,		PLCore::uint32,	64,		ReadWrite,	"Texture height (must be a power of 2)",	"Min='8'")
+	pl_attribute_metadata(Brightness,	PLCore::uint8,	255,	ReadWrite,	"Spot brightness",							"")
+pl_class_metadata_end(TextureCreatorSpot2D)
 
 
 //[-------------------------------------------------------]

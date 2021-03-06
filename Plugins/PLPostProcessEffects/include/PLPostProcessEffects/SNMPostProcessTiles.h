@@ -56,16 +56,14 @@ class SNMPostProcessTiles : public PLCompositing::SNMPostProcess {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, SNMPostProcessTiles, "PLPostProcessEffects", PLCompositing::SNMPostProcess, "")
+	pl_class_def()
 		// Attributes
-		pl_attribute(Tiles,		float,				65.0f,									ReadWrite,	DirectValue,	"Tiles",								"")
-		pl_attribute(EdgeWidth,	float,				0.15f,									ReadWrite,	DirectValue,	"Edge width",							"")
-		pl_attribute(EdgeColor,	PLGraphics::Color3,	PLGraphics::Color3(0.7f, 0.7f, 0.7f),	ReadWrite,	DirectValue,	"Edge color",							"")
+		pl_attribute_directvalue(								Tiles,		float,				65.0f,									ReadWrite)
+		pl_attribute_directvalue(								EdgeWidth,	float,				0.15f,									ReadWrite)
+		pl_attribute_directvalue(								EdgeColor,	PLGraphics::Color3,	PLGraphics::Color3(0.7f, 0.7f, 0.7f),	ReadWrite)
 			// Overloaded SNMPostProcess attributes
-		pl_attribute(Filename,	PLCore::String,		"Data/PostProcesses/Tiles.pp",			ReadWrite,	ModifyAttr,		"Filename of the post process to use",	"Type='PostProcess'")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
-	pl_class_end
+		pl_attribute_modifyattr	(PLCompositing::SNMPostProcess,	Filename,	PLCore::String,		"Data/PostProcesses/Tiles.pp",			ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

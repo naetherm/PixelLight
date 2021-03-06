@@ -66,10 +66,8 @@ class SRPlibRocket : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLLIBROCKET_RTTI_EXPORT, SRPlibRocket, "PLlibRocket", PLScene::SceneRendererPass, "libRocket scene renderer pass")
-		// Constructors
-		pl_constructor_2(ParameterConstructor,	Rocket::Core::Context&,	RenderInterfacePL&,	"Parameter constructor",	"")
-	pl_class_end
+	pl_class_def(PLLIBROCKET_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

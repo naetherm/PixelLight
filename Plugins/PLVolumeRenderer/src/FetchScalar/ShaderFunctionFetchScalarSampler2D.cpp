@@ -39,7 +39,10 @@ namespace PLVolumeRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(ShaderFunctionFetchScalarSampler2D)
+pl_class_metadata(ShaderFunctionFetchScalarSampler2D, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionFetchScalar, "2D texture atlas sampler shader function implementation class for fetch scalar")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(ShaderFunctionFetchScalarSampler2D)
 
 
 //[-------------------------------------------------------]

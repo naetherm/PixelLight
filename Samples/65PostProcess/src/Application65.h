@@ -54,12 +54,10 @@ class Application65 : public PLEngine::EngineApplication {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(pl_rtti_export, Application65, "", PLEngine::EngineApplication, "Application class")
-		// Constructors
-		pl_constructor_1(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+	pl_class_def()
 		// Slots
-		pl_slot_1(OnControl,	PLInput::Control&,	"Called when a control event has occurred, occurred control as first parameter",	"")
-	pl_class_end
+		pl_slot_1_def(Application65,	OnControl,	PLInput::Control&)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

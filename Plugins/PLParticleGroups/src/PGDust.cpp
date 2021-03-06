@@ -42,7 +42,10 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGDust)
+pl_class_metadata(PGDust, "PLParticleGroups", PLParticleGroups::PGPhysics, "Dust particle group")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(PGDust)
 
 
 //[-------------------------------------------------------]

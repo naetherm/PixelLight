@@ -52,10 +52,8 @@ class ShaderFunctionReconstructionTriCubic : public ShaderFunctionReconstruction
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionReconstructionTriCubic, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionReconstruction, "Tri-cubic B-spline filtering (8 volume texture fetches for the reconstruction, higher-order texture filtering) shader function implementation class for reconstruction")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

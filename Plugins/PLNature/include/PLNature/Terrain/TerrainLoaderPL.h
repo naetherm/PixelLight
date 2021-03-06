@@ -58,19 +58,8 @@ class TerrainLoaderPL : public TerrainLoader {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLNATURE_RTTI_EXPORT, TerrainLoaderPL, "PLNature", PLNature::TerrainLoader, "Terrain loader implementation for the PixelLight terrain XML file format")
-		// Properties
-		pl_properties
-			pl_property("Formats",	"terrain,TERRAIN")
-			pl_property("Load",		"1")
-			pl_property("Save",		"0")
-		pl_properties_end
-		// Methods
-		pl_method_2(Load,	pl_ret_type(bool),	SNTerrain&,	PLCore::File&,	"Load method",	"")
-		pl_method_2(Save,	pl_ret_type(bool),	SNTerrain&,	PLCore::File&,	"Save method",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLNATURE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

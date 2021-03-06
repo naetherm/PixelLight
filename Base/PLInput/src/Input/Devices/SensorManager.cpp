@@ -39,7 +39,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(SensorManager)
+pl_class_metadata(SensorManager, "PLInput", PLInput::Device, "Sensor manager input controller")
+pl_class_metadata_end(SensorManager)
 
 
 //[-------------------------------------------------------]

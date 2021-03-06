@@ -57,8 +57,8 @@ class SNMPhysics : public PLScene::SceneNodeModifier {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLPHYSICS_RTTI_EXPORT, SNMPhysics, "PLPhysics", PLScene::SceneNodeModifier, "Abstract physics scene node modifier base class")
-	pl_class_end
+	pl_class_def(PLPHYSICS_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

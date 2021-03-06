@@ -45,7 +45,13 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMMoveController)
+pl_class_metadata(SNMMoveController, "PLEngine", PLScene::SNMTransform, "Scene node move input controller modifier class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(InputSemantic,	PLCore::String,	"",		ReadWrite,	"Semantic of this input controller (e.g. \"Camera\")",	"")
+	pl_attribute_metadata(Speed,			float,			1.0f,	ReadWrite,	"Movement speed",										"Min='0.0001'")
+pl_class_metadata_end(SNMMoveController)
 
 
 //[-------------------------------------------------------]

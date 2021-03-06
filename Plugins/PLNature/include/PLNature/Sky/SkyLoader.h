@@ -53,12 +53,8 @@ class SkyLoader : public PLCore::LoaderImpl {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLNATURE_RTTI_EXPORT, SkyLoader, "PLNature", PLCore::LoaderImpl, "Abstract sky loader base class")
-		// Properties
-		pl_properties
-			pl_property("Type",	"Sky")
-		pl_properties_end
-	pl_class_end
+	pl_class_def(PLNATURE_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -51,7 +51,10 @@ namespace PLFrontendPLGui {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Frontend)
+pl_class_metadata(Frontend, "PLFrontendPLGui", PLCore::FrontendImpl, "PLGui frontend implementation class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(Frontend)
 
 
 //[-------------------------------------------------------]

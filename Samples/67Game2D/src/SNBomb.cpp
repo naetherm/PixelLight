@@ -43,7 +43,18 @@ using namespace PLScene;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNBomb)
+pl_class_metadata(SNBomb, "", PLSound::SNSound, "Bomb scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Killed,	bool,								false,							ReadWrite,	"Killed?",																								"")
+		// Overwritten PLSound::SNSound attributes
+	pl_attribute_metadata(Sound,	PLCore::String,						"Data/Sounds/Explosion.ogg",	ReadWrite,	"Filename of the sound which should be played (full path, supported file formats are API dependent)",	"Ext='mp3 ogg wav mid midi it mod s3m xm'")
+		// Overwritten PLScene::SceneNode attributes
+	pl_attribute_metadata(Flags,	pl_flag_type_def3(SNBomb, EFlags),	SNBomb::NoCulling,				ReadWrite,	"Flags",																								"")
+	// Slots
+	pl_slot_0_metadata(OnUpdate,	"Called when the scene node needs to be updated",	"")
+pl_class_metadata_end(SNBomb)
 
 
 //[-------------------------------------------------------]

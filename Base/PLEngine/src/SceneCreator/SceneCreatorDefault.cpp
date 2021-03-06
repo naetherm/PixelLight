@@ -39,7 +39,10 @@ namespace PLEngine {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SceneCreatorDefault)
+pl_class_metadata(SceneCreatorDefault, "PLEngine", PLEngine::SceneCreator, "Default scene creator")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+pl_class_metadata_end(SceneCreatorDefault)
 
 
 //[-------------------------------------------------------]

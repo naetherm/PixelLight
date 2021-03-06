@@ -47,7 +47,8 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Layout)
+pl_class_metadata(Layout, "PLGui", PLCore::Object, "GUI layout class")
+pl_class_metadata_end(Layout)
 
 
 //[-------------------------------------------------------]

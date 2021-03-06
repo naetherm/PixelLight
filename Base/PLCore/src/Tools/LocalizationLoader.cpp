@@ -37,7 +37,12 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(LocalizationLoader)
+pl_class_metadata(LocalizationLoader, "PLCore", PLCore::LoaderImpl, "Abstract localization loader base class")
+	// Properties
+	pl_properties
+		pl_property("Type",	"Localization")
+	pl_properties_end
+pl_class_metadata_end(LocalizationLoader)
 
 
 //[-------------------------------------------------------]

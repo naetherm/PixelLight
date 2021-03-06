@@ -34,15 +34,9 @@
 #ifdef PLPHYSICSNULL_EXPORTS
 	// To export classes, methods and variables
 	#define PLPHYSICSNULL_API __declspec(dllexport)
-
-	// To export RTTI elements
-	#define PLPHYSICSNULL_RTTI_EXPORT 1
 #else
 	// To import classes, methods and variables
 	#define PLPHYSICSNULL_API __declspec(dllimport)
-
-	// To import RTTI elements
-	#define PLPHYSICSNULL_RTTI_EXPORT 0
 #endif
 
 

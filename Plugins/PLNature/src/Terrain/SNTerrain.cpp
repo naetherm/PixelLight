@@ -54,7 +54,12 @@ namespace PLNature {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNTerrain)
+pl_class_metadata(SNTerrain, "PLNature", PLScene::SceneNode, "Terrain scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Filename,	PLCore::String, "",	ReadWrite,	"Terrain filename",	"Type='Terrain'")
+pl_class_metadata_end(SNTerrain)
 
 
 //[-------------------------------------------------------]

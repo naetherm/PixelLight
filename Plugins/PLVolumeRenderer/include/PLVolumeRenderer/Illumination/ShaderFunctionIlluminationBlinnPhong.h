@@ -52,10 +52,8 @@ class ShaderFunctionIlluminationBlinnPhong : public ShaderFunctionIllumination {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionIlluminationBlinnPhong, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionIllumination, "Blinn-Phong shader function implementation class for local illumination")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

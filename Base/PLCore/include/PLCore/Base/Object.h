@@ -47,8 +47,6 @@ namespace PLCore {
 //[-------------------------------------------------------]
 class Class;
 class DynVar;
-class DynEvent;
-class DynEventHandler;
 class DynConstructor;
 class DynParams;
 
@@ -181,21 +179,10 @@ class Object : public ObjectBase {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class_internal(PLCORE_RTTI_EXPORT, Object, "PLCore", /* No base class */, "Object base class")
-		#ifdef PLCORE_EXPORTS	// The following is only required when compiling PLCore
-			// Methods
-			pl_method_1(IsInstanceOf,			pl_ret_type(bool),		const String&,					"Check if object is instance of a given class. Class name (with namespace) as first parameter. Returns 'true' if the object is an instance of the class or one of it's derived classes, else 'false'.",	"")
-			pl_method_2(SetAttribute,			pl_ret_type(void),		const String&,	const String&,	"Set attribute value. Attribute name as first parameter, attribute value as second parameter.",																											"")
-			pl_method_1(SetAttributeDefault,	pl_ret_type(void),		const String&,					"Set attribute to it's default value. Attribute name as first parameter.",																																"")
-			pl_method_2(CallMethod,				pl_ret_type(void),		const String&,	const String&,	"Call method. Method name as first parameter, parameters as string (e.g. \"Param0='x' Param1='y'\") as second parameter.",																				"")
-			pl_method_1(SetValues,				pl_ret_type(void),		const String&,					"Set multiple attribute values as a string at once. String containing attributes and values as first parameter (e.g. \"Name='Bob' Position='1 2 3'\").",												"")
-			pl_method_0(SetDefaultValues,		pl_ret_type(void),										"Set all attributes to default.",																																										"")
-			pl_method_0(ToString,				pl_ret_type(String),									"Get the object as string. Returns string representation of object.",																																	"")
-			pl_method_1(FromString,				pl_ret_type(void),		const String&,					"Set the object from string. String representation of object as first parameter.",																														"")
-		#endif
+	pl_class_def_internal(Object, PLCORE_API)
 		// Signals
-		pl_signal_0(SignalDestroyed,	"Object destroyed signal. When this signal is emitted the object is already in the destruction phase and parts may already be invalid. Best to e.g. only update our object pointer.",	"")
-	pl_class_end
+		pl_signal_0_def(SignalDestroyed)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
@@ -253,7 +240,7 @@ class Object : public ObjectBase {
 		*    In general it is recommended to use GetClass()->GetAttributes() to obtain a list of attribute descriptors
 		*    and then call GetAttribute() from the descriptor to get access to the actual attribute
 		*/
-		PLCORE_API const List<DynVar*> GetAttributes() const;
+		PLCORE_API const List<DynVarPtr> GetAttributes() const;
 
 		/**
 		*  @brief
@@ -265,7 +252,7 @@ class Object : public ObjectBase {
 		*  @return
 		*    Attribute (do not destroy the returned instance, can be a null pointer, if no attribute with that name could be found)
 		*/
-		PLCORE_API DynVar *GetAttribute(const String &sName) const;
+		PLCORE_API DynVarPtr GetAttribute(const String &sName) const;
 
 		/**
 		*  @brief
@@ -310,7 +297,7 @@ class Object : public ObjectBase {
 		*    In general it is recommended to use GetClass()->GetSignals() to obtain a list of signal descriptors
 		*    and then call GetSignal() from the descriptor to get access to the actual signal
 		*/
-		PLCORE_API const List<DynEvent*> GetSignals() const;
+		PLCORE_API const List<DynEventPtr> GetSignals() const;
 
 		/**
 		*  @brief
@@ -322,7 +309,7 @@ class Object : public ObjectBase {
 		*  @return
 		*    Signal (do not destroy the returned instance, can be a null pointer, if no signal with that name could be found)
 		*/
-		PLCORE_API DynEvent *GetSignal(const String &sName) const;
+		PLCORE_API DynEventPtr GetSignal(const String &sName) const;
 
 		/**
 		*  @brief
@@ -336,7 +323,7 @@ class Object : public ObjectBase {
 		*    In general it is recommended to use GetClass()->GetSlots() to obtain a list of slot descriptors
 		*    and then call GetSlot() from the descriptor to get access to the actual slot
 		*/
-		PLCORE_API const List<DynEventHandler*> GetSlots() const;
+		PLCORE_API const List<DynEventHandlerPtr> GetSlots() const;
 
 		/**
 		*  @brief
@@ -348,7 +335,7 @@ class Object : public ObjectBase {
 		*  @return
 		*    Slot (do not destroy the returned instance, can be a null pointer, if no slot with that name could be found)
 		*/
-		PLCORE_API DynEventHandler *GetSlot(const String &sName) const;
+		PLCORE_API DynEventHandlerPtr GetSlot(const String &sName) const;
 
 		//[-------------------------------------------------------]
 		//[ Direct access functions                               ]
@@ -388,7 +375,7 @@ class Object : public ObjectBase {
 		*    This is a comfort method allowing to write e.g.
 		*      pFirstObject->SetAttribute("MyAttribute", pSecondObject->GetAttribute("MyAttribute"));
 		*    instead of
-		*      DynVar *pDynVar = pSecondObject->GetAttribute();
+		*      DynVarPtr pDynVar = pSecondObject->GetAttribute();
 		*      if (pDynVar)
 		*        pFirstObject->SetAttribute("MyAttribute", *pDynVar);
 		*    In case there's no such attribute in "pSecondObject", nothing happens at all.

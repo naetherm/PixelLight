@@ -37,7 +37,17 @@ namespace PLCompositing {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SRPDebugWireframes)
+pl_class_metadata(SRPDebugWireframes, "PLCompositing", PLCompositing::SRPDebug, "Abstract scene renderer pass drawing just simple wireframes")
+	// Attributes
+	pl_attribute_metadata(LineWidth,			float,											1.0f,										ReadWrite,	"Line width (if supported by the the used renderer API)",									"Min='1.0'")
+	pl_attribute_metadata(LineColor,			PLGraphics::Color4,								PLGraphics::Color4(1.0f, 1.0f, 1.0f, 0.4f),	ReadWrite,	"Line color",																							"")
+	pl_attribute_metadata(MaxDrawDistance,		float,											-1.0f,										ReadWrite,	"Maximum draw distance of wireframes to the camera, if less or equal 0, there's no limitation",	"")
+	pl_attribute_metadata(CullMode,				pl_enum_type_def3(PLRenderer::Cull, Enum),		PLRenderer::Cull::CCW,						ReadWrite,	"Backface cull mode to use",																		"")
+	pl_attribute_metadata(SlopeScaleDepthBias,	float,											0.0f,										ReadWrite,	"Slope scale depth bias (polygon offset to avoid nasty line artifacts)",							"")
+	pl_attribute_metadata(DepthBias,			float,											0.0f,										ReadWrite,	"Depth bias (polygon offset to avoid nasty line artifacts)",										"")
+		// Overwritten PLScene::SceneRendererPass attributes
+	pl_attribute_metadata(Flags,				pl_flag_type_def3(SRPDebugWireframes, EFlags),	0,											ReadWrite,	"Flags",																								"")
+pl_class_metadata_end(SRPDebugWireframes)
 
 
 //[-------------------------------------------------------]

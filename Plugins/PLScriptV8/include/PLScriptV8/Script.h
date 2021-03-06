@@ -58,15 +58,8 @@ class Script : public PLCore::Script {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLSCRIPTV8_RTTI_EXPORT, Script, "PLScriptV8", PLCore::Script, "V8 (ECMA-262 compliant JavaScript engine, see http://code.google.com/p/v8/) script implementation")
-		// Properties
-		pl_properties
-			pl_property("Language",	"JavaScript")
-			pl_property("Formats",	"js,JS")
-		pl_properties_end
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLSCRIPTV8_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

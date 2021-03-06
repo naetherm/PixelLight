@@ -48,8 +48,8 @@ class GameBoyController : public PLInput::Controller {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(1, GameBoyController, "", PLInput::Controller, "Sample GameBoy input controller")
-	pl_class_end
+	pl_class_def()
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

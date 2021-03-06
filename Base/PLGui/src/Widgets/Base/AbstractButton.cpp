@@ -47,7 +47,21 @@ namespace PLGui {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(AbstractButton)
+pl_class_metadata(AbstractButton, "PLGui", PLGui::Widget, "Abstract base class for all kind of buttons")
+	// Attributes
+	pl_attribute_metadata(Text,				PLCore::String,		"",							ReadWrite,	"Text that is displayed on the button",					"")
+	pl_attribute_metadata(ImageName,		PLCore::String,		"",							ReadWrite,	"Image filename",										"")
+	pl_attribute_metadata(ImageSize,		PLMath::Vector2i,	PLMath::Vector2i(16, 16),	ReadWrite,	"Image size",											"")
+	pl_attribute_metadata(Repeat,			bool,				false,						ReadWrite,	"If the button is hold down, emit clicks repeatedly",	"")
+	pl_attribute_metadata(RepeatDelay,		PLCore::uint64,		500,						ReadWrite,	"Initial delay (in ms) for repeated clicks",			"")
+	pl_attribute_metadata(RepeatInterval,	PLCore::uint64,		500,						ReadWrite,	"Interval (in ms) between repeated clicks",				"")
+	// Signals
+	pl_signal_0_metadata(SignalPressed,	"The button has been pressed down",						"")
+	pl_signal_0_metadata(SignalReleased,	"The button has been released",							"")
+	pl_signal_0_metadata(SignalClicked,	"The button has been clicked (pressed and released)",	"")
+	// Slots
+	pl_slot_0_metadata(OnTimer,	"Timer callback",	"")
+pl_class_metadata_end(AbstractButton)
 
 
 //[-------------------------------------------------------]

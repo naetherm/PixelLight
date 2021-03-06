@@ -37,7 +37,15 @@ namespace PLCore {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(LoaderImpl)
+pl_class_metadata(LoaderImpl, "PLCore", PLCore::Object, "Abstract loader implementation base class, derive your concrete loader implementations from this class")
+	// Properties
+	pl_properties
+		pl_property("Type",		"Unknown")
+		pl_property("Formats",	"")
+		pl_property("Load",		"0")
+		pl_property("Save",		"0")
+	pl_properties_end
+pl_class_metadata_end(LoaderImpl)
 
 
 //[-------------------------------------------------------]

@@ -55,10 +55,8 @@ class SNFire : public SNSystem {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(SPARK_PL_RTTI_EXPORT, SNFire, "SPARK_PL", SPARK_PL::SNSystem, "Fire SPARK particle system scene node")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(SPARK_PL_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

@@ -37,7 +37,12 @@ namespace PLFrontendQt {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(DockWidgetScene)
+pl_class_metadata(DockWidgetScene, "PLFrontendQt", PLFrontendQt::DockWidget, "Abstract scene Qt dock widget base class")
+	// Properties
+	pl_properties
+		pl_property("Title", "Scene")
+	pl_properties_end
+pl_class_metadata_end(DockWidgetScene)
 
 
 //[-------------------------------------------------------]

@@ -44,7 +44,17 @@ namespace PLScene {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNLineBox)
+pl_class_metadata(SNLineBox, "PLScene", PLScene::SceneNode, "Line box scene node")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(StartPosition,	PLMath::Vector3,						PLMath::Vector3::Zero,		ReadWrite,	"Line box start position (relative to this node)",				"")
+	pl_attribute_metadata(EndPosition,		PLMath::Vector3,						PLMath::Vector3::UnitZ,		ReadWrite,	"Line box end position (relative to this node)",				"")
+	pl_attribute_metadata(Width,			float,									1.0f,						ReadWrite,	"Line box width (if supported by the the used renderer API)",	"Min='1.0'")
+	pl_attribute_metadata(Color,			PLGraphics::Color4,						PLGraphics::Color4::White,	ReadWrite,	"Line box color (r/g/b/a)",										"")
+		// Overwritten SceneNode attributes
+	pl_attribute_metadata(Flags,			pl_flag_type_def3(SNLineBox, EFlags),	0,							ReadWrite,	"Flags",														"")
+pl_class_metadata_end(SNLineBox)
 
 
 //[-------------------------------------------------------]

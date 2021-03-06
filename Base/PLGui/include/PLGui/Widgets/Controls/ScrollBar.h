@@ -54,14 +54,12 @@ class ScrollBar : public AbstractSlider {
 	//[-------------------------------------------------------]
 	//[ Class definition                                      ]
 	//[-------------------------------------------------------]
-	pl_class(PLGUI_RTTI_EXPORT, ScrollBar, "PLGui", PLGui::AbstractSlider, "Scroll bar widget")
+	pl_class_def(PLGUI_API)
 		// Attributes
-		pl_attribute(Orientation,	pl_enum_type(EOrientation),	Horizontal,	ReadWrite,	GetSet,	"Scrollbar orientation",	"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
+		pl_attribute_getset(ScrollBar,	Orientation,	EOrientation,	Horizontal,	ReadWrite)
 		// Slots
-		pl_slot_0(OnTimer,	"Timer callback",	"")
-	pl_class_end
+		pl_slot_0_def(ScrollBar,	OnTimer)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

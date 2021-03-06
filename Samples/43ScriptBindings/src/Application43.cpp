@@ -43,7 +43,10 @@ using namespace PLCore;
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(Application43)
+pl_class_metadata(Application43, "", PLCore::FrontendApplication, "Application class")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLCore::Frontend&,	"Parameter constructor. Frontend this application instance is running in as first parameter.",	"")
+pl_class_metadata_end(Application43)
 
 
 //[-------------------------------------------------------]
@@ -132,7 +135,8 @@ void Application43::RunScript(const String &sScriptFilename)
 		System::GetInstance()->GetConsole().Print("-- " + pScript->GetScriptLanguage() + " script language --\n");
 
 		// Call the script function "Bindings"
-		FuncScriptPtr<void>(pScript, "Bindings").Call(Params<void>());
+		FuncScriptPtr<void> bindingsMethod(pScript, "Bindings");
+		FuncWrapper<void>(&bindingsMethod).Call(Params<void>());
 
 		// Cleanup
 		delete pScript;

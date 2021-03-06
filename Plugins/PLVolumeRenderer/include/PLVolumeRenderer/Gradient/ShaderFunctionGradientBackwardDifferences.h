@@ -56,10 +56,8 @@ class ShaderFunctionGradientBackwardDifferences : public ShaderFunctionGradient 
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionGradientBackwardDifferences, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionGradient, "Backward differences (finite differences) shader function implementation class for on-the-fly gradient (4 volume texture fetches for the gradient)")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

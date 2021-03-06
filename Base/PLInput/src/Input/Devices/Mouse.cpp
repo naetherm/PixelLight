@@ -39,7 +39,8 @@ namespace PLInput {
 //[-------------------------------------------------------]
 //[ Class implementation                                  ]
 //[-------------------------------------------------------]
-pl_implement_class(Mouse)
+pl_class_metadata(Mouse, "PLInput", PLInput::Device, "Mouse input controller")
+pl_class_metadata_end(Mouse)
 
 
 //[-------------------------------------------------------]

@@ -50,7 +50,10 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SPDefault)
+pl_class_metadata(SPDefault, "PLRenderer", PLRenderer::SurfacePainter, "This surface painter is called when the window content should be drawn")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	Renderer&,	"Parameter constructor",	"")
+pl_class_metadata_end(SPDefault)
 
 
 //[-------------------------------------------------------]

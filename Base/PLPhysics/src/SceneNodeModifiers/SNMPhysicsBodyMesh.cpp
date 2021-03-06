@@ -43,7 +43,13 @@ namespace PLPhysics {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(SNMPhysicsBodyMesh)
+pl_class_metadata(SNMPhysicsBodyMesh, "PLPhysics", PLPhysics::SNMPhysicsBody, "Physics mesh body scene node modifier")
+	// Constructors
+	pl_constructor_1_metadata(ParameterConstructor,	PLScene::SceneNode&,	"Parameter constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Mesh,		PLCore::String,	"",		ReadWrite,	"Collision mesh, if empty, the variable 'Mesh' (if available) of the scene node is used instead",								"Type='Mesh'")
+	pl_attribute_metadata(Optimize,	bool,			false,	ReadWrite,	"Flag that indicates whether it should optimize this mesh. Set to 1 to optimize (may take some time!) the mesh, otherwise 0.",	"")
+pl_class_metadata_end(SNMPhysicsBodyMesh)
 
 
 //[-------------------------------------------------------]
@@ -108,7 +114,7 @@ void SNMPhysicsBodyMesh::CreatePhysicsBody()
 		// Create the PL physics body
 		String sMesh = m_sMesh;
 		if (!m_sMesh.GetLength()) {
-			DynVar *pDynVar = GetSceneNode().GetAttribute("Mesh");
+			DynVarPtr pDynVar = GetSceneNode().GetAttribute("Mesh");
 			if (pDynVar)
 				sMesh = pDynVar->GetString();
 		}

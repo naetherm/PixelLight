@@ -42,7 +42,21 @@ namespace PLParticleGroups {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(PGFountain)
+pl_class_metadata(PGFountain, "PLParticleGroups", PLParticleGroups::SNParticleGroup, "Fountain particle group")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Steps,				PLCore::uint32,		8,								ReadWrite,	"Steps",					"")
+	pl_attribute_metadata(RaysPerStep,			PLCore::uint32,		6,								ReadWrite,	"Rays per step",			"")
+	pl_attribute_metadata(DropsPerRay,			PLCore::uint32,		50,								ReadWrite,	"Drops per ray",			"")
+	pl_attribute_metadata(AngleOfDeepestStep,	float,				80.0f,							ReadWrite,	"Angle of deepest step",	"")
+	pl_attribute_metadata(AngleOfHighestStep,	float,				85.0f,							ReadWrite,	"Angle of highest step",	"")
+	pl_attribute_metadata(RandomAngleAddition,	float,				20.0f,							ReadWrite,	"Random angle addition",	"")
+	pl_attribute_metadata(AccFactor,			float,				0.11f,							ReadWrite,	"Acc factor",				"")
+		// Overwritten SNParticleGroup attributes
+	pl_attribute_metadata(Material,				PLCore::String,		"Data/Textures/PGFountain.dds",	ReadWrite,	"Particle group material",	"Type='Material Effect Image TextureAni'")
+	pl_attribute_metadata(Particles,			PLCore::uint32,		600,							ReadWrite,	"Number of particles",		"Min=1")
+pl_class_metadata_end(PGFountain)
 
 
 //[-------------------------------------------------------]
@@ -234,7 +248,7 @@ void PGFountain::InitFunction()
 					vNewSpeed.y = Math::Sin(static_cast<float>(fStepAngle*Math::DegToRad))*(0.2f+0.04f*k);
 
 					// Angle you see when you look down on the fountain
-					float fRayAngle = static_cast<float>(j)/static_cast<float>(m_nRaysPerStep)*360.0f + 12.0f;	// +12.0 causes a rotation (12°)
+					float fRayAngle = static_cast<float>(j)/static_cast<float>(m_nRaysPerStep)*360.0f + 12.0f;	// +12.0 causes a rotation (12ï¿½)
 
 					// For the next computations "vNewSpeed.x" is the radius. Care! Don't swap the two
 					// lines, because the second one changes vNewSpeed.x!

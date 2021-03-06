@@ -69,7 +69,7 @@ class SRPVolume : public PLScene::SceneRendererPass {
 		enum EFlags {
 			DrawOrderFrontToBack = 1<<1,	/**< Draw order is front to back (e.g. useful when rendering solid objects) */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(PLScene::SceneRendererPass::EFlags)
 			pl_enum_value(DrawOrderFrontToBack, "Draw order is front to back (e.g. useful when rendering solid objects)")
 		pl_enum_end
@@ -78,11 +78,11 @@ class SRPVolume : public PLScene::SceneRendererPass {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUME_RTTI_EXPORT, SRPVolume, "PLVolume", PLScene::SceneRendererPass, "Abstract scene renderer pass for volume scene nodes")
+	pl_class_def(PLVOLUME_API)
 		// Attributes
 			// Overwritten PLScene::SceneRendererPass attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	0,	ReadWrite,	GetSet,	"Flags",	"")
-	pl_class_end
+		pl_attribute_getset(SRPVolume,	Flags,	PLCore::uint32,	0,	ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

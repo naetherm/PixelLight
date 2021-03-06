@@ -52,8 +52,8 @@ class ShaderFunctionRayTraversalDebug : public ShaderFunctionRayTraversal {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLVOLUMERENDERER_RTTI_EXPORT, ShaderFunctionRayTraversalDebug, "PLVolumeRenderer", PLVolumeRenderer::ShaderFunctionRayTraversal, "Abstract debug shader function implementation base class for ray traversal")
-	pl_class_end
+	pl_class_def(PLVOLUMERENDERER_API)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]

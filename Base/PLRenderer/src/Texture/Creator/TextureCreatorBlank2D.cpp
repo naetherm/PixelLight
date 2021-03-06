@@ -44,7 +44,15 @@ namespace PLRenderer {
 //[-------------------------------------------------------]
 //[ RTTI interface                                        ]
 //[-------------------------------------------------------]
-pl_implement_class(TextureCreatorBlank2D)
+pl_class_metadata(TextureCreatorBlank2D, "PLRenderer", PLRenderer::TextureCreator, "Blank 2D texture (TextureBuffer::R8G8B8) creator class")
+	// Constructors
+	pl_constructor_0_metadata(DefaultConstructor,	"Default constructor",	"")
+	// Attributes
+	pl_attribute_metadata(Width,		PLCore::uint32,		32,											ReadWrite,	"Texture width (must be a power of 2)",		"Min='8'")
+	pl_attribute_metadata(Height,		PLCore::uint32,		32,											ReadWrite,	"Texture height (must be a power of 2)",	"Min='8'")
+	pl_attribute_metadata(Components,	PLCore::uint8,		3,											ReadWrite,	"Number of color components (1-4)",			"Min='1' Max='4'")
+	pl_attribute_metadata(Color,		PLGraphics::Color4,	PLGraphics::Color4(0.0f, 0.0f, 0.0f, 1.0f),	ReadWrite,	"Texture fill color",						"")
+pl_class_metadata_end(TextureCreatorBlank2D)
 
 
 //[-------------------------------------------------------]

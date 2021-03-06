@@ -62,7 +62,7 @@ class SNPoint : public SceneNode {
 			No3DPosition = 1<<10,	/**< The point is not placed within 3D. If this flag is set, the node position is in 'screen space' between 0.0 and 1.0. */
 			NoDepthTest  = 1<<11	/**< Do not perform a depth test */
 		};
-		pl_enum(EFlags)
+		pl_flag(EFlags)
 			pl_enum_base(SceneNode::EFlags)
 			pl_enum_value(No3DPosition,	"The point is not placed within 3D. If this flag is set, the node position is in 'screen space' between 0.0 and 1.0.")
 			pl_enum_value(NoDepthTest,	"Do not perform a depth test")
@@ -72,15 +72,13 @@ class SNPoint : public SceneNode {
 	//[-------------------------------------------------------]
 	//[ RTTI interface                                        ]
 	//[-------------------------------------------------------]
-	pl_class(PLS_RTTI_EXPORT, SNPoint, "PLScene", PLScene::SceneNode, "Simple point scene node")
+	pl_class_def(PLS_API)
 		// Attributes
-		pl_attribute(Size,	float,					1.0f,						ReadWrite,	DirectValue,	"Point size",				"")
-		pl_attribute(Color,	PLGraphics::Color4,		PLGraphics::Color4::White,	ReadWrite,	DirectValue,	"Point color (r/g/b/a)",	"")
+		pl_attribute_directvalue(			Size,	float,				1.0f,						ReadWrite)
+		pl_attribute_directvalue(			Color,	PLGraphics::Color4,	PLGraphics::Color4::White,	ReadWrite)
 			// Overwritten SceneNode attributes
-		pl_attribute(Flags,	pl_flag_type(EFlags),	0,							ReadWrite,	GetSet,			"Flags",					"")
-		// Constructors
-		pl_constructor_0(DefaultConstructor,	"Default constructor",	"")
-	pl_class_end
+		pl_attribute_getset		(SNPoint,	Flags,	PLCore::uint32,		0,							ReadWrite)
+	pl_class_def_end
 
 
 	//[-------------------------------------------------------]
